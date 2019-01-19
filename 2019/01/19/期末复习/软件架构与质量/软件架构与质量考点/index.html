@@ -34,7 +34,9 @@
 <meta property="og:description" content="CH 1. What is software architecture?What is software architectureThe software architecture of a system is the set of structures needed to reason about the system, which comprise software elements, rel">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://zjxjwxk.com/2019/01/19/期末复习/软件架构与质量/软件架构与质量考点/1547890359658.png">
-<meta property="og:updated_time" content="2019-01-19T15:58:37.048Z">
+<meta property="og:image" content="https://zjxjwxk.com/2019/01/19/期末复习/软件架构与质量/软件架构与质量考点/1547915772754.png">
+<meta property="og:image" content="https://zjxjwxk.com/2019/01/19/期末复习/软件架构与质量/软件架构与质量考点/1547915852136.png">
+<meta property="og:updated_time" content="2019-01-19T16:38:21.198Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="软件架构与质量考点">
 <meta name="twitter:description" content="CH 1. What is software architecture?What is software architectureThe software architecture of a system is the set of structures needed to reason about the system, which comprise software elements, rel">
@@ -309,11 +311,53 @@
 </li>
 </ul>
 <h3 id="Tactic"><a href="#Tactic" class="headerlink" title="Tactic"></a>Tactic</h3><ul>
-<li>Heart-beat</li>
-<li>Ping/Echo</li>
-<li>Active Redundancy, Passive Redundancy, Spare, Rollback</li>
+<li>Detect Faults<ul>
+<li><strong>Heart-beat</strong><ul>
+<li>Heartbeat is a fault detection mechanism that employs a periodic message exchange between a system monitor and a process being monitored.</li>
 </ul>
-<h3 id="Fault-tree"><a href="#Fault-tree" class="headerlink" title="Fault tree"></a>Fault tree</h3>
+</li>
+<li><strong>Ping/Echo</strong><ul>
+<li>Ping/echo refers to an asynchronous request/response message pair exchanged between nodes, used to determine reachability and the round-trip delay through the associated network path.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Recover from Faults<ul>
+<li><strong>Active Redundancy</strong><ul>
+<li>Active redundancy (hot spare). This refers to a configuration where all of the nodes (active or redundant spare) in a protection group receive and process identical inputs in parallel, allowing the redundant spare(s) to maintain synchronous state with the active node(s).</li>
+</ul>
+</li>
+<li><strong>Passive Redundancy</strong><ul>
+<li>Passive redundancy (warm spare). This refers to a configuration where only the active members of the protection group process input traffic; one of their duties is to provide the redundant spare(s) with periodic state updates.</li>
+</ul>
+</li>
+<li><strong>Spare</strong><ul>
+<li>Spare (cold spare). Cold sparing refers to a configuration where the redundant spares of a protection group remain out of service until a fail-over occurs, at which point a power-on-reset procedure is initiated on the redundant spare prior to its being placed in service.</li>
+</ul>
+</li>
+<li><strong>Rollback</strong><ul>
+<li>Rollback. This tactic permits the system to revert to a previous known good state, referred to as the “rollback line”—rolling back time—upon the detection of a failure.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="Fault-tree"><a href="#Fault-tree" class="headerlink" title="Fault tree"></a>Fault tree</h3><p>Fault tree analysis is an analytical technique that specifies a state of the system that negatively impacts safety or reliability, and then analyzes the system’s context and operation to find all the ways that the undesired state could occur.</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/2019/01/19/期末复习/软件架构与质量/软件架构与质量考点/1547915772754.png" alt="A simple fault tree. D fails if A fails and either B or C fails." title="">
+                </div>
+                <div class="image-caption">A simple fault tree. D fails if A fails and either B or C fails.</div>
+            </figure>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/2019/01/19/期末复习/软件架构与质量/软件架构与质量考点/1547915852136.png" alt="Fault tree gate symbols" title="">
+                </div>
+                <div class="image-caption">Fault tree gate symbols</div>
+            </figure>
+
         </div>
 
         <blockquote class="post-copyright">
@@ -321,7 +365,7 @@
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2019-01-19T15:58:37.048Z" itemprop="dateUpdated">2019-01-19 23:58:37</time>
+    最后更新时间：<time datetime="2019-01-19T16:38:21.198Z" itemprop="dateUpdated">2019-01-20 00:38:21</time>
 </span><br>
 
 
