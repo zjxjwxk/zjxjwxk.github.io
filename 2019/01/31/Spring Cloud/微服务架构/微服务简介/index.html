@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+
+    
+
+    
+
+
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    
+    
+    <meta name="sogou_site_verification" content="true">
+    
+    
+    <link rel="canonical" href="https://zjxjwxk.com/2019/01/31/Spring Cloud/微服务架构/微服务简介/">
+    
+    
+    <title>No title | Zjxjwxk&#39;s Blog | A Java Developer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="">
+    <meta name="description" content="微服务简介定义The microservice architectural style is an approach to developing a single application running as a suite of small services, each running its own process and communicating with lightweight mech">
+<meta name="keywords" content="Java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="No title">
+<meta property="og:url" content="https://zjxjwxk.com/2019/01/31/Spring Cloud/微服务架构/微服务简介/index.html">
+<meta property="og:site_name" content="Zjxjwxk&#39;s Blog">
+<meta property="og:description" content="微服务简介定义The microservice architectural style is an approach to developing a single application running as a suite of small services, each running its own process and communicating with lightweight mech">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://dubbo.apache.org/docs/zh-cn/user/sources/images/dubbo-architecture-roadmap.jpg">
+<meta property="og:image" content="https://zjxjwxk.com/2019/01/31/Spring%20Cloud/微服务架构/微服务简介/image-20190131150906318.png">
+<meta property="og:updated_time" content="2019-01-31T07:41:00.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="No title">
+<meta name="twitter:description" content="微服务简介定义The microservice architectural style is an approach to developing a single application running as a suite of small services, each running its own process and communicating with lightweight mech">
+<meta name="twitter:image" content="http://dubbo.apache.org/docs/zh-cn/user/sources/images/dubbo-architecture-roadmap.jpg">
+    
+        <link rel="alternate" type="application/atom+xml" title="Zjxjwxk&#39;s Blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    
+
+</head>
+
+<body>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">吴鑫康</h5>
+          <a href="mailto:zjxjwxk@gmail.com" title="zjxjwxk@gmail.com" class="mail">zjxjwxk@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/zjxjwxk" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                GitHub
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis"></div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title"></h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-01-31T06:39:34.000Z" itemprop="datePublished" class="page-time">
+  2019-01-31
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#微服务简介"><span class="post-toc-number">1.</span> <span class="post-toc-text">微服务简介</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#定义"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">定义</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#背景"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">背景</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#单一应用架构"><span class="post-toc-number">1.2.1.</span> <span class="post-toc-text">单一应用架构</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#垂直应用架构"><span class="post-toc-number">1.2.2.</span> <span class="post-toc-text">垂直应用架构</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#分布式服务架构"><span class="post-toc-number">1.2.3.</span> <span class="post-toc-text">分布式服务架构</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#流动计算架构"><span class="post-toc-number">1.2.4.</span> <span class="post-toc-text">流动计算架构</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#单体架构"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">单体架构</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#优点"><span class="post-toc-number">1.3.1.</span> <span class="post-toc-text">优点</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#缺点"><span class="post-toc-number">1.3.2.</span> <span class="post-toc-text">缺点</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#分布式定义"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">分布式定义</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#简单的微服务"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">简单的微服务</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#微服务架构的基础框架-组件"><span class="post-toc-number">1.5.1.</span> <span class="post-toc-text">微服务架构的基础框架/组件</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#两大阵营"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">两大阵营</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#阿里系"><span class="post-toc-number">1.6.1.</span> <span class="post-toc-text">阿里系</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Spring-Cloud"><span class="post-toc-number">1.6.2.</span> <span class="post-toc-text">Spring Cloud</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Spring-Cloud-是什么"><span class="post-toc-number">1.7.</span> <span class="post-toc-text">Spring Cloud 是什么</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Spring Cloud/微服务架构/微服务简介" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title"></h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-01-31 14:39:34" datetime="2019-01-31T06:39:34.000Z" itemprop="datePublished">2019-01-31</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="微服务简介"><a href="#微服务简介" class="headerlink" title="微服务简介"></a>微服务简介</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>The microservice architectural style is an approach to developing a single application running as <strong>a suite of small services</strong>, each <strong>running its own process</strong> and communicating with lightweight mechanisms, often an HTTP resource API. These services are <strong>built around business capabilities</strong> and <strong>independently deployable</strong> by fully automated deployment machinery. There is <strong>a bare minimum of centralized management of these services</strong>, which may be written in different programming languages and use different data storage technologies.</p>
+<ul>
+<li>一系列微小的服务共同组成</li>
+<li>跑在自己的进程里</li>
+<li>每个服务为独立的业务开发</li>
+<li>独立部署</li>
+<li>分布式的管理</li>
+</ul>
+<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>随着互联网的发展，网站应用的规模不断扩大，常规的垂直应用架构已无法应对，分布式服务架构以及流动计算架构势在必行，亟需一个治理系统确保架构有条不紊的演进。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://dubbo.apache.org/docs/zh-cn/user/sources/images/dubbo-architecture-roadmap.jpg" alt="单一应用架构->垂直应用架构->分布式服务架构->流动计算架构" title="">
+                </div>
+                <div class="image-caption">单一应用架构->垂直应用架构->分布式服务架构->流动计算架构</div>
+            </figure>
+<h3 id="单一应用架构"><a href="#单一应用架构" class="headerlink" title="单一应用架构"></a>单一应用架构</h3><p>当网站流量很小时，只需一个应用，将所有功能都部署在一起，以减少部署节点和成本。此时，用于简化增删改查工作量的数据访问框架(ORM)是关键。</p>
+<h3 id="垂直应用架构"><a href="#垂直应用架构" class="headerlink" title="垂直应用架构"></a>垂直应用架构</h3><p>当访问量逐渐增大，单一应用增加机器带来的加速度越来越小，将应用拆成互不相干的几个应用，以提升效率。此时，用于加速前端页面开发的Web框架(MVC)是关键。</p>
+<h3 id="分布式服务架构"><a href="#分布式服务架构" class="headerlink" title="分布式服务架构"></a>分布式服务架构</h3><p>当垂直应用越来越多，应用之间交互不可避免，将核心业务抽取出来，作为独立的服务，逐渐形成稳定的服务中心，使前端应用能更快速的响应多变的市场需求。此时，用于提高业务复用及整合的分布式服务框架(RPC)是关键。</p>
+<h3 id="流动计算架构"><a href="#流动计算架构" class="headerlink" title="流动计算架构"></a>流动计算架构</h3><p>当服务越来越多，容量的评估，小服务资源的浪费等问题逐渐显现，此时需增加一个调度中心基于访问压力实时管理集群容量，提高集群利用率。此时，用于提高机器利用率的资源调度和治理中心(SOA)是关键。</p>
+<h2 id="单体架构"><a href="#单体架构" class="headerlink" title="单体架构"></a>单体架构</h2><h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h3><ul>
+<li>容易测试</li>
+<li>容易部署</li>
+</ul>
+<h3 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h3><ul>
+<li>开发效率低</li>
+<li>代码维护难</li>
+<li>部署不灵活</li>
+<li>稳定性不高</li>
+<li>扩展性不够</li>
+</ul>
+<h2 id="分布式定义"><a href="#分布式定义" class="headerlink" title="分布式定义"></a>分布式定义</h2><p>旨在支持应用程序和服务的开发，可以利用物理架构，由多个自治的处理元素，不共享主内存，但通过网络发送消息合作。——Leslie Lamport</p>
+<h2 id="简单的微服务"><a href="#简单的微服务" class="headerlink" title="简单的微服务"></a>简单的微服务</h2><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/2019/01/31/Spring Cloud/微服务架构/微服务简介/image-20190131150906318.png" alt="简单的微服务" title="">
+                </div>
+                <div class="image-caption">简单的微服务</div>
+            </figure>
+<h3 id="微服务架构的基础框架-组件"><a href="#微服务架构的基础框架-组件" class="headerlink" title="微服务架构的基础框架/组件"></a>微服务架构的基础框架/组件</h3><ul>
+<li>服务注册发现</li>
+<li><p>服务网关（Service Gateway）</p>
+</li>
+<li><p>后端通用服务（也称中间层服务 Middle Tire Service）</p>
+</li>
+<li>前端服务（也称边缘服务 Edge Service）<ul>
+<li>聚合<ul>
+<li>对多个API调用进行聚合，从而减少客户端的请求数</li>
+</ul>
+</li>
+<li>裁剪<ul>
+<li>对返回不同的设备的内容进行裁剪（PC、移动端）</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="两大阵营"><a href="#两大阵营" class="headerlink" title="两大阵营"></a>两大阵营</h2><h3 id="阿里系"><a href="#阿里系" class="headerlink" title="阿里系"></a>阿里系</h3><ul>
+<li>Dubbo（服务化治理）</li>
+<li>Zookeeper（服务注册中心）</li>
+<li>Spring MVC or SpringBoot</li>
+<li>…</li>
+</ul>
+<h3 id="Spring-Cloud"><a href="#Spring-Cloud" class="headerlink" title="Spring Cloud"></a>Spring Cloud</h3><ul>
+<li>Spring Cloud Netflix Eureka</li>
+<li>SpringBoot</li>
+<li>…</li>
+</ul>
+<h2 id="Spring-Cloud-是什么"><a href="#Spring-Cloud-是什么" class="headerlink" title="Spring Cloud 是什么"></a>Spring Cloud 是什么</h2><ul>
+<li>Spring Cloud 是一个开发工具集，含了多个子项目<ul>
+<li>利用Spring Boot的开发便利</li>
+<li>主要是基于对Netflix开源组件的进一步封装</li>
+</ul>
+</li>
+<li>Spring Cloud 简化了分布式开发</li>
+<li>掌握如何使用，更要理解分布式、架构的特点</li>
+</ul>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-01-31T07:41:00.000Z" itemprop="dateUpdated">2019-01-31 15:41:00</time>
+</span><br>
+
+
+        
+        原始链接：<a href="/2019/01/31/Spring Cloud/微服务架构/微服务简介/" target="_blank" rel="external">https://zjxjwxk.com/2019/01/31/Spring Cloud/微服务架构/微服务简介/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://zjxjwxk.com">
+            <img src="/img/avatar.jpg" alt="吴鑫康">
+            吴鑫康
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://zjxjwxk.com/2019/01/31/Spring Cloud/微服务架构/微服务简介/&title=Zjxjwxk's Blog&pic=https://zjxjwxk.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://zjxjwxk.com/2019/01/31/Spring Cloud/微服务架构/微服务简介/&title=Zjxjwxk's Blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://zjxjwxk.com/2019/01/31/Spring Cloud/微服务架构/微服务简介/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=Zjxjwxk's Blog&url=https://zjxjwxk.com/2019/01/31/Spring Cloud/微服务架构/微服务简介/&via=https://zjxjwxk.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://zjxjwxk.com/2019/01/31/Spring Cloud/微服务架构/微服务简介/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/01/31/Spring Cloud/服务注册与发现/Spring Cloud Eureka/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">[no title]</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "gJTHi1MULDjBNIRKPWN2bTWd-gzGzoHsz",
+            appKey: "dflbQMdoD4HLI3twjbzShRMK",
+            avatar: "mm",
+            placeholder: "写下你的评论吧！",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>吴鑫康 &copy; 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://zjxjwxk.com/2019/01/31/Spring Cloud/微服务架构/微服务简介/&title=《No title》 — Zjxjwxk's Blog&pic=https://zjxjwxk.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://zjxjwxk.com/2019/01/31/Spring Cloud/微服务架构/微服务简介/&title=《No title》 — Zjxjwxk's Blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://zjxjwxk.com/2019/01/31/Spring Cloud/微服务架构/微服务简介/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《No title》 — Zjxjwxk's Blog&url=https://zjxjwxk.com/2019/01/31/Spring Cloud/微服务架构/微服务简介/&via=https://zjxjwxk.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://zjxjwxk.com/2019/01/31/Spring Cloud/微服务架构/微服务简介/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACvUlEQVR42u3b0W7CQAwEwP7/T9PXShVh185BK02eEIRLJpXOxna/vuLj8eNIzvl9/Dzn2Xev37+++urAw8PDW9z69W0lnyYrP/s05yX3jIeHh3ealyx9fbF2K8/BqwCDh4eH92d4edqdbO4zMB4eHt7/4j2CY1bUyEMIHh4e3md5efk1f92Wfa9v9HitBQ8PD6/bsaOt+e+8PtLfw8PDw1t31Web7ybtnjXhnn4LDw8P7wAv/6mfF2dz6mz9OrHGw8PDewtvxs43+nxga3aVoi+Hh4eHV/KSZlU+DpW3+WfUNrTg4eHhneDlIwJtMt2u1oalYjQBDw8P71ZevtXOEt/ZzbXDB8W4FR4eHt5NvDb/3LSv8tGrpOX24hHg4eHhHeAljM0Nzcq+m3eK/h4eHh7eiJckvu3Q1SwM5Il7MZSAh4eH9xbeLJnOs9m8rJC3356uhoeHh3eANyu/thfLH0Fe/C0eNx4eHt5beJuC74nmVpsh4+Hh4Z3j5VvwrNCwX3+TlOPh4eGd5s225rsa/Pk4QvEzAA8PD+8wb/Z6dmY7iJCHkFVKjYeHh5fWGW745/l8hTxNv22sAQ8PD+8Ary3Xbtr5yePLB7NqJB4eHt6al5cV8k/bUkLb3Lo+M+q54eHh4d3K26Ta+9GBttk2HB3Aw8PDW/A241D5OcP2Vbly8TfEw8PDW/Bm5dRk404+bQNA3RjDw8PDO8BrL5OUJPLg0Sbls64WHh4e3r28R3nkTbJZq6wdF3gRwPDw8PAO8NrNdxYYcvxsiKFN3/Hw8PD2vDYY3Dt6lbPzNlsR/fDw8PAWvLzn3j6ChDdrs0Xn4+Hh4X2UtynXtgWIvNzwIizh4eHhfZTXlgP235qVLVZxDw8PDy/mJelykmTvg0de5rihy4eHh4c34u3ntvJLJkXYfFdf9fTw8PDwJrxvTDuxhktQxygAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+
+
+</body>
+</html>
