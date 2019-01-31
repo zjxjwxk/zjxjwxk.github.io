@@ -18,17 +18,17 @@
     <link rel="canonical" href="https://zjxjwxk.com/2019/01/31/Spring Cloud/服务注册与发现/Spring Cloud Eureka/">
     
     
-    <title>No title | Zjxjwxk&#39;s Blog | A Java Developer</title>
+    <title>Spring Cloud Eureka | Zjxjwxk&#39;s Blog | A Java Developer</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
     <meta name="theme-color" content="#3F51B5">
     
     
-    <meta name="keywords" content="">
+    <meta name="keywords" content="Java,Spring Cloud,微服务架构">
     <meta name="description" content="Spring Cloud Eureka 基于 Netflix Eureka 做了二次封装 两个组件组成： Eureka Server 注册中心 作为具有服务注册功能的服务器，是服务注册中心，系统中的其他微服务使用 Eureka Client 连接到Eureka Server ，并维持心跳连接以监控各个微服务是否正常运行。   Eureka Client 服务注册 用于简化与服务器的交互，作为轮询负">
-<meta name="keywords" content="Java">
+<meta name="keywords" content="Java,Spring Cloud,微服务架构">
 <meta property="og:type" content="article">
-<meta property="og:title" content="No title">
+<meta property="og:title" content="Spring Cloud Eureka">
 <meta property="og:url" content="https://zjxjwxk.com/2019/01/31/Spring Cloud/服务注册与发现/Spring Cloud Eureka/index.html">
 <meta property="og:site_name" content="Zjxjwxk&#39;s Blog">
 <meta property="og:description" content="Spring Cloud Eureka 基于 Netflix Eureka 做了二次封装 两个组件组成： Eureka Server 注册中心 作为具有服务注册功能的服务器，是服务注册中心，系统中的其他微服务使用 Eureka Client 连接到Eureka Server ，并维持心跳连接以监控各个微服务是否正常运行。   Eureka Client 服务注册 用于简化与服务器的交互，作为轮询负">
@@ -38,9 +38,9 @@
 <meta property="og:image" content="https://zjxjwxk.com/2019/01/31/Spring%20Cloud/服务注册与发现/Spring%20Cloud%20Eureka/Spring">
 <meta property="og:image" content="https://zjxjwxk.com/2019/01/31/Spring%20Cloud/服务注册与发现/Spring%20Cloud%20Eureka/Spring">
 <meta property="og:image" content="https://zjxjwxk.com/2019/01/31/Spring%20Cloud/服务注册与发现/Spring%20Cloud%20Eureka/Spring">
-<meta property="og:updated_time" content="2019-01-31T11:43:26.000Z">
+<meta property="og:updated_time" content="2019-01-31T12:19:19.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="No title">
+<meta name="twitter:title" content="Spring Cloud Eureka">
 <meta name="twitter:description" content="Spring Cloud Eureka 基于 Netflix Eureka 做了二次封装 两个组件组成： Eureka Server 注册中心 作为具有服务注册功能的服务器，是服务注册中心，系统中的其他微服务使用 Eureka Client 连接到Eureka Server ，并维持心跳连接以监控各个微服务是否正常运行。   Eureka Client 服务注册 用于简化与服务器的交互，作为轮询负">
 <meta name="twitter:image" content="https://zjxjwxk.com/2019/01/31/Spring%20Cloud/服务注册与发现/Spring%20Cloud%20Eureka/Spring">
     
@@ -123,7 +123,7 @@
         <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
           <i class="icon icon-lg icon-navicon"></i>
         </a>
-        <div class="flex-col header-title ellipsis"></div>
+        <div class="flex-col header-title ellipsis">Spring Cloud Eureka</div>
         
         <div class="search-wrap" id="search-wrap">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
@@ -145,13 +145,15 @@
 <header class="content-header post-header">
 
     <div class="container fade-scale">
-        <h1 class="title"></h1>
+        <h1 class="title">Spring Cloud Eureka</h1>
         <h5 class="subtitle">
             
-                <time datetime="2019-01-31T06:04:48.000Z" itemprop="datePublished" class="page-time">
+                <time datetime="2019-01-31T12:18:00.000Z" itemprop="datePublished" class="page-time">
   2019-01-31
 </time>
 
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Spring-Cloud/">Spring Cloud</a></li></ul>
 
             
         </h5>
@@ -168,7 +170,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Spring-Cloud-Eureka"><span class="post-toc-number">1.</span> <span class="post-toc-text">Spring Cloud Eureka</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Eureka-Server"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">Eureka Server</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-创建Spring项目"><span class="post-toc-number">1.1.1.</span> <span class="post-toc-text">1. 创建Spring项目</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#2-填充项目信息"><span class="post-toc-number">2.</span> <span class="post-toc-text">2. 填充项目信息</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-选择项目类型为-Cloud-Discovery-中的-Eureka-Server"><span class="post-toc-number">2.0.1.</span> <span class="post-toc-text">3. 选择项目类型为 Cloud Discovery 中的 Eureka Server</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-完成创建"><span class="post-toc-number">2.0.2.</span> <span class="post-toc-text">4. 完成创建</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#5-添加注解-EnableEurekaServer"><span class="post-toc-number">2.0.3.</span> <span class="post-toc-text">5. 添加注解 @EnableEurekaServer</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#6-配置-application-yml"><span class="post-toc-number">2.0.4.</span> <span class="post-toc-text">6. 配置 application.yml</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#7-启动-Eureka-Server"><span class="post-toc-number">2.0.5.</span> <span class="post-toc-text">7. 启动 Eureka Server</span></a></li></ol></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Spring-Cloud-Eureka"><span class="post-toc-number">1.</span> <span class="post-toc-text">Spring Cloud Eureka</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#启动-Eureka-Server"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">启动 Eureka Server</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-创建Spring项目"><span class="post-toc-number">1.1.1.</span> <span class="post-toc-text">1. 创建Spring项目</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#2-填充项目信息"><span class="post-toc-number">2.</span> <span class="post-toc-text">2. 填充项目信息</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-选择项目类型为-Cloud-Discovery-中的-Eureka-Server"><span class="post-toc-number">2.0.1.</span> <span class="post-toc-text">3. 选择项目类型为 Cloud Discovery 中的 Eureka Server</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-完成创建"><span class="post-toc-number">2.0.2.</span> <span class="post-toc-text">4. 完成创建</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#5-添加注解-EnableEurekaServer"><span class="post-toc-number">2.0.3.</span> <span class="post-toc-text">5. 添加注解 @EnableEurekaServer</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#6-配置-application-yml"><span class="post-toc-number">2.0.4.</span> <span class="post-toc-text">6. 配置 application.yml</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#7-启动-Eureka-Server"><span class="post-toc-number">2.0.5.</span> <span class="post-toc-text">7. 启动 Eureka Server</span></a></li></ol></li></ol>
         </nav>
     </aside>
 
@@ -176,11 +178,13 @@
 <article id="post-Spring Cloud/服务注册与发现/Spring Cloud Eureka" class="post-article article-type-post fade" itemprop="blogPost">
 
     <div class="post-card">
-        <h1 class="post-card-title"></h1>
+        <h1 class="post-card-title">Spring Cloud Eureka</h1>
         <div class="post-meta">
-            <time class="post-time" title="2019-01-31 14:04:48" datetime="2019-01-31T06:04:48.000Z" itemprop="datePublished">2019-01-31</time>
+            <time class="post-time" title="2019-01-31 20:18:00" datetime="2019-01-31T12:18:00.000Z" itemprop="datePublished">2019-01-31</time>
 
             
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Spring-Cloud/">Spring Cloud</a></li></ul>
+
 
 
             
@@ -205,7 +209,7 @@
 </ul>
 </li>
 </ul>
-<h2 id="Eureka-Server"><a href="#Eureka-Server" class="headerlink" title="Eureka Server"></a>Eureka Server</h2><h3 id="1-创建Spring项目"><a href="#1-创建Spring项目" class="headerlink" title="1. 创建Spring项目"></a>1. 创建Spring项目</h3><figure class="image-bubble">
+<h2 id="启动-Eureka-Server"><a href="#启动-Eureka-Server" class="headerlink" title="启动 Eureka Server"></a>启动 Eureka Server</h2><h3 id="1-创建Spring项目"><a href="#1-创建Spring项目" class="headerlink" title="1. 创建Spring项目"></a>1. 创建Spring项目</h3><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
                     <img src="/2019/01/31/Spring Cloud/服务注册与发现/Spring Cloud Eureka/Spring" alt="Cloud" title="">
@@ -251,7 +255,7 @@
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2019-01-31T11:43:26.000Z" itemprop="dateUpdated">2019-01-31 19:43:26</time>
+    最后更新时间：<time datetime="2019-01-31T12:19:19.000Z" itemprop="dateUpdated">2019-01-31 20:19:19</time>
 </span><br>
 
 
@@ -277,6 +281,8 @@
 
         <div class="post-footer">
             
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Spring-Cloud/">Spring Cloud</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/微服务架构/">微服务架构</a></li></ul>
+
 
             
 <div class="page-share-wrap">
@@ -285,7 +291,7 @@
 <div class="page-share" id="pageShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://zjxjwxk.com/2019/01/31/Spring Cloud/服务注册与发现/Spring Cloud Eureka/&title=Zjxjwxk's Blog&pic=https://zjxjwxk.com/img/avatar.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://zjxjwxk.com/2019/01/31/Spring Cloud/服务注册与发现/Spring Cloud Eureka/&title=《Spring Cloud Eureka》 — Zjxjwxk's Blog&pic=https://zjxjwxk.com/img/avatar.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -295,7 +301,7 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://zjxjwxk.com/2019/01/31/Spring Cloud/服务注册与发现/Spring Cloud Eureka/&title=Zjxjwxk's Blog&source=" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://zjxjwxk.com/2019/01/31/Spring Cloud/服务注册与发现/Spring Cloud Eureka/&title=《Spring Cloud Eureka》 — Zjxjwxk's Blog&source=" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
@@ -305,7 +311,7 @@
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=Zjxjwxk's Blog&url=https://zjxjwxk.com/2019/01/31/Spring Cloud/服务注册与发现/Spring Cloud Eureka/&via=https://zjxjwxk.com" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Spring Cloud Eureka》 — Zjxjwxk's Blog&url=https://zjxjwxk.com/2019/01/31/Spring Cloud/服务注册与发现/Spring Cloud Eureka/&via=https://zjxjwxk.com" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
@@ -330,21 +336,14 @@
     </div>
 
     
-<nav class="post-nav flex-row flex-justify-between">
-  
-    <div class="waves-block waves-effect prev">
-      <a href="/2019/01/31/Spring Cloud/微服务架构/微服务简介/" id="post-prev" class="post-nav-link">
-        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
-        <h4 class="title">[no title]</h4>
-      </a>
-    </div>
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
   
 
   
     <div class="waves-block waves-effect next">
-      <a href="/2019/01/30/Linux/CentOS/CentOS jar包后台运行/" id="post-next" class="post-nav-link">
+      <a href="/2019/01/31/Spring Cloud/微服务架构/微服务简介/" id="post-next" class="post-nav-link">
         <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">CentOS jar包后台运行</h4>
+        <h4 class="title">微服务简介</h4>
       </a>
     </div>
   
@@ -464,7 +463,7 @@
 <div class="global-share" id="globalShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://zjxjwxk.com/2019/01/31/Spring Cloud/服务注册与发现/Spring Cloud Eureka/&title=《No title》 — Zjxjwxk's Blog&pic=https://zjxjwxk.com/img/avatar.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://zjxjwxk.com/2019/01/31/Spring Cloud/服务注册与发现/Spring Cloud Eureka/&title=《Spring Cloud Eureka》 — Zjxjwxk's Blog&pic=https://zjxjwxk.com/img/avatar.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -474,7 +473,7 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://zjxjwxk.com/2019/01/31/Spring Cloud/服务注册与发现/Spring Cloud Eureka/&title=《No title》 — Zjxjwxk's Blog&source=" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://zjxjwxk.com/2019/01/31/Spring Cloud/服务注册与发现/Spring Cloud Eureka/&title=《Spring Cloud Eureka》 — Zjxjwxk's Blog&source=" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
@@ -484,7 +483,7 @@
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《No title》 — Zjxjwxk's Blog&url=https://zjxjwxk.com/2019/01/31/Spring Cloud/服务注册与发现/Spring Cloud Eureka/&via=https://zjxjwxk.com" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Spring Cloud Eureka》 — Zjxjwxk's Blog&url=https://zjxjwxk.com/2019/01/31/Spring Cloud/服务注册与发现/Spring Cloud Eureka/&via=https://zjxjwxk.com" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
