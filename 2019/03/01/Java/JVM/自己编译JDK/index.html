@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+
+    
+
+    
+
+
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    
+    
+    <meta name="sogou_site_verification" content="true">
+    
+    
+    <link rel="canonical" href="https://zjxjwxk.com/2019/03/01/Java/JVM/自己编译JDK/">
+    
+    
+    <title>自己编译JDK | Zjxjwxk&#39;s Blog | A Java Developer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Java,JVM">
+    <meta name="description" content="想要一探 JDK 内部的实现机制，最便捷的捷径之一就是自己编译一套 JDK，通过阅读和跟踪调试 JDK 源码去了解 Java 技术体系的原理。本人选择了 OpenJDK 进行编译。 1. 获取 JDK 源码获取 JDK 源码有两种方式： (1). 通过 Mercurial 代码版本管理工具从 Repository 中直接取得源码Repository 地址：http://hg.openjdk.jav">
+<meta name="keywords" content="Java,JVM">
+<meta property="og:type" content="article">
+<meta property="og:title" content="自己编译JDK">
+<meta property="og:url" content="https://zjxjwxk.com/2019/03/01/Java/JVM/自己编译JDK/index.html">
+<meta property="og:site_name" content="Zjxjwxk&#39;s Blog">
+<meta property="og:description" content="想要一探 JDK 内部的实现机制，最便捷的捷径之一就是自己编译一套 JDK，通过阅读和跟踪调试 JDK 源码去了解 Java 技术体系的原理。本人选择了 OpenJDK 进行编译。 1. 获取 JDK 源码获取 JDK 源码有两种方式： (1). 通过 Mercurial 代码版本管理工具从 Repository 中直接取得源码Repository 地址：http://hg.openjdk.jav">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-03-11T10:11:12.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="自己编译JDK">
+<meta name="twitter:description" content="想要一探 JDK 内部的实现机制，最便捷的捷径之一就是自己编译一套 JDK，通过阅读和跟踪调试 JDK 源码去了解 Java 技术体系的原理。本人选择了 OpenJDK 进行编译。 1. 获取 JDK 源码获取 JDK 源码有两种方式： (1). 通过 Mercurial 代码版本管理工具从 Repository 中直接取得源码Repository 地址：http://hg.openjdk.jav">
+    
+        <link rel="alternate" type="application/atom+xml" title="Zjxjwxk&#39;s Blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    
+
+</head>
+
+<body>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">吴鑫康</h5>
+          <a href="mailto:zjxjwxk@gmail.com" title="zjxjwxk@gmail.com" class="mail">zjxjwxk@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/zjxjwxk" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                GitHub
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">自己编译JDK</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">自己编译JDK</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-03-01T02:44:22.000Z" itemprop="datePublished" class="page-time">
+  2019-03-01
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Java/">Java</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-获取-JDK-源码"><span class="post-toc-number">1.</span> <span class="post-toc-text">1. 获取 JDK 源码</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-通过-Mercurial-代码版本管理工具从-Repository-中直接取得源码"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">(1). 通过 Mercurial 代码版本管理工具从 Repository 中直接取得源码</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-通过-OpenJDK™-Source-Releases-页面取得打包好的源码"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">(2). 通过 OpenJDK™ Source Releases 页面取得打包好的源码</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-系统需求"><span class="post-toc-number">2.</span> <span class="post-toc-text">2. 系统需求</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-构建编译环境"><span class="post-toc-number">3.</span> <span class="post-toc-text">3. 构建编译环境</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#4-进行编译"><span class="post-toc-number">4.</span> <span class="post-toc-text">4. 进行编译</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#5-检查"><span class="post-toc-number">5.</span> <span class="post-toc-text">5. 检查</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#6-单独编译-HotSpot-虚拟机"><span class="post-toc-number">6.</span> <span class="post-toc-text">6. 单独编译 HotSpot 虚拟机</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Java/JVM/自己编译JDK" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">自己编译JDK</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-03-01 10:44:22" datetime="2019-03-01T02:44:22.000Z" itemprop="datePublished">2019-03-01</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Java/">Java</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>想要一探 JDK 内部的实现机制，最便捷的捷径之一就是自己编译一套 JDK，通过阅读和跟踪调试 JDK 源码去了解 Java 技术体系的原理。本人选择了 OpenJDK 进行编译。</p>
+<h2 id="1-获取-JDK-源码"><a href="#1-获取-JDK-源码" class="headerlink" title="1. 获取 JDK 源码"></a>1. 获取 JDK 源码</h2><p>获取 JDK 源码有两种方式：</p>
+<h3 id="1-通过-Mercurial-代码版本管理工具从-Repository-中直接取得源码"><a href="#1-通过-Mercurial-代码版本管理工具从-Repository-中直接取得源码" class="headerlink" title="(1). 通过 Mercurial 代码版本管理工具从 Repository 中直接取得源码"></a>(1). 通过 Mercurial 代码版本管理工具从 Repository 中直接取得源码</h3><p>Repository 地址：<a href="http://hg.openjdk.java.net/jdk7u/jdk7u" target="_blank" rel="noopener">http://hg.openjdk.java.net/jdk7u/jdk7u</a></p>
+<p>获取过程如以下代码所示</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">hg clone http://hg.openjdk.java.net/jdk7u/jdk7u-dev</span><br><span class="line">cd jdk7u-dev</span><br><span class="line">chmod 755 get_source.sh</span><br><span class="line">./get_source.sh</span><br></pre></td></tr></table></figure>
+<p>从版本管理中看变更轨迹效果较好，但不足之处是速度太慢，而且 Mercurial 不如 Git、SVN 等版本控制工具那样普及。</p>
+<h3 id="2-通过-OpenJDK™-Source-Releases-页面取得打包好的源码"><a href="#2-通过-OpenJDK™-Source-Releases-页面取得打包好的源码" class="headerlink" title="(2). 通过 OpenJDK™ Source Releases 页面取得打包好的源码"></a>(2). 通过 OpenJDK™ Source Releases 页面取得打包好的源码</h3><p>页面地址：<a href="https://download.java.net/openjdk/jdk7/" target="_blank" rel="noopener">https://download.java.net/openjdk/jdk7/</a></p>
+<h2 id="2-系统需求"><a href="#2-系统需求" class="headerlink" title="2. 系统需求"></a>2. 系统需求</h2><p>建议在 Linux、MacOS 或 Solaris 上构建 OpenJDK</p>
+<p>本人采用的是 64 位操作系统，编译的也是 64 位的 OpenJDK</p>
+<h2 id="3-构建编译环境"><a href="#3-构建编译环境" class="headerlink" title="3. 构建编译环境"></a>3. 构建编译环境</h2><p>本人使用的是 MacOS ，需要安装最新版本的 XCode 和 Command Line Tools for Xcode，另外还要准备一个 6u14 以上版本的 JDK，官方称这个 JDK 为 “Bootstrap JDK” 。最后，需要下载一个 1.7.1 以上版本的 Apache Ant，用于执行 Java 编译代码中的 Ant 脚本。</p>
+<h2 id="4-进行编译"><a href="#4-进行编译" class="headerlink" title="4. 进行编译"></a>4. 进行编译</h2><p>最后我们还需要对系统的环境变量做一些简单设置以便编译能够顺利通过，这里给出使用的编译 Shell 脚本：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#语言选项,这个必须设置,否则编译好后会出现一个HashTable的NPE错</span></span><br><span class="line"><span class="built_in">export</span> LANG=C</span><br><span class="line"><span class="comment">#Bootstrap JDK的安装路径。必须设置</span></span><br><span class="line"><span class="built_in">export</span> ALT_BOOTDIR=/Library/Java/JavaVirtualMachines/jdk1.8.0_201.jdk/Contents/Home</span><br><span class="line"></span><br><span class="line"><span class="comment">#允许自动下载依赖</span></span><br><span class="line"><span class="built_in">export</span> ALLOW_DOWNLOADS=<span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#并行编译的线程数,设置为和CPU内核数量一致即可</span></span><br><span class="line"><span class="built_in">export</span> HOTSPOT_BUILD_J0BS=8</span><br><span class="line"><span class="built_in">export</span> ALT_PARALLEL_COMPILE_JOBS=8</span><br><span class="line"></span><br><span class="line"><span class="comment">#比较本次build出来的映像与先前版本的差异。这对我们来说没有意义, </span></span><br><span class="line"><span class="comment">#必须设置为false,香则sanity检查会报缺少先前版本JDK的映像的错误提示。 </span></span><br><span class="line"><span class="comment">#如桌已经设置dev或者DEV_ONLY=true,这个不显式设置也行</span></span><br><span class="line"><span class="built_in">export</span> SKIP_COMPARE_IMAGES=<span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#使用预编译头文件,不加这个编译会更慢一些</span></span><br><span class="line"><span class="built_in">export</span> USE_PRECOMPILED_HEADER=<span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#要编译的内容</span></span><br><span class="line"><span class="built_in">export</span> BUILD_LANGTOOLS=<span class="literal">true</span></span><br><span class="line"><span class="comment">#export BUILD_JAXP=false</span></span><br><span class="line"><span class="comment">#export BUILD_JAXWS=fa1se</span></span><br><span class="line"><span class="comment">#export BUILD_CORBA=false</span></span><br><span class="line"><span class="built_in">export</span> BUILD_HOTSPOT=<span class="literal">true</span></span><br><span class="line"><span class="built_in">export</span> BUILD_JDK=<span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#要编译的版本</span></span><br><span class="line"><span class="comment">#export SKIP_DEBUG_BUILD=false</span></span><br><span class="line"><span class="comment">#export SKIP_FASTDEBUG_BUILD=true</span></span><br><span class="line"><span class="comment">#export DEBUG_NAME=debug</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#把它设置为false可以避开java111`ws和浏览器Java插件之类的部分的build</span></span><br><span class="line">BUILD_DEPLOY=<span class="literal">false</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#把它设置为false就不会build出安装包。因为安装包里有些奇怪的依赖, </span></span><br><span class="line"><span class="comment">#但即便不build出它也已经能得到完整的JDK映像,所以还是别build它好了</span></span><br><span class="line">BUILD_INSTALL=<span class="literal">false</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#编译结果所存放的路径</span></span><br><span class="line"><span class="built_in">export</span> ALT_OUTPUTDIR=/Users/zjxjwxk/Documents/JVM/JDK-Build/build</span><br><span class="line"></span><br><span class="line"><span class="comment">#这两个环境变量必须去掉,不然会有很诡异的事情发生（我没有具体查过这些 "诡异的</span></span><br><span class="line"><span class="comment">#事情” ,Makefile脚本裣查到有这2个变量就会提示警告)</span></span><br><span class="line"><span class="built_in">unset</span> JAVA_HOME</span><br><span class="line"><span class="built_in">unset</span> CLASSPATH</span><br><span class="line">make 2&gt;&amp;1 | tee <span class="variable">$ALT_OUTPUTDIR</span>/build.log</span><br></pre></td></tr></table></figure>
+<h2 id="5-检查"><a href="#5-检查" class="headerlink" title="5. 检查"></a>5. 检查</h2><p>全部设置结束之后，可以输入 <code>make sanity</code> 来检查我们所做的设置是否全部正确。如果一切顺利，那么几秒钟之后会有类似代码清单1-2所示的输出。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">~/Develop/JVM/jdkBuild/openjdk_7u4$ make sanity  </span><br><span class="line">Build Machine Information:  </span><br><span class="line">   build machine = IcyFenix-RMBP.local  </span><br><span class="line"> </span><br><span class="line">Build Directory Structure:  </span><br><span class="line">   CWD = /Users/IcyFenix/Develop/JVM/jdkBuild/openjdk_7u4  </span><br><span class="line">   TOPDIR = .  </span><br><span class="line">   LANGTOOLS_TOPDIR = ./langtools  </span><br><span class="line">   JAXP_TOPDIR = ./jaxp  </span><br><span class="line">   JAXWS_TOPDIR = ./jaxws  </span><br><span class="line">   CORBA_TOPDIR = ./corba  </span><br><span class="line">   HOTSPOT_TOPDIR = ./hotspot  </span><br><span class="line">   JDK_TOPDIR = ./jdk  </span><br><span class="line"> </span><br><span class="line">Build Directives:  </span><br><span class="line">   BUILD_LANGTOOLS = <span class="literal">true</span>   </span><br><span class="line">   BUILD_JAXP = <span class="literal">true</span>   </span><br><span class="line">   BUILD_JAXWS = <span class="literal">true</span>   </span><br><span class="line">   BUILD_CORBA = <span class="literal">true</span>   </span><br><span class="line">   BUILD_HOTSPOT = <span class="literal">true</span>   </span><br><span class="line">   BUILD_JDK    = <span class="literal">true</span>   </span><br><span class="line">   DEBUG_CLASSFILES =    </span><br><span class="line">   DEBUG_BINARIES =    </span><br><span class="line"> </span><br><span class="line">……因篇幅关系，中间省略了大量的输出内容……  </span><br><span class="line">   </span><br><span class="line">OpenJDK-specific settings:  </span><br><span class="line">  FREETYPE_HEADERS_PATH = /usr/X11R6/include  </span><br><span class="line">    ALT_FREETYPE_HEADERS_PATH =   </span><br><span class="line">  FREETYPE_LIB_PATH = /usr/X11R6/lib  </span><br><span class="line">    ALT_FREETYPE_LIB_PATH =   </span><br><span class="line"> </span><br><span class="line">Previous JDK Settings:  </span><br><span class="line">  PREVIOUS_RELEASE_PATH = USING-PREVIOUS_RELEASE_IMAGE  </span><br><span class="line">    ALT_PREVIOUS_RELEASE_PATH =   </span><br><span class="line">  PREVIOUS_JDK_VERSION = 1.6.0  </span><br><span class="line">    ALT_PREVIOUS_JDK_VERSION =   </span><br><span class="line">  PREVIOUS_JDK_FILE =   </span><br><span class="line">    ALT_PREVIOUS_JDK_FILE =   </span><br><span class="line">  PREVIOUS_JRE_FILE =   </span><br><span class="line">    ALT_PREVIOUS_JRE_FILE =   </span><br><span class="line">  PREVIOUS_RELEASE_IMAGE = /Library/Java/JavaVirtualMachines/jdk1.7.0_04.jdk/Contents/Home  </span><br><span class="line">    ALT_PREVIOUS_RELEASE_IMAGE =   </span><br><span class="line"> </span><br><span class="line">Sanity check passed.</span><br></pre></td></tr></table></figure>
+<p>Makefile 的 Sanity 检查过程输出了编译所需的所有环境变量，如果看到 “Sanity check passed” 说明检查过程通过了，可以输入 <code>make</code> 执行整个 OpenJDK 编译 (make 不加参数，默认编译 make all)。</p>
+<p>编译完成后，进入 OpenJDK 源码下的 build/j2sdk-image 目录，这是整个 JDK 的完整编译结果，复制到 JAVA_HOME 目录，就可以作为一个完整的 JDK 使用，编译出来的虚拟机，在 <code>-version</code> 命令中带有用户的机器名。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt; ./java -version  </span><br><span class="line">openjdk version <span class="string">"1.7.0-internal-fastdebug"</span>  </span><br><span class="line">OpenJDK Runtime Environment (build 1.7.0-internal-fastdebug-icyfenix_2012_12_24_15_57-b00)  </span><br><span class="line">OpenJDK 64-Bit Server VM (build 23.0-b21-fastdebug, mixed mode)</span><br></pre></td></tr></table></figure>
+<h2 id="6-单独编译-HotSpot-虚拟机"><a href="#6-单独编译-HotSpot-虚拟机" class="headerlink" title="6. 单独编译 HotSpot 虚拟机"></a>6. 单独编译 HotSpot 虚拟机</h2><p>在大多数时候，如果我们不关心 JDK 中 HotSpot 虚拟机以外的内容，只想单独编译 HotSpot 虚拟机的话（例如调试虚拟机时，每次改动程序都执行整个 OpenJDK 的Makefile，速度肯定受不了），那么使用 hotspot/make 目录 下的 Makefile 进行替换即可，其他参数设置与前面是一致的，这时候虚拟机的输出结果存放在 build/hotspot/outputdir/bsd_amd64_compiler2 目录中，进入后可以见到以下几个目录。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">0 drwxr-xr-x   15 IcyFenix  staff   510B 12 13 17:24 debug  </span><br><span class="line">0 drwxr-xr-x   15 IcyFenix  staff   510B 12 13 17:24 fastdebug  </span><br><span class="line">0 drwxr-xr-x   15 IcyFenix  staff   510B 12 13 17:25 generated  </span><br><span class="line">0 drwxr-xr-x   15 IcyFenix  staff   510B 12 13 17:24 jvmg  </span><br><span class="line">0 drwxr-xr-x   15 IcyFenix  staff   510B 12 13 17:24 optimized  </span><br><span class="line">0 drwxr-xr-x  584 IcyFenix  staff    19K 12 13 17:25 product  </span><br><span class="line">0 drwxr-xr-x   15 IcyFenix  staff   510B 12 13 17:24 profiled</span><br></pre></td></tr></table></figure>
+<p>这些目录对应了不同的优化级别，优化级别越高，性能自然越好，但是输出代码与源码的差别就越大，难于调试，具体哪个目录有内容，取决于 <code>make</code> 命令后面的参数。</p>
+<p>在编译结束之后、运行虚拟机之前，还要手工编辑目录下的 env.sh 文件，这个文件由编译脚本自动产生，用于设置虚拟机的环境变量，里面已经发布了 “JAVA_HOME、CLASSPATH、HOTSPOT_BUILD_USER” 3个环境变量，还需要增加一个“LD_LIBRARY_PATH”，内容如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">LD_LIBRARY_PATH=.:<span class="variable">$&#123;JAVA_HOME&#125;</span>/jre/lib/amd64/native_threads:<span class="variable">$&#123;JAVA_HOME&#125;</span>/jre/lib/amd64:  </span><br><span class="line"><span class="built_in">export</span> LD_LIBRARY_PATH</span><br></pre></td></tr></table></figure>
+<p>然后执行以下命令启动虚拟机（这时的启动器名为gamma），输出版本号。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">. ./env.sh  </span><br><span class="line">./gamma -version  </span><br><span class="line">Using java runtime at: /Library/Java/JavaVirtualMachines/jdk1.7.0_04.jdk/Contents/Home/jre  </span><br><span class="line">java version <span class="string">"1.7.0_04"</span>  </span><br><span class="line">Java(TM) SE Runtime Environment (build 1.7.0_04-b21)  </span><br><span class="line">OpenJDK 64-Bit Server VM (build 23.0-b21, mixed mode)</span><br></pre></td></tr></table></figure>
+<p>看到自己编译的虚拟机成功运行起来，很有成就感吧!</p>
+<blockquote>
+<p>来源：《深入理解Java虚拟机：JVM高级特性与最佳实践（第2版）》</p>
+<p>作者：周志明</p>
+</blockquote>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-03-11T10:11:12.000Z" itemprop="dateUpdated">2019-03-11 18:11:12</time>
+</span><br>
+
+
+        
+        原始链接：<a href="/2019/03/01/Java/JVM/自己编译JDK/" target="_blank" rel="external">https://zjxjwxk.com/2019/03/01/Java/JVM/自己编译JDK/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://zjxjwxk.com">
+            <img src="/img/avatar.jpg" alt="吴鑫康">
+            吴鑫康
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JVM/">JVM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://zjxjwxk.com/2019/03/01/Java/JVM/自己编译JDK/&title=《自己编译JDK》 — Zjxjwxk's Blog&pic=https://zjxjwxk.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://zjxjwxk.com/2019/03/01/Java/JVM/自己编译JDK/&title=《自己编译JDK》 — Zjxjwxk's Blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://zjxjwxk.com/2019/03/01/Java/JVM/自己编译JDK/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《自己编译JDK》 — Zjxjwxk's Blog&url=https://zjxjwxk.com/2019/03/01/Java/JVM/自己编译JDK/&via=https://zjxjwxk.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://zjxjwxk.com/2019/03/01/Java/JVM/自己编译JDK/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/02/02/Spring Boot/Spring-Boot-简化分页查询Page接口的JSON响应/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Spring Boot 简化分页查询Page接口的JSON响应</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "gJTHi1MULDjBNIRKPWN2bTWd-gzGzoHsz",
+            appKey: "dflbQMdoD4HLI3twjbzShRMK",
+            avatar: "mm",
+            placeholder: "写下你的评论吧！",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>吴鑫康 &copy; 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://zjxjwxk.com/2019/03/01/Java/JVM/自己编译JDK/&title=《自己编译JDK》 — Zjxjwxk's Blog&pic=https://zjxjwxk.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://zjxjwxk.com/2019/03/01/Java/JVM/自己编译JDK/&title=《自己编译JDK》 — Zjxjwxk's Blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://zjxjwxk.com/2019/03/01/Java/JVM/自己编译JDK/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《自己编译JDK》 — Zjxjwxk's Blog&url=https://zjxjwxk.com/2019/03/01/Java/JVM/自己编译JDK/&via=https://zjxjwxk.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://zjxjwxk.com/2019/03/01/Java/JVM/自己编译JDK/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACHElEQVR42u3aQYqEQAwF0L7/pXu2A4P6k9IBU8+VSKv1bAipJJ9PfHyD4+j3v6/8PT+/6+YDAwPjtYxkccn1oyefv6t6/fCNGBgYGzDOF3G0oOQ8CcdJmL5YMwYGBkaQriUJX35gYGBg3MU4D68rW1kMDAyM3iZ2pfSWp5iP78UxMDBeyMir7v9//kh/AwMD41WMlY1lsuHMk8WVAwMDYzajWkrrJX954M7TPgwMjN0YK0Ngvc1tr+X54CwbBgbGSxh5oMwTwTxYrw98YGBg7MDoDWZVQ2r1w1U/LgYGxjxGnqLlpbdeazP/lIdVQwwMjKGM9ZBaje75MwtlNQwMjNGMfGNZDX8JsjrgdbgqDAyMbRg9Uv6yXo8iWhUGBsZoRm+h94bavBh3cRcGBsZQRt44TKgrAxbVFgIGBsY+jN6i8/JZPjyRh/joP8HAwBjHWBnGqvJWGAUABgbGIEZUxloYxahugJvFOwwMjNGMPKTmA2TVMY67ttAYGBh7MnJMr1iWX78tQcTAwBjBKJe0HtjKVgMxBgYGxl0DFs+Nd2BgYMxmfItHvpReKa3aRr2Yw8XAwBjBqLYMn0v7egMZGBgY+zBWBiOSu6rFtWqiiYGBsQ+jF/hWkr8bmgEYGBgYcZLXDJHFpikGBgZGzsgHKXqtzTxAX8yMYGBgjGPk29FqoMybBNXPh4GBsQ+junVMHl39zcpHxMDAGM34AbMHslB5093AAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+
+
+</body>
+</html>
