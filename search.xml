@@ -94,7 +94,7 @@
       
       <categories>
           
-          <category> Spring Cloud </category>
+          <category> Spring-Cloud </category>
           
       </categories>
       
@@ -103,9 +103,9 @@
             
             <tag> Java </tag>
             
-            <tag> Spring Cloud </tag>
-            
             <tag> 微服务架构 </tag>
+            
+            <tag> Spring-Cloud </tag>
             
         </tags>
       

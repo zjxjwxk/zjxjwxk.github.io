@@ -104,7 +104,7 @@
     <link href="https://zjxjwxk.com/2019/01/31/Spring%20Cloud/%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%8E%E5%8F%91%E7%8E%B0/Spring-Cloud-Eureka/"/>
     <id>https://zjxjwxk.com/2019/01/31/Spring Cloud/服务注册与发现/Spring-Cloud-Eureka/</id>
     <published>2019-01-31T12:18:00.000Z</published>
-    <updated>2020-02-02T15:55:36.000Z</updated>
+    <updated>2020-02-02T16:39:25.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="Spring-Cloud-Eureka"><a href="#Spring-Cloud-Eureka" class="headerlink" title="Spring Cloud Eureka"></a>Spring Cloud Eureka</h1><ul><li>基于 Netflix Eureka 做了二次封装</li><li>两个组件组成：<ul><li>Eureka Server 注册中心<ul><li>作为具有服务注册功能的服务器，是服务注册中心，系统中的其他微服务使用 Eureka Client 连接到Eureka Server ，并维持心跳连接以监控各个微服务是否正常运行。</li></ul></li><li>Eureka Client 服务注册<ul><li>用于简化与服务器的交互，作为轮询负载均衡器，并提供服务的故障切换支持。</li></ul></li></ul></li></ul><h2 id="启动-Eureka-Server"><a href="#启动-Eureka-Server" class="headerlink" title="启动 Eureka Server"></a>启动 Eureka Server</h2><h3 id="1-创建Spring项目"><a href="#1-创建Spring项目" class="headerlink" title="1. 创建Spring项目"></a>1. 创建Spring项目</h3><p><img src="/2019/01/31/Spring Cloud/服务注册与发现/Spring-Cloud-Eureka/image-20190131155138441.png" alt="创建Spring项目"></p><h1 id="2-填充项目信息"><a href="#2-填充项目信息" class="headerlink" title="2. 填充项目信息"></a>2. 填充项目信息</h1><p><img src="/2019/01/31/Spring Cloud/服务注册与发现/Spring-Cloud-Eureka/image-20190131155241197.png" alt="填充项目信息"></p><h3 id="3-选择项目类型为-Cloud-Discovery-中的-Eureka-Server"><a href="#3-选择项目类型为-Cloud-Discovery-中的-Eureka-Server" class="headerlink" title="3. 选择项目类型为 Cloud Discovery 中的 Eureka Server"></a>3. 选择项目类型为 Cloud Discovery 中的 Eureka Server</h3><p><img src="/2019/01/31/Spring Cloud/服务注册与发现/Spring-Cloud-Eureka/image-20190131155453826.png" alt="选择Eureka Server"></p><h3 id="4-完成创建"><a href="#4-完成创建" class="headerlink" title="4. 完成创建"></a>4. 完成创建</h3><p><img src="/2019/01/31/Spring Cloud/服务注册与发现/Spring-Cloud-Eureka/image-20190131160337079.png" alt="完成创建"></p><h3 id="5-添加注解-EnableEurekaServer"><a href="#5-添加注解-EnableEurekaServer" class="headerlink" title="5. 添加注解 @EnableEurekaServer"></a>5. 添加注解 @EnableEurekaServer</h3><pre><code class="Java">@SpringBootApplication@EnableEurekaServerpublic class EurekaApplication {    public static void main(String[] args) {        SpringApplication.run(EurekaApplication.class, args);    }}</code></pre><h3 id="6-配置-application-yml"><a href="#6-配置-application-yml" class="headerlink" title="6. 配置 application.yml"></a>6. 配置 application.yml</h3><pre><code class="yml">eureka:  client:    service-url:      defaultZone: http://localhost:8761/eureka/    register-with-eureka: falsespring:  application:    name: eurekaserver:  port: 8761</code></pre><h3 id="7-启动-Eureka-Server"><a href="#7-启动-Eureka-Server" class="headerlink" title="7. 启动 Eureka Server"></a>7. 启动 Eureka Server</h3><p><img src="/2019/01/31/Spring Cloud/服务注册与发现/Spring-Cloud-Eureka/image-20190131172458551.png" alt="Eureka Server信息"></p><p>这样，一个简单的Eureka Server就启动完成了。</p>]]></content>
     
@@ -118,14 +118,14 @@
     
     </summary>
     
-      <category term="Spring Cloud" scheme="https://zjxjwxk.com/categories/Spring-Cloud/"/>
+      <category term="Spring-Cloud" scheme="https://zjxjwxk.com/categories/Spring-Cloud/"/>
     
     
       <category term="Java" scheme="https://zjxjwxk.com/tags/Java/"/>
     
-      <category term="Spring Cloud" scheme="https://zjxjwxk.com/tags/Spring-Cloud/"/>
-    
       <category term="微服务架构" scheme="https://zjxjwxk.com/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/"/>
+    
+      <category term="Spring-Cloud" scheme="https://zjxjwxk.com/tags/Spring-Cloud/"/>
     
   </entry>
   
