@@ -1,530 +1,386 @@
+
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN" class="loading">
 <head><meta name="generator" content="Hexo 3.8.0">
-    
-
-    
-
-    
-
-
-
-    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
-    
-    
-    <meta name="sogou_site_verification" content="true">
-    
-    
-    <link rel="canonical" href="https://zjxjwxk.com/2019/02/02/Spring Boot/Spring-Boot-简化分页查询Page接口的JSON响应/">
-    
-    
-    <title>Spring Boot 简化分页查询Page接口的JSON响应 | Zjxjwxk&#39;s Blog | A Java Developer</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    
-    <meta name="theme-color" content="#3F51B5">
-    
-    
-    <meta name="keywords" content="Java,Spring Boot">
-    <meta name="description" content="多余的分页信息Spring Data 的 Page 接口进行数据分页返回了很多很多垃圾信息： 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354&amp;#123;    &quot;status&quot;: 0,    &quot;data&quot;: &amp;#123;        &quot;conte">
-<meta name="keywords" content="Java,Spring Boot">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Spring Boot 简化分页查询Page接口的JSON响应">
-<meta property="og:url" content="https://zjxjwxk.com/2019/02/02/Spring Boot/Spring-Boot-简化分页查询Page接口的JSON响应/index.html">
-<meta property="og:site_name" content="Zjxjwxk&#39;s Blog">
-<meta property="og:description" content="多余的分页信息Spring Data 的 Page 接口进行数据分页返回了很多很多垃圾信息： 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354&amp;#123;    &quot;status&quot;: 0,    &quot;data&quot;: &amp;#123;        &quot;conte">
-<meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-02-02T09:46:55.000Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Spring Boot 简化分页查询Page接口的JSON响应">
-<meta name="twitter:description" content="多余的分页信息Spring Data 的 Page 接口进行数据分页返回了很多很多垃圾信息： 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354&amp;#123;    &quot;status&quot;: 0,    &quot;data&quot;: &amp;#123;        &quot;conte">
-    
-        <link rel="alternate" type="application/atom+xml" title="Zjxjwxk&#39;s Blog" href="/atom.xml">
-    
-    <link rel="shortcut icon" href="/favicon.ico">
-    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
-    <script>window.lazyScripts=[]</script>
-
-    <!-- custom head --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
-    
-
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Spring Boot 简化分页查询Page接口的JSON响应 - Zjxjwxk&#39;s Blog</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="吴鑫康 zjxjwxk Wxk Java,"> 
+    <meta name="description" content="多余的分页信息Spring Data 的 Page 接口进行数据分页返回了很多很多垃圾信息：
+{
+    &amp;quot;status&amp;quot;: 0,
+    &amp;quot;data&amp;quot;: {,"> 
+    <meta name="author" content="吴鑫康"> 
+    <link rel="alternative" href="atom.xml" title="Zjxjwxk&#39;s Blog" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    <link href="https://fonts.loli.net/css?family=Roboto+Mono|Rubik&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_1429596_nzgqgvnmkjb.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.7.2/animate.min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/codemirror/5.48.4/codemirror.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/codemirror/5.48.4/theme/dracula.css">
+    <link rel="stylesheet" href="/css/obsidian.css">
+    <link rel="stylesheet" href="/css/ball-atom.min.css"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
+</html>
 
-<body>
-    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="loading" class="active"></div>
-
-    <aside id="menu" class="hide">
-  <div class="inner flex-row-vertical">
-    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
-        <i class="icon icon-lg icon-close"></i>
-    </a>
-    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
-      <div class="brand">
-        <a href="/" class="avatar waves-effect waves-circle waves-light">
-          <img src="/img/avatar.jpg">
-        </a>
-        <hgroup class="introduce">
-          <h5 class="nickname">吴鑫康</h5>
-          <a href="mailto:zjxjwxk@gmail.com" title="zjxjwxk@gmail.com" class="mail">zjxjwxk@gmail.com</a>
-        </hgroup>
-      </div>
-    </div>
-    <div class="scroll-wrap flex-col">
-      <ul class="nav">
-        
-            <li class="waves-block waves-effect">
-              <a href="/">
-                <i class="icon icon-lg icon-home"></i>
-                主页
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/archives">
-                <i class="icon icon-lg icon-archives"></i>
-                归档
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/tags">
-                <i class="icon icon-lg icon-tags"></i>
-                标签
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/categories">
-                <i class="icon icon-lg icon-th-list"></i>
-                分类
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="https://github.com/zjxjwxk" target="_blank">
-                <i class="icon icon-lg icon-github"></i>
-                GitHub
-              </a>
-            </li>
-        
-      </ul>
-    </div>
-  </div>
-</aside>
-
-    <main id="main">
-        <header class="top-header" id="header">
-    <div class="flex-row">
-        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
-          <i class="icon icon-lg icon-navicon"></i>
-        </a>
-        <div class="flex-col header-title ellipsis">Spring Boot 简化分页查询Page接口的JSON响应</div>
-        
-        <div class="search-wrap" id="search-wrap">
-            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
-                <i class="icon icon-lg icon-chevron-left"></i>
-            </a>
-            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
-            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
-                <i class="icon icon-lg icon-search"></i>
-            </a>
+<body class="loading">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="loader">
+        <div class="la-ball-atom la-2x">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
         </div>
-        
-        
-        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
-            <i class="icon icon-lg icon-share-alt"></i>
-        </a>
-        
     </div>
-</header>
-<header class="content-header post-header">
-
-    <div class="container fade-scale">
-        <h1 class="title">Spring Boot 简化分页查询Page接口的JSON响应</h1>
-        <h5 class="subtitle">
-            
-                <time datetime="2019-02-02T09:15:00.000Z" itemprop="datePublished" class="page-time">
-  2019-02-02
-</time>
-
-
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Spring-Boot/">Spring Boot</a></li></ul>
-
-            
-        </h5>
-    </div>
-
-    
-
-
-</header>
-
-
-<div class="container body-wrap">
-    
-    <aside class="post-widget">
-        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
-            <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#多余的分页信息"><span class="post-toc-number">1.</span> <span class="post-toc-text">多余的分页信息</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#实际需要的分页信息"><span class="post-toc-number">2.</span> <span class="post-toc-text">实际需要的分页信息</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#创建-PageChunk-类进行封装"><span class="post-toc-number">3.</span> <span class="post-toc-text">创建 PageChunk 类进行封装</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#用-PageChunk-替代-Page"><span class="post-toc-number">4.</span> <span class="post-toc-text">用 PageChunk 替代 Page</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#简化后的结果"><span class="post-toc-number">5.</span> <span class="post-toc-text">简化后的结果</span></a></li></ol>
-        </nav>
-    </aside>
-
-
-<article id="post-Spring Boot/Spring-Boot-简化分页查询Page接口的JSON响应" class="post-article article-type-post fade" itemprop="blogPost">
-
-    <div class="post-card">
-        <h1 class="post-card-title">Spring Boot 简化分页查询Page接口的JSON响应</h1>
-        <div class="post-meta">
-            <time class="post-time" title="2019-02-02 17:15:00" datetime="2019-02-02T09:15:00.000Z" itemprop="datePublished">2019-02-02</time>
-
-            
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Spring-Boot/">Spring Boot</a></li></ul>
-
-
-
-            
-<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
-    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
-</span>
-
-
+    <span id="config-title" style="display:none">Zjxjwxk&#39;s Blog</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div class="scrollbar gradient-bg-rev"></div>
+<div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <div class="navigation animated fadeIn fast delay-1s">
+        <img id="home-icon" class="icon-home" src="/img/favicon.png" alt="" data-url="https://zjxjwxk.com">
+        <div id="play-icon" title="Play/Pause" class="iconfont icon-play"></div>
+        <h3 class="subtitle">Spring Boot 简化分页查询Page接口的JSON响应</h3>
+        <div class="social">
+            <!--        <div class="like-icon">-->
+            <!--            <a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
+            <!--        </div>-->
+            <div>
+                <div class="share">
+                    
+                        <a href="javascript:;" class="iconfont icon-share1"></a>
+                        <div class="share-component-cc" data-disabled="facebook,douban,linkedin,diandian,tencent,google"></div>
+                    
+                </div>
+            </div>
         </div>
-        <div class="post-content" id="post-content" itemprop="postContent">
+    </div>
+</div>
+
+    <div class="section">
+        <div class="article-header-wrapper">
+    <div class="article-header">
+        <div class="article-cover animated fadeIn" style="
+            animation-delay: 600ms;
+            animation-duration: 1.2s;
+            background-image: 
+                radial-gradient(ellipse closest-side, rgba(0, 0, 0, 0.65), #100e17),
+                url(/img/cover.jpg);">
+        </div>
+        <div class="else">
+            <p class="animated fadeInDown">
+                
+                <a href="/categories/Spring Boot"><b>「
+                    </b>SPRING BOOT<b> 」</b></a>
+                
+                二月 02, 2019
+            </p>
+            <h3 class="post-title animated fadeInDown"><a href="/2019/02/02/Spring Boot/Spring-Boot-简化分页查询Page接口的JSON响应/" title="Spring Boot 简化分页查询Page接口的JSON响应">Spring Boot 简化分页查询Page接口的JSON响应</a>
+            </h3>
+            
+            <p class="post-count animated fadeInDown">
+                
+                <span>
+                    <b class="iconfont icon-text2"></b> <i>文章字数</i>
+                    7.3k
+                </span>
+                
+                
+                <span>
+                    <b class="iconfont icon-timer__s"></b> <i>阅读约需</i>
+                    7 mins.
+                </span>
+                
+                
+                <span id="/2019/02/02/Spring Boot/Spring-Boot-简化分页查询Page接口的JSON响应/" class="leancloud_visitors" data-flag-title="Spring Boot 简化分页查询Page接口的JSON响应">
+                    <b class="iconfont icon-read"></b> <i>阅读次数</i>
+                    <span class="leancloud-visitors-count">1000000</span>
+                </span>
+                
+                
+            </p>
+            
+            
+            <ul class="animated fadeInDown post-tags-list"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/Java/">Java</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/Spring-Boot/">Spring Boot</a></li></ul>
+            
+        </div>
+    </div>
+</div>
+
+<div class="screen-gradient-after">
+    <div class="screen-gradient-content">
+        <div class="screen-gradient-content-inside">
+            <div class="bold-underline-links screen-gradient-sponsor">
+                <p>
+                    <span class="animated fadeIn delay-1s"></span>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="article">
+    <div class="main">
+        <div class="content markdown animated fadeIn">
             <h3 id="多余的分页信息"><a href="#多余的分页信息" class="headerlink" title="多余的分页信息"></a>多余的分页信息</h3><p>Spring Data 的 Page 接口进行数据分页返回了很多很多垃圾信息：</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"status"</span>: <span class="number">0</span>,</span><br><span class="line">    <span class="attr">"data"</span>: &#123;</span><br><span class="line">        <span class="attr">"content"</span>: [</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="attr">"goodsId"</span>: <span class="number">1</span>,</span><br><span class="line">                <span class="attr">"producerId"</span>: <span class="number">1</span>,</span><br><span class="line">                <span class="attr">"categoryId"</span>: <span class="number">4</span>,</span><br><span class="line">                <span class="attr">"name"</span>: <span class="string">"耐克sb滑板鞋"</span>,</span><br><span class="line">                <span class="attr">"price"</span>: <span class="number">500</span>,</span><br><span class="line">                <span class="attr">"stock"</span>: <span class="number">500</span>,</span><br><span class="line">                <span class="attr">"status"</span>: <span class="string">"正常"</span>,</span><br><span class="line">                <span class="attr">"createTime"</span>: <span class="string">"2019-02-02T03:48:33.000+0000"</span>,</span><br><span class="line">                <span class="attr">"updateTime"</span>: <span class="literal">null</span></span><br><span class="line">            &#125;,</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="attr">"goodsId"</span>: <span class="number">2</span>,</span><br><span class="line">                <span class="attr">"producerId"</span>: <span class="number">1</span>,</span><br><span class="line">                <span class="attr">"categoryId"</span>: <span class="number">4</span>,</span><br><span class="line">                <span class="attr">"name"</span>: <span class="string">"阿迪达斯小白鞋"</span>,</span><br><span class="line">                <span class="attr">"price"</span>: <span class="number">500</span>,</span><br><span class="line">                <span class="attr">"stock"</span>: <span class="number">300</span>,</span><br><span class="line">                <span class="attr">"status"</span>: <span class="string">"正常"</span>,</span><br><span class="line">                <span class="attr">"createTime"</span>: <span class="string">"2019-02-02T03:48:59.000+0000"</span>,</span><br><span class="line">                <span class="attr">"updateTime"</span>: <span class="literal">null</span></span><br><span class="line">            &#125;</span><br><span class="line">        ],</span><br><span class="line">        <span class="attr">"pageable"</span>: &#123;</span><br><span class="line">            <span class="attr">"sort"</span>: &#123;</span><br><span class="line">                <span class="attr">"sorted"</span>: <span class="literal">false</span>,</span><br><span class="line">                <span class="attr">"unsorted"</span>: <span class="literal">true</span>,</span><br><span class="line">                <span class="attr">"empty"</span>: <span class="literal">true</span></span><br><span class="line">            &#125;,</span><br><span class="line">            <span class="attr">"offset"</span>: <span class="number">0</span>,</span><br><span class="line">            <span class="attr">"pageSize"</span>: <span class="number">10</span>,</span><br><span class="line">            <span class="attr">"pageNumber"</span>: <span class="number">0</span>,</span><br><span class="line">            <span class="attr">"paged"</span>: <span class="literal">true</span>,</span><br><span class="line">            <span class="attr">"unpaged"</span>: <span class="literal">false</span></span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">"last"</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">"totalPages"</span>: <span class="number">1</span>,</span><br><span class="line">        <span class="attr">"totalElements"</span>: <span class="number">2</span>,</span><br><span class="line">        <span class="attr">"size"</span>: <span class="number">10</span>,</span><br><span class="line">        <span class="attr">"number"</span>: <span class="number">0</span>,</span><br><span class="line">        <span class="attr">"numberOfElements"</span>: <span class="number">2</span>,</span><br><span class="line">        <span class="attr">"sort"</span>: &#123;</span><br><span class="line">            <span class="attr">"sorted"</span>: <span class="literal">false</span>,</span><br><span class="line">            <span class="attr">"unsorted"</span>: <span class="literal">true</span>,</span><br><span class="line">            <span class="attr">"empty"</span>: <span class="literal">true</span></span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">"first"</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">"empty"</span>: <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="JSON">{
+    &quot;status&quot;: 0,
+    &quot;data&quot;: {
+        &quot;content&quot;: [
+            {
+                &quot;goodsId&quot;: 1,
+                &quot;producerId&quot;: 1,
+                &quot;categoryId&quot;: 4,
+                &quot;name&quot;: &quot;耐克sb滑板鞋&quot;,
+                &quot;price&quot;: 500,
+                &quot;stock&quot;: 500,
+                &quot;status&quot;: &quot;正常&quot;,
+                &quot;createTime&quot;: &quot;2019-02-02T03:48:33.000+0000&quot;,
+                &quot;updateTime&quot;: null
+            },
+            {
+                &quot;goodsId&quot;: 2,
+                &quot;producerId&quot;: 1,
+                &quot;categoryId&quot;: 4,
+                &quot;name&quot;: &quot;阿迪达斯小白鞋&quot;,
+                &quot;price&quot;: 500,
+                &quot;stock&quot;: 300,
+                &quot;status&quot;: &quot;正常&quot;,
+                &quot;createTime&quot;: &quot;2019-02-02T03:48:59.000+0000&quot;,
+                &quot;updateTime&quot;: null
+            }
+        ],
+        &quot;pageable&quot;: {
+            &quot;sort&quot;: {
+                &quot;sorted&quot;: false,
+                &quot;unsorted&quot;: true,
+                &quot;empty&quot;: true
+            },
+            &quot;offset&quot;: 0,
+            &quot;pageSize&quot;: 10,
+            &quot;pageNumber&quot;: 0,
+            &quot;paged&quot;: true,
+            &quot;unpaged&quot;: false
+        },
+        &quot;last&quot;: true,
+        &quot;totalPages&quot;: 1,
+        &quot;totalElements&quot;: 2,
+        &quot;size&quot;: 10,
+        &quot;number&quot;: 0,
+        &quot;numberOfElements&quot;: 2,
+        &quot;sort&quot;: {
+            &quot;sorted&quot;: false,
+            &quot;unsorted&quot;: true,
+            &quot;empty&quot;: true
+        },
+        &quot;first&quot;: true,
+        &quot;empty&quot;: false
+    }
+}
+</code></pre>
 <h3 id="实际需要的分页信息"><a href="#实际需要的分页信息" class="headerlink" title="实际需要的分页信息"></a>实际需要的分页信息</h3><p>实际上我只需要下面这些分页信息：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">"totalPages": 3,</span><br><span class="line">"totalElements": 20,</span><br><span class="line">"pageNumber": 2,</span><br><span class="line">"numberOfElements": 7</span><br></pre></td></tr></table></figure>
+<pre><code class="JSON">&quot;totalPages&quot;: 3,
+&quot;totalElements&quot;: 20,
+&quot;pageNumber&quot;: 2,
+&quot;numberOfElements&quot;: 7
+</code></pre>
 <h3 id="创建-PageChunk-类进行封装"><a href="#创建-PageChunk-类进行封装" class="headerlink" title="创建 PageChunk 类进行封装"></a>创建 PageChunk 类进行封装</h3><p>我的 GoodsRepository 接口为：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Page&lt;Goods&gt; <span class="title">findByCategoryId</span><span class="params">(Integer categoryId, Pageable pageable)</span></span>;</span><br></pre></td></tr></table></figure>
+<pre><code class="Java">Page&lt;Goods&gt; findByCategoryId(Integer categoryId, Pageable pageable);
+</code></pre>
 <p>我们看到返回了很多多余的，重复的数据。为了解决这个问题，创建一个Pagination DTO(<code>PageChunk</code>)来包装一下分页数据。这个类的作用很简单就是包含每一次分页的内容和分页元数据（<strong>总页数</strong>，<strong>搜索结果总数</strong>，<strong>当前页号</strong>， <strong>当前页包含多少项</strong>）。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> lombok.Data;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> zjxjwxk</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PageChunk</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> List&lt;T&gt; content;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> totalPages;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">long</span> totalElements;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> pageNumber;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> numberOfElements;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="Java">import lombok.Data;
+
+import java.util.List;
+
+/**
+ * @author zjxjwxk
+ */
+@Data
+public class PageChunk&lt;T&gt; {
+
+    private List&lt;T&gt; content;
+    private int totalPages;
+    private long totalElements;
+    private int pageNumber;
+    private int numberOfElements;
+}
+
+</code></pre>
 <p>同时，我根据业务需求对商品信息进行了DTO的包装，（只需要商品id，名称和价格即可）。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> lombok.Data;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> zjxjwxk</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GoodsDTO</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Integer goodsId;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> Integer price;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="Java">import lombok.Data;
+
+/**
+ * @author zjxjwxk
+ */
+@Data
+public class GoodsDTO {
+
+    private Integer goodsId;
+    private String name;
+    private Integer price;
+
+}
+</code></pre>
 <h3 id="用-PageChunk-替代-Page"><a href="#用-PageChunk-替代-Page" class="headerlink" title="用 PageChunk 替代 Page"></a>用 PageChunk 替代 Page</h3><p>编写以下 getPageChunk 方法用于将 Page<goods> 对象转化为 PageChunk<goodsdto> 对象，仅仅提取 Page 对象中所需要的Content 和一些分页信息，将 PageChunk 对象封装并返回。编写 getGoodsDTO 方法用于简化商品信息。</goodsdto></goods></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span>(<span class="string">"GoodsService"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GoodsServiceImpl</span> <span class="keyword">implements</span> <span class="title">GoodsService</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> GoodsRepository goodsRepository;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">GoodsServiceImpl</span><span class="params">(GoodsRepository goodsRepository)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.goodsRepository = goodsRepository;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> ServerResponse <span class="title">getList</span><span class="params">(String keyword, Integer categoryId,</span></span></span><br><span class="line"><span class="function"><span class="params">                                               Integer pageNum, Integer pageSize,</span></span></span><br><span class="line"><span class="function"><span class="params">                                               String orderBy)</span> </span>&#123;</span><br><span class="line">        PageRequest pageRequest = PageRequest.of(pageNum - <span class="number">1</span>, pageSize);</span><br><span class="line">        Page&lt;Goods&gt; goodsPage = goodsRepository.findByCategoryId(categoryId, pageRequest);</span><br><span class="line">        <span class="keyword">return</span> ServerResponse.createBySuccess(getPageChunk(goodsPage));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> PageChunk&lt;GoodsDTO&gt; <span class="title">getPageChunk</span><span class="params">(Page&lt;Goods&gt; goodsPage)</span> </span>&#123;</span><br><span class="line">        PageChunk&lt;GoodsDTO&gt; pageChunk = <span class="keyword">new</span> PageChunk&lt;&gt;();</span><br><span class="line">        pageChunk.setContent(getGoodsDTO(goodsPage.getContent()));</span><br><span class="line">        pageChunk.setTotalPages(goodsPage.getTotalPages());</span><br><span class="line">        pageChunk.setTotalElements(goodsPage.getTotalElements());</span><br><span class="line">        pageChunk.setPageNumber(goodsPage.getPageable().getPageNumber() + <span class="number">1</span>);</span><br><span class="line">        pageChunk.setNumberOfElements(goodsPage.getNumberOfElements());</span><br><span class="line">        <span class="keyword">return</span> pageChunk;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> List&lt;GoodsDTO&gt; <span class="title">getGoodsDTO</span><span class="params">(List&lt;Goods&gt; goodsList)</span> </span>&#123;</span><br><span class="line">        List&lt;GoodsDTO&gt; goodsDTOList = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span> (Goods goods :</span><br><span class="line">                goodsList) &#123;</span><br><span class="line">            GoodsDTO goodsDTO = <span class="keyword">new</span> GoodsDTO();</span><br><span class="line">            goodsDTO.setGoodsId(goods.getGoodsId());</span><br><span class="line">            goodsDTO.setName(goods.getName());</span><br><span class="line">            goodsDTO.setPrice(goods.getPrice());</span><br><span class="line"></span><br><span class="line">            goodsDTOList.add(goodsDTO);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> goodsDTOList;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="Java">@Service(&quot;GoodsService&quot;)
+public class GoodsServiceImpl implements GoodsService {
+
+    private final GoodsRepository goodsRepository;
+
+    @Autowired
+    public GoodsServiceImpl(GoodsRepository goodsRepository) {
+        this.goodsRepository = goodsRepository;
+    }
+
+    @Override
+    public ServerResponse getList(String keyword, Integer categoryId,
+                                               Integer pageNum, Integer pageSize,
+                                               String orderBy) {
+        PageRequest pageRequest = PageRequest.of(pageNum - 1, pageSize);
+        Page&lt;Goods&gt; goodsPage = goodsRepository.findByCategoryId(categoryId, pageRequest);
+        return ServerResponse.createBySuccess(getPageChunk(goodsPage));
+    }
+
+    private PageChunk&lt;GoodsDTO&gt; getPageChunk(Page&lt;Goods&gt; goodsPage) {
+        PageChunk&lt;GoodsDTO&gt; pageChunk = new PageChunk&lt;&gt;();
+        pageChunk.setContent(getGoodsDTO(goodsPage.getContent()));
+        pageChunk.setTotalPages(goodsPage.getTotalPages());
+        pageChunk.setTotalElements(goodsPage.getTotalElements());
+        pageChunk.setPageNumber(goodsPage.getPageable().getPageNumber() + 1);
+        pageChunk.setNumberOfElements(goodsPage.getNumberOfElements());
+        return pageChunk;
+    }
+
+    private List&lt;GoodsDTO&gt; getGoodsDTO(List&lt;Goods&gt; goodsList) {
+        List&lt;GoodsDTO&gt; goodsDTOList = new ArrayList&lt;&gt;();
+        for (Goods goods :
+                goodsList) {
+            GoodsDTO goodsDTO = new GoodsDTO();
+            goodsDTO.setGoodsId(goods.getGoodsId());
+            goodsDTO.setName(goods.getName());
+            goodsDTO.setPrice(goods.getPrice());
+
+            goodsDTOList.add(goodsDTO);
+        }
+        return goodsDTOList;
+    }
+}
+</code></pre>
 <blockquote>
 <p>为了返回 JSON 数据，我自定义了一个 ServerResponse 服务响应对象，它的作用是让我们返回的 JSON 有一个通用的格式</p>
 </blockquote>
-<h3 id="简化后的结果"><a href="#简化后的结果" class="headerlink" title="简化后的结果"></a>简化后的结果</h3><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"status"</span>: <span class="number">0</span>,</span><br><span class="line">    <span class="attr">"data"</span>: &#123;</span><br><span class="line">        <span class="attr">"content"</span>: [</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="attr">"goodsId"</span>: <span class="number">8</span>,</span><br><span class="line">                <span class="attr">"name"</span>: <span class="string">"Clarks 男 Tri Spark生活休闲鞋26135668"</span>,</span><br><span class="line">                <span class="attr">"price"</span>: <span class="number">459</span></span><br><span class="line">            &#125;,</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="attr">"goodsId"</span>: <span class="number">9</span>,</span><br><span class="line">                <span class="attr">"name"</span>: <span class="string">"Adidas三叶草 男 休闲跑步鞋 STAN SMITH M20324"</span>,</span><br><span class="line">                <span class="attr">"price"</span>: <span class="number">415</span></span><br><span class="line">            &#125;,</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="attr">"goodsId"</span>: <span class="number">10</span>,</span><br><span class="line">                <span class="attr">"name"</span>: <span class="string">"Skechers 斯凯奇 SKECHERS SPORT系列 男 绑带运动鞋 999732-NVOR"</span>,</span><br><span class="line">                <span class="attr">"price"</span>: <span class="number">355</span></span><br><span class="line">            &#125;,</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="attr">"goodsId"</span>: <span class="number">11</span>,</span><br><span class="line">                <span class="attr">"name"</span>: <span class="string">"Saucony 圣康尼 RSP 男 休闲跑步鞋 KINETA RELAY S2524465"</span>,</span><br><span class="line">                <span class="attr">"price"</span>: <span class="number">479</span></span><br><span class="line">            &#125;,</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="attr">"goodsId"</span>: <span class="number">12</span>,</span><br><span class="line">                <span class="attr">"name"</span>: <span class="string">"Mustang 男 帆布鞋休闲运动 4058-305（亚马逊进口直采,德国品牌）"</span>,</span><br><span class="line">                <span class="attr">"price"</span>: <span class="number">324</span></span><br><span class="line">            &#125;,</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="attr">"goodsId"</span>: <span class="number">13</span>,</span><br><span class="line">                <span class="attr">"name"</span>: <span class="string">"Clarks 男 Tri Spark生活休闲鞋26135655"</span>,</span><br><span class="line">                <span class="attr">"price"</span>: <span class="number">123425</span></span><br><span class="line">            &#125;,</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="attr">"goodsId"</span>: <span class="number">14</span>,</span><br><span class="line">                <span class="attr">"name"</span>: <span class="string">"New Balance 574系列 男 休闲跑步鞋 ML574EG-D"</span>,</span><br><span class="line">                <span class="attr">"price"</span>: <span class="number">324</span></span><br><span class="line">            &#125;</span><br><span class="line">        ],</span><br><span class="line">        <span class="attr">"totalPages"</span>: <span class="number">3</span>,</span><br><span class="line">        <span class="attr">"totalElements"</span>: <span class="number">20</span>,</span><br><span class="line">        <span class="attr">"pageNumber"</span>: <span class="number">2</span>,</span><br><span class="line">        <span class="attr">"numberOfElements"</span>: <span class="number">7</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-        </div>
+<h3 id="简化后的结果"><a href="#简化后的结果" class="headerlink" title="简化后的结果"></a>简化后的结果</h3><pre><code class="JSON">{
+    &quot;status&quot;: 0,
+    &quot;data&quot;: {
+        &quot;content&quot;: [
+            {
+                &quot;goodsId&quot;: 8,
+                &quot;name&quot;: &quot;Clarks 男 Tri Spark生活休闲鞋26135668&quot;,
+                &quot;price&quot;: 459
+            },
+            {
+                &quot;goodsId&quot;: 9,
+                &quot;name&quot;: &quot;Adidas三叶草 男 休闲跑步鞋 STAN SMITH M20324&quot;,
+                &quot;price&quot;: 415
+            },
+            {
+                &quot;goodsId&quot;: 10,
+                &quot;name&quot;: &quot;Skechers 斯凯奇 SKECHERS SPORT系列 男 绑带运动鞋 999732-NVOR&quot;,
+                &quot;price&quot;: 355
+            },
+            {
+                &quot;goodsId&quot;: 11,
+                &quot;name&quot;: &quot;Saucony 圣康尼 RSP 男 休闲跑步鞋 KINETA RELAY S2524465&quot;,
+                &quot;price&quot;: 479
+            },
+            {
+                &quot;goodsId&quot;: 12,
+                &quot;name&quot;: &quot;Mustang 男 帆布鞋休闲运动 4058-305（亚马逊进口直采,德国品牌）&quot;,
+                &quot;price&quot;: 324
+            },
+            {
+                &quot;goodsId&quot;: 13,
+                &quot;name&quot;: &quot;Clarks 男 Tri Spark生活休闲鞋26135655&quot;,
+                &quot;price&quot;: 123425
+            },
+            {
+                &quot;goodsId&quot;: 14,
+                &quot;name&quot;: &quot;New Balance 574系列 男 休闲跑步鞋 ML574EG-D&quot;,
+                &quot;price&quot;: 324
+            }
+        ],
+        &quot;totalPages&quot;: 3,
+        &quot;totalElements&quot;: 20,
+        &quot;pageNumber&quot;: 2,
+        &quot;numberOfElements&quot;: 7
+    }
+}
+</code></pre>
 
-        <blockquote class="post-copyright">
-    
-    <div class="content">
-        
-<span class="post-time">
-    最后更新时间：<time datetime="2019-02-02T09:46:55.000Z" itemprop="dateUpdated">2019-02-02 17:46:55</time>
-</span><br>
-
-
-        
-        原始链接：<a href="/2019/02/02/Spring Boot/Spring-Boot-简化分页查询Page接口的JSON响应/" target="_blank" rel="external">https://zjxjwxk.com/2019/02/02/Spring Boot/Spring-Boot-简化分页查询Page接口的JSON响应/</a>
-        
-    </div>
-    
-    <footer>
-        <a href="https://zjxjwxk.com">
-            <img src="/img/avatar.jpg" alt="吴鑫康">
-            吴鑫康
-        </a>
-    </footer>
-</blockquote>
-
-        
-<div class="page-reward">
-    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
-</div>
-
-
-
-        <div class="post-footer">
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
             
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Spring-Boot/">Spring Boot</a></li></ul>
-
-
-            
-<div class="page-share-wrap">
-    
-
-<div class="page-share" id="pageShare">
-    <ul class="reset share-icons">
-      <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://zjxjwxk.com/2019/02/02/Spring Boot/Spring-Boot-简化分页查询Page接口的JSON响应/&title=《Spring Boot 简化分页查询Page接口的JSON响应》 — Zjxjwxk's Blog&pic=https://zjxjwxk.com/img/avatar.jpg" data-title="微博">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      <li>
-        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://zjxjwxk.com/2019/02/02/Spring Boot/Spring-Boot-简化分页查询Page接口的JSON响应/&title=《Spring Boot 简化分页查询Page接口的JSON响应》 — Zjxjwxk's Blog&source=" data-title=" QQ">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://zjxjwxk.com/2019/02/02/Spring Boot/Spring-Boot-简化分页查询Page接口的JSON响应/" data-title=" Facebook">
-          <i class="icon icon-facebook"></i>
-        </a>
-      </li>
-      <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Spring Boot 简化分页查询Page接口的JSON响应》 — Zjxjwxk's Blog&url=https://zjxjwxk.com/2019/02/02/Spring Boot/Spring-Boot-简化分页查询Page接口的JSON响应/&via=https://zjxjwxk.com" data-title=" Twitter">
-          <i class="icon icon-twitter"></i>
-        </a>
-      </li>
-      <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://zjxjwxk.com/2019/02/02/Spring Boot/Spring-Boot-简化分页查询Page接口的JSON响应/" data-title=" Google+">
-          <i class="icon icon-google-plus"></i>
-        </a>
-      </li>
-    </ul>
- </div>
-
-
-
-    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
-        <i class="icon icon-share-alt icon-lg"></i>
-    </a>
-</div>
-
-
-
-        </div>
-    </div>
-
-    
-<nav class="post-nav flex-row flex-justify-between">
-  
-    <div class="waves-block waves-effect prev">
-      <a href="/2019/03/11/Java/JVM/自己编译JDK/" id="post-prev" class="post-nav-link">
-        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
-        <h4 class="title">自己编译JDK</h4>
-      </a>
-    </div>
-  
-
-  
-    <div class="waves-block waves-effect next">
-      <a href="/2019/01/31/Spring Cloud/服务注册与发现/Spring-Cloud-Eureka/" id="post-next" class="post-nav-link">
-        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">Spring Cloud Eureka</h4>
-      </a>
-    </div>
-  
-</nav>
-
-
-
-    
-
-
-
-
-
-
-
-
-
-
-
-    <!-- Valine Comments -->
-    <div class="comments vcomment" id="comments"></div>
-    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
-    <!-- Valine Comments script -->
-    <script>
-        var GUEST_INFO = ['nick','mail','link'];
-        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
-          return GUEST_INFO.indexOf(item) > -1
-        });
-        new Valine({
-            el: '#comments',
-            notify: 'true' == 'true',
-            verify: 'false' == 'true',
-            appId: "gJTHi1MULDjBNIRKPWN2bTWd-gzGzoHsz",
-            appKey: "dflbQMdoD4HLI3twjbzShRMK",
-            avatar: "mm",
-            placeholder: "写下你的评论吧！",
-            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
-            pageSize: "10"
-        })
-    </script>
-    <!-- Valine Comments end -->
-
-
-
-
-
-
-
-</article>
-
-<div id="reward" class="page-modal reward-lay">
-    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <h3 class="reward-title">
-        <i class="icon icon-quote-left"></i>
-        谢谢大爷~
-        <i class="icon icon-quote-right"></i>
-    </h3>
-    <div class="reward-content">
-        
-        <div class="reward-code">
-            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
-        </div>
-        
-        <label class="reward-toggle">
-            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
-            <div class="reward-toggle-ctrol">
-                <span class="reward-toggle-item wechat">微信</span>
-                <span class="reward-toggle-label"></span>
-                <span class="reward-toggle-item alipay">支付宝</span>
-            </div>
-        </label>
-        
-    </div>
-</div>
-
-
-
-</div>
-
-        <footer class="footer">
-    <div class="top">
-        
-<p>
-    <span id="busuanzi_container_site_uv" style="display:none">
-        站点总访客数：<span id="busuanzi_value_site_uv"></span>
-    </span>
-    <span id="busuanzi_container_site_pv" style="display:none">
-        站点总访问量：<span id="busuanzi_value_site_pv"></span>
-    </span>
-</p>
-
-
-        <p>
-            
-                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
-            
-            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
-        </p>
-    </div>
-    <div class="bottom">
-        <p><span>吴鑫康 &copy; 2019</span>
-            <span>
+            <ul id="audio-list" style="display:none">
                 
-                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
-            </span>
-        </p>
-    </div>
-</footer>
-
-    </main>
-    <div class="mask" id="mask"></div>
-<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
-
-
-
-<div class="global-share" id="globalShare">
-    <ul class="reset share-icons">
-      <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://zjxjwxk.com/2019/02/02/Spring Boot/Spring-Boot-简化分页查询Page接口的JSON响应/&title=《Spring Boot 简化分页查询Page接口的JSON响应》 — Zjxjwxk's Blog&pic=https://zjxjwxk.com/img/avatar.jpg" data-title="微博">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      <li>
-        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://zjxjwxk.com/2019/02/02/Spring Boot/Spring-Boot-简化分页查询Page接口的JSON响应/&title=《Spring Boot 简化分页查询Page接口的JSON响应》 — Zjxjwxk's Blog&source=" data-title=" QQ">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://zjxjwxk.com/2019/02/02/Spring Boot/Spring-Boot-简化分页查询Page接口的JSON响应/" data-title=" Facebook">
-          <i class="icon icon-facebook"></i>
-        </a>
-      </li>
-      <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Spring Boot 简化分页查询Page接口的JSON响应》 — Zjxjwxk's Blog&url=https://zjxjwxk.com/2019/02/02/Spring Boot/Spring-Boot-简化分页查询Page接口的JSON响应/&via=https://zjxjwxk.com" data-title=" Twitter">
-          <i class="icon icon-twitter"></i>
-        </a>
-      </li>
-      <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://zjxjwxk.com/2019/02/02/Spring Boot/Spring-Boot-简化分页查询Page接口的JSON响应/" data-title=" Google+">
-          <i class="icon icon-google-plus"></i>
-        </a>
-      </li>
-    </ul>
- </div>
-
-
-<div class="page-modal wx-share" id="wxShare">
-    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAAAAADAeSUUAAADLUlEQVR42u3aQW7jMBAEwPz/097rAomU7qECOJPSybBlkUUfxpzmx0d8vf67Pr9/dc/n+6+efDXW1ROSex64sLGxsX8J+3V73bPzCd0D8oXLl/6bpcHGxsZex04mlJSl+8GS754saGLBxsbGxp5tNtpJ52UJGxsbG/u8gLXlbbbNmD0TGxsb+++wTwpD3oqatZban+ThXho2Njb227PzVPT9X/9Ivo2NjY39xuxXed0/IXmnLWAnbaZLBTY2NvYi9qzF34a7s0j4JxpP2NjY2FvZ9497KqadbWxmu6viwBA2Njb2InYUjpabkHbL8VQpPVo4bGxs7F/Ffrb53jaDZp+2P9VlLw0bGxt7EfukGOR/9/PjO7OYuSh72NjY2IvY7ZYjP2R5EgO3hzXbJcDGxsbexG5XaHas59kmVBs5fHEPNjY29jr2sxuS+2fOouJZoHs5FjY2NvYi9iz3bA+sz4rWs0HCN00lbGxs7EXsogDERS5vDLUHdIZdNGxsbOxF7FkBOI8H2lgin3N0PzY2NvYidr7NaFv8SXiQfJov0FHci42Njf3L2bNH54dv8qZS207KF+7SiI2Njb2U3bb+2yHzplXeeMqbUNjY2Nib2PlRmzxAPWkwPdvkuhwdGxsbexE7Hz4vLdGQB6X0pC2FjY2NvZXdloScMduQJMs6CxWwsbGx/wI732a0kep5PNzGBlFbChsbG3sF+6RZPzvuk3+r3SzlMTA2Njb2DnZbQk5i4Lz41b/b7Sbki+9iY2Njr2Pnf/rbkvZUNDtbpm/ybWxsbOwV7OSDfHJtPNCO284kWjhsbGzsFez8j35bxu63B+dPPtkmYWNjY29ltwHqyRbipwtkUcCwsbGxV7DbSbRFK8e0s2oPDGFjY2NvYr/Ka3akcnYos51DEQxgY2NjL2K3k8sj4XxR2qflI0bVGxsbG3sFOykYs8Z9G+vmsHY5sLGxsf8C+7xxn28V2vjhfJODjY2NjZ2zZ22mk0WsI15sbGxs7FFkex5CDFv899kINjY29iJ2vmFo32kXd1YI22NA2NjY2JvYJwdrkiHPD9PkQfKzx4mwsbGx3579D5D/pYEdflkcAAAAAElFTkSuQmCC" alt="微信分享二维码">
-</div>
-
-
-
-
-    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
-<script>
-var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
-
-
-</script>
-
-<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
-
-
-<div class="search-panel" id="search-panel">
-    <ul class="search-result" id="search-result"></ul>
-</div>
-<template id="search-tpl">
-<li class="item">
-    <a href="{path}" class="waves-block waves-effect">
-        <div class="title ellipsis" title="{title}">{title}</div>
-        <div class="flex-row flex-middle">
-            <div class="tags ellipsis">
-                {tags}
-            </div>
-            <time class="flex-col time">{date}</time>
+                
+                <li title="0" data-url="/statics/Silent express.mp3"></li>
+                
+                    
+            </ul>
+            
+            
+            
+            <div id="vcomments"></div>
+            
         </div>
-    </a>
-</li>
-</template>
+        <div class="sidebar">
+            <div class="box animated fadeInRight">
+                <div class="subbox">
+                    <img src="https://res.cloudinary.com/tridiamond/image/upload/v1573019751/TriDiamond_logo_ui_xeublz.jpg" height="300" width="300">
+                    <p>吴鑫康</p>
+                    <span>Talk is cheap. Show me the code ———— Linus Torvalds</span>
+                    <dl>
+                        <dd><a href="https://github.com/zjxjwxk" target="_blank"><span class=" iconfont icon-github"></span></a></dd>
+                        <dd><a href="https://twitter.com/zjxjwxk" target="_blank"><span class=" iconfont icon-twitter"></span></a></dd>
+                        <dd><a href="" target="_blank"><span class=" iconfont icon-stack-overflow"></span></a></dd>
+                    </dl>
+                </div>
+                <ul>
+                    <li><a href="/">15 <p>文章</p></a></li>
+                    <li><a href="/categories">5 <p>分类</p></a></li>
+                    <li><a href="/tags">11 <p>标签</p></a></li>
+                </ul>
+            </div>
+            
+            
+            
+            <div class="box sticky animated fadeInRight faster">
+                <div id="toc" class="subbox">
+                    <h4>目录</h4>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#多余的分页信息"><span class="toc-number">1.</span> <span class="toc-text">多余的分页信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实际需要的分页信息"><span class="toc-number">2.</span> <span class="toc-text">实际需要的分页信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建-PageChunk-类进行封装"><span class="toc-number">3.</span> <span class="toc-text">创建 PageChunk 类进行封装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#用-PageChunk-替代-Page"><span class="toc-number">4.</span> <span class="toc-text">用 PageChunk 替代 Page</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#简化后的结果"><span class="toc-number">5.</span> <span class="toc-text">简化后的结果</span></a></li></ol>
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+</div>
 
-<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
-
-
-
-<!-- mathjax config similar to math.stackexchange -->
-
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-    tex2jax: {
-        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-        processEscapes: true,
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-    }
-});
-
-MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-        all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-});
-</script>
-
-<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-
-
-
-
-<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+    </div>
+</div>
+    <div id="back-to-top" class="animated fadeIn faster">
+        <div class="flow"></div>
+        <span class="percentage animated fadeIn faster">0%</span>
+        <span class="iconfont icon-top02 animated fadeIn faster"></span>
+    </div><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
 <script type="text/x-mathjax-config">
   MathJax.Hub.Config("");
 </script>
@@ -542,10 +398,233 @@ MathJax.Hub.Queue(function() {
 </script>
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->
-
-
-
-
-
 </body>
+<footer>
+    <p class="copyright" id="copyright">
+        &copy; 2020
+        <span class="gradient-text">
+            吴鑫康
+        </span>.
+        Powered by <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a>
+        Theme
+        <span class="gradient-text">
+            <a href="https://github.com/TriDiamond/hexo-theme-obsidian" title="Obsidian" target="_blank" rel="noopener">Obsidian</a>
+        </span>
+        <small><a href="https://github.com/TriDiamond/hexo-theme-obsidian/blob/master/CHANGELOG.md" title="v1.4.3" target="_blank" rel="noopener">v1.4.3</a></small>
+    </p>
+</footer>
+
+<script type="text/javascript" src="https://cdn.bootcss.com/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<script>
+  MathJax.Hub.Config({
+    "HTML-CSS": {
+      preferredFont: "TeX",
+      availableFonts: ["STIX", "TeX"],
+      linebreaks: {
+        automatic: true
+      },
+      EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+      inlineMath: [
+        ["$", "$"],
+        ["\\(", "\\)"]
+      ],
+      processEscapes: true,
+      ignoreClass: "tex2jax_ignore|dno",
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      noUndefined: {
+        attributes: {
+          mathcolor: "red",
+          mathbackground: "#FFEEEE",
+          mathsize: "90%"
+        }
+      },
+      Macros: {
+        href: "{}"
+      }
+    },
+    messageStyle: "none"
+  });
+</script>
+<script>
+  function initialMathJax() {
+    MathJax.Hub.Queue(function () {
+      var all = MathJax.Hub.getAllJax(),
+        i;
+      // console.log(all);
+      for (i = 0; i < all.length; i += 1) {
+        console.log(all[i].SourceElement().parentNode)
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  }
+
+  function reprocessMathJax() {
+    if (typeof MathJax !== 'undefined') {
+      MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+    }
+  }
+</script>
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/obsidian.js"></script>
+<script src="/js/jquery.truncate.js"></script>
+<script src="/js/search.js"></script>
+<script src="//cdn.bootcss.com/typed.js/2.0.10/typed.min.js"></script>
+<script src="//cdn.bootcss.com/blueimp-md5/2.12.0/js/md5.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+
+<script src="https://cdn.bootcss.com/codemirror/5.48.4/codemirror.min.js"></script>
+
+    <script src="//cdn.bootcss.com/codemirror/5.48.4/mode/javascript/javascript.min.js"></script>
+
+    <script src="//cdn.bootcss.com/codemirror/5.48.4/mode/css/css.min.js"></script>
+
+    <script src="//cdn.bootcss.com/codemirror/5.48.4/mode/xml/xml.min.js"></script>
+
+    <script src="//cdn.bootcss.com/codemirror/5.48.4/mode/htmlmixed/htmlmixed.min.js"></script>
+
+    <script src="//cdn.bootcss.com/codemirror/5.48.4/mode/clike/clike.min.js"></script>
+
+    <script src="//cdn.bootcss.com/codemirror/5.48.4/mode/php/php.min.js"></script>
+
+    <script src="//cdn.bootcss.com/codemirror/5.48.4/mode/shell/shell.min.js"></script>
+
+    <script src="//cdn.bootcss.com/codemirror/5.48.4/mode/python/python.min.js"></script>
+
+
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/photoswipe/4.1.3/photoswipe.min.css">
+<link rel="stylesheet" href="//cdn.bootcss.com/photoswipe/4.1.3/default-skin/default-skin.min.css">
+<script src="//cdn.bootcss.com/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="//cdn.bootcss.com/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="//www.googletagmanager.com/gtag/js?id=UA-157529205-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-157529205-1');
+    </script>
+
+
+
+
+
+<script>
+    function initialTyped () {
+        var typedTextEl = $('.typed-text');
+        if (typedTextEl && typedTextEl.length > 0) {
+            var typed = new Typed('.typed-text', {
+                strings: ["Talk is cheap. Show me the code ———— Linus Torvalds", "废话少说，放码过来"],
+                typeSpeed: 90,
+                loop: true,
+                loopCount: Infinity,
+                backSpeed: 20,
+            });
+        }
+    }
+
+    if ($('.article-header') && $('.article-header').length) {
+        $(document).ready(function () {
+            initialTyped();
+        });
+    }
+</script>
+
+
+    <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+    <script>
+
+        var valine = new Valine();
+
+        function initValine(path) {
+            if (!path) path = window.location.pathname;
+            let language = 'zh-CN';
+            if (!language) {
+                language = 'en';
+            } else {
+                language = language.toLowerCase();
+            }
+            valine.init({
+                el: '#vcomments',
+                appId: 'gJTHi1MULDjBNIRKPWN2bTWd-gzGzoHsz',
+                appKey: 'dflbQMdoD4HLI3twjbzShRMK',
+                notify: 'true',
+                verify: 'false',
+                avatar: 'mp',
+                placeholder: 'Leave your throughs behind~',
+                visitor: 'true',
+                path: path,
+                lang: language
+            });
+        }
+
+        $(document).ready(function () {
+            initValine();
+        });
+    </script>
+
+
+
 </html>

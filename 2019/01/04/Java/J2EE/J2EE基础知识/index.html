@@ -1,196 +1,130 @@
+
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN" class="loading">
 <head><meta name="generator" content="Hexo 3.8.0">
-    
-
-    
-
-    
-
-
-
-    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
-    
-    
-    <meta name="sogou_site_verification" content="true">
-    
-    
-    <link rel="canonical" href="https://zjxjwxk.com/2019/01/04/Java/J2EE/J2EE基础知识/">
-    
-    
-    <title>J2EE基础知识 | Zjxjwxk&#39;s Blog | A Java Developer</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    
-    <meta name="theme-color" content="#3F51B5">
-    
-    
-    <meta name="keywords" content="Java,J2EE">
-    <meta name="description" content="Servlet总结在Java Web程序中，Servlet主要负责接收用户请求HttpServletRequest,在doGet(),doPost()中做相应的处理，并将回应HttpServletResponse反馈给用户。Servlet可以设置初始化参数，供Servlet内部使用。一个Servlet类只会有一个实例，在它初始化时调用init()方法，销毁时调用destroy()方法。Servle">
-<meta name="keywords" content="Java,J2EE">
-<meta property="og:type" content="article">
-<meta property="og:title" content="J2EE基础知识">
-<meta property="og:url" content="https://zjxjwxk.com/2019/01/04/Java/J2EE/J2EE基础知识/index.html">
-<meta property="og:site_name" content="Zjxjwxk&#39;s Blog">
-<meta property="og:description" content="Servlet总结在Java Web程序中，Servlet主要负责接收用户请求HttpServletRequest,在doGet(),doPost()中做相应的处理，并将回应HttpServletResponse反馈给用户。Servlet可以设置初始化参数，供Servlet内部使用。一个Servlet类只会有一个实例，在它初始化时调用init()方法，销毁时调用destroy()方法。Servle">
-<meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://zjxjwxk.com/2019/01/04/Java/J2EE/J2EE基础知识/68747470733a2f2f757365722d676f6c642d63646e2e786974752e696f2f323031382f332f33312f313632376265653037333037396132383f773d36373526683d32393226663d6a70656726733d313333353533.jpg">
-<meta property="og:updated_time" content="2019-01-19T14:04:04.000Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="J2EE基础知识">
-<meta name="twitter:description" content="Servlet总结在Java Web程序中，Servlet主要负责接收用户请求HttpServletRequest,在doGet(),doPost()中做相应的处理，并将回应HttpServletResponse反馈给用户。Servlet可以设置初始化参数，供Servlet内部使用。一个Servlet类只会有一个实例，在它初始化时调用init()方法，销毁时调用destroy()方法。Servle">
-<meta name="twitter:image" content="https://zjxjwxk.com/2019/01/04/Java/J2EE/J2EE基础知识/68747470733a2f2f757365722d676f6c642d63646e2e786974752e696f2f323031382f332f33312f313632376265653037333037396132383f773d36373526683d32393226663d6a70656726733d313333353533.jpg">
-    
-        <link rel="alternate" type="application/atom+xml" title="Zjxjwxk&#39;s Blog" href="/atom.xml">
-    
-    <link rel="shortcut icon" href="/favicon.ico">
-    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
-    <script>window.lazyScripts=[]</script>
-
-    <!-- custom head --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
-    
-
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>J2EE基础知识 - Zjxjwxk&#39;s Blog</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="吴鑫康 zjxjwxk Wxk Java,"> 
+    <meta name="description" content="Servlet总结在Java Web程序中，Servlet主要负责接收用户请求HttpServletRequest,在doGet(),doPost()中做相应的处理，并将回应HttpServletR,"> 
+    <meta name="author" content="吴鑫康"> 
+    <link rel="alternative" href="atom.xml" title="Zjxjwxk&#39;s Blog" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    <link href="https://fonts.loli.net/css?family=Roboto+Mono|Rubik&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_1429596_nzgqgvnmkjb.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.7.2/animate.min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/codemirror/5.48.4/codemirror.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/codemirror/5.48.4/theme/dracula.css">
+    <link rel="stylesheet" href="/css/obsidian.css">
+    <link rel="stylesheet" href="/css/ball-atom.min.css"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
+</html>
 
-<body>
-    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="loading" class="active"></div>
-
-    <aside id="menu" class="hide">
-  <div class="inner flex-row-vertical">
-    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
-        <i class="icon icon-lg icon-close"></i>
-    </a>
-    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
-      <div class="brand">
-        <a href="/" class="avatar waves-effect waves-circle waves-light">
-          <img src="/img/avatar.jpg">
-        </a>
-        <hgroup class="introduce">
-          <h5 class="nickname">吴鑫康</h5>
-          <a href="mailto:zjxjwxk@gmail.com" title="zjxjwxk@gmail.com" class="mail">zjxjwxk@gmail.com</a>
-        </hgroup>
-      </div>
-    </div>
-    <div class="scroll-wrap flex-col">
-      <ul class="nav">
-        
-            <li class="waves-block waves-effect">
-              <a href="/">
-                <i class="icon icon-lg icon-home"></i>
-                主页
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/archives">
-                <i class="icon icon-lg icon-archives"></i>
-                归档
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/tags">
-                <i class="icon icon-lg icon-tags"></i>
-                标签
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/categories">
-                <i class="icon icon-lg icon-th-list"></i>
-                分类
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="https://github.com/zjxjwxk" target="_blank">
-                <i class="icon icon-lg icon-github"></i>
-                GitHub
-              </a>
-            </li>
-        
-      </ul>
-    </div>
-  </div>
-</aside>
-
-    <main id="main">
-        <header class="top-header" id="header">
-    <div class="flex-row">
-        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
-          <i class="icon icon-lg icon-navicon"></i>
-        </a>
-        <div class="flex-col header-title ellipsis">J2EE基础知识</div>
-        
-        <div class="search-wrap" id="search-wrap">
-            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
-                <i class="icon icon-lg icon-chevron-left"></i>
-            </a>
-            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
-            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
-                <i class="icon icon-lg icon-search"></i>
-            </a>
+<body class="loading">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="loader">
+        <div class="la-ball-atom la-2x">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
         </div>
-        
-        
-        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
-            <i class="icon icon-lg icon-share-alt"></i>
-        </a>
-        
     </div>
-</header>
-<header class="content-header post-header">
-
-    <div class="container fade-scale">
-        <h1 class="title">J2EE基础知识</h1>
-        <h5 class="subtitle">
-            
-                <time datetime="2019-01-04T04:54:00.000Z" itemprop="datePublished" class="page-time">
-  2019-01-04
-</time>
-
-
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Java/">Java</a></li></ul>
-
-            
-        </h5>
-    </div>
-
-    
-
-
-</header>
-
-
-<div class="container body-wrap">
-    
-    <aside class="post-widget">
-        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
-            <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Servlet总结"><span class="post-toc-number">1.</span> <span class="post-toc-text">Servlet总结</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#阐述Servlet和CGI的区别"><span class="post-toc-number">2.</span> <span class="post-toc-text">阐述Servlet和CGI的区别?</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#CGI的不足之处"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">CGI的不足之处:</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Servlet的优点"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">Servlet的优点:</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Servlet接口中有哪些方法及Servlet生命周期探秘"><span class="post-toc-number">3.</span> <span class="post-toc-text">Servlet接口中有哪些方法及Servlet生命周期探秘</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#get和post请求的区别"><span class="post-toc-number">4.</span> <span class="post-toc-text">get和post请求的区别</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#什么情况下调用doGet-和doPost"><span class="post-toc-number">5.</span> <span class="post-toc-text">什么情况下调用doGet()和doPost()</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#转发-Forward-和重定向-Redirect-的区别"><span class="post-toc-number">6.</span> <span class="post-toc-text">转发(Forward)和重定向(Redirect)的区别</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#自动刷新-Refresh"><span class="post-toc-number">7.</span> <span class="post-toc-text">自动刷新(Refresh)</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Servlet与线程安全"><span class="post-toc-number">8.</span> <span class="post-toc-text">Servlet与线程安全</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#JSP和Servlet是什么关系"><span class="post-toc-number">9.</span> <span class="post-toc-text">JSP和Servlet是什么关系</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#JSP工作原理"><span class="post-toc-number">10.</span> <span class="post-toc-text">JSP工作原理</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#JSP有哪些内置对象、作用分别是什么"><span class="post-toc-number">11.</span> <span class="post-toc-text">JSP有哪些内置对象、作用分别是什么</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Request对象的主要方法有哪些"><span class="post-toc-number">12.</span> <span class="post-toc-text">Request对象的主要方法有哪些</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#request-getAttribute-和-request-getParameter-有何区别"><span class="post-toc-number">13.</span> <span class="post-toc-text">request.getAttribute()和 request.getParameter()有何区别</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#include指令include的行为的区别"><span class="post-toc-number">14.</span> <span class="post-toc-text">include指令include的行为的区别</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#JSP九大内置对象，七大动作，三大指令"><span class="post-toc-number">15.</span> <span class="post-toc-text">JSP九大内置对象，七大动作，三大指令</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#讲解JSP中的四种作用域"><span class="post-toc-number">16.</span> <span class="post-toc-text">讲解JSP中的四种作用域</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#如何实现JSP或Servlet的单线程模式"><span class="post-toc-number">17.</span> <span class="post-toc-text">如何实现JSP或Servlet的单线程模式</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#实现会话跟踪的技术有哪些"><span class="post-toc-number">18.</span> <span class="post-toc-text">实现会话跟踪的技术有哪些</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Cookie和Session的的区别"><span class="post-toc-number">19.</span> <span class="post-toc-text">Cookie和Session的的区别</span></a></li></ol>
-        </nav>
-    </aside>
-
-
-<article id="post-Java/J2EE/J2EE基础知识" class="post-article article-type-post fade" itemprop="blogPost">
-
-    <div class="post-card">
-        <h1 class="post-card-title">J2EE基础知识</h1>
-        <div class="post-meta">
-            <time class="post-time" title="2019-01-04 12:54:00" datetime="2019-01-04T04:54:00.000Z" itemprop="datePublished">2019-01-04</time>
-
-            
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Java/">Java</a></li></ul>
-
-
-
-            
-<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
-    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
-</span>
-
-
+    <span id="config-title" style="display:none">Zjxjwxk&#39;s Blog</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div class="scrollbar gradient-bg-rev"></div>
+<div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <div class="navigation animated fadeIn fast delay-1s">
+        <img id="home-icon" class="icon-home" src="/img/favicon.png" alt="" data-url="https://zjxjwxk.com">
+        <div id="play-icon" title="Play/Pause" class="iconfont icon-play"></div>
+        <h3 class="subtitle">J2EE基础知识</h3>
+        <div class="social">
+            <!--        <div class="like-icon">-->
+            <!--            <a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
+            <!--        </div>-->
+            <div>
+                <div class="share">
+                    
+                        <a href="javascript:;" class="iconfont icon-share1"></a>
+                        <div class="share-component-cc" data-disabled="facebook,douban,linkedin,diandian,tencent,google"></div>
+                    
+                </div>
+            </div>
         </div>
-        <div class="post-content" id="post-content" itemprop="postContent">
+    </div>
+</div>
+
+    <div class="section">
+        <div class="article-header-wrapper">
+    <div class="article-header">
+        <div class="article-cover animated fadeIn" style="
+            animation-delay: 600ms;
+            animation-duration: 1.2s;
+            background-image: 
+                radial-gradient(ellipse closest-side, rgba(0, 0, 0, 0.65), #100e17),
+                url(/img/cover.jpg);">
+        </div>
+        <div class="else">
+            <p class="animated fadeInDown">
+                
+                <a href="/categories/Java"><b>「
+                    </b>JAVA<b> 」</b></a>
+                
+                一月 04, 2019
+            </p>
+            <h3 class="post-title animated fadeInDown"><a href="/2019/01/04/Java/J2EE/J2EE基础知识/" title="J2EE基础知识">J2EE基础知识</a>
+            </h3>
+            
+            <p class="post-count animated fadeInDown">
+                
+                <span>
+                    <b class="iconfont icon-text2"></b> <i>文章字数</i>
+                    15k
+                </span>
+                
+                
+                <span>
+                    <b class="iconfont icon-timer__s"></b> <i>阅读约需</i>
+                    14 mins.
+                </span>
+                
+                
+                <span id="/2019/01/04/Java/J2EE/J2EE基础知识/" class="leancloud_visitors" data-flag-title="J2EE基础知识">
+                    <b class="iconfont icon-read"></b> <i>阅读次数</i>
+                    <span class="leancloud-visitors-count">1000000</span>
+                </span>
+                
+                
+            </p>
+            
+            
+            <ul class="animated fadeInDown post-tags-list"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/J2EE/">J2EE</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/Java/">Java</a></li></ul>
+            
+        </div>
+    </div>
+</div>
+
+<div class="screen-gradient-after">
+    <div class="screen-gradient-content">
+        <div class="screen-gradient-content-inside">
+            <div class="bold-underline-links screen-gradient-sponsor">
+                <p>
+                    <span class="animated fadeIn delay-1s"></span>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="article">
+    <div class="main">
+        <div class="content markdown animated fadeIn">
             <h2 id="Servlet总结"><a href="#Servlet总结" class="headerlink" title="Servlet总结"></a>Servlet总结</h2><p>在Java Web程序中，<strong>Servlet</strong>主要负责接收用户请求<strong>HttpServletRequest</strong>,在<strong>doGet()</strong>,<strong>doPost()中做相应的处理，并将回应HttpServletResponse</strong>反馈给用户。Servlet可以设置初始化参数，供Servlet内部使用。一个Servlet类只会有一个实例，在它初始化时调用<strong>init()方法</strong>，销毁时调用<strong>destroy()方法</strong>。<strong>Servlet需要在web.xml中配置</strong>（MyEclipse中创建Servlet会自动配置），<strong>一个Servlet可以设置多个URL访问</strong>。<strong>Servlet不是线程安全</strong>，因此要谨慎使用类变量。</p>
 <h2 id="阐述Servlet和CGI的区别"><a href="#阐述Servlet和CGI的区别" class="headerlink" title="阐述Servlet和CGI的区别?"></a>阐述Servlet和CGI的区别?</h2><h3 id="CGI的不足之处"><a href="#CGI的不足之处" class="headerlink" title="CGI的不足之处:"></a>CGI的不足之处:</h3><p>1，需要为每个请求启动一个操作CGI程序的系统进程。如果请求频繁，这将会带来很大的开销。</p>
 <p>2，需要为每个请求加载和运行一个CGI程序，这将带来很大的开销</p>
@@ -228,8 +162,8 @@
 <h2 id="什么情况下调用doGet-和doPost"><a href="#什么情况下调用doGet-和doPost" class="headerlink" title="什么情况下调用doGet()和doPost()"></a>什么情况下调用doGet()和doPost()</h2><p>Form标签里的method的属性为get时调用doGet()，为post时调用doPost()。</p>
 <h2 id="转发-Forward-和重定向-Redirect-的区别"><a href="#转发-Forward-和重定向-Redirect-的区别" class="headerlink" title="转发(Forward)和重定向(Redirect)的区别"></a>转发(Forward)和重定向(Redirect)的区别</h2><p><strong>转发是服务器行为，重定向是客户端行为。</strong></p>
 <p><strong>转发（Forword）</strong> 通过RequestDispatcher对象的forward（HttpServletRequest request,HttpServletResponse response）方法实现的。RequestDispatcher可以通过HttpServletRequest 的getRequestDispatcher()方法获得。例如下面的代码就是跳转到login_success.jsp页面。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">request.getRequestDispatcher(&quot;login_success.jsp&quot;).forward(request, response);</span><br></pre></td></tr></table></figure>
-<p><strong>重定向（Redirect）</strong> 是利用服务器返回的状态吗来实现的。客户端浏览器请求服务器的时候，服务器会返回一个状态码。服务器通过HttpServletRequestResponse的setStatus(int status)方法设置状态码。如果服务器返回301或者302，则浏览器会到新的网址重新请求该资源。</p>
+<pre><code>     request.getRequestDispatcher(&quot;login_success.jsp&quot;).forward(request, response);
+</code></pre><p><strong>重定向（Redirect）</strong> 是利用服务器返回的状态吗来实现的。客户端浏览器请求服务器的时候，服务器会返回一个状态码。服务器通过HttpServletRequestResponse的setStatus(int status)方法设置状态码。如果服务器返回301或者302，则浏览器会到新的网址重新请求该资源。</p>
 <ol>
 <li><strong>从地址栏显示来说</strong></li>
 </ol>
@@ -247,18 +181,12 @@
 </ol>
 <p>forward:高. redirect:低.</p>
 <h2 id="自动刷新-Refresh"><a href="#自动刷新-Refresh" class="headerlink" title="自动刷新(Refresh)"></a>自动刷新(Refresh)</h2><p>自动刷新不仅可以实现一段时间之后自动跳转到另一个页面，还可以实现一段时间之后自动刷新本页面。Servlet中通过HttpServletResponse对象设置Header属性实现自动刷新例如：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Response.setHeader(&quot;Refresh&quot;,&quot;5;URL=http://localhost:8080/servlet/example.htm&quot;);</span><br></pre></td></tr></table></figure>
-<p>其中5为时间，单位为秒。URL指定就是要跳转的页面（如果设置自己的路径，就会实现每过一秒自动刷新本页面一次）</p>
+<pre><code>Response.setHeader(&quot;Refresh&quot;,&quot;5;URL=http://localhost:8080/servlet/example.htm&quot;);
+</code></pre><p>其中5为时间，单位为秒。URL指定就是要跳转的页面（如果设置自己的路径，就会实现每过一秒自动刷新本页面一次）</p>
 <h2 id="Servlet与线程安全"><a href="#Servlet与线程安全" class="headerlink" title="Servlet与线程安全"></a>Servlet与线程安全</h2><p><strong>Servlet不是线程安全的，多线程并发的读写会导致数据不同步的问题。</strong> 解决的办法是尽量不要定义name属性，而是要把name变量分别定义在doGet()和doPost()方法内。虽然使用synchronized(name){}语句块可以解决问题，但是会造成线程的等待，不是很科学的办法。 注意：多线程的并发的读写Servlet类属性会导致数据不同步。但是如果只是并发地读取属性而不写入，则不存在数据不同步的问题。因此Servlet里的只读属性最好定义为final类型的。</p>
 <p>参考：《javaweb整合开发王者归来》P92</p>
 <h2 id="JSP和Servlet是什么关系"><a href="#JSP和Servlet是什么关系" class="headerlink" title="JSP和Servlet是什么关系"></a>JSP和Servlet是什么关系</h2><p>其实这个问题在上面已经阐述过了，Servlet是一个特殊的Java程序，它运行于服务器的JVM中，能够依靠服务器的支持向浏览器提供显示内容。JSP本质上是Servlet的一种简易形式，JSP会被服务器处理成一个类似于Servlet的Java程序，可以简化页面内容的生成。Servlet和JSP最主要的不同点在于，Servlet的应用逻辑是在Java文件中，并且完全从表示层中的HTML分离开来。而JSP的情况是Java和HTML可以组合成一个扩展名为.jsp的文件。有人说，Servlet就是在Java中写HTML，而JSP就是在HTML中写Java代码，当然这个说法是很片面且不够准确的。JSP侧重于视图，Servlet更侧重于控制逻辑，在MVC架构模式中，JSP适合充当视图（view）而Servlet适合充当控制器（controller）。</p>
-<h2 id="JSP工作原理"><a href="#JSP工作原理" class="headerlink" title="JSP工作原理"></a>JSP工作原理</h2><p>JSP是一种Servlet，但是与HttpServlet的工作方式不太一样。HttpServlet是先由源代码编译为class文件后部署到服务器下，为先编译后部署。而JSP则是先部署后编译。JSP会在客户端第一次请求JSP文件时被编译为HttpJspPage类（接口Servlet的一个子类）。该类会被服务器临时存放在服务器工作目录里面。下面通过实例给大家介绍。 工程JspLoginDemo下有一个名为login.jsp的Jsp文件，把工程第一次部署到服务器上后访问这个Jsp文件，我们发现这个目录下多了下图这两个东东。 .class文件便是JSP对应的Servlet。编译完毕后再运行class文件来响应客户端请求。以后客户端访问login.jsp的时候，Tomcat将不再重新编译JSP文件，而是直接调用class文件来响应客户端请求。<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="/2019/01/04/Java/J2EE/J2EE基础知识/68747470733a2f2f757365722d676f6c642d63646e2e786974752e696f2f323031382f332f33312f313632376265653037333037396132383f773d36373526683d32393226663d6a70656726733d313333353533.jpg" alt="JSP工作原理" title="">
-                </div>
-                <div class="image-caption">JSP工作原理</div>
-            </figure> </p>
+<h2 id="JSP工作原理"><a href="#JSP工作原理" class="headerlink" title="JSP工作原理"></a>JSP工作原理</h2><p>JSP是一种Servlet，但是与HttpServlet的工作方式不太一样。HttpServlet是先由源代码编译为class文件后部署到服务器下，为先编译后部署。而JSP则是先部署后编译。JSP会在客户端第一次请求JSP文件时被编译为HttpJspPage类（接口Servlet的一个子类）。该类会被服务器临时存放在服务器工作目录里面。下面通过实例给大家介绍。 工程JspLoginDemo下有一个名为login.jsp的Jsp文件，把工程第一次部署到服务器上后访问这个Jsp文件，我们发现这个目录下多了下图这两个东东。 .class文件便是JSP对应的Servlet。编译完毕后再运行class文件来响应客户端请求。以后客户端访问login.jsp的时候，Tomcat将不再重新编译JSP文件，而是直接调用class文件来响应客户端请求。<img src="/2019/01/04/Java/J2EE/J2EE基础知识/68747470733a2f2f757365722d676f6c642d63646e2e786974752e696f2f323031382f332f33312f313632376265653037333037396132383f773d36373526683d32393226663d6a70656726733d313333353533.jpg" alt="JSP工作原理"> </p>
 <p>由于JSP只会在客户端第一次请求的时候被编译 ，因此第一次请求JSP时会感觉比较慢，之后就会感觉快很多。如果把服务器保存的class文件删除，服务器也会重新编译JSP。</p>
 <p>开发Web程序时经常需要修改JSP。Tomcat能够自动检测到JSP程序的改动。如果检测到JSP源代码发生了改动。Tomcat会在下次客户端请求JSP时重新编译JSP，而不需要重启Tomcat。这种自动检测功能是默认开启的，检测改动会消耗少量的时间，在部署Web应用的时候可以在web.xml中将它关掉。</p>
 <p>参考：《javaweb整合开发王者归来》P97</p>
@@ -327,10 +255,23 @@
 <li><strong>使用Cookie</strong></li>
 </ol>
 <p>向客户端发送Cookie</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Cookie c =new Cookie(&quot;name&quot;,&quot;value&quot;); //创建Cookie </span><br><span class="line">c.setMaxAge(60*60*24); //设置最大时效，此处设置的最大时效为一天</span><br><span class="line">response.addCookie(c); //把Cookie放入到HTTP响应中</span><br></pre></td></tr></table></figure>
-<p>从客户端读取Cookie</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">String name =&quot;name&quot;; </span><br><span class="line">Cookie[]cookies =request.getCookies(); </span><br><span class="line">if(cookies !=null)&#123; </span><br><span class="line">   for(int i= 0;i&lt;cookies.length;i++)&#123; </span><br><span class="line">    Cookie cookie =cookies[i]; </span><br><span class="line">    if(name.equals(cookis.getName())) </span><br><span class="line">    //something is here. </span><br><span class="line">    //you can get the value </span><br><span class="line">    cookie.getValue(); </span><br><span class="line">       </span><br><span class="line">   &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
-<p><strong>优点:</strong> 数据可以持久保存，不需要服务器资源，简单，基于文本的Key-Value</p>
+<pre><code>Cookie c =new Cookie(&quot;name&quot;,&quot;value&quot;); //创建Cookie 
+c.setMaxAge(60*60*24); //设置最大时效，此处设置的最大时效为一天
+response.addCookie(c); //把Cookie放入到HTTP响应中
+</code></pre><p>从客户端读取Cookie</p>
+<pre><code>String name =&quot;name&quot;; 
+Cookie[]cookies =request.getCookies(); 
+if(cookies !=null){ 
+   for(int i= 0;i&lt;cookies.length;i++){ 
+    Cookie cookie =cookies[i]; 
+    if(name.equals(cookis.getName())) 
+    //something is here. 
+    //you can get the value 
+    cookie.getValue(); 
+
+   }
+ }
+</code></pre><p><strong>优点:</strong> 数据可以持久保存，不需要服务器资源，简单，基于文本的Key-Value</p>
 <p><strong>缺点:</strong> 大小受到限制，用户可以禁用Cookie功能，由于保存在本地，有一定的安全风险。</p>
 <ol>
 <li>URL 重写</li>
@@ -339,8 +280,8 @@
 <p><strong>优点：</strong> 在Cookie被禁用的时候依然可以使用</p>
 <p><strong>缺点：</strong> 必须对网站的URL进行编码，所有页面必须动态生成，不能用预先记录下来的URL进行访问。</p>
 <p>3.隐藏的表单域</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type=&quot;hidden&quot; name =&quot;session&quot; value=&quot;...&quot;/&gt;</span><br></pre></td></tr></table></figure>
-<p><strong>优点：</strong> Cookie被禁时可以使用</p>
+<pre><code>&lt;input type=&quot;hidden&quot; name =&quot;session&quot; value=&quot;...&quot;/&gt;
+</code></pre><p><strong>优点：</strong> Cookie被禁时可以使用</p>
 <p><strong>缺点：</strong> 所有页面必须是表单提交之后的结果。</p>
 <ol>
 <li>HttpSession</li>
@@ -357,326 +298,64 @@
 <p>《javaweb整合开发王者归来》P158 Cookie和Session的比较</p>
 </blockquote>
 
-        </div>
-
-        <blockquote class="post-copyright">
-    
-    <div class="content">
-        
-<span class="post-time">
-    最后更新时间：<time datetime="2019-01-19T14:04:04.000Z" itemprop="dateUpdated">2019-01-19 22:04:04</time>
-</span><br>
-
-
-        
-        原始链接：<a href="/2019/01/04/Java/J2EE/J2EE基础知识/" target="_blank" rel="external">https://zjxjwxk.com/2019/01/04/Java/J2EE/J2EE基础知识/</a>
-        
-    </div>
-    
-    <footer>
-        <a href="https://zjxjwxk.com">
-            <img src="/img/avatar.jpg" alt="吴鑫康">
-            吴鑫康
-        </a>
-    </footer>
-</blockquote>
-
-        
-<div class="page-reward">
-    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
-</div>
-
-
-
-        <div class="post-footer">
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
             
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/J2EE/">J2EE</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
-
-
-            
-<div class="page-share-wrap">
-    
-
-<div class="page-share" id="pageShare">
-    <ul class="reset share-icons">
-      <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://zjxjwxk.com/2019/01/04/Java/J2EE/J2EE基础知识/&title=《J2EE基础知识》 — Zjxjwxk's Blog&pic=https://zjxjwxk.com/img/avatar.jpg" data-title="微博">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      <li>
-        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://zjxjwxk.com/2019/01/04/Java/J2EE/J2EE基础知识/&title=《J2EE基础知识》 — Zjxjwxk's Blog&source=" data-title=" QQ">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://zjxjwxk.com/2019/01/04/Java/J2EE/J2EE基础知识/" data-title=" Facebook">
-          <i class="icon icon-facebook"></i>
-        </a>
-      </li>
-      <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《J2EE基础知识》 — Zjxjwxk's Blog&url=https://zjxjwxk.com/2019/01/04/Java/J2EE/J2EE基础知识/&via=https://zjxjwxk.com" data-title=" Twitter">
-          <i class="icon icon-twitter"></i>
-        </a>
-      </li>
-      <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://zjxjwxk.com/2019/01/04/Java/J2EE/J2EE基础知识/" data-title=" Google+">
-          <i class="icon icon-google-plus"></i>
-        </a>
-      </li>
-    </ul>
- </div>
-
-
-
-    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
-        <i class="icon icon-share-alt icon-lg"></i>
-    </a>
-</div>
-
-
-
-        </div>
-    </div>
-
-    
-<nav class="post-nav flex-row flex-justify-between">
-  
-    <div class="waves-block waves-effect prev">
-      <a href="/2019/01/13/Linux/CentOS/CentOS 7 Tomcat的安装及开机自启动配置/" id="post-prev" class="post-nav-link">
-        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
-        <h4 class="title">CentOS 7 Tomcat开机自启动配置</h4>
-      </a>
-    </div>
-  
-
-  
-    <div class="waves-block waves-effect next">
-      <a href="/2019/01/03/Java/Java核心/Java基础知识/" id="post-next" class="post-nav-link">
-        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">Java基础知识</h4>
-      </a>
-    </div>
-  
-</nav>
-
-
-
-    
-
-
-
-
-
-
-
-
-
-
-
-    <!-- Valine Comments -->
-    <div class="comments vcomment" id="comments"></div>
-    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
-    <!-- Valine Comments script -->
-    <script>
-        var GUEST_INFO = ['nick','mail','link'];
-        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
-          return GUEST_INFO.indexOf(item) > -1
-        });
-        new Valine({
-            el: '#comments',
-            notify: 'true' == 'true',
-            verify: 'false' == 'true',
-            appId: "gJTHi1MULDjBNIRKPWN2bTWd-gzGzoHsz",
-            appKey: "dflbQMdoD4HLI3twjbzShRMK",
-            avatar: "mm",
-            placeholder: "写下你的评论吧！",
-            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
-            pageSize: "10"
-        })
-    </script>
-    <!-- Valine Comments end -->
-
-
-
-
-
-
-
-</article>
-
-<div id="reward" class="page-modal reward-lay">
-    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <h3 class="reward-title">
-        <i class="icon icon-quote-left"></i>
-        谢谢大爷~
-        <i class="icon icon-quote-right"></i>
-    </h3>
-    <div class="reward-content">
-        
-        <div class="reward-code">
-            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
-        </div>
-        
-        <label class="reward-toggle">
-            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
-            <div class="reward-toggle-ctrol">
-                <span class="reward-toggle-item wechat">微信</span>
-                <span class="reward-toggle-label"></span>
-                <span class="reward-toggle-item alipay">支付宝</span>
-            </div>
-        </label>
-        
-    </div>
-</div>
-
-
-
-</div>
-
-        <footer class="footer">
-    <div class="top">
-        
-<p>
-    <span id="busuanzi_container_site_uv" style="display:none">
-        站点总访客数：<span id="busuanzi_value_site_uv"></span>
-    </span>
-    <span id="busuanzi_container_site_pv" style="display:none">
-        站点总访问量：<span id="busuanzi_value_site_pv"></span>
-    </span>
-</p>
-
-
-        <p>
-            
-                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
-            
-            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
-        </p>
-    </div>
-    <div class="bottom">
-        <p><span>吴鑫康 &copy; 2019</span>
-            <span>
+            <ul id="audio-list" style="display:none">
                 
-                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
-            </span>
-        </p>
-    </div>
-</footer>
-
-    </main>
-    <div class="mask" id="mask"></div>
-<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
-
-
-
-<div class="global-share" id="globalShare">
-    <ul class="reset share-icons">
-      <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://zjxjwxk.com/2019/01/04/Java/J2EE/J2EE基础知识/&title=《J2EE基础知识》 — Zjxjwxk's Blog&pic=https://zjxjwxk.com/img/avatar.jpg" data-title="微博">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      <li>
-        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://zjxjwxk.com/2019/01/04/Java/J2EE/J2EE基础知识/&title=《J2EE基础知识》 — Zjxjwxk's Blog&source=" data-title=" QQ">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://zjxjwxk.com/2019/01/04/Java/J2EE/J2EE基础知识/" data-title=" Facebook">
-          <i class="icon icon-facebook"></i>
-        </a>
-      </li>
-      <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《J2EE基础知识》 — Zjxjwxk's Blog&url=https://zjxjwxk.com/2019/01/04/Java/J2EE/J2EE基础知识/&via=https://zjxjwxk.com" data-title=" Twitter">
-          <i class="icon icon-twitter"></i>
-        </a>
-      </li>
-      <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://zjxjwxk.com/2019/01/04/Java/J2EE/J2EE基础知识/" data-title=" Google+">
-          <i class="icon icon-google-plus"></i>
-        </a>
-      </li>
-    </ul>
- </div>
-
-
-<div class="page-modal wx-share" id="wxShare">
-    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACOElEQVR42u3awW6sMAwF0Pn/n6bSWz2pAq7jTCXMyWpEO5DDwmPH/nzidfxbv6/8f/3sSvLXs//ZvDAwMB7LOC7X9QOOYF1v+uw++d4wMDDew7gOsgkj2e715s6em/wAYGBgYCTp2tp2q+kjBgYGRsJISs2bNG4p+GJgYGBU07VqGM2L3q/X4hgYGA9kVBsDf/n5i/0NDAyMhzCO4qo2A5IEdMOuMDAwRjOS9mFnqqEzupEgo7oZAwNjHGPtOGzXd5Pxi9PnYmBgvICRB9nOsf71lYRxen8MDIzRjHKzsBhMd90hSkAxMDDGMdYahNXUMB8Cy79VrqoxMDAey6gOQyRJW16aVs/KykUsBgbGCEb1IKwaXqthei09xcDAmM3I2415ylg90N92fwwMjNGMvFzsp3RJyyFPKzEwMN7A2LvRTvm6dvyHgYHxBkbnmCxP+/LGQOczBgbGbEYe+D5Lq3qo19oPBgbGOMbaQfzakETeMEheyk2Gi4GBMYjRGsMKEsS9YfrmpWBgYAxlJOVrNWmrjl9Uh8ZOfzcwMDBewNgbfPNhiw1JJwYGxmhGPzjmxWd/FWZGMDAwBjGO4srTxLXXkbdUo3oXAwNjBKMa7NYO9/eOU7RgGBgYj2XkQbYagvNZiOQILypfMTAwRjOqQTY/bkvuk/8CtIbDMDAwXsD4RmJXHZbFwMDA6D9yLTVcy/EwMDDexsiL2M6wRWc64uYlYmBgjGb0GwPXTcrOUMXmdiYGBsbzGD/1zvUbmgID4QAAAABJRU5ErkJggg==" alt="微信分享二维码">
-</div>
-
-
-
-
-    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
-<script>
-var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
-
-
-</script>
-
-<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
-
-
-<div class="search-panel" id="search-panel">
-    <ul class="search-result" id="search-result"></ul>
-</div>
-<template id="search-tpl">
-<li class="item">
-    <a href="{path}" class="waves-block waves-effect">
-        <div class="title ellipsis" title="{title}">{title}</div>
-        <div class="flex-row flex-middle">
-            <div class="tags ellipsis">
-                {tags}
-            </div>
-            <time class="flex-col time">{date}</time>
+                
+                <li title="0" data-url="/statics/Silent express.mp3"></li>
+                
+                    
+            </ul>
+            
+            
+            
+            <div id="vcomments"></div>
+            
         </div>
-    </a>
-</li>
-</template>
+        <div class="sidebar">
+            <div class="box animated fadeInRight">
+                <div class="subbox">
+                    <img src="https://res.cloudinary.com/tridiamond/image/upload/v1573019751/TriDiamond_logo_ui_xeublz.jpg" height="300" width="300">
+                    <p>吴鑫康</p>
+                    <span>Talk is cheap. Show me the code ———— Linus Torvalds</span>
+                    <dl>
+                        <dd><a href="https://github.com/zjxjwxk" target="_blank"><span class=" iconfont icon-github"></span></a></dd>
+                        <dd><a href="https://twitter.com/zjxjwxk" target="_blank"><span class=" iconfont icon-twitter"></span></a></dd>
+                        <dd><a href="" target="_blank"><span class=" iconfont icon-stack-overflow"></span></a></dd>
+                    </dl>
+                </div>
+                <ul>
+                    <li><a href="/">15 <p>文章</p></a></li>
+                    <li><a href="/categories">5 <p>分类</p></a></li>
+                    <li><a href="/tags">11 <p>标签</p></a></li>
+                </ul>
+            </div>
+            
+            
+            
+            <div class="box sticky animated fadeInRight faster">
+                <div id="toc" class="subbox">
+                    <h4>目录</h4>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Servlet总结"><span class="toc-number">1.</span> <span class="toc-text">Servlet总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#阐述Servlet和CGI的区别"><span class="toc-number">2.</span> <span class="toc-text">阐述Servlet和CGI的区别?</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#CGI的不足之处"><span class="toc-number">2.1.</span> <span class="toc-text">CGI的不足之处:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Servlet的优点"><span class="toc-number">2.2.</span> <span class="toc-text">Servlet的优点:</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Servlet接口中有哪些方法及Servlet生命周期探秘"><span class="toc-number">3.</span> <span class="toc-text">Servlet接口中有哪些方法及Servlet生命周期探秘</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#get和post请求的区别"><span class="toc-number">4.</span> <span class="toc-text">get和post请求的区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#什么情况下调用doGet-和doPost"><span class="toc-number">5.</span> <span class="toc-text">什么情况下调用doGet()和doPost()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#转发-Forward-和重定向-Redirect-的区别"><span class="toc-number">6.</span> <span class="toc-text">转发(Forward)和重定向(Redirect)的区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#自动刷新-Refresh"><span class="toc-number">7.</span> <span class="toc-text">自动刷新(Refresh)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Servlet与线程安全"><span class="toc-number">8.</span> <span class="toc-text">Servlet与线程安全</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JSP和Servlet是什么关系"><span class="toc-number">9.</span> <span class="toc-text">JSP和Servlet是什么关系</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JSP工作原理"><span class="toc-number">10.</span> <span class="toc-text">JSP工作原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JSP有哪些内置对象、作用分别是什么"><span class="toc-number">11.</span> <span class="toc-text">JSP有哪些内置对象、作用分别是什么</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Request对象的主要方法有哪些"><span class="toc-number">12.</span> <span class="toc-text">Request对象的主要方法有哪些</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#request-getAttribute-和-request-getParameter-有何区别"><span class="toc-number">13.</span> <span class="toc-text">request.getAttribute()和 request.getParameter()有何区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#include指令include的行为的区别"><span class="toc-number">14.</span> <span class="toc-text">include指令include的行为的区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JSP九大内置对象，七大动作，三大指令"><span class="toc-number">15.</span> <span class="toc-text">JSP九大内置对象，七大动作，三大指令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#讲解JSP中的四种作用域"><span class="toc-number">16.</span> <span class="toc-text">讲解JSP中的四种作用域</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#如何实现JSP或Servlet的单线程模式"><span class="toc-number">17.</span> <span class="toc-text">如何实现JSP或Servlet的单线程模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实现会话跟踪的技术有哪些"><span class="toc-number">18.</span> <span class="toc-text">实现会话跟踪的技术有哪些</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Cookie和Session的的区别"><span class="toc-number">19.</span> <span class="toc-text">Cookie和Session的的区别</span></a></li></ol>
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+</div>
 
-<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
-
-
-
-<!-- mathjax config similar to math.stackexchange -->
-
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-    tex2jax: {
-        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-        processEscapes: true,
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-    }
-});
-
-MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-        all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-});
-</script>
-
-<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-
-
-
-
-<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+    </div>
+</div>
+    <div id="back-to-top" class="animated fadeIn faster">
+        <div class="flow"></div>
+        <span class="percentage animated fadeIn faster">0%</span>
+        <span class="iconfont icon-top02 animated fadeIn faster"></span>
+    </div><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
 <script type="text/x-mathjax-config">
   MathJax.Hub.Config("");
 </script>
@@ -694,10 +373,233 @@ MathJax.Hub.Queue(function() {
 </script>
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->
-
-
-
-
-
 </body>
+<footer>
+    <p class="copyright" id="copyright">
+        &copy; 2020
+        <span class="gradient-text">
+            吴鑫康
+        </span>.
+        Powered by <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a>
+        Theme
+        <span class="gradient-text">
+            <a href="https://github.com/TriDiamond/hexo-theme-obsidian" title="Obsidian" target="_blank" rel="noopener">Obsidian</a>
+        </span>
+        <small><a href="https://github.com/TriDiamond/hexo-theme-obsidian/blob/master/CHANGELOG.md" title="v1.4.3" target="_blank" rel="noopener">v1.4.3</a></small>
+    </p>
+</footer>
+
+<script type="text/javascript" src="https://cdn.bootcss.com/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<script>
+  MathJax.Hub.Config({
+    "HTML-CSS": {
+      preferredFont: "TeX",
+      availableFonts: ["STIX", "TeX"],
+      linebreaks: {
+        automatic: true
+      },
+      EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+      inlineMath: [
+        ["$", "$"],
+        ["\\(", "\\)"]
+      ],
+      processEscapes: true,
+      ignoreClass: "tex2jax_ignore|dno",
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      noUndefined: {
+        attributes: {
+          mathcolor: "red",
+          mathbackground: "#FFEEEE",
+          mathsize: "90%"
+        }
+      },
+      Macros: {
+        href: "{}"
+      }
+    },
+    messageStyle: "none"
+  });
+</script>
+<script>
+  function initialMathJax() {
+    MathJax.Hub.Queue(function () {
+      var all = MathJax.Hub.getAllJax(),
+        i;
+      // console.log(all);
+      for (i = 0; i < all.length; i += 1) {
+        console.log(all[i].SourceElement().parentNode)
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  }
+
+  function reprocessMathJax() {
+    if (typeof MathJax !== 'undefined') {
+      MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+    }
+  }
+</script>
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/obsidian.js"></script>
+<script src="/js/jquery.truncate.js"></script>
+<script src="/js/search.js"></script>
+<script src="//cdn.bootcss.com/typed.js/2.0.10/typed.min.js"></script>
+<script src="//cdn.bootcss.com/blueimp-md5/2.12.0/js/md5.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+
+<script src="https://cdn.bootcss.com/codemirror/5.48.4/codemirror.min.js"></script>
+
+    <script src="//cdn.bootcss.com/codemirror/5.48.4/mode/javascript/javascript.min.js"></script>
+
+    <script src="//cdn.bootcss.com/codemirror/5.48.4/mode/css/css.min.js"></script>
+
+    <script src="//cdn.bootcss.com/codemirror/5.48.4/mode/xml/xml.min.js"></script>
+
+    <script src="//cdn.bootcss.com/codemirror/5.48.4/mode/htmlmixed/htmlmixed.min.js"></script>
+
+    <script src="//cdn.bootcss.com/codemirror/5.48.4/mode/clike/clike.min.js"></script>
+
+    <script src="//cdn.bootcss.com/codemirror/5.48.4/mode/php/php.min.js"></script>
+
+    <script src="//cdn.bootcss.com/codemirror/5.48.4/mode/shell/shell.min.js"></script>
+
+    <script src="//cdn.bootcss.com/codemirror/5.48.4/mode/python/python.min.js"></script>
+
+
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/photoswipe/4.1.3/photoswipe.min.css">
+<link rel="stylesheet" href="//cdn.bootcss.com/photoswipe/4.1.3/default-skin/default-skin.min.css">
+<script src="//cdn.bootcss.com/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="//cdn.bootcss.com/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="//www.googletagmanager.com/gtag/js?id=UA-157529205-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-157529205-1');
+    </script>
+
+
+
+
+
+<script>
+    function initialTyped () {
+        var typedTextEl = $('.typed-text');
+        if (typedTextEl && typedTextEl.length > 0) {
+            var typed = new Typed('.typed-text', {
+                strings: ["Talk is cheap. Show me the code ———— Linus Torvalds", "废话少说，放码过来"],
+                typeSpeed: 90,
+                loop: true,
+                loopCount: Infinity,
+                backSpeed: 20,
+            });
+        }
+    }
+
+    if ($('.article-header') && $('.article-header').length) {
+        $(document).ready(function () {
+            initialTyped();
+        });
+    }
+</script>
+
+
+    <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+    <script>
+
+        var valine = new Valine();
+
+        function initValine(path) {
+            if (!path) path = window.location.pathname;
+            let language = 'zh-CN';
+            if (!language) {
+                language = 'en';
+            } else {
+                language = language.toLowerCase();
+            }
+            valine.init({
+                el: '#vcomments',
+                appId: 'gJTHi1MULDjBNIRKPWN2bTWd-gzGzoHsz',
+                appKey: 'dflbQMdoD4HLI3twjbzShRMK',
+                notify: 'true',
+                verify: 'false',
+                avatar: 'mp',
+                placeholder: 'Leave your throughs behind~',
+                visitor: 'true',
+                path: path,
+                lang: language
+            });
+        }
+
+        $(document).ready(function () {
+            initValine();
+        });
+    </script>
+
+
+
 </html>

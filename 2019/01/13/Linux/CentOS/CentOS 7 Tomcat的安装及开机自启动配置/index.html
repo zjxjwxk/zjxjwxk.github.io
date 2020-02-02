@@ -1,199 +1,165 @@
+
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN" class="loading">
 <head><meta name="generator" content="Hexo 3.8.0">
-    
-
-    
-
-    
-
-
-
-    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
-    
-    
-    <meta name="sogou_site_verification" content="true">
-    
-    
-    <link rel="canonical" href="https://zjxjwxk.com/2019/01/13/Linux/CentOS/CentOS 7 Tomcat的安装及开机自启动配置/">
-    
-    
-    <title>CentOS 7 Tomcat开机自启动配置 | Zjxjwxk&#39;s Blog | A Java Developer</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    
-    <meta name="theme-color" content="#3F51B5">
-    
-    
-    <meta name="keywords" content="Linux,CentOS,Tomcat">
-    <meta name="description" content="CentOS 7 Tomcat开机自启动配置配置开机运行Tomcat增加启动参数Tomcat需要增加一个pid文件，在 $CATALINA_HOME/bin 目录下面，增加 setenv.sh 配置，catalina.sh启动的时候会调用，同时配置Java内存参数。添加如下命令：[root@vps bin]# vim setenv.sh 12345678910111213#Tomcat start">
-<meta name="keywords" content="Linux,CentOS,Tomcat">
-<meta property="og:type" content="article">
-<meta property="og:title" content="CentOS 7 Tomcat开机自启动配置">
-<meta property="og:url" content="https://zjxjwxk.com/2019/01/13/Linux/CentOS/CentOS 7 Tomcat的安装及开机自启动配置/index.html">
-<meta property="og:site_name" content="Zjxjwxk&#39;s Blog">
-<meta property="og:description" content="CentOS 7 Tomcat开机自启动配置配置开机运行Tomcat增加启动参数Tomcat需要增加一个pid文件，在 $CATALINA_HOME/bin 目录下面，增加 setenv.sh 配置，catalina.sh启动的时候会调用，同时配置Java内存参数。添加如下命令：[root@vps bin]# vim setenv.sh 12345678910111213#Tomcat start">
-<meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-01-29T16:53:24.000Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="CentOS 7 Tomcat开机自启动配置">
-<meta name="twitter:description" content="CentOS 7 Tomcat开机自启动配置配置开机运行Tomcat增加启动参数Tomcat需要增加一个pid文件，在 $CATALINA_HOME/bin 目录下面，增加 setenv.sh 配置，catalina.sh启动的时候会调用，同时配置Java内存参数。添加如下命令：[root@vps bin]# vim setenv.sh 12345678910111213#Tomcat start">
-    
-        <link rel="alternate" type="application/atom+xml" title="Zjxjwxk&#39;s Blog" href="/atom.xml">
-    
-    <link rel="shortcut icon" href="/favicon.ico">
-    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
-    <script>window.lazyScripts=[]</script>
-
-    <!-- custom head --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
-    
-
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>CentOS 7 Tomcat开机自启动配置 - Zjxjwxk&#39;s Blog</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="吴鑫康 zjxjwxk Wxk Java,"> 
+    <meta name="description" content="CentOS 7 Tomcat开机自启动配置配置开机运行Tomcat增加启动参数Tomcat需要增加一个pid文件，在 $CATALINA_HOME/bin 目录下面，增加 setenv.sh 配置,"> 
+    <meta name="author" content="吴鑫康"> 
+    <link rel="alternative" href="atom.xml" title="Zjxjwxk&#39;s Blog" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    <link href="https://fonts.loli.net/css?family=Roboto+Mono|Rubik&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_1429596_nzgqgvnmkjb.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.7.2/animate.min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/codemirror/5.48.4/codemirror.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/codemirror/5.48.4/theme/dracula.css">
+    <link rel="stylesheet" href="/css/obsidian.css">
+    <link rel="stylesheet" href="/css/ball-atom.min.css"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
+</html>
 
-<body>
-    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="loading" class="active"></div>
-
-    <aside id="menu" class="hide">
-  <div class="inner flex-row-vertical">
-    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
-        <i class="icon icon-lg icon-close"></i>
-    </a>
-    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
-      <div class="brand">
-        <a href="/" class="avatar waves-effect waves-circle waves-light">
-          <img src="/img/avatar.jpg">
-        </a>
-        <hgroup class="introduce">
-          <h5 class="nickname">吴鑫康</h5>
-          <a href="mailto:zjxjwxk@gmail.com" title="zjxjwxk@gmail.com" class="mail">zjxjwxk@gmail.com</a>
-        </hgroup>
-      </div>
-    </div>
-    <div class="scroll-wrap flex-col">
-      <ul class="nav">
-        
-            <li class="waves-block waves-effect">
-              <a href="/">
-                <i class="icon icon-lg icon-home"></i>
-                主页
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/archives">
-                <i class="icon icon-lg icon-archives"></i>
-                归档
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/tags">
-                <i class="icon icon-lg icon-tags"></i>
-                标签
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/categories">
-                <i class="icon icon-lg icon-th-list"></i>
-                分类
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="https://github.com/zjxjwxk" target="_blank">
-                <i class="icon icon-lg icon-github"></i>
-                GitHub
-              </a>
-            </li>
-        
-      </ul>
-    </div>
-  </div>
-</aside>
-
-    <main id="main">
-        <header class="top-header" id="header">
-    <div class="flex-row">
-        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
-          <i class="icon icon-lg icon-navicon"></i>
-        </a>
-        <div class="flex-col header-title ellipsis">CentOS 7 Tomcat开机自启动配置</div>
-        
-        <div class="search-wrap" id="search-wrap">
-            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
-                <i class="icon icon-lg icon-chevron-left"></i>
-            </a>
-            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
-            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
-                <i class="icon icon-lg icon-search"></i>
-            </a>
+<body class="loading">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="loader">
+        <div class="la-ball-atom la-2x">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
         </div>
-        
-        
-        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
-            <i class="icon icon-lg icon-share-alt"></i>
-        </a>
-        
     </div>
-</header>
-<header class="content-header post-header">
-
-    <div class="container fade-scale">
-        <h1 class="title">CentOS 7 Tomcat开机自启动配置</h1>
-        <h5 class="subtitle">
-            
-                <time datetime="2019-01-12T16:04:00.000Z" itemprop="datePublished" class="page-time">
-  2019-01-13
-</time>
-
-
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Linux/">Linux</a></li></ul>
-
-            
-        </h5>
-    </div>
-
-    
-
-
-</header>
-
-
-<div class="container body-wrap">
-    
-    <aside class="post-widget">
-        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
-            <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#CentOS-7-Tomcat开机自启动配置"><span class="post-toc-number">1.</span> <span class="post-toc-text">CentOS 7 Tomcat开机自启动配置</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#配置开机运行"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">配置开机运行</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Tomcat增加启动参数"><span class="post-toc-number">1.1.1.</span> <span class="post-toc-text">Tomcat增加启动参数</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#增加-tomcat-service"><span class="post-toc-number">1.1.2.</span> <span class="post-toc-text">增加 tomcat.service</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#使用tomcat-service"><span class="post-toc-number">1.1.3.</span> <span class="post-toc-text">使用tomcat.service</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#查看效果"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">查看效果</span></a></li></ol></li></ol>
-        </nav>
-    </aside>
-
-
-<article id="post-Linux/CentOS/CentOS 7 Tomcat的安装及开机自启动配置" class="post-article article-type-post fade" itemprop="blogPost">
-
-    <div class="post-card">
-        <h1 class="post-card-title">CentOS 7 Tomcat开机自启动配置</h1>
-        <div class="post-meta">
-            <time class="post-time" title="2019-01-13 00:04:00" datetime="2019-01-12T16:04:00.000Z" itemprop="datePublished">2019-01-13</time>
-
-            
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Linux/">Linux</a></li></ul>
-
-
-
-            
-<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
-    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
-</span>
-
-
+    <span id="config-title" style="display:none">Zjxjwxk&#39;s Blog</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div class="scrollbar gradient-bg-rev"></div>
+<div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <div class="navigation animated fadeIn fast delay-1s">
+        <img id="home-icon" class="icon-home" src="/img/favicon.png" alt="" data-url="https://zjxjwxk.com">
+        <div id="play-icon" title="Play/Pause" class="iconfont icon-play"></div>
+        <h3 class="subtitle">CentOS 7 Tomcat开机自启动配置</h3>
+        <div class="social">
+            <!--        <div class="like-icon">-->
+            <!--            <a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
+            <!--        </div>-->
+            <div>
+                <div class="share">
+                    
+                        <a href="javascript:;" class="iconfont icon-share1"></a>
+                        <div class="share-component-cc" data-disabled="facebook,douban,linkedin,diandian,tencent,google"></div>
+                    
+                </div>
+            </div>
         </div>
-        <div class="post-content" id="post-content" itemprop="postContent">
+    </div>
+</div>
+
+    <div class="section">
+        <div class="article-header-wrapper">
+    <div class="article-header">
+        <div class="article-cover animated fadeIn" style="
+            animation-delay: 600ms;
+            animation-duration: 1.2s;
+            background-image: 
+                radial-gradient(ellipse closest-side, rgba(0, 0, 0, 0.65), #100e17),
+                url(/img/cover.jpg);">
+        </div>
+        <div class="else">
+            <p class="animated fadeInDown">
+                
+                <a href="/categories/Linux"><b>「
+                    </b>LINUX<b> 」</b></a>
+                
+                一月 13, 2019
+            </p>
+            <h3 class="post-title animated fadeInDown"><a href="/2019/01/13/Linux/CentOS/CentOS 7 Tomcat的安装及开机自启动配置/" title="CentOS 7 Tomcat开机自启动配置">CentOS 7 Tomcat开机自启动配置</a>
+            </h3>
+            
+            <p class="post-count animated fadeInDown">
+                
+                <span>
+                    <b class="iconfont icon-text2"></b> <i>文章字数</i>
+                    3.2k
+                </span>
+                
+                
+                <span>
+                    <b class="iconfont icon-timer__s"></b> <i>阅读约需</i>
+                    3 mins.
+                </span>
+                
+                
+                <span id="/2019/01/13/Linux/CentOS/CentOS 7 Tomcat的安装及开机自启动配置/" class="leancloud_visitors" data-flag-title="CentOS 7 Tomcat开机自启动配置">
+                    <b class="iconfont icon-read"></b> <i>阅读次数</i>
+                    <span class="leancloud-visitors-count">1000000</span>
+                </span>
+                
+                
+            </p>
+            
+            
+            <ul class="animated fadeInDown post-tags-list"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/CentOS/">CentOS</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/Linux/">Linux</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/Tomcat/">Tomcat</a></li></ul>
+            
+        </div>
+    </div>
+</div>
+
+<div class="screen-gradient-after">
+    <div class="screen-gradient-content">
+        <div class="screen-gradient-content-inside">
+            <div class="bold-underline-links screen-gradient-sponsor">
+                <p>
+                    <span class="animated fadeIn delay-1s"></span>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="article">
+    <div class="main">
+        <div class="content markdown animated fadeIn">
             <h1 id="CentOS-7-Tomcat开机自启动配置"><a href="#CentOS-7-Tomcat开机自启动配置" class="headerlink" title="CentOS 7 Tomcat开机自启动配置"></a>CentOS 7 Tomcat开机自启动配置</h1><h2 id="配置开机运行"><a href="#配置开机运行" class="headerlink" title="配置开机运行"></a>配置开机运行</h2><h3 id="Tomcat增加启动参数"><a href="#Tomcat增加启动参数" class="headerlink" title="Tomcat增加启动参数"></a>Tomcat增加启动参数</h3><p>Tomcat需要增加一个pid文件，在 <code>$CATALINA_HOME/bin</code> 目录下面，增加 <code>setenv.sh</code> 配置，<code>catalina.sh</code>启动的时候会调用，同时配置Java内存参数。添加如下命令：<br><code>[root@vps bin]# vim setenv.sh</code></p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#Tomcat startup pid</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#set Java runtime environment variable </span></span><br><span class="line"><span class="built_in">export</span> JAVA_HOME=/usr/java/jdk1.8.0_191-amd64</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:<span class="variable">$JAVA_HOME</span>/bin</span><br><span class="line"><span class="built_in">export</span> CATALINA_HOME=/developer/apache-tomcat-7.0.91</span><br><span class="line"><span class="built_in">export</span> CATALINA_BASE=/developer/apache-tomcat-7.0.91</span><br><span class="line"></span><br><span class="line"><span class="comment">#add Tomcat pid</span></span><br><span class="line">CATALINA_PID=<span class="string">"<span class="variable">$CATALINA_BASE</span>/tomcat.pid"</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#add Java opts</span></span><br><span class="line">JAVA_OPTS=<span class="string">"-server -XX:PermSize=256M -XX:MaxPermSize=1024m -Xms512M -Xmx1024M -XX:MaxNewSize=256m"</span></span><br></pre></td></tr></table></figure>
+<pre><code class="sh">#Tomcat startup pid
+
+#set Java runtime environment variable 
+export JAVA_HOME=/usr/java/jdk1.8.0_191-amd64
+export PATH=$PATH:$JAVA_HOME/bin
+export CATALINA_HOME=/developer/apache-tomcat-7.0.91
+export CATALINA_BASE=/developer/apache-tomcat-7.0.91
+
+#add Tomcat pid
+CATALINA_PID=&quot;$CATALINA_BASE/tomcat.pid&quot;
+
+#add Java opts
+JAVA_OPTS=&quot;-server -XX:PermSize=256M -XX:MaxPermSize=1024m -Xms512M -Xmx1024M -XX:MaxNewSize=256m&quot;
+</code></pre>
 <p><strong>注意:</strong> 配置开机运行时,需要再次添加 JAVA_HOME</p>
 <h3 id="增加-tomcat-service"><a href="#增加-tomcat-service" class="headerlink" title="增加 tomcat.service"></a>增加 tomcat.service</h3><p>在/usr/lib/systemd/system目录下增加tomcat.service，目录必须是绝对目录，添加如下命令：<br><code>[root@vps bin]# vim /usr/lib/systemd/system/tomcat.service</code></p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># conf service desc ,set do this after network started</span></span><br><span class="line">[Unit]</span><br><span class="line">Description=tomcat </span><br><span class="line">After=syslog.target network.target remote-fs.target nss-lookup.target</span><br><span class="line"></span><br><span class="line"><span class="comment"># conf service pid, start,stop and restart</span></span><br><span class="line">[Service]</span><br><span class="line">Type=forking</span><br><span class="line">PIDFile=/developer/apache-tomcat-7.0.91/tomcat.pid</span><br><span class="line">ExecStart=/developer/apache-tomcat-7.0.91/bin/startup.sh</span><br><span class="line">ExecStop=/bin/<span class="built_in">kill</span> -s QUIT <span class="variable">$MAINPID</span></span><br><span class="line">ExecReload=/bin/<span class="built_in">kill</span> -s HUP <span class="variable">$MAINPID</span></span><br><span class="line">PrivateTmp=<span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># conf user </span></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br></pre></td></tr></table></figure>
+<pre><code class="sh"># conf service desc ,set do this after network started
+[Unit]
+Description=tomcat 
+After=syslog.target network.target remote-fs.target nss-lookup.target
+
+# conf service pid, start,stop and restart
+[Service]
+Type=forking
+PIDFile=/developer/apache-tomcat-7.0.91/tomcat.pid
+ExecStart=/developer/apache-tomcat-7.0.91/bin/startup.sh
+ExecStop=/bin/kill -s QUIT $MAINPID
+ExecReload=/bin/kill -s HUP $MAINPID
+PrivateTmp=true
+
+# conf user 
+[Install]
+WantedBy=multi-user.target
+</code></pre>
 <p><em>[unit]:</em> 配置了服务的描述，规定了在network启动之后执行，</p>
 <p><em>[service]:</em> 配置服务的pid，服务的启动，停止，重启</p>
 <p><em>[install]:</em> 配置了使用用户</p>
@@ -207,329 +173,77 @@
 </ul>
 <p>因为配置pid，在启动的时候会在Tomcat的根目录下生产tomcat.pid文件,服务停止后删除。<br>同时Tomcat在启动时，执行start不会启动两个Tomcat，保证始终只有一个Tomcat服务在运行。多个Tomcat可以配置在多个目录下，互不影响。</p>
 <h2 id="查看效果"><a href="#查看效果" class="headerlink" title="查看效果"></a>查看效果</h2><p>重启服务器后,通过wget访问，终端输出如下所示，配置tomcat开机自启动成功！</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[root@vps ~]# wget 35.234.8.23:8080</span><br><span class="line">--2019-01-12 16:02:41--  http://35.234.8.23:8080/</span><br><span class="line">Connecting to 35.234.8.23:8080... connected.</span><br><span class="line">HTTP request sent, awaiting response... 200 OK</span><br><span class="line">Length: 909 [text/html]</span><br><span class="line">Saving to: ‘index.html’</span><br><span class="line"></span><br><span class="line"><span class="meta">100%</span><span class="bash">[===========================================================&gt;] 909         --.-K/s   <span class="keyword">in</span> 0s      </span></span><br><span class="line"></span><br><span class="line">2019-01-12 16:02:41 (157 MB/s) - ‘index.html’ saved [909/909]</span><br></pre></td></tr></table></figure>
+<pre><code class="shell">[root@vps ~]# wget 35.234.8.23:8080
+--2019-01-12 16:02:41--  http://35.234.8.23:8080/
+Connecting to 35.234.8.23:8080... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 909 [text/html]
+Saving to: ‘index.html’
+
+100%[===========================================================&gt;] 909         --.-K/s   in 0s      
+
+2019-01-12 16:02:41 (157 MB/s) - ‘index.html’ saved [909/909]
+</code></pre>
 <p>同时,客户端浏览器也能成功访问。</p>
 
-        </div>
-
-        <blockquote class="post-copyright">
-    
-    <div class="content">
-        
-<span class="post-time">
-    最后更新时间：<time datetime="2019-01-29T16:53:24.000Z" itemprop="dateUpdated">2019-01-30 00:53:24</time>
-</span><br>
-
-
-        
-        原始链接：<a href="/2019/01/13/Linux/CentOS/CentOS 7 Tomcat的安装及开机自启动配置/" target="_blank" rel="external">https://zjxjwxk.com/2019/01/13/Linux/CentOS/CentOS 7 Tomcat的安装及开机自启动配置/</a>
-        
-    </div>
-    
-    <footer>
-        <a href="https://zjxjwxk.com">
-            <img src="/img/avatar.jpg" alt="吴鑫康">
-            吴鑫康
-        </a>
-    </footer>
-</blockquote>
-
-        
-<div class="page-reward">
-    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
-</div>
-
-
-
-        <div class="post-footer">
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
             
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CentOS/">CentOS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Tomcat/">Tomcat</a></li></ul>
-
-
-            
-<div class="page-share-wrap">
-    
-
-<div class="page-share" id="pageShare">
-    <ul class="reset share-icons">
-      <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://zjxjwxk.com/2019/01/13/Linux/CentOS/CentOS 7 Tomcat的安装及开机自启动配置/&title=《CentOS 7 Tomcat开机自启动配置》 — Zjxjwxk's Blog&pic=https://zjxjwxk.com/img/avatar.jpg" data-title="微博">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      <li>
-        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://zjxjwxk.com/2019/01/13/Linux/CentOS/CentOS 7 Tomcat的安装及开机自启动配置/&title=《CentOS 7 Tomcat开机自启动配置》 — Zjxjwxk's Blog&source=" data-title=" QQ">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://zjxjwxk.com/2019/01/13/Linux/CentOS/CentOS 7 Tomcat的安装及开机自启动配置/" data-title=" Facebook">
-          <i class="icon icon-facebook"></i>
-        </a>
-      </li>
-      <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《CentOS 7 Tomcat开机自启动配置》 — Zjxjwxk's Blog&url=https://zjxjwxk.com/2019/01/13/Linux/CentOS/CentOS 7 Tomcat的安装及开机自启动配置/&via=https://zjxjwxk.com" data-title=" Twitter">
-          <i class="icon icon-twitter"></i>
-        </a>
-      </li>
-      <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://zjxjwxk.com/2019/01/13/Linux/CentOS/CentOS 7 Tomcat的安装及开机自启动配置/" data-title=" Google+">
-          <i class="icon icon-google-plus"></i>
-        </a>
-      </li>
-    </ul>
- </div>
-
-
-
-    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
-        <i class="icon icon-share-alt icon-lg"></i>
-    </a>
-</div>
-
-
-
-        </div>
-    </div>
-
-    
-<nav class="post-nav flex-row flex-justify-between">
-  
-    <div class="waves-block waves-effect prev">
-      <a href="/2019/01/19/期末复习/Team-Collaboration-and-Career-Development/Team-Collaboration-and-Career-Development(Exam)/" id="post-prev" class="post-nav-link">
-        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
-        <h4 class="title">Team Collaboration and Career Development (Exam)</h4>
-      </a>
-    </div>
-  
-
-  
-    <div class="waves-block waves-effect next">
-      <a href="/2019/01/04/Java/J2EE/J2EE基础知识/" id="post-next" class="post-nav-link">
-        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">J2EE基础知识</h4>
-      </a>
-    </div>
-  
-</nav>
-
-
-
-    
-
-
-
-
-
-
-
-
-
-
-
-    <!-- Valine Comments -->
-    <div class="comments vcomment" id="comments"></div>
-    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
-    <!-- Valine Comments script -->
-    <script>
-        var GUEST_INFO = ['nick','mail','link'];
-        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
-          return GUEST_INFO.indexOf(item) > -1
-        });
-        new Valine({
-            el: '#comments',
-            notify: 'true' == 'true',
-            verify: 'false' == 'true',
-            appId: "gJTHi1MULDjBNIRKPWN2bTWd-gzGzoHsz",
-            appKey: "dflbQMdoD4HLI3twjbzShRMK",
-            avatar: "mm",
-            placeholder: "写下你的评论吧！",
-            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
-            pageSize: "10"
-        })
-    </script>
-    <!-- Valine Comments end -->
-
-
-
-
-
-
-
-</article>
-
-<div id="reward" class="page-modal reward-lay">
-    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <h3 class="reward-title">
-        <i class="icon icon-quote-left"></i>
-        谢谢大爷~
-        <i class="icon icon-quote-right"></i>
-    </h3>
-    <div class="reward-content">
-        
-        <div class="reward-code">
-            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
-        </div>
-        
-        <label class="reward-toggle">
-            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
-            <div class="reward-toggle-ctrol">
-                <span class="reward-toggle-item wechat">微信</span>
-                <span class="reward-toggle-label"></span>
-                <span class="reward-toggle-item alipay">支付宝</span>
-            </div>
-        </label>
-        
-    </div>
-</div>
-
-
-
-</div>
-
-        <footer class="footer">
-    <div class="top">
-        
-<p>
-    <span id="busuanzi_container_site_uv" style="display:none">
-        站点总访客数：<span id="busuanzi_value_site_uv"></span>
-    </span>
-    <span id="busuanzi_container_site_pv" style="display:none">
-        站点总访问量：<span id="busuanzi_value_site_pv"></span>
-    </span>
-</p>
-
-
-        <p>
-            
-                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
-            
-            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
-        </p>
-    </div>
-    <div class="bottom">
-        <p><span>吴鑫康 &copy; 2019</span>
-            <span>
+            <ul id="audio-list" style="display:none">
                 
-                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
-            </span>
-        </p>
-    </div>
-</footer>
-
-    </main>
-    <div class="mask" id="mask"></div>
-<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
-
-
-
-<div class="global-share" id="globalShare">
-    <ul class="reset share-icons">
-      <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://zjxjwxk.com/2019/01/13/Linux/CentOS/CentOS 7 Tomcat的安装及开机自启动配置/&title=《CentOS 7 Tomcat开机自启动配置》 — Zjxjwxk's Blog&pic=https://zjxjwxk.com/img/avatar.jpg" data-title="微博">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      <li>
-        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://zjxjwxk.com/2019/01/13/Linux/CentOS/CentOS 7 Tomcat的安装及开机自启动配置/&title=《CentOS 7 Tomcat开机自启动配置》 — Zjxjwxk's Blog&source=" data-title=" QQ">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://zjxjwxk.com/2019/01/13/Linux/CentOS/CentOS 7 Tomcat的安装及开机自启动配置/" data-title=" Facebook">
-          <i class="icon icon-facebook"></i>
-        </a>
-      </li>
-      <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《CentOS 7 Tomcat开机自启动配置》 — Zjxjwxk's Blog&url=https://zjxjwxk.com/2019/01/13/Linux/CentOS/CentOS 7 Tomcat的安装及开机自启动配置/&via=https://zjxjwxk.com" data-title=" Twitter">
-          <i class="icon icon-twitter"></i>
-        </a>
-      </li>
-      <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://zjxjwxk.com/2019/01/13/Linux/CentOS/CentOS 7 Tomcat的安装及开机自启动配置/" data-title=" Google+">
-          <i class="icon icon-google-plus"></i>
-        </a>
-      </li>
-    </ul>
- </div>
-
-
-<div class="page-modal wx-share" id="wxShare">
-    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAAAAADAeSUUAAADJUlEQVR42u3aQW7jQAwEQP//095rgmClJikDGaZ0CmytRjU+9JKc1yu+3l+u5Nv3jyu58+sn/1vl+vkPX9jY2NiHsN+X1/WSCT5/6WtAdRNvtgYbGxt7HTsJjCQ8klDJt6waeIkFGxsbG7saFdefJ9ta/RYbGxsbOyk/rhm9FlVS8FR/HmxsbOy/w85jI/lXeXMqf9ok/LCxsbF3s/PI+f1/f2S+jY2Njf2L2fMQmgx08wNA8/D79kxsbGzsRez5kZ28cd87QFkdJBeeho2Njb2C3YuB6ghhTpqPol/53mNjY2MfxZ6MVOclxHWfpzfQxcbGxv5r7CRskgCrtpwma/ViLCpFsLGxsQ9k54AkuqqtpSoy5+WhiI2NjX06+9lhQLKJ+VAhGVc0iyhsbGzsRewqsnrPpBk0mV1HowJsbGzsRewck5ciecFQfU71h7lZFxsbG3spO2/HJ9s334jqWKIZYNjY2NiHs6uRVsXnQZWsWGDEMYyNjY19IrvapqmWKNWRcO/+POSwsbGxt7KrRcWknOgdzckDLwpLbGxs7HXsZ1sz86hLML3BBjY2NvY+dq8B9LkY6x0Aqh7WxMbGxt7E7pHyNn2vqJiPk2/uwcbGxl7HThbIG/GTVlS1NEreKqrAsLGxsY9lJ8h5WZIPa5PtyA/05ONkbGxs7HPZ+ePK+1ds3FfjajKuwMbGxt7Hzke51TZQfrxmsm655YSNjY29jp28UA8zibG85VR+JjY2NvZS9lNlRr58r+xJ2Ndvjo2Njb2JnS+ZD2jz1n91PFANxZt4w8bGxl7ErgZP3tZPCpXqmHkSda9kYWxsbOwD2Qlp3jDqbehkhFwYEmBjY2OvZlcDLPm8F3vVrbl5H2xsbOwV7HfxqjaA8m/zDZoMKrCxsbH3sXv/9a8eo3lqMPCJnwEbGxt7BzsPrd5r5bFUPcQzaXthY2Nj72MnTZ9qbEyKjeqK5TIGGxsbGzs+UvOJRlJvix8OMGxsbOxj2b0yINmaXsg1m2LY2NjY69h5UylvGPWe0/sZ8q3HxsbG3scetWaKQ9zeVibPzIcN2NjY2IvY/wA0/yFMpGpHSgAAAABJRU5ErkJggg==" alt="微信分享二维码">
-</div>
-
-
-
-
-    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
-<script>
-var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
-
-
-</script>
-
-<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
-
-
-<div class="search-panel" id="search-panel">
-    <ul class="search-result" id="search-result"></ul>
-</div>
-<template id="search-tpl">
-<li class="item">
-    <a href="{path}" class="waves-block waves-effect">
-        <div class="title ellipsis" title="{title}">{title}</div>
-        <div class="flex-row flex-middle">
-            <div class="tags ellipsis">
-                {tags}
-            </div>
-            <time class="flex-col time">{date}</time>
+                
+                <li title="0" data-url="/statics/Silent express.mp3"></li>
+                
+                    
+            </ul>
+            
+            
+            
+            <div id="vcomments"></div>
+            
         </div>
-    </a>
-</li>
-</template>
+        <div class="sidebar">
+            <div class="box animated fadeInRight">
+                <div class="subbox">
+                    <img src="https://res.cloudinary.com/tridiamond/image/upload/v1573019751/TriDiamond_logo_ui_xeublz.jpg" height="300" width="300">
+                    <p>吴鑫康</p>
+                    <span>Talk is cheap. Show me the code ———— Linus Torvalds</span>
+                    <dl>
+                        <dd><a href="https://github.com/zjxjwxk" target="_blank"><span class=" iconfont icon-github"></span></a></dd>
+                        <dd><a href="https://twitter.com/zjxjwxk" target="_blank"><span class=" iconfont icon-twitter"></span></a></dd>
+                        <dd><a href="" target="_blank"><span class=" iconfont icon-stack-overflow"></span></a></dd>
+                    </dl>
+                </div>
+                <ul>
+                    <li><a href="/">15 <p>文章</p></a></li>
+                    <li><a href="/categories">5 <p>分类</p></a></li>
+                    <li><a href="/tags">11 <p>标签</p></a></li>
+                </ul>
+            </div>
+            
+            
+            
+            <div class="box sticky animated fadeInRight faster">
+                <div id="toc" class="subbox">
+                    <h4>目录</h4>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#CentOS-7-Tomcat开机自启动配置"><span class="toc-number">1.</span> <span class="toc-text">CentOS 7 Tomcat开机自启动配置</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#配置开机运行"><span class="toc-number">1.1.</span> <span class="toc-text">配置开机运行</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Tomcat增加启动参数"><span class="toc-number">1.1.1.</span> <span class="toc-text">Tomcat增加启动参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#增加-tomcat-service"><span class="toc-number">1.1.2.</span> <span class="toc-text">增加 tomcat.service</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用tomcat-service"><span class="toc-number">1.1.3.</span> <span class="toc-text">使用tomcat.service</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#查看效果"><span class="toc-number">1.2.</span> <span class="toc-text">查看效果</span></a></li></ol></li></ol>
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+</div>
 
-<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
-
-
-
-<!-- mathjax config similar to math.stackexchange -->
-
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-    tex2jax: {
-        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-        processEscapes: true,
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-    }
-});
-
-MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-        all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-});
-</script>
-
-<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-
-
-
-
-<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+    </div>
+</div>
+    <div id="back-to-top" class="animated fadeIn faster">
+        <div class="flow"></div>
+        <span class="percentage animated fadeIn faster">0%</span>
+        <span class="iconfont icon-top02 animated fadeIn faster"></span>
+    </div><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
 <script type="text/x-mathjax-config">
   MathJax.Hub.Config("");
 </script>
@@ -547,10 +261,233 @@ MathJax.Hub.Queue(function() {
 </script>
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->
-
-
-
-
-
 </body>
+<footer>
+    <p class="copyright" id="copyright">
+        &copy; 2020
+        <span class="gradient-text">
+            吴鑫康
+        </span>.
+        Powered by <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a>
+        Theme
+        <span class="gradient-text">
+            <a href="https://github.com/TriDiamond/hexo-theme-obsidian" title="Obsidian" target="_blank" rel="noopener">Obsidian</a>
+        </span>
+        <small><a href="https://github.com/TriDiamond/hexo-theme-obsidian/blob/master/CHANGELOG.md" title="v1.4.3" target="_blank" rel="noopener">v1.4.3</a></small>
+    </p>
+</footer>
+
+<script type="text/javascript" src="https://cdn.bootcss.com/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<script>
+  MathJax.Hub.Config({
+    "HTML-CSS": {
+      preferredFont: "TeX",
+      availableFonts: ["STIX", "TeX"],
+      linebreaks: {
+        automatic: true
+      },
+      EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+      inlineMath: [
+        ["$", "$"],
+        ["\\(", "\\)"]
+      ],
+      processEscapes: true,
+      ignoreClass: "tex2jax_ignore|dno",
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      noUndefined: {
+        attributes: {
+          mathcolor: "red",
+          mathbackground: "#FFEEEE",
+          mathsize: "90%"
+        }
+      },
+      Macros: {
+        href: "{}"
+      }
+    },
+    messageStyle: "none"
+  });
+</script>
+<script>
+  function initialMathJax() {
+    MathJax.Hub.Queue(function () {
+      var all = MathJax.Hub.getAllJax(),
+        i;
+      // console.log(all);
+      for (i = 0; i < all.length; i += 1) {
+        console.log(all[i].SourceElement().parentNode)
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  }
+
+  function reprocessMathJax() {
+    if (typeof MathJax !== 'undefined') {
+      MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+    }
+  }
+</script>
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/obsidian.js"></script>
+<script src="/js/jquery.truncate.js"></script>
+<script src="/js/search.js"></script>
+<script src="//cdn.bootcss.com/typed.js/2.0.10/typed.min.js"></script>
+<script src="//cdn.bootcss.com/blueimp-md5/2.12.0/js/md5.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+
+<script src="https://cdn.bootcss.com/codemirror/5.48.4/codemirror.min.js"></script>
+
+    <script src="//cdn.bootcss.com/codemirror/5.48.4/mode/javascript/javascript.min.js"></script>
+
+    <script src="//cdn.bootcss.com/codemirror/5.48.4/mode/css/css.min.js"></script>
+
+    <script src="//cdn.bootcss.com/codemirror/5.48.4/mode/xml/xml.min.js"></script>
+
+    <script src="//cdn.bootcss.com/codemirror/5.48.4/mode/htmlmixed/htmlmixed.min.js"></script>
+
+    <script src="//cdn.bootcss.com/codemirror/5.48.4/mode/clike/clike.min.js"></script>
+
+    <script src="//cdn.bootcss.com/codemirror/5.48.4/mode/php/php.min.js"></script>
+
+    <script src="//cdn.bootcss.com/codemirror/5.48.4/mode/shell/shell.min.js"></script>
+
+    <script src="//cdn.bootcss.com/codemirror/5.48.4/mode/python/python.min.js"></script>
+
+
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/photoswipe/4.1.3/photoswipe.min.css">
+<link rel="stylesheet" href="//cdn.bootcss.com/photoswipe/4.1.3/default-skin/default-skin.min.css">
+<script src="//cdn.bootcss.com/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="//cdn.bootcss.com/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="//www.googletagmanager.com/gtag/js?id=UA-157529205-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-157529205-1');
+    </script>
+
+
+
+
+
+<script>
+    function initialTyped () {
+        var typedTextEl = $('.typed-text');
+        if (typedTextEl && typedTextEl.length > 0) {
+            var typed = new Typed('.typed-text', {
+                strings: ["Talk is cheap. Show me the code ———— Linus Torvalds", "废话少说，放码过来"],
+                typeSpeed: 90,
+                loop: true,
+                loopCount: Infinity,
+                backSpeed: 20,
+            });
+        }
+    }
+
+    if ($('.article-header') && $('.article-header').length) {
+        $(document).ready(function () {
+            initialTyped();
+        });
+    }
+</script>
+
+
+    <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+    <script>
+
+        var valine = new Valine();
+
+        function initValine(path) {
+            if (!path) path = window.location.pathname;
+            let language = 'zh-CN';
+            if (!language) {
+                language = 'en';
+            } else {
+                language = language.toLowerCase();
+            }
+            valine.init({
+                el: '#vcomments',
+                appId: 'gJTHi1MULDjBNIRKPWN2bTWd-gzGzoHsz',
+                appKey: 'dflbQMdoD4HLI3twjbzShRMK',
+                notify: 'true',
+                verify: 'false',
+                avatar: 'mp',
+                placeholder: 'Leave your throughs behind~',
+                visitor: 'true',
+                path: path,
+                lang: language
+            });
+        }
+
+        $(document).ready(function () {
+            initValine();
+        });
+    </script>
+
+
+
 </html>

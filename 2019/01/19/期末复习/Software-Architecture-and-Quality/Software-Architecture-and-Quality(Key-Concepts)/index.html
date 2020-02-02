@@ -1,200 +1,130 @@
+
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN" class="loading">
 <head><meta name="generator" content="Hexo 3.8.0">
-    
-
-    
-
-    
-
-
-
-    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
-    
-    
-    <meta name="sogou_site_verification" content="true">
-    
-    
-    <link rel="canonical" href="https://zjxjwxk.com/2019/01/19/期末复习/Software-Architecture-and-Quality/Software-Architecture-and-Quality(Key-Concepts)/">
-    
-    
-    <title>Software-Architecture-and-Quality(Key-Concepts) | Zjxjwxk&#39;s Blog | A Java Developer</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    
-    <meta name="theme-color" content="#3F51B5">
-    
-    
-    <meta name="keywords" content="BTH,期末复习">
-    <meta name="description" content="CH 1. What is software architecture?What is software architectureThe software architecture of a system is the set of structures needed to reason about the system, which comprise software elements, rel">
-<meta name="keywords" content="BTH,期末复习">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Software-Architecture-and-Quality(Key-Concepts)">
-<meta property="og:url" content="https://zjxjwxk.com/2019/01/19/期末复习/Software-Architecture-and-Quality/Software-Architecture-and-Quality(Key-Concepts)/index.html">
-<meta property="og:site_name" content="Zjxjwxk&#39;s Blog">
-<meta property="og:description" content="CH 1. What is software architecture?What is software architectureThe software architecture of a system is the set of structures needed to reason about the system, which comprise software elements, rel">
-<meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://zjxjwxk.com/2019/01/19/期末复习/Software-Architecture-and-Quality/Software-Architecture-and-Quality(Key-Concepts)/1547890359658.png">
-<meta property="og:image" content="https://zjxjwxk.com/2019/01/19/期末复习/Software-Architecture-and-Quality/Software-Architecture-and-Quality(Key-Concepts)/1547958287611.png">
-<meta property="og:image" content="https://zjxjwxk.com/2019/01/19/期末复习/Software-Architecture-and-Quality/Software-Architecture-and-Quality(Key-Concepts)/1547915772754.png">
-<meta property="og:image" content="https://zjxjwxk.com/2019/01/19/期末复习/Software-Architecture-and-Quality/Software-Architecture-and-Quality(Key-Concepts)/1547915852136.png">
-<meta property="og:image" content="https://zjxjwxk.com/2019/01/19/期末复习/Software-Architecture-and-Quality/Software-Architecture-and-Quality(Key-Concepts)/1547962999199.png">
-<meta property="og:updated_time" content="2019-06-21T07:13:55.000Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Software-Architecture-and-Quality(Key-Concepts)">
-<meta name="twitter:description" content="CH 1. What is software architecture?What is software architectureThe software architecture of a system is the set of structures needed to reason about the system, which comprise software elements, rel">
-<meta name="twitter:image" content="https://zjxjwxk.com/2019/01/19/期末复习/Software-Architecture-and-Quality/Software-Architecture-and-Quality(Key-Concepts)/1547890359658.png">
-    
-        <link rel="alternate" type="application/atom+xml" title="Zjxjwxk&#39;s Blog" href="/atom.xml">
-    
-    <link rel="shortcut icon" href="/favicon.ico">
-    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
-    <script>window.lazyScripts=[]</script>
-
-    <!-- custom head --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
-    
-
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Software-Architecture-and-Quality(Key-Concepts) - Zjxjwxk&#39;s Blog</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="吴鑫康 zjxjwxk Wxk Java,"> 
+    <meta name="description" content="CH 1. What is software architecture?What is software architectureThe software architecture of a sys,"> 
+    <meta name="author" content="吴鑫康"> 
+    <link rel="alternative" href="atom.xml" title="Zjxjwxk&#39;s Blog" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    <link href="https://fonts.loli.net/css?family=Roboto+Mono|Rubik&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_1429596_nzgqgvnmkjb.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.7.2/animate.min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/codemirror/5.48.4/codemirror.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/codemirror/5.48.4/theme/dracula.css">
+    <link rel="stylesheet" href="/css/obsidian.css">
+    <link rel="stylesheet" href="/css/ball-atom.min.css"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
+</html>
 
-<body>
-    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="loading" class="active"></div>
-
-    <aside id="menu" class="hide">
-  <div class="inner flex-row-vertical">
-    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
-        <i class="icon icon-lg icon-close"></i>
-    </a>
-    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
-      <div class="brand">
-        <a href="/" class="avatar waves-effect waves-circle waves-light">
-          <img src="/img/avatar.jpg">
-        </a>
-        <hgroup class="introduce">
-          <h5 class="nickname">吴鑫康</h5>
-          <a href="mailto:zjxjwxk@gmail.com" title="zjxjwxk@gmail.com" class="mail">zjxjwxk@gmail.com</a>
-        </hgroup>
-      </div>
-    </div>
-    <div class="scroll-wrap flex-col">
-      <ul class="nav">
-        
-            <li class="waves-block waves-effect">
-              <a href="/">
-                <i class="icon icon-lg icon-home"></i>
-                主页
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/archives">
-                <i class="icon icon-lg icon-archives"></i>
-                归档
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/tags">
-                <i class="icon icon-lg icon-tags"></i>
-                标签
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/categories">
-                <i class="icon icon-lg icon-th-list"></i>
-                分类
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="https://github.com/zjxjwxk" target="_blank">
-                <i class="icon icon-lg icon-github"></i>
-                GitHub
-              </a>
-            </li>
-        
-      </ul>
-    </div>
-  </div>
-</aside>
-
-    <main id="main">
-        <header class="top-header" id="header">
-    <div class="flex-row">
-        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
-          <i class="icon icon-lg icon-navicon"></i>
-        </a>
-        <div class="flex-col header-title ellipsis">Software-Architecture-and-Quality(Key-Concepts)</div>
-        
-        <div class="search-wrap" id="search-wrap">
-            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
-                <i class="icon icon-lg icon-chevron-left"></i>
-            </a>
-            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
-            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
-                <i class="icon icon-lg icon-search"></i>
-            </a>
+<body class="loading">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="loader">
+        <div class="la-ball-atom la-2x">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
         </div>
-        
-        
-        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
-            <i class="icon icon-lg icon-share-alt"></i>
-        </a>
-        
     </div>
-</header>
-<header class="content-header post-header">
-
-    <div class="container fade-scale">
-        <h1 class="title">Software-Architecture-and-Quality(Key-Concepts)</h1>
-        <h5 class="subtitle">
-            
-                <time datetime="2019-01-19T14:01:00.000Z" itemprop="datePublished" class="page-time">
-  2019-01-19
-</time>
-
-
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/期末复习/">期末复习</a></li></ul>
-
-            
-        </h5>
-    </div>
-
-    
-
-
-</header>
-
-
-<div class="container body-wrap">
-    
-    <aside class="post-widget">
-        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
-            <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#CH-1-What-is-software-architecture"><span class="post-toc-number">1.</span> <span class="post-toc-text">CH 1. What is software architecture?</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#What-is-software-architecture"><span class="post-toc-number">1.0.1.</span> <span class="post-toc-text">What is software architecture</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Categories-of-structures"><span class="post-toc-number">1.0.2.</span> <span class="post-toc-text">Categories of structures</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Three-Kinds-of-Structures"><span class="post-toc-number">1.0.3.</span> <span class="post-toc-text">Three Kinds of Structures</span></a></li></ol></li></ol><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#CH-4-Understanding-Quality-Attributes"><span class="post-toc-number">2.</span> <span class="post-toc-text">CH 4. Understanding Quality Attributes</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#System-requirements-can-be-categorized-as"><span class="post-toc-number">2.0.1.</span> <span class="post-toc-text">System requirements can be categorized as</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Quality-Attribute-Requirements-six-parts"><span class="post-toc-number">2.0.2.</span> <span class="post-toc-text">Quality Attribute Requirements six parts</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Guiding-Quality-Design-Decisions"><span class="post-toc-number">2.0.3.</span> <span class="post-toc-text">Guiding Quality Design Decisions</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Quality-attributes"><span class="post-toc-number">2.0.4.</span> <span class="post-toc-text">Quality attributes</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Development-time-qualities"><span class="post-toc-number">2.0.5.</span> <span class="post-toc-text">Development time qualities</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#CH5-Availability"><span class="post-toc-number">3.</span> <span class="post-toc-text">CH5. Availability</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Terms"><span class="post-toc-number">3.0.1.</span> <span class="post-toc-text">Terms</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Tactic"><span class="post-toc-number">3.0.2.</span> <span class="post-toc-text">Tactic</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Fault-tree"><span class="post-toc-number">3.0.3.</span> <span class="post-toc-text">Fault tree</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#CH7-Modifiability"><span class="post-toc-number">4.</span> <span class="post-toc-text">CH7. Modifiability</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#What-is-Modifiability？"><span class="post-toc-number">4.0.1.</span> <span class="post-toc-text">What is Modifiability？</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#CH8-Performance"><span class="post-toc-number">5.</span> <span class="post-toc-text">CH8. Performance</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Performance-General-Scenario"><span class="post-toc-number">5.0.1.</span> <span class="post-toc-text">Performance General Scenario</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Tactics-for-Performance"><span class="post-toc-number">5.0.2.</span> <span class="post-toc-text">Tactics for Performance</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#CH13-Patterns-and-Tactics"><span class="post-toc-number">6.</span> <span class="post-toc-text">CH13. Patterns and Tactics</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#What-is-a-Pattern"><span class="post-toc-number">6.0.1.</span> <span class="post-toc-text">What is a Pattern?</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Architectural-Pattern"><span class="post-toc-number">6.0.2.</span> <span class="post-toc-text">Architectural Pattern</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#CH18-Architecture-Document"><span class="post-toc-number">7.</span> <span class="post-toc-text">CH18. Architecture Document</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#View-consistency"><span class="post-toc-number">7.0.1.</span> <span class="post-toc-text">View consistency</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-1-view-model"><span class="post-toc-number">7.0.2.</span> <span class="post-toc-text">4+1 view model</span></a></li></ol></li>
-        </nav>
-    </aside>
-
-
-<article id="post-期末复习/Software-Architecture-and-Quality/Software-Architecture-and-Quality(Key-Concepts)" class="post-article article-type-post fade" itemprop="blogPost">
-
-    <div class="post-card">
-        <h1 class="post-card-title">Software-Architecture-and-Quality(Key-Concepts)</h1>
-        <div class="post-meta">
-            <time class="post-time" title="2019-01-19 22:01:00" datetime="2019-01-19T14:01:00.000Z" itemprop="datePublished">2019-01-19</time>
-
-            
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/期末复习/">期末复习</a></li></ul>
-
-
-
-            
-<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
-    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
-</span>
-
-
+    <span id="config-title" style="display:none">Zjxjwxk&#39;s Blog</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div class="scrollbar gradient-bg-rev"></div>
+<div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <div class="navigation animated fadeIn fast delay-1s">
+        <img id="home-icon" class="icon-home" src="/img/favicon.png" alt="" data-url="https://zjxjwxk.com">
+        <div id="play-icon" title="Play/Pause" class="iconfont icon-play"></div>
+        <h3 class="subtitle">Software-Architecture-and-Quality(Key-Concepts)</h3>
+        <div class="social">
+            <!--        <div class="like-icon">-->
+            <!--            <a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
+            <!--        </div>-->
+            <div>
+                <div class="share">
+                    
+                        <a href="javascript:;" class="iconfont icon-share1"></a>
+                        <div class="share-component-cc" data-disabled="facebook,douban,linkedin,diandian,tencent,google"></div>
+                    
+                </div>
+            </div>
         </div>
-        <div class="post-content" id="post-content" itemprop="postContent">
+    </div>
+</div>
+
+    <div class="section">
+        <div class="article-header-wrapper">
+    <div class="article-header">
+        <div class="article-cover animated fadeIn" style="
+            animation-delay: 600ms;
+            animation-duration: 1.2s;
+            background-image: 
+                radial-gradient(ellipse closest-side, rgba(0, 0, 0, 0.65), #100e17),
+                url(/img/cover.jpg);">
+        </div>
+        <div class="else">
+            <p class="animated fadeInDown">
+                
+                <a href="/categories/期末复习"><b>「
+                    </b>期末复习<b> 」</b></a>
+                
+                一月 19, 2019
+            </p>
+            <h3 class="post-title animated fadeInDown"><a href="/2019/01/19/期末复习/Software-Architecture-and-Quality/Software-Architecture-and-Quality(Key-Concepts)/" title="Software-Architecture-and-Quality(Key-Concepts)">Software-Architecture-and-Quality(Key-Concepts)</a>
+            </h3>
+            
+            <p class="post-count animated fadeInDown">
+                
+                <span>
+                    <b class="iconfont icon-text2"></b> <i>文章字数</i>
+                    25k
+                </span>
+                
+                
+                <span>
+                    <b class="iconfont icon-timer__s"></b> <i>阅读约需</i>
+                    23 mins.
+                </span>
+                
+                
+                <span id="/2019/01/19/期末复习/Software-Architecture-and-Quality/Software-Architecture-and-Quality(Key-Concepts)/" class="leancloud_visitors" data-flag-title="Software-Architecture-and-Quality(Key-Concepts)">
+                    <b class="iconfont icon-read"></b> <i>阅读次数</i>
+                    <span class="leancloud-visitors-count">1000000</span>
+                </span>
+                
+                
+            </p>
+            
+            
+            <ul class="animated fadeInDown post-tags-list"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/BTH/">BTH</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/期末复习/">期末复习</a></li></ul>
+            
+        </div>
+    </div>
+</div>
+
+<div class="screen-gradient-after">
+    <div class="screen-gradient-content">
+        <div class="screen-gradient-content-inside">
+            <div class="bold-underline-links screen-gradient-sponsor">
+                <p>
+                    <span class="animated fadeIn delay-1s"></span>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="article">
+    <div class="main">
+        <div class="content markdown animated fadeIn">
             <h1 id="CH-1-What-is-software-architecture"><a href="#CH-1-What-is-software-architecture" class="headerlink" title="CH 1. What is software architecture?"></a>CH 1. What is software architecture?</h1><h3 id="What-is-software-architecture"><a href="#What-is-software-architecture" class="headerlink" title="What is software architecture"></a>What is software architecture</h3><p>The software architecture of a system is the set of structures needed to reason about the system, which comprise software elements, relations among them, and properties of both.</p>
 <ol>
 <li>To find out what users of the system think about the system. ×</li>
@@ -244,13 +174,7 @@
 <li><strong>Response</strong>. The response is the activity undertaken as the result of the arrival of the stimulus.</li>
 <li><strong>Response measure</strong>. When the response occurs, it should be measurable in some fashion so that the requirement can be tested.</li>
 </ol>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="/2019/01/19/期末复习/Software-Architecture-and-Quality/Software-Architecture-and-Quality(Key-Concepts)/1547890359658.png" alt="" title="">
-                </div>
-                <div class="image-caption"></div>
-            </figure>
+<p><img src="/2019/01/19/期末复习/Software-Architecture-and-Quality/Software-Architecture-and-Quality(Key-Concepts)/Software-Architecture-and-Quality(Key-Concepts" alt="">/1547890359658.png)</p>
 <h3 id="Guiding-Quality-Design-Decisions"><a href="#Guiding-Quality-Design-Decisions" class="headerlink" title="Guiding Quality Design Decisions"></a>Guiding Quality Design Decisions</h3><ul>
 <li>Architecture design is a systematic approach to making design decisions.</li>
 <li><p>We categorize the design decisions that an architect needs to make as follows:</p>
@@ -377,13 +301,7 @@
 </ul>
 </li>
 </ul>
-<h3 id="Tactic"><a href="#Tactic" class="headerlink" title="Tactic"></a>Tactic</h3><figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="/2019/01/19/期末复习/Software-Architecture-and-Quality/Software-Architecture-and-Quality(Key-Concepts)/1547958287611.png" alt="" title="">
-                </div>
-                <div class="image-caption"></div>
-            </figure>
+<h3 id="Tactic"><a href="#Tactic" class="headerlink" title="Tactic"></a>Tactic</h3><p><img src="/2019/01/19/期末复习/Software-Architecture-and-Quality/Software-Architecture-and-Quality(Key-Concepts)/Software-Architecture-and-Quality(Key-Concepts" alt="">/1547958287611.png)</p>
 <ul>
 <li>Detect Faults<ul>
 <li><strong>Heart-beat</strong><ul>
@@ -421,20 +339,8 @@
 </li>
 </ul>
 <h3 id="Fault-tree"><a href="#Fault-tree" class="headerlink" title="Fault tree"></a>Fault tree</h3><p>Fault tree analysis is an analytical technique that specifies a state of the system that negatively impacts safety or reliability, and then analyzes the system’s context and operation to find all the ways that the undesired state could occur.</p>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="/2019/01/19/期末复习/Software-Architecture-and-Quality/Software-Architecture-and-Quality(Key-Concepts)/1547915772754.png" alt="A simple fault tree. D fails if A fails and either B or C fails." title="">
-                </div>
-                <div class="image-caption">A simple fault tree. D fails if A fails and either B or C fails.</div>
-            </figure>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="/2019/01/19/期末复习/Software-Architecture-and-Quality/Software-Architecture-and-Quality(Key-Concepts)/1547915852136.png" alt="Fault tree gate symbols" title="">
-                </div>
-                <div class="image-caption">Fault tree gate symbols</div>
-            </figure>
+<p><img src="/2019/01/19/期末复习/Software-Architecture-and-Quality/Software-Architecture-and-Quality(Key-Concepts)/Software-Architecture-and-Quality(Key-Concepts" alt="A simple fault tree. D fails if A fails and either B or C fails.">/1547915772754.png)</p>
+<p><img src="/2019/01/19/期末复习/Software-Architecture-and-Quality/Software-Architecture-and-Quality(Key-Concepts)/Software-Architecture-and-Quality(Key-Concepts" alt="Fault tree gate symbols">/1547915852136.png)</p>
 <h1 id="CH7-Modifiability"><a href="#CH7-Modifiability" class="headerlink" title="CH7. Modifiability"></a>CH7. Modifiability</h1><h3 id="What-is-Modifiability？"><a href="#What-is-Modifiability？" class="headerlink" title="What is Modifiability？"></a>What is Modifiability？</h3><ul>
 <li><p>Modifiability is about change and our interest in it is in the cost and risk of making changes.</p>
 </li>
@@ -499,13 +405,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="Tactics-for-Performance"><a href="#Tactics-for-Performance" class="headerlink" title="Tactics for Performance"></a>Tactics for Performance</h3><figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="/2019/01/19/期末复习/Software-Architecture-and-Quality/Software-Architecture-and-Quality(Key-Concepts)/1547962999199.png" alt="Performance tactics" title="">
-                </div>
-                <div class="image-caption">Performance tactics</div>
-            </figure>
+<h3 id="Tactics-for-Performance"><a href="#Tactics-for-Performance" class="headerlink" title="Tactics for Performance"></a>Tactics for Performance</h3><p><img src="/2019/01/19/期末复习/Software-Architecture-and-Quality/Software-Architecture-and-Quality(Key-Concepts)/Software-Architecture-and-Quality(Key-Concepts" alt="Performance tactics">/1547962999199.png)</p>
 <ul>
 <li><strong>Control Resource Demand</strong><ul>
 <li><strong>Manage sampling rate</strong>. If it is possible to reduce the sampling frequency at which a stream of environmental data is captured, then demand can be reduced, typically with some attendant loss of fidelity.</li>
@@ -552,326 +452,64 @@
 </ul>
 <h3 id="4-1-view-model"><a href="#4-1-view-model" class="headerlink" title="4+1 view model"></a>4+1 view model</h3><p>Logical, Process, Development, Physical + Use Cases</p>
 
-        </div>
-
-        <blockquote class="post-copyright">
-    
-    <div class="content">
-        
-<span class="post-time">
-    最后更新时间：<time datetime="2019-06-21T07:13:55.000Z" itemprop="dateUpdated">2019-06-21 15:13:55</time>
-</span><br>
-
-
-        
-        原始链接：<a href="/2019/01/19/期末复习/Software-Architecture-and-Quality/Software-Architecture-and-Quality(Key-Concepts)/" target="_blank" rel="external">https://zjxjwxk.com/2019/01/19/期末复习/Software-Architecture-and-Quality/Software-Architecture-and-Quality(Key-Concepts)/</a>
-        
-    </div>
-    
-    <footer>
-        <a href="https://zjxjwxk.com">
-            <img src="/img/avatar.jpg" alt="吴鑫康">
-            吴鑫康
-        </a>
-    </footer>
-</blockquote>
-
-        
-<div class="page-reward">
-    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
-</div>
-
-
-
-        <div class="post-footer">
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
             
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/BTH/">BTH</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/期末复习/">期末复习</a></li></ul>
-
-
-            
-<div class="page-share-wrap">
-    
-
-<div class="page-share" id="pageShare">
-    <ul class="reset share-icons">
-      <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://zjxjwxk.com/2019/01/19/期末复习/Software-Architecture-and-Quality/Software-Architecture-and-Quality(Key-Concepts)/&title=《Software-Architecture-and-Quality(Key-Concepts)》 — Zjxjwxk's Blog&pic=https://zjxjwxk.com/img/avatar.jpg" data-title="微博">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      <li>
-        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://zjxjwxk.com/2019/01/19/期末复习/Software-Architecture-and-Quality/Software-Architecture-and-Quality(Key-Concepts)/&title=《Software-Architecture-and-Quality(Key-Concepts)》 — Zjxjwxk's Blog&source=" data-title=" QQ">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://zjxjwxk.com/2019/01/19/期末复习/Software-Architecture-and-Quality/Software-Architecture-and-Quality(Key-Concepts)/" data-title=" Facebook">
-          <i class="icon icon-facebook"></i>
-        </a>
-      </li>
-      <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Software-Architecture-and-Quality(Key-Concepts)》 — Zjxjwxk's Blog&url=https://zjxjwxk.com/2019/01/19/期末复习/Software-Architecture-and-Quality/Software-Architecture-and-Quality(Key-Concepts)/&via=https://zjxjwxk.com" data-title=" Twitter">
-          <i class="icon icon-twitter"></i>
-        </a>
-      </li>
-      <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://zjxjwxk.com/2019/01/19/期末复习/Software-Architecture-and-Quality/Software-Architecture-and-Quality(Key-Concepts)/" data-title=" Google+">
-          <i class="icon icon-google-plus"></i>
-        </a>
-      </li>
-    </ul>
- </div>
-
-
-
-    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
-        <i class="icon icon-share-alt icon-lg"></i>
-    </a>
-</div>
-
-
-
-        </div>
-    </div>
-
-    
-<nav class="post-nav flex-row flex-justify-between">
-  
-    <div class="waves-block waves-effect prev">
-      <a href="/2019/01/19/期末复习/The-design-and-analysis-of-algorithms/The-design-and-analysis-of-algorithms(Exam)/" id="post-prev" class="post-nav-link">
-        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
-        <h4 class="title">The-design-and-analysis-of-algorithms(Exam)</h4>
-      </a>
-    </div>
-  
-
-  
-    <div class="waves-block waves-effect next">
-      <a href="/2019/01/19/期末复习/Team-Collaboration-and-Career-Development/Team-Collaboration-and-Career-Development(Key-Concepts)/" id="post-next" class="post-nav-link">
-        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">Team Collaboration and Career Development (Key Concepts)</h4>
-      </a>
-    </div>
-  
-</nav>
-
-
-
-    
-
-
-
-
-
-
-
-
-
-
-
-    <!-- Valine Comments -->
-    <div class="comments vcomment" id="comments"></div>
-    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
-    <!-- Valine Comments script -->
-    <script>
-        var GUEST_INFO = ['nick','mail','link'];
-        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
-          return GUEST_INFO.indexOf(item) > -1
-        });
-        new Valine({
-            el: '#comments',
-            notify: 'true' == 'true',
-            verify: 'false' == 'true',
-            appId: "gJTHi1MULDjBNIRKPWN2bTWd-gzGzoHsz",
-            appKey: "dflbQMdoD4HLI3twjbzShRMK",
-            avatar: "mm",
-            placeholder: "写下你的评论吧！",
-            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
-            pageSize: "10"
-        })
-    </script>
-    <!-- Valine Comments end -->
-
-
-
-
-
-
-
-</article>
-
-<div id="reward" class="page-modal reward-lay">
-    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <h3 class="reward-title">
-        <i class="icon icon-quote-left"></i>
-        谢谢大爷~
-        <i class="icon icon-quote-right"></i>
-    </h3>
-    <div class="reward-content">
-        
-        <div class="reward-code">
-            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
-        </div>
-        
-        <label class="reward-toggle">
-            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
-            <div class="reward-toggle-ctrol">
-                <span class="reward-toggle-item wechat">微信</span>
-                <span class="reward-toggle-label"></span>
-                <span class="reward-toggle-item alipay">支付宝</span>
-            </div>
-        </label>
-        
-    </div>
-</div>
-
-
-
-</div>
-
-        <footer class="footer">
-    <div class="top">
-        
-<p>
-    <span id="busuanzi_container_site_uv" style="display:none">
-        站点总访客数：<span id="busuanzi_value_site_uv"></span>
-    </span>
-    <span id="busuanzi_container_site_pv" style="display:none">
-        站点总访问量：<span id="busuanzi_value_site_pv"></span>
-    </span>
-</p>
-
-
-        <p>
-            
-                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
-            
-            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
-        </p>
-    </div>
-    <div class="bottom">
-        <p><span>吴鑫康 &copy; 2019</span>
-            <span>
+            <ul id="audio-list" style="display:none">
                 
-                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
-            </span>
-        </p>
-    </div>
-</footer>
-
-    </main>
-    <div class="mask" id="mask"></div>
-<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
-
-
-
-<div class="global-share" id="globalShare">
-    <ul class="reset share-icons">
-      <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://zjxjwxk.com/2019/01/19/期末复习/Software-Architecture-and-Quality/Software-Architecture-and-Quality(Key-Concepts)/&title=《Software-Architecture-and-Quality(Key-Concepts)》 — Zjxjwxk's Blog&pic=https://zjxjwxk.com/img/avatar.jpg" data-title="微博">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      <li>
-        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://zjxjwxk.com/2019/01/19/期末复习/Software-Architecture-and-Quality/Software-Architecture-and-Quality(Key-Concepts)/&title=《Software-Architecture-and-Quality(Key-Concepts)》 — Zjxjwxk's Blog&source=" data-title=" QQ">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://zjxjwxk.com/2019/01/19/期末复习/Software-Architecture-and-Quality/Software-Architecture-and-Quality(Key-Concepts)/" data-title=" Facebook">
-          <i class="icon icon-facebook"></i>
-        </a>
-      </li>
-      <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Software-Architecture-and-Quality(Key-Concepts)》 — Zjxjwxk's Blog&url=https://zjxjwxk.com/2019/01/19/期末复习/Software-Architecture-and-Quality/Software-Architecture-and-Quality(Key-Concepts)/&via=https://zjxjwxk.com" data-title=" Twitter">
-          <i class="icon icon-twitter"></i>
-        </a>
-      </li>
-      <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://zjxjwxk.com/2019/01/19/期末复习/Software-Architecture-and-Quality/Software-Architecture-and-Quality(Key-Concepts)/" data-title=" Google+">
-          <i class="icon icon-google-plus"></i>
-        </a>
-      </li>
-    </ul>
- </div>
-
-
-<div class="page-modal wx-share" id="wxShare">
-    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASYAAAEmCAAAAADqr2IGAAAEnElEQVR42u3ayYrkQAwFwPr/n+6BuTa2nyQXWO6o0zB4yQw3pLbPJ/79/P/9/p/z3+8rz5989JZkPUdPO1rP5xs/TJgwYcL0SKZ8q/m9+TXnNOfER2/JP3myd0yYMGHC9A6m/KiebzhhPSdInpyvKgo4MGHChAnTH2BKkttewlmlyUOB8/ACEyZMmDBhytPRPD2el5irTL2UHhMmTJgwvYmpd+T3yrJJITjhqKa7vVAGEyZMmDBtZ6oeyW/69xfnmzBhwoQJ0wOYflq/ajm41+ysJr1JmNLbNSZMmDBh2suUJ6t5aTU/hifxS56m5in6xXowYcKECdNCpurAzfni8iuTgu+kwTlpiF6EApgwYcKEaSFT3jhMQoEkYc5HZyYpdL7ai11jwoQJE6ZXMCVbmhRJ5wM9eRI+2VeUPWPChAkTpiVMyZE8uSZvhVZbmNX198IaTJgwYcL0DqakRDsZqekd8JMPmX+SKjQmTJgwYdrL1LyheGLmS89Dh+oobfUuTJgwYcK0lylvPeZpbbXAWi0K99qT1bQ8mm/ChAkTJkyrmKqbnxzeeahRHfqZfJjD52PChAkTphcxJcXTXjl4UpDNA5cexEXCjwkTJkyYljPlAzQ9surB/40EuFpQ/lS3jQkTJkyYHsyUFEDzY7u33OqoUB4uVFPlw5kmTJgwYcK0kClv71UbhNXCa/4/vQ/Z+7O4+MvChAkTJkyPZ/rGkX8Xyl2JdK8EcFgLx4QJEyZMa5mqL7gr+ZyUoXu12XJWiwkTJkyY1jLly0oO4DwUmIQdyfGfF3Z7q8WECRMmTFuYqg3I6rarS8+HePJEeoKICRMmTJjewdQr71ZbmL1DOmlSzluhF2kzJkyYMGFayzT/5VualGvzzU8anPkwECZMmDBh2sg0KbNWX9YLL/KwoJpIl78SJkyYMGFawlQdCe0tt3dvvvlq4zPZdVQLx4QJEyZMj2fqJbcJZe+au9LjXoDSnHXChAkTJkwPZsqX+L2hmd5IULVdmjdfLwZ3MGHChAnTcqZ5MjyJSqqfLd98r6h9GBBgwoQJE6YXMeVpcG+s567gIHljHjRcpL6YMGHChGkVU284JkmS750wyldYJbt4IyZMmDBheh1TNSntDffMB256qXXesv0k3xkTJkyYMC1nyhuTk+fkdzW32krFMWHChAnTdqbq8VltGU6Gb3ofYFLYTcrWmDBhwoRpI1PzaBw3FPM39oZo831F68eECRMmTAuZqsdqspTJc/J7q0lyb4z104s+MGHChAnTI5mqW51cOUl0k+R5/pEwYcKECdM7mKpAveJvPlgzGevJn1lNuTFhwoQJ016meSJaTY97Lck8lZ0HE5gwYcKE6U1MvcPy3gS1N6BzF8ekIYoJEyZMmLYw9Q7yartxHhBMPtikhI0JEyZMmN7B1Esge5tvRiXFEnAvAroICDBhwoQJ0x9g6qFUB2gmxda8EVsILDBhwoQJ0x9g6iXD1YGefEjoriZrlDxjwoQJE6blTEmRNz+qq/dWE+Yk7Ki+q5wTY8KECROmJUyTwZ1eGFFtiPYQJ2lwEw4TJkyYMD2L6R/oqk1uZTHiVQAAAABJRU5ErkJggg==" alt="微信分享二维码">
-</div>
-
-
-
-
-    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
-<script>
-var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
-
-
-</script>
-
-<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
-
-
-<div class="search-panel" id="search-panel">
-    <ul class="search-result" id="search-result"></ul>
-</div>
-<template id="search-tpl">
-<li class="item">
-    <a href="{path}" class="waves-block waves-effect">
-        <div class="title ellipsis" title="{title}">{title}</div>
-        <div class="flex-row flex-middle">
-            <div class="tags ellipsis">
-                {tags}
-            </div>
-            <time class="flex-col time">{date}</time>
+                
+                <li title="0" data-url="/statics/Silent express.mp3"></li>
+                
+                    
+            </ul>
+            
+            
+            
+            <div id="vcomments"></div>
+            
         </div>
-    </a>
-</li>
-</template>
+        <div class="sidebar">
+            <div class="box animated fadeInRight">
+                <div class="subbox">
+                    <img src="https://res.cloudinary.com/tridiamond/image/upload/v1573019751/TriDiamond_logo_ui_xeublz.jpg" height="300" width="300">
+                    <p>吴鑫康</p>
+                    <span>Talk is cheap. Show me the code ———— Linus Torvalds</span>
+                    <dl>
+                        <dd><a href="https://github.com/zjxjwxk" target="_blank"><span class=" iconfont icon-github"></span></a></dd>
+                        <dd><a href="https://twitter.com/zjxjwxk" target="_blank"><span class=" iconfont icon-twitter"></span></a></dd>
+                        <dd><a href="" target="_blank"><span class=" iconfont icon-stack-overflow"></span></a></dd>
+                    </dl>
+                </div>
+                <ul>
+                    <li><a href="/">15 <p>文章</p></a></li>
+                    <li><a href="/categories">5 <p>分类</p></a></li>
+                    <li><a href="/tags">11 <p>标签</p></a></li>
+                </ul>
+            </div>
+            
+            
+            
+            <div class="box sticky animated fadeInRight faster">
+                <div id="toc" class="subbox">
+                    <h4>目录</h4>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#CH-1-What-is-software-architecture"><span class="toc-number">1.</span> <span class="toc-text">CH 1. What is software architecture?</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#What-is-software-architecture"><span class="toc-number">1.0.1.</span> <span class="toc-text">What is software architecture</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Categories-of-structures"><span class="toc-number">1.0.2.</span> <span class="toc-text">Categories of structures</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Three-Kinds-of-Structures"><span class="toc-number">1.0.3.</span> <span class="toc-text">Three Kinds of Structures</span></a></li></ol></li></ol><li class="toc-item toc-level-1"><a class="toc-link" href="#CH-4-Understanding-Quality-Attributes"><span class="toc-number">2.</span> <span class="toc-text">CH 4. Understanding Quality Attributes</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#System-requirements-can-be-categorized-as"><span class="toc-number">2.0.1.</span> <span class="toc-text">System requirements can be categorized as</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Quality-Attribute-Requirements-six-parts"><span class="toc-number">2.0.2.</span> <span class="toc-text">Quality Attribute Requirements six parts</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Guiding-Quality-Design-Decisions"><span class="toc-number">2.0.3.</span> <span class="toc-text">Guiding Quality Design Decisions</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Quality-attributes"><span class="toc-number">2.0.4.</span> <span class="toc-text">Quality attributes</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Development-time-qualities"><span class="toc-number">2.0.5.</span> <span class="toc-text">Development time qualities</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#CH5-Availability"><span class="toc-number">3.</span> <span class="toc-text">CH5. Availability</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Terms"><span class="toc-number">3.0.1.</span> <span class="toc-text">Terms</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Tactic"><span class="toc-number">3.0.2.</span> <span class="toc-text">Tactic</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Fault-tree"><span class="toc-number">3.0.3.</span> <span class="toc-text">Fault tree</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#CH7-Modifiability"><span class="toc-number">4.</span> <span class="toc-text">CH7. Modifiability</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#What-is-Modifiability？"><span class="toc-number">4.0.1.</span> <span class="toc-text">What is Modifiability？</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#CH8-Performance"><span class="toc-number">5.</span> <span class="toc-text">CH8. Performance</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Performance-General-Scenario"><span class="toc-number">5.0.1.</span> <span class="toc-text">Performance General Scenario</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Tactics-for-Performance"><span class="toc-number">5.0.2.</span> <span class="toc-text">Tactics for Performance</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#CH13-Patterns-and-Tactics"><span class="toc-number">6.</span> <span class="toc-text">CH13. Patterns and Tactics</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#What-is-a-Pattern"><span class="toc-number">6.0.1.</span> <span class="toc-text">What is a Pattern?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Architectural-Pattern"><span class="toc-number">6.0.2.</span> <span class="toc-text">Architectural Pattern</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#CH18-Architecture-Document"><span class="toc-number">7.</span> <span class="toc-text">CH18. Architecture Document</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#View-consistency"><span class="toc-number">7.0.1.</span> <span class="toc-text">View consistency</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-view-model"><span class="toc-number">7.0.2.</span> <span class="toc-text">4+1 view model</span></a></li></ol></li>
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+</div>
 
-<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
-
-
-
-<!-- mathjax config similar to math.stackexchange -->
-
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-    tex2jax: {
-        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-        processEscapes: true,
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-    }
-});
-
-MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-        all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-});
-</script>
-
-<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-
-
-
-
-<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+    </div>
+</div>
+    <div id="back-to-top" class="animated fadeIn faster">
+        <div class="flow"></div>
+        <span class="percentage animated fadeIn faster">0%</span>
+        <span class="iconfont icon-top02 animated fadeIn faster"></span>
+    </div><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
 <script type="text/x-mathjax-config">
   MathJax.Hub.Config("");
 </script>
@@ -889,10 +527,233 @@ MathJax.Hub.Queue(function() {
 </script>
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->
-
-
-
-
-
 </body>
+<footer>
+    <p class="copyright" id="copyright">
+        &copy; 2020
+        <span class="gradient-text">
+            吴鑫康
+        </span>.
+        Powered by <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a>
+        Theme
+        <span class="gradient-text">
+            <a href="https://github.com/TriDiamond/hexo-theme-obsidian" title="Obsidian" target="_blank" rel="noopener">Obsidian</a>
+        </span>
+        <small><a href="https://github.com/TriDiamond/hexo-theme-obsidian/blob/master/CHANGELOG.md" title="v1.4.3" target="_blank" rel="noopener">v1.4.3</a></small>
+    </p>
+</footer>
+
+<script type="text/javascript" src="https://cdn.bootcss.com/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<script>
+  MathJax.Hub.Config({
+    "HTML-CSS": {
+      preferredFont: "TeX",
+      availableFonts: ["STIX", "TeX"],
+      linebreaks: {
+        automatic: true
+      },
+      EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+      inlineMath: [
+        ["$", "$"],
+        ["\\(", "\\)"]
+      ],
+      processEscapes: true,
+      ignoreClass: "tex2jax_ignore|dno",
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      noUndefined: {
+        attributes: {
+          mathcolor: "red",
+          mathbackground: "#FFEEEE",
+          mathsize: "90%"
+        }
+      },
+      Macros: {
+        href: "{}"
+      }
+    },
+    messageStyle: "none"
+  });
+</script>
+<script>
+  function initialMathJax() {
+    MathJax.Hub.Queue(function () {
+      var all = MathJax.Hub.getAllJax(),
+        i;
+      // console.log(all);
+      for (i = 0; i < all.length; i += 1) {
+        console.log(all[i].SourceElement().parentNode)
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  }
+
+  function reprocessMathJax() {
+    if (typeof MathJax !== 'undefined') {
+      MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+    }
+  }
+</script>
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/obsidian.js"></script>
+<script src="/js/jquery.truncate.js"></script>
+<script src="/js/search.js"></script>
+<script src="//cdn.bootcss.com/typed.js/2.0.10/typed.min.js"></script>
+<script src="//cdn.bootcss.com/blueimp-md5/2.12.0/js/md5.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+
+<script src="https://cdn.bootcss.com/codemirror/5.48.4/codemirror.min.js"></script>
+
+    <script src="//cdn.bootcss.com/codemirror/5.48.4/mode/javascript/javascript.min.js"></script>
+
+    <script src="//cdn.bootcss.com/codemirror/5.48.4/mode/css/css.min.js"></script>
+
+    <script src="//cdn.bootcss.com/codemirror/5.48.4/mode/xml/xml.min.js"></script>
+
+    <script src="//cdn.bootcss.com/codemirror/5.48.4/mode/htmlmixed/htmlmixed.min.js"></script>
+
+    <script src="//cdn.bootcss.com/codemirror/5.48.4/mode/clike/clike.min.js"></script>
+
+    <script src="//cdn.bootcss.com/codemirror/5.48.4/mode/php/php.min.js"></script>
+
+    <script src="//cdn.bootcss.com/codemirror/5.48.4/mode/shell/shell.min.js"></script>
+
+    <script src="//cdn.bootcss.com/codemirror/5.48.4/mode/python/python.min.js"></script>
+
+
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/photoswipe/4.1.3/photoswipe.min.css">
+<link rel="stylesheet" href="//cdn.bootcss.com/photoswipe/4.1.3/default-skin/default-skin.min.css">
+<script src="//cdn.bootcss.com/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="//cdn.bootcss.com/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="//www.googletagmanager.com/gtag/js?id=UA-157529205-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-157529205-1');
+    </script>
+
+
+
+
+
+<script>
+    function initialTyped () {
+        var typedTextEl = $('.typed-text');
+        if (typedTextEl && typedTextEl.length > 0) {
+            var typed = new Typed('.typed-text', {
+                strings: ["Talk is cheap. Show me the code ———— Linus Torvalds", "废话少说，放码过来"],
+                typeSpeed: 90,
+                loop: true,
+                loopCount: Infinity,
+                backSpeed: 20,
+            });
+        }
+    }
+
+    if ($('.article-header') && $('.article-header').length) {
+        $(document).ready(function () {
+            initialTyped();
+        });
+    }
+</script>
+
+
+    <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+    <script>
+
+        var valine = new Valine();
+
+        function initValine(path) {
+            if (!path) path = window.location.pathname;
+            let language = 'zh-CN';
+            if (!language) {
+                language = 'en';
+            } else {
+                language = language.toLowerCase();
+            }
+            valine.init({
+                el: '#vcomments',
+                appId: 'gJTHi1MULDjBNIRKPWN2bTWd-gzGzoHsz',
+                appKey: 'dflbQMdoD4HLI3twjbzShRMK',
+                notify: 'true',
+                verify: 'false',
+                avatar: 'mp',
+                placeholder: 'Leave your throughs behind~',
+                visitor: 'true',
+                path: path,
+                lang: language
+            });
+        }
+
+        $(document).ready(function () {
+            initValine();
+        });
+    </script>
+
+
+
 </html>

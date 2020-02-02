@@ -1,198 +1,130 @@
+
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN" class="loading">
 <head><meta name="generator" content="Hexo 3.8.0">
-    
-
-    
-
-    
-
-
-
-    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
-    
-    
-    <meta name="sogou_site_verification" content="true">
-    
-    
-    <link rel="canonical" href="https://zjxjwxk.com/2019/01/03/Java/Java核心/Java基础知识/">
-    
-    
-    <title>Java基础知识 | Zjxjwxk&#39;s Blog | A Java Developer</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    
-    <meta name="theme-color" content="#3F51B5">
-    
-    
-    <meta name="keywords" content="Java">
-    <meta name="description" content="1. 面向对象和面向过程的区别面向过程优点： 性能比面向对象高，因为类调用时需要实例化，开销比较大，比较消耗资源;比如单片机、嵌入式开发、Linux/Unix等一般采用面向过程开发，性能是最重要的因素。 缺点： 没有面向对象易维护、易复用、易扩展 面向对象优点： 易维护、易复用、易扩展，由于面向对象有封装、继承、多态性的特性，可以设计出低耦合的系统，使系统更加灵活、更加易于维护 缺点： 性能比面向">
-<meta name="keywords" content="Java">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Java基础知识">
-<meta property="og:url" content="https://zjxjwxk.com/2019/01/03/Java/Java核心/Java基础知识/index.html">
-<meta property="og:site_name" content="Zjxjwxk&#39;s Blog">
-<meta property="og:description" content="1. 面向对象和面向过程的区别面向过程优点： 性能比面向对象高，因为类调用时需要实例化，开销比较大，比较消耗资源;比如单片机、嵌入式开发、Linux/Unix等一般采用面向过程开发，性能是最重要的因素。 缺点： 没有面向对象易维护、易复用、易扩展 面向对象优点： 易维护、易复用、易扩展，由于面向对象有封装、继承、多态性的特性，可以设计出低耦合的系统，使系统更加灵活、更加易于维护 缺点： 性能比面向">
-<meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://zjxjwxk.com/2019/01/03/Java/Java核心/Java基础知识/687474703a2f2f6d792d626c6f672d746f2d7573652e6f73732d636e2d6265696a696e672e616c6979756e63732e636f6d2f31382d392d31352f38363733353531392e6a7067.jpg">
-<meta property="og:image" content="https://zjxjwxk.com/2019/01/03/Java/Java核心/Java基础知识/68747470733a2f2f757365722d676f6c642d63646e2e786974752e696f2f323031382f382f392f313635316631396437633465393361333f773d38373626683d34393226663d706e6726733d313238303932.jpg">
-<meta property="og:image" content="https://zjxjwxk.com/2019/01/03/Java/Java核心/Java基础知识/687474703a2f2f696d61676573323031352e636e626c6f67732e636f6d2f626c6f672f3634313030332f3230313630372f3634313030332d32303136303730363233323034343238302d3335353335343739302e706e67.png">
-<meta property="og:updated_time" content="2019-01-12T16:16:44.000Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Java基础知识">
-<meta name="twitter:description" content="1. 面向对象和面向过程的区别面向过程优点： 性能比面向对象高，因为类调用时需要实例化，开销比较大，比较消耗资源;比如单片机、嵌入式开发、Linux/Unix等一般采用面向过程开发，性能是最重要的因素。 缺点： 没有面向对象易维护、易复用、易扩展 面向对象优点： 易维护、易复用、易扩展，由于面向对象有封装、继承、多态性的特性，可以设计出低耦合的系统，使系统更加灵活、更加易于维护 缺点： 性能比面向">
-<meta name="twitter:image" content="https://zjxjwxk.com/2019/01/03/Java/Java核心/Java基础知识/687474703a2f2f6d792d626c6f672d746f2d7573652e6f73732d636e2d6265696a696e672e616c6979756e63732e636f6d2f31382d392d31352f38363733353531392e6a7067.jpg">
-    
-        <link rel="alternate" type="application/atom+xml" title="Zjxjwxk&#39;s Blog" href="/atom.xml">
-    
-    <link rel="shortcut icon" href="/favicon.ico">
-    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
-    <script>window.lazyScripts=[]</script>
-
-    <!-- custom head --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
-    
-
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Java基础知识 - Zjxjwxk&#39;s Blog</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="吴鑫康 zjxjwxk Wxk Java,"> 
+    <meta name="description" content="1. 面向对象和面向过程的区别面向过程优点： 性能比面向对象高，因为类调用时需要实例化，开销比较大，比较消耗资源;比如单片机、嵌入式开发、Linux/Unix等一般采用面向过程开发，性能是最重要的因,"> 
+    <meta name="author" content="吴鑫康"> 
+    <link rel="alternative" href="atom.xml" title="Zjxjwxk&#39;s Blog" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    <link href="https://fonts.loli.net/css?family=Roboto+Mono|Rubik&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_1429596_nzgqgvnmkjb.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.7.2/animate.min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/codemirror/5.48.4/codemirror.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/codemirror/5.48.4/theme/dracula.css">
+    <link rel="stylesheet" href="/css/obsidian.css">
+    <link rel="stylesheet" href="/css/ball-atom.min.css"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
+</html>
 
-<body>
-    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="loading" class="active"></div>
-
-    <aside id="menu" class="hide">
-  <div class="inner flex-row-vertical">
-    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
-        <i class="icon icon-lg icon-close"></i>
-    </a>
-    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
-      <div class="brand">
-        <a href="/" class="avatar waves-effect waves-circle waves-light">
-          <img src="/img/avatar.jpg">
-        </a>
-        <hgroup class="introduce">
-          <h5 class="nickname">吴鑫康</h5>
-          <a href="mailto:zjxjwxk@gmail.com" title="zjxjwxk@gmail.com" class="mail">zjxjwxk@gmail.com</a>
-        </hgroup>
-      </div>
-    </div>
-    <div class="scroll-wrap flex-col">
-      <ul class="nav">
-        
-            <li class="waves-block waves-effect">
-              <a href="/">
-                <i class="icon icon-lg icon-home"></i>
-                主页
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/archives">
-                <i class="icon icon-lg icon-archives"></i>
-                归档
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/tags">
-                <i class="icon icon-lg icon-tags"></i>
-                标签
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/categories">
-                <i class="icon icon-lg icon-th-list"></i>
-                分类
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="https://github.com/zjxjwxk" target="_blank">
-                <i class="icon icon-lg icon-github"></i>
-                GitHub
-              </a>
-            </li>
-        
-      </ul>
-    </div>
-  </div>
-</aside>
-
-    <main id="main">
-        <header class="top-header" id="header">
-    <div class="flex-row">
-        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
-          <i class="icon icon-lg icon-navicon"></i>
-        </a>
-        <div class="flex-col header-title ellipsis">Java基础知识</div>
-        
-        <div class="search-wrap" id="search-wrap">
-            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
-                <i class="icon icon-lg icon-chevron-left"></i>
-            </a>
-            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
-            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
-                <i class="icon icon-lg icon-search"></i>
-            </a>
+<body class="loading">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="loader">
+        <div class="la-ball-atom la-2x">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
         </div>
-        
-        
-        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
-            <i class="icon icon-lg icon-share-alt"></i>
-        </a>
-        
     </div>
-</header>
-<header class="content-header post-header">
-
-    <div class="container fade-scale">
-        <h1 class="title">Java基础知识</h1>
-        <h5 class="subtitle">
-            
-                <time datetime="2019-01-03T14:44:22.000Z" itemprop="datePublished" class="page-time">
-  2019-01-03
-</time>
-
-
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Java/">Java</a></li></ul>
-
-            
-        </h5>
-    </div>
-
-    
-
-
-</header>
-
-
-<div class="container body-wrap">
-    
-    <aside class="post-widget">
-        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
-            <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-面向对象和面向过程的区别"><span class="post-toc-number">1.</span> <span class="post-toc-text">1. 面向对象和面向过程的区别</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#面向过程"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">面向过程</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#面向对象"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">面向对象</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-Java-语言有哪些特点"><span class="post-toc-number">2.</span> <span class="post-toc-text">2. Java 语言有哪些特点</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-什么是-JDK-什么是-JRE-什么是-JVM-三者之间的联系与区别"><span class="post-toc-number">3.</span> <span class="post-toc-text">3. 什么是 JDK 什么是 JRE 什么是 JVM 三者之间的联系与区别</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#4-什么是字节码-采用字节码的最大好处是什么"><span class="post-toc-number">4.</span> <span class="post-toc-text">4. 什么是字节码 采用字节码的最大好处是什么</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#先看下-java-中的编译器和解释器："><span class="post-toc-number">4.1.</span> <span class="post-toc-text">先看下 java 中的编译器和解释器： 　　</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#采用字节码的好处："><span class="post-toc-number">4.2.</span> <span class="post-toc-text">采用字节码的好处：　</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#5-Java和C-的区别"><span class="post-toc-number">5.</span> <span class="post-toc-text">5. Java和C++的区别</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#6-什么是-Java-程序的主类-应用程序和小程序的主类有何不同"><span class="post-toc-number">6.</span> <span class="post-toc-text">6. 什么是 Java 程序的主类 应用程序和小程序的主类有何不同</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#7-Java-应用程序与小程序之间有那些差别"><span class="post-toc-number">7.</span> <span class="post-toc-text">7. Java 应用程序与小程序之间有那些差别</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#8-字符型常量和字符串常量的区别"><span class="post-toc-number">8.</span> <span class="post-toc-text">8. 字符型常量和字符串常量的区别</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#9-构造器-Constructor-是否可被-override"><span class="post-toc-number">9.</span> <span class="post-toc-text">9. 构造器 Constructor 是否可被 override</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#10-重载和重写的区别"><span class="post-toc-number">10.</span> <span class="post-toc-text">10. 重载和重写的区别</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#11-Java-面向对象编程三大特性-封装、继承、多态"><span class="post-toc-number">11.</span> <span class="post-toc-text">11. Java 面向对象编程三大特性:封装、继承、多态</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#封装"><span class="post-toc-number">11.1.</span> <span class="post-toc-text">封装</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#继承"><span class="post-toc-number">11.2.</span> <span class="post-toc-text">继承</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#多态"><span class="post-toc-number">11.3.</span> <span class="post-toc-text">多态</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#12-String-和-StringBuffer、StringBuilder-的区别是什么-String-为什么是不可变的"><span class="post-toc-number">12.</span> <span class="post-toc-text">12. String 和 StringBuffer、StringBuilder 的区别是什么 String 为什么是不可变的</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#13-自动装箱与拆箱"><span class="post-toc-number">13.</span> <span class="post-toc-text">13. 自动装箱与拆箱</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#14-在一个静态方法内调用一个非静态成员为什么是非法的"><span class="post-toc-number">14.</span> <span class="post-toc-text">14. 在一个静态方法内调用一个非静态成员为什么是非法的</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#15-在-Java-中定义一个不做事且没有参数的构造方法的作用"><span class="post-toc-number">15.</span> <span class="post-toc-text">15. 在 Java 中定义一个不做事且没有参数的构造方法的作用</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#16-import-java和javax有什么区别"><span class="post-toc-number">16.</span> <span class="post-toc-text">16. import java和javax有什么区别</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#17-接口和抽象类的区别是什么"><span class="post-toc-number">17.</span> <span class="post-toc-text">17. 接口和抽象类的区别是什么</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#18-成员变量与局部变量的区别有那些"><span class="post-toc-number">18.</span> <span class="post-toc-text">18. 成员变量与局部变量的区别有那些</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#19-创建一个对象用什么运算符？对象实体与对象引用有何不同？"><span class="post-toc-number">19.</span> <span class="post-toc-text">19. 创建一个对象用什么运算符？对象实体与对象引用有何不同？</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#20-什么是方法的返回值？返回值在类的方法里的作用是什么？"><span class="post-toc-number">20.</span> <span class="post-toc-text">20. 什么是方法的返回值？返回值在类的方法里的作用是什么？</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#21-一个类的构造方法的作用是什么-若一个类没有声明构造方法，该程序能正确执行吗-为什么"><span class="post-toc-number">21.</span> <span class="post-toc-text">21. 一个类的构造方法的作用是什么 若一个类没有声明构造方法，该程序能正确执行吗 为什么</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#22-构造方法有哪些特性"><span class="post-toc-number">22.</span> <span class="post-toc-text">22. 构造方法有哪些特性</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#23-静态方法和实例方法有何不同"><span class="post-toc-number">23.</span> <span class="post-toc-text">23. 静态方法和实例方法有何不同</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#24-对象的相等与指向他们的引用相等，两者有什么不同？"><span class="post-toc-number">24.</span> <span class="post-toc-text">24. 对象的相等与指向他们的引用相等，两者有什么不同？</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#25-在调用子类构造方法之前会先调用父类没有参数的构造方法，其目的是？"><span class="post-toc-number">25.</span> <span class="post-toc-text">25. 在调用子类构造方法之前会先调用父类没有参数的构造方法，其目的是？</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#26-与-equals-重要"><span class="post-toc-number">26.</span> <span class="post-toc-text">26. == 与 equals(重要)</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#27-hashCode-与-equals（重要）"><span class="post-toc-number">27.</span> <span class="post-toc-text">27. hashCode 与 equals（重要）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#hashCode（）介绍"><span class="post-toc-number">27.1.</span> <span class="post-toc-text">hashCode（）介绍</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#为什么要有-hashCode"><span class="post-toc-number">27.2.</span> <span class="post-toc-text">为什么要有 hashCode</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#hashCode（）与equals（）的相关规定"><span class="post-toc-number">27.3.</span> <span class="post-toc-text">hashCode（）与equals（）的相关规定</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#28-为什么Java中只有值传递"><span class="post-toc-number">28.</span> <span class="post-toc-text">28. 为什么Java中只有值传递</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#29-简述线程，程序、进程的基本概念。以及他们之间关系是什么"><span class="post-toc-number">29.</span> <span class="post-toc-text">29. 简述线程，程序、进程的基本概念。以及他们之间关系是什么</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#30-线程有哪些基本状态？这些状态是如何定义的"><span class="post-toc-number">30.</span> <span class="post-toc-text">30. 线程有哪些基本状态？这些状态是如何定义的?</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#31-关于-final-关键字的一些总结"><span class="post-toc-number">31.</span> <span class="post-toc-text">31 关于 final 关键字的一些总结</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#32-Java-中的异常处理"><span class="post-toc-number">32.</span> <span class="post-toc-text">32 Java 中的异常处理</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Java异常类层次结构图"><span class="post-toc-number">32.1.</span> <span class="post-toc-text">Java异常类层次结构图</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Throwable类常用方法"><span class="post-toc-number">32.2.</span> <span class="post-toc-text">Throwable类常用方法</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#异常处理总结"><span class="post-toc-number">32.3.</span> <span class="post-toc-text">异常处理总结</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#33-Java序列话中如果有些字段不想进行序列化-怎么办"><span class="post-toc-number">33.</span> <span class="post-toc-text">33 Java序列话中如果有些字段不想进行序列化 怎么办</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#34-获取用键盘输入常用的的两种方法"><span class="post-toc-number">34.</span> <span class="post-toc-text">34 获取用键盘输入常用的的两种方法</span></a></li></ol><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Java基础学习书籍推荐"><span class="post-toc-number"></span> <span class="post-toc-text">Java基础学习书籍推荐</span></a>
-        </li></nav>
-    </aside>
-
-
-<article id="post-Java/Java核心/Java基础知识" class="post-article article-type-post fade" itemprop="blogPost">
-
-    <div class="post-card">
-        <h1 class="post-card-title">Java基础知识</h1>
-        <div class="post-meta">
-            <time class="post-time" title="2019-01-03 22:44:22" datetime="2019-01-03T14:44:22.000Z" itemprop="datePublished">2019-01-03</time>
-
-            
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Java/">Java</a></li></ul>
-
-
-
-            
-<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
-    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
-</span>
-
-
+    <span id="config-title" style="display:none">Zjxjwxk&#39;s Blog</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div class="scrollbar gradient-bg-rev"></div>
+<div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <div class="navigation animated fadeIn fast delay-1s">
+        <img id="home-icon" class="icon-home" src="/img/favicon.png" alt="" data-url="https://zjxjwxk.com">
+        <div id="play-icon" title="Play/Pause" class="iconfont icon-play"></div>
+        <h3 class="subtitle">Java基础知识</h3>
+        <div class="social">
+            <!--        <div class="like-icon">-->
+            <!--            <a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
+            <!--        </div>-->
+            <div>
+                <div class="share">
+                    
+                        <a href="javascript:;" class="iconfont icon-share1"></a>
+                        <div class="share-component-cc" data-disabled="facebook,douban,linkedin,diandian,tencent,google"></div>
+                    
+                </div>
+            </div>
         </div>
-        <div class="post-content" id="post-content" itemprop="postContent">
+    </div>
+</div>
+
+    <div class="section">
+        <div class="article-header-wrapper">
+    <div class="article-header">
+        <div class="article-cover animated fadeIn" style="
+            animation-delay: 600ms;
+            animation-duration: 1.2s;
+            background-image: 
+                radial-gradient(ellipse closest-side, rgba(0, 0, 0, 0.65), #100e17),
+                url(/img/cover.jpg);">
+        </div>
+        <div class="else">
+            <p class="animated fadeInDown">
+                
+                <a href="/categories/Java"><b>「
+                    </b>JAVA<b> 」</b></a>
+                
+                一月 03, 2019
+            </p>
+            <h3 class="post-title animated fadeInDown"><a href="/2019/01/03/Java/Java核心/Java基础知识/" title="Java基础知识">Java基础知识</a>
+            </h3>
+            
+            <p class="post-count animated fadeInDown">
+                
+                <span>
+                    <b class="iconfont icon-text2"></b> <i>文章字数</i>
+                    21k
+                </span>
+                
+                
+                <span>
+                    <b class="iconfont icon-timer__s"></b> <i>阅读约需</i>
+                    19 mins.
+                </span>
+                
+                
+                <span id="/2019/01/03/Java/Java核心/Java基础知识/" class="leancloud_visitors" data-flag-title="Java基础知识">
+                    <b class="iconfont icon-read"></b> <i>阅读次数</i>
+                    <span class="leancloud-visitors-count">1000000</span>
+                </span>
+                
+                
+            </p>
+            
+            
+            <ul class="animated fadeInDown post-tags-list"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/Java/">Java</a></li></ul>
+            
+        </div>
+    </div>
+</div>
+
+<div class="screen-gradient-after">
+    <div class="screen-gradient-content">
+        <div class="screen-gradient-content-inside">
+            <div class="bold-underline-links screen-gradient-sponsor">
+                <p>
+                    <span class="animated fadeIn delay-1s"></span>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="article">
+    <div class="main">
+        <div class="content markdown animated fadeIn">
             <h2 id="1-面向对象和面向过程的区别"><a href="#1-面向对象和面向过程的区别" class="headerlink" title="1. 面向对象和面向过程的区别"></a>1. 面向对象和面向过程的区别</h2><h3 id="面向过程"><a href="#面向过程" class="headerlink" title="面向过程"></a>面向过程</h3><p><strong>优点：</strong> 性能比面向对象高，因为类调用时需要实例化，开销比较大，比较消耗资源;比如单片机、嵌入式开发、Linux/Unix等一般采用面向过程开发，性能是最重要的因素。</p>
 <p><strong>缺点：</strong> 没有面向对象易维护、易复用、易扩展</p>
 <h3 id="面向对象"><a href="#面向对象" class="headerlink" title="面向对象"></a>面向对象</h3><p><strong>优点：</strong> 易维护、易复用、易扩展，由于面向对象有封装、继承、多态性的特性，可以设计出低耦合的系统，使系统更加灵活、更加易于维护</p>
@@ -240,13 +172,7 @@
 <li>占内存大小 字符常量只占2个字节 字符串常量占若干个字节(至少一个字符结束标志) (<strong>注意： char在Java中占两个字节</strong>)</li>
 </ol>
 <blockquote>
- <figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="/2019/01/03/Java/Java核心/Java基础知识/687474703a2f2f6d792d626c6f672d746f2d7573652e6f73732d636e2d6265696a696e672e616c6979756e63732e636f6d2f31382d392d31352f38363733353531392e6a7067.jpg" alt="java编程思想第四版：2.2.2节" title="">
-                </div>
-                <div class="image-caption">java编程思想第四版：2.2.2节</div>
-            </figure>
+<p> <img src="/2019/01/03/Java/Java核心/Java基础知识/687474703a2f2f6d792d626c6f672d746f2d7573652e6f73732d636e2d6265696a696e672e616c6979756e63732e636f6d2f31382d392d31352f38363733353531392e6a7067.jpg" alt="java编程思想第四版：2.2.2节"></p>
 </blockquote>
 <h2 id="9-构造器-Constructor-是否可被-override"><a href="#9-构造器-Constructor-是否可被-override" class="headerlink" title="9. 构造器 Constructor 是否可被 override"></a>9. 构造器 Constructor 是否可被 override</h2><p>在讲继承的时候我们就知道父类的私有属性和构造方法并不能被继承，所以 Constructor 也就不能被 override（重写）,但是可以 overload（重载）,所以你可以看到一个类中有多个构造函数的情况。</p>
 <h2 id="10-重载和重写的区别"><a href="#10-重载和重写的区别" class="headerlink" title="10. 重载和重写的区别"></a>10. 重载和重写的区别</h2><p><strong>重载：</strong> 发生在同一个类中，方法名必须相同，参数类型不同、个数不同、顺序不同，方法返回值和访问修饰符可以不同，发生在编译时。 　　</p>
@@ -265,8 +191,15 @@
 <p>简单的来说：String 类中使用 final 关键字字符数组保存字符串，<code>private　final　char　value[]</code>，所以 String 对象是不可变的。而StringBuilder 与 StringBuffer 都继承自 AbstractStringBuilder 类，在 AbstractStringBuilder 中也是使用字符数组保存字符串<code>char[]value</code> 但是没有用 final 关键字修饰，所以这两种对象都是可变的。</p>
 <p>StringBuilder 与 StringBuffer 的构造方法都是调用父类构造方法也就是 AbstractStringBuilder 实现的，大家可以自行查阅源码。</p>
 <p>AbstractStringBuilder.java</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">abstract class AbstractStringBuilder implements Appendable, CharSequence &#123;</span><br><span class="line">    char[] value;</span><br><span class="line">    int count;</span><br><span class="line">    AbstractStringBuilder() &#123;</span><br><span class="line">    &#125;</span><br><span class="line">    AbstractStringBuilder(int capacity) &#123;</span><br><span class="line">        value = new char[capacity];</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<p><strong>线程安全性</strong></p>
+<pre><code>abstract class AbstractStringBuilder implements Appendable, CharSequence {
+    char[] value;
+    int count;
+    AbstractStringBuilder() {
+    }
+    AbstractStringBuilder(int capacity) {
+        value = new char[capacity];
+    }
+</code></pre><p><strong>线程安全性</strong></p>
 <p>String 中的对象是不可变的，也就可以理解为常量，线程安全。AbstractStringBuilder 是 StringBuilder 与 StringBuffer 的公共父类，定义了一些字符串的基本操作，如 expandCapacity、append、insert、indexOf 等公共方法。StringBuffer 对方法加了同步锁或者对调用的方法加了同步锁，所以是线程安全的。StringBuilder 并没有对方法进行加同步锁，所以是非线程安全的。 　　</p>
 <p><strong>性能</strong></p>
 <p>每次对 String 类型进行改变的时候，都会生成一个新的 String 对象，然后将指针指向新的 String 对象。StringBuffer 每次都会对 StringBuffer 对象本身进行操作，而不是生成新的对象并改变对象引用。相同情况下使用 StirngBuilder 相比使用 StringBuffer 仅能获得 10%~15% 左右的性能提升，但却要冒多线程不安全的风险。</p>
@@ -316,8 +249,24 @@
 <li>情况2：类覆盖了 equals() 方法。一般，我们都覆盖 equals() 方法来两个对象的内容相等；若它们的内容相等，则返回 true (即，认为这两个对象相等)。</li>
 </ul>
 <p><strong>举个例子：</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">public class test1 &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        String a = new String(&quot;ab&quot;); // a 为一个引用</span><br><span class="line">        String b = new String(&quot;ab&quot;); // b为另一个引用,对象的内容一样</span><br><span class="line">        String aa = &quot;ab&quot;; // 放在常量池中</span><br><span class="line">        String bb = &quot;ab&quot;; // 从常量池中查找</span><br><span class="line">        if (aa == bb) // true</span><br><span class="line">            System.out.println(&quot;aa==bb&quot;);</span><br><span class="line">        if (a == b) // false，非同一对象</span><br><span class="line">            System.out.println(&quot;a==b&quot;);</span><br><span class="line">        if (a.equals(b)) // true</span><br><span class="line">            System.out.println(&quot;aEQb&quot;);</span><br><span class="line">        if (42 == 42.0) &#123; // true</span><br><span class="line">            System.out.println(&quot;true&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><strong>说明：</strong></p>
+<pre><code>public class test1 {
+    public static void main(String[] args) {
+        String a = new String(&quot;ab&quot;); // a 为一个引用
+        String b = new String(&quot;ab&quot;); // b为另一个引用,对象的内容一样
+        String aa = &quot;ab&quot;; // 放在常量池中
+        String bb = &quot;ab&quot;; // 从常量池中查找
+        if (aa == bb) // true
+            System.out.println(&quot;aa==bb&quot;);
+        if (a == b) // false，非同一对象
+            System.out.println(&quot;a==b&quot;);
+        if (a.equals(b)) // true
+            System.out.println(&quot;aEQb&quot;);
+        if (42 == 42.0) { // true
+            System.out.println(&quot;true&quot;);
+        }
+    }
+}
+</code></pre><p><strong>说明：</strong></p>
 <ul>
 <li>String 中的 equals 方法是被重写过的，因为 object 的 equals 方法是比较的对象的内存地址，而 String 的 equals 方法比较的是对象的值。</li>
 <li>当创建 String 类型的对象时，虚拟机会在常量池中查找有没有已经存在的值和要创建的值相同的对象，如果有就把它赋给当前引用。如果没有就在常量池中重新创建一个 String 对象。</li>
@@ -345,13 +294,7 @@
 <li><strong>阻塞(block)</strong>：阻塞状态是指线程因为某种原因放弃了cpu使用权，也即让出了cpu timeslice，暂时停止运行。直到线程进入可运行(runnable)状态，才有 机会再次获得cpu timeslice转到运行(running)状态。阻塞的情况分三种： (一). 等待阻塞：运行(running)的线程执行o.wait()方法，JVM会把该线程放 入等待队列(waitting queue)中。 (二). 同步阻塞：运行(running)的线程在获取对象的同步锁时，若该同步锁 被别的线程占用，则JVM会把该线程放入锁池(lock pool)中。 (三). 其他阻塞: 运行(running)的线程执行Thread.sleep(long ms)或t.join()方法，或者发出了I/O请求时，JVM会把该线程置为阻塞状态。当sleep()状态超时join()等待线程终止或者超时、或者I/O处理完毕时，线程重新转入可运行(runnable)状态。</li>
 <li><strong>死亡(dead)</strong>：线程run()、main()方法执行结束，或者因异常退出了run()方法，则该线程结束生命周期。死亡的线程不可再次复生。</li>
 </ol>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="/2019/01/03/Java/Java核心/Java基础知识/68747470733a2f2f757365722d676f6c642d63646e2e786974752e696f2f323031382f382f392f313635316631396437633465393361333f773d38373626683d34393226663d706e6726733d313238303932.jpg" alt="" title="">
-                </div>
-                <div class="image-caption"></div>
-            </figure>
+<p><img src="/2019/01/03/Java/Java核心/Java基础知识/68747470733a2f2f757365722d676f6c642d63646e2e786974752e696f2f323031382f382f392f313635316631396437633465393361333f773d38373626683d34393226663d706e6726733d313238303932.jpg" alt=""></p>
 <p>备注： 可以用早起坐地铁来比喻这个过程：</p>
 <p>还没起床：sleeping</p>
 <p>起床收拾好了，随时可以坐地铁出发：Runnable</p>
@@ -366,13 +309,7 @@
 <li>当用final修饰一个类时，表明这个类不能被继承。final类中的所有成员方法都会被隐式地指定为final方法。</li>
 <li>使用final方法的原因有两个。第一个原因是把方法锁定，以防任何继承类修改它的含义；第二个原因是效率。在早期的Java实现版本中，会将final方法转为内嵌调用。但是如果方法过于庞大，可能看不到内嵌调用带来的任何性能提升（现在的Java版本已经不需要使用final方法进行这些优化了）。类中所有的private方法都隐式地指定为final。</li>
 </ol>
-<h2 id="32-Java-中的异常处理"><a href="#32-Java-中的异常处理" class="headerlink" title="32 Java 中的异常处理"></a>32 Java 中的异常处理</h2><h3 id="Java异常类层次结构图"><a href="#Java异常类层次结构图" class="headerlink" title="Java异常类层次结构图"></a>Java异常类层次结构图</h3><figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="/2019/01/03/Java/Java核心/Java基础知识/687474703a2f2f696d61676573323031352e636e626c6f67732e636f6d2f626c6f672f3634313030332f3230313630372f3634313030332d32303136303730363233323034343238302d3335353335343739302e706e67.png" alt="Java异常类层次结构图" title="">
-                </div>
-                <div class="image-caption">Java异常类层次结构图</div>
-            </figure>
+<h2 id="32-Java-中的异常处理"><a href="#32-Java-中的异常处理" class="headerlink" title="32 Java 中的异常处理"></a>32 Java 中的异常处理</h2><h3 id="Java异常类层次结构图"><a href="#Java异常类层次结构图" class="headerlink" title="Java异常类层次结构图"></a>Java异常类层次结构图</h3><p><img src="/2019/01/03/Java/Java核心/Java基础知识/687474703a2f2f696d61676573323031352e636e626c6f67732e636f6d2f626c6f672f3634313030332f3230313630372f3634313030332d32303136303730363233323034343238302d3335353335343739302e706e67.png" alt="Java异常类层次结构图"></p>
 <p>在 Java 中，所有的异常都有一个共同的祖先java.lang包中的 <strong>Throwable类</strong>。Throwable： 有两个重要的子类：<strong>Exception（异常）</strong> 和 <strong>Error（错误）</strong> ，二者都是 Java 异常处理的重要子类，各自都包含大量子类。</p>
 <p><strong>Error（错误）:是程序无法处理的错误</strong>，表示运行应用程序中较严重问题。大多数错误与代码编写者执行的操作无关，而表示代码运行时 JVM（Java 虚拟机）出现的问题。例如，Java虚拟机运行错误（Virtual MachineError），当 JVM 不再有继续执行操作所需的内存资源时，将出现 OutOfMemoryError。这些异常发生时，Java虚拟机（JVM）一般会选择线程终止。</p>
 <p>这些错误表示故障发生于虚拟机自身、或者发生在虚拟机试图执行应用时，如Java虚拟机运行错误（Virtual MachineError）、类定义错误（NoClassDefFoundError）等。这些错误是不可查的，因为它们在应用程序的控制和处理能力之 外，而且绝大多数是程序运行时不允许出现的状况。对于设计合理的应用程序来说，即使确实发生了错误，本质上也不应该试图去处理它所引起的异常状况。在 Java中，错误通过Error的子类描述。</p>
@@ -399,326 +336,74 @@
 <h2 id="33-Java序列话中如果有些字段不想进行序列化-怎么办"><a href="#33-Java序列话中如果有些字段不想进行序列化-怎么办" class="headerlink" title="33 Java序列话中如果有些字段不想进行序列化 怎么办"></a>33 Java序列话中如果有些字段不想进行序列化 怎么办</h2><p>对于不想进行序列化的变量，使用transient关键字修饰。</p>
 <p>transient关键字的作用是：阻止实例中那些用此关键字修饰的的变量序列化；当对象被反序列化时，被transient修饰的变量值不会被持久化和恢复。transient只能修饰变量，不能修饰类和方法。</p>
 <h2 id="34-获取用键盘输入常用的的两种方法"><a href="#34-获取用键盘输入常用的的两种方法" class="headerlink" title="34 获取用键盘输入常用的的两种方法"></a>34 获取用键盘输入常用的的两种方法</h2><p>方法1：通过 Scanner</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Scanner input = new Scanner(System.in);</span><br><span class="line">String s  = input.nextLine();</span><br><span class="line">input.close();</span><br></pre></td></tr></table></figure>
-<p>方法2：通过 BufferedReader</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">BufferedReader input = new BufferedReader(new InputStreamReader(System.in)); </span><br><span class="line">String s = input.readLine();</span><br></pre></td></tr></table></figure>
-<h1 id="Java基础学习书籍推荐"><a href="#Java基础学习书籍推荐" class="headerlink" title="Java基础学习书籍推荐"></a>Java基础学习书籍推荐</h1><p><strong>《Head First Java.第二版》：</strong> 可以说是我的 Java 启蒙书籍了，特别适合新手读当然也适合我们用来温故Java知识点。</p>
+<pre><code>Scanner input = new Scanner(System.in);
+String s  = input.nextLine();
+input.close();
+</code></pre><p>方法2：通过 BufferedReader</p>
+<pre><code>BufferedReader input = new BufferedReader(new InputStreamReader(System.in)); 
+String s = input.readLine(); 
+</code></pre><h1 id="Java基础学习书籍推荐"><a href="#Java基础学习书籍推荐" class="headerlink" title="Java基础学习书籍推荐"></a>Java基础学习书籍推荐</h1><p><strong>《Head First Java.第二版》：</strong> 可以说是我的 Java 启蒙书籍了，特别适合新手读当然也适合我们用来温故Java知识点。</p>
 <p><strong>《Java核心技术卷1+卷2》：</strong> 很棒的两本书，建议有点 Java 基础之后再读，介绍的还是比较深入的，非常推荐。</p>
 <p><strong>《Java编程思想(第4版)》：</strong> 这本书要常读，初学者可以快速概览，中等程序员可以深入看看 Java，老鸟还可以用之回顾 Java 的体系。这本书之所以厉害，因为它在无形中整合了设计模式，这本书之所以难读，也恰恰在于他对设计模式的整合是无形的。</p>
 
-        </div>
-
-        <blockquote class="post-copyright">
-    
-    <div class="content">
-        
-<span class="post-time">
-    最后更新时间：<time datetime="2019-01-12T16:16:44.000Z" itemprop="dateUpdated">2019-01-13 00:16:44</time>
-</span><br>
-
-
-        
-        原始链接：<a href="/2019/01/03/Java/Java核心/Java基础知识/" target="_blank" rel="external">https://zjxjwxk.com/2019/01/03/Java/Java核心/Java基础知识/</a>
-        
-    </div>
-    
-    <footer>
-        <a href="https://zjxjwxk.com">
-            <img src="/img/avatar.jpg" alt="吴鑫康">
-            吴鑫康
-        </a>
-    </footer>
-</blockquote>
-
-        
-<div class="page-reward">
-    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
-</div>
-
-
-
-        <div class="post-footer">
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
             
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
-
-
-            
-<div class="page-share-wrap">
-    
-
-<div class="page-share" id="pageShare">
-    <ul class="reset share-icons">
-      <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://zjxjwxk.com/2019/01/03/Java/Java核心/Java基础知识/&title=《Java基础知识》 — Zjxjwxk's Blog&pic=https://zjxjwxk.com/img/avatar.jpg" data-title="微博">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      <li>
-        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://zjxjwxk.com/2019/01/03/Java/Java核心/Java基础知识/&title=《Java基础知识》 — Zjxjwxk's Blog&source=" data-title=" QQ">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://zjxjwxk.com/2019/01/03/Java/Java核心/Java基础知识/" data-title=" Facebook">
-          <i class="icon icon-facebook"></i>
-        </a>
-      </li>
-      <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Java基础知识》 — Zjxjwxk's Blog&url=https://zjxjwxk.com/2019/01/03/Java/Java核心/Java基础知识/&via=https://zjxjwxk.com" data-title=" Twitter">
-          <i class="icon icon-twitter"></i>
-        </a>
-      </li>
-      <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://zjxjwxk.com/2019/01/03/Java/Java核心/Java基础知识/" data-title=" Google+">
-          <i class="icon icon-google-plus"></i>
-        </a>
-      </li>
-    </ul>
- </div>
-
-
-
-    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
-        <i class="icon icon-share-alt icon-lg"></i>
-    </a>
-</div>
-
-
-
-        </div>
-    </div>
-
-    
-<nav class="post-nav flex-row flex-justify-between">
-  
-    <div class="waves-block waves-effect prev">
-      <a href="/2019/01/04/Java/J2EE/J2EE基础知识/" id="post-prev" class="post-nav-link">
-        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
-        <h4 class="title">J2EE基础知识</h4>
-      </a>
-    </div>
-  
-
-  
-</nav>
-
-
-
-    
-
-
-
-
-
-
-
-
-
-
-
-    <!-- Valine Comments -->
-    <div class="comments vcomment" id="comments"></div>
-    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
-    <!-- Valine Comments script -->
-    <script>
-        var GUEST_INFO = ['nick','mail','link'];
-        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
-          return GUEST_INFO.indexOf(item) > -1
-        });
-        new Valine({
-            el: '#comments',
-            notify: 'true' == 'true',
-            verify: 'false' == 'true',
-            appId: "gJTHi1MULDjBNIRKPWN2bTWd-gzGzoHsz",
-            appKey: "dflbQMdoD4HLI3twjbzShRMK",
-            avatar: "mm",
-            placeholder: "写下你的评论吧！",
-            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
-            pageSize: "10"
-        })
-    </script>
-    <!-- Valine Comments end -->
-
-
-
-
-
-
-
-</article>
-
-<div id="reward" class="page-modal reward-lay">
-    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <h3 class="reward-title">
-        <i class="icon icon-quote-left"></i>
-        谢谢大爷~
-        <i class="icon icon-quote-right"></i>
-    </h3>
-    <div class="reward-content">
-        
-        <div class="reward-code">
-            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
-        </div>
-        
-        <label class="reward-toggle">
-            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
-            <div class="reward-toggle-ctrol">
-                <span class="reward-toggle-item wechat">微信</span>
-                <span class="reward-toggle-label"></span>
-                <span class="reward-toggle-item alipay">支付宝</span>
-            </div>
-        </label>
-        
-    </div>
-</div>
-
-
-
-</div>
-
-        <footer class="footer">
-    <div class="top">
-        
-<p>
-    <span id="busuanzi_container_site_uv" style="display:none">
-        站点总访客数：<span id="busuanzi_value_site_uv"></span>
-    </span>
-    <span id="busuanzi_container_site_pv" style="display:none">
-        站点总访问量：<span id="busuanzi_value_site_pv"></span>
-    </span>
-</p>
-
-
-        <p>
-            
-                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
-            
-            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
-        </p>
-    </div>
-    <div class="bottom">
-        <p><span>吴鑫康 &copy; 2019</span>
-            <span>
+            <ul id="audio-list" style="display:none">
                 
-                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
-            </span>
-        </p>
-    </div>
-</footer>
-
-    </main>
-    <div class="mask" id="mask"></div>
-<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
-
-
-
-<div class="global-share" id="globalShare">
-    <ul class="reset share-icons">
-      <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://zjxjwxk.com/2019/01/03/Java/Java核心/Java基础知识/&title=《Java基础知识》 — Zjxjwxk's Blog&pic=https://zjxjwxk.com/img/avatar.jpg" data-title="微博">
-          <i class="icon icon-weibo"></i>
-        </a>
-      </li>
-      <li>
-        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
-          <i class="icon icon-weixin"></i>
-        </a>
-      </li>
-      <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://zjxjwxk.com/2019/01/03/Java/Java核心/Java基础知识/&title=《Java基础知识》 — Zjxjwxk's Blog&source=" data-title=" QQ">
-          <i class="icon icon-qq"></i>
-        </a>
-      </li>
-      <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://zjxjwxk.com/2019/01/03/Java/Java核心/Java基础知识/" data-title=" Facebook">
-          <i class="icon icon-facebook"></i>
-        </a>
-      </li>
-      <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Java基础知识》 — Zjxjwxk's Blog&url=https://zjxjwxk.com/2019/01/03/Java/Java核心/Java基础知识/&via=https://zjxjwxk.com" data-title=" Twitter">
-          <i class="icon icon-twitter"></i>
-        </a>
-      </li>
-      <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://zjxjwxk.com/2019/01/03/Java/Java核心/Java基础知识/" data-title=" Google+">
-          <i class="icon icon-google-plus"></i>
-        </a>
-      </li>
-    </ul>
- </div>
-
-
-<div class="page-modal wx-share" id="wxShare">
-    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACrUlEQVR42u3a0WrrMBAE0Pz/T6evF4qSGa2U9MLxUzG1raOCtJ3V4xFfz3+u3/dXd56LK3n/6s7jxoWHh4c3GPpqKK8Hl09Ki0/G82b68PDw8K7xVoNLFu7kDcmw8snNv4iHh4f3d3gJIHl/uz3g4eHh/Y+8vNTOS+SzU4aHh4f3GV5S1LakebHeBsR4eHh4n+Hlgezf+flKfw8PDw9v3FXfW3b3ItrJQYTl+/Hw8PAu8PJ/9V/D9uKMeYsLDw8P77u8ydLcFt954d5GHm9Sajw8PLxDvNdl8d6H83ChPTowimvx8PDwxry9Y1Vt8Jrf2ZvQ5eTi4eHhXeZNkG14kW8nSQiy/B08PDy8y7wkYE02ifbOpPH2JvzFw8PDu8Dbaz7lyHnM0bbEln9DPDw8vEO89khTMuh8Kc/L6PypKGvBw8PDG/D2BpcP+lRomzz1ODX3eHh4eC95ecO+pZ46pjA6A4CHh4d3jffYuu6V3UnEXAS4eHh4eEd57ZKdbwn5ZjMZ6GhzwsPDw9vitYOY49vyfRJe4OHh4d3g7S3iLXKvJbYXUtT7Gx4eHl7Ja1tN7Z02XEiK5mIi8PDw8C7z8sNM8wMBe6VzvZ3g4eHhXebNF+V26c8ZSYmPh4eH90neqRI5PzTQDjef7npu8PDw8Epewmij2LyAbg8c7D2Lh4eHd5bXNr2uzG55OqwIQfDw8PAu8OaweXusLaPb41x4eHh4Z3nP8mqfapfveQut7pLh4eHhlbz8yhtae+FsMtwDkS4eHh7eIV6+uLdxwKQEbzeG5dTg4eHhXeO1B57yAHfvne0O9iZlwcPDw/sSb75kJ88m7IKKh4eH91XeqcJ6EvvWAS4eHh7eNV7+yTzwTT6/d9yq2FTw8PDwLvBG/+ofbfwnse8xEh4eHt4O7wffyNB1wj+pxAAAAABJRU5ErkJggg==" alt="微信分享二维码">
-</div>
-
-
-
-
-    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
-<script>
-var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
-
-
-</script>
-
-<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
-
-
-<div class="search-panel" id="search-panel">
-    <ul class="search-result" id="search-result"></ul>
-</div>
-<template id="search-tpl">
-<li class="item">
-    <a href="{path}" class="waves-block waves-effect">
-        <div class="title ellipsis" title="{title}">{title}</div>
-        <div class="flex-row flex-middle">
-            <div class="tags ellipsis">
-                {tags}
-            </div>
-            <time class="flex-col time">{date}</time>
+                
+                <li title="0" data-url="/statics/Silent express.mp3"></li>
+                
+                    
+            </ul>
+            
+            
+            
+            <div id="vcomments"></div>
+            
         </div>
-    </a>
-</li>
-</template>
+        <div class="sidebar">
+            <div class="box animated fadeInRight">
+                <div class="subbox">
+                    <img src="https://res.cloudinary.com/tridiamond/image/upload/v1573019751/TriDiamond_logo_ui_xeublz.jpg" height="300" width="300">
+                    <p>吴鑫康</p>
+                    <span>Talk is cheap. Show me the code ———— Linus Torvalds</span>
+                    <dl>
+                        <dd><a href="https://github.com/zjxjwxk" target="_blank"><span class=" iconfont icon-github"></span></a></dd>
+                        <dd><a href="https://twitter.com/zjxjwxk" target="_blank"><span class=" iconfont icon-twitter"></span></a></dd>
+                        <dd><a href="" target="_blank"><span class=" iconfont icon-stack-overflow"></span></a></dd>
+                    </dl>
+                </div>
+                <ul>
+                    <li><a href="/">15 <p>文章</p></a></li>
+                    <li><a href="/categories">5 <p>分类</p></a></li>
+                    <li><a href="/tags">11 <p>标签</p></a></li>
+                </ul>
+            </div>
+            
+            
+            
+            <div class="box sticky animated fadeInRight faster">
+                <div id="toc" class="subbox">
+                    <h4>目录</h4>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-面向对象和面向过程的区别"><span class="toc-number">1.</span> <span class="toc-text">1. 面向对象和面向过程的区别</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#面向过程"><span class="toc-number">1.1.</span> <span class="toc-text">面向过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#面向对象"><span class="toc-number">1.2.</span> <span class="toc-text">面向对象</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Java-语言有哪些特点"><span class="toc-number">2.</span> <span class="toc-text">2. Java 语言有哪些特点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-什么是-JDK-什么是-JRE-什么是-JVM-三者之间的联系与区别"><span class="toc-number">3.</span> <span class="toc-text">3. 什么是 JDK 什么是 JRE 什么是 JVM 三者之间的联系与区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-什么是字节码-采用字节码的最大好处是什么"><span class="toc-number">4.</span> <span class="toc-text">4. 什么是字节码 采用字节码的最大好处是什么</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#先看下-java-中的编译器和解释器："><span class="toc-number">4.1.</span> <span class="toc-text">先看下 java 中的编译器和解释器： 　　</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#采用字节码的好处："><span class="toc-number">4.2.</span> <span class="toc-text">采用字节码的好处：　</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-Java和C-的区别"><span class="toc-number">5.</span> <span class="toc-text">5. Java和C++的区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-什么是-Java-程序的主类-应用程序和小程序的主类有何不同"><span class="toc-number">6.</span> <span class="toc-text">6. 什么是 Java 程序的主类 应用程序和小程序的主类有何不同</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-Java-应用程序与小程序之间有那些差别"><span class="toc-number">7.</span> <span class="toc-text">7. Java 应用程序与小程序之间有那些差别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-字符型常量和字符串常量的区别"><span class="toc-number">8.</span> <span class="toc-text">8. 字符型常量和字符串常量的区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-构造器-Constructor-是否可被-override"><span class="toc-number">9.</span> <span class="toc-text">9. 构造器 Constructor 是否可被 override</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-重载和重写的区别"><span class="toc-number">10.</span> <span class="toc-text">10. 重载和重写的区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11-Java-面向对象编程三大特性-封装、继承、多态"><span class="toc-number">11.</span> <span class="toc-text">11. Java 面向对象编程三大特性:封装、继承、多态</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#封装"><span class="toc-number">11.1.</span> <span class="toc-text">封装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#继承"><span class="toc-number">11.2.</span> <span class="toc-text">继承</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#多态"><span class="toc-number">11.3.</span> <span class="toc-text">多态</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12-String-和-StringBuffer、StringBuilder-的区别是什么-String-为什么是不可变的"><span class="toc-number">12.</span> <span class="toc-text">12. String 和 StringBuffer、StringBuilder 的区别是什么 String 为什么是不可变的</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#13-自动装箱与拆箱"><span class="toc-number">13.</span> <span class="toc-text">13. 自动装箱与拆箱</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#14-在一个静态方法内调用一个非静态成员为什么是非法的"><span class="toc-number">14.</span> <span class="toc-text">14. 在一个静态方法内调用一个非静态成员为什么是非法的</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#15-在-Java-中定义一个不做事且没有参数的构造方法的作用"><span class="toc-number">15.</span> <span class="toc-text">15. 在 Java 中定义一个不做事且没有参数的构造方法的作用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#16-import-java和javax有什么区别"><span class="toc-number">16.</span> <span class="toc-text">16. import java和javax有什么区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#17-接口和抽象类的区别是什么"><span class="toc-number">17.</span> <span class="toc-text">17. 接口和抽象类的区别是什么</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#18-成员变量与局部变量的区别有那些"><span class="toc-number">18.</span> <span class="toc-text">18. 成员变量与局部变量的区别有那些</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#19-创建一个对象用什么运算符？对象实体与对象引用有何不同？"><span class="toc-number">19.</span> <span class="toc-text">19. 创建一个对象用什么运算符？对象实体与对象引用有何不同？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#20-什么是方法的返回值？返回值在类的方法里的作用是什么？"><span class="toc-number">20.</span> <span class="toc-text">20. 什么是方法的返回值？返回值在类的方法里的作用是什么？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#21-一个类的构造方法的作用是什么-若一个类没有声明构造方法，该程序能正确执行吗-为什么"><span class="toc-number">21.</span> <span class="toc-text">21. 一个类的构造方法的作用是什么 若一个类没有声明构造方法，该程序能正确执行吗 为什么</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#22-构造方法有哪些特性"><span class="toc-number">22.</span> <span class="toc-text">22. 构造方法有哪些特性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#23-静态方法和实例方法有何不同"><span class="toc-number">23.</span> <span class="toc-text">23. 静态方法和实例方法有何不同</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#24-对象的相等与指向他们的引用相等，两者有什么不同？"><span class="toc-number">24.</span> <span class="toc-text">24. 对象的相等与指向他们的引用相等，两者有什么不同？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#25-在调用子类构造方法之前会先调用父类没有参数的构造方法，其目的是？"><span class="toc-number">25.</span> <span class="toc-text">25. 在调用子类构造方法之前会先调用父类没有参数的构造方法，其目的是？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#26-与-equals-重要"><span class="toc-number">26.</span> <span class="toc-text">26. == 与 equals(重要)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#27-hashCode-与-equals（重要）"><span class="toc-number">27.</span> <span class="toc-text">27. hashCode 与 equals（重要）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#hashCode（）介绍"><span class="toc-number">27.1.</span> <span class="toc-text">hashCode（）介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#为什么要有-hashCode"><span class="toc-number">27.2.</span> <span class="toc-text">为什么要有 hashCode</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#hashCode（）与equals（）的相关规定"><span class="toc-number">27.3.</span> <span class="toc-text">hashCode（）与equals（）的相关规定</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#28-为什么Java中只有值传递"><span class="toc-number">28.</span> <span class="toc-text">28. 为什么Java中只有值传递</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#29-简述线程，程序、进程的基本概念。以及他们之间关系是什么"><span class="toc-number">29.</span> <span class="toc-text">29. 简述线程，程序、进程的基本概念。以及他们之间关系是什么</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#30-线程有哪些基本状态？这些状态是如何定义的"><span class="toc-number">30.</span> <span class="toc-text">30. 线程有哪些基本状态？这些状态是如何定义的?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#31-关于-final-关键字的一些总结"><span class="toc-number">31.</span> <span class="toc-text">31 关于 final 关键字的一些总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#32-Java-中的异常处理"><span class="toc-number">32.</span> <span class="toc-text">32 Java 中的异常处理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Java异常类层次结构图"><span class="toc-number">32.1.</span> <span class="toc-text">Java异常类层次结构图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Throwable类常用方法"><span class="toc-number">32.2.</span> <span class="toc-text">Throwable类常用方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#异常处理总结"><span class="toc-number">32.3.</span> <span class="toc-text">异常处理总结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#33-Java序列话中如果有些字段不想进行序列化-怎么办"><span class="toc-number">33.</span> <span class="toc-text">33 Java序列话中如果有些字段不想进行序列化 怎么办</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#34-获取用键盘输入常用的的两种方法"><span class="toc-number">34.</span> <span class="toc-text">34 获取用键盘输入常用的的两种方法</span></a></li></ol><li class="toc-item toc-level-1"><a class="toc-link" href="#Java基础学习书籍推荐"><span class="toc-number"></span> <span class="toc-text">Java基础学习书籍推荐</span></a>
+                </li></div>
+            </div>
+            
+            
+        </div>
+    </div>
+</div>
 
-<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
-
-
-
-<!-- mathjax config similar to math.stackexchange -->
-
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-    tex2jax: {
-        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-        processEscapes: true,
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-    }
-});
-
-MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-        all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-});
-</script>
-
-<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-
-
-
-
-<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+    </div>
+</div>
+    <div id="back-to-top" class="animated fadeIn faster">
+        <div class="flow"></div>
+        <span class="percentage animated fadeIn faster">0%</span>
+        <span class="iconfont icon-top02 animated fadeIn faster"></span>
+    </div><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
 <script type="text/x-mathjax-config">
   MathJax.Hub.Config("");
 </script>
@@ -736,10 +421,233 @@ MathJax.Hub.Queue(function() {
 </script>
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->
-
-
-
-
-
 </body>
+<footer>
+    <p class="copyright" id="copyright">
+        &copy; 2020
+        <span class="gradient-text">
+            吴鑫康
+        </span>.
+        Powered by <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a>
+        Theme
+        <span class="gradient-text">
+            <a href="https://github.com/TriDiamond/hexo-theme-obsidian" title="Obsidian" target="_blank" rel="noopener">Obsidian</a>
+        </span>
+        <small><a href="https://github.com/TriDiamond/hexo-theme-obsidian/blob/master/CHANGELOG.md" title="v1.4.3" target="_blank" rel="noopener">v1.4.3</a></small>
+    </p>
+</footer>
+
+<script type="text/javascript" src="https://cdn.bootcss.com/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<script>
+  MathJax.Hub.Config({
+    "HTML-CSS": {
+      preferredFont: "TeX",
+      availableFonts: ["STIX", "TeX"],
+      linebreaks: {
+        automatic: true
+      },
+      EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+      inlineMath: [
+        ["$", "$"],
+        ["\\(", "\\)"]
+      ],
+      processEscapes: true,
+      ignoreClass: "tex2jax_ignore|dno",
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      noUndefined: {
+        attributes: {
+          mathcolor: "red",
+          mathbackground: "#FFEEEE",
+          mathsize: "90%"
+        }
+      },
+      Macros: {
+        href: "{}"
+      }
+    },
+    messageStyle: "none"
+  });
+</script>
+<script>
+  function initialMathJax() {
+    MathJax.Hub.Queue(function () {
+      var all = MathJax.Hub.getAllJax(),
+        i;
+      // console.log(all);
+      for (i = 0; i < all.length; i += 1) {
+        console.log(all[i].SourceElement().parentNode)
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  }
+
+  function reprocessMathJax() {
+    if (typeof MathJax !== 'undefined') {
+      MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+    }
+  }
+</script>
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/obsidian.js"></script>
+<script src="/js/jquery.truncate.js"></script>
+<script src="/js/search.js"></script>
+<script src="//cdn.bootcss.com/typed.js/2.0.10/typed.min.js"></script>
+<script src="//cdn.bootcss.com/blueimp-md5/2.12.0/js/md5.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+
+<script src="https://cdn.bootcss.com/codemirror/5.48.4/codemirror.min.js"></script>
+
+    <script src="//cdn.bootcss.com/codemirror/5.48.4/mode/javascript/javascript.min.js"></script>
+
+    <script src="//cdn.bootcss.com/codemirror/5.48.4/mode/css/css.min.js"></script>
+
+    <script src="//cdn.bootcss.com/codemirror/5.48.4/mode/xml/xml.min.js"></script>
+
+    <script src="//cdn.bootcss.com/codemirror/5.48.4/mode/htmlmixed/htmlmixed.min.js"></script>
+
+    <script src="//cdn.bootcss.com/codemirror/5.48.4/mode/clike/clike.min.js"></script>
+
+    <script src="//cdn.bootcss.com/codemirror/5.48.4/mode/php/php.min.js"></script>
+
+    <script src="//cdn.bootcss.com/codemirror/5.48.4/mode/shell/shell.min.js"></script>
+
+    <script src="//cdn.bootcss.com/codemirror/5.48.4/mode/python/python.min.js"></script>
+
+
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/photoswipe/4.1.3/photoswipe.min.css">
+<link rel="stylesheet" href="//cdn.bootcss.com/photoswipe/4.1.3/default-skin/default-skin.min.css">
+<script src="//cdn.bootcss.com/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="//cdn.bootcss.com/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="//www.googletagmanager.com/gtag/js?id=UA-157529205-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-157529205-1');
+    </script>
+
+
+
+
+
+<script>
+    function initialTyped () {
+        var typedTextEl = $('.typed-text');
+        if (typedTextEl && typedTextEl.length > 0) {
+            var typed = new Typed('.typed-text', {
+                strings: ["Talk is cheap. Show me the code ———— Linus Torvalds", "废话少说，放码过来"],
+                typeSpeed: 90,
+                loop: true,
+                loopCount: Infinity,
+                backSpeed: 20,
+            });
+        }
+    }
+
+    if ($('.article-header') && $('.article-header').length) {
+        $(document).ready(function () {
+            initialTyped();
+        });
+    }
+</script>
+
+
+    <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+    <script>
+
+        var valine = new Valine();
+
+        function initValine(path) {
+            if (!path) path = window.location.pathname;
+            let language = 'zh-CN';
+            if (!language) {
+                language = 'en';
+            } else {
+                language = language.toLowerCase();
+            }
+            valine.init({
+                el: '#vcomments',
+                appId: 'gJTHi1MULDjBNIRKPWN2bTWd-gzGzoHsz',
+                appKey: 'dflbQMdoD4HLI3twjbzShRMK',
+                notify: 'true',
+                verify: 'false',
+                avatar: 'mp',
+                placeholder: 'Leave your throughs behind~',
+                visitor: 'true',
+                path: path,
+                lang: language
+            });
+        }
+
+        $(document).ready(function () {
+            initValine();
+        });
+    </script>
+
+
+
 </html>
