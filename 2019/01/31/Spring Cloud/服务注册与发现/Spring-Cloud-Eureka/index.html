@@ -89,7 +89,7 @@ Eureka Server 注册中心
                 
                 <span>
                     <b class="iconfont icon-text2"></b> <i>文章字数</i>
-                    2.5k
+                    2.6k
                 </span>
                 
                 
@@ -144,9 +144,9 @@ Eureka Server 注册中心
 </li>
 </ul>
 <h2 id="启动-Eureka-Server"><a href="#启动-Eureka-Server" class="headerlink" title="启动 Eureka Server"></a>启动 Eureka Server</h2><h3 id="1-创建Spring项目"><a href="#1-创建Spring项目" class="headerlink" title="1. 创建Spring项目"></a>1. 创建Spring项目</h3><p><img src="/2019/01/31/Spring Cloud/服务注册与发现/Spring-Cloud-Eureka/image-20190131155138441.png" alt="创建Spring项目"></p>
-<h1 id="2-填充项目信息"><a href="#2-填充项目信息" class="headerlink" title="2. 填充项目信息"></a>2. 填充项目信息</h1><p><img src="/2019/01/31/Spring Cloud/服务注册与发现/Spring-Cloud-Eureka/image-20190131155241197.png" alt=""></p>
-<h3 id="3-选择项目类型为-Cloud-Discovery-中的-Eureka-Server"><a href="#3-选择项目类型为-Cloud-Discovery-中的-Eureka-Server" class="headerlink" title="3. 选择项目类型为 Cloud Discovery 中的 Eureka Server"></a>3. 选择项目类型为 Cloud Discovery 中的 Eureka Server</h3><p><img src="/2019/01/31/Spring Cloud/服务注册与发现/Spring-Cloud-Eureka/image-20190131155453826.png" alt=""></p>
-<h3 id="4-完成创建"><a href="#4-完成创建" class="headerlink" title="4. 完成创建"></a>4. 完成创建</h3><p><img src="/2019/01/31/Spring Cloud/服务注册与发现/Spring-Cloud-Eureka/image-20190131160337079.png" alt=""></p>
+<h1 id="2-填充项目信息"><a href="#2-填充项目信息" class="headerlink" title="2. 填充项目信息"></a>2. 填充项目信息</h1><p><img src="/2019/01/31/Spring Cloud/服务注册与发现/Spring-Cloud-Eureka/image-20190131155241197.png" alt="填充项目信息"></p>
+<h3 id="3-选择项目类型为-Cloud-Discovery-中的-Eureka-Server"><a href="#3-选择项目类型为-Cloud-Discovery-中的-Eureka-Server" class="headerlink" title="3. 选择项目类型为 Cloud Discovery 中的 Eureka Server"></a>3. 选择项目类型为 Cloud Discovery 中的 Eureka Server</h3><p><img src="/2019/01/31/Spring Cloud/服务注册与发现/Spring-Cloud-Eureka/image-20190131155453826.png" alt="选择Eureka Server"></p>
+<h3 id="4-完成创建"><a href="#4-完成创建" class="headerlink" title="4. 完成创建"></a>4. 完成创建</h3><p><img src="/2019/01/31/Spring Cloud/服务注册与发现/Spring-Cloud-Eureka/image-20190131160337079.png" alt="完成创建"></p>
 <h3 id="5-添加注解-EnableEurekaServer"><a href="#5-添加注解-EnableEurekaServer" class="headerlink" title="5. 添加注解 @EnableEurekaServer"></a>5. 添加注解 @EnableEurekaServer</h3><pre><code class="Java">@SpringBootApplication
 @EnableEurekaServer
 public class EurekaApplication {
@@ -168,7 +168,7 @@ spring:
 server:
   port: 8761
 </code></pre>
-<h3 id="7-启动-Eureka-Server"><a href="#7-启动-Eureka-Server" class="headerlink" title="7. 启动 Eureka Server"></a>7. 启动 Eureka Server</h3><p><img src="/2019/01/31/Spring Cloud/服务注册与发现/Spring-Cloud-Eureka/image-20190131172458551.png" alt=""></p>
+<h3 id="7-启动-Eureka-Server"><a href="#7-启动-Eureka-Server" class="headerlink" title="7. 启动 Eureka Server"></a>7. 启动 Eureka Server</h3><p><img src="/2019/01/31/Spring Cloud/服务注册与发现/Spring-Cloud-Eureka/image-20190131172458551.png" alt="Eureka Server信息"></p>
 <p>这样，一个简单的Eureka Server就启动完成了。</p>
 
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
@@ -194,7 +194,7 @@ server:
                 <div class="subbox">
                     <img src="/img/avatar.jpg" height="300" width="300">
                     <p>吴鑫康</p>
-                    <span>Talk is cheap. Show me the code. ———— Linus Torvalds</span>
+                    <span>Talk is cheap Show me the code</span>
                     <dl>
                         <dd><a href="https://github.com/zjxjwxk" target="_blank"><span class=" iconfont icon-github"></span></a></dd>
                         <dd><a href="https://twitter.com/zjxjwxk" target="_blank"><span class=" iconfont icon-twitter"></span></a></dd>
@@ -407,7 +407,7 @@ server:
         var typedTextEl = $('.typed-text');
         if (typedTextEl && typedTextEl.length > 0) {
             var typed = new Typed('.typed-text', {
-                strings: ["Talk is cheap. Show me the code. ———— Linus Torvalds", "废话少说，放码过来"],
+                strings: ["Talk is cheap Show me the code", "废话少说 放码过来"],
                 typeSpeed: 90,
                 loop: true,
                 loopCount: Infinity,
