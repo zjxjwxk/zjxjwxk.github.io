@@ -353,14 +353,14 @@ audio {
   z-index: 10;
   position: relative;
   display: flex;
-  -webkit-background-size: 84px 32px;
-  -moz-background-size: 84px 32px;
-  background-size: 84px 32px;
+  -webkit-background-size: 107px 32px;
+  -moz-background-size: 107px 32px;
+  background-size: 107px 32px;
   background-repeat: no-repeat;
   background-position: center center;
   -webkit-mask-box-image: url("/img/logo.png");
   background-color: #fff;
-  width: 84px;
+  width: 107px;
   height: 32px;
   mask-image: url("/img/logo.png");
   mask-size: contain;
