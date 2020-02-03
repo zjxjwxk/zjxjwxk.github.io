@@ -160,7 +160,16 @@
 </code></pre>
 <p>当前ssh窗口被锁定，可按CTRL + C打断程序运行，或直接关闭窗口让程序退出。</p>
 <p>那如何让窗口不被锁定？</p>
-<pre><code class="shell">java -jar application...</code></pre>
+<pre><code class="shell">java -jar application.jar &amp;
+</code></pre>
+<p>&amp;代表在后台运行。</p>
+<p>当前ssh窗口不被锁定，但是当窗口关闭时，程序中止运行。</p>
+<p>继续改进，如何让窗口关闭时，程序仍然运行？</p>
+<pre><code class="shell">nohup java -jar application.jar &amp;
+</code></pre>
+<p>nohup 意思是不挂断运行命令,当账户退出或终端关闭时,程序仍然运行。</p>
+<p>那怎么不打印该程序输出的内容，而写入某个文件中呢？</p>
+<pre><code class="shell">nohup java -jar application...</code></pre>
             
             <span class="read-more"><a href="/2019/01/30/Linux/CentOS/CentOS jar包后台运行/" title="查看全文" class="posttitle">查看全文</a>
                 <b class="iconfont icon-arrow-right- gradient-text"></b></span>

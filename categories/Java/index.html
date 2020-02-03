@@ -157,7 +157,12 @@
         <div class="md-content animated fadeIn">
             
             <p>想要一探 JDK 内部的实现机制，最便捷的捷径之一就是自己编译一套 JDK，通过阅读和跟踪调试 JDK 源码去了解 Java 技术体系的原理。本人选择了 OpenJDK 进行编译。</p>
-<p>获取 JDK 源码...</p>
+<p>获取 JDK 源码有两种方式：</p>
+<h3 id="1-通过-Mercurial-代码版本管理工具从-Repository-中直接取得源码"><a href="#1-通过-Mercurial-代码版本管理工具从-Repository-中直接取得源码" class="headerlink" title="(1). 通过 Mercurial 代码版本管理工具从 Repository 中直接取得源码"></a>(1). 通过 Mercurial 代码版本管理工具从 Repository 中直接取得源码</h3><p>Repository 地址：<a href="http://hg.openjdk.java.net/jdk7u/jdk7u" target="_blank" rel="noopener">http://hg.openjdk.java.net/jdk7u/jdk7u</a></p>
+<p>获取过程如以下代码所示</p>
+<pre><code class="shell">hg clone http://hg.openjdk.java.net/jdk7u/jdk7u-dev
+cd jdk7u-dev
+chmod 755 get_source...</code></pre>
             
             <span class="read-more"><a href="/2019/03/11/Java/JVM/自己编译JDK/" title="查看全文" class="posttitle">查看全文</a>
                 <b class="iconfont icon-arrow-right- gradient-text"></b></span>

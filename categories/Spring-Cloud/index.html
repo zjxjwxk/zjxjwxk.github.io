@@ -160,7 +160,21 @@
 <li>基于 Netflix Eureka 做了二次封装</li>
 <li>两个组件组成：<ul>
 <li>Eureka Server 注册中心<ul>
-<li>作为具有服务注册功能的服务器，是服务注册中心，系统中的其他微服务使用 Eureka Client...</li></ul></li></ul></li></ul>
+<li>作为具有服务注册功能的服务器，是服务注册中心，系统中的其他微服务使用 Eureka Client 连接到Eureka Server ，并维持心跳连接以监控各个微服务是否正常运行。</li>
+</ul>
+</li>
+<li>Eureka Client 服务注册<ul>
+<li>用于简化与服务器的交互，作为轮询负载均衡器，并提供服务的故障切换支持。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="1-创建Spring项目"><a href="#1-创建Spring项目" class="headerlink" title="1. 创建Spring项目"></a>1. 创建Spring项目</h3><p></p>
+<p></p>
+<h3 id="3-选择项目类型为-Cloud-Discovery-中的-Eureka-Server"><a href="#3-选择项目类型为-Cloud-Discovery-中的-Eureka-Server" class="headerlink" title="3. 选择项目类型为 Cloud Discovery 中的 Eureka Server"></a>3. 选择项目类型为 Cloud Discovery 中的 Eureka Server</h3><p></p>
+<h3 id="4-完成创建"><a href="#4-完成创建" class="headerlink" title="4. 完成创建"></a>4. 完成创建</h3><p></p>
+<h3 id="5-添加注解-EnableEurekaServer"><a href="#5-添加注解-EnableEurekaServer" class="headerlink" title="5. 添加注解 @EnableEurekaServer"></a>5. 添加注解 @EnableEurekaServer</h3><pre><code class="Java">@...</code></pre>
             
             <span class="read-more"><a href="/2019/01/31/Spring Cloud/服务注册与发现/Spring-Cloud-Eureka/" title="查看全文" class="posttitle">查看全文</a>
                 <b class="iconfont icon-arrow-right- gradient-text"></b></span>
