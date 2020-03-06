@@ -339,14 +339,39 @@ public class QuickStartConsumer {
 <li>直连提供者限制了分布式的易扩展性</li>
 </ul>
 <h3 id="Dubbo架构"><a href="#Dubbo架构" class="headerlink" title="Dubbo架构"></a>Dubbo架构</h3><p><img src="/2020/03/06/Dubbo/Dubbo微服务影院系列/环境搭建/Dubbo微服务影院系列（3）：环境搭建/image-20200306234710428.png" alt="Dubbo架构"></p>
-<ul>
-<li>| 节点      | 角色说明                                     |<br>| ——— | ——————————————– |<br>| Provider  | 暴露服务的服务提供方                         |<br>| Consumer  | 调用远程服务的服务消费方                     |<br>| Registry  | 服务注册与发现的注册中心，通常使用 ZooKeeper |<br>| Monitor   | 统计服务的调用次数和调用时间的监控中心       |<br>| Container | 服务运行容器                                 |</li>
-</ul>
+<table>
+<thead>
+<tr>
+<th>节点</th>
+<th>角色说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Provider</td>
+<td>暴露服务的服务提供方</td>
+</tr>
+<tr>
+<td>Consumer</td>
+<td>调用远程服务的服务消费方</td>
+</tr>
+<tr>
+<td>Registry</td>
+<td>服务注册与发现的注册中心，通常使用 ZooKeeper</td>
+</tr>
+<tr>
+<td>Monitor</td>
+<td>统计服务的调用次数和调用时间的监控中心</td>
+</tr>
+<tr>
+<td>Container</td>
+<td>服务运行容器</td>
+</tr>
+</tbody>
+</table>
 <h2 id="ZooKeeper安装和启动"><a href="#ZooKeeper安装和启动" class="headerlink" title="ZooKeeper安装和启动"></a>ZooKeeper安装和启动</h2><ul>
-<li><p>从 Apache ZooKeeper 官网下载 <a href="https://www.apache.org/dyn/closer.cgi/zookeeper" target="_blank" rel="noopener">https://www.apache.org/dyn/closer.cgi/zookeeper</a></p>
-</li>
-<li><p>在 conf 目录下将 zoo-sample.cfg 改为 zoo.cfg</p>
-</li>
+<li>从 Apache ZooKeeper 官网下载 <a href="https://www.apache.org/dyn/closer.cgi/zookeeper" target="_blank" rel="noopener">https://www.apache.org/dyn/closer.cgi/zookeeper</a></li>
+<li>在 conf 目录下将 zoo-sample.cfg 改为 zoo.cfg</li>
 <li><p>在 bin 目录下启动 zkServer.sh </p>
 <pre><code class="sh">sh zkServer.sh start
 </code></pre>
