@@ -5,21 +5,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Dubbo微服务影院系列（2）：微服务入门 - Zjxjwxk&#39;s Blog</title>
+    <title>Tag: Algorithm - Zjxjwxk&#39;s Blog</title>
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="google" content="notranslate">
     <meta name="keywords" content="吴鑫康 zjxjwxk Wxk Java,"> 
-    <meta name="description" content="传统业务应用
-传统应用带来的问题
-单一业务开发和迭代困难
-扩容困难
-部署和回滚困难
-
-微服务发展历程面向服务开发 - SOA
-微服务开发微服务概述
-微服务是一种将业务系统进一步拆分的架构风格
-微服务,"> 
+    
     <meta name="author" content="吴鑫康"> 
     <link rel="alternative" href="atom.xml" title="Zjxjwxk&#39;s Blog" type="application/atom+xml"> 
     <link rel="icon" href="/img/favicon.png"> 
@@ -45,78 +36,135 @@
     </div>
     <span id="config-title" style="display:none">Zjxjwxk&#39;s Blog</span>
     <div id="loader"></div>
-    <div id="single">
-    <div class="scrollbar gradient-bg-rev"></div>
-<div id="top" style="display: block;">
-    <div class="bar" style="width: 0;"></div>
-    <div class="navigation animated fadeIn fast delay-1s">
-        <img id="home-icon" class="icon-home" src="/img/favicon.png" alt="" data-url="https://zjxjwxk.com">
-        <div id="play-icon" title="Play/Pause" class="iconfont icon-play"></div>
-        <h3 class="subtitle">Dubbo微服务影院系列（2）：微服务入门</h3>
-        <div class="social">
-            <!--        <div class="like-icon">-->
-            <!--            <a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
-            <!--        </div>-->
-            <div>
-                <div class="share">
-                    
-                        <a href="javascript:;" class="iconfont icon-share1"></a>
-                        <div class="share-component-cc" data-disabled="facebook,douban,linkedin,diandian,tencent,google"></div>
-                    
-                </div>
-            </div>
+    <div class="nav">
+    <ul id="menu-menu" class="menu">
+        
+        <li class="animated fadeInDown menu-item menu-item-type-post_type menu-item-object-page">
+            <a href="/whoami/" title="ABOUT">ABOUT</a>
+        </li>
+        
+        <li class="animated fadeInDown menu-item menu-item-type-post_type menu-item-object-page">
+            <a href="/categories/" title="CATEGORIES">CATEGORIES</a>
+        </li>
+        
+        <li class="animated fadeInDown menu-item menu-item-type-post_type menu-item-object-page">
+            <a href="/tags/" title="TAGS">TAGS</a>
+        </li>
+        
+        <li class="animated fadeInDown menu-item menu-item-type-post_type menu-item-object-page">
+            <a href="/archives/" title="ARCHIVES">ARCHIVES</a>
+        </li>
+        
+    </ul>
+    <p class="copyright" id="copyright">
+        &copy; 2020 吴鑫康.
+        Powered by <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a>
+        Theme <a href="https://github.com/TriDiamond/hexo-theme-obsidian" title="Obsidian" target="_blank" rel="noopener">Obsidian</a>
+    </p>
+</div>
+
+<div id="container">
+    
+<div class="search-box">
+    <form class="site-search-form">
+        <span class="iconfont icon-search"></span>
+        <input type="text" id="local-search-input" class="st-search-input">
+        <div class="iconfont icon-cross search-box-close"></div>
+    </form>
+    <div class="search-scrollable">
+        <div id="local-search-result" class="local-search-result-cls" data-initialise="首次搜索，正在载入索引文件，请稍后……" data-start="输入关键词搜索。" data-empty="没有找到内容，请尝试更换检索词。">
+            <span>输入关键词搜索。</span>
         </div>
     </div>
 </div>
-
-    <div class="section">
-        <div class="article-header-wrapper">
-    <div class="article-header">
-        <div class="article-cover animated fadeIn" style="
-            animation-delay: 600ms;
-            animation-duration: 1.2s;
-            background-image: 
-                radial-gradient(ellipse closest-side, rgba(0, 0, 0, 0.65), #100e17),
+<div id="header">
+    <div>
+        <div class="logo animated fadeInDown">
+            <img src="/img/favicon.png" alt="">
+            <a class="image-logo" href="/"></a>
+        </div>
+        <ul id="menu-menu" class="menu text-menu">
+            
+            <li class="animated fadeInDown menu-item menu-item-type-post_type menu-item-object-page">
+                <a href="/whoami/" title="ABOUT" class="menu-link">ABOUT</a>
+            </li>
+            
+            <li class="animated fadeInDown menu-item menu-item-type-post_type menu-item-object-page">
+                <a href="/categories/" title="CATEGORIES" class="menu-link">CATEGORIES</a>
+            </li>
+            
+            <li class="animated fadeInDown menu-item menu-item-type-post_type menu-item-object-page">
+                <a href="/tags/" title="TAGS" class="menu-link">TAGS</a>
+            </li>
+            
+            <li class="animated fadeInDown menu-item menu-item-type-post_type menu-item-object-page">
+                <a href="/archives/" title="ARCHIVES" class="menu-link">ARCHIVES</a>
+            </li>
+            
+            
+            <li class="animated fadeInDown search-bar iconfont icon-search"></li>
+            
+        </ul>
+        <div class="iconfont icon-menu switchmenu gradient-text animated fadeInDown"></div>
+    </div>
+</div>
+<div id="screen">
+    <div id="mark">
+        <div class="cover animated fadeIn" style="
+            animation-delay: 900ms;
+            animation-duration: 2.8s;
+            background-image:
+                radial-gradient(ellipse closest-side, rgba(0, 0, 0, 0.56), #100e17),
                 url(/img/cover.jpg);">
         </div>
-        <div class="else">
-            <p class="animated fadeInDown">
-                
-                <a href="/categories/Dubbo"><b>「
-                    </b>DUBBO<b> 」</b></a>
-                
-                三月 06, 2020
-            </p>
-            <h3 class="post-title animated fadeInDown"><a href="/2020/03/06/Dubbo/Dubbo微服务影院系列/微服务入门/Dubbo微服务影院系列（2）：微服务入门/" title="Dubbo微服务影院系列（2）：微服务入门">Dubbo微服务影院系列（2）：微服务入门</a>
-            </h3>
+    </div>
+    
+    <div id="post0" class="else">
+        <p class="animated fadeInDown">
             
-            <p class="post-count animated fadeInDown">
-                
-                <span>
-                    <b class="iconfont icon-text2"></b> <i>文章字数</i>
-                    1.1k
-                </span>
-                
-                
-                <span>
-                    <b class="iconfont icon-timer__s"></b> <i>阅读约需</i>
-                    1 mins.
-                </span>
-                
-                
-                <span id="/2020/03/06/Dubbo/Dubbo微服务影院系列/微服务入门/Dubbo微服务影院系列（2）：微服务入门/" class="leancloud_visitors" data-flag-title="Dubbo微服务影院系列（2）：微服务入门">
-                    <b class="iconfont icon-read"></b> <i>阅读次数</i>
-                    <span class="leancloud-visitors-count">1000000</span>
-                </span>
-                
-                
-            </p>
+            <a href="/categories/PAT"><b>「
+                </b>PAT<b> 」</b></a>
+            
+            三月 08, 2020
+        </p>
+        <h3 class="post-title animated fadeInDown">
+            <a href="/2020/03/08/PAT/Advanced_Level/A1014/" title="A1014 Waiting in Line (30分)" class="posttitle">A1014 Waiting in Line (30分)</a></h3>
+        
+        <p class="post-count animated fadeInDown">
+            
+            <span>
+                <b class="iconfont icon-text2"></b> <i>文章字数</i>
+                5.3k
+            </span>
             
             
-            <ul class="animated fadeInDown post-tags-list"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/Dubbo/">Dubbo</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/微服务架构/">微服务架构</a></li></ul>
+            <span>
+                <b class="iconfont icon-timer__s"></b> <i>阅读约需</i>
+                5 mins.
+            </span>
             
+            
+            <span id="/2020/03/08/PAT/Advanced_Level/A1014/" class="leancloud_visitors" data-flag-title="">
+                <b class="iconfont icon-read"></b> <i>阅读次数</i>
+                <span class="leancloud-visitors-count">1000000</span>
+            </span>
+            
+        </p>
+        
+        
+        <ul class="animated fadeInDown post-tags-list"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/Algorithm/">Algorithm</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/PAT/">PAT</a></li></ul>
+        
+        <div class="md-content animated fadeIn">
+            
+            <p>Suppose a bank has N windows open for service. There is a yellow line in front of the windows which devides the waiting area into two parts. The rules for the customers to wait in line are:</p>
+<ul>
+<li>The space inside the yellow line in front of each window is enough to contain a line with M customers. Hence ...</li></ul>
+            
+            <span class="read-more"><a href="/2020/03/08/PAT/Advanced_Level/A1014/" title="查看全文" class="posttitle">查看全文</a>
+                <b class="iconfont icon-arrow-right- gradient-text"></b></span>
         </div>
     </div>
+    
 </div>
 
 <div class="screen-gradient-after">
@@ -124,88 +172,21 @@
         <div class="screen-gradient-content-inside">
             <div class="bold-underline-links screen-gradient-sponsor">
                 <p>
-                    <span class="animated fadeIn delay-1s"></span>
+                    <span class="typed-text"></span>
                 </p>
             </div>
         </div>
     </div>
 </div>
 
-<div class="article">
-    <div class="main">
-        <div class="content markdown animated fadeIn">
-            <h1 id="传统业务应用"><a href="#传统业务应用" class="headerlink" title="传统业务应用"></a>传统业务应用</h1><p><img src="/2020/03/06/Dubbo/Dubbo微服务影院系列/微服务入门/Dubbo微服务影院系列（2）：微服务入门/image-20200306231434458.png" alt="传统业务应用"></p>
-<h1 id="传统应用带来的问题"><a href="#传统应用带来的问题" class="headerlink" title="传统应用带来的问题"></a>传统应用带来的问题</h1><ul>
-<li>单一业务开发和迭代困难</li>
-<li>扩容困难</li>
-<li>部署和回滚困难</li>
-</ul>
-<h1 id="微服务发展历程"><a href="#微服务发展历程" class="headerlink" title="微服务发展历程"></a>微服务发展历程</h1><h2 id="面向服务开发-SOA"><a href="#面向服务开发-SOA" class="headerlink" title="面向服务开发 - SOA"></a>面向服务开发 - SOA</h2><p><img src="/2020/03/06/Dubbo/Dubbo微服务影院系列/微服务入门/Dubbo微服务影院系列（2）：微服务入门/image-20200306231555431.png" alt="SOA"></p>
-<h2 id="微服务开发"><a href="#微服务开发" class="headerlink" title="微服务开发"></a>微服务开发</h2><h1 id="微服务概述"><a href="#微服务概述" class="headerlink" title="微服务概述"></a>微服务概述</h1><ul>
-<li>微服务是一种将业务系统进一步拆分的架构风格</li>
-<li>微服务强调每个单一业务都独立运行</li>
-<li>每个单一服务都应该使用更轻量的机制保持通信</li>
-<li>服务不强调环境，可以不同语言或数据源</li>
-</ul>
-<h1 id="微服务选择"><a href="#微服务选择" class="headerlink" title="微服务选择"></a>微服务选择</h1><ul>
-<li>Dubbo</li>
-<li>Spring Cloud</li>
-<li>Zero ICE</li>
-</ul>
-
-            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
-            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
-                <source type="audio/mpeg" src="">
-            </audio>
-            
-            <ul id="audio-list" style="display:none">
-                
-                
-                <li title="0" data-url="/statics/Silent-express.mp3"></li>
-                
-                    
-            </ul>
-            
-            
-            
-            <div id="vcomments"></div>
-            
-        </div>
-        <div class="sidebar">
-            <div class="box animated fadeInRight">
-                <div class="subbox">
-                    <img src="/img/avatar.jpg" height="300" width="300">
-                    <p>吴鑫康</p>
-                    <span>Talk is cheap Show me the code</span>
-                    <dl>
-                        <dd><a href="https://github.com/zjxjwxk" target="_blank"><span class=" iconfont icon-github"></span></a></dd>
-                        <dd><a href="https://twitter.com/zjxjwxk" target="_blank"><span class=" iconfont icon-twitter"></span></a></dd>
-                        <dd><a href="https://stackoverflow.com/users/10336671/wxk?tab=profile" target="_blank"><span class=" iconfont icon-stack-overflow"></span></a></dd>
-                    </dl>
-                </div>
-                <ul>
-                    <li><a href="/">18 <p>文章</p></a></li>
-                    <li><a href="/categories">7 <p>分类</p></a></li>
-                    <li><a href="/tags">14 <p>标签</p></a></li>
-                </ul>
-            </div>
-            
-            
-            
-            <div class="box sticky animated fadeInRight faster">
-                <div id="toc" class="subbox">
-                    <h4>目录</h4>
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#传统业务应用"><span class="toc-number">1.</span> <span class="toc-text">传统业务应用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#传统应用带来的问题"><span class="toc-number">2.</span> <span class="toc-text">传统应用带来的问题</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#微服务发展历程"><span class="toc-number">3.</span> <span class="toc-text">微服务发展历程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#面向服务开发-SOA"><span class="toc-number">3.1.</span> <span class="toc-text">面向服务开发 - SOA</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#微服务开发"><span class="toc-number">3.2.</span> <span class="toc-text">微服务开发</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#微服务概述"><span class="toc-number">4.</span> <span class="toc-text">微服务概述</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#微服务选择"><span class="toc-number">5.</span> <span class="toc-text">微服务选择</span></a></li></ol>
-                </div>
-            </div>
-            
-            
-        </div>
+    <div id="primary">
+        
     </div>
+    
 </div>
+<div id="preview"></div>
 
-    </div>
-</div>
+
     <div id="back-to-top" class="animated fadeIn faster">
         <div class="flow"></div>
         <span class="percentage animated fadeIn faster">0%</span>

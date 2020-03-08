@@ -5,21 +5,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Dubbo微服务影院系列（2）：微服务入门 - Zjxjwxk&#39;s Blog</title>
+    <title>A1014 Waiting in Line (30分) - Zjxjwxk&#39;s Blog</title>
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="google" content="notranslate">
     <meta name="keywords" content="吴鑫康 zjxjwxk Wxk Java,"> 
-    <meta name="description" content="传统业务应用
-传统应用带来的问题
-单一业务开发和迭代困难
-扩容困难
-部署和回滚困难
-
-微服务发展历程面向服务开发 - SOA
-微服务开发微服务概述
-微服务是一种将业务系统进一步拆分的架构风格
-微服务,"> 
+    <meta name="description" content="Suppose a bank has N windows open for service. There is a yellow line in front of the windows which,"> 
     <meta name="author" content="吴鑫康"> 
     <link rel="alternative" href="atom.xml" title="Zjxjwxk&#39;s Blog" type="application/atom+xml"> 
     <link rel="icon" href="/img/favicon.png"> 
@@ -52,7 +43,7 @@
     <div class="navigation animated fadeIn fast delay-1s">
         <img id="home-icon" class="icon-home" src="/img/favicon.png" alt="" data-url="https://zjxjwxk.com">
         <div id="play-icon" title="Play/Pause" class="iconfont icon-play"></div>
-        <h3 class="subtitle">Dubbo微服务影院系列（2）：微服务入门</h3>
+        <h3 class="subtitle">A1014 Waiting in Line (30分)</h3>
         <div class="social">
             <!--        <div class="like-icon">-->
             <!--            <a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
@@ -82,29 +73,29 @@
         <div class="else">
             <p class="animated fadeInDown">
                 
-                <a href="/categories/Dubbo"><b>「
-                    </b>DUBBO<b> 」</b></a>
+                <a href="/categories/PAT"><b>「
+                    </b>PAT<b> 」</b></a>
                 
-                三月 06, 2020
+                三月 08, 2020
             </p>
-            <h3 class="post-title animated fadeInDown"><a href="/2020/03/06/Dubbo/Dubbo微服务影院系列/微服务入门/Dubbo微服务影院系列（2）：微服务入门/" title="Dubbo微服务影院系列（2）：微服务入门">Dubbo微服务影院系列（2）：微服务入门</a>
+            <h3 class="post-title animated fadeInDown"><a href="/2020/03/08/PAT/Advanced_Level/A1014/" title="A1014 Waiting in Line (30分)">A1014 Waiting in Line (30分)</a>
             </h3>
             
             <p class="post-count animated fadeInDown">
                 
                 <span>
                     <b class="iconfont icon-text2"></b> <i>文章字数</i>
-                    1.1k
+                    5.3k
                 </span>
                 
                 
                 <span>
                     <b class="iconfont icon-timer__s"></b> <i>阅读约需</i>
-                    1 mins.
+                    5 mins.
                 </span>
                 
                 
-                <span id="/2020/03/06/Dubbo/Dubbo微服务影院系列/微服务入门/Dubbo微服务影院系列（2）：微服务入门/" class="leancloud_visitors" data-flag-title="Dubbo微服务影院系列（2）：微服务入门">
+                <span id="/2020/03/08/PAT/Advanced_Level/A1014/" class="leancloud_visitors" data-flag-title="A1014 Waiting in Line (30分)">
                     <b class="iconfont icon-read"></b> <i>阅读次数</i>
                     <span class="leancloud-visitors-count">1000000</span>
                 </span>
@@ -113,7 +104,7 @@
             </p>
             
             
-            <ul class="animated fadeInDown post-tags-list"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/Dubbo/">Dubbo</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/微服务架构/">微服务架构</a></li></ul>
+            <ul class="animated fadeInDown post-tags-list"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/Algorithm/">Algorithm</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/PAT/">PAT</a></li></ul>
             
         </div>
     </div>
@@ -134,24 +125,93 @@
 <div class="article">
     <div class="main">
         <div class="content markdown animated fadeIn">
-            <h1 id="传统业务应用"><a href="#传统业务应用" class="headerlink" title="传统业务应用"></a>传统业务应用</h1><p><img src="/2020/03/06/Dubbo/Dubbo微服务影院系列/微服务入门/Dubbo微服务影院系列（2）：微服务入门/image-20200306231434458.png" alt="传统业务应用"></p>
-<h1 id="传统应用带来的问题"><a href="#传统应用带来的问题" class="headerlink" title="传统应用带来的问题"></a>传统应用带来的问题</h1><ul>
-<li>单一业务开发和迭代困难</li>
-<li>扩容困难</li>
-<li>部署和回滚困难</li>
+            <p>Suppose a bank has N windows open for service. There is a yellow line in front of the windows which devides the waiting area into two parts. The rules for the customers to wait in line are:</p>
+<ul>
+<li>The space inside the yellow line in front of each window is enough to contain a line with M customers. Hence when all the N lines are full, all the customers after (and including) the (NM+1)st one will have to wait in a line behind the yellow line.</li>
+<li>Each customer will choose the shortest line to wait in when crossing the yellow line. If there are two or more lines with the same length, the customer will always choose the window with the smallest number.</li>
+<li>Customer[i] will take T[i] minutes to have his/her transaction processed.</li>
+<li>The first N customers are assumed to be served at 8:00am.</li>
 </ul>
-<h1 id="微服务发展历程"><a href="#微服务发展历程" class="headerlink" title="微服务发展历程"></a>微服务发展历程</h1><h2 id="面向服务开发-SOA"><a href="#面向服务开发-SOA" class="headerlink" title="面向服务开发 - SOA"></a>面向服务开发 - SOA</h2><p><img src="/2020/03/06/Dubbo/Dubbo微服务影院系列/微服务入门/Dubbo微服务影院系列（2）：微服务入门/image-20200306231555431.png" alt="SOA"></p>
-<h2 id="微服务开发"><a href="#微服务开发" class="headerlink" title="微服务开发"></a>微服务开发</h2><h1 id="微服务概述"><a href="#微服务概述" class="headerlink" title="微服务概述"></a>微服务概述</h1><ul>
-<li>微服务是一种将业务系统进一步拆分的架构风格</li>
-<li>微服务强调每个单一业务都独立运行</li>
-<li>每个单一服务都应该使用更轻量的机制保持通信</li>
-<li>服务不强调环境，可以不同语言或数据源</li>
-</ul>
-<h1 id="微服务选择"><a href="#微服务选择" class="headerlink" title="微服务选择"></a>微服务选择</h1><ul>
-<li>Dubbo</li>
-<li>Spring Cloud</li>
-<li>Zero ICE</li>
-</ul>
+<p>Now given the processing time of each customer, you are supposed to tell the exact time at which a customer has his/her business done.</p>
+<p>For example, suppose that a bank has 2 windows and each window may have 2 customers waiting inside the yellow line. There are 5 customers waiting with transactions taking 1, 2, 6, 4 and 3 minutes, respectively. At 08:00 in the morning, customer[1] is served at window[1] while customer[2] is served at window[2]. Customer[3] will wait in front of window[1] and customer[4] will wait in front of window[2]. Customer[5] will wait behind the yellow line.</p>
+<p>At 08:01, customer[1] is done and customer[5] enters the line in front of window[1] since that line seems shorter now. Customer[2] will leave at 08:02, customer[4] at 08:06, customer[3] at 08:07, and finally customer[5] at 08:10.</p>
+<h3 id="Input-Specification"><a href="#Input-Specification" class="headerlink" title="Input Specification:"></a>Input Specification:</h3><p>Each input file contains one test case. Each case starts with a line containing 4 positive integers: <em>N</em> (≤20, number of windows), <em>M</em> (≤10, the maximum capacity of each line inside the yellow line), <em>K</em> (≤1000, number of customers), and <em>Q</em> (≤1000, number of customer queries).</p>
+<p>The next line contains <em>K</em> positive integers, which are the processing time of the <em>K</em> customers.</p>
+<p>The last line contains <em>Q</em> positive integers, which represent the customers who are asking about the time they can have their transactions done. The customers are numbered from 1 to <em>K</em>.</p>
+<h3 id="Output-Specification"><a href="#Output-Specification" class="headerlink" title="Output Specification:"></a>Output Specification:</h3><p>For each of the <em>Q</em> customers, print in one line the time at which his/her transaction is finished, in the format <code>HH:MM</code> where <code>HH</code> is in [08, 17] and <code>MM</code> is in [00, 59]. Note that since the bank is closed everyday after 17:00, for those customers who cannot be served before 17:00, you must output <code>Sorry</code> instead.</p>
+<h3 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input:"></a>Sample Input:</h3><pre><code class="in">2 2 7 5
+1 2 6 4 3 534 2
+3 4 5 6 7
+</code></pre>
+<h3 id="Sample-Output"><a href="#Sample-Output" class="headerlink" title="Sample Output:"></a>Sample Output:</h3><pre><code class="out">08:07
+08:06
+08:10
+17:00
+Sorry
+</code></pre>
+<p>题⽬大意：n个窗口，每个窗口可以排队m人。有k位⽤用户需要服务，给出了每位⽤户需要的minute数，所有客户在8点开始服务，如果有窗口还没排满就入队，否则就在黄线外等候。如果有某⼀列有一个用户走了服务完毕了，黄线外的人就进来一个。如果同时就选窗⼝数小的。求q个人的服务结束时间。</p>
+<p>坑点：如果⼀个客户在17:00以及以后还没有开始服务（<strong>此处不是结束服务是开始服务</strong>）就不再服务输出sorry；如果这个服务已经开始了了，无论时间多长都要等他服务完毕。如果当成结束服务，则测试点2，4，5不能通过。</p>
+<pre><code class="C++">#include &lt;cstdio&gt;
+#include &lt;queue&gt;
+using namespace std;
+
+const int maxk = 1001, maxn = 21, maxTime = 540;
+int n, m, k, q, t[maxk], ans[maxk] = {0};
+
+int main() {
+    scanf(&quot;%d %d %d %d&quot;, &amp;n, &amp;m, &amp;k, &amp;q);
+    for (int i = 1; i &lt;= k; i++) {
+        scanf(&quot;%d&quot;, &amp;t[i]);
+    }
+    queue&lt;int&gt; que[maxn];
+    int time = 0, index = 0, query;
+    for (int i = 1; i &lt;= m; i++) {
+        for (int j = 1; j &lt;= n; j++) {
+            que[j].push(++index);
+            if (index == k) {
+                break;
+            }
+        }
+        if (index == k) {
+            break;
+        }
+    }
+    while (time != maxTime - 1) {
+        time++;
+        for (int i = 1; i &lt;= n; i++) {
+            if (que[i].size() &gt; 0) {
+                int front = que[i].front();
+                if (t[front] &gt; 0) {
+                    t[front]--;
+                    if (t[front] == 0) {
+                        que[i].pop();
+                        ans[front] = time;
+                        if (index != k) {
+                            que[i].push(++index);
+                        }
+                    }
+                }
+            }
+        }
+    }
+  // 额外处理到17:00还没有服务完的客户
+    for (int i = 1; i &lt;= n; i++) {
+        if (que[i].size() &gt; 0) {
+            int front = que[i].front();
+            ans[front] = time + t[front];
+        }
+    }
+    for (int i = 0; i &lt; q; i++) {
+        scanf(&quot;%d&quot;, &amp;query);
+        if (ans[query] != 0) {
+            printf(&quot;%02d:%02d\n&quot;, 8 + ans[query] / 60, ans[query] % 60);
+        } else {
+            printf(&quot;Sorry\n&quot;);
+        }
+    }
+    return 0;
+}
+</code></pre>
 
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
@@ -195,7 +255,7 @@
             <div class="box sticky animated fadeInRight faster">
                 <div id="toc" class="subbox">
                     <h4>目录</h4>
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#传统业务应用"><span class="toc-number">1.</span> <span class="toc-text">传统业务应用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#传统应用带来的问题"><span class="toc-number">2.</span> <span class="toc-text">传统应用带来的问题</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#微服务发展历程"><span class="toc-number">3.</span> <span class="toc-text">微服务发展历程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#面向服务开发-SOA"><span class="toc-number">3.1.</span> <span class="toc-text">面向服务开发 - SOA</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#微服务开发"><span class="toc-number">3.2.</span> <span class="toc-text">微服务开发</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#微服务概述"><span class="toc-number">4.</span> <span class="toc-text">微服务概述</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#微服务选择"><span class="toc-number">5.</span> <span class="toc-text">微服务选择</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Input-Specification"><span class="toc-number">1.</span> <span class="toc-text">Input Specification:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Output-Specification"><span class="toc-number">2.</span> <span class="toc-text">Output Specification:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Sample-Input"><span class="toc-number">3.</span> <span class="toc-text">Sample Input:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Sample-Output"><span class="toc-number">4.</span> <span class="toc-text">Sample Output:</span></a></li></ol>
                 </div>
             </div>
             
