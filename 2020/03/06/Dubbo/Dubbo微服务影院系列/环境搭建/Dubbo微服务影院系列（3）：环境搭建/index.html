@@ -427,8 +427,9 @@ public class QuickStartConsumer {
 &lt;/dependency&gt;
 </code></pre>
 <p>在 application.properties 中添加注册中心</p>
-<pre><code>spring.dubbo.registry=zookeeper://localhost:2181
-</code></pre><p>去掉 @Reference 括号中的 url （非直连，而是通过 zookeeper 注册中心）</p>
+<pre><code class="yaml">spring.dubbo.registry=zookeeper://localhost:2181
+</code></pre>
+<p>去掉 @Reference 括号中的 url （非直连，而是通过 zookeeper 注册中心）</p>
 <pre><code class="Java">@Reference
     ServiceAPI serviceAPI;
 </code></pre>
