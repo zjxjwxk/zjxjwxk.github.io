@@ -5,18 +5,21 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Dubbo微服务影院系列（1）：课程导学 - Zjxjwxk&#39;s Blog</title>
+    <title>Dubbo微服务影院系列（2）：微服务入门 - Zjxjwxk&#39;s Blog</title>
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="google" content="notranslate">
     <meta name="keywords" content="吴鑫康 zjxjwxk Wxk Java,"> 
-    <meta name="description" content="为什么使用DubboDubbo 是基于 RPC 通信协议，速度更快
-Dubbo 的多中心配置更灵活
-ZooKeeper
-Redis
+    <meta name="description" content="传统业务应用
+传统应用带来的问题
+单一业务开发和迭代困难
+扩容困难
+部署和回滚困难
 
-Dubbo 可以按需集成其他组件，完成微服务生态环境构建
-Hys,"> 
+微服务发展历程面向服务开发 - SOA
+微服务开发微服务概述
+微服务是一种将业务系统进一步拆分的架构风格
+微服务,"> 
     <meta name="author" content="吴鑫康"> 
     <link rel="alternative" href="atom.xml" title="Zjxjwxk&#39;s Blog" type="application/atom+xml"> 
     <link rel="icon" href="/img/favicon.png"> 
@@ -49,7 +52,7 @@ Hys,">
     <div class="navigation animated fadeIn fast delay-1s">
         <img id="home-icon" class="icon-home" src="/img/favicon.png" alt="" data-url="https://zjxjwxk.com">
         <div id="play-icon" title="Play/Pause" class="iconfont icon-play"></div>
-        <h3 class="subtitle">Dubbo微服务影院系列（1）：课程导学</h3>
+        <h3 class="subtitle">Dubbo微服务影院系列（2）：微服务入门</h3>
         <div class="social">
             <!--        <div class="like-icon">-->
             <!--            <a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
@@ -84,24 +87,24 @@ Hys,">
                 
                 三月 06, 2020
             </p>
-            <h3 class="post-title animated fadeInDown"><a href="/2020/03/06/Dubbo/Dubbo微服务影院系列/课程导学/Dubbo微服务影院系列（1）：课程导学/" title="Dubbo微服务影院系列（1）：课程导学">Dubbo微服务影院系列（1）：课程导学</a>
+            <h3 class="post-title animated fadeInDown"><a href="/2020/03/06/Dubbo/Dubbo微服务影院系列/2.微服务入门/Dubbo微服务影院系列（2）：微服务入门/" title="Dubbo微服务影院系列（2）：微服务入门">Dubbo微服务影院系列（2）：微服务入门</a>
             </h3>
             
             <p class="post-count animated fadeInDown">
                 
                 <span>
                     <b class="iconfont icon-text2"></b> <i>文章字数</i>
-                    1.8k
+                    1.1k
                 </span>
                 
                 
                 <span>
                     <b class="iconfont icon-timer__s"></b> <i>阅读约需</i>
-                    2 mins.
+                    1 mins.
                 </span>
                 
                 
-                <span id="/2020/03/06/Dubbo/Dubbo微服务影院系列/课程导学/Dubbo微服务影院系列（1）：课程导学/" class="leancloud_visitors" data-flag-title="Dubbo微服务影院系列（1）：课程导学">
+                <span id="/2020/03/06/Dubbo/Dubbo微服务影院系列/2.微服务入门/Dubbo微服务影院系列（2）：微服务入门/" class="leancloud_visitors" data-flag-title="Dubbo微服务影院系列（2）：微服务入门">
                     <b class="iconfont icon-read"></b> <i>阅读次数</i>
                     <span class="leancloud-visitors-count">1000000</span>
                 </span>
@@ -131,24 +134,24 @@ Hys,">
 <div class="article">
     <div class="main">
         <div class="content markdown animated fadeIn">
-            <h1 id="为什么使用Dubbo"><a href="#为什么使用Dubbo" class="headerlink" title="为什么使用Dubbo"></a>为什么使用Dubbo</h1><h2 id="Dubbo-是基于-RPC-通信协议，速度更快"><a href="#Dubbo-是基于-RPC-通信协议，速度更快" class="headerlink" title="Dubbo 是基于 RPC 通信协议，速度更快"></a>Dubbo 是基于 RPC 通信协议，速度更快</h2><p><img src="/2020/03/06/Dubbo/Dubbo微服务影院系列/课程导学/Dubbo微服务影院系列（1）：课程导学/image-20200306225758803.png" alt="千万次调用"></p>
-<h2 id="Dubbo-的多中心配置更灵活"><a href="#Dubbo-的多中心配置更灵活" class="headerlink" title="Dubbo 的多中心配置更灵活"></a>Dubbo 的多中心配置更灵活</h2><ul>
-<li>ZooKeeper</li>
-<li>Redis</li>
+            <h1 id="传统业务应用"><a href="#传统业务应用" class="headerlink" title="传统业务应用"></a>传统业务应用</h1><p><img src="/2020/03/06/Dubbo/Dubbo微服务影院系列/2.微服务入门/Dubbo微服务影院系列（2）：微服务入门/image-20200306231434458.png" alt="传统业务应用"></p>
+<h1 id="传统应用带来的问题"><a href="#传统应用带来的问题" class="headerlink" title="传统应用带来的问题"></a>传统应用带来的问题</h1><ul>
+<li>单一业务开发和迭代困难</li>
+<li>扩容困难</li>
+<li>部署和回滚困难</li>
 </ul>
-<h2 id="Dubbo-可以按需集成其他组件，完成微服务生态环境构建"><a href="#Dubbo-可以按需集成其他组件，完成微服务生态环境构建" class="headerlink" title="Dubbo 可以按需集成其他组件，完成微服务生态环境构建"></a>Dubbo 可以按需集成其他组件，完成微服务生态环境构建</h2><ul>
-<li>Hystrix</li>
-<li>Zipkin</li>
+<h1 id="微服务发展历程"><a href="#微服务发展历程" class="headerlink" title="微服务发展历程"></a>微服务发展历程</h1><h2 id="面向服务开发-SOA"><a href="#面向服务开发-SOA" class="headerlink" title="面向服务开发 - SOA"></a>面向服务开发 - SOA</h2><p><img src="/2020/03/06/Dubbo/Dubbo微服务影院系列/2.微服务入门/Dubbo微服务影院系列（2）：微服务入门/image-20200306231555431.png" alt="SOA"></p>
+<h2 id="微服务开发"><a href="#微服务开发" class="headerlink" title="微服务开发"></a>微服务开发</h2><h1 id="微服务概述"><a href="#微服务概述" class="headerlink" title="微服务概述"></a>微服务概述</h1><ul>
+<li>微服务是一种将业务系统进一步拆分的架构风格</li>
+<li>微服务强调每个单一业务都独立运行</li>
+<li>每个单一服务都应该使用更轻量的机制保持通信</li>
+<li>服务不强调环境，可以不同语言或数据源</li>
 </ul>
-<h2 id="包括阿里、小米、京东等多家互联网公司都有使用"><a href="#包括阿里、小米、京东等多家互联网公司都有使用" class="headerlink" title="包括阿里、小米、京东等多家互联网公司都有使用"></a>包括阿里、小米、京东等多家互联网公司都有使用</h2><h1 id="学习目标"><a href="#学习目标" class="headerlink" title="学习目标"></a>学习目标</h1><ul>
-<li>构建业务完整的商业化项目</li>
-<li>掌握以 Dubbo 为底的各项微服务套件的应用</li>
-<li>掌握基于 Dubbo 的微服务常见面试问题</li>
+<h1 id="微服务选择"><a href="#微服务选择" class="headerlink" title="微服务选择"></a>微服务选择</h1><ul>
+<li>Dubbo</li>
+<li>Spring Cloud</li>
+<li>Zero ICE</li>
 </ul>
-<h1 id="业务结构图"><a href="#业务结构图" class="headerlink" title="业务结构图"></a>业务结构图</h1><p><img src="/2020/03/06/Dubbo/Dubbo微服务影院系列/课程导学/Dubbo微服务影院系列（1）：课程导学/image-20200306230144862.png" alt="业务结构图"></p>
-<h1 id="核心功能"><a href="#核心功能" class="headerlink" title="核心功能"></a>核心功能</h1><p><img src="/2020/03/06/Dubbo/Dubbo微服务影院系列/课程导学/Dubbo微服务影院系列（1）：课程导学/image-20200306230227966.png" alt="核心功能"></p>
-<h1 id="主要知识点"><a href="#主要知识点" class="headerlink" title="主要知识点"></a>主要知识点</h1><p><img src="/2020/03/06/Dubbo/Dubbo微服务影院系列/课程导学/Dubbo微服务影院系列（1）：课程导学/image-20200306230255648.png" alt="主要知识点"></p>
-<h1 id="技术架构图"><a href="#技术架构图" class="headerlink" title="技术架构图"></a>技术架构图</h1><p><img src="/2020/03/06/Dubbo/Dubbo微服务影院系列/课程导学/Dubbo微服务影院系列（1）：课程导学/image-20200306230335981.png" alt="技术架构图"></p>
 
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
@@ -181,7 +184,7 @@ Hys,">
                     </dl>
                 </div>
                 <ul>
-                    <li><a href="/">18 <p>文章</p></a></li>
+                    <li><a href="/">19 <p>文章</p></a></li>
                     <li><a href="/categories">7 <p>分类</p></a></li>
                     <li><a href="/tags">14 <p>标签</p></a></li>
                 </ul>
@@ -192,7 +195,7 @@ Hys,">
             <div class="box sticky animated fadeInRight faster">
                 <div id="toc" class="subbox">
                     <h4>目录</h4>
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#为什么使用Dubbo"><span class="toc-number">1.</span> <span class="toc-text">为什么使用Dubbo</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Dubbo-是基于-RPC-通信协议，速度更快"><span class="toc-number">1.1.</span> <span class="toc-text">Dubbo 是基于 RPC 通信协议，速度更快</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Dubbo-的多中心配置更灵活"><span class="toc-number">1.2.</span> <span class="toc-text">Dubbo 的多中心配置更灵活</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Dubbo-可以按需集成其他组件，完成微服务生态环境构建"><span class="toc-number">1.3.</span> <span class="toc-text">Dubbo 可以按需集成其他组件，完成微服务生态环境构建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#包括阿里、小米、京东等多家互联网公司都有使用"><span class="toc-number">1.4.</span> <span class="toc-text">包括阿里、小米、京东等多家互联网公司都有使用</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#学习目标"><span class="toc-number">2.</span> <span class="toc-text">学习目标</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#业务结构图"><span class="toc-number">3.</span> <span class="toc-text">业务结构图</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#核心功能"><span class="toc-number">4.</span> <span class="toc-text">核心功能</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#主要知识点"><span class="toc-number">5.</span> <span class="toc-text">主要知识点</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#技术架构图"><span class="toc-number">6.</span> <span class="toc-text">技术架构图</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#传统业务应用"><span class="toc-number">1.</span> <span class="toc-text">传统业务应用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#传统应用带来的问题"><span class="toc-number">2.</span> <span class="toc-text">传统应用带来的问题</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#微服务发展历程"><span class="toc-number">3.</span> <span class="toc-text">微服务发展历程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#面向服务开发-SOA"><span class="toc-number">3.1.</span> <span class="toc-text">面向服务开发 - SOA</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#微服务开发"><span class="toc-number">3.2.</span> <span class="toc-text">微服务开发</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#微服务概述"><span class="toc-number">4.</span> <span class="toc-text">微服务概述</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#微服务选择"><span class="toc-number">5.</span> <span class="toc-text">微服务选择</span></a></li></ol>
                 </div>
             </div>
             

@@ -84,7 +84,7 @@ C,">
                 
                 三月 06, 2020
             </p>
-            <h3 class="post-title animated fadeInDown"><a href="/2020/03/06/Dubbo/Dubbo微服务影院系列/环境搭建/Dubbo微服务影院系列（3）：环境搭建/" title="Dubbo微服务影院系列（3）：环境搭建">Dubbo微服务影院系列（3）：环境搭建</a>
+            <h3 class="post-title animated fadeInDown"><a href="/2020/03/06/Dubbo/Dubbo微服务影院系列/3.环境搭建/Dubbo微服务影院系列（3）：环境搭建/" title="Dubbo微服务影院系列（3）：环境搭建">Dubbo微服务影院系列（3）：环境搭建</a>
             </h3>
             
             <p class="post-count animated fadeInDown">
@@ -101,7 +101,7 @@ C,">
                 </span>
                 
                 
-                <span id="/2020/03/06/Dubbo/Dubbo微服务影院系列/环境搭建/Dubbo微服务影院系列（3）：环境搭建/" class="leancloud_visitors" data-flag-title="Dubbo微服务影院系列（3）：环境搭建">
+                <span id="/2020/03/06/Dubbo/Dubbo微服务影院系列/3.环境搭建/Dubbo微服务影院系列（3）：环境搭建/" class="leancloud_visitors" data-flag-title="Dubbo微服务影院系列（3）：环境搭建">
                     <b class="iconfont icon-read"></b> <i>阅读次数</i>
                     <span class="leancloud-visitors-count">1000000</span>
                 </span>
@@ -141,7 +141,7 @@ C,">
 <li>同一个服务可以即是 Provider，又是 Consumer</li>
 </ul>
 <p>以下可以选用 Spring 或 SpringBoot</p>
-<h2 id="Spring基础环境构建"><a href="#Spring基础环境构建" class="headerlink" title="Spring基础环境构建"></a>Spring基础环境构建</h2><h3 id="项目结构"><a href="#项目结构" class="headerlink" title="项目结构"></a>项目结构</h3><p><img src="/2020/03/06/Dubbo/Dubbo微服务影院系列/环境搭建/Dubbo微服务影院系列（3）：环境搭建/image-20200306232618900.png" alt="Spring基础环境项目结构"></p>
+<h2 id="Spring基础环境构建"><a href="#Spring基础环境构建" class="headerlink" title="Spring基础环境构建"></a>Spring基础环境构建</h2><h3 id="项目结构"><a href="#项目结构" class="headerlink" title="项目结构"></a>项目结构</h3><p><img src="/2020/03/06/Dubbo/Dubbo微服务影院系列/3.环境搭建/Dubbo微服务影院系列（3）：环境搭建/image-20200306232618900.png" alt="Spring基础环境项目结构"></p>
 <h3 id="主模块（Spring-Dubbo-Demo）"><a href="#主模块（Spring-Dubbo-Demo）" class="headerlink" title="主模块（Spring-Dubbo-Demo）"></a>主模块（Spring-Dubbo-Demo）</h3><p>在 pom.xml 中添加 dependencies</p>
 <pre><code class="XML">&lt;dependencies&gt;
     &lt;dependency&gt;
@@ -299,7 +299,7 @@ C,">
     }
 }
 </code></pre>
-<h2 id="SpringBoot基础环境构建"><a href="#SpringBoot基础环境构建" class="headerlink" title="SpringBoot基础环境构建"></a>SpringBoot基础环境构建</h2><h3 id="项目结构-1"><a href="#项目结构-1" class="headerlink" title="项目结构"></a>项目结构</h3><p><img src="/2020/03/06/Dubbo/Dubbo微服务影院系列/环境搭建/Dubbo微服务影院系列（3）：环境搭建/image-20200306233743772.png" alt="SpringBoot基础环境项目结构"></p>
+<h2 id="SpringBoot基础环境构建"><a href="#SpringBoot基础环境构建" class="headerlink" title="SpringBoot基础环境构建"></a>SpringBoot基础环境构建</h2><h3 id="项目结构-1"><a href="#项目结构-1" class="headerlink" title="项目结构"></a>项目结构</h3><p><img src="/2020/03/06/Dubbo/Dubbo微服务影院系列/3.环境搭建/Dubbo微服务影院系列（3）：环境搭建/image-20200306233743772.png" alt="SpringBoot基础环境项目结构"></p>
 <h3 id="主模块（SpringBoot-Dubbo-Demo）"><a href="#主模块（SpringBoot-Dubbo-Demo）" class="headerlink" title="主模块（SpringBoot-Dubbo-Demo）"></a>主模块（SpringBoot-Dubbo-Demo）</h3><h3 id="子模块（consumer、provider）"><a href="#子模块（consumer、provider）" class="headerlink" title="子模块（consumer、provider）"></a>子模块（consumer、provider）</h3><h4 id="provider-1"><a href="#provider-1" class="headerlink" title="provider"></a>provider</h4><ul>
 <li>配置 application.properties</li>
 </ul>
@@ -346,13 +346,13 @@ public class QuickStartConsumer {
 <ul>
 <li>项目结构</li>
 </ul>
-<p><img src="/2020/03/06/Dubbo/Dubbo微服务影院系列/环境搭建/Dubbo微服务影院系列（3）：环境搭建/image-20200306234410548.png" alt="SpringBoot的直连提供者项目结构"></p>
+<p><img src="/2020/03/06/Dubbo/Dubbo微服务影院系列/3.环境搭建/Dubbo微服务影院系列（3）：环境搭建/image-20200306234410548.png" alt="SpringBoot的直连提供者项目结构"></p>
 <h1 id="注册中心概念"><a href="#注册中心概念" class="headerlink" title="注册中心概念"></a>注册中心概念</h1><h2 id="直连提供者"><a href="#直连提供者" class="headerlink" title="直连提供者"></a>直连提供者</h2><ul>
 <li>消费端知道服务提供者的地址，直接进行连接</li>
 <li>该种方式一般只在测试环境中使用</li>
 <li>直连提供者限制了分布式的易扩展性</li>
 </ul>
-<h2 id="Dubbo架构"><a href="#Dubbo架构" class="headerlink" title="Dubbo架构"></a>Dubbo架构</h2><p><img src="/2020/03/06/Dubbo/Dubbo微服务影院系列/环境搭建/Dubbo微服务影院系列（3）：环境搭建/image-20200306234710428.png" alt="Dubbo架构"></p>
+<h2 id="Dubbo架构"><a href="#Dubbo架构" class="headerlink" title="Dubbo架构"></a>Dubbo架构</h2><p><img src="/2020/03/06/Dubbo/Dubbo微服务影院系列/3.环境搭建/Dubbo微服务影院系列（3）：环境搭建/image-20200306234710428.png" alt="Dubbo架构"></p>
 <table>
 <thead>
 <tr>
@@ -465,7 +465,7 @@ public class QuickStartConsumer {
                     </dl>
                 </div>
                 <ul>
-                    <li><a href="/">18 <p>文章</p></a></li>
+                    <li><a href="/">19 <p>文章</p></a></li>
                     <li><a href="/categories">7 <p>分类</p></a></li>
                     <li><a href="/tags">14 <p>标签</p></a></li>
                 </ul>
