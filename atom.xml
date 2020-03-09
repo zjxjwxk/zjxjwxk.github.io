@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://zjxjwxk.com/"/>
-  <updated>2020-03-08T10:08:15.000Z</updated>
+  <updated>2020-03-09T14:25:20.000Z</updated>
   <id>https://zjxjwxk.com/</id>
   
   <author>
@@ -15,6 +15,35 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Dubbo微服务影院系列（4）：业务基础环境构建</title>
+    <link href="https://zjxjwxk.com/2020/03/09/Dubbo/Dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/4.%E4%B8%9A%E5%8A%A1%E5%9F%BA%E7%A1%80%E7%8E%AF%E5%A2%83%E6%9E%84%E5%BB%BA/Dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97%EF%BC%884%EF%BC%89%EF%BC%9A%E4%B8%9A%E5%8A%A1%E5%9F%BA%E7%A1%80%E7%8E%AF%E5%A2%83%E6%9E%84%E5%BB%BA/"/>
+    <id>https://zjxjwxk.com/2020/03/09/Dubbo/Dubbo微服务影院系列/4.业务基础环境构建/Dubbo微服务影院系列（4）：业务基础环境构建/</id>
+    <published>2020-03-09T14:25:00.000Z</published>
+    <updated>2020-03-09T14:25:20.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="章节概要"><a href="#章节概要" class="headerlink" title="章节概要"></a>章节概要</h1><ul><li>构建基于 Guns + SpringBoot + Dubbo 的框架</li><li>学会抽离业务接口</li><li>学会 API 网关变形应用</li></ul><h1 id="API-网关介绍"><a href="#API-网关介绍" class="headerlink" title="API 网关介绍"></a>API 网关介绍</h1><ul><li>API 网关有点类似于设计模式中的 Facade 模式</li><li>API 网关一般都是微服务系统中的门面</li><li><strong>API  网关是微服务的重要组成部分</strong></li></ul><p><img src="/2020/03/09/Dubbo/Dubbo微服务影院系列/4.业务基础环境构建/Dubbo微服务影院系列（4）：业务基础环境构建/image-20200309195624129.png" alt="API网关示意图"></p><h2 id="API-网关的常见作用"><a href="#API-网关的常见作用" class="headerlink" title="API 网关的常见作用"></a>API 网关的常见作用</h2><ul><li>身份验证和安全</li><li>审查和检测</li><li>动态路由</li><li>压力测试</li><li>负载均衡（Dubbo 自带）</li><li>静态相应处理</li></ul><p><img src="/2020/03/09/Dubbo/Dubbo微服务影院系列/4.业务基础环境构建/Dubbo微服务影院系列（4）：业务基础环境构建/image-20200309200432132.png" alt="API网关作用"></p><h1 id="Guns-环境构建"><a href="#Guns-环境构建" class="headerlink" title="Guns 环境构建"></a>Guns 环境构建</h1><h2 id="导入-guns-项目"><a href="#导入-guns-项目" class="headerlink" title="导入 guns 项目"></a>导入 guns 项目</h2><p><img src="/2020/03/09/Dubbo/Dubbo微服务影院系列/4.业务基础环境构建/Dubbo微服务影院系列（4）：业务基础环境构建/image-20200309203515871.png" alt="guns项目结构"></p><h2 id="创建-guns-rest-数据库"><a href="#创建-guns-rest-数据库" class="headerlink" title="创建 guns_rest 数据库"></a>创建 guns_rest 数据库</h2><p><img src="/2020/03/09/Dubbo/Dubbo微服务影院系列/4.业务基础环境构建/Dubbo微服务影院系列（4）：业务基础环境构建/image-20200309203649262.png" alt="guns_rest数据库"></p><h2 id="创建-user-表"><a href="#创建-user-表" class="headerlink" title="创建 user 表"></a>创建 user 表</h2><pre><code class="SQL">-- ------------------------------ Table structure for user-- ----------------------------DROP TABLE IF EXISTS `user`;CREATE TABLE `user`  (  `id` bigint(20) NOT NULL AUTO_INCREMENT,  `userName` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,  PRIMARY KEY (`id`) USING BTREE) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;-- ------------------------------ Records of user-- ----------------------------INSERT INTO `user` VALUES (1, &#39;admin&#39;);SET FOREIGN_KEY_CHECKS = 1;</code></pre><h2 id="添加-log4j-依赖"><a href="#添加-log4j-依赖" class="headerlink" title="添加 log4j 依赖"></a>添加 log4j 依赖</h2><pre><code class="XML">&lt;dependency&gt;  &lt;groupId&gt;log4j&lt;/groupId&gt;  &lt;artifactId&gt;log4j&lt;/artifactId&gt;  &lt;version&gt;1.2.17&lt;/version&gt;&lt;/dependency&gt;</code></pre><h2 id="修改-datasource-的-url"><a href="#修改-datasource-的-url" class="headerlink" title="修改 datasource 的 url"></a>修改 datasource 的 url</h2><p>修改 application.yml 中 spring 的 datasource 的 url 为</p><pre><code class="YAML">url: jdbc:mysql://127.0.0.1:3306/guns_rest?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=utf8&amp;serverTimezone=GMT%2B8</code></pre><h2 id="验证环境"><a href="#验证环境" class="headerlink" title="验证环境"></a>验证环境</h2><p>启动 GunsRestApplication，访问 url <a href="http://localhost/auth?userName=admin&amp;password=admin，若返回如下" target="_blank" rel="noopener">http://localhost/auth?userName=admin&amp;password=admin，若返回如下</a> token 则环境搭建成功。</p><pre><code class="JSON">{  &quot;randomKey&quot;: &quot;zd8rb8&quot;,  &quot;token&quot;: &quot;eyJhbGciOiJIUzUxMiJ9.eyJyYW5kb21LZXkiOiJ6ZDhyYjgiLCJzdWIiOiJhZG1pbiIsImV4cCI6MTU4NDM2MjkxOCwiaWF0IjoxNTgzNzU4MTE4fQ.mR7Elro8oK8T2Rx6FE02FWTvORJnUAcFfPka4-KbQYsSpoMQQl5iUgd-wd9wYIw_5wbXpn3TFoii72suPn0b4A&quot;}</code></pre><h1 id="API-网关模块构建测试"><a href="#API-网关模块构建测试" class="headerlink" title="API 网关模块构建测试"></a>API 网关模块构建测试</h1><p>在 guns 项目中复制一份 guns-rest 模块并重命名为 guns-gateway，在主模块 pom.xml 中添加 <module>guns-gateway</module></p><pre><code class="XML">    &lt;modules&gt;        &lt;module&gt;guns-admin&lt;/module&gt;        &lt;module&gt;guns-core&lt;/module&gt;        &lt;module&gt;guns-rest&lt;/module&gt;        &lt;module&gt;guns-generator&lt;/module&gt;        &lt;module&gt;guns-gateway&lt;/module&gt;    &lt;/modules&gt;</code></pre><p>修改其 pom.xml 中有关名称为 guns-gateway，并在 Project Structure 中将该模块重命名为 guns-gateway，同时删除原来 guns-rest 中多余的 Content Root（从 guns-gateway 加入的）</p><p><img src="/2020/03/09/Dubbo/Dubbo微服务影院系列/4.业务基础环境构建/Dubbo微服务影院系列（4）：业务基础环境构建/image-20200309210548081.png" alt="需删除的Content Root"></p><p>这样 guns-gateway 就构建好了（测试同 guns-rest）。</p><h1 id="API-网关集成-Dubbo"><a href="#API-网关集成-Dubbo" class="headerlink" title="API 网关集成 Dubbo"></a>API 网关集成 Dubbo</h1><p>在 guns-gateway 项目的 pom.xml 文件中添加 Dubbo 和 ZooKeeper 的依赖</p><pre><code class="XML">&lt;dependency&gt;  &lt;groupId&gt;com.alibaba.spring.boot&lt;/groupId&gt;  &lt;artifactId&gt;dubbo-spring-boot-starter&lt;/artifactId&gt;  &lt;version&gt;2.0.0&lt;/version&gt;&lt;/dependency&gt;&lt;dependency&gt;  &lt;groupId&gt;com.101tec&lt;/groupId&gt;  &lt;artifactId&gt;zkclient&lt;/artifactId&gt;  &lt;version&gt;0.10&lt;/version&gt;&lt;/dependency&gt;</code></pre><p>在 application.yml 中添加 </p><pre><code class="YAML">spring:  application:    name: cinema-gateway  dubbo:    server: true    registry: zookeeper://localhost:2181</code></pre><ul><li>在 Application 类上添加注解 @EnableDubboConfiguration</li><li>在 Service 实现类上添加注解 @Component 和 @Service(interfaceClass = UserAPI.class)，其中 @Service 来自Dubbo</li></ul><h1 id="抽离业务-API"><a href="#抽离业务-API" class="headerlink" title="抽离业务 API"></a>抽离业务 API</h1><ul><li>在 guns 项目中复制一份 guns-core 模块并重命名为 guns-api</li><li>修改其 pom.xml 中各名称后，删除其所有依赖</li><li>删除所有 java 下所有包，创建 api 包，其中可创建公用接口类</li><li>使用 Maven 的 install 指令将其放入库中</li></ul><p><img src="/2020/03/09/Dubbo/Dubbo微服务影院系列/4.业务基础环境构建/Dubbo微服务影院系列（4）：业务基础环境构建/image-20200309215810417.png" alt="maven install"></p><ul><li>在主模块的 pom.xml 中添加依赖</li></ul><pre><code class="XML">&lt;dependency&gt;  &lt;groupId&gt;com.stylefeng&lt;/groupId&gt;  &lt;artifactId&gt;guns-api&lt;/artifactId&gt;  &lt;version&gt;${guns.version}&lt;/version&gt;&lt;/dependency&gt;</code></pre><ul><li>在 guns-gateway 的 pom.xml 中添加依赖</li></ul><pre><code class="XML">&lt;dependency&gt;  &lt;groupId&gt;com.stylefeng&lt;/groupId&gt;  &lt;artifactId&gt;guns-api&lt;/artifactId&gt;&lt;/dependency&gt;</code></pre><p>之后，就可以在 guns-gateway 模块中，引入 guns-api 中的接口来使用了。这样接口类只需要在 guns-api 中写一份就够了，避免了冗余。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;章节概要&quot;&gt;&lt;a href=&quot;#章节概要&quot; class=&quot;headerlink&quot; title=&quot;章节概要&quot;&gt;&lt;/a&gt;章节概要&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;构建基于 Guns + SpringBoot + Dubbo 的框架&lt;/li&gt;
+&lt;li&gt;学会抽离业务接口&lt;/li
+      
+    
+    </summary>
+    
+      <category term="Dubbo" scheme="https://zjxjwxk.com/categories/Dubbo/"/>
+    
+    
+      <category term="微服务架构" scheme="https://zjxjwxk.com/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/"/>
+    
+      <category term="Dubbo" scheme="https://zjxjwxk.com/tags/Dubbo/"/>
+    
+  </entry>
   
   <entry>
     <title>PAT甲级 A1014 Waiting in Line (30分)</title>
@@ -84,35 +113,6 @@
       
       
         &lt;h1 id=&quot;传统业务应用&quot;&gt;&lt;a href=&quot;#传统业务应用&quot; class=&quot;headerlink&quot; title=&quot;传统业务应用&quot;&gt;&lt;/a&gt;传统业务应用&lt;/h1&gt;&lt;p&gt;&lt;img src=&quot;/2020/03/06/Dubbo/Dubbo微服务影院系列/2.微服务入门/Dubbo
-      
-    
-    </summary>
-    
-      <category term="Dubbo" scheme="https://zjxjwxk.com/categories/Dubbo/"/>
-    
-    
-      <category term="微服务架构" scheme="https://zjxjwxk.com/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/"/>
-    
-      <category term="Dubbo" scheme="https://zjxjwxk.com/tags/Dubbo/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Dubbo微服务影院系列（4）：业务基础环境构建</title>
-    <link href="https://zjxjwxk.com/2020/03/06/Dubbo/Dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/4.%E4%B8%9A%E5%8A%A1%E5%9F%BA%E7%A1%80%E7%8E%AF%E5%A2%83%E6%9E%84%E5%BB%BA/Dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97%EF%BC%884%EF%BC%89%EF%BC%9A%E4%B8%9A%E5%8A%A1%E5%9F%BA%E7%A1%80%E7%8E%AF%E5%A2%83%E6%9E%84%E5%BB%BA/"/>
-    <id>https://zjxjwxk.com/2020/03/06/Dubbo/Dubbo微服务影院系列/4.业务基础环境构建/Dubbo微服务影院系列（4）：业务基础环境构建/</id>
-    <published>2020-03-06T15:14:00.000Z</published>
-    <updated>2020-03-09T14:24:20.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="章节概要"><a href="#章节概要" class="headerlink" title="章节概要"></a>章节概要</h1><ul><li>构建基于 Guns + SpringBoot + Dubbo 的框架</li><li>学会抽离业务接口</li><li>学会 API 网关变形应用</li></ul><h1 id="API-网关介绍"><a href="#API-网关介绍" class="headerlink" title="API 网关介绍"></a>API 网关介绍</h1><ul><li>API 网关有点类似于设计模式中的 Facade 模式</li><li>API 网关一般都是微服务系统中的门面</li><li><strong>API  网关是微服务的重要组成部分</strong></li></ul><p><img src="/2020/03/06/Dubbo/Dubbo微服务影院系列/4.业务基础环境构建/Dubbo微服务影院系列（4）：业务基础环境构建/image-20200309195624129.png" alt="API网关示意图"></p><h2 id="API-网关的常见作用"><a href="#API-网关的常见作用" class="headerlink" title="API 网关的常见作用"></a>API 网关的常见作用</h2><ul><li>身份验证和安全</li><li>审查和检测</li><li>动态路由</li><li>压力测试</li><li>负载均衡（Dubbo 自带）</li><li>静态相应处理</li></ul><p><img src="/2020/03/06/Dubbo/Dubbo微服务影院系列/4.业务基础环境构建/Dubbo微服务影院系列（4）：业务基础环境构建/image-20200309200432132.png" alt="API网关作用"></p><h1 id="Guns-环境构建"><a href="#Guns-环境构建" class="headerlink" title="Guns 环境构建"></a>Guns 环境构建</h1><h2 id="导入-guns-项目"><a href="#导入-guns-项目" class="headerlink" title="导入 guns 项目"></a>导入 guns 项目</h2><p><img src="/2020/03/06/Dubbo/Dubbo微服务影院系列/4.业务基础环境构建/Dubbo微服务影院系列（4）：业务基础环境构建/image-20200309203515871.png" alt="guns项目结构"></p><h2 id="创建-guns-rest-数据库"><a href="#创建-guns-rest-数据库" class="headerlink" title="创建 guns_rest 数据库"></a>创建 guns_rest 数据库</h2><p><img src="/2020/03/06/Dubbo/Dubbo微服务影院系列/4.业务基础环境构建/Dubbo微服务影院系列（4）：业务基础环境构建/image-20200309203649262.png" alt="guns_rest数据库"></p><h2 id="创建-user-表"><a href="#创建-user-表" class="headerlink" title="创建 user 表"></a>创建 user 表</h2><pre><code class="SQL">-- ------------------------------ Table structure for user-- ----------------------------DROP TABLE IF EXISTS `user`;CREATE TABLE `user`  (  `id` bigint(20) NOT NULL AUTO_INCREMENT,  `userName` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,  PRIMARY KEY (`id`) USING BTREE) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;-- ------------------------------ Records of user-- ----------------------------INSERT INTO `user` VALUES (1, &#39;admin&#39;);SET FOREIGN_KEY_CHECKS = 1;</code></pre><h2 id="添加-log4j-依赖"><a href="#添加-log4j-依赖" class="headerlink" title="添加 log4j 依赖"></a>添加 log4j 依赖</h2><pre><code class="XML">&lt;dependency&gt;  &lt;groupId&gt;log4j&lt;/groupId&gt;  &lt;artifactId&gt;log4j&lt;/artifactId&gt;  &lt;version&gt;1.2.17&lt;/version&gt;&lt;/dependency&gt;</code></pre><h2 id="修改-datasource-的-url"><a href="#修改-datasource-的-url" class="headerlink" title="修改 datasource 的 url"></a>修改 datasource 的 url</h2><p>修改 application.yml 中 spring 的 datasource 的 url 为</p><pre><code class="YAML">url: jdbc:mysql://127.0.0.1:3306/guns_rest?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=utf8&amp;serverTimezone=GMT%2B8</code></pre><h2 id="验证环境"><a href="#验证环境" class="headerlink" title="验证环境"></a>验证环境</h2><p>启动 GunsRestApplication，访问 url <a href="http://localhost/auth?userName=admin&amp;password=admin，若返回如下" target="_blank" rel="noopener">http://localhost/auth?userName=admin&amp;password=admin，若返回如下</a> token 则环境搭建成功。</p><pre><code class="JSON">{  &quot;randomKey&quot;: &quot;zd8rb8&quot;,  &quot;token&quot;: &quot;eyJhbGciOiJIUzUxMiJ9.eyJyYW5kb21LZXkiOiJ6ZDhyYjgiLCJzdWIiOiJhZG1pbiIsImV4cCI6MTU4NDM2MjkxOCwiaWF0IjoxNTgzNzU4MTE4fQ.mR7Elro8oK8T2Rx6FE02FWTvORJnUAcFfPka4-KbQYsSpoMQQl5iUgd-wd9wYIw_5wbXpn3TFoii72suPn0b4A&quot;}</code></pre><h1 id="API-网关模块构建测试"><a href="#API-网关模块构建测试" class="headerlink" title="API 网关模块构建测试"></a>API 网关模块构建测试</h1><p>在 guns 项目中复制一份 guns-rest 模块并重命名为 guns-gateway，在主模块 pom.xml 中添加 <module>guns-gateway</module></p><pre><code class="XML">    &lt;modules&gt;        &lt;module&gt;guns-admin&lt;/module&gt;        &lt;module&gt;guns-core&lt;/module&gt;        &lt;module&gt;guns-rest&lt;/module&gt;        &lt;module&gt;guns-generator&lt;/module&gt;        &lt;module&gt;guns-gateway&lt;/module&gt;    &lt;/modules&gt;</code></pre><p>修改其 pom.xml 中有关名称为 guns-gateway，并在 Project Structure 中将该模块重命名为 guns-gateway，同时删除原来 guns-rest 中多余的 Content Root（从 guns-gateway 加入的）</p><p><img src="/2020/03/06/Dubbo/Dubbo微服务影院系列/4.业务基础环境构建/Dubbo微服务影院系列（4）：业务基础环境构建/image-20200309210548081.png" alt="需删除的Content Root"></p><p>这样 guns-gateway 就构建好了（测试同 guns-rest）。</p><h1 id="API-网关集成-Dubbo"><a href="#API-网关集成-Dubbo" class="headerlink" title="API 网关集成 Dubbo"></a>API 网关集成 Dubbo</h1><p>在 guns-gateway 项目的 pom.xml 文件中添加 Dubbo 和 ZooKeeper 的依赖</p><pre><code class="XML">&lt;dependency&gt;  &lt;groupId&gt;com.alibaba.spring.boot&lt;/groupId&gt;  &lt;artifactId&gt;dubbo-spring-boot-starter&lt;/artifactId&gt;  &lt;version&gt;2.0.0&lt;/version&gt;&lt;/dependency&gt;&lt;dependency&gt;  &lt;groupId&gt;com.101tec&lt;/groupId&gt;  &lt;artifactId&gt;zkclient&lt;/artifactId&gt;  &lt;version&gt;0.10&lt;/version&gt;&lt;/dependency&gt;</code></pre><p>在 application.yml 中添加 </p><pre><code class="YAML">spring:  application:    name: cinema-gateway  dubbo:    server: true    registry: zookeeper://localhost:2181</code></pre><ul><li>在 Application 类上添加注解 @EnableDubboConfiguration</li><li>在 Service 实现类上添加注解 @Component 和 @Service(interfaceClass = UserAPI.class)，其中 @Service 来自Dubbo</li></ul><h1 id="抽离业务-API"><a href="#抽离业务-API" class="headerlink" title="抽离业务 API"></a>抽离业务 API</h1><ul><li>在 guns 项目中复制一份 guns-core 模块并重命名为 guns-api</li><li>修改其 pom.xml 中各名称后，删除其所有依赖</li><li>删除所有 java 下所有包，创建 api 包，其中可创建公用接口类</li><li>使用 Maven 的 install 指令将其放入库中</li></ul><p><img src="/2020/03/06/Dubbo/Dubbo微服务影院系列/4.业务基础环境构建/Dubbo微服务影院系列（4）：业务基础环境构建/image-20200309215810417.png" alt="maven install"></p><ul><li>在主模块的 pom.xml 中添加依赖</li></ul><pre><code class="XML">&lt;dependency&gt;  &lt;groupId&gt;com.stylefeng&lt;/groupId&gt;  &lt;artifactId&gt;guns-api&lt;/artifactId&gt;  &lt;version&gt;${guns.version}&lt;/version&gt;&lt;/dependency&gt;</code></pre><ul><li>在 guns-gateway 的 pom.xml 中添加依赖</li></ul><pre><code class="XML">&lt;dependency&gt;  &lt;groupId&gt;com.stylefeng&lt;/groupId&gt;  &lt;artifactId&gt;guns-api&lt;/artifactId&gt;&lt;/dependency&gt;</code></pre><p>之后，就可以在 guns-gateway 模块中，引入 guns-api 中的接口来使用了。这样接口类只需要在 guns-api 中写一份就够了，避免了冗余。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;章节概要&quot;&gt;&lt;a href=&quot;#章节概要&quot; class=&quot;headerlink&quot; title=&quot;章节概要&quot;&gt;&lt;/a&gt;章节概要&lt;/h1&gt;&lt;ul&gt;
-&lt;li&gt;构建基于 Guns + SpringBoot + Dubbo 的框架&lt;/li&gt;
-&lt;li&gt;学会抽离业务接口&lt;/li
       
     
     </summary>
