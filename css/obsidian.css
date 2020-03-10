@@ -252,7 +252,7 @@ audio {
   border-bottom-right-radius: 200px;
 }
 #screen .cover {
-  position: absolute;
+  position: relative;
   top: 0;
   left: 30%;
   width: 1200px;
@@ -353,16 +353,16 @@ audio {
   z-index: 10;
   position: relative;
   display: flex;
-  -webkit-background-size: 107px 32px;
-  -moz-background-size: 107px 32px;
-  background-size: 107px 32px;
+  -webkit-background-size: 75px 32px;
+  -moz-background-size: 75px 32px;
+  background-size: 75px 32px;
   background-repeat: no-repeat;
   background-position: center center;
-  -webkit-mask-box-image: url("/img/logo.png");
+  -webkit-mask-box-image: url("../img/logo.png");
   background-color: #fff;
-  width: 107px;
+  width: 75px;
   height: 32px;
-  mask-image: url("/img/logo.png");
+  mask-image: url("../img/logo.png");
   mask-size: contain;
   transition: background-color 0.5s ease-in-out;
 }
@@ -1715,7 +1715,7 @@ footer .copyright a {
   background-size: cover;
   background-repeat: no-repeat;
   opacity: 0.85;
-  background-image: radial-gradient(ellipse closest-side, rgba(0,0,0,0.46), #100e17), url("/img/cover.jpg");
+  background-image: radial-gradient(ellipse closest-side, rgba(0,0,0,0.46), #100e17), url("../img/cover.jpg");
   z-index: -1;
   animation-delay: 900ms;
   animation-duration: 1.2s;
