@@ -92,13 +92,13 @@
                 
                 <span>
                     <b class="iconfont icon-text2"></b> <i>文章字数</i>
-                    2.4k
+                    3.2k
                 </span>
                 
                 
                 <span>
                     <b class="iconfont icon-timer__s"></b> <i>阅读约需</i>
-                    2 mins.
+                    3 mins.
                 </span>
                 
                 
@@ -168,6 +168,24 @@ CREATE TABLE user(
 insert into user(user_name,user_pwd,nick_name,user_sex,birthday,email,user_phone,address,head_url,life_state,biography) values(&#39;admin&#39;,&#39;0192023a7bbd73250516f069df18b500&#39;,&#39;管理员&#39;,0,&#39;2018-07-31&#39;,&#39;admin@gmail.com&#39;,&#39;13888888888&#39;,&#39;浙江省杭州市西湖区某路某号&#39;,&#39;cinema/img/head-img.jpg&#39;,0,&#39;我是苦逼的管理员&#39;);
 insert into user(user_name,user_pwd,nick_name,user_sex,birthday,email,user_phone,address,head_url,life_state,biography) values(&#39;test&#39;,&#39;5e2de6bd1c9b50f6e27d4e55da43b917&#39;,&#39;测试用户&#39;,0,&#39;2018-08-20&#39;,&#39;test@gmail.com&#39;,&#39;13866666666&#39;,&#39;测试地址&#39;,&#39;cinema/img/head-img.jpg&#39;,1,&#39;我是测试用户&#39;);
 </code></pre>
+<h1 id="用户服务与网关交互"><a href="#用户服务与网关交互" class="headerlink" title="用户服务与网关交互"></a>用户服务与网关交互</h1><p>在 guns 项目中复制一份 guns-gateway 模块并重命名为 guns-user（修改相应子模块和主模块的 pom.xml ），在 guns-user 中编写 UserAPI 的实现类，其中 UserAPI 接口是来自于 guns-api 的（在前一章已经做了业务 API 抽离）。</p>
+<pre><code class="Java">@Component
+@Service(interfaceClass = UserAPI.class)
+public class UserImpl implements UserAPI {
+
+    @Override
+    public boolean login(String username, String password) {
+        System.out.println(&quot;This is user service! &quot; + username + &quot;, &quot; + password);
+        return false;
+    }
+}
+</code></pre>
+<p>然后，在 guns-gateway 中就可以调用 UserAPI 接口了。</p>
+<pre><code class="Java">    @Reference(interfaceClass = UserAPI.class)
+    private UserAPI userAPI;
+
+    userAPI.login(username, password);
+</code></pre>
 
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
@@ -211,7 +229,7 @@ insert into user(user_name,user_pwd,nick_name,user_sex,birthday,email,user_phone
             <div class="box sticky animated fadeInRight faster">
                 <div id="toc" class="subbox">
                     <h4>目录</h4>
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#章节概要"><span class="toc-number">1.</span> <span class="toc-text">章节概要</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#用户模块开发"><span class="toc-number">1.1.</span> <span class="toc-text">用户模块开发</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#修改-Guns-中的-JWT-模块"><span class="toc-number">1.1.1.</span> <span class="toc-text">修改 Guns 中的 JWT 模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#业务功能开发"><span class="toc-number">1.1.2.</span> <span class="toc-text">业务功能开发</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#创建用户表"><span class="toc-number">2.</span> <span class="toc-text">创建用户表</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#章节概要"><span class="toc-number">1.</span> <span class="toc-text">章节概要</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#用户模块开发"><span class="toc-number">1.1.</span> <span class="toc-text">用户模块开发</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#修改-Guns-中的-JWT-模块"><span class="toc-number">1.1.1.</span> <span class="toc-text">修改 Guns 中的 JWT 模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#业务功能开发"><span class="toc-number">1.1.2.</span> <span class="toc-text">业务功能开发</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#创建用户表"><span class="toc-number">2.</span> <span class="toc-text">创建用户表</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#用户服务与网关交互"><span class="toc-number">3.</span> <span class="toc-text">用户服务与网关交互</span></a></li></ol>
                 </div>
             </div>
             
