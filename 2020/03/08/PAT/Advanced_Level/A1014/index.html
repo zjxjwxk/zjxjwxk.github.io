@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>PAT甲级 A1014 Waiting in Line (30分) - Zjxjwxk&#39;s Blog</title>
+    <title>PAT甲级 1014 Waiting in Line (30分) - Zjxjwxk&#39;s Blog</title>
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="google" content="notranslate">
@@ -43,7 +43,7 @@
     <div class="navigation animated fadeIn fast delay-1s">
         <img id="home-icon" class="icon-home" src="/img/favicon.png" alt="" data-url="https://zjxjwxk.com">
         <div id="play-icon" title="Play/Pause" class="iconfont icon-play"></div>
-        <h3 class="subtitle">PAT甲级 A1014 Waiting in Line (30分)</h3>
+        <h3 class="subtitle">PAT甲级 1014 Waiting in Line (30分)</h3>
         <div class="social">
             <!--        <div class="like-icon">-->
             <!--            <a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
@@ -79,14 +79,14 @@
                 
                 三月 08, 2020
             </p>
-            <h3 class="post-title animated fadeInDown"><a href="/2020/03/08/PAT/Advanced_Level/A1014/" title="PAT甲级 A1014 Waiting in Line (30分)">PAT甲级 A1014 Waiting in Line (30分)</a>
+            <h3 class="post-title animated fadeInDown"><a href="/2020/03/08/PAT/Advanced_Level/A1014/" title="PAT甲级 1014 Waiting in Line (30分)">PAT甲级 1014 Waiting in Line (30分)</a>
             </h3>
             
             <p class="post-count animated fadeInDown">
                 
                 <span>
                     <b class="iconfont icon-text2"></b> <i>文章字数</i>
-                    5.3k
+                    5.2k
                 </span>
                 
                 
@@ -96,7 +96,7 @@
                 </span>
                 
                 
-                <span id="/2020/03/08/PAT/Advanced_Level/A1014/" class="leancloud_visitors" data-flag-title="PAT甲级 A1014 Waiting in Line (30分)">
+                <span id="/2020/03/08/PAT/Advanced_Level/A1014/" class="leancloud_visitors" data-flag-title="PAT甲级 1014 Waiting in Line (30分)">
                     <b class="iconfont icon-read"></b> <i>阅读次数</i>
                     <span class="leancloud-visitors-count">-</span>
                 </span>
@@ -150,8 +150,7 @@
 17:00
 Sorry
 </code></pre>
-<p>题⽬大意：n个窗口，每个窗口可以排队m人。有k位⽤用户需要服务，给出了每位⽤户需要的minute数，所有客户在8点开始服务，如果有窗口还没排满就入队，否则就在黄线外等候。如果有某⼀列有一个用户走了服务完毕了，黄线外的人就进来一个。如果同时就选窗⼝数小的。求q个人的服务结束时间。</p>
-<p>坑点：如果⼀个客户在17:00以及以后还没有开始服务（<strong>此处不是结束服务是开始服务</strong>）就不再服务输出sorry；如果这个服务已经开始了了，无论时间多长都要等他服务完毕。如果当成结束服务，则测试点2，4，5不能通过。</p>
+<h1 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h1><p>如果⼀个客户在17:00以及以后还没有开始服务（<strong>此处不是结束服务是开始服务</strong>）就不再服务输出sorry；如果这个服务已经开始了了，无论时间多长都要等他服务完毕。如果当成结束服务，则测试点2，4，5不能通过。</p>
 <pre><code class="C++">#include &lt;cstdio&gt;
 #include &lt;queue&gt;
 using namespace std;
@@ -245,7 +244,7 @@ int main() {
                     </dl>
                 </div>
                 <ul>
-                    <li><a href="/">20 <p>文章</p></a></li>
+                    <li><a href="/">21 <p>文章</p></a></li>
                     <li><a href="/categories">8 <p>分类</p></a></li>
                     <li><a href="/tags">14 <p>标签</p></a></li>
                 </ul>
@@ -256,8 +255,8 @@ int main() {
             <div class="box sticky animated fadeInRight faster">
                 <div id="toc" class="subbox">
                     <h4>目录</h4>
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Input-Specification"><span class="toc-number">1.</span> <span class="toc-text">Input Specification:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Output-Specification"><span class="toc-number">2.</span> <span class="toc-text">Output Specification:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Sample-Input"><span class="toc-number">3.</span> <span class="toc-text">Sample Input:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Sample-Output"><span class="toc-number">4.</span> <span class="toc-text">Sample Output:</span></a></li></ol>
-                </div>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Input-Specification"><span class="toc-number">1.</span> <span class="toc-text">Input Specification:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Output-Specification"><span class="toc-number">2.</span> <span class="toc-text">Output Specification:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Sample-Input"><span class="toc-number">3.</span> <span class="toc-text">Sample Input:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Sample-Output"><span class="toc-number">4.</span> <span class="toc-text">Sample Output:</span></a></li></ol><li class="toc-item toc-level-1"><a class="toc-link" href="#注意点"><span class="toc-number"></span> <span class="toc-text">注意点</span></a>
+                </li></div>
             </div>
             
             
