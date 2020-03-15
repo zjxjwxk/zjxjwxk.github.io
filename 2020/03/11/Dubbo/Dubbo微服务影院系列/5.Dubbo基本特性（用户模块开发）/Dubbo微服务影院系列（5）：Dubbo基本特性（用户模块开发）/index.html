@@ -92,13 +92,13 @@
                 
                 <span>
                     <b class="iconfont icon-text2"></b> <i>文章字数</i>
-                    7.3k
+                    8.8k
                 </span>
                 
                 
                 <span>
                     <b class="iconfont icon-timer__s"></b> <i>阅读约需</i>
-                    7 mins.
+                    8 mins.
                 </span>
                 
                 
@@ -246,7 +246,7 @@ public class JwtProperties {
             }
         }
 </code></pre>
-<h1 id="修改-JWT-申请的返回报文"><a href="#修改-JWT-申请的返回报文" class="headerlink" title="修改 JWT 申请的返回报文"></a>修改 JWT 申请的返回报文</h1><p>创建 ResponseVO 类作为响应VO类，其中包含了三种状态 Status ：0-成功，1-业务失败，999-系统异常</p>
+<h1 id="修改-JWT-申请的返回报文"><a href="#修改-JWT-申请的返回报文" class="headerlink" title="修改 JWT 申请的返回报文"></a>修改 JWT 申请的返回报文</h1><p>在 guns-gateway 模块中的 modular.vo 下，创建 ResponseVO 类作为响应VO类，其中包含了三种状态 Status ：0-成功，1-业务失败，999-系统异常</p>
 <pre><code class="Java">public class ResponseVO&lt;M&gt; {
 
     /**
@@ -309,6 +309,48 @@ public class JwtProperties {
         }
     }
 </code></pre>
+<h1 id="增加-Threadlocal-的用户信息保存"><a href="#增加-Threadlocal-的用户信息保存" class="headerlink" title="增加 Threadlocal 的用户信息保存"></a>增加 Threadlocal 的用户信息保存</h1><p>在 guns-gateway 中的 common 下创建 CurrentUser 类用于保存 userId（不直接保存 userInfoModel 是因为更省空间，避免用户量大时出现内存溢出），该 userId 存在 ThreadLocal 中和线程绑定，同一线程内共享</p>
+<pre><code class="Java">public class CurrentUser {
+
+    /**
+     * 线程绑定的存储空间
+     */
+    private static final ThreadLocal&lt;String&gt; threadLocal = new ThreadLocal&lt;&gt;();
+
+    public static void saveUserId(String userId) {
+        threadLocal.set(userId);
+    }
+
+    public static String getCurrentUser() {
+        return threadLocal.get();
+    }
+}
+</code></pre>
+<p>之后，在 AuthFilter 验证 token 时，就可以通过 token 获取 userID，并且将之存入 ThreadLocal，以便后续业务调用了</p>
+<pre><code class="Java">            String userId = jwtTokenUtil.getUsernameFromToken(authToken);
+            if (userId == null) {
+                return;
+            } else {
+                CurrentUser.saveUserId(userId);
+            }
+</code></pre>
+<p>在用户后续访问时，就可以取出 userId，并从数据库或 redis 中获取用户信息了</p>
+<pre><code class="Java">@Controller
+@RequestMapping(&quot;/hello&quot;)
+public class ExampleController {
+
+    @RequestMapping(&quot;&quot;)
+    public ResponseEntity hello() {
+
+        System.out.println(CurrentUser.getCurrentUser());
+
+        // 这里将以userId为key，userInfo为value存在redis中，TTL为30分钟
+        // 或以userId为条件去数据库取出（和redis只有快慢的区别）
+
+        return ResponseEntity.ok(&quot;请求成功!&quot;);
+    }
+}
+</code></pre>
 
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
@@ -352,7 +394,7 @@ public class JwtProperties {
             <div class="box sticky animated fadeInRight faster">
                 <div id="toc" class="subbox">
                     <h4>目录</h4>
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#章节概要"><span class="toc-number">1.</span> <span class="toc-text">章节概要</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#用户模块开发"><span class="toc-number">1.1.</span> <span class="toc-text">用户模块开发</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#修改-Guns-中的-JWT-模块"><span class="toc-number">1.1.1.</span> <span class="toc-text">修改 Guns 中的 JWT 模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#业务功能开发"><span class="toc-number">1.1.2.</span> <span class="toc-text">业务功能开发</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#创建用户表"><span class="toc-number">2.</span> <span class="toc-text">创建用户表</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#用户服务与网关交互"><span class="toc-number">3.</span> <span class="toc-text">用户服务与网关交互</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#基于-SpringBoot-配置忽略列表"><span class="toc-number">4.</span> <span class="toc-text">基于 SpringBoot 配置忽略列表</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#修改-JWT-申请的返回报文"><span class="toc-number">5.</span> <span class="toc-text">修改 JWT 申请的返回报文</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#章节概要"><span class="toc-number">1.</span> <span class="toc-text">章节概要</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#用户模块开发"><span class="toc-number">1.1.</span> <span class="toc-text">用户模块开发</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#修改-Guns-中的-JWT-模块"><span class="toc-number">1.1.1.</span> <span class="toc-text">修改 Guns 中的 JWT 模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#业务功能开发"><span class="toc-number">1.1.2.</span> <span class="toc-text">业务功能开发</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#创建用户表"><span class="toc-number">2.</span> <span class="toc-text">创建用户表</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#用户服务与网关交互"><span class="toc-number">3.</span> <span class="toc-text">用户服务与网关交互</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#基于-SpringBoot-配置忽略列表"><span class="toc-number">4.</span> <span class="toc-text">基于 SpringBoot 配置忽略列表</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#修改-JWT-申请的返回报文"><span class="toc-number">5.</span> <span class="toc-text">修改 JWT 申请的返回报文</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#增加-Threadlocal-的用户信息保存"><span class="toc-number">6.</span> <span class="toc-text">增加 Threadlocal 的用户信息保存</span></a></li></ol>
                 </div>
             </div>
             
