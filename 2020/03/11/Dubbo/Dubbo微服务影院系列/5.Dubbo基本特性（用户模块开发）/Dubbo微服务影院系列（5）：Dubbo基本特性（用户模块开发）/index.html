@@ -92,13 +92,13 @@
                 
                 <span>
                     <b class="iconfont icon-text2"></b> <i>文章字数</i>
-                    3.2k
+                    7.3k
                 </span>
                 
                 
                 <span>
                     <b class="iconfont icon-timer__s"></b> <i>阅读约需</i>
-                    3 mins.
+                    7 mins.
                 </span>
                 
                 
@@ -168,7 +168,27 @@ CREATE TABLE user(
 insert into user(user_name,user_pwd,nick_name,user_sex,birthday,email,user_phone,address,head_url,life_state,biography) values(&#39;admin&#39;,&#39;0192023a7bbd73250516f069df18b500&#39;,&#39;管理员&#39;,0,&#39;2018-07-31&#39;,&#39;admin@gmail.com&#39;,&#39;13888888888&#39;,&#39;浙江省杭州市西湖区某路某号&#39;,&#39;cinema/img/head-img.jpg&#39;,0,&#39;我是苦逼的管理员&#39;);
 insert into user(user_name,user_pwd,nick_name,user_sex,birthday,email,user_phone,address,head_url,life_state,biography) values(&#39;test&#39;,&#39;5e2de6bd1c9b50f6e27d4e55da43b917&#39;,&#39;测试用户&#39;,0,&#39;2018-08-20&#39;,&#39;test@gmail.com&#39;,&#39;13866666666&#39;,&#39;测试地址&#39;,&#39;cinema/img/head-img.jpg&#39;,1,&#39;我是测试用户&#39;);
 </code></pre>
-<h1 id="用户服务与网关交互"><a href="#用户服务与网关交互" class="headerlink" title="用户服务与网关交互"></a>用户服务与网关交互</h1><p>在 guns 项目中复制一份 guns-gateway 模块并重命名为 guns-user（修改相应子模块和主模块的 pom.xml ），在 guns-user 中编写 UserAPI 的实现类，其中 UserAPI 接口是来自于 guns-api 的（在前一章已经做了业务 API 抽离）。</p>
+<h1 id="用户服务与网关交互"><a href="#用户服务与网关交互" class="headerlink" title="用户服务与网关交互"></a>用户服务与网关交互</h1><p>在 guns 项目中复制一份 guns-gateway 模块并重命名为 guns-user（修改相应子模块和主模块的 pom.xml 等），并在 application.yml 中将其鉴权机制等关闭（网关才需要）</p>
+<pre><code class="YAML">rest:
+  auth-open: false #jwt鉴权机制是否开启(true或者false)
+  sign-open: false #签名机制是否开启(true或false)
+</code></pre>
+<p>端口设为8083</p>
+<pre><code class="YAML">server:
+  port: 8083 #项目端口
+</code></pre>
+<p>在 spring:dubbo: 下添加 Dubbo 协议和端口（UserApplication 需要向外部暴露接口，先向注册中心注册，然后通过 Dubbo 协议被远程调用）</p>
+<pre><code class="YAML">spring:
+  application:
+    name: cinema-user
+  dubbo:
+    server: true
+    registry: zookeeper://localhost:2181
+    protocol:
+      name: dubbo
+      port: 20881
+</code></pre>
+<p>在 guns-user 中编写 UserAPI 的实现类，其中 UserAPI 接口是来自于 guns-api 的（在前一章已经做了业务 API 抽离），并通过 @Service 向外部暴露</p>
 <pre><code class="Java">@Component
 @Service(interfaceClass = UserAPI.class)
 public class UserImpl implements UserAPI {
@@ -180,11 +200,114 @@ public class UserImpl implements UserAPI {
     }
 }
 </code></pre>
-<p>然后，在 guns-gateway 中就可以调用 UserAPI 接口了。</p>
+<p>然后，在 guns-gateway 中就可以远程调用 UserAPI 接口了</p>
 <pre><code class="Java">    @Reference(interfaceClass = UserAPI.class)
     private UserAPI userAPI;
 
     userAPI.login(username, password);
+</code></pre>
+<h1 id="基于-SpringBoot-配置忽略列表"><a href="#基于-SpringBoot-配置忽略列表" class="headerlink" title="基于 SpringBoot 配置忽略列表"></a>基于 SpringBoot 配置忽略列表</h1><p>配置 guns-gateway 网关模块中的 application.yml，在 jwt 下添加 ignore-url 配置，用逗号分隔 url，这些接口将不通过 jwt 验证过滤器</p>
+<pre><code class="yaml">jwt:
+  header: Authorization   #http请求头所需要的字段
+  secret: mySecret        #jwt秘钥
+  expiration: 604800      #7天 单位:秒
+  auth-path: auth         #认证请求的路径
+  md5-key: randomKey      #md5加密混淆key
+  ignore-url: /user/, /film  #忽略列表
+</code></pre>
+<p>在 JwtProperties 中添加一项成员变量，并添加 get、set 函数，这个类是配置类，<code>@ConfigurationProperties(prefix = JwtProperties.JWT_PREFIX)</code> 表示用于从配置文件 application.yml 中获取 jwt 开头的配置变量</p>
+<pre><code class="Java">@Configuration
+@ConfigurationProperties(prefix = JwtProperties.JWT_PREFIX)
+public class JwtProperties {
+
+    public static final String JWT_PREFIX = &quot;jwt&quot;;
+
+    private String header = &quot;Authorization&quot;;
+
+    private String secret = &quot;defaultSecret&quot;;
+
+    private Long expiration = 604800L;
+
+    private String authPath = &quot;auth&quot;;
+
+    private String md5Key = &quot;randomKey&quot;;
+
+    private String ignoreUrl = &quot;&quot;;
+</code></pre>
+<p>在 AuthFilter 的 doFilterInternal 方法中添加以下代码，用于忽略配置列表</p>
+<pre><code class="Java">        // 配置忽略列表
+        String ignoreUrl = jwtProperties.getIgnoreUrl();
+        String[] ignoreUrls = ignoreUrl.split(&quot;,&quot;);
+
+        for (int i = 0; i &lt; ignoreUrls.length; i++) {
+            if (request.getServletPath().equals(ignoreUrls[i])) {
+                chain.doFilter(request, response);
+                return;
+            }
+        }
+</code></pre>
+<h1 id="修改-JWT-申请的返回报文"><a href="#修改-JWT-申请的返回报文" class="headerlink" title="修改 JWT 申请的返回报文"></a>修改 JWT 申请的返回报文</h1><p>创建 ResponseVO 类作为响应VO类，其中包含了三种状态 Status ：0-成功，1-业务失败，999-系统异常</p>
+<pre><code class="Java">public class ResponseVO&lt;M&gt; {
+
+    /**
+     * 返回状态 [0-成功，1-业务失败，999-系统异常]
+     */
+    private Integer status;
+    /**
+     * 返回信息
+     */
+    private String msg;
+    /**
+     * 返回数据实体
+     */
+    private M data;
+
+    private ResponseVO() {}
+
+    public static&lt;M&gt; ResponseVO success(M m) {
+        ResponseVO responseVO = new ResponseVO();
+        responseVO.setStatus(0);
+        responseVO.setData(m);
+        return responseVO;
+    }
+
+    public static ResponseVO serviceFail(String msg) {
+        ResponseVO responseVO = new ResponseVO();
+        responseVO.setStatus(1);
+        responseVO.setMsg(msg);
+        return responseVO;
+    }
+
+    public static ResponseVO appFail(String msg) {
+        ResponseVO responseVO = new ResponseVO();
+        responseVO.setStatus(999);
+        responseVO.setMsg(msg);
+        return responseVO;
+    }
+</code></pre>
+<p>之后在 AuthController 中就可以用该类作为返回对象了</p>
+<pre><code class="Java">    @RequestMapping(value = &quot;${jwt.auth-path}&quot;)
+    public ResponseVO createAuthenticationToken(AuthRequest authRequest) {
+
+        boolean validate = true;
+
+        // 去掉guns自身携带的用户名密码验证机制，使用自己的
+        int userId = userAPI.login(authRequest.getUserName(), authRequest.getPassword());
+
+        if (userId == 0) {
+            validate = false;
+        }
+
+        if (validate) {
+            // randomKey和token已经生成完毕
+            final String randomKey = jwtTokenUtil.getRandomKey();
+            final String token = jwtTokenUtil.generateToken(&quot;&quot; + userId, randomKey);
+            // 返回值
+            return ResponseVO.success(new AuthResponse(token, randomKey));
+        } else {
+            return ResponseVO.serviceFail(&quot;用户名或密码错误&quot;);
+        }
+    }
 </code></pre>
 
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
@@ -229,7 +352,7 @@ public class UserImpl implements UserAPI {
             <div class="box sticky animated fadeInRight faster">
                 <div id="toc" class="subbox">
                     <h4>目录</h4>
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#章节概要"><span class="toc-number">1.</span> <span class="toc-text">章节概要</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#用户模块开发"><span class="toc-number">1.1.</span> <span class="toc-text">用户模块开发</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#修改-Guns-中的-JWT-模块"><span class="toc-number">1.1.1.</span> <span class="toc-text">修改 Guns 中的 JWT 模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#业务功能开发"><span class="toc-number">1.1.2.</span> <span class="toc-text">业务功能开发</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#创建用户表"><span class="toc-number">2.</span> <span class="toc-text">创建用户表</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#用户服务与网关交互"><span class="toc-number">3.</span> <span class="toc-text">用户服务与网关交互</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#章节概要"><span class="toc-number">1.</span> <span class="toc-text">章节概要</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#用户模块开发"><span class="toc-number">1.1.</span> <span class="toc-text">用户模块开发</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#修改-Guns-中的-JWT-模块"><span class="toc-number">1.1.1.</span> <span class="toc-text">修改 Guns 中的 JWT 模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#业务功能开发"><span class="toc-number">1.1.2.</span> <span class="toc-text">业务功能开发</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#创建用户表"><span class="toc-number">2.</span> <span class="toc-text">创建用户表</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#用户服务与网关交互"><span class="toc-number">3.</span> <span class="toc-text">用户服务与网关交互</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#基于-SpringBoot-配置忽略列表"><span class="toc-number">4.</span> <span class="toc-text">基于 SpringBoot 配置忽略列表</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#修改-JWT-申请的返回报文"><span class="toc-number">5.</span> <span class="toc-text">修改 JWT 申请的返回报文</span></a></li></ol>
                 </div>
             </div>
             
