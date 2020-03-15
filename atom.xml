@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://zjxjwxk.com/"/>
-  <updated>2020-03-15T10:48:10.000Z</updated>
+  <updated>2020-03-15T10:49:58.000Z</updated>
   <id>https://zjxjwxk.com/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://zjxjwxk.com/2020/03/15/PAT/Advanced_Level/A1065/"/>
     <id>https://zjxjwxk.com/2020/03/15/PAT/Advanced_Level/A1065/</id>
     <published>2020-03-15T10:04:00.000Z</published>
-    <updated>2020-03-15T10:48:10.000Z</updated>
+    <updated>2020-03-15T10:49:58.000Z</updated>
     
     <content type="html"><![CDATA[<p>Given three integers <em>A</em>, <em>B</em> and <em>C</em> in [−2^63,2^63], you are supposed to tell whether <em>A</em>+<em>B</em>&gt;<em>C</em>.</p><h3 id="Input-Specification"><a href="#Input-Specification" class="headerlink" title="Input Specification:"></a>Input Specification:</h3><p>The first line of the input gives the positive number of test cases, <em>T</em> (≤10). Then <em>T</em> test cases follow, each consists of a single line containing three integers <em>A</em>, <em>B</em> and <em>C</em>, separated by single spaces.</p><h3 id="Output-Specification"><a href="#Output-Specification" class="headerlink" title="Output Specification:"></a>Output Specification:</h3><p>For each test case, output in one line <code>Case #X: true</code> if <em>A</em>+<em>B</em>&gt;<em>C</em>, or <code>Case #X: false</code> otherwise, where <em>X</em> is the case number (starting from 1).</p><h3 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input:"></a>Sample Input:</h3><pre><code class="in">31 2 32 3 49223372036854775807 -9223372036854775808 0</code></pre><h3 id="Sample-Output"><a href="#Sample-Output" class="headerlink" title="Sample Output:"></a>Sample Output:</h3><pre><code class="out">Case #1: falseCase #2: trueCase #3: false</code></pre><h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><ul><li>当正溢出时，A + B 大小的范围区间为 [2^63, 2^64 - 2]，所以溢出后的区间为 [-2^63, -2]。所以，当 A &gt; 0, B &gt; 0, A + B &lt; 0 时，为正溢出，输入 true。</li><li>当负溢出时，A + B 大小的范围区间为 [-2^64, -2^63 - 1]，所以溢出后的区间为 [0, 2^63 - 1]。所以，当 A &lt; 0, B &lt; 0, A + B &gt;= 0 时为，为负溢出，输出 false。</li><li>在没有溢出的情况下，正常比较。</li></ul><h1 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h1><ul><li>A + B 必须存放到 long long 型变量中才可与 C 进行比较，而不可以在 if 的条件中直接相加与 C 比较，否则会造成后两组数据错误。</li></ul><pre><code class="C++">#include &lt;cstdio&gt;int main() {    int t;    long long a, b, c;    bool flag;    scanf(&quot;%d&quot;, &amp;t);    for (int i = 1; i &lt;= t; i++) {        scanf(&quot;%lld %lld %lld&quot;, &amp;a, &amp;b, &amp;c);        long long res = a + b;        if (a &gt; 0 &amp;&amp; b &gt; 0 &amp;&amp; res &lt; 0) {            flag = true;        } else if (a &lt; 0 &amp;&amp; b &lt; 0 &amp;&amp; res &gt;= 0) {            flag = false;        } else if (res &gt; c) {            flag = true;        } else {            flag = false;        }        printf(&quot;Case #%d: %s\n&quot;, i, flag ? &quot;true&quot; : &quot;false&quot;);    }    return 0;}</code></pre>]]></content>
     
