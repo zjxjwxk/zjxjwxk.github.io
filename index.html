@@ -125,16 +125,16 @@
             <a href="/categories/PAT"><b>「
                 </b>PAT<b> 」</b></a>
             
-            三月 15, 2020
+            三月 17, 2020
         </p>
         <h3 class="post-title animated fadeInDown">
-            <a href="/2020/03/15/PAT/Advanced_Level/A1065/" title="PAT甲级 1065 A+B and C (64bit) (20分)" class="posttitle">PAT甲级 1065 A+B and C (64bit) (20分)</a></h3>
+            <a href="/2020/03/17/PAT/Basic_Level/B1010/" title="PAT乙级 1010 一元多项式求导 (25分)" class="posttitle">PAT乙级 1010 一元多项式求导 (25分)</a></h3>
         
         <p class="post-count animated fadeInDown">
             
             <span>
                 <b class="iconfont icon-text2"></b> <i>文章字数</i>
-                2.5k
+                1.7k
             </span>
             
             
@@ -144,7 +144,7 @@
             </span>
             
             
-            <span id="/2020/03/15/PAT/Advanced_Level/A1065/" class="leancloud_visitors" data-flag-title="">
+            <span id="/2020/03/17/PAT/Basic_Level/B1010/" class="leancloud_visitors" data-flag-title="">
                 <b class="iconfont icon-read"></b> <i>阅读次数</i>
                 <span class="leancloud-visitors-count">-</span>
             </span>
@@ -156,10 +156,19 @@
         
         <div class="md-content animated fadeIn">
             
-            <p>Given three integers <em>A</em>, <em>B</em> and <em>C</em> in [−2^63,2^63], you are supposed to tell whether <em>A</em>+<em>B</em>&gt;<em>C</em>.</p>
-<h3 id="Input-Specification"><a href="#Input-Specification" class="headerlink" title="Input Specification:"></a>Input Specification:</h3><p>The first line of the input gives the positive number of test cases, <em>T</em> (≤10). Then <em>T</em> test cases follow, each consists of a single line containing three integers <em>A</em>, <em>B</em> and <em>C</em>, separated by single...</p>
+            <p>设计函数求一元多项式的导数。（注：$x^n$（<em>n</em>为整数）的一阶导数为$nx^{n−1}$。）</p>
+<p>以指数递降方式输入多项式非零项系数和指数（绝对值均为不超过 1000 的整数）。数字间以空格分隔。</p>
+<p>以与输入相同的格式输出导数多项式非零项的系数和指数。数字间以空格分隔，但结尾不能有多余空格。注意“零多项式”的指数和系数都是 0，但是表示为 <code>0 0</code>。</p>
+<pre><code class="in">3 4 -5 2 6 1 -2 0
+</code></pre>
+<pre><code class="out">12 3 -10 1 6 0
+</code></pre>
+<ul>
+<li>用 while……EOF 的格式来读入系数和指数（黑框中触发 EOF 要按 <code>ctrl + Z</code>，并回车）</li>
+<li>经测试，该题的指数都是非负整数</li>
+<li>求导必须从低次项枚举到高次项，否则结果可能为出...</li></ul>
             
-            <span class="read-more"><a href="/2020/03/15/PAT/Advanced_Level/A1065/" title="查看全文" class="posttitle">查看全文</a>
+            <span class="read-more"><a href="/2020/03/17/PAT/Basic_Level/B1010/" title="查看全文" class="posttitle">查看全文</a>
                 <b class="iconfont icon-arrow-right- gradient-text"></b></span>
         </div>
     </div>
@@ -180,6 +189,58 @@
 
     <div id="primary">
         
+<div class="post" id="post">
+    <div class="post-cover animated fadeIn" style="
+            background-image:
+            radial-gradient(ellipse closest-side, rgba(0, 0, 0, 0.65), #100e17),
+            url(/img/welcome-cover.jpg);">
+    </div>
+    <div class="else">
+        <p class="animated fadeInDown">
+            
+                <a href="/categories/PAT">
+                  <b>「 </b>PAT<b> 」</b>
+                </a>
+            
+            三月 15, 2020
+        </p>
+        <h3 class="post-title animated fadeInDown"><a href="/2020/03/15/PAT/Advanced_Level/A1065/" title="PAT甲级 1065 A+B and C (64bit) (20分)" class="posttitle">PAT甲级 1065 A+B and C (64bit) (20分)</a></h3>
+        
+            <p class="post-count animated fadeInDown">
+                
+                    <span>
+                        <b class="iconfont icon-text2"></b> <i>文章字数</i>
+                        2.5k
+                    </span>
+                
+                
+                    <span>
+                        <b class="iconfont icon-timer__s"></b> <i>阅读约需</i>
+                        2 mins.
+                    </span>
+                
+                
+                    <span id="/2020/03/15/PAT/Advanced_Level/A1065/" class="leancloud_visitors" data-flag-title="">
+                        <b class="iconfont icon-read"></b> <i>阅读次数</i>
+                        <span class="leancloud-visitors-count">-</span>
+                    </span>
+                
+            </p>
+            
+                <ul class="animated fadeInDown post-tags-list"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/Algorithm/">Algorithm</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/PAT/">PAT</a></li></ul>
+            
+        
+        <div class="md-content animated fadeIn">
+            
+                <p>Given three integers <em>A</em>, <em>B</em> and <em>C</em> in [−2^63,2^63], you are supposed to tell whether <em>A</em>+<em>B</em>&gt;<em>C</em>.</p>
+<p>The first line of the input gives the positive number of test cases, <em>T</em> (≤10). Then <em>T</em> test cases follow, each consists of a single line containing three integers...</p>
+            
+            <span class="read-more"><a href="/2020/03/15/PAT/Advanced_Level/A1065/" title="查看全文" class="posttitle">查看全文</a> <b class="iconfont icon-arrow-right- gradient-text"></b></span>
+        </div>
+    </div>
+</div>
+
+
 <div class="post" id="post">
     <div class="post-cover animated fadeIn" style="
             background-image:
@@ -686,67 +747,6 @@ CREATE TABLE user(
 <pre><code class="shell">hg clone http://hg.openjdk.java....</code></pre>
             
             <span class="read-more"><a href="/2019/03/11/Java/JVM/自己编译JDK/" title="查看全文" class="posttitle">查看全文</a> <b class="iconfont icon-arrow-right- gradient-text"></b></span>
-        </div>
-    </div>
-</div>
-
-
-<div class="post" id="post">
-    <div class="post-cover animated fadeIn" style="
-            background-image:
-            radial-gradient(ellipse closest-side, rgba(0, 0, 0, 0.65), #100e17),
-            url(/img/welcome-cover.jpg);">
-    </div>
-    <div class="else">
-        <p class="animated fadeInDown">
-            
-                <a href="/categories/Spring-Boot">
-                  <b>「 </b>SPRING-BOOT<b> 」</b>
-                </a>
-            
-            二月 02, 2019
-        </p>
-        <h3 class="post-title animated fadeInDown"><a href="/2019/02/02/Spring Boot/Spring-Boot-简化分页查询Page接口的JSON响应/" title="Spring Boot 简化分页查询Page接口的JSON响应" class="posttitle">Spring Boot 简化分页查询Page接口的JSON响应</a></h3>
-        
-            <p class="post-count animated fadeInDown">
-                
-                    <span>
-                        <b class="iconfont icon-text2"></b> <i>文章字数</i>
-                        7.3k
-                    </span>
-                
-                
-                    <span>
-                        <b class="iconfont icon-timer__s"></b> <i>阅读约需</i>
-                        7 mins.
-                    </span>
-                
-                
-                    <span id="/2019/02/02/Spring Boot/Spring-Boot-简化分页查询Page接口的JSON响应/" class="leancloud_visitors" data-flag-title="">
-                        <b class="iconfont icon-read"></b> <i>阅读次数</i>
-                        <span class="leancloud-visitors-count">-</span>
-                    </span>
-                
-            </p>
-            
-                <ul class="animated fadeInDown post-tags-list"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/Java/">Java</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/Spring-Boot/">Spring-Boot</a></li></ul>
-            
-        
-        <div class="md-content animated fadeIn">
-            
-                <h3 id="多余的分页信息"><a href="#多余的分页信息" class="headerlink" title="多余的分页信息"></a>多余的分页信息</h3><p>Spring Data 的 Page 接口进行数据分页返回了很多很多垃圾信息：</p>
-<pre><code class="JSON">{
-    &quot;status&quot;: 0,
-    &quot;data&quot;: {
-        &quot;content&quot;: [
-            {
-                &quot;goodsId&quot;: 1,
-                &quot;producerId&quot;: 1,
-                &quot;categoryId&quot;: 4,
-                &quot;name&quot;: &quot;耐克sb滑板鞋&quot;,
-                &quot;price&quot...</code></pre>
-            
-            <span class="read-more"><a href="/2019/02/02/Spring Boot/Spring-Boot-简化分页查询Page接口的JSON响应/" title="查看全文" class="posttitle">查看全文</a> <b class="iconfont icon-arrow-right- gradient-text"></b></span>
         </div>
     </div>
 </div>

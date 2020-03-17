@@ -136,15 +136,15 @@
 <p>Now given the processing time of each customer, you are supposed to tell the exact time at which a customer has his/her business done.</p>
 <p>For example, suppose that a bank has 2 windows and each window may have 2 customers waiting inside the yellow line. There are 5 customers waiting with transactions taking 1, 2, 6, 4 and 3 minutes, respectively. At 08:00 in the morning, customer[1] is served at window[1] while customer[2] is served at window[2]. Customer[3] will wait in front of window[1] and customer[4] will wait in front of window[2]. Customer[5] will wait behind the yellow line.</p>
 <p>At 08:01, customer[1] is done and customer[5] enters the line in front of window[1] since that line seems shorter now. Customer[2] will leave at 08:02, customer[4] at 08:06, customer[3] at 08:07, and finally customer[5] at 08:10.</p>
-<h3 id="Input-Specification"><a href="#Input-Specification" class="headerlink" title="Input Specification:"></a>Input Specification:</h3><p>Each input file contains one test case. Each case starts with a line containing 4 positive integers: <em>N</em> (≤20, number of windows), <em>M</em> (≤10, the maximum capacity of each line inside the yellow line), <em>K</em> (≤1000, number of customers), and <em>Q</em> (≤1000, number of customer queries).</p>
+<h1 id="Input-Specification"><a href="#Input-Specification" class="headerlink" title="Input Specification:"></a>Input Specification:</h1><p>Each input file contains one test case. Each case starts with a line containing 4 positive integers: <em>N</em> (≤20, number of windows), <em>M</em> (≤10, the maximum capacity of each line inside the yellow line), <em>K</em> (≤1000, number of customers), and <em>Q</em> (≤1000, number of customer queries).</p>
 <p>The next line contains <em>K</em> positive integers, which are the processing time of the <em>K</em> customers.</p>
 <p>The last line contains <em>Q</em> positive integers, which represent the customers who are asking about the time they can have their transactions done. The customers are numbered from 1 to <em>K</em>.</p>
-<h3 id="Output-Specification"><a href="#Output-Specification" class="headerlink" title="Output Specification:"></a>Output Specification:</h3><p>For each of the <em>Q</em> customers, print in one line the time at which his/her transaction is finished, in the format <code>HH:MM</code> where <code>HH</code> is in [08, 17] and <code>MM</code> is in [00, 59]. Note that since the bank is closed everyday after 17:00, for those customers who cannot be served before 17:00, you must output <code>Sorry</code> instead.</p>
-<h3 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input:"></a>Sample Input:</h3><pre><code class="in">2 2 7 5
+<h1 id="Output-Specification"><a href="#Output-Specification" class="headerlink" title="Output Specification:"></a>Output Specification:</h1><p>For each of the <em>Q</em> customers, print in one line the time at which his/her transaction is finished, in the format <code>HH:MM</code> where <code>HH</code> is in [08, 17] and <code>MM</code> is in [00, 59]. Note that since the bank is closed everyday after 17:00, for those customers who cannot be served before 17:00, you must output <code>Sorry</code> instead.</p>
+<h1 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input:"></a>Sample Input:</h1><pre><code class="in">2 2 7 5
 1 2 6 4 3 534 2
 3 4 5 6 7
 </code></pre>
-<h3 id="Sample-Output"><a href="#Sample-Output" class="headerlink" title="Sample Output:"></a>Sample Output:</h3><pre><code class="out">08:07
+<h1 id="Sample-Output"><a href="#Sample-Output" class="headerlink" title="Sample Output:"></a>Sample Output:</h1><pre><code class="out">08:07
 08:06
 08:10
 17:00
@@ -244,7 +244,7 @@ int main() {
                     </dl>
                 </div>
                 <ul>
-                    <li><a href="/">21 <p>文章</p></a></li>
+                    <li><a href="/">22 <p>文章</p></a></li>
                     <li><a href="/categories">8 <p>分类</p></a></li>
                     <li><a href="/tags">14 <p>标签</p></a></li>
                 </ul>
@@ -255,8 +255,8 @@ int main() {
             <div class="box sticky animated fadeInRight faster">
                 <div id="toc" class="subbox">
                     <h4>目录</h4>
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Input-Specification"><span class="toc-number">1.</span> <span class="toc-text">Input Specification:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Output-Specification"><span class="toc-number">2.</span> <span class="toc-text">Output Specification:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Sample-Input"><span class="toc-number">3.</span> <span class="toc-text">Sample Input:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Sample-Output"><span class="toc-number">4.</span> <span class="toc-text">Sample Output:</span></a></li></ol><li class="toc-item toc-level-1"><a class="toc-link" href="#注意点"><span class="toc-number"></span> <span class="toc-text">注意点</span></a>
-                </li></div>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Input-Specification"><span class="toc-number">1.</span> <span class="toc-text">Input Specification:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Output-Specification"><span class="toc-number">2.</span> <span class="toc-text">Output Specification:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Sample-Input"><span class="toc-number">3.</span> <span class="toc-text">Sample Input:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Sample-Output"><span class="toc-number">4.</span> <span class="toc-text">Sample Output:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#注意点"><span class="toc-number">5.</span> <span class="toc-text">注意点</span></a></li></ol>
+                </div>
             </div>
             
             
