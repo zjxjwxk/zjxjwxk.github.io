@@ -206,14 +206,14 @@ public class UserImpl implements UserAPI {
 
     userAPI.login(username, password);
 </code></pre>
-<h1 id="基于-SpringBoot-配置忽略列表"><a href="#基于-SpringBoot-配置忽略列表" class="headerlink" title="基于 SpringBoot 配置忽略列表"></a>基于 SpringBoot 配置忽略列表</h1><p>配置 guns-gateway 网关模块中的 application.yml，在 jwt 下添加 ignore-url 配置，用逗号分隔 url，这些接口将不通过 jwt 验证过滤器</p>
+<h1 id="基于-SpringBoot-配置忽略列表"><a href="#基于-SpringBoot-配置忽略列表" class="headerlink" title="基于 SpringBoot 配置忽略列表"></a>基于 SpringBoot 配置忽略列表</h1><p>配置 guns-gateway 网关模块中的 application.yml，在 jwt 下添加 ignore-url 配置，用逗号分隔 url（<strong>注意不能有空格！</strong>），这些接口将不通过 jwt 验证过滤器</p>
 <pre><code class="yaml">jwt:
   header: Authorization   #http请求头所需要的字段
   secret: mySecret        #jwt秘钥
   expiration: 604800      #7天 单位:秒
   auth-path: auth         #认证请求的路径
   md5-key: randomKey      #md5加密混淆key
-  ignore-url: /user/, /film  #忽略列表
+  ignore-url: /user/,/film/  #忽略列表
 </code></pre>
 <p>在 JwtProperties 中添加一项成员变量，并添加 get、set 函数，这个类是配置类，<code>@ConfigurationProperties(prefix = JwtProperties.JWT_PREFIX)</code> 表示用于从配置文件 application.yml 中获取 jwt 开头的配置变量</p>
 <pre><code class="Java">@Configuration
