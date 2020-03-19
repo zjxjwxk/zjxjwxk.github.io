@@ -92,13 +92,13 @@
                 
                 <span>
                     <b class="iconfont icon-text2"></b> <i>文章字数</i>
-                    11k
+                    13k
                 </span>
                 
                 
                 <span>
                     <b class="iconfont icon-timer__s"></b> <i>阅读约需</i>
-                    10 mins.
+                    12 mins.
                 </span>
                 
                 
@@ -403,7 +403,24 @@ public class UserController {
     }
 }
 </code></pre>
-
+<h1 id="业务检查"><a href="#业务检查" class="headerlink" title="业务检查"></a>业务检查</h1><h2 id="存在的问题"><a href="#存在的问题" class="headerlink" title="存在的问题"></a>存在的问题</h2><ol>
+<li>必须先启动服务提供者，否则会报错（如下）。如果有两个服务互相依赖，那么两个服务都无法启动成功。</li>
+</ol>
+<pre><code>Caused by: java.lang.IllegalStateException: Failed to check the status of the service com.stylefeng.guns.api.user.UserAPI. No provider available for the service com.stylefeng.guns.api.user.UserAPI from the url zookeeper://localhost:2181/com.alibaba.dubbo.registry.RegistryService?application=cinema-gateway&amp;dubbo=2.6.0&amp;interface=com.stylefeng.guns.api.user.UserAPI&amp;methods=updateUserInfo,checkUserName,getUserInfo,login,register&amp;pid=10451&amp;register.ip=192.168.6.102&amp;side=consumer&amp;timestamp=1584633672918 to the consumer 192.168.6.102 use dubbo version 2.6.0
+</code></pre><ol start="2">
+<li><p>如果我们将用户模块部署多台，消费者会如何访问</p>
+</li>
+<li><p>spring: dubbo: 中的 protocol 属性是做什么的</p>
+</li>
+</ol>
+<h2 id="Dubbo-启动检查"><a href="#Dubbo-启动检查" class="headerlink" title="Dubbo 启动检查"></a>Dubbo 启动检查</h2><ul>
+<li>服务启动过程中验证服务提供者的可用性</li>
+<li>验证过程出现问题，则阻止整个 Spring 容器初始化</li>
+<li>服务启动检查可以尽可能早的发现服务问题</li>
+</ul>
+<p>Dubbo 默认打开了启动检查，每个接口的 @Reference 注解都默认 check = true，如果确实想取消启动检查，只需在每个消费者所引用的接口的 @Reference 注解后手动设置 check = false 即可（但是并不推荐）。关闭启动检查后，无论所调用接口的服务有没有启动，都能够正常启动。但如果其调用没有启动的服务，将会报以下错误：</p>
+<pre><code>com.alibaba.dubbo.rpc.RpcException: No provider available from registry localhost:2181 for service com.stylefeng.guns.api.user.UserAPI on consumer 192.168.6.102 use dubbo version 2.6.0, may be providers disabled or not registered ?
+</code></pre>
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
                 <source type="audio/mpeg" src="">
@@ -446,7 +463,7 @@ public class UserController {
             <div class="box sticky animated fadeInRight faster">
                 <div id="toc" class="subbox">
                     <h4>目录</h4>
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#章节概要"><span class="toc-number">1.</span> <span class="toc-text">章节概要</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#用户模块开发"><span class="toc-number">1.1.</span> <span class="toc-text">用户模块开发</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#修改-Guns-中的-JWT-模块"><span class="toc-number">1.1.1.</span> <span class="toc-text">修改 Guns 中的 JWT 模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#业务功能开发"><span class="toc-number">1.1.2.</span> <span class="toc-text">业务功能开发</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#创建用户表"><span class="toc-number">2.</span> <span class="toc-text">创建用户表</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#用户服务与网关交互"><span class="toc-number">3.</span> <span class="toc-text">用户服务与网关交互</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#基于-SpringBoot-配置忽略列表"><span class="toc-number">4.</span> <span class="toc-text">基于 SpringBoot 配置忽略列表</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#修改-JWT-申请的返回报文"><span class="toc-number">5.</span> <span class="toc-text">修改 JWT 申请的返回报文</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#增加-Threadlocal-的用户信息保存"><span class="toc-number">6.</span> <span class="toc-text">增加 Threadlocal 的用户信息保存</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#用户模块开发-1"><span class="toc-number">7.</span> <span class="toc-text">用户模块开发</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#业务功能开发流程"><span class="toc-number">7.1.</span> <span class="toc-text">业务功能开发流程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#使用代码生成器生成数据项"><span class="toc-number">7.1.1.</span> <span class="toc-text">使用代码生成器生成数据项</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实现相应的接口功能"><span class="toc-number">7.1.2.</span> <span class="toc-text">实现相应的接口功能</span></a></li></ol></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#章节概要"><span class="toc-number">1.</span> <span class="toc-text">章节概要</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#用户模块开发"><span class="toc-number">1.1.</span> <span class="toc-text">用户模块开发</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#修改-Guns-中的-JWT-模块"><span class="toc-number">1.1.1.</span> <span class="toc-text">修改 Guns 中的 JWT 模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#业务功能开发"><span class="toc-number">1.1.2.</span> <span class="toc-text">业务功能开发</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#创建用户表"><span class="toc-number">2.</span> <span class="toc-text">创建用户表</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#用户服务与网关交互"><span class="toc-number">3.</span> <span class="toc-text">用户服务与网关交互</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#基于-SpringBoot-配置忽略列表"><span class="toc-number">4.</span> <span class="toc-text">基于 SpringBoot 配置忽略列表</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#修改-JWT-申请的返回报文"><span class="toc-number">5.</span> <span class="toc-text">修改 JWT 申请的返回报文</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#增加-Threadlocal-的用户信息保存"><span class="toc-number">6.</span> <span class="toc-text">增加 Threadlocal 的用户信息保存</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#用户模块开发-1"><span class="toc-number">7.</span> <span class="toc-text">用户模块开发</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#业务功能开发流程"><span class="toc-number">7.1.</span> <span class="toc-text">业务功能开发流程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#使用代码生成器生成数据项"><span class="toc-number">7.1.1.</span> <span class="toc-text">使用代码生成器生成数据项</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实现相应的接口功能"><span class="toc-number">7.1.2.</span> <span class="toc-text">实现相应的接口功能</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#业务检查"><span class="toc-number">8.</span> <span class="toc-text">业务检查</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#存在的问题"><span class="toc-number">8.1.</span> <span class="toc-text">存在的问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Dubbo-启动检查"><span class="toc-number">8.2.</span> <span class="toc-text">Dubbo 启动检查</span></a></li></ol></li></ol>
                 </div>
             </div>
             
