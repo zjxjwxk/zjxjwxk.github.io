@@ -5,13 +5,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>PAT甲级 1065 A+B and C (64bit) (20分) - Zjxjwxk&#39;s Blog</title>
+    <title>PAT甲级 1012 The Best Rank (25分) - Zjxjwxk&#39;s Blog</title>
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="google" content="notranslate">
     <meta name="keywords" content="吴鑫康 zjxjwxk Wxk Java,"> 
-    <meta name="description" content="Given three integers A, B and C in [−2^63,2^63], you are supposed to tell whether A+B&amp;gt;C.
-Input S,"> 
+    <meta name="description" content="To evaluate the performance of our first year CS majored students, we consider their grades of thre,"> 
     <meta name="author" content="吴鑫康"> 
     <link rel="alternative" href="atom.xml" title="Zjxjwxk&#39;s Blog" type="application/atom+xml"> 
     <link rel="icon" href="/img/favicon.png"> 
@@ -44,7 +43,7 @@ Input S,">
     <div class="navigation animated fadeIn fast delay-1s">
         <img id="home-icon" class="icon-home" src="/img/favicon.png" alt="" data-url="https://zjxjwxk.com">
         <div id="play-icon" title="Play/Pause" class="iconfont icon-play"></div>
-        <h3 class="subtitle">PAT甲级 1065 A+B and C (64bit) (20分)</h3>
+        <h3 class="subtitle">PAT甲级 1012 The Best Rank (25分)</h3>
         <div class="social">
             <!--        <div class="like-icon">-->
             <!--            <a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
@@ -78,26 +77,26 @@ Input S,">
                 <a href="/categories/PAT"><b>「
                     </b>PAT<b> 」</b></a>
                 
-                三月 15, 2020
+                三月 19, 2020
             </p>
-            <h3 class="post-title animated fadeInDown"><a href="/2020/03/15/PAT/Advanced_Level/A1065/" title="PAT甲级 1065 A+B and C (64bit) (20分)">PAT甲级 1065 A+B and C (64bit) (20分)</a>
+            <h3 class="post-title animated fadeInDown"><a href="/2020/03/19/PAT/Advanced_Level/Untitled/" title="PAT甲级 1012 The Best Rank (25分)">PAT甲级 1012 The Best Rank (25分)</a>
             </h3>
             
             <p class="post-count animated fadeInDown">
                 
                 <span>
                     <b class="iconfont icon-text2"></b> <i>文章字数</i>
-                    2.5k
+                    4.8k
                 </span>
                 
                 
                 <span>
                     <b class="iconfont icon-timer__s"></b> <i>阅读约需</i>
-                    2 mins.
+                    4 mins.
                 </span>
                 
                 
-                <span id="/2020/03/15/PAT/Advanced_Level/A1065/" class="leancloud_visitors" data-flag-title="PAT甲级 1065 A+B and C (64bit) (20分)">
+                <span id="/2020/03/19/PAT/Advanced_Level/Untitled/" class="leancloud_visitors" data-flag-title="PAT甲级 1012 The Best Rank (25分)">
                     <b class="iconfont icon-read"></b> <i>阅读次数</i>
                     <span class="leancloud-visitors-count">-</span>
                 </span>
@@ -127,46 +126,99 @@ Input S,">
 <div class="article">
     <div class="main">
         <div class="content markdown animated fadeIn">
-            <p>Given three integers <em>A</em>, <em>B</em> and <em>C</em> in [−2^63,2^63], you are supposed to tell whether <em>A</em>+<em>B</em>&gt;<em>C</em>.</p>
-<h1 id="Input-Specification"><a href="#Input-Specification" class="headerlink" title="Input Specification:"></a>Input Specification:</h1><p>The first line of the input gives the positive number of test cases, <em>T</em> (≤10). Then <em>T</em> test cases follow, each consists of a single line containing three integers <em>A</em>, <em>B</em> and <em>C</em>, separated by single spaces.</p>
-<h1 id="Output-Specification"><a href="#Output-Specification" class="headerlink" title="Output Specification:"></a>Output Specification:</h1><p>For each test case, output in one line <code>Case #X: true</code> if <em>A</em>+<em>B</em>&gt;<em>C</em>, or <code>Case #X: false</code> otherwise, where <em>X</em> is the case number (starting from 1).</p>
-<h1 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input:"></a>Sample Input:</h1><pre><code class="in">3
-1 2 3
-2 3 4
-9223372036854775807 -9223372036854775808 0
+            <p>To evaluate the performance of our first year CS majored students, we consider their grades of three courses only: <code>C</code> - C Programming Language, <code>M</code> - Mathematics (Calculus or Linear Algrbra), and <code>E</code> - English. At the mean time, we encourage students by emphasizing on their best ranks – that is, among the four ranks with respect to the three courses and the average grade, we print the best rank for each student.</p>
+<p>For example, The grades of <code>C</code>, <code>M</code>, <code>E</code> and <code>A</code> - Average of 4 students are given as the following:</p>
+<pre><code>StudentID  C  M  E  A
+310101     98 85 88 90
+310102     70 95 88 84
+310103     82 87 94 88
+310104     91 91 91 91
+</code></pre><p>Then the best ranks for all the students are No.1 since the 1st one has done the best in C Programming Language, while the 2nd one in Mathematics, the 3rd one in English, and the last one in average.</p>
+<h3 id="Input-Specification"><a href="#Input-Specification" class="headerlink" title="Input Specification:"></a>Input Specification:</h3><p>Each input file contains one test case. Each case starts with a line containing 2 numbers <em>N</em> and <em>M</em> (≤2000), which are the total number of students, and the number of students who would check their ranks, respectively. Then <em>N</em> lines follow, each contains a student ID which is a string of 6 digits, followed by the three integer grades (in the range of [0, 100]) of that student in the order of <code>C</code>, <code>M</code> and <code>E</code>. Then there are <em>M</em> lines, each containing a student ID.</p>
+<h1 id="Output-Specification"><a href="#Output-Specification" class="headerlink" title="Output Specification:"></a>Output Specification:</h1><p>For each of the <em>M</em> students, print in one line the best rank for him/her, and the symbol of the corresponding rank, separated by a space.</p>
+<p>The priorities of the ranking methods are ordered as <code>A</code> &gt; <code>C</code> &gt; <code>M</code> &gt; <code>E</code>. Hence if there are two or more ways for a student to obtain the same best rank, output the one with the highest priority.</p>
+<p>If a student is not on the grading list, simply output <code>N/A</code>.</p>
+<h1 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input:"></a>Sample Input:</h1><pre><code class="in">5 6
+310101 98 85 88
+310102 70 95 88
+310103 82 87 94
+310104 91 91 91
+310105 85 90 90
+310101
+310102
+310103
+310104
+310105
+999999
 </code></pre>
-<h1 id="Sample-Output"><a href="#Sample-Output" class="headerlink" title="Sample Output:"></a>Sample Output:</h1><pre><code class="out">Case #1: false
-Case #2: true
-Case #3: false
+<h1 id="Sample-Output"><a href="#Sample-Output" class="headerlink" title="Sample Output:"></a>Sample Output:</h1><pre><code class="out">1 C
+1 M
+1 E
+1 A
+3 A
+N/A
 </code></pre>
 <h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><ul>
-<li>当正溢出时，A + B 大小的范围区间为 [2^63, 2^64 - 2]，所以溢出后的区间为 [-2^63, -2]。所以，当 A &gt; 0, B &gt; 0, A + B &lt; 0 时，为正溢出，输入 true。</li>
-<li>当负溢出时，A + B 大小的范围区间为 [-2^64, -2^63 - 1]，所以溢出后的区间为 [0, 2^63 - 1]。所以，当 A &lt; 0, B &lt; 0, A + B &gt;= 0 时为，为负溢出，输出 false。</li>
-<li>在没有溢出的情况下，正常比较。</li>
+<li>以结构体 Stu 存放 id 和 score[4] 数组，score[0] ~ score[3] 分别代表 A，C，M，E</li>
+<li>由于 id 是 6 位的整数（6 digits），不妨设置 ranks [1000000] [4] 数组，其中 ranks [id] [0] ~ ranks [id] [4] 分别代表编号为 id 的考生的 A，C，M，E 分别的排名</li>
 </ul>
 <h1 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h1><ul>
-<li>A + B 必须存放到 long long 型变量中才可与 C 进行比较，而不可以在 if 的条件中直接相加与 C 比较，否则会造成后两组数据错误。</li>
+<li>由于优先级是 A &gt; C &gt; M &gt; E，为了方便枚举，设置数组时，尽量把 A 放在 C、M、E 前面</li>
+<li>该题 id 是整数（digits 即数字），不会是字符型</li>
+<li>该题没有说明平均分是向下取整还是四舍五入（向下取整也能通过），但为了更方便，平均分也可以用总分来代替</li>
 </ul>
 <pre><code class="C++">#include &lt;cstdio&gt;
+#include &lt;algorithm&gt;
+using namespace std;
+
+const int maxn = 2000;
+
+struct Stu {
+    int id;
+    int score[4] = {0};
+} stus[maxn];
+
+int n, m, q, ranks[1000000][4] = {0}, index;
+char ch[4] = {&#39;A&#39;, &#39;C&#39;, &#39;M&#39;, &#39;E&#39;};
+
+int cmp(Stu s1, Stu s2) {
+    return s1.score[index] &gt; s2.score[index];
+}
 
 int main() {
-    int t;
-    long long a, b, c;
-    bool flag;
-    scanf(&quot;%d&quot;, &amp;t);
-    for (int i = 1; i &lt;= t; i++) {
-        scanf(&quot;%lld %lld %lld&quot;, &amp;a, &amp;b, &amp;c);
-        long long res = a + b;
-        if (a &gt; 0 &amp;&amp; b &gt; 0 &amp;&amp; res &lt; 0) {
-            flag = true;
-        } else if (a &lt; 0 &amp;&amp; b &lt; 0 &amp;&amp; res &gt;= 0) {
-            flag = false;
-        } else if (res &gt; c) {
-            flag = true;
-        } else {
-            flag = false;
+    scanf(&quot;%d %d&quot;, &amp;n, &amp;m);
+    for (int i = 0; i &lt; n; i++) {
+        scanf(&quot;%d&quot;, &amp;stus[i].id);
+        for (int j = 1; j &lt;= 3; j++) {
+            scanf(&quot;%d&quot;, &amp;stus[i].score[j]);
+            stus[i].score[0] += stus[i].score[j];
         }
-        printf(&quot;Case #%d: %s\n&quot;, i, flag ? &quot;true&quot; : &quot;false&quot;);
+    }
+    for (index = 0; index &lt; 4; index++) {
+        sort(stus, stus + n, cmp);
+        ranks[stus[0].id][index] = 1;
+        for (int i = 1; i &lt; n; i++) {
+            if (stus[i].score[index] == stus[i - 1].score[index]) {
+                ranks[stus[i].id][index] = ranks[stus[i - 1].id][index];
+            } else {
+                ranks[stus[i].id][index] = i + 1;
+            }
+        }
+    }
+    for (int i = 0; i &lt; m; i++) {
+        scanf(&quot;%d&quot;, &amp;q);
+        if (ranks[q][0] == 0) {
+            printf(&quot;N/A\n&quot;);
+        } else {
+            int minRank = 2000, minIndex;
+            for (int j = 0; j &lt; 4; j++) {
+                if (ranks[q][j] &lt; minRank) {
+                    minRank = ranks[q][j];
+                    minIndex = j;
+                }
+            }
+            printf(&quot;%d %c\n&quot;, minRank, ch[minIndex]);
+        }
     }
     return 0;
 }
@@ -214,8 +266,8 @@ int main() {
             <div class="box sticky animated fadeInRight faster">
                 <div id="toc" class="subbox">
                     <h4>目录</h4>
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Input-Specification"><span class="toc-number">1.</span> <span class="toc-text">Input Specification:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Output-Specification"><span class="toc-number">2.</span> <span class="toc-text">Output Specification:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Sample-Input"><span class="toc-number">3.</span> <span class="toc-text">Sample Input:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Sample-Output"><span class="toc-number">4.</span> <span class="toc-text">Sample Output:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#思路"><span class="toc-number">5.</span> <span class="toc-text">思路</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#注意点"><span class="toc-number">6.</span> <span class="toc-text">注意点</span></a></li></ol>
-                </div>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Input-Specification"><span class="toc-number">1.</span> <span class="toc-text">Input Specification:</span></a></li></ol><li class="toc-item toc-level-1"><a class="toc-link" href="#Output-Specification"><span class="toc-number"></span> <span class="toc-text">Output Specification:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Sample-Input"><span class="toc-number"></span> <span class="toc-text">Sample Input:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Sample-Output"><span class="toc-number"></span> <span class="toc-text">Sample Output:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#思路"><span class="toc-number"></span> <span class="toc-text">思路</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#注意点"><span class="toc-number"></span> <span class="toc-text">注意点</span></a>
+                </li></div>
             </div>
             
             
