@@ -92,13 +92,13 @@
                 
                 <span>
                     <b class="iconfont icon-text2"></b> <i>文章字数</i>
-                    13k
+                    16k
                 </span>
                 
                 
                 <span>
                     <b class="iconfont icon-timer__s"></b> <i>阅读约需</i>
-                    12 mins.
+                    15 mins.
                 </span>
                 
                 
@@ -403,16 +403,19 @@ public class UserController {
     }
 }
 </code></pre>
-<h1 id="业务检查"><a href="#业务检查" class="headerlink" title="业务检查"></a>业务检查</h1><h2 id="存在的问题"><a href="#存在的问题" class="headerlink" title="存在的问题"></a>存在的问题</h2><ul>
-<li>必须先启动服务提供者，否则会报错（如下）。如果有两个服务互相依赖，那么两个服务都无法启动成功。</li>
+<h1 id="Dubbo-特性"><a href="#Dubbo-特性" class="headerlink" title="Dubbo 特性"></a>Dubbo 特性</h1><h2 id="存在的问题"><a href="#存在的问题" class="headerlink" title="存在的问题"></a>存在的问题</h2><ul>
+<li>必须先启动服务提供者，否则会报错（如下）。如果有两个服务互相依赖，那么两个服务都无法启动成功。（Dubbo 启动检查）</li>
 </ul>
 <pre><code class="text">Caused by: java.lang.IllegalStateException: Failed to check the status of the service com.stylefeng.guns.api.user.UserAPI. No provider available for the service com.stylefeng.guns.api.user.UserAPI from the url zookeeper://localhost:2181/com.alibaba.dubbo.registry.RegistryService?application=cinema-gateway&amp;dubbo=2.6.0&amp;interface=com.stylefeng.guns.api.user.UserAPI&amp;methods=updateUserInfo,checkUserName,getUserInfo,login,register&amp;pid=10451&amp;register.ip=192.168.6.102&amp;side=consumer&amp;timestamp=1584633672918 to the consumer 192.168.6.102 use dubbo version 2.6.0
 </code></pre>
 <ul>
-<li>如果我们将用户模块部署多台，消费者会如何访问</li>
-<li>spring: dubbo: 中的 protocol 属性是做什么的</li>
+<li>如果我们将用户模块部署多台，消费者会如何访问？（Dubbo 负载均衡）</li>
+<li>spring: dubbo: 中的 protocol 属性是做什么的？（Dubbo 多协议支持）</li>
 </ul>
-<h2 id="Dubbo-启动检查"><a href="#Dubbo-启动检查" class="headerlink" title="Dubbo 启动检查"></a>Dubbo 启动检查</h2><ul>
+<h2 id="Dubbo-启动检查"><a href="#Dubbo-启动检查" class="headerlink" title="Dubbo 启动检查"></a>Dubbo 启动检查</h2><blockquote>
+<p>官方文档：<a href="https://dubbo.apache.org/zh-cn/docs/user/demos/preflight-check.html" target="_blank" rel="noopener">https://dubbo.apache.org/zh-cn/docs/user/demos/preflight-check.html</a></p>
+</blockquote>
+<ul>
 <li>服务启动过程中验证服务提供者的可用性</li>
 <li>验证过程出现问题，则阻止整个 Spring 容器初始化</li>
 <li>服务启动检查可以尽可能早的发现服务问题</li>
@@ -420,6 +423,103 @@ public class UserController {
 <p>Dubbo 默认打开了启动检查，每个接口的 @Reference 注解都默认 check = true，如果确实想取消启动检查，只需在每个消费者所引用的接口的 @Reference 注解后手动设置 check = false 即可（但是并不推荐）。关闭启动检查后，无论所调用接口的服务有没有启动，都能够正常启动。但如果其调用没有启动的服务，将会报以下错误：</p>
 <pre><code class="text">com.alibaba.dubbo.rpc.RpcException: No provider available from registry localhost:2181 for service com.stylefeng.guns.api.user.UserAPI on consumer 192.168.6.102 use dubbo version 2.6.0, may be providers disabled or not registered ?
 </code></pre>
+<h2 id="Dubbo-负载均衡"><a href="#Dubbo-负载均衡" class="headerlink" title="Dubbo 负载均衡"></a>Dubbo 负载均衡</h2><blockquote>
+<p>官方文档：<a href="https://dubbo.apache.org/zh-cn/docs/user/demos/loadbalance.html" target="_blank" rel="noopener">https://dubbo.apache.org/zh-cn/docs/user/demos/loadbalance.html</a></p>
+</blockquote>
+<p>在集群负载均衡时，Dubbo 提供了多种均衡策略，缺省为 <code>random</code> 随机调用。</p>
+<h3 id="负载均衡策略"><a href="#负载均衡策略" class="headerlink" title="负载均衡策略"></a>负载均衡策略</h3><table>
+<thead>
+<tr>
+<th>策略名称</th>
+<th>策略描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Random</td>
+<td><strong>随机</strong>，按权重设置随机概率</td>
+</tr>
+<tr>
+<td>RoundRobin</td>
+<td><strong>轮询</strong>，按公约后的权重设置轮询比率</td>
+</tr>
+<tr>
+<td>LeastActive</td>
+<td><strong>最少活跃调用数</strong>，相同活跃数的随机，活跃数指调用前后计数差</td>
+</tr>
+<tr>
+<td>ConsistentHash</td>
+<td><strong>一致性 Hash</strong>，相同参数的请求总是发到同一提供者</td>
+</tr>
+</tbody>
+</table>
+<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><h4 id="服务端服务级别"><a href="#服务端服务级别" class="headerlink" title="服务端服务级别"></a>服务端服务级别</h4><pre><code class="xml">&lt;dubbo:service interface=&quot;...&quot;  /&gt;
+</code></pre>
+<h4 id="客户端服务级别"><a href="#客户端服务级别" class="headerlink" title="客户端服务级别"></a>客户端服务级别</h4><pre><code class="xml">&lt;dubbo:reference interface=&quot;...&quot; loadbalance=&quot;roundrobin&quot; /&gt;
+</code></pre>
+<h4 id="服务端方法级别"><a href="#服务端方法级别" class="headerlink" title="服务端方法级别"></a>服务端方法级别</h4><pre><code class="xml">&lt;dubbo:service interface=&quot;...&quot;&gt;
+    &lt;dubbo:method name=&quot;...&quot; loadbalance=&quot;roundrobin&quot;/&gt;
+&lt;/dubbo:service&gt;
+</code></pre>
+<h4 id="客户端方法级别"><a href="#客户端方法级别" class="headerlink" title="客户端方法级别"></a>客户端方法级别</h4><pre><code class="xml">&lt;dubbo:reference interface=&quot;...&quot;&gt;
+    &lt;dubbo:method name=&quot;...&quot; loadbalance=&quot;roundrobin&quot;/&gt;
+&lt;/dubbo:reference&gt;
+</code></pre>
+<h2 id="Dubbo-多协议支持"><a href="#Dubbo-多协议支持" class="headerlink" title="Dubbo 多协议支持"></a>Dubbo 多协议支持</h2><blockquote>
+<p>官方文档：<a href="https://dubbo.apache.org/zh-cn/docs/user/demos/multi-protocols.html" target="_blank" rel="noopener">https://dubbo.apache.org/zh-cn/docs/user/demos/multi-protocols.html</a></p>
+</blockquote>
+<h3 id="多协议支撑"><a href="#多协议支撑" class="headerlink" title="多协议支撑"></a>多协议支撑</h3><ul>
+<li>Dubbo 支持多种协议</li>
+<li>最常见的协议是 dubbo</li>
+<li>RMI、Hessian、HTTP、Redis、Memcached 等多种协议</li>
+</ul>
+<h3 id="协议对比"><a href="#协议对比" class="headerlink" title="协议对比"></a>协议对比</h3><table>
+<thead>
+<tr>
+<th>特性对比</th>
+<th>dubbo</th>
+<th>RMI</th>
+<th>Hessian</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>连接数</td>
+<td>单连接</td>
+<td>多连接</td>
+<td>多连接</td>
+</tr>
+<tr>
+<td>连接方式</td>
+<td>长连接</td>
+<td>短连接</td>
+<td>短连接</td>
+</tr>
+<tr>
+<td>传输协议</td>
+<td>TCP 传输</td>
+<td>同步传输</td>
+<td>同步传输</td>
+</tr>
+<tr>
+<td>传输方式</td>
+<td>NIO 异步传输</td>
+<td>同步传输</td>
+<td>同步传输</td>
+</tr>
+<tr>
+<td>适用场景</td>
+<td>1. 数据包较小<br>2. 消费者个数多<br>3. 常规方式</td>
+<td>1. 数据包大小不一<br>2. 消费者和提供者数量相差不大</td>
+<td>1. 数据包大小不一<br>2. 消费者和提供者数量相差不大</td>
+</tr>
+</tbody>
+</table>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><ul>
+<li>API 网关与服务模块调用方式（API 网关相当于服务消费者，服务模块相当于服务提供者）</li>
+<li>Dubbo 特性：负载均衡、启动检查、Dubbo 协议</li>
+<li>JWT 的业务应用</li>
+</ul>
 
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
@@ -463,7 +563,7 @@ public class UserController {
             <div class="box sticky animated fadeInRight faster">
                 <div id="toc" class="subbox">
                     <h4>目录</h4>
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#章节概要"><span class="toc-number">1.</span> <span class="toc-text">章节概要</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#用户模块开发"><span class="toc-number">1.1.</span> <span class="toc-text">用户模块开发</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#修改-Guns-中的-JWT-模块"><span class="toc-number">1.1.1.</span> <span class="toc-text">修改 Guns 中的 JWT 模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#业务功能开发"><span class="toc-number">1.1.2.</span> <span class="toc-text">业务功能开发</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#创建用户表"><span class="toc-number">2.</span> <span class="toc-text">创建用户表</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#用户服务与网关交互"><span class="toc-number">3.</span> <span class="toc-text">用户服务与网关交互</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#基于-SpringBoot-配置忽略列表"><span class="toc-number">4.</span> <span class="toc-text">基于 SpringBoot 配置忽略列表</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#修改-JWT-申请的返回报文"><span class="toc-number">5.</span> <span class="toc-text">修改 JWT 申请的返回报文</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#增加-Threadlocal-的用户信息保存"><span class="toc-number">6.</span> <span class="toc-text">增加 Threadlocal 的用户信息保存</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#用户模块开发-1"><span class="toc-number">7.</span> <span class="toc-text">用户模块开发</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#业务功能开发流程"><span class="toc-number">7.1.</span> <span class="toc-text">业务功能开发流程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#使用代码生成器生成数据项"><span class="toc-number">7.1.1.</span> <span class="toc-text">使用代码生成器生成数据项</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实现相应的接口功能"><span class="toc-number">7.1.2.</span> <span class="toc-text">实现相应的接口功能</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#业务检查"><span class="toc-number">8.</span> <span class="toc-text">业务检查</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#存在的问题"><span class="toc-number">8.1.</span> <span class="toc-text">存在的问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Dubbo-启动检查"><span class="toc-number">8.2.</span> <span class="toc-text">Dubbo 启动检查</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#章节概要"><span class="toc-number">1.</span> <span class="toc-text">章节概要</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#用户模块开发"><span class="toc-number">1.1.</span> <span class="toc-text">用户模块开发</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#修改-Guns-中的-JWT-模块"><span class="toc-number">1.1.1.</span> <span class="toc-text">修改 Guns 中的 JWT 模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#业务功能开发"><span class="toc-number">1.1.2.</span> <span class="toc-text">业务功能开发</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#创建用户表"><span class="toc-number">2.</span> <span class="toc-text">创建用户表</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#用户服务与网关交互"><span class="toc-number">3.</span> <span class="toc-text">用户服务与网关交互</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#基于-SpringBoot-配置忽略列表"><span class="toc-number">4.</span> <span class="toc-text">基于 SpringBoot 配置忽略列表</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#修改-JWT-申请的返回报文"><span class="toc-number">5.</span> <span class="toc-text">修改 JWT 申请的返回报文</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#增加-Threadlocal-的用户信息保存"><span class="toc-number">6.</span> <span class="toc-text">增加 Threadlocal 的用户信息保存</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#用户模块开发-1"><span class="toc-number">7.</span> <span class="toc-text">用户模块开发</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#业务功能开发流程"><span class="toc-number">7.1.</span> <span class="toc-text">业务功能开发流程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#使用代码生成器生成数据项"><span class="toc-number">7.1.1.</span> <span class="toc-text">使用代码生成器生成数据项</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实现相应的接口功能"><span class="toc-number">7.1.2.</span> <span class="toc-text">实现相应的接口功能</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Dubbo-特性"><span class="toc-number">8.</span> <span class="toc-text">Dubbo 特性</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#存在的问题"><span class="toc-number">8.1.</span> <span class="toc-text">存在的问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Dubbo-启动检查"><span class="toc-number">8.2.</span> <span class="toc-text">Dubbo 启动检查</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Dubbo-负载均衡"><span class="toc-number">8.3.</span> <span class="toc-text">Dubbo 负载均衡</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#负载均衡策略"><span class="toc-number">8.3.1.</span> <span class="toc-text">负载均衡策略</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配置"><span class="toc-number">8.3.2.</span> <span class="toc-text">配置</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Dubbo-多协议支持"><span class="toc-number">8.4.</span> <span class="toc-text">Dubbo 多协议支持</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#多协议支撑"><span class="toc-number">8.4.1.</span> <span class="toc-text">多协议支撑</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#协议对比"><span class="toc-number">8.4.2.</span> <span class="toc-text">协议对比</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#总结"><span class="toc-number">9.</span> <span class="toc-text">总结</span></a></li></ol>
                 </div>
             </div>
             
