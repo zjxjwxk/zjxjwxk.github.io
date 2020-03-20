@@ -403,18 +403,17 @@ public class UserController {
     }
 }
 </code></pre>
-<h1 id="业务检查"><a href="#业务检查" class="headerlink" title="业务检查"></a>业务检查</h1><h2 id="存在的问题"><a href="#存在的问题" class="headerlink" title="存在的问题"></a>存在的问题</h2><ol>
+<h1 id="业务检查"><a href="#业务检查" class="headerlink" title="业务检查"></a>业务检查</h1><h2 id="存在的问题"><a href="#存在的问题" class="headerlink" title="存在的问题"></a>存在的问题</h2><ul>
 <li>必须先启动服务提供者，否则会报错（如下）。如果有两个服务互相依赖，那么两个服务都无法启动成功。</li>
-</ol>
+</ul>
 <pre><code class="text">Caused by: java.lang.IllegalStateException: Failed to check the status of the service com.stylefeng.guns.api.user.UserAPI. No provider available for the service com.stylefeng.guns.api.user.UserAPI from the url zookeeper://localhost:2181/com.alibaba.dubbo.registry.RegistryService?application=cinema-gateway&amp;dubbo=2.6.0&amp;interface=com.stylefeng.guns.api.user.UserAPI&amp;methods=updateUserInfo,checkUserName,getUserInfo,login,register&amp;pid=10451&amp;register.ip=192.168.6.102&amp;side=consumer&amp;timestamp=1584633672918 to the consumer 192.168.6.102 use dubbo version 2.6.0
-
 </code></pre>
-<ol start="2">
+<ul>
 <li><p>如果我们将用户模块部署多台，消费者会如何访问</p>
 </li>
 <li><p>spring: dubbo: 中的 protocol 属性是做什么的</p>
 </li>
-</ol>
+</ul>
 <h2 id="Dubbo-启动检查"><a href="#Dubbo-启动检查" class="headerlink" title="Dubbo 启动检查"></a>Dubbo 启动检查</h2><ul>
 <li>服务启动过程中验证服务提供者的可用性</li>
 <li>验证过程出现问题，则阻止整个 Spring 容器初始化</li>
@@ -422,7 +421,6 @@ public class UserController {
 </ul>
 <p>Dubbo 默认打开了启动检查，每个接口的 @Reference 注解都默认 check = true，如果确实想取消启动检查，只需在每个消费者所引用的接口的 @Reference 注解后手动设置 check = false 即可（但是并不推荐）。关闭启动检查后，无论所调用接口的服务有没有启动，都能够正常启动。但如果其调用没有启动的服务，将会报以下错误：</p>
 <pre><code class="text">com.alibaba.dubbo.rpc.RpcException: No provider available from registry localhost:2181 for service com.stylefeng.guns.api.user.UserAPI on consumer 192.168.6.102 use dubbo version 2.6.0, may be providers disabled or not registered ?
-
 </code></pre>
 
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
