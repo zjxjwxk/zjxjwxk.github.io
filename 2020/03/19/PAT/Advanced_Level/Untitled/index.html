@@ -86,13 +86,13 @@
                 
                 <span>
                     <b class="iconfont icon-text2"></b> <i>文章字数</i>
-                    4.8k
+                    5k
                 </span>
                 
                 
                 <span>
                     <b class="iconfont icon-timer__s"></b> <i>阅读约需</i>
-                    4 mins.
+                    5 mins.
                 </span>
                 
                 
@@ -159,13 +159,14 @@
 N/A
 </code></pre>
 <h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><ul>
+<li>本题主要在于数据的存取方式，先用 Stu 结构体数组来存储每个考生的 id 和用来存储其各科分数的数组，并对该结构体数组根据各科分数进行排序，每排序一次就将其排序结果写入排名数组 ranks，最后根据查询 id，输出最高排名信息即可</li>
 <li>以结构体 Stu 存放 id 和 score[4] 数组，score[0] ~ score[3] 分别代表 A，C，M，E</li>
 <li>由于 id 是 6 位的整数（6 digits），不妨设置 ranks [1000000] [4] 数组，其中 ranks [id] [0] ~ ranks [id] [4] 分别代表编号为 id 的考生的 A，C，M，E 分别的排名</li>
 </ul>
 <h1 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h1><ul>
 <li>由于优先级是 A &gt; C &gt; M &gt; E，为了方便枚举，设置数组时，尽量把 A 放在 C、M、E 前面</li>
-<li>该题 id 是整数（digits 即数字），不会是字符型</li>
-<li>该题没有说明平均分是向下取整还是四舍五入（向下取整也能通过），但为了更方便，平均分也可以用总分来代替</li>
+<li>本题 id 是整数（digits 即数字），不会是字符型</li>
+<li>本题没有说明平均分是向下取整还是四舍五入（向下取整也能通过），但为了更方便，平均分也可以用总分来代替</li>
 </ul>
 <pre><code class="C++">#include &lt;cstdio&gt;
 #include &lt;algorithm&gt;
