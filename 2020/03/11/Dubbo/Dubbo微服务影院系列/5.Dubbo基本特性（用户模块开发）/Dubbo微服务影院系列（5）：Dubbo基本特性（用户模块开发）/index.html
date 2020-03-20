@@ -409,10 +409,8 @@ public class UserController {
 <pre><code class="text">Caused by: java.lang.IllegalStateException: Failed to check the status of the service com.stylefeng.guns.api.user.UserAPI. No provider available for the service com.stylefeng.guns.api.user.UserAPI from the url zookeeper://localhost:2181/com.alibaba.dubbo.registry.RegistryService?application=cinema-gateway&amp;dubbo=2.6.0&amp;interface=com.stylefeng.guns.api.user.UserAPI&amp;methods=updateUserInfo,checkUserName,getUserInfo,login,register&amp;pid=10451&amp;register.ip=192.168.6.102&amp;side=consumer&amp;timestamp=1584633672918 to the consumer 192.168.6.102 use dubbo version 2.6.0
 </code></pre>
 <ul>
-<li><p>如果我们将用户模块部署多台，消费者会如何访问</p>
-</li>
-<li><p>spring: dubbo: 中的 protocol 属性是做什么的</p>
-</li>
+<li>如果我们将用户模块部署多台，消费者会如何访问</li>
+<li>spring: dubbo: 中的 protocol 属性是做什么的</li>
 </ul>
 <h2 id="Dubbo-启动检查"><a href="#Dubbo-启动检查" class="headerlink" title="Dubbo 启动检查"></a>Dubbo 启动检查</h2><ul>
 <li>服务启动过程中验证服务提供者的可用性</li>
