@@ -5,13 +5,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>自己编译JDK - Zjxjwxk&#39;s Blog</title>
+    <title>PAT甲级 1016 Phone Bills (25分) - Zjxjwxk&#39;s Blog</title>
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="google" content="notranslate">
     <meta name="keywords" content="吴鑫康 zjxjwxk Wxk Java,"> 
-    <meta name="description" content="想要一探 JDK 内部的实现机制，最便捷的捷径之一就是自己编译一套 JDK，通过阅读和跟踪调试 JDK 源码去了解 Java 技术体系的原理。本人选择了 OpenJDK 进行编译。
-1. 获取 JD,"> 
+    <meta name="description" content="A long-distance telephone company charges its customers by the following rules:
+Making a long-dista,"> 
     <meta name="author" content="吴鑫康"> 
     <link rel="alternative" href="atom.xml" title="Zjxjwxk&#39;s Blog" type="application/atom+xml"> 
     <link rel="icon" href="/img/favicon.png"> 
@@ -44,7 +44,7 @@
     <div class="navigation animated fadeIn fast delay-1s">
         <img id="home-icon" class="icon-home" src="/img/favicon.png" alt="" data-url="https://zjxjwxk.com">
         <div id="play-icon" title="Play/Pause" class="iconfont icon-play"></div>
-        <h3 class="subtitle">自己编译JDK</h3>
+        <h3 class="subtitle">PAT甲级 1016 Phone Bills (25分)</h3>
         <div class="social">
             <!--        <div class="like-icon">-->
             <!--            <a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
@@ -75,19 +75,19 @@
         <div class="else">
             <p class="animated fadeInDown">
                 
-                <a href="/categories/Java"><b>「
-                    </b>JAVA<b> 」</b></a>
+                <a href="/categories/PAT"><b>「
+                    </b>PAT<b> 」</b></a>
                 
-                三月 11, 2019
+                三月 20, 2020
             </p>
-            <h3 class="post-title animated fadeInDown"><a href="/2019/03/11/Java/JVM/自己编译JDK/" title="自己编译JDK">自己编译JDK</a>
+            <h3 class="post-title animated fadeInDown"><a href="/2020/03/20/PAT/Advanced_Level/A1016/" title="PAT甲级 1016 Phone Bills (25分)">PAT甲级 1016 Phone Bills (25分)</a>
             </h3>
             
             <p class="post-count animated fadeInDown">
                 
                 <span>
                     <b class="iconfont icon-text2"></b> <i>文章字数</i>
-                    6.8k
+                    6.2k
                 </span>
                 
                 
@@ -97,7 +97,7 @@
                 </span>
                 
                 
-                <span id="/2019/03/11/Java/JVM/自己编译JDK/" class="leancloud_visitors" data-flag-title="自己编译JDK">
+                <span id="/2020/03/20/PAT/Advanced_Level/A1016/" class="leancloud_visitors" data-flag-title="PAT甲级 1016 Phone Bills (25分)">
                     <b class="iconfont icon-read"></b> <i>阅读次数</i>
                     <span class="leancloud-visitors-count">-</span>
                 </span>
@@ -106,7 +106,7 @@
             </p>
             
             
-            <ul class="animated fadeInDown post-tags-list"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/JVM/">JVM</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/Java/">Java</a></li></ul>
+            <ul class="animated fadeInDown post-tags-list"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/PAT/">PAT</a></li></ul>
             
         </div>
     </div>
@@ -127,151 +127,115 @@
 <div class="article">
     <div class="main">
         <div class="content markdown animated fadeIn">
-            <p>想要一探 JDK 内部的实现机制，最便捷的捷径之一就是自己编译一套 JDK，通过阅读和跟踪调试 JDK 源码去了解 Java 技术体系的原理。本人选择了 OpenJDK 进行编译。</p>
-<h2 id="1-获取-JDK-源码"><a href="#1-获取-JDK-源码" class="headerlink" title="1. 获取 JDK 源码"></a>1. 获取 JDK 源码</h2><p>获取 JDK 源码有两种方式：</p>
-<h3 id="1-通过-Mercurial-代码版本管理工具从-Repository-中直接取得源码"><a href="#1-通过-Mercurial-代码版本管理工具从-Repository-中直接取得源码" class="headerlink" title="(1). 通过 Mercurial 代码版本管理工具从 Repository 中直接取得源码"></a>(1). 通过 Mercurial 代码版本管理工具从 Repository 中直接取得源码</h3><p>Repository 地址：<a href="http://hg.openjdk.java.net/jdk7u/jdk7u" target="_blank" rel="noopener">http://hg.openjdk.java.net/jdk7u/jdk7u</a></p>
-<p>获取过程如以下代码所示</p>
-<pre><code class="shell">hg clone http://hg.openjdk.java.net/jdk7u/jdk7u-dev
-cd jdk7u-dev
-chmod 755 get_source.sh
-./get_source.sh
+            <p>A long-distance telephone company charges its customers by the following rules:</p>
+<p>Making a long-distance call costs a certain amount per minute, depending on the time of day when the call is made. When a customer starts connecting a long-distance call, the time will be recorded, and so will be the time when the customer hangs up the phone. Every calendar month, a bill is sent to the customer for each minute called (at a rate determined by the time of day). Your job is to prepare the bills for each month, given a set of phone call records.</p>
+<h1 id="Input-Specification"><a href="#Input-Specification" class="headerlink" title="Input Specification:"></a>Input Specification:</h1><p>Each input file contains one test case. Each case has two parts: the rate structure, and the phone call records.</p>
+<p>The rate structure consists of a line with 24 non-negative integers denoting the toll (cents/minute) from 00:00 - 01:00, the toll from 01:00 - 02:00, and so on for each hour in the day.</p>
+<p>The next line contains a positive number <em>N</em> (≤1000), followed by <em>N</em> lines of records. Each phone call record consists of the name of the customer (string of up to 20 characters without space), the time and date (<code>mm:dd:hh:mm</code>), and the word <code>on-line</code> or <code>off-line</code>.</p>
+<p>For each test case, all dates will be within a single month. Each <code>on-line</code> record is paired with the chronologically next record for the same customer provided it is an <code>off-line</code> record. Any <code>on-line</code> records that are not paired with an <code>off-line</code> record are ignored, as are <code>off-line</code> records not paired with an <code>on-line</code> record. It is guaranteed that at least one call is well paired in the input. You may assume that no two records for the same customer have the same time. Times are recorded using a 24-hour clock.</p>
+<h1 id="Output-Specification"><a href="#Output-Specification" class="headerlink" title="Output Specification:"></a>Output Specification:</h1><p>For each test case, you must print a phone bill for each customer.</p>
+<p>Bills must be printed in alphabetical order of customers’ names. For each customer, first print in a line the name of the customer and the month of the bill in the format shown by the sample. Then for each time period of a call, print in one line the beginning and ending time and date (<code>dd:hh:mm</code>), the lasting time (in minute) and the charge of the call. The calls must be listed in chronological order. Finally, print the total charge for the month in the format shown by the sample.</p>
+<h1 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input:"></a>Sample Input:</h1><pre><code class="in">10 10 10 10 10 10 20 20 20 15 15 15 15 15 15 15 20 30 20 15 15 10 10 10
+10
+CYLL 01:01:06:01 on-line
+CYLL 01:28:16:05 off-line
+CYJJ 01:01:07:00 off-line
+CYLL 01:01:08:03 off-line
+CYJJ 01:01:05:59 on-line
+aaa 01:01:01:03 on-line
+aaa 01:02:00:01 on-line
+CYLL 01:28:15:41 on-line
+aaa 01:05:02:24 on-line
+aaa 01:04:23:59 off-line
 </code></pre>
-<p>从版本管理中看变更轨迹效果较好，但不足之处是速度太慢，而且 Mercurial 不如 Git、SVN 等版本控制工具那样普及。</p>
-<h3 id="2-通过-OpenJDK™-Source-Releases-页面取得打包好的源码"><a href="#2-通过-OpenJDK™-Source-Releases-页面取得打包好的源码" class="headerlink" title="(2). 通过 OpenJDK™ Source Releases 页面取得打包好的源码"></a>(2). 通过 OpenJDK™ Source Releases 页面取得打包好的源码</h3><p>页面地址：<a href="https://download.java.net/openjdk/jdk7/" target="_blank" rel="noopener">https://download.java.net/openjdk/jdk7/</a></p>
-<h2 id="2-系统需求"><a href="#2-系统需求" class="headerlink" title="2. 系统需求"></a>2. 系统需求</h2><p>建议在 Linux、MacOS 或 Solaris 上构建 OpenJDK</p>
-<p>本人采用的是 64 位操作系统，编译的也是 64 位的 OpenJDK</p>
-<h2 id="3-构建编译环境"><a href="#3-构建编译环境" class="headerlink" title="3. 构建编译环境"></a>3. 构建编译环境</h2><p>本人使用的是 MacOS ，需要安装最新版本的 XCode 和 Command Line Tools for Xcode，另外还要准备一个 6u14 以上版本的 JDK，官方称这个 JDK 为 “Bootstrap JDK” 。最后，需要下载一个 1.7.1 以上版本的 Apache Ant，用于执行 Java 编译代码中的 Ant 脚本。</p>
-<h2 id="4-进行编译"><a href="#4-进行编译" class="headerlink" title="4. 进行编译"></a>4. 进行编译</h2><p>最后我们还需要对系统的环境变量做一些简单设置以便编译能够顺利通过，这里给出使用的编译 Shell 脚本：</p>
-<pre><code class="bash">#语言选项,这个必须设置,否则编译好后会出现一个HashTable的NPE错
-export LANG=C
-#Bootstrap JDK的安装路径。必须设置
-export ALT_BOOTDIR=/Library/Java/JavaVirtualMachines/jdk1.8.0_201.jdk/Contents/Home
-
-#允许自动下载依赖
-export ALLOW_DOWNLOADS=true
-
-#并行编译的线程数,设置为和CPU内核数量一致即可
-export HOTSPOT_BUILD_J0BS=8
-export ALT_PARALLEL_COMPILE_JOBS=8
-
-#比较本次build出来的映像与先前版本的差异。这对我们来说没有意义, 
-#必须设置为false,香则sanity检查会报缺少先前版本JDK的映像的错误提示。 
-#如桌已经设置dev或者DEV_ONLY=true,这个不显式设置也行
-export SKIP_COMPARE_IMAGES=true
-
-#使用预编译头文件,不加这个编译会更慢一些
-export USE_PRECOMPILED_HEADER=true
-
-#要编译的内容
-export BUILD_LANGTOOLS=true
-#export BUILD_JAXP=false
-#export BUILD_JAXWS=fa1se
-#export BUILD_CORBA=false
-export BUILD_HOTSPOT=true
-export BUILD_JDK=true
-
-#要编译的版本
-#export SKIP_DEBUG_BUILD=false
-#export SKIP_FASTDEBUG_BUILD=true
-#export DEBUG_NAME=debug
-
-#把它设置为false可以避开java111`ws和浏览器Java插件之类的部分的build
-BUILD_DEPLOY=false
-
-#把它设置为false就不会build出安装包。因为安装包里有些奇怪的依赖, 
-#但即便不build出它也已经能得到完整的JDK映像,所以还是别build它好了
-BUILD_INSTALL=false
-
-#编译结果所存放的路径
-export ALT_OUTPUTDIR=/Users/zjxjwxk/Documents/JVM/JDK-Build/build
-
-#这两个环境变量必须去掉,不然会有很诡异的事情发生（我没有具体查过这些 &quot;诡异的
-#事情” ,Makefile脚本裣查到有这2个变量就会提示警告)
-unset JAVA_HOME
-unset CLASSPATH
-make 2&gt;&amp;1 | tee $ALT_OUTPUTDIR/build.log
+<h1 id="Sample-Output"><a href="#Sample-Output" class="headerlink" title="Sample Output:"></a>Sample Output:</h1><pre><code class="out">CYJJ 01
+01:05:59 01:07:00 61 $12.10
+Total amount: $12.10
+CYLL 01
+01:06:01 01:08:03 122 $24.40
+28:15:41 28:16:05 24 $3.85
+Total amount: $28.25
+aaa 01
+02:00:01 04:23:59 4318 $638.80
+Total amount: $638.80
 </code></pre>
-<h2 id="5-检查"><a href="#5-检查" class="headerlink" title="5. 检查"></a>5. 检查</h2><p>全部设置结束之后，可以输入 <code>make sanity</code> 来检查我们所做的设置是否全部正确。如果一切顺利，那么几秒钟之后会有类似代码清单1-2所示的输出。</p>
-<pre><code class="bash">~/Develop/JVM/jdkBuild/openjdk_7u4$ make sanity  
-Build Machine Information:  
-   build machine = IcyFenix-RMBP.local  
+<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><ul>
+<li>将通话记录，先根据姓名，再根据时间先后，进行排序。这样相同名字的记录就会排在一起，且其中的数据也是按照时间顺序的。</li>
+<li>为了方便计算某一组通话的时长，可以把记录的时间都换算为相对于 00:00:00 的分钟数，则挂电话时间减去接电话时间，即为通话时长</li>
+<li>为了方便计算某一组通话的费用，可以把挂电话相对于 00:00:00 的费用减去接电话相对于 00:00:00 的费用，即为该通话的费用</li>
+</ul>
+<pre><code class="C++">#include &lt;iostream&gt;
+#include &lt;string&gt;
+#include &lt;map&gt;
+#include &lt;vector&gt;
+#include &lt;algorithm&gt;
+using namespace std;
 
-Build Directory Structure:  
-   CWD = /Users/IcyFenix/Develop/JVM/jdkBuild/openjdk_7u4  
-   TOPDIR = .  
-   LANGTOOLS_TOPDIR = ./langtools  
-   JAXP_TOPDIR = ./jaxp  
-   JAXWS_TOPDIR = ./jaxws  
-   CORBA_TOPDIR = ./corba  
-   HOTSPOT_TOPDIR = ./hotspot  
-   JDK_TOPDIR = ./jdk  
+const int maxn = 2000;
+int n, rate[25] = {0};
 
-Build Directives:  
-   BUILD_LANGTOOLS = true   
-   BUILD_JAXP = true   
-   BUILD_JAXWS = true   
-   BUILD_CORBA = true   
-   BUILD_HOTSPOT = true   
-   BUILD_JDK    = true   
-   DEBUG_CLASSFILES =    
-   DEBUG_BINARIES =    
+struct Record {
+    string name;
+    int month, day, hour, min, time, status;
+} records[maxn];
 
-……因篇幅关系，中间省略了大量的输出内容……  
+double getCostFromZero(Record &amp;r) {
+    double cost = 0;
+    cost += (r.day - 1) * 60 * rate[24] + r.min * rate[r.hour];
+    for (int i = 0; i &lt;= r.hour - 1; i++) {
+        cost += rate[i] * 60;
+    }
+    return cost;
+}
 
-OpenJDK-specific settings:  
-  FREETYPE_HEADERS_PATH = /usr/X11R6/include  
-    ALT_FREETYPE_HEADERS_PATH =   
-  FREETYPE_LIB_PATH = /usr/X11R6/lib  
-    ALT_FREETYPE_LIB_PATH =   
+int cmp(Record r1, Record r2) {
+    if (r1.name != r2.name) {
+        return r1.name &lt; r2.name;
+    } else {
+        return r1.time &lt; r2.time;
+    }
+}
 
-Previous JDK Settings:  
-  PREVIOUS_RELEASE_PATH = USING-PREVIOUS_RELEASE_IMAGE  
-    ALT_PREVIOUS_RELEASE_PATH =   
-  PREVIOUS_JDK_VERSION = 1.6.0  
-    ALT_PREVIOUS_JDK_VERSION =   
-  PREVIOUS_JDK_FILE =   
-    ALT_PREVIOUS_JDK_FILE =   
-  PREVIOUS_JRE_FILE =   
-    ALT_PREVIOUS_JRE_FILE =   
-  PREVIOUS_RELEASE_IMAGE = /Library/Java/JavaVirtualMachines/jdk1.7.0_04.jdk/Contents/Home  
-    ALT_PREVIOUS_RELEASE_IMAGE =   
-
-Sanity check passed.  
+int main() {
+    for (int i = 0; i &lt; 24; i++) {
+        scanf(&quot;%d&quot;, &amp;rate[i]);
+        rate[24] += rate[i];
+    }
+    scanf(&quot;%d&quot;, &amp;n);
+    string status;
+    for (int i = 0; i &lt; n; i++) {
+        cin &gt;&gt; records[i].name;
+        scanf(&quot;%d:%d:%d:%d&quot;, &amp;records[i].month, &amp;records[i].day, &amp;records[i].hour, &amp;records[i].min);
+        records[i].time = records[i].day * 24 * 60 + records[i].hour * 60 + records[i].min;
+        cin &gt;&gt; status;
+        if (status == &quot;on-line&quot;) {
+            records[i].status = 1;
+        } else {
+            records[i].status = 0;
+        }
+    }
+    sort(records, records + n, cmp);
+    map&lt;string, vector&lt;Record&gt; &gt; nameRecords;
+    for (int i = 1; i &lt; n; i++) {
+        if (records[i].name == records[i - 1].name &amp;&amp; records[i - 1].status == 1 &amp;&amp; records[i].status == 0) {
+            nameRecords[records[i].name].push_back(records[i - 1]);
+            nameRecords[records[i].name].push_back(records[i]);
+        }
+    }
+    for (auto it : nameRecords) {
+        vector&lt;Record&gt; temp = it.second;
+        printf(&quot;%s %02d\n&quot;, it.first.c_str(), temp[0].month);
+        double totalCost = 0;
+        for (int i = 0; i &lt; temp.size(); i += 2) {
+            double cost = getCostFromZero(temp[i + 1]) - getCostFromZero(temp[i]);
+            printf(&quot;%02d:%02d:%02d %02d:%02d:%02d %d $%.2f\n&quot;, temp[i].day, temp[i].hour, temp[i].min, temp[i + 1].day, temp[i + 1].hour, temp[i + 1].min, temp[i + 1].time - temp[i].time, cost / 100);
+            totalCost += cost;
+        }
+        printf(&quot;Total amount: $%.2f\n&quot;, totalCost / 100);
+    }
+    return 0;
+}
 </code></pre>
-<p>Makefile 的 Sanity 检查过程输出了编译所需的所有环境变量，如果看到 “Sanity check passed” 说明检查过程通过了，可以输入 <code>make</code> 执行整个 OpenJDK 编译 (make 不加参数，默认编译 make all)。</p>
-<p>编译完成后，进入 OpenJDK 源码下的 build/j2sdk-image 目录，这是整个 JDK 的完整编译结果，复制到 JAVA_HOME 目录，就可以作为一个完整的 JDK 使用，编译出来的虚拟机，在 <code>-version</code> 命令中带有用户的机器名。</p>
-<pre><code class="bash">&gt; ./java -version  
-openjdk version &quot;1.7.0-internal-fastdebug&quot;  
-OpenJDK Runtime Environment (build 1.7.0-internal-fastdebug-icyfenix_2012_12_24_15_57-b00)  
-OpenJDK 64-Bit Server VM (build 23.0-b21-fastdebug, mixed mode) 
-</code></pre>
-<h2 id="6-单独编译-HotSpot-虚拟机"><a href="#6-单独编译-HotSpot-虚拟机" class="headerlink" title="6. 单独编译 HotSpot 虚拟机"></a>6. 单独编译 HotSpot 虚拟机</h2><p>在大多数时候，如果我们不关心 JDK 中 HotSpot 虚拟机以外的内容，只想单独编译 HotSpot 虚拟机的话（例如调试虚拟机时，每次改动程序都执行整个 OpenJDK 的Makefile，速度肯定受不了），那么使用 hotspot/make 目录 下的 Makefile 进行替换即可，其他参数设置与前面是一致的，这时候虚拟机的输出结果存放在 build/hotspot/outputdir/bsd_amd64_compiler2 目录中，进入后可以见到以下几个目录。</p>
-<pre><code class="bash">0 drwxr-xr-x   15 IcyFenix  staff   510B 12 13 17:24 debug  
-0 drwxr-xr-x   15 IcyFenix  staff   510B 12 13 17:24 fastdebug  
-0 drwxr-xr-x   15 IcyFenix  staff   510B 12 13 17:25 generated  
-0 drwxr-xr-x   15 IcyFenix  staff   510B 12 13 17:24 jvmg  
-0 drwxr-xr-x   15 IcyFenix  staff   510B 12 13 17:24 optimized  
-0 drwxr-xr-x  584 IcyFenix  staff    19K 12 13 17:25 product  
-0 drwxr-xr-x   15 IcyFenix  staff   510B 12 13 17:24 profiled 
-</code></pre>
-<p>这些目录对应了不同的优化级别，优化级别越高，性能自然越好，但是输出代码与源码的差别就越大，难于调试，具体哪个目录有内容，取决于 <code>make</code> 命令后面的参数。</p>
-<p>在编译结束之后、运行虚拟机之前，还要手工编辑目录下的 env.sh 文件，这个文件由编译脚本自动产生，用于设置虚拟机的环境变量，里面已经发布了 “JAVA_HOME、CLASSPATH、HOTSPOT_BUILD_USER” 3个环境变量，还需要增加一个“LD_LIBRARY_PATH”，内容如下：</p>
-<pre><code class="bash">LD_LIBRARY_PATH=.:${JAVA_HOME}/jre/lib/amd64/native_threads:${JAVA_HOME}/jre/lib/amd64:  
-export LD_LIBRARY_PATH 
-</code></pre>
-<p>然后执行以下命令启动虚拟机（这时的启动器名为gamma），输出版本号。</p>
-<pre><code class="bash">. ./env.sh  
-./gamma -version  
-Using java runtime at: /Library/Java/JavaVirtualMachines/jdk1.7.0_04.jdk/Contents/Home/jre  
-java version &quot;1.7.0_04&quot;  
-Java(TM) SE Runtime Environment (build 1.7.0_04-b21)  
-OpenJDK 64-Bit Server VM (build 23.0-b21, mixed mode) 
-</code></pre>
-<p>看到自己编译的虚拟机成功运行起来，很有成就感吧!</p>
-<blockquote>
-<p>来源：《深入理解Java虚拟机：JVM高级特性与最佳实践（第2版）》</p>
-<p>作者：周志明</p>
-</blockquote>
 
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
@@ -315,7 +279,7 @@ OpenJDK 64-Bit Server VM (build 23.0-b21, mixed mode)
             <div class="box sticky animated fadeInRight faster">
                 <div id="toc" class="subbox">
                     <h4>目录</h4>
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-获取-JDK-源码"><span class="toc-number">1.</span> <span class="toc-text">1. 获取 JDK 源码</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-通过-Mercurial-代码版本管理工具从-Repository-中直接取得源码"><span class="toc-number">1.1.</span> <span class="toc-text">(1). 通过 Mercurial 代码版本管理工具从 Repository 中直接取得源码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-通过-OpenJDK™-Source-Releases-页面取得打包好的源码"><span class="toc-number">1.2.</span> <span class="toc-text">(2). 通过 OpenJDK™ Source Releases 页面取得打包好的源码</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-系统需求"><span class="toc-number">2.</span> <span class="toc-text">2. 系统需求</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-构建编译环境"><span class="toc-number">3.</span> <span class="toc-text">3. 构建编译环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-进行编译"><span class="toc-number">4.</span> <span class="toc-text">4. 进行编译</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-检查"><span class="toc-number">5.</span> <span class="toc-text">5. 检查</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-单独编译-HotSpot-虚拟机"><span class="toc-number">6.</span> <span class="toc-text">6. 单独编译 HotSpot 虚拟机</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Input-Specification"><span class="toc-number">1.</span> <span class="toc-text">Input Specification:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Output-Specification"><span class="toc-number">2.</span> <span class="toc-text">Output Specification:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Sample-Input"><span class="toc-number">3.</span> <span class="toc-text">Sample Input:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Sample-Output"><span class="toc-number">4.</span> <span class="toc-text">Sample Output:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#思路"><span class="toc-number">5.</span> <span class="toc-text">思路</span></a></li></ol>
                 </div>
             </div>
             
