@@ -5,13 +5,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>PAT乙级 1033 旧键盘打字 (20分) - Zjxjwxk&#39;s Blog</title>
+    <title>PAT甲级 1067 Sort with Swap(0, i) (25分) - Zjxjwxk&#39;s Blog</title>
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="google" content="notranslate">
     <meta name="keywords" content="吴鑫康 zjxjwxk Wxk Java,"> 
-    <meta name="description" content="旧键盘上坏了几个键，于是在敲一段文字的时候，对应的字符就不会出现。现在给出应该输入的一段文字、以及坏掉的那些键，打出的结果文字会是怎样？
-输入格式：输入在 2 行中分别给出坏掉的那些键、以及应该输入,"> 
+    <meta name="description" content="Given any permutation of the numbers {0, 1, 2,…, N−1}, it is easy to sort them in increasing order.,"> 
     <meta name="author" content="吴鑫康"> 
     <link rel="alternative" href="atom.xml" title="Zjxjwxk&#39;s Blog" type="application/atom+xml"> 
     <link rel="icon" href="/img/favicon.png"> 
@@ -44,7 +43,7 @@
     <div class="navigation animated fadeIn fast delay-1s">
         <img id="home-icon" class="icon-home" src="/img/favicon.png" alt="" data-url="https://zjxjwxk.com">
         <div id="play-icon" title="Play/Pause" class="iconfont icon-play"></div>
-        <h3 class="subtitle">PAT乙级 1033 旧键盘打字 (20分)</h3>
+        <h3 class="subtitle">PAT甲级 1067 Sort with Swap(0, i) (25分)</h3>
         <div class="social">
             <!--        <div class="like-icon">-->
             <!--            <a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
@@ -78,16 +77,16 @@
                 <a href="/categories/PAT"><b>「
                     </b>PAT<b> 」</b></a>
                 
-                三月 26, 2020
+                三月 27, 2020
             </p>
-            <h3 class="post-title animated fadeInDown"><a href="/2020/03/26/PAT/Basic_Level/B1033/" title="PAT乙级 1033 旧键盘打字 (20分)">PAT乙级 1033 旧键盘打字 (20分)</a>
+            <h3 class="post-title animated fadeInDown"><a href="/2020/03/27/PAT/Advanced_Level/A1067/" title="PAT甲级 1067 Sort with Swap(0, i) (25分)">PAT甲级 1067 Sort with Swap(0, i) (25分)</a>
             </h3>
             
             <p class="post-count animated fadeInDown">
                 
                 <span>
                     <b class="iconfont icon-text2"></b> <i>文章字数</i>
-                    2.1k
+                    2.7k
                 </span>
                 
                 
@@ -97,7 +96,7 @@
                 </span>
                 
                 
-                <span id="/2020/03/26/PAT/Basic_Level/B1033/" class="leancloud_visitors" data-flag-title="PAT乙级 1033 旧键盘打字 (20分)">
+                <span id="/2020/03/27/PAT/Advanced_Level/A1067/" class="leancloud_visitors" data-flag-title="PAT甲级 1067 Sort with Swap(0, i) (25分)">
                     <b class="iconfont icon-read"></b> <i>阅读次数</i>
                     <span class="leancloud-visitors-count">-</span>
                 </span>
@@ -127,48 +126,56 @@
 <div class="article">
     <div class="main">
         <div class="content markdown animated fadeIn">
-            <p>旧键盘上坏了几个键，于是在敲一段文字的时候，对应的字符就不会出现。现在给出应该输入的一段文字、以及坏掉的那些键，打出的结果文字会是怎样？</p>
-<h1 id="输入格式："><a href="#输入格式：" class="headerlink" title="输入格式："></a>输入格式：</h1><p>输入在 2 行中分别给出坏掉的那些键、以及应该输入的文字。其中对应英文字母的坏键以大写给出；每段文字是不超过 $10^5$ 个字符的串。可用的字符包括字母 [<code>a</code>-<code>z</code>, <code>A</code>-<code>Z</code>]、数字 <code>0</code>-<code>9</code>、以及下划线 <code>_</code>（代表空格）、<code>,</code>、<code>.</code>、<code>-</code>、<code>+</code>（代表上档键）。题目保证第 2 行输入的文字串非空。</p>
-<p>注意：如果上档键坏掉了，那么大写的英文字母无法被打出。</p>
-<h1 id="输出格式："><a href="#输出格式：" class="headerlink" title="输出格式："></a>输出格式：</h1><p>在一行中输出能够被打出的结果文字。如果没有一个字符能被打出，则输出空行。</p>
-<h1 id="输入样例："><a href="#输入样例：" class="headerlink" title="输入样例："></a>输入样例：</h1><pre><code class="in">7+IE.
-7_This_is_a_test.
+            <p>Given any permutation of the numbers {0, 1, 2,…, <em>N</em>−1}, it is easy to sort them in increasing order. But what if <code>Swap(0, *)</code> is the ONLY operation that is allowed to use? For example, to sort {4, 0, 2, 1, 3} we may apply the swap operations in the following way:</p>
+<pre><code>Swap(0, 1) =&gt; {4, 1, 2, 0, 3}
+Swap(0, 3) =&gt; {4, 1, 2, 3, 0}
+Swap(0, 4) =&gt; {0, 1, 2, 3, 4}
+</code></pre><p>Now you are asked to find the minimum number of swaps need to sort the given permutation of the first <em>N</em> nonnegative integers.</p>
+<h1 id="Input-Specification"><a href="#Input-Specification" class="headerlink" title="Input Specification:"></a>Input Specification:</h1><p>Each input file contains one test case, which gives a positive <em>N</em> (≤$10^5$) followed by a permutation sequence of {0, 1, …, <em>N</em>−1}. All the numbers in a line are separated by a space.</p>
+<h1 id="Output-Specification"><a href="#Output-Specification" class="headerlink" title="Output Specification:"></a>Output Specification:</h1><p>For each case, simply print in a line the minimum number of swaps need to sort the given permutation.</p>
+<h1 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input:"></a>Sample Input:</h1><pre><code class="in">10
+3 5 7 2 6 4 9 0 8 1
 </code></pre>
-<h1 id="输出样例："><a href="#输出样例：" class="headerlink" title="输出样例："></a>输出样例：</h1><pre><code class="out">_hs_s_a_tst
+<h1 id="Sample-Output"><a href="#Sample-Output" class="headerlink" title="Sample Output:"></a>Sample Output:</h1><pre><code class="out">9
 </code></pre>
-<h1 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h1><ul>
-<li>读入失效键位的时候要注意，可能没有失效的键位，即第一行为空行的情况。这时候不能用 scanf 输入，而要用 cin.getline(str, maxn) 输入字符串。</li>
+<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><ul>
+<li>如果在交换过程中出现数字0在0号位的情况，就随意选择一个还没有回到“本位”的数字，让其与数字0交换位置</li>
 </ul>
-<pre><code class="C++">#include &lt;iostream&gt;
-#include &lt;cstring&gt;
+<h1 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h1><ul>
+<li>在循环中寻找一个不在本位上的数时，如果每次都从头开始遍历序列中的数，则会有两组数据超时（因为复杂度是二次方级别的）。合适的做法是从整体上定义一个变量 k，用来保存目前序列中不在本位上的最小数（初试为1），当交换过程中出现0回归本位的情况时，总是从当前的 k 开始继续增大寻找不在本位上的数，这样能保证复杂度从整体上是线性级别（k 从 1 增长到 n）</li>
+<li>该题用一个 index[] 数组表示下标值所在的位置即可，无需原始数组</li>
+</ul>
+<pre><code class="C++">#include &lt;cstdio&gt;
+#include &lt;algorithm&gt;
 using namespace std;
 
-const int maxn = 100001;
+const int maxn = 100000;
 
 int main() {
-    int hash_table[256] = {0};
-    char wrong[257], input[maxn];
-    cin.getline(wrong, 257);
-    int len = strlen(wrong);
-    for (int i = 0; i &lt; len; i++) {
-        if (wrong[i] &gt;= &#39;A&#39; &amp;&amp; wrong[i] &lt;= &#39;Z&#39;) {
-            wrong[i] = wrong[i] - &#39;A&#39; + &#39;a&#39;;
+    int n, index[maxn], num, k = 1, ans = 0, cnt = 0;
+    scanf(&quot;%d&quot;, &amp;n);
+    for (int i = 0; i &lt; n; i++) {
+        scanf(&quot;%d&quot;, &amp;num);
+        index[num] = i;
+        if (index[num] != num &amp;&amp; num != 0) {
+            cnt++;
         }
-        hash_table[wrong[i]] = 1;
     }
-    scanf(&quot;%s&quot;, input);
-    len = strlen(input);
-    for (int i = 0; i &lt; len; i++) {
-        if (input[i] &gt;= &#39;A&#39; &amp;&amp; input[i] &lt;= &#39;Z&#39;) {
-            int low = input[i] - &#39;A&#39; + &#39;a&#39;;
-            if (hash_table[low] == 0 &amp;&amp; hash_table[&#39;+&#39;] == 0) {
-                printf(&quot;%c&quot;, input[i]);
+    while (cnt != 0) {
+        if (index[0] == 0) {
+            for (; k &lt; n; k++) {
+                if (index[k] != k) {
+                    break;
+                }
             }
-        } else if (hash_table[input[i]] == 0) {
-            printf(&quot;%c&quot;, input[i]);
+            swap(index[0], index[k]);
+        } else {
+            swap(index[0], index[index[0]]);
+            cnt--;
         }
+        ans++;
     }
-    printf(&quot;\n&quot;);
+    printf(&quot;%d&quot;, ans);
     return 0;
 }
 </code></pre>
@@ -215,7 +222,7 @@ int main() {
             <div class="box sticky animated fadeInRight faster">
                 <div id="toc" class="subbox">
                     <h4>目录</h4>
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#输入格式："><span class="toc-number">1.</span> <span class="toc-text">输入格式：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#输出格式："><span class="toc-number">2.</span> <span class="toc-text">输出格式：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#输入样例："><span class="toc-number">3.</span> <span class="toc-text">输入样例：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#输出样例："><span class="toc-number">4.</span> <span class="toc-text">输出样例：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#注意点"><span class="toc-number">5.</span> <span class="toc-text">注意点</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Input-Specification"><span class="toc-number">1.</span> <span class="toc-text">Input Specification:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Output-Specification"><span class="toc-number">2.</span> <span class="toc-text">Output Specification:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Sample-Input"><span class="toc-number">3.</span> <span class="toc-text">Sample Input:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Sample-Output"><span class="toc-number">4.</span> <span class="toc-text">Sample Output:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#思路"><span class="toc-number">5.</span> <span class="toc-text">思路</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#注意点"><span class="toc-number">6.</span> <span class="toc-text">注意点</span></a></li></ol>
                 </div>
             </div>
             
