@@ -5,16 +5,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Spring Cloud Eureka - Zjxjwxk&#39;s Blog</title>
+    <title>PAT甲级 1033 To Fill or Not to Fill (25分) - Zjxjwxk&#39;s Blog</title>
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="google" content="notranslate">
     <meta name="keywords" content="吴鑫康 zjxjwxk Wxk Java,"> 
-    <meta name="description" content="Spring Cloud Eureka
-基于 Netflix Eureka 做了二次封装
-两个组件组成：
-Eureka Server 注册中心
-作为具有服务注册功能的服务器，是服务注册中心，系统中的,"> 
+    <meta name="description" content="With highways available, driving a car from Hangzhou to any other city is easy. But since the tank ,"> 
     <meta name="author" content="吴鑫康"> 
     <link rel="alternative" href="atom.xml" title="Zjxjwxk&#39;s Blog" type="application/atom+xml"> 
     <link rel="icon" href="/img/favicon.png"> 
@@ -47,7 +43,7 @@ Eureka Server 注册中心
     <div class="navigation animated fadeIn fast delay-1s">
         <img id="home-icon" class="icon-home" src="/img/favicon.png" alt="" data-url="https://zjxjwxk.com">
         <div id="play-icon" title="Play/Pause" class="iconfont icon-play"></div>
-        <h3 class="subtitle">Spring Cloud Eureka</h3>
+        <h3 class="subtitle">PAT甲级 1033 To Fill or Not to Fill (25分)</h3>
         <div class="social">
             <!--        <div class="like-icon">-->
             <!--            <a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
@@ -78,29 +74,29 @@ Eureka Server 注册中心
         <div class="else">
             <p class="animated fadeInDown">
                 
-                <a href="/categories/Spring-Cloud"><b>「
-                    </b>SPRING-CLOUD<b> 」</b></a>
+                <a href="/categories/PAT"><b>「
+                    </b>PAT<b> 」</b></a>
                 
-                一月 31, 2019
+                三月 22, 2020
             </p>
-            <h3 class="post-title animated fadeInDown"><a href="/2019/01/31/Spring Cloud/服务注册与发现/Spring-Cloud-Eureka/" title="Spring Cloud Eureka">Spring Cloud Eureka</a>
+            <h3 class="post-title animated fadeInDown"><a href="/2020/03/22/PAT/Advanced_Level/A1033/" title="PAT甲级 1033 To Fill or Not to Fill (25分)">PAT甲级 1033 To Fill or Not to Fill (25分)</a>
             </h3>
             
             <p class="post-count animated fadeInDown">
                 
                 <span>
                     <b class="iconfont icon-text2"></b> <i>文章字数</i>
-                    2.6k
+                    5.4k
                 </span>
                 
                 
                 <span>
                     <b class="iconfont icon-timer__s"></b> <i>阅读约需</i>
-                    2 mins.
+                    5 mins.
                 </span>
                 
                 
-                <span id="/2019/01/31/Spring Cloud/服务注册与发现/Spring-Cloud-Eureka/" class="leancloud_visitors" data-flag-title="Spring Cloud Eureka">
+                <span id="/2020/03/22/PAT/Advanced_Level/A1033/" class="leancloud_visitors" data-flag-title="PAT甲级 1033 To Fill or Not to Fill (25分)">
                     <b class="iconfont icon-read"></b> <i>阅读次数</i>
                     <span class="leancloud-visitors-count">-</span>
                 </span>
@@ -109,7 +105,7 @@ Eureka Server 注册中心
             </p>
             
             
-            <ul class="animated fadeInDown post-tags-list"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/Java/">Java</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/Spring-Cloud/">Spring-Cloud</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/微服务架构/">微服务架构</a></li></ul>
+            <ul class="animated fadeInDown post-tags-list"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/PAT/">PAT</a></li></ul>
             
         </div>
     </div>
@@ -130,47 +126,106 @@ Eureka Server 注册中心
 <div class="article">
     <div class="main">
         <div class="content markdown animated fadeIn">
-            <h1 id="Spring-Cloud-Eureka"><a href="#Spring-Cloud-Eureka" class="headerlink" title="Spring Cloud Eureka"></a>Spring Cloud Eureka</h1><ul>
-<li>基于 Netflix Eureka 做了二次封装</li>
-<li>两个组件组成：<ul>
-<li>Eureka Server 注册中心<ul>
-<li>作为具有服务注册功能的服务器，是服务注册中心，系统中的其他微服务使用 Eureka Client 连接到Eureka Server ，并维持心跳连接以监控各个微服务是否正常运行。</li>
+            <p>With highways available, driving a car from Hangzhou to any other city is easy. But since the tank capacity of a car is limited, we have to find gas stations on the way from time to time. Different gas station may give different price. You are asked to carefully design the cheapest route to go.</p>
+<h1 id="Input-Specification"><a href="#Input-Specification" class="headerlink" title="Input Specification:"></a>Input Specification:</h1><p>Each input file contains one test case. For each case, the first line contains 4 positive numbers: <em>Cmax</em> (≤ 100), the maximum capacity of the tank; <em>D</em> (≤30000), the distance between Hangzhou and the destination city; <em>Davg</em> (≤20), the average distance per unit gas that the car can run; and <em>N</em> (≤ 500), the total number of gas stations. Then <em>N</em> lines follow, each contains a pair of non-negative numbers: <em>Pi</em>, the unit gas price, and <em>Di</em> (≤<em>D</em>), the distance between this station and Hangzhou, for <em>i</em>=1,⋯,<em>N</em>. All the numbers in a line are separated by a space.</p>
+<h1 id="Output-Specification"><a href="#Output-Specification" class="headerlink" title="Output Specification:"></a>Output Specification:</h1><p>For each test case, print the cheapest price in a line, accurate up to 2 decimal places. It is assumed that the tank is empty at the beginning. If it is impossible to reach the destination, print <code>The maximum travel distance = X</code> where <code>X</code> is the maximum possible distance the car can run, accurate up to 2 decimal places.</p>
+<h1 id="Sample-Input-1"><a href="#Sample-Input-1" class="headerlink" title="Sample Input 1:"></a>Sample Input 1:</h1><pre><code class="in">50 1300 12 8
+6.00 1250
+7.00 600
+7.00 150
+7.10 0
+7.20 200
+7.50 400
+7.30 1000
+6.85 300
+</code></pre>
+<h1 id="Sample-Output-1"><a href="#Sample-Output-1" class="headerlink" title="Sample Output 1:"></a>Sample Output 1:</h1><pre><code class="out">749.17
+</code></pre>
+<h1 id="Sample-Input-2"><a href="#Sample-Input-2" class="headerlink" title="Sample Input 2:"></a>Sample Input 2:</h1><pre><code>50 1300 12 2
+7.10 0
+7.00 600
+</code></pre><h1 id="Sample-Output-2"><a href="#Sample-Output-2" class="headerlink" title="Sample Output 2:"></a>Sample Output 2:</h1><pre><code>The maximum travel distance = 1200.00
+</code></pre><h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><ul>
+<li>把终点视为单位油价为0，离起点距离为 destD 的加油站（以便在最后选择下一站时，能够直接选到终点）</li>
+<li>贪心：寻找距离当前加油站<strong>最近的</strong>油价低于当前油价的加油站，加恰好能够到达该加油站的油，然后前往该加油站；如果找不到油价低于当前油价的加油站，则寻找油价最低的加油站，在当前加油站加满油，然后前往该加油站</li>
 </ul>
-</li>
-<li>Eureka Client 服务注册<ul>
-<li>用于简化与服务器的交互，作为轮询负载均衡器，并提供服务的故障切换支持。</li>
+<h1 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h1><ul>
+<li>在距离为0处必须有加油站，否则无法出发，一定无法到达终点</li>
 </ul>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="启动-Eureka-Server"><a href="#启动-Eureka-Server" class="headerlink" title="启动 Eureka Server"></a>启动 Eureka Server</h2><h3 id="1-创建Spring项目"><a href="#1-创建Spring项目" class="headerlink" title="1. 创建Spring项目"></a>1. 创建Spring项目</h3><p><img src="/2019/01/31/Spring Cloud/服务注册与发现/Spring-Cloud-Eureka/image-20190131155138441.png" alt="创建Spring项目"></p>
-<h1 id="2-填充项目信息"><a href="#2-填充项目信息" class="headerlink" title="2. 填充项目信息"></a>2. 填充项目信息</h1><p><img src="/2019/01/31/Spring Cloud/服务注册与发现/Spring-Cloud-Eureka/image-20190131155241197.png" alt="填充项目信息"></p>
-<h3 id="3-选择项目类型为-Cloud-Discovery-中的-Eureka-Server"><a href="#3-选择项目类型为-Cloud-Discovery-中的-Eureka-Server" class="headerlink" title="3. 选择项目类型为 Cloud Discovery 中的 Eureka Server"></a>3. 选择项目类型为 Cloud Discovery 中的 Eureka Server</h3><p><img src="/2019/01/31/Spring Cloud/服务注册与发现/Spring-Cloud-Eureka/image-20190131155453826.png" alt="选择Eureka Server"></p>
-<h3 id="4-完成创建"><a href="#4-完成创建" class="headerlink" title="4. 完成创建"></a>4. 完成创建</h3><p><img src="/2019/01/31/Spring Cloud/服务注册与发现/Spring-Cloud-Eureka/image-20190131160337079.png" alt="完成创建"></p>
-<h3 id="5-添加注解-EnableEurekaServer"><a href="#5-添加注解-EnableEurekaServer" class="headerlink" title="5. 添加注解 @EnableEurekaServer"></a>5. 添加注解 @EnableEurekaServer</h3><pre><code class="Java">@SpringBootApplication
-@EnableEurekaServer
-public class EurekaApplication {
+<pre><code class="C++">#include &lt;cstdio&gt;
+#include &lt;algorithm&gt;
+using namespace std;
 
-    public static void main(String[] args) {
-        SpringApplication.run(EurekaApplication.class, args);
+const int maxn = 501;
+
+struct Station {
+    double P;
+    double D;
+} stations[maxn];
+
+int cmp(Station s1, Station s2) {
+    return s1.D &lt; s2.D;
+}
+
+int main() {
+    double capacity, destD, avgD, nowC = 0, nowD = 0, cost = 0;
+    int n, nowIndex = 0;
+    scanf(&quot;%lf %lf %lf %d&quot;, &amp;capacity, &amp;destD, &amp;avgD, &amp;n);
+    for (int i = 0; i &lt; n; i++) {
+        scanf(&quot;%lf %lf&quot;, &amp;stations[i].P, &amp;stations[i].D);
     }
-
+    stations[n].P = 0;
+    stations[n].D = destD;
+    sort(stations, stations + n, cmp);
+    if (stations[0].D != 0) {
+        printf(&quot;The maximum travel distance = 0.00&quot;);
+    } else {
+        while (nowD &lt; destD) {
+            if (nowIndex == n - 1 &amp;&amp; (capacity * avgD &lt; (destD - nowD)) || (nowIndex &lt; n - 1) &amp;&amp; (capacity * avgD &lt; (stations[nowIndex + 1].D - nowD))) {
+                nowD += capacity * avgD;
+                break;
+            }
+            double minP = stations[nowIndex].P, secondP = stations[nowIndex + 1].P;
+            int minIndex = -1, secondIndex = nowIndex + 1;
+            for (int i = nowIndex + 1; i &lt;= n; i++) {
+                if (capacity * avgD &gt;= (stations[i].D - nowD)) {
+                    if (stations[i].P &lt; minP) {
+                        minP = stations[i].P;
+                        minIndex = i;
+                        break;
+                    } else if (stations[i].P &lt; secondP) {
+                        secondP = stations[i].P;
+                        secondIndex = i;
+                    }
+                } else {
+                    break;
+                }
+            }
+            if (minIndex != -1) {
+                if (nowC * avgD &lt; (stations[minIndex].D - nowD)) {
+                    cost += ((stations[minIndex].D - nowD) / avgD - nowC) * stations[nowIndex].P;
+                    nowC = 0;
+                } else {
+                    nowC -= (stations[minIndex].D - nowD) / avgD;
+                }
+                nowD = stations[minIndex].D;
+                nowIndex = minIndex;
+            } else {
+                cost += (capacity - nowC) * stations[nowIndex].P;
+                nowC = capacity - (stations[secondIndex].D - nowD) / avgD;
+                nowD = stations[secondIndex].D;
+                nowIndex = secondIndex;
+            }
+        }
+        if (nowD &lt; destD) {
+            printf(&quot;The maximum travel distance = %.2f&quot;, nowD);
+        } else {
+            printf(&quot;%.2f&quot;, cost);
+        }
+    }
+    return 0;
 }
 </code></pre>
-<h3 id="6-配置-application-yml"><a href="#6-配置-application-yml" class="headerlink" title="6. 配置 application.yml"></a>6. 配置 application.yml</h3><pre><code class="yml">eureka:
-  client:
-    service-url:
-      defaultZone: http://localhost:8761/eureka/
-    register-with-eureka: false
-spring:
-  application:
-    name: eureka
-server:
-  port: 8761
-</code></pre>
-<h3 id="7-启动-Eureka-Server"><a href="#7-启动-Eureka-Server" class="headerlink" title="7. 启动 Eureka Server"></a>7. 启动 Eureka Server</h3><p><img src="/2019/01/31/Spring Cloud/服务注册与发现/Spring-Cloud-Eureka/image-20190131172458551.png" alt="Eureka Server信息"></p>
-<p>这样，一个简单的Eureka Server就启动完成了。</p>
 
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
@@ -214,7 +269,7 @@ server:
             <div class="box sticky animated fadeInRight faster">
                 <div id="toc" class="subbox">
                     <h4>目录</h4>
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Spring-Cloud-Eureka"><span class="toc-number">1.</span> <span class="toc-text">Spring Cloud Eureka</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#启动-Eureka-Server"><span class="toc-number">1.1.</span> <span class="toc-text">启动 Eureka Server</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-创建Spring项目"><span class="toc-number">1.1.1.</span> <span class="toc-text">1. 创建Spring项目</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-填充项目信息"><span class="toc-number">2.</span> <span class="toc-text">2. 填充项目信息</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-选择项目类型为-Cloud-Discovery-中的-Eureka-Server"><span class="toc-number">2.0.1.</span> <span class="toc-text">3. 选择项目类型为 Cloud Discovery 中的 Eureka Server</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-完成创建"><span class="toc-number">2.0.2.</span> <span class="toc-text">4. 完成创建</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-添加注解-EnableEurekaServer"><span class="toc-number">2.0.3.</span> <span class="toc-text">5. 添加注解 @EnableEurekaServer</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-配置-application-yml"><span class="toc-number">2.0.4.</span> <span class="toc-text">6. 配置 application.yml</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-启动-Eureka-Server"><span class="toc-number">2.0.5.</span> <span class="toc-text">7. 启动 Eureka Server</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Input-Specification"><span class="toc-number">1.</span> <span class="toc-text">Input Specification:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Output-Specification"><span class="toc-number">2.</span> <span class="toc-text">Output Specification:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Sample-Input-1"><span class="toc-number">3.</span> <span class="toc-text">Sample Input 1:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Sample-Output-1"><span class="toc-number">4.</span> <span class="toc-text">Sample Output 1:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Sample-Input-2"><span class="toc-number">5.</span> <span class="toc-text">Sample Input 2:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Sample-Output-2"><span class="toc-number">6.</span> <span class="toc-text">Sample Output 2:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#思路"><span class="toc-number">7.</span> <span class="toc-text">思路</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#注意点"><span class="toc-number">8.</span> <span class="toc-text">注意点</span></a></li></ol>
                 </div>
             </div>
             
