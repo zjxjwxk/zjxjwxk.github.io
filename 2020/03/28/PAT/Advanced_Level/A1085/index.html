@@ -5,13 +5,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>PAT甲级 1016 Phone Bills (25分) - Zjxjwxk&#39;s Blog</title>
+    <title>PAT甲级 1085 Perfect Sequence (25分) - Zjxjwxk&#39;s Blog</title>
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="google" content="notranslate">
     <meta name="keywords" content="吴鑫康 zjxjwxk Wxk Java,"> 
-    <meta name="description" content="A long-distance telephone company charges its customers by the following rules:
-Making a long-dista,"> 
+    <meta name="description" content="Given a sequence of positive integers and another positive integer p. The sequence is said to be a ,"> 
     <meta name="author" content="吴鑫康"> 
     <link rel="alternative" href="atom.xml" title="Zjxjwxk&#39;s Blog" type="application/atom+xml"> 
     <link rel="icon" href="/img/favicon.png"> 
@@ -44,7 +43,7 @@ Making a long-dista,">
     <div class="navigation animated fadeIn fast delay-1s">
         <img id="home-icon" class="icon-home" src="/img/favicon.png" alt="" data-url="https://zjxjwxk.com">
         <div id="play-icon" title="Play/Pause" class="iconfont icon-play"></div>
-        <h3 class="subtitle">PAT甲级 1016 Phone Bills (25分)</h3>
+        <h3 class="subtitle">PAT甲级 1085 Perfect Sequence (25分)</h3>
         <div class="social">
             <!--        <div class="like-icon">-->
             <!--            <a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
@@ -78,26 +77,26 @@ Making a long-dista,">
                 <a href="/categories/PAT"><b>「
                     </b>PAT<b> 」</b></a>
                 
-                三月 20, 2020
+                三月 28, 2020
             </p>
-            <h3 class="post-title animated fadeInDown"><a href="/2020/03/20/PAT/Advanced_Level/A1016/" title="PAT甲级 1016 Phone Bills (25分)">PAT甲级 1016 Phone Bills (25分)</a>
+            <h3 class="post-title animated fadeInDown"><a href="/2020/03/28/PAT/Advanced_Level/A1085/" title="PAT甲级 1085 Perfect Sequence (25分)">PAT甲级 1085 Perfect Sequence (25分)</a>
             </h3>
             
             <p class="post-count animated fadeInDown">
                 
                 <span>
                     <b class="iconfont icon-text2"></b> <i>文章字数</i>
-                    6.2k
+                    2.6k
                 </span>
                 
                 
                 <span>
                     <b class="iconfont icon-timer__s"></b> <i>阅读约需</i>
-                    6 mins.
+                    2 mins.
                 </span>
                 
                 
-                <span id="/2020/03/20/PAT/Advanced_Level/A1016/" class="leancloud_visitors" data-flag-title="PAT甲级 1016 Phone Bills (25分)">
+                <span id="/2020/03/28/PAT/Advanced_Level/A1085/" class="leancloud_visitors" data-flag-title="PAT甲级 1085 Perfect Sequence (25分)">
                     <b class="iconfont icon-read"></b> <i>阅读次数</i>
                     <span class="leancloud-visitors-count">-</span>
                 </span>
@@ -127,112 +126,46 @@ Making a long-dista,">
 <div class="article">
     <div class="main">
         <div class="content markdown animated fadeIn">
-            <p>A long-distance telephone company charges its customers by the following rules:</p>
-<p>Making a long-distance call costs a certain amount per minute, depending on the time of day when the call is made. When a customer starts connecting a long-distance call, the time will be recorded, and so will be the time when the customer hangs up the phone. Every calendar month, a bill is sent to the customer for each minute called (at a rate determined by the time of day). Your job is to prepare the bills for each month, given a set of phone call records.</p>
-<h1 id="Input-Specification"><a href="#Input-Specification" class="headerlink" title="Input Specification:"></a>Input Specification:</h1><p>Each input file contains one test case. Each case has two parts: the rate structure, and the phone call records.</p>
-<p>The rate structure consists of a line with 24 non-negative integers denoting the toll (cents/minute) from 00:00 - 01:00, the toll from 01:00 - 02:00, and so on for each hour in the day.</p>
-<p>The next line contains a positive number <em>N</em> (≤1000), followed by <em>N</em> lines of records. Each phone call record consists of the name of the customer (string of up to 20 characters without space), the time and date (<code>mm:dd:hh:mm</code>), and the word <code>on-line</code> or <code>off-line</code>.</p>
-<p>For each test case, all dates will be within a single month. Each <code>on-line</code> record is paired with the chronologically next record for the same customer provided it is an <code>off-line</code> record. Any <code>on-line</code> records that are not paired with an <code>off-line</code> record are ignored, as are <code>off-line</code> records not paired with an <code>on-line</code> record. It is guaranteed that at least one call is well paired in the input. You may assume that no two records for the same customer have the same time. Times are recorded using a 24-hour clock.</p>
-<h1 id="Output-Specification"><a href="#Output-Specification" class="headerlink" title="Output Specification:"></a>Output Specification:</h1><p>For each test case, you must print a phone bill for each customer.</p>
-<p>Bills must be printed in alphabetical order of customers’ names. For each customer, first print in a line the name of the customer and the month of the bill in the format shown by the sample. Then for each time period of a call, print in one line the beginning and ending time and date (<code>dd:hh:mm</code>), the lasting time (in minute) and the charge of the call. The calls must be listed in chronological order. Finally, print the total charge for the month in the format shown by the sample.</p>
-<h1 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input:"></a>Sample Input:</h1><pre><code class="in">10 10 10 10 10 10 20 20 20 15 15 15 15 15 15 15 20 30 20 15 15 10 10 10
-10
-CYLL 01:01:06:01 on-line
-CYLL 01:28:16:05 off-line
-CYJJ 01:01:07:00 off-line
-CYLL 01:01:08:03 off-line
-CYJJ 01:01:05:59 on-line
-aaa 01:01:01:03 on-line
-aaa 01:02:00:01 on-line
-CYLL 01:28:15:41 on-line
-aaa 01:05:02:24 on-line
-aaa 01:04:23:59 off-line
+            <p>Given a sequence of positive integers and another positive integer <em>p</em>. The sequence is said to be a <strong>perfect sequence</strong> if <em>M</em>≤<em>m</em>×<em>p</em> where <em>M</em> and <em>m</em> are the maximum and minimum numbers in the sequence, respectively.</p>
+<p>Now given a sequence and a parameter <em>p</em>, you are supposed to find from the sequence as many numbers as possible to form a perfect subsequence.</p>
+<h1 id="Input-Specification"><a href="#Input-Specification" class="headerlink" title="Input Specification:"></a>Input Specification:</h1><p>Each input file contains one test case. For each case, the first line contains two positive integers <em>N</em> and <em>p</em>, where <em>N</em> (≤$10^5$) is the number of integers in the sequence, and <em>p</em> (≤$10^9$) is the parameter. In the second line there are <em>N</em> positive integers, each is no greater than 109.</p>
+<h1 id="Output-Specification"><a href="#Output-Specification" class="headerlink" title="Output Specification:"></a>Output Specification:</h1><p>For each test case, print in one line the maximum number of integers that can be chosen to form a perfect subsequence.</p>
+<h1 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input:"></a>Sample Input:</h1><pre><code class="in">10 8
+2 3 20 4 5 1 6 7 8 9
 </code></pre>
-<h1 id="Sample-Output"><a href="#Sample-Output" class="headerlink" title="Sample Output:"></a>Sample Output:</h1><pre><code class="out">CYJJ 01
-01:05:59 01:07:00 61 $12.10
-Total amount: $12.10
-CYLL 01
-01:06:01 01:08:03 122 $24.40
-28:15:41 28:16:05 24 $3.85
-Total amount: $28.25
-aaa 01
-02:00:01 04:23:59 4318 $638.80
-Total amount: $638.80
+<h1 id="Sample-Output"><a href="#Sample-Output" class="headerlink" title="Sample Output:"></a>Sample Output:</h1><pre><code class="out">8
 </code></pre>
 <h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><ul>
-<li>将通话记录，先根据姓名，再根据时间先后，进行排序。这样相同名字的记录就会排在一起，且其中的数据也是按照时间顺序的。</li>
-<li>为了方便计算某一组通话的时长，可以把记录的时间都换算为相对于 00:00:00 的分钟数，则挂电话时间减去接电话时间，即为通话时长</li>
-<li>为了方便计算某一组通话的费用，可以把挂电话相对于 00:00:00 的费用减去接电话相对于 00:00:00 的费用，即为该通话的费用</li>
+<li>能使选出的数个数最大的方案，一定是在该递增序列中选择连续的若干个数的方案</li>
+<li>如果强行进行O($n^2$)的二重循环遍历，那么根据题目的数据范围，肯定是会超时的。这里有两种方法解决这个问题：二分查找和 two pointers。</li>
+<li>本人利用 upper_bound() 函数来二分寻找第一个大于 m * p 的数的位置，那么 M 的最大数的位置即为该位置 -1。</li>
 </ul>
-<pre><code class="C++">#include &lt;iostream&gt;
-#include &lt;string&gt;
-#include &lt;map&gt;
-#include &lt;vector&gt;
+<h1 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h1><ul>
+<li>nums[i] * p 可能达到 $10^{18}$，可以使用 long long 来定义数组。</li>
+</ul>
+<pre><code class="C++">#include &lt;cstdio&gt;
 #include &lt;algorithm&gt;
 using namespace std;
 
-const int maxn = 2000;
-int n, rate[25] = {0};
-
-struct Record {
-    string name;
-    int month, day, hour, min, time, status;
-} records[maxn];
-
-double getCostFromZero(Record &amp;r) {
-    double cost = 0;
-    cost += (r.day - 1) * 60 * rate[24] + r.min * rate[r.hour];
-    for (int i = 0; i &lt;= r.hour - 1; i++) {
-        cost += rate[i] * 60;
-    }
-    return cost;
-}
-
-int cmp(Record r1, Record r2) {
-    if (r1.name != r2.name) {
-        return r1.name &lt; r2.name;
-    } else {
-        return r1.time &lt; r2.time;
-    }
-}
+const int maxn = 100000;
 
 int main() {
-    for (int i = 0; i &lt; 24; i++) {
-        scanf(&quot;%d&quot;, &amp;rate[i]);
-        rate[24] += rate[i];
-    }
-    scanf(&quot;%d&quot;, &amp;n);
-    string status;
+    int n;
+    long long p, nums[maxn];
+    scanf(&quot;%d %lld&quot;, &amp;n, &amp;p);
     for (int i = 0; i &lt; n; i++) {
-        cin &gt;&gt; records[i].name;
-        scanf(&quot;%d:%d:%d:%d&quot;, &amp;records[i].month, &amp;records[i].day, &amp;records[i].hour, &amp;records[i].min);
-        records[i].time = records[i].day * 24 * 60 + records[i].hour * 60 + records[i].min;
-        cin &gt;&gt; status;
-        if (status == &quot;on-line&quot;) {
-            records[i].status = 1;
-        } else {
-            records[i].status = 0;
+        scanf(&quot;%lld&quot;, &amp;nums[i]);
+    }
+    sort(nums, nums + n);
+    int ans = 0;
+    long long m = nums[0];
+    for (int i = 0; i &lt; n; i++) {
+        int j = upper_bound(nums + i + 1, nums + n, nums[i] * p) - nums - 1;
+        if (j - i + 1 &gt; ans) {
+            ans = j - i + 1;
         }
     }
-    sort(records, records + n, cmp);
-    map&lt;string, vector&lt;Record&gt; &gt; nameRecords;
-    for (int i = 1; i &lt; n; i++) {
-        if (records[i].name == records[i - 1].name &amp;&amp; records[i - 1].status == 1 &amp;&amp; records[i].status == 0) {
-            nameRecords[records[i].name].push_back(records[i - 1]);
-            nameRecords[records[i].name].push_back(records[i]);
-        }
-    }
-    for (auto it : nameRecords) {
-        vector&lt;Record&gt; temp = it.second;
-        printf(&quot;%s %02d\n&quot;, it.first.c_str(), temp[0].month);
-        double totalCost = 0;
-        for (int i = 0; i &lt; temp.size(); i += 2) {
-            double cost = getCostFromZero(temp[i + 1]) - getCostFromZero(temp[i]);
-            printf(&quot;%02d:%02d:%02d %02d:%02d:%02d %d $%.2f\n&quot;, temp[i].day, temp[i].hour, temp[i].min, temp[i + 1].day, temp[i + 1].hour, temp[i + 1].min, temp[i + 1].time - temp[i].time, cost / 100);
-            totalCost += cost;
-        }
-        printf(&quot;Total amount: $%.2f\n&quot;, totalCost / 100);
-    }
+    printf(&quot;%d&quot;, ans);
     return 0;
 }
 </code></pre>
@@ -279,7 +212,7 @@ int main() {
             <div class="box sticky animated fadeInRight faster">
                 <div id="toc" class="subbox">
                     <h4>目录</h4>
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Input-Specification"><span class="toc-number">1.</span> <span class="toc-text">Input Specification:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Output-Specification"><span class="toc-number">2.</span> <span class="toc-text">Output Specification:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Sample-Input"><span class="toc-number">3.</span> <span class="toc-text">Sample Input:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Sample-Output"><span class="toc-number">4.</span> <span class="toc-text">Sample Output:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#思路"><span class="toc-number">5.</span> <span class="toc-text">思路</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Input-Specification"><span class="toc-number">1.</span> <span class="toc-text">Input Specification:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Output-Specification"><span class="toc-number">2.</span> <span class="toc-text">Output Specification:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Sample-Input"><span class="toc-number">3.</span> <span class="toc-text">Sample Input:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Sample-Output"><span class="toc-number">4.</span> <span class="toc-text">Sample Output:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#思路"><span class="toc-number">5.</span> <span class="toc-text">思路</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#注意点"><span class="toc-number">6.</span> <span class="toc-text">注意点</span></a></li></ol>
                 </div>
             </div>
             

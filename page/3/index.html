@@ -122,29 +122,29 @@
     <div id="post0" class="else">
         <p class="animated fadeInDown">
             
-            <a href="/categories/Spring-Cloud"><b>「
-                </b>SPRING-CLOUD<b> 」</b></a>
+            <a href="/categories/Java"><b>「
+                </b>JAVA<b> 」</b></a>
             
-            一月 31, 2019
+            三月 11, 2019
         </p>
         <h3 class="post-title animated fadeInDown">
-            <a href="/2019/01/31/Spring Cloud/服务注册与发现/Spring-Cloud-Eureka/" title="Spring Cloud Eureka" class="posttitle">Spring Cloud Eureka</a></h3>
+            <a href="/2019/03/11/Java/JVM/自己编译JDK/" title="自己编译JDK" class="posttitle">自己编译JDK</a></h3>
         
         <p class="post-count animated fadeInDown">
             
             <span>
                 <b class="iconfont icon-text2"></b> <i>文章字数</i>
-                2.6k
+                6.8k
             </span>
             
             
             <span>
                 <b class="iconfont icon-timer__s"></b> <i>阅读约需</i>
-                2 mins.
+                6 mins.
             </span>
             
             
-            <span id="/2019/01/31/Spring Cloud/服务注册与发现/Spring-Cloud-Eureka/" class="leancloud_visitors" data-flag-title="">
+            <span id="/2019/03/11/Java/JVM/自己编译JDK/" class="leancloud_visitors" data-flag-title="">
                 <b class="iconfont icon-read"></b> <i>阅读次数</i>
                 <span class="leancloud-visitors-count">-</span>
             </span>
@@ -152,31 +152,19 @@
         </p>
         
         
-        <ul class="animated fadeInDown post-tags-list"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/Java/">Java</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/Spring-Cloud/">Spring-Cloud</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/微服务架构/">微服务架构</a></li></ul>
+        <ul class="animated fadeInDown post-tags-list"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/JVM/">JVM</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/Java/">Java</a></li></ul>
         
         <div class="md-content animated fadeIn">
             
-            <ul>
-<li>基于 Netflix Eureka 做了二次封装</li>
-<li>两个组件组成：<ul>
-<li>Eureka Server 注册中心<ul>
-<li>作为具有服务注册功能的服务器，是服务注册中心，系统中的其他微服务使用 Eureka Client 连接到Eureka Server ，并维持心跳连接以监控各个微服务是否正常运行。</li>
-</ul>
-</li>
-<li>Eureka Client 服务注册<ul>
-<li>用于简化与服务器的交互，作为轮询负载均衡器，并提供服务的故障切换支持。</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="1-创建Spring项目"><a href="#1-创建Spring项目" class="headerlink" title="1. 创建Spring项目"></a>1. 创建Spring项目</h3><p></p>
-<p></p>
-<h3 id="3-选择项目类型为-Cloud-Discovery-中的-Eureka-Server"><a href="#3-选择项目类型为-Cloud-Discovery-中的-Eureka-Server" class="headerlink" title="3. 选择项目类型为 Cloud Discovery 中的 Eureka Server"></a>3. 选择项目类型为 Cloud Discovery 中的 Eureka Server</h3><p></p>
-<h3 id="4-完成创建"><a href="#4-完成创建" class="headerlink" title="4. 完成创建"></a>4. 完成创建</h3><p></p>
-<h3 id="5-添加注解-EnableEurekaServer"><a href="#5-添加注解-EnableEurekaServer" class="headerlink" title="5. 添加注解 @EnableEurekaServer"></a>5. 添加注解 @EnableEurekaServer</h3><pre><code class="Java">@...</code></pre>
+            <p>想要一探 JDK 内部的实现机制，最便捷的捷径之一就是自己编译一套 JDK，通过阅读和跟踪调试 JDK 源码去了解 Java 技术体系的原理。本人选择了 OpenJDK 进行编译。</p>
+<p>获取 JDK 源码有两种方式：</p>
+<h3 id="1-通过-Mercurial-代码版本管理工具从-Repository-中直接取得源码"><a href="#1-通过-Mercurial-代码版本管理工具从-Repository-中直接取得源码" class="headerlink" title="(1). 通过 Mercurial 代码版本管理工具从 Repository 中直接取得源码"></a>(1). 通过 Mercurial 代码版本管理工具从 Repository 中直接取得源码</h3><p>Repository 地址：<a href="http://hg.openjdk.java.net/jdk7u/jdk7u" target="_blank" rel="noopener">http://hg.openjdk.java.net/jdk7u/jdk7u</a></p>
+<p>获取过程如以下代码所示</p>
+<pre><code class="shell">hg clone http://hg.openjdk.java.net/jdk7u/jdk7u-dev
+cd jdk7u-dev
+chmod 755 get_source...</code></pre>
             
-            <span class="read-more"><a href="/2019/01/31/Spring Cloud/服务注册与发现/Spring-Cloud-Eureka/" title="查看全文" class="posttitle">查看全文</a>
+            <span class="read-more"><a href="/2019/03/11/Java/JVM/自己编译JDK/" title="查看全文" class="posttitle">查看全文</a>
                 <b class="iconfont icon-arrow-right- gradient-text"></b></span>
         </div>
     </div>
@@ -197,6 +185,122 @@
 
     <div id="primary">
         
+<div class="post" id="post">
+    <div class="post-cover animated fadeIn" style="
+            background-image:
+            radial-gradient(ellipse closest-side, rgba(0, 0, 0, 0.65), #100e17),
+            url(/img/welcome-cover.jpg);">
+    </div>
+    <div class="else">
+        <p class="animated fadeInDown">
+            
+                <a href="/categories/Java">
+                  <b>「 </b>JAVA<b> 」</b>
+                </a>
+            
+            三月 11, 2019
+        </p>
+        <h3 class="post-title animated fadeInDown"><a href="/2019/03/11/Java/JVM/自己编译JDK/" title="自己编译JDK" class="posttitle">自己编译JDK</a></h3>
+        
+            <p class="post-count animated fadeInDown">
+                
+                    <span>
+                        <b class="iconfont icon-text2"></b> <i>文章字数</i>
+                        6.8k
+                    </span>
+                
+                
+                    <span>
+                        <b class="iconfont icon-timer__s"></b> <i>阅读约需</i>
+                        6 mins.
+                    </span>
+                
+                
+                    <span id="/2019/03/11/Java/JVM/自己编译JDK/" class="leancloud_visitors" data-flag-title="">
+                        <b class="iconfont icon-read"></b> <i>阅读次数</i>
+                        <span class="leancloud-visitors-count">-</span>
+                    </span>
+                
+            </p>
+            
+                <ul class="animated fadeInDown post-tags-list"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/JVM/">JVM</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/Java/">Java</a></li></ul>
+            
+        
+        <div class="md-content animated fadeIn">
+            
+                <p>想要一探 JDK 内部的实现机制，最便捷的捷径之一就是自己编译一套 JDK，通过阅读和跟踪调试 JDK 源码去了解 Java 技术体系的原理。本人选择了 OpenJDK 进行编译。</p>
+<p>获取 JDK 源码有两种方式：</p>
+<h3 id="1-通过-Mercurial-代码版本管理工具从-Repository-中直接取得源码"><a href="#1-通过-Mercurial-代码版本管理工具从-Repository-中直接取得源码" class="headerlink" title="(1). 通过 Mercurial 代码版本管理工具从 Repository 中直接取得源码"></a>(1). 通过 Mercurial 代码版本管理工具从 Repository 中直接取得源码</h3><p>Repository 地址：<a href="http://hg.openjdk.java.net/jdk7u/jdk7u" target="_blank" rel="noopener">http://hg.openjdk.java.net/jdk7u/jdk7u</a></p>
+<p>获取过程如以下代码所示</p>
+<pre><code class="shell">hg clone http://hg.openjdk.java....</code></pre>
+            
+            <span class="read-more"><a href="/2019/03/11/Java/JVM/自己编译JDK/" title="查看全文" class="posttitle">查看全文</a> <b class="iconfont icon-arrow-right- gradient-text"></b></span>
+        </div>
+    </div>
+</div>
+
+
+<div class="post" id="post">
+    <div class="post-cover animated fadeIn" style="
+            background-image:
+            radial-gradient(ellipse closest-side, rgba(0, 0, 0, 0.65), #100e17),
+            url(/img/welcome-cover.jpg);">
+    </div>
+    <div class="else">
+        <p class="animated fadeInDown">
+            
+                <a href="/categories/Spring-Boot">
+                  <b>「 </b>SPRING-BOOT<b> 」</b>
+                </a>
+            
+            二月 02, 2019
+        </p>
+        <h3 class="post-title animated fadeInDown"><a href="/2019/02/02/Spring Boot/Spring-Boot-简化分页查询Page接口的JSON响应/" title="Spring Boot 简化分页查询Page接口的JSON响应" class="posttitle">Spring Boot 简化分页查询Page接口的JSON响应</a></h3>
+        
+            <p class="post-count animated fadeInDown">
+                
+                    <span>
+                        <b class="iconfont icon-text2"></b> <i>文章字数</i>
+                        7.3k
+                    </span>
+                
+                
+                    <span>
+                        <b class="iconfont icon-timer__s"></b> <i>阅读约需</i>
+                        7 mins.
+                    </span>
+                
+                
+                    <span id="/2019/02/02/Spring Boot/Spring-Boot-简化分页查询Page接口的JSON响应/" class="leancloud_visitors" data-flag-title="">
+                        <b class="iconfont icon-read"></b> <i>阅读次数</i>
+                        <span class="leancloud-visitors-count">-</span>
+                    </span>
+                
+            </p>
+            
+                <ul class="animated fadeInDown post-tags-list"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/Java/">Java</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/Spring-Boot/">Spring-Boot</a></li></ul>
+            
+        
+        <div class="md-content animated fadeIn">
+            
+                <h3 id="多余的分页信息"><a href="#多余的分页信息" class="headerlink" title="多余的分页信息"></a>多余的分页信息</h3><p>Spring Data 的 Page 接口进行数据分页返回了很多很多垃圾信息：</p>
+<pre><code class="JSON">{
+    &quot;status&quot;: 0,
+    &quot;data&quot;: {
+        &quot;content&quot;: [
+            {
+                &quot;goodsId&quot;: 1,
+                &quot;producerId&quot;: 1,
+                &quot;categoryId&quot;: 4,
+                &quot;name&quot;: &quot;耐克sb滑板鞋&quot;,
+                &quot;price&quot...</code></pre>
+            
+            <span class="read-more"><a href="/2019/02/02/Spring Boot/Spring-Boot-简化分页查询Page接口的JSON响应/" title="查看全文" class="posttitle">查看全文</a> <b class="iconfont icon-arrow-right- gradient-text"></b></span>
+        </div>
+    </div>
+</div>
+
+
 <div class="post" id="post">
     <div class="post-cover animated fadeIn" style="
             background-image:
@@ -635,113 +739,6 @@
 <p><strong>Communication...</strong></p>
             
             <span class="read-more"><a href="/2019/01/19/期末复习/Team-Collaboration-and-Career-Development/Team-Collaboration-and-Career-Development/" title="查看全文" class="posttitle">查看全文</a> <b class="iconfont icon-arrow-right- gradient-text"></b></span>
-        </div>
-    </div>
-</div>
-
-
-<div class="post" id="post">
-    <div class="post-cover animated fadeIn" style="
-            background-image:
-            radial-gradient(ellipse closest-side, rgba(0, 0, 0, 0.65), #100e17),
-            url(/img/welcome-cover.jpg);">
-    </div>
-    <div class="else">
-        <p class="animated fadeInDown">
-            
-                <a href="/categories/Linux">
-                  <b>「 </b>LINUX<b> 」</b>
-                </a>
-            
-            一月 13, 2019
-        </p>
-        <h3 class="post-title animated fadeInDown"><a href="/2019/01/13/Linux/CentOS/CentOS 7 Tomcat的安装及开机自启动配置/" title="CentOS 7 Tomcat开机自启动配置" class="posttitle">CentOS 7 Tomcat开机自启动配置</a></h3>
-        
-            <p class="post-count animated fadeInDown">
-                
-                    <span>
-                        <b class="iconfont icon-text2"></b> <i>文章字数</i>
-                        3.2k
-                    </span>
-                
-                
-                    <span>
-                        <b class="iconfont icon-timer__s"></b> <i>阅读约需</i>
-                        3 mins.
-                    </span>
-                
-                
-                    <span id="/2019/01/13/Linux/CentOS/CentOS 7 Tomcat的安装及开机自启动配置/" class="leancloud_visitors" data-flag-title="">
-                        <b class="iconfont icon-read"></b> <i>阅读次数</i>
-                        <span class="leancloud-visitors-count">-</span>
-                    </span>
-                
-            </p>
-            
-                <ul class="animated fadeInDown post-tags-list"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/CentOS/">CentOS</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/Linux/">Linux</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/Tomcat/">Tomcat</a></li></ul>
-            
-        
-        <div class="md-content animated fadeIn">
-            
-                <h3 id="Tomcat增加启动参数"><a href="#Tomcat增加启动参数" class="headerlink" title="Tomcat增加启动参数"></a>Tomcat增加启动参数</h3><p>Tomcat需要增加一个pid文件，在 <code>$CATALINA_HOME/bin</code> 目录下面，增加 <code>setenv.sh</code> 配置，<code>catalina.sh</code>启动的时候会调用，同时配置Java内存参数。添加如下命令：<br><code>[root@vps bin]# vim setenv.sh</code></p>
-<pre><code class="sh">#Tomcat startup pid
-
-#set Java runtime environment variable 
-export JAVA_HOME=/usr/java/jdk1.8.0_191-amd64
-export...</code></pre>
-            
-            <span class="read-more"><a href="/2019/01/13/Linux/CentOS/CentOS 7 Tomcat的安装及开机自启动配置/" title="查看全文" class="posttitle">查看全文</a> <b class="iconfont icon-arrow-right- gradient-text"></b></span>
-        </div>
-    </div>
-</div>
-
-
-<div class="post" id="post">
-    <div class="post-cover animated fadeIn" style="
-            background-image:
-            radial-gradient(ellipse closest-side, rgba(0, 0, 0, 0.65), #100e17),
-            url(/img/welcome-cover.jpg);">
-    </div>
-    <div class="else">
-        <p class="animated fadeInDown">
-            
-                <a href="/categories/Java">
-                  <b>「 </b>JAVA<b> 」</b>
-                </a>
-            
-            一月 04, 2019
-        </p>
-        <h3 class="post-title animated fadeInDown"><a href="/2019/01/04/Java/J2EE/J2EE基础知识/" title="J2EE基础知识" class="posttitle">J2EE基础知识</a></h3>
-        
-            <p class="post-count animated fadeInDown">
-                
-                    <span>
-                        <b class="iconfont icon-text2"></b> <i>文章字数</i>
-                        15k
-                    </span>
-                
-                
-                    <span>
-                        <b class="iconfont icon-timer__s"></b> <i>阅读约需</i>
-                        14 mins.
-                    </span>
-                
-                
-                    <span id="/2019/01/04/Java/J2EE/J2EE基础知识/" class="leancloud_visitors" data-flag-title="">
-                        <b class="iconfont icon-read"></b> <i>阅读次数</i>
-                        <span class="leancloud-visitors-count">-</span>
-                    </span>
-                
-            </p>
-            
-                <ul class="animated fadeInDown post-tags-list"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/J2EE/">J2EE</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/Java/">Java</a></li></ul>
-            
-        
-        <div class="md-content animated fadeIn">
-            
-                <p>在Java Web程序中，<strong>Servlet</strong>主要负责接收用户请求<strong>HttpServletRequest</strong>,在<strong>doGet()</strong>,<strong>doPost()中做相应的处理，并将回应HttpServletResponse</strong>反馈给用户。Servlet可以设置初始化参数，供Servlet内部使用。一个Servlet类只会有一个实例，在它初始化时调用<strong>init()方法</strong>，销毁时调用<strong>destroy()方法</strong>。<strong>Servlet需要在web.xml中配置</strong>（MyEclipse中创建Servlet会自动配置），<strong>一个Servlet可以设置多个URL...</strong></p>
-            
-            <span class="read-more"><a href="/2019/01/04/Java/J2EE/J2EE基础知识/" title="查看全文" class="posttitle">查看全文</a> <b class="iconfont icon-arrow-right- gradient-text"></b></span>
         </div>
     </div>
 </div>
