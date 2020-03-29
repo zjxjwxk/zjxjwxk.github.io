@@ -5,12 +5,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>PAT甲级 1061 Dating (20分) - Zjxjwxk&#39;s Blog</title>
+    <title>PAT甲级 1010 Radix (25分) - Zjxjwxk&#39;s Blog</title>
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="google" content="notranslate">
     <meta name="keywords" content="吴鑫康 zjxjwxk Wxk Java,"> 
-    <meta name="description" content="Sherlock Holmes received a note with some strange strings: Let&amp;#39;s date! 3485djDkxh4hhGE 2984akDf,"> 
+    <meta name="description" content="Given a pair of positive integers, for example, 6 and 110, can this equation 6 = 110 be true? The a,"> 
     <meta name="author" content="吴鑫康"> 
     <link rel="alternative" href="atom.xml" title="Zjxjwxk&#39;s Blog" type="application/atom+xml"> 
     <link rel="icon" href="/img/favicon.png"> 
@@ -43,7 +43,7 @@
     <div class="navigation animated fadeIn fast delay-1s">
         <img id="home-icon" class="icon-home" src="/img/favicon.png" alt="" data-url="https://zjxjwxk.com">
         <div id="play-icon" title="Play/Pause" class="iconfont icon-play"></div>
-        <h3 class="subtitle">PAT甲级 1061 Dating (20分)</h3>
+        <h3 class="subtitle">PAT甲级 1010 Radix (25分)</h3>
         <div class="social">
             <!--        <div class="like-icon">-->
             <!--            <a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
@@ -77,16 +77,16 @@
                 <a href="/categories/PAT"><b>「
                     </b>PAT<b> 」</b></a>
                 
-                三月 18, 2020
+                三月 29, 2020
             </p>
-            <h3 class="post-title animated fadeInDown"><a href="/2020/03/18/PAT/Advanced_Level/A1061/" title="PAT甲级 1061 Dating (20分)">PAT甲级 1061 Dating (20分)</a>
+            <h3 class="post-title animated fadeInDown"><a href="/2020/03/29/PAT/Advanced_Level/A1010/" title="PAT甲级 1010 Radix (25分)">PAT甲级 1010 Radix (25分)</a>
             </h3>
             
             <p class="post-count animated fadeInDown">
                 
                 <span>
                     <b class="iconfont icon-text2"></b> <i>文章字数</i>
-                    4.1k
+                    4.7k
                 </span>
                 
                 
@@ -96,7 +96,7 @@
                 </span>
                 
                 
-                <span id="/2020/03/18/PAT/Advanced_Level/A1061/" class="leancloud_visitors" data-flag-title="PAT甲级 1061 Dating (20分)">
+                <span id="/2020/03/29/PAT/Advanced_Level/A1010/" class="leancloud_visitors" data-flag-title="PAT甲级 1010 Radix (25分)">
                     <b class="iconfont icon-read"></b> <i>阅读次数</i>
                     <span class="leancloud-visitors-count">-</span>
                 </span>
@@ -126,56 +126,102 @@
 <div class="article">
     <div class="main">
         <div class="content markdown animated fadeIn">
-            <p>Sherlock Holmes received a note with some strange strings: <code>Let&#39;s date! 3485djDkxh4hhGE 2984akDfkkkkggEdsb s&amp;hgsfdk d&amp;Hyscvnm</code>. It took him only a minute to figure out that those strange strings are actually referring to the coded time <code>Thursday 14:04</code> – since the first common capital English letter (case sensitive) shared by the first two strings is the 4th capital letter <code>D</code>, representing the 4th day in a week; the second common character is the 5th capital letter <code>E</code>, representing the 14th hour (hence the hours from 0 to 23 in a day are represented by the numbers from 0 to 9 and the capital letters from <code>A</code> to <code>N</code>, respectively); and the English letter shared by the last two strings is <code>s</code> at the 4th position, representing the 4th minute. Now given two pairs of strings, you are supposed to help Sherlock decode the dating time.</p>
-<h1 id="Input-Specification"><a href="#Input-Specification" class="headerlink" title="Input Specification:"></a>Input Specification:</h1><p>Each input file contains one test case. Each case gives 4 non-empty strings of no more than 60 characters without white space in 4 lines.</p>
-<h1 id="Output-Specification"><a href="#Output-Specification" class="headerlink" title="Output Specification:"></a>Output Specification:</h1><p>For each test case, print the decoded time in one line, in the format <code>DAY HH:MM</code>, where <code>DAY</code> is a 3-character abbreviation for the days in a week – that is, <code>MON</code> for Monday, <code>TUE</code> for Tuesday, <code>WED</code> for Wednesday, <code>THU</code> for Thursday, <code>FRI</code> for Friday, <code>SAT</code> for Saturday, and <code>SUN</code> for Sunday. It is guaranteed that the result is unique for each case.</p>
-<h1 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input:"></a>Sample Input:</h1><pre><code class="in">3485djDkxh4hhGE 
-2984akDfkkkkggEdsb 
-s&amp;hgsfdk 
-d&amp;Hyscvnm
+            <p>Given a pair of positive integers, for example, 6 and 110, can this equation 6 = 110 be true? The answer is <code>yes</code>, if 6 is a decimal number and 110 is a binary number.</p>
+<p>Now for any pair of positive integers <em>N</em>1 and <em>N</em>2, your task is to find the radix of one number while that of the other is given.</p>
+<h1 id="Input-Specification"><a href="#Input-Specification" class="headerlink" title="Input Specification:"></a>Input Specification:</h1><p>Each input file contains one test case. Each case occupies a line which contains 4 positive integers:</p>
+<pre><code>N1 N2 tag radix
+</code></pre><p>Here <code>N1</code> and <code>N2</code> each has no more than 10 digits. A digit is less than its radix and is chosen from the set { 0-9, <code>a</code>-<code>z</code> } where 0-9 represent the decimal numbers 0-9, and <code>a</code>-<code>z</code> represent the decimal numbers 10-35. The last number <code>radix</code> is the radix of <code>N1</code> if <code>tag</code> is 1, or of <code>N2</code> if <code>tag</code> is 2.</p>
+<h1 id="Output-Specification"><a href="#Output-Specification" class="headerlink" title="Output Specification:"></a>Output Specification:</h1><p>For each test case, print in one line the radix of the other number so that the equation <code>N1</code> = <code>N2</code> is true. If the equation is impossible, print <code>Impossible</code>. If the solution is not unique, output the smallest possible radix.</p>
+<h1 id="Sample-Input-1"><a href="#Sample-Input-1" class="headerlink" title="Sample Input 1:"></a>Sample Input 1:</h1><pre><code class="in">6 110 1 10
 </code></pre>
-<h1 id="Sample-Output"><a href="#Sample-Output" class="headerlink" title="Sample Output:"></a>Sample Output:</h1><pre><code class="out">THU 14:04
+<h1 id="Sample-Output-1"><a href="#Sample-Output-1" class="headerlink" title="Sample Output 1:"></a>Sample Output 1:</h1><pre><code class="out">2
 </code></pre>
-<h1 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h1><ul>
-<li>三对相同的字符都需要在对应相同的位置上（在各自的字符串中所在的位置相同），这一点题目没有说清楚（我刚开始以为可以在不同位置</li>
-<li>第 2 对相同的字符，其实是在第一对字符位置之后的下一对满足条件的字符，而不是从头扫描碰到的第 2 对，这一点题目也没有说清楚</li>
-<li>前两对字符需要限定到具体范围，如 A～G 与 A～N，而不是 A～Z，否则会“答案错误”</li>
-<li>总之，这题很模糊，能做对靠猜</li>
+<h1 id="Sample-Input-2"><a href="#Sample-Input-2" class="headerlink" title="Sample Input 2:"></a>Sample Input 2:</h1><pre><code class="in">1 ab 1 2
+</code></pre>
+<h1 id="Sample-Output-2"><a href="#Sample-Output-2" class="headerlink" title="Sample Output 2:"></a>Sample Output 2:</h1><pre><code class="out">Impossible
+</code></pre>
+<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><ul>
+<li>二分：对一个确定的数字串来说，它的进制越大，该数字串转换为十进制的结果也就越大。</li>
+</ul>
+<h2 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h2><ul>
+<li>使用遍历进制的暴力法会超时，因使用二分法。</li>
+<li>本题的变量尽量使用 long long 类型。另外，经测试得到，本题中 radix 的范围最大为 INT_MAX ，即$2^{31}-1$，因此必须在在计算过程中判断是否溢出。</li>
+<li>N2 进制的<strong>下界</strong>为所有数位中最大的那个+1，<strong>上界</strong>为 N1 的十进制（num1）与下界（lower）的较大值+1（即 max(num1, lower) + 1）。</li>
 </ul>
 <pre><code class="C++">#include &lt;cstdio&gt;
 #include &lt;cstring&gt;
+#include &lt;algorithm&gt;
+using namespace std;
 
-const int maxn = 61;
+char n1[11], n2[11], temp[11];
+int tag;
+long long radix, num1, inf = (1LL &lt;&lt; 63) - 1;
+
+long long strToNum(char str[], long long radix, long long upper) {
+    int len = strlen(str);
+    long long num = 0;
+    for (int i = 0; i &lt; len; i++) {
+        long long digit;
+        if (str[i] &gt;= &#39;a&#39; &amp;&amp; str[i] &lt;= &#39;z&#39;) {
+            digit = str[i] - &#39;a&#39; + 10;
+        } else {
+            digit = str[i] - &#39;0&#39;;
+        }
+        num = num * radix + digit;
+        if (num &lt; 0 || num &gt; upper) {
+            return -1;
+        }
+    }
+    return num;
+}
+
+long long findLower(char str[]) {
+    long long maxDigit = -1;
+    int len = strlen(str);
+    for (int i = 0; i &lt; len; i++) {
+        long long digit;
+        if (str[i] &gt;= &#39;a&#39; &amp;&amp; str[i] &lt;= &#39;z&#39;) {
+            digit = str[i] - &#39;a&#39; + 10;
+        } else {
+            digit = str[i] - &#39;0&#39;;
+        }
+        if (digit &gt; maxDigit) {
+            maxDigit = digit;
+        }
+    }
+    return maxDigit + 1;
+}
+
+int binarySearch(long long left, long long right, char str[], long long upper) {
+    long long mid, num2;
+    while (left &lt;= right) {
+        mid = left + (right - left) / 2;
+        long long num2 = strToNum(n2, mid, upper);
+        if (num2 == num1) {
+            return mid;
+        } else if (num2 &gt; num1 || num2 == -1) {
+            right = mid - 1;
+        } else {
+            left = mid + 1;
+        }
+    }
+    return -1;
+}
 
 int main() {
-    char str[4][maxn];
-    char week[7][4] = {&quot;MON&quot;, &quot;TUE&quot;, &quot;WED&quot;, &quot;THU&quot;, &quot;FRI&quot;, &quot;SAT&quot;, &quot;SUN&quot;};
-    for (int i = 0; i &lt; 4; i++) {
-        scanf(&quot;%s&quot;, str[i]);
+    scanf(&quot;%s %s %d %d&quot;, n1, n2, &amp;tag, &amp;radix);
+    if (tag == 2) {
+        strcpy(temp, n1);
+        strcpy(n1, n2);
+        strcpy(n2, temp);
     }
-    int i, j, len1 = strlen(str[0]), len2 = strlen(str[1]), len3 = strlen(str[2]), len4 = strlen(str[3]);
-    for (i = 0; i &lt; len1 &amp;&amp; i &lt; len2; i++) {
-        if (str[0][i] == str[1][i] &amp;&amp; str[0][i] &gt;= &#39;A&#39; &amp;&amp; str[0][i] &lt;= &#39;G&#39;) {
-            printf(&quot;%s &quot;, week[str[0][i] - &#39;A&#39;]);
-            break;
-        }
-    }
-    for (i++; i &lt; len1 &amp;&amp; i &lt; len2; i++) {
-        if (str[0][i] == str[1][i]) {
-            if (str[0][i] &gt;= &#39;0&#39; &amp;&amp; str[0][i] &lt;= &#39;9&#39;) {
-                printf(&quot;%02d:&quot;, str[0][i] - &#39;0&#39;);
-                break;
-            } else if (str[0][i] &gt;= &#39;A&#39; &amp;&amp; str[0][i] &lt;= &#39;N&#39;) {
-                printf(&quot;%02d:&quot;, str[0][i] - &#39;A&#39; + 10);
-                break;
-            }
-        }
-    }
-    for (int i = 0; i &lt; len3 &amp;&amp; i &lt; len4; i++) {
-        if (str[2][i] == str[3][i] &amp;&amp; (str[2][i] &gt;= &#39;a&#39; &amp;&amp; str[2][i] &lt;= &#39;z&#39; || str[2][i] &gt;= &#39;A&#39; &amp;&amp; str[2][i] &lt;= &#39;Z&#39;)) {
-            printf(&quot;%02d&quot;, i);
-            break;
-        }
+    long long lower = findLower(n2);
+    num1 = strToNum(n1, radix, inf);
+    long long radix2 = binarySearch(lower, max(num1, lower) + 1, n2, num1);
+    if (radix2 == -1) {
+        printf(&quot;Impossible&quot;);
+    } else {
+        printf(&quot;%d&quot;, radix2);
     }
     return 0;
 }
@@ -223,7 +269,7 @@ int main() {
             <div class="box sticky animated fadeInRight faster">
                 <div id="toc" class="subbox">
                     <h4>目录</h4>
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Input-Specification"><span class="toc-number">1.</span> <span class="toc-text">Input Specification:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Output-Specification"><span class="toc-number">2.</span> <span class="toc-text">Output Specification:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Sample-Input"><span class="toc-number">3.</span> <span class="toc-text">Sample Input:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Sample-Output"><span class="toc-number">4.</span> <span class="toc-text">Sample Output:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#注意点"><span class="toc-number">5.</span> <span class="toc-text">注意点</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Input-Specification"><span class="toc-number">1.</span> <span class="toc-text">Input Specification:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Output-Specification"><span class="toc-number">2.</span> <span class="toc-text">Output Specification:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Sample-Input-1"><span class="toc-number">3.</span> <span class="toc-text">Sample Input 1:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Sample-Output-1"><span class="toc-number">4.</span> <span class="toc-text">Sample Output 1:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Sample-Input-2"><span class="toc-number">5.</span> <span class="toc-text">Sample Input 2:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Sample-Output-2"><span class="toc-number">6.</span> <span class="toc-text">Sample Output 2:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#思路"><span class="toc-number">7.</span> <span class="toc-text">思路</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#注意点"><span class="toc-number">7.1.</span> <span class="toc-text">注意点</span></a></li></ol></li></ol>
                 </div>
             </div>
             

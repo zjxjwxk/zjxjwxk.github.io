@@ -144,11 +144,11 @@ Eureka Server 注册中心
 </ul>
 </li>
 </ul>
-<h2 id="启动-Eureka-Server"><a href="#启动-Eureka-Server" class="headerlink" title="启动 Eureka Server"></a>启动 Eureka Server</h2><h3 id="1-创建Spring项目"><a href="#1-创建Spring项目" class="headerlink" title="1. 创建Spring项目"></a>1. 创建Spring项目</h3><p><img src="/2019/01/31/Spring Cloud/服务注册与发现/Spring-Cloud-Eureka/image-20190131155138441.png" alt="创建Spring项目"></p>
-<h1 id="2-填充项目信息"><a href="#2-填充项目信息" class="headerlink" title="2. 填充项目信息"></a>2. 填充项目信息</h1><p><img src="/2019/01/31/Spring Cloud/服务注册与发现/Spring-Cloud-Eureka/image-20190131155241197.png" alt="填充项目信息"></p>
-<h3 id="3-选择项目类型为-Cloud-Discovery-中的-Eureka-Server"><a href="#3-选择项目类型为-Cloud-Discovery-中的-Eureka-Server" class="headerlink" title="3. 选择项目类型为 Cloud Discovery 中的 Eureka Server"></a>3. 选择项目类型为 Cloud Discovery 中的 Eureka Server</h3><p><img src="/2019/01/31/Spring Cloud/服务注册与发现/Spring-Cloud-Eureka/image-20190131155453826.png" alt="选择Eureka Server"></p>
-<h3 id="4-完成创建"><a href="#4-完成创建" class="headerlink" title="4. 完成创建"></a>4. 完成创建</h3><p><img src="/2019/01/31/Spring Cloud/服务注册与发现/Spring-Cloud-Eureka/image-20190131160337079.png" alt="完成创建"></p>
-<h3 id="5-添加注解-EnableEurekaServer"><a href="#5-添加注解-EnableEurekaServer" class="headerlink" title="5. 添加注解 @EnableEurekaServer"></a>5. 添加注解 @EnableEurekaServer</h3><pre><code class="Java">@SpringBootApplication
+<h1 id="启动-Eureka-Server"><a href="#启动-Eureka-Server" class="headerlink" title="启动 Eureka Server"></a>启动 Eureka Server</h1><h2 id="1-创建Spring项目"><a href="#1-创建Spring项目" class="headerlink" title="1. 创建Spring项目"></a>1. 创建Spring项目</h2><p><img src="/2019/01/31/Spring Cloud/服务注册与发现/Spring-Cloud-Eureka/image-20190131155138441.png" alt="创建Spring项目"></p>
+<h2 id="2-填充项目信息"><a href="#2-填充项目信息" class="headerlink" title="2. 填充项目信息"></a>2. 填充项目信息</h2><p><img src="/2019/01/31/Spring Cloud/服务注册与发现/Spring-Cloud-Eureka/image-20190131155241197.png" alt="填充项目信息"></p>
+<h2 id="3-选择项目类型为-Cloud-Discovery-中的-Eureka-Server"><a href="#3-选择项目类型为-Cloud-Discovery-中的-Eureka-Server" class="headerlink" title="3. 选择项目类型为 Cloud Discovery 中的 Eureka Server"></a>3. 选择项目类型为 Cloud Discovery 中的 Eureka Server</h2><p><img src="/2019/01/31/Spring Cloud/服务注册与发现/Spring-Cloud-Eureka/image-20190131155453826.png" alt="选择Eureka Server"></p>
+<h2 id="4-完成创建"><a href="#4-完成创建" class="headerlink" title="4. 完成创建"></a>4. 完成创建</h2><p><img src="/2019/01/31/Spring Cloud/服务注册与发现/Spring-Cloud-Eureka/image-20190131160337079.png" alt="完成创建"></p>
+<h2 id="5-添加注解-EnableEurekaServer"><a href="#5-添加注解-EnableEurekaServer" class="headerlink" title="5. 添加注解 @EnableEurekaServer"></a>5. 添加注解 @EnableEurekaServer</h2><pre><code class="Java">@SpringBootApplication
 @EnableEurekaServer
 public class EurekaApplication {
 
@@ -158,7 +158,7 @@ public class EurekaApplication {
 
 }
 </code></pre>
-<h3 id="6-配置-application-yml"><a href="#6-配置-application-yml" class="headerlink" title="6. 配置 application.yml"></a>6. 配置 application.yml</h3><pre><code class="yml">eureka:
+<h2 id="6-配置-application-yml"><a href="#6-配置-application-yml" class="headerlink" title="6. 配置 application.yml"></a>6. 配置 application.yml</h2><pre><code class="yml">eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka/
@@ -169,7 +169,7 @@ spring:
 server:
   port: 8761
 </code></pre>
-<h3 id="7-启动-Eureka-Server"><a href="#7-启动-Eureka-Server" class="headerlink" title="7. 启动 Eureka Server"></a>7. 启动 Eureka Server</h3><p><img src="/2019/01/31/Spring Cloud/服务注册与发现/Spring-Cloud-Eureka/image-20190131172458551.png" alt="Eureka Server信息"></p>
+<h2 id="7-启动-Eureka-Server"><a href="#7-启动-Eureka-Server" class="headerlink" title="7. 启动 Eureka Server"></a>7. 启动 Eureka Server</h2><p><img src="/2019/01/31/Spring Cloud/服务注册与发现/Spring-Cloud-Eureka/image-20190131172458551.png" alt="Eureka Server信息"></p>
 <p>这样，一个简单的Eureka Server就启动完成了。</p>
 
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
@@ -203,8 +203,8 @@ server:
                     </dl>
                 </div>
                 <ul>
-                    <li><a href="/">33 <p>文章</p></a></li>
-                    <li><a href="/categories">13 <p>分类</p></a></li>
+                    <li><a href="/">35 <p>文章</p></a></li>
+                    <li><a href="/categories">14 <p>分类</p></a></li>
                     <li><a href="/tags">13 <p>标签</p></a></li>
                 </ul>
             </div>
@@ -214,7 +214,7 @@ server:
             <div class="box sticky animated fadeInRight faster">
                 <div id="toc" class="subbox">
                     <h4>目录</h4>
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Spring-Cloud-Eureka"><span class="toc-number">1.</span> <span class="toc-text">Spring Cloud Eureka</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#启动-Eureka-Server"><span class="toc-number">1.1.</span> <span class="toc-text">启动 Eureka Server</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-创建Spring项目"><span class="toc-number">1.1.1.</span> <span class="toc-text">1. 创建Spring项目</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-填充项目信息"><span class="toc-number">2.</span> <span class="toc-text">2. 填充项目信息</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-选择项目类型为-Cloud-Discovery-中的-Eureka-Server"><span class="toc-number">2.0.1.</span> <span class="toc-text">3. 选择项目类型为 Cloud Discovery 中的 Eureka Server</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-完成创建"><span class="toc-number">2.0.2.</span> <span class="toc-text">4. 完成创建</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-添加注解-EnableEurekaServer"><span class="toc-number">2.0.3.</span> <span class="toc-text">5. 添加注解 @EnableEurekaServer</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-配置-application-yml"><span class="toc-number">2.0.4.</span> <span class="toc-text">6. 配置 application.yml</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-启动-Eureka-Server"><span class="toc-number">2.0.5.</span> <span class="toc-text">7. 启动 Eureka Server</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Spring-Cloud-Eureka"><span class="toc-number">1.</span> <span class="toc-text">Spring Cloud Eureka</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#启动-Eureka-Server"><span class="toc-number">2.</span> <span class="toc-text">启动 Eureka Server</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-创建Spring项目"><span class="toc-number">2.1.</span> <span class="toc-text">1. 创建Spring项目</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-填充项目信息"><span class="toc-number">2.2.</span> <span class="toc-text">2. 填充项目信息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-选择项目类型为-Cloud-Discovery-中的-Eureka-Server"><span class="toc-number">2.3.</span> <span class="toc-text">3. 选择项目类型为 Cloud Discovery 中的 Eureka Server</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-完成创建"><span class="toc-number">2.4.</span> <span class="toc-text">4. 完成创建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-添加注解-EnableEurekaServer"><span class="toc-number">2.5.</span> <span class="toc-text">5. 添加注解 @EnableEurekaServer</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-配置-application-yml"><span class="toc-number">2.6.</span> <span class="toc-text">6. 配置 application.yml</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-启动-Eureka-Server"><span class="toc-number">2.7.</span> <span class="toc-text">7. 启动 Eureka Server</span></a></li></ol></li></ol>
                 </div>
             </div>
             
