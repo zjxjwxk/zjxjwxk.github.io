@@ -5,15 +5,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Spring Boot 简化分页查询Page接口的JSON响应 - Zjxjwxk&#39;s Blog</title>
+    <title>PAT乙级 1003 我要通过！ (20分) - Zjxjwxk&#39;s Blog</title>
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="google" content="notranslate">
     <meta name="keywords" content="吴鑫康 zjxjwxk Wxk Java,"> 
-    <meta name="description" content="多余的分页信息Spring Data 的 Page 接口进行数据分页返回了很多很多垃圾信息：
-{
-    &amp;quot;status&amp;quot;: 0,
-    &amp;quot;data&amp;quot;: {,"> 
+    <meta name="description" content="“答案正确”是自动判题系统给出的最令人欢喜的回复。本题属于 PAT 的“答案正确”大派送 —— 只要读入的字符串满足下列条件，系统就输出“答案正确”，否则输出“答案错误”。
+得到“答案正确”的条件是,"> 
     <meta name="author" content="吴鑫康"> 
     <link rel="alternative" href="atom.xml" title="Zjxjwxk&#39;s Blog" type="application/atom+xml"> 
     <link rel="icon" href="/img/favicon.png"> 
@@ -46,7 +44,7 @@
     <div class="navigation animated fadeIn fast delay-1s">
         <img id="home-icon" class="icon-home" src="/img/favicon.png" alt="" data-url="https://zjxjwxk.com">
         <div id="play-icon" title="Play/Pause" class="iconfont icon-play"></div>
-        <h3 class="subtitle">Spring Boot 简化分页查询Page接口的JSON响应</h3>
+        <h3 class="subtitle">PAT乙级 1003 我要通过！ (20分)</h3>
         <div class="social">
             <!--        <div class="like-icon">-->
             <!--            <a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
@@ -77,29 +75,29 @@
         <div class="else">
             <p class="animated fadeInDown">
                 
-                <a href="/categories/Spring-Boot"><b>「
-                    </b>SPRING-BOOT<b> 」</b></a>
+                <a href="/categories/PAT"><b>「
+                    </b>PAT<b> 」</b></a>
                 
-                二月 02, 2019
+                三月 30, 2020
             </p>
-            <h3 class="post-title animated fadeInDown"><a href="/2019/02/02/Spring Boot/Spring-Boot-简化分页查询Page接口的JSON响应/" title="Spring Boot 简化分页查询Page接口的JSON响应">Spring Boot 简化分页查询Page接口的JSON响应</a>
+            <h3 class="post-title animated fadeInDown"><a href="/2020/03/30/PAT/Basic_Level/1003/" title="PAT乙级 1003 我要通过！ (20分)">PAT乙级 1003 我要通过！ (20分)</a>
             </h3>
             
             <p class="post-count animated fadeInDown">
                 
                 <span>
                     <b class="iconfont icon-text2"></b> <i>文章字数</i>
-                    7.3k
+                    2.6k
                 </span>
                 
                 
                 <span>
                     <b class="iconfont icon-timer__s"></b> <i>阅读约需</i>
-                    7 mins.
+                    2 mins.
                 </span>
                 
                 
-                <span id="/2019/02/02/Spring Boot/Spring-Boot-简化分页查询Page接口的JSON响应/" class="leancloud_visitors" data-flag-title="Spring Boot 简化分页查询Page接口的JSON响应">
+                <span id="/2020/03/30/PAT/Basic_Level/1003/" class="leancloud_visitors" data-flag-title="PAT乙级 1003 我要通过！ (20分)">
                     <b class="iconfont icon-read"></b> <i>阅读次数</i>
                     <span class="leancloud-visitors-count">-</span>
                 </span>
@@ -108,7 +106,7 @@
             </p>
             
             
-            <ul class="animated fadeInDown post-tags-list"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/Java/">Java</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/Spring-Boot/">Spring-Boot</a></li></ul>
+            <ul class="animated fadeInDown post-tags-list"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/PAT/">PAT</a></li></ul>
             
         </div>
     </div>
@@ -129,198 +127,74 @@
 <div class="article">
     <div class="main">
         <div class="content markdown animated fadeIn">
-            <h3 id="多余的分页信息"><a href="#多余的分页信息" class="headerlink" title="多余的分页信息"></a>多余的分页信息</h3><p>Spring Data 的 Page 接口进行数据分页返回了很多很多垃圾信息：</p>
-<pre><code class="JSON">{
-    &quot;status&quot;: 0,
-    &quot;data&quot;: {
-        &quot;content&quot;: [
-            {
-                &quot;goodsId&quot;: 1,
-                &quot;producerId&quot;: 1,
-                &quot;categoryId&quot;: 4,
-                &quot;name&quot;: &quot;耐克sb滑板鞋&quot;,
-                &quot;price&quot;: 500,
-                &quot;stock&quot;: 500,
-                &quot;status&quot;: &quot;正常&quot;,
-                &quot;createTime&quot;: &quot;2019-02-02T03:48:33.000+0000&quot;,
-                &quot;updateTime&quot;: null
-            },
-            {
-                &quot;goodsId&quot;: 2,
-                &quot;producerId&quot;: 1,
-                &quot;categoryId&quot;: 4,
-                &quot;name&quot;: &quot;阿迪达斯小白鞋&quot;,
-                &quot;price&quot;: 500,
-                &quot;stock&quot;: 300,
-                &quot;status&quot;: &quot;正常&quot;,
-                &quot;createTime&quot;: &quot;2019-02-02T03:48:59.000+0000&quot;,
-                &quot;updateTime&quot;: null
+            <p>“<strong>答案正确</strong>”是自动判题系统给出的最令人欢喜的回复。本题属于 PAT 的“<strong>答案正确</strong>”大派送 —— 只要读入的字符串满足下列条件，系统就输出“<strong>答案正确</strong>”，否则输出“<strong>答案错误</strong>”。</p>
+<p>得到“<strong>答案正确</strong>”的条件是：</p>
+<ol>
+<li>字符串中必须仅有 <code>P</code>、 <code>A</code>、 <code>T</code>这三种字符，不可以包含其它字符；</li>
+<li>任意形如 <code>xPATx</code> 的字符串都可以获得“<strong>答案正确</strong>”，其中 <code>x</code> 或者是空字符串，或者是仅由字母 <code>A</code> 组成的字符串；</li>
+<li>如果 <code>aPbTc</code> 是正确的，那么 <code>aPbATca</code> 也是正确的，其中 <code>a</code>、 <code>b</code>、 <code>c</code> 均或者是空字符串，或者是仅由字母 <code>A</code> 组成的字符串。</li>
+</ol>
+<p>现在就请你为 PAT 写一个自动裁判程序，判定哪些字符串是可以获得“<strong>答案正确</strong>”的。</p>
+<h1 id="输入格式："><a href="#输入格式：" class="headerlink" title="输入格式："></a>输入格式：</h1><p>每个测试输入包含 1 个测试用例。第 1 行给出一个正整数 <em>n</em> (&lt;10)，是需要检测的字符串个数。接下来每个字符串占一行，字符串长度不超过 100，且不包含空格。</p>
+<h1 id="输出格式："><a href="#输出格式：" class="headerlink" title="输出格式："></a>输出格式：</h1><p>每个字符串的检测结果占一行，如果该字符串可以获得“<strong>答案正确</strong>”，则输出 <code>YES</code>，否则输出 <code>NO</code>。</p>
+<h1 id="输入样例："><a href="#输入样例：" class="headerlink" title="输入样例："></a>输入样例：</h1><pre><code class="in">8
+PAT
+PAAT
+AAPATAA
+AAPAATAAAA
+xPATx
+PT
+Whatever
+APAAATAA
+</code></pre>
+<h1 id="输出样例："><a href="#输出样例：" class="headerlink" title="输出样例："></a>输出样例：</h1><pre><code class="out">YES
+YES
+YES
+YES
+NO
+NO
+NO
+NO
+</code></pre>
+<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><ul>
+<li>可以找到这样的规律：正确的字符串应该遵循 P 左侧的 A 个数乘 P 与 T 中间的 A 个数等于 T 右侧的 A 个数。且 P 和 T 的个数必须为1，中间 A 的个数不能为 0，除了 P，A，T 的其他的字符个数必须为 0。</li>
+</ul>
+<pre><code class="C++">#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+
+const int maxn = 101;
+
+int main() {
+    int n, len;
+    scanf(&quot;%d&quot;, &amp;n);
+    char str[maxn];
+    for (int i = 0; i &lt; n; i++) {
+        scanf(&quot;%s&quot;, str);
+        len = strlen(str);
+        int PNum = 0, TNum = 0, otherNum = 0, PIndex, TIndex;
+        for (int j = 0; j &lt; len; j++) {
+            if (str[j] == &#39;P&#39;) {
+                PNum++;
+                PIndex = j;
+            } else if (str[j] == &#39;T&#39;) {
+                TNum++;
+                TIndex = j;
+            } else if (str[j] != &#39;A&#39;) {
+                otherNum++;
             }
-        ],
-        &quot;pageable&quot;: {
-            &quot;sort&quot;: {
-                &quot;sorted&quot;: false,
-                &quot;unsorted&quot;: true,
-                &quot;empty&quot;: true
-            },
-            &quot;offset&quot;: 0,
-            &quot;pageSize&quot;: 10,
-            &quot;pageNumber&quot;: 0,
-            &quot;paged&quot;: true,
-            &quot;unpaged&quot;: false
-        },
-        &quot;last&quot;: true,
-        &quot;totalPages&quot;: 1,
-        &quot;totalElements&quot;: 2,
-        &quot;size&quot;: 10,
-        &quot;number&quot;: 0,
-        &quot;numberOfElements&quot;: 2,
-        &quot;sort&quot;: {
-            &quot;sorted&quot;: false,
-            &quot;unsorted&quot;: true,
-            &quot;empty&quot;: true
-        },
-        &quot;first&quot;: true,
-        &quot;empty&quot;: false
-    }
-}
-</code></pre>
-<h3 id="实际需要的分页信息"><a href="#实际需要的分页信息" class="headerlink" title="实际需要的分页信息"></a>实际需要的分页信息</h3><p>实际上我只需要下面这些分页信息：</p>
-<pre><code class="JSON">&quot;totalPages&quot;: 3,
-&quot;totalElements&quot;: 20,
-&quot;pageNumber&quot;: 2,
-&quot;numberOfElements&quot;: 7
-</code></pre>
-<h3 id="创建-PageChunk-类进行封装"><a href="#创建-PageChunk-类进行封装" class="headerlink" title="创建 PageChunk 类进行封装"></a>创建 PageChunk 类进行封装</h3><p>我的 GoodsRepository 接口为：</p>
-<pre><code class="Java">Page&lt;Goods&gt; findByCategoryId(Integer categoryId, Pageable pageable);
-</code></pre>
-<p>我们看到返回了很多多余的，重复的数据。为了解决这个问题，创建一个Pagination DTO(<code>PageChunk</code>)来包装一下分页数据。这个类的作用很简单就是包含每一次分页的内容和分页元数据（<strong>总页数</strong>，<strong>搜索结果总数</strong>，<strong>当前页号</strong>， <strong>当前页包含多少项</strong>）。</p>
-<pre><code class="Java">import lombok.Data;
-
-import java.util.List;
-
-/**
- * @author zjxjwxk
- */
-@Data
-public class PageChunk&lt;T&gt; {
-
-    private List&lt;T&gt; content;
-    private int totalPages;
-    private long totalElements;
-    private int pageNumber;
-    private int numberOfElements;
-}
-
-</code></pre>
-<p>同时，我根据业务需求对商品信息进行了DTO的包装，（只需要商品id，名称和价格即可）。</p>
-<pre><code class="Java">import lombok.Data;
-
-/**
- * @author zjxjwxk
- */
-@Data
-public class GoodsDTO {
-
-    private Integer goodsId;
-    private String name;
-    private Integer price;
-
-}
-</code></pre>
-<h3 id="用-PageChunk-替代-Page"><a href="#用-PageChunk-替代-Page" class="headerlink" title="用 PageChunk 替代 Page"></a>用 PageChunk 替代 Page</h3><p>编写以下 getPageChunk 方法用于将 Page<goods> 对象转化为 PageChunk<goodsdto> 对象，仅仅提取 Page 对象中所需要的Content 和一些分页信息，将 PageChunk 对象封装并返回。编写 getGoodsDTO 方法用于简化商品信息。</goodsdto></goods></p>
-<pre><code class="Java">@Service(&quot;GoodsService&quot;)
-public class GoodsServiceImpl implements GoodsService {
-
-    private final GoodsRepository goodsRepository;
-
-    @Autowired
-    public GoodsServiceImpl(GoodsRepository goodsRepository) {
-        this.goodsRepository = goodsRepository;
-    }
-
-    @Override
-    public ServerResponse getList(String keyword, Integer categoryId,
-                                               Integer pageNum, Integer pageSize,
-                                               String orderBy) {
-        PageRequest pageRequest = PageRequest.of(pageNum - 1, pageSize);
-        Page&lt;Goods&gt; goodsPage = goodsRepository.findByCategoryId(categoryId, pageRequest);
-        return ServerResponse.createBySuccess(getPageChunk(goodsPage));
-    }
-
-    private PageChunk&lt;GoodsDTO&gt; getPageChunk(Page&lt;Goods&gt; goodsPage) {
-        PageChunk&lt;GoodsDTO&gt; pageChunk = new PageChunk&lt;&gt;();
-        pageChunk.setContent(getGoodsDTO(goodsPage.getContent()));
-        pageChunk.setTotalPages(goodsPage.getTotalPages());
-        pageChunk.setTotalElements(goodsPage.getTotalElements());
-        pageChunk.setPageNumber(goodsPage.getPageable().getPageNumber() + 1);
-        pageChunk.setNumberOfElements(goodsPage.getNumberOfElements());
-        return pageChunk;
-    }
-
-    private List&lt;GoodsDTO&gt; getGoodsDTO(List&lt;Goods&gt; goodsList) {
-        List&lt;GoodsDTO&gt; goodsDTOList = new ArrayList&lt;&gt;();
-        for (Goods goods :
-                goodsList) {
-            GoodsDTO goodsDTO = new GoodsDTO();
-            goodsDTO.setGoodsId(goods.getGoodsId());
-            goodsDTO.setName(goods.getName());
-            goodsDTO.setPrice(goods.getPrice());
-
-            goodsDTOList.add(goodsDTO);
         }
-        return goodsDTOList;
+        if (PNum != 1 || TNum != 1 || otherNum != 0 || (TIndex - PIndex) &lt;= 1) {
+            printf(&quot;NO\n&quot;);
+            continue;
+        }
+        int leftA = PIndex, midA = TIndex - PIndex - 1, rightA = len - TIndex - 1;
+        if (leftA * midA == rightA) {
+            printf(&quot;YES\n&quot;);
+        } else {
+            printf(&quot;NO\n&quot;);
+        }
     }
-}
-</code></pre>
-<blockquote>
-<p>为了返回 JSON 数据，我自定义了一个 ServerResponse 服务响应对象，它的作用是让我们返回的 JSON 有一个通用的格式</p>
-</blockquote>
-<h3 id="简化后的结果"><a href="#简化后的结果" class="headerlink" title="简化后的结果"></a>简化后的结果</h3><pre><code class="JSON">{
-    &quot;status&quot;: 0,
-    &quot;data&quot;: {
-        &quot;content&quot;: [
-            {
-                &quot;goodsId&quot;: 8,
-                &quot;name&quot;: &quot;Clarks 男 Tri Spark生活休闲鞋26135668&quot;,
-                &quot;price&quot;: 459
-            },
-            {
-                &quot;goodsId&quot;: 9,
-                &quot;name&quot;: &quot;Adidas三叶草 男 休闲跑步鞋 STAN SMITH M20324&quot;,
-                &quot;price&quot;: 415
-            },
-            {
-                &quot;goodsId&quot;: 10,
-                &quot;name&quot;: &quot;Skechers 斯凯奇 SKECHERS SPORT系列 男 绑带运动鞋 999732-NVOR&quot;,
-                &quot;price&quot;: 355
-            },
-            {
-                &quot;goodsId&quot;: 11,
-                &quot;name&quot;: &quot;Saucony 圣康尼 RSP 男 休闲跑步鞋 KINETA RELAY S2524465&quot;,
-                &quot;price&quot;: 479
-            },
-            {
-                &quot;goodsId&quot;: 12,
-                &quot;name&quot;: &quot;Mustang 男 帆布鞋休闲运动 4058-305（亚马逊进口直采,德国品牌）&quot;,
-                &quot;price&quot;: 324
-            },
-            {
-                &quot;goodsId&quot;: 13,
-                &quot;name&quot;: &quot;Clarks 男 Tri Spark生活休闲鞋26135655&quot;,
-                &quot;price&quot;: 123425
-            },
-            {
-                &quot;goodsId&quot;: 14,
-                &quot;name&quot;: &quot;New Balance 574系列 男 休闲跑步鞋 ML574EG-D&quot;,
-                &quot;price&quot;: 324
-            }
-        ],
-        &quot;totalPages&quot;: 3,
-        &quot;totalElements&quot;: 20,
-        &quot;pageNumber&quot;: 2,
-        &quot;numberOfElements&quot;: 7
-    }
+    return 0;
 }
 </code></pre>
 
@@ -366,7 +240,7 @@ public class GoodsServiceImpl implements GoodsService {
             <div class="box sticky animated fadeInRight faster">
                 <div id="toc" class="subbox">
                     <h4>目录</h4>
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#多余的分页信息"><span class="toc-number">1.</span> <span class="toc-text">多余的分页信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实际需要的分页信息"><span class="toc-number">2.</span> <span class="toc-text">实际需要的分页信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建-PageChunk-类进行封装"><span class="toc-number">3.</span> <span class="toc-text">创建 PageChunk 类进行封装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#用-PageChunk-替代-Page"><span class="toc-number">4.</span> <span class="toc-text">用 PageChunk 替代 Page</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#简化后的结果"><span class="toc-number">5.</span> <span class="toc-text">简化后的结果</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#输入格式："><span class="toc-number">1.</span> <span class="toc-text">输入格式：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#输出格式："><span class="toc-number">2.</span> <span class="toc-text">输出格式：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#输入样例："><span class="toc-number">3.</span> <span class="toc-text">输入样例：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#输出样例："><span class="toc-number">4.</span> <span class="toc-text">输出样例：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#思路"><span class="toc-number">5.</span> <span class="toc-text">思路</span></a></li></ol>
                 </div>
             </div>
             

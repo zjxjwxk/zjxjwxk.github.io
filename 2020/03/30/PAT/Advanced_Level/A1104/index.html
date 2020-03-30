@@ -5,15 +5,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Spring Boot 简化分页查询Page接口的JSON响应 - Zjxjwxk&#39;s Blog</title>
+    <title>PAT甲级 1104 Sum of Number Segments (20分) - Zjxjwxk&#39;s Blog</title>
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="google" content="notranslate">
     <meta name="keywords" content="吴鑫康 zjxjwxk Wxk Java,"> 
-    <meta name="description" content="多余的分页信息Spring Data 的 Page 接口进行数据分页返回了很多很多垃圾信息：
-{
-    &amp;quot;status&amp;quot;: 0,
-    &amp;quot;data&amp;quot;: {,"> 
+    <meta name="description" content="Given a sequence of positive numbers, a segment is defined to be a consecutive subsequence. For exa,"> 
     <meta name="author" content="吴鑫康"> 
     <link rel="alternative" href="atom.xml" title="Zjxjwxk&#39;s Blog" type="application/atom+xml"> 
     <link rel="icon" href="/img/favicon.png"> 
@@ -46,7 +43,7 @@
     <div class="navigation animated fadeIn fast delay-1s">
         <img id="home-icon" class="icon-home" src="/img/favicon.png" alt="" data-url="https://zjxjwxk.com">
         <div id="play-icon" title="Play/Pause" class="iconfont icon-play"></div>
-        <h3 class="subtitle">Spring Boot 简化分页查询Page接口的JSON响应</h3>
+        <h3 class="subtitle">PAT甲级 1104 Sum of Number Segments (20分)</h3>
         <div class="social">
             <!--        <div class="like-icon">-->
             <!--            <a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
@@ -77,29 +74,29 @@
         <div class="else">
             <p class="animated fadeInDown">
                 
-                <a href="/categories/Spring-Boot"><b>「
-                    </b>SPRING-BOOT<b> 」</b></a>
+                <a href="/categories/PAT"><b>「
+                    </b>PAT<b> 」</b></a>
                 
-                二月 02, 2019
+                三月 30, 2020
             </p>
-            <h3 class="post-title animated fadeInDown"><a href="/2019/02/02/Spring Boot/Spring-Boot-简化分页查询Page接口的JSON响应/" title="Spring Boot 简化分页查询Page接口的JSON响应">Spring Boot 简化分页查询Page接口的JSON响应</a>
+            <h3 class="post-title animated fadeInDown"><a href="/2020/03/30/PAT/Advanced_Level/A1104/" title="PAT甲级 1104 Sum of Number Segments (20分)">PAT甲级 1104 Sum of Number Segments (20分)</a>
             </h3>
             
             <p class="post-count animated fadeInDown">
                 
                 <span>
                     <b class="iconfont icon-text2"></b> <i>文章字数</i>
-                    7.3k
+                    2.1k
                 </span>
                 
                 
                 <span>
                     <b class="iconfont icon-timer__s"></b> <i>阅读约需</i>
-                    7 mins.
+                    2 mins.
                 </span>
                 
                 
-                <span id="/2019/02/02/Spring Boot/Spring-Boot-简化分页查询Page接口的JSON响应/" class="leancloud_visitors" data-flag-title="Spring Boot 简化分页查询Page接口的JSON响应">
+                <span id="/2020/03/30/PAT/Advanced_Level/A1104/" class="leancloud_visitors" data-flag-title="PAT甲级 1104 Sum of Number Segments (20分)">
                     <b class="iconfont icon-read"></b> <i>阅读次数</i>
                     <span class="leancloud-visitors-count">-</span>
                 </span>
@@ -108,7 +105,7 @@
             </p>
             
             
-            <ul class="animated fadeInDown post-tags-list"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/Java/">Java</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/Spring-Boot/">Spring-Boot</a></li></ul>
+            <ul class="animated fadeInDown post-tags-list"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/PAT/">PAT</a></li></ul>
             
         </div>
     </div>
@@ -129,198 +126,32 @@
 <div class="article">
     <div class="main">
         <div class="content markdown animated fadeIn">
-            <h3 id="多余的分页信息"><a href="#多余的分页信息" class="headerlink" title="多余的分页信息"></a>多余的分页信息</h3><p>Spring Data 的 Page 接口进行数据分页返回了很多很多垃圾信息：</p>
-<pre><code class="JSON">{
-    &quot;status&quot;: 0,
-    &quot;data&quot;: {
-        &quot;content&quot;: [
-            {
-                &quot;goodsId&quot;: 1,
-                &quot;producerId&quot;: 1,
-                &quot;categoryId&quot;: 4,
-                &quot;name&quot;: &quot;耐克sb滑板鞋&quot;,
-                &quot;price&quot;: 500,
-                &quot;stock&quot;: 500,
-                &quot;status&quot;: &quot;正常&quot;,
-                &quot;createTime&quot;: &quot;2019-02-02T03:48:33.000+0000&quot;,
-                &quot;updateTime&quot;: null
-            },
-            {
-                &quot;goodsId&quot;: 2,
-                &quot;producerId&quot;: 1,
-                &quot;categoryId&quot;: 4,
-                &quot;name&quot;: &quot;阿迪达斯小白鞋&quot;,
-                &quot;price&quot;: 500,
-                &quot;stock&quot;: 300,
-                &quot;status&quot;: &quot;正常&quot;,
-                &quot;createTime&quot;: &quot;2019-02-02T03:48:59.000+0000&quot;,
-                &quot;updateTime&quot;: null
-            }
-        ],
-        &quot;pageable&quot;: {
-            &quot;sort&quot;: {
-                &quot;sorted&quot;: false,
-                &quot;unsorted&quot;: true,
-                &quot;empty&quot;: true
-            },
-            &quot;offset&quot;: 0,
-            &quot;pageSize&quot;: 10,
-            &quot;pageNumber&quot;: 0,
-            &quot;paged&quot;: true,
-            &quot;unpaged&quot;: false
-        },
-        &quot;last&quot;: true,
-        &quot;totalPages&quot;: 1,
-        &quot;totalElements&quot;: 2,
-        &quot;size&quot;: 10,
-        &quot;number&quot;: 0,
-        &quot;numberOfElements&quot;: 2,
-        &quot;sort&quot;: {
-            &quot;sorted&quot;: false,
-            &quot;unsorted&quot;: true,
-            &quot;empty&quot;: true
-        },
-        &quot;first&quot;: true,
-        &quot;empty&quot;: false
-    }
-}
+            <p>Given a sequence of positive numbers, a segment is defined to be a consecutive subsequence. For example, given the sequence { 0.1, 0.2, 0.3, 0.4 }, we have 10 segments: (0.1) (0.1, 0.2) (0.1, 0.2, 0.3) (0.1, 0.2, 0.3, 0.4) (0.2) (0.2, 0.3) (0.2, 0.3, 0.4) (0.3) (0.3, 0.4) and (0.4).</p>
+<p>Now given a sequence, you are supposed to find the sum of all the numbers in all the segments. For the previous example, the sum of all the 10 segments is 0.1 + 0.3 + 0.6 + 1.0 + 0.2 + 0.5 + 0.9 + 0.3 + 0.7 + 0.4 = 5.0.</p>
+<h1 id="Input-Specification"><a href="#Input-Specification" class="headerlink" title="Input Specification:"></a>Input Specification:</h1><p>Each input file contains one test case. For each case, the first line gives a positive integer <em>N</em>, the size of the sequence which is no more than $10^5$ . The next line contains <em>N</em> positive numbers in the sequence, each no more than 1.0, separated by a space.</p>
+<h1 id="Output-Specification"><a href="#Output-Specification" class="headerlink" title="Output Specification:"></a>Output Specification:</h1><p>For each test case, print in one line the sum of all the numbers in all the segments, accurate up to 2 decimal places.</p>
+<h1 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input:"></a>Sample Input:</h1><pre><code class="in">4
+0.1 0.2 0.3 0.4
 </code></pre>
-<h3 id="实际需要的分页信息"><a href="#实际需要的分页信息" class="headerlink" title="实际需要的分页信息"></a>实际需要的分页信息</h3><p>实际上我只需要下面这些分页信息：</p>
-<pre><code class="JSON">&quot;totalPages&quot;: 3,
-&quot;totalElements&quot;: 20,
-&quot;pageNumber&quot;: 2,
-&quot;numberOfElements&quot;: 7
+<h1 id="Sample-Output"><a href="#Sample-Output" class="headerlink" title="Sample Output:"></a>Sample Output:</h1><pre><code class="out">5.00
 </code></pre>
-<h3 id="创建-PageChunk-类进行封装"><a href="#创建-PageChunk-类进行封装" class="headerlink" title="创建 PageChunk 类进行封装"></a>创建 PageChunk 类进行封装</h3><p>我的 GoodsRepository 接口为：</p>
-<pre><code class="Java">Page&lt;Goods&gt; findByCategoryId(Integer categoryId, Pageable pageable);
-</code></pre>
-<p>我们看到返回了很多多余的，重复的数据。为了解决这个问题，创建一个Pagination DTO(<code>PageChunk</code>)来包装一下分页数据。这个类的作用很简单就是包含每一次分页的内容和分页元数据（<strong>总页数</strong>，<strong>搜索结果总数</strong>，<strong>当前页号</strong>， <strong>当前页包含多少项</strong>）。</p>
-<pre><code class="Java">import lombok.Data;
+<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><ul>
+<li>包含第 i 个数的片段，其首指针有 i 中选择：1, 2, 3, … i，其尾指针有 n - i + 1 中选择：i, i + 1, … n。所以包含第 i 个数的片段有 i * (n - i + 1) 种。将 i 从 1 到 n 遍历，将包含每个数的片段数相加即可。</li>
+</ul>
+<pre><code class="C++">#include &lt;cstdio&gt;
 
-import java.util.List;
+const int maxn = 100000;
 
-/**
- * @author zjxjwxk
- */
-@Data
-public class PageChunk&lt;T&gt; {
-
-    private List&lt;T&gt; content;
-    private int totalPages;
-    private long totalElements;
-    private int pageNumber;
-    private int numberOfElements;
-}
-
-</code></pre>
-<p>同时，我根据业务需求对商品信息进行了DTO的包装，（只需要商品id，名称和价格即可）。</p>
-<pre><code class="Java">import lombok.Data;
-
-/**
- * @author zjxjwxk
- */
-@Data
-public class GoodsDTO {
-
-    private Integer goodsId;
-    private String name;
-    private Integer price;
-
-}
-</code></pre>
-<h3 id="用-PageChunk-替代-Page"><a href="#用-PageChunk-替代-Page" class="headerlink" title="用 PageChunk 替代 Page"></a>用 PageChunk 替代 Page</h3><p>编写以下 getPageChunk 方法用于将 Page<goods> 对象转化为 PageChunk<goodsdto> 对象，仅仅提取 Page 对象中所需要的Content 和一些分页信息，将 PageChunk 对象封装并返回。编写 getGoodsDTO 方法用于简化商品信息。</goodsdto></goods></p>
-<pre><code class="Java">@Service(&quot;GoodsService&quot;)
-public class GoodsServiceImpl implements GoodsService {
-
-    private final GoodsRepository goodsRepository;
-
-    @Autowired
-    public GoodsServiceImpl(GoodsRepository goodsRepository) {
-        this.goodsRepository = goodsRepository;
+int main() {
+    int n;
+    scanf(&quot;%d&quot;, &amp;n);
+    double temp, ans = 0;
+    for (int i = 1; i &lt;= n; i++) {
+        scanf(&quot;%lf&quot;, &amp;temp);
+        ans += temp * i * (n - i + 1);
     }
-
-    @Override
-    public ServerResponse getList(String keyword, Integer categoryId,
-                                               Integer pageNum, Integer pageSize,
-                                               String orderBy) {
-        PageRequest pageRequest = PageRequest.of(pageNum - 1, pageSize);
-        Page&lt;Goods&gt; goodsPage = goodsRepository.findByCategoryId(categoryId, pageRequest);
-        return ServerResponse.createBySuccess(getPageChunk(goodsPage));
-    }
-
-    private PageChunk&lt;GoodsDTO&gt; getPageChunk(Page&lt;Goods&gt; goodsPage) {
-        PageChunk&lt;GoodsDTO&gt; pageChunk = new PageChunk&lt;&gt;();
-        pageChunk.setContent(getGoodsDTO(goodsPage.getContent()));
-        pageChunk.setTotalPages(goodsPage.getTotalPages());
-        pageChunk.setTotalElements(goodsPage.getTotalElements());
-        pageChunk.setPageNumber(goodsPage.getPageable().getPageNumber() + 1);
-        pageChunk.setNumberOfElements(goodsPage.getNumberOfElements());
-        return pageChunk;
-    }
-
-    private List&lt;GoodsDTO&gt; getGoodsDTO(List&lt;Goods&gt; goodsList) {
-        List&lt;GoodsDTO&gt; goodsDTOList = new ArrayList&lt;&gt;();
-        for (Goods goods :
-                goodsList) {
-            GoodsDTO goodsDTO = new GoodsDTO();
-            goodsDTO.setGoodsId(goods.getGoodsId());
-            goodsDTO.setName(goods.getName());
-            goodsDTO.setPrice(goods.getPrice());
-
-            goodsDTOList.add(goodsDTO);
-        }
-        return goodsDTOList;
-    }
-}
-</code></pre>
-<blockquote>
-<p>为了返回 JSON 数据，我自定义了一个 ServerResponse 服务响应对象，它的作用是让我们返回的 JSON 有一个通用的格式</p>
-</blockquote>
-<h3 id="简化后的结果"><a href="#简化后的结果" class="headerlink" title="简化后的结果"></a>简化后的结果</h3><pre><code class="JSON">{
-    &quot;status&quot;: 0,
-    &quot;data&quot;: {
-        &quot;content&quot;: [
-            {
-                &quot;goodsId&quot;: 8,
-                &quot;name&quot;: &quot;Clarks 男 Tri Spark生活休闲鞋26135668&quot;,
-                &quot;price&quot;: 459
-            },
-            {
-                &quot;goodsId&quot;: 9,
-                &quot;name&quot;: &quot;Adidas三叶草 男 休闲跑步鞋 STAN SMITH M20324&quot;,
-                &quot;price&quot;: 415
-            },
-            {
-                &quot;goodsId&quot;: 10,
-                &quot;name&quot;: &quot;Skechers 斯凯奇 SKECHERS SPORT系列 男 绑带运动鞋 999732-NVOR&quot;,
-                &quot;price&quot;: 355
-            },
-            {
-                &quot;goodsId&quot;: 11,
-                &quot;name&quot;: &quot;Saucony 圣康尼 RSP 男 休闲跑步鞋 KINETA RELAY S2524465&quot;,
-                &quot;price&quot;: 479
-            },
-            {
-                &quot;goodsId&quot;: 12,
-                &quot;name&quot;: &quot;Mustang 男 帆布鞋休闲运动 4058-305（亚马逊进口直采,德国品牌）&quot;,
-                &quot;price&quot;: 324
-            },
-            {
-                &quot;goodsId&quot;: 13,
-                &quot;name&quot;: &quot;Clarks 男 Tri Spark生活休闲鞋26135655&quot;,
-                &quot;price&quot;: 123425
-            },
-            {
-                &quot;goodsId&quot;: 14,
-                &quot;name&quot;: &quot;New Balance 574系列 男 休闲跑步鞋 ML574EG-D&quot;,
-                &quot;price&quot;: 324
-            }
-        ],
-        &quot;totalPages&quot;: 3,
-        &quot;totalElements&quot;: 20,
-        &quot;pageNumber&quot;: 2,
-        &quot;numberOfElements&quot;: 7
-    }
+    printf(&quot;%.2f&quot;, ans);
+    return 0;
 }
 </code></pre>
 
@@ -366,7 +197,7 @@ public class GoodsServiceImpl implements GoodsService {
             <div class="box sticky animated fadeInRight faster">
                 <div id="toc" class="subbox">
                     <h4>目录</h4>
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#多余的分页信息"><span class="toc-number">1.</span> <span class="toc-text">多余的分页信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实际需要的分页信息"><span class="toc-number">2.</span> <span class="toc-text">实际需要的分页信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建-PageChunk-类进行封装"><span class="toc-number">3.</span> <span class="toc-text">创建 PageChunk 类进行封装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#用-PageChunk-替代-Page"><span class="toc-number">4.</span> <span class="toc-text">用 PageChunk 替代 Page</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#简化后的结果"><span class="toc-number">5.</span> <span class="toc-text">简化后的结果</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Input-Specification"><span class="toc-number">1.</span> <span class="toc-text">Input Specification:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Output-Specification"><span class="toc-number">2.</span> <span class="toc-text">Output Specification:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Sample-Input"><span class="toc-number">3.</span> <span class="toc-text">Sample Input:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Sample-Output"><span class="toc-number">4.</span> <span class="toc-text">Sample Output:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#思路"><span class="toc-number">5.</span> <span class="toc-text">思路</span></a></li></ol>
                 </div>
             </div>
             
