@@ -5,12 +5,17 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Team Collaboration and Career Development for Exam - Zjxjwxk&#39;s Blog</title>
+    <title>Dubbo微服务影院系列（7）：Dubbo服务开发（影院模块开发） - Zjxjwxk&#39;s Blog</title>
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="google" content="notranslate">
     <meta name="keywords" content="吴鑫康 zjxjwxk Wxk Java,"> 
-    <meta name="description" content="During the lectures we defined three different areas important for every individual: Values, Intere,"> 
+    <meta name="description" content="章节概要
+完成影院模块业务开发
+修改全局异常返回
+学习 Dubbo 特性：并发控制，结果缓存
+
+"> 
     <meta name="author" content="吴鑫康"> 
     <link rel="alternative" href="atom.xml" title="Zjxjwxk&#39;s Blog" type="application/atom+xml"> 
     <link rel="icon" href="/img/favicon.png"> 
@@ -43,7 +48,7 @@
     <div class="navigation animated fadeIn fast delay-1s">
         <img id="home-icon" class="icon-home" src="/img/favicon.png" alt="" data-url="https://zjxjwxk.com">
         <div id="play-icon" title="Play/Pause" class="iconfont icon-play"></div>
-        <h3 class="subtitle">Team Collaboration and Career Development for Exam</h3>
+        <h3 class="subtitle">Dubbo微服务影院系列（7）：Dubbo服务开发（影院模块开发）</h3>
         <div class="social">
             <!--        <div class="like-icon">-->
             <!--            <a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
@@ -74,29 +79,29 @@
         <div class="else">
             <p class="animated fadeInDown">
                 
-                <a href="/categories/期末复习"><b>「
-                    </b>期末复习<b> 」</b></a>
+                <a href="/categories/Dubbo"><b>「
+                    </b>DUBBO<b> 」</b></a>
                 
-                一月 19, 2019
+                三月 30, 2020
             </p>
-            <h3 class="post-title animated fadeInDown"><a href="/2019/01/19/期末复习/Team-Collaboration-and-Career-Development/Team-Collaboration-and-Career-Development for Exam/" title="Team Collaboration and Career Development for Exam">Team Collaboration and Career Development for Exam</a>
+            <h3 class="post-title animated fadeInDown"><a href="/2020/03/30/Dubbo/Dubbo微服务影院系列/7.Dubbo服务开发（影院模块开发）/Dubbo微服务影院系列（7）：Dubbo服务开发（影院模块开发）/" title="Dubbo微服务影院系列（7）：Dubbo服务开发（影院模块开发）">Dubbo微服务影院系列（7）：Dubbo服务开发（影院模块开发）</a>
             </h3>
             
             <p class="post-count animated fadeInDown">
                 
                 <span>
                     <b class="iconfont icon-text2"></b> <i>文章字数</i>
-                    10k
+                    155
                 </span>
                 
                 
                 <span>
                     <b class="iconfont icon-timer__s"></b> <i>阅读约需</i>
-                    9 mins.
+                    1 mins.
                 </span>
                 
                 
-                <span id="/2019/01/19/期末复习/Team-Collaboration-and-Career-Development/Team-Collaboration-and-Career-Development for Exam/" class="leancloud_visitors" data-flag-title="Team Collaboration and Career Development for Exam">
+                <span id="/2020/03/30/Dubbo/Dubbo微服务影院系列/7.Dubbo服务开发（影院模块开发）/Dubbo微服务影院系列（7）：Dubbo服务开发（影院模块开发）/" class="leancloud_visitors" data-flag-title="Dubbo微服务影院系列（7）：Dubbo服务开发（影院模块开发）">
                     <b class="iconfont icon-read"></b> <i>阅读次数</i>
                     <span class="leancloud-visitors-count">-</span>
                 </span>
@@ -105,7 +110,7 @@
             </p>
             
             
-            <ul class="animated fadeInDown post-tags-list"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/BTH/">BTH</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/期末复习/">期末复习</a></li></ul>
+            <ul class="animated fadeInDown post-tags-list"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/Dubbo/">Dubbo</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/微服务架构/">微服务架构</a></li></ul>
             
         </div>
     </div>
@@ -126,57 +131,10 @@
 <div class="article">
     <div class="main">
         <div class="content markdown animated fadeIn">
-            <h3 id="During-the-lectures-we-defined-three-different-areas-important-for-every-individual-Values-Interests-and-Skills-These-should-be-described-regarding-your-internal-focus-in-a-resume"><a href="#During-the-lectures-we-defined-three-different-areas-important-for-every-individual-Values-Interests-and-Skills-These-should-be-described-regarding-your-internal-focus-in-a-resume" class="headerlink" title="During the lectures we defined three different areas important for every individual: Values, Interests and Skills. These should be described regarding your internal focus in a resume."></a>During the lectures we defined three different areas important for every individual: Values, Interests and Skills. These should be described regarding your internal focus in a resume.</h3><p><strong>a. Describe, explain, these three areas, including at least two examples from each area. (15)</strong></p>
-<ul>
-<li><strong>Values</strong> are what is important for you, what you really care about, and which give you a sense of purpose. <strong>Example</strong>: High Income, Helping others.</li>
-<li><strong>Interests</strong> are what is fun for you, what enjoys you, and those work activities which hold your attention and fire your enthusiasm. <strong>Example</strong>: Technical, Scientific.</li>
-<li><strong>Skills</strong> are things you can do well, things you have learned, special talent and special abilities. <strong>Example</strong>: Technical skills, Leadership.<br><strong>b. What is a GAP? Give at least one example of a possible GAP relating to your own experiences, one example from each area. (6)</strong></li>
-<li>A GAP is where you are and where you want to be.</li>
-<li>The GAP for me: I hope that I can enter a big company like Alibaba to work as a Java developer. The GAP for me is that my understanding of the Java virtual machine is not deep enough, I don’t have enough knowledge of multithreading, don’t know enough about the principle and implementation of the database, and don’t know much about the distributed architecture.</li>
-</ul>
-<h3 id="2-Name-the-5-elements-of-the-Career-Development-Cycle-Draw-the-model-of-the-cycle-Describe-shortly-1-2-sentences-every-action-in-the-cycle-12"><a href="#2-Name-the-5-elements-of-the-Career-Development-Cycle-Draw-the-model-of-the-cycle-Describe-shortly-1-2-sentences-every-action-in-the-cycle-12" class="headerlink" title="2. Name the 5 elements of the Career Development Cycle. Draw the model of the cycle. Describe shortly, 1-2 sentences, every action in the cycle. (12)"></a>2. Name the 5 elements of the Career Development Cycle. Draw the model of the cycle. Describe shortly, 1-2 sentences, every action in the cycle. (12)</h3><ul>
-<li>Communication, Analysis, Synthesis, Valuing, Execution<br><img src="/2019/01/19/期末复习/Team-Collaboration-and-Career-Development/Team-Collaboration-and-Career-Development for Exam/1547730517318.png" alt="">  </li>
-<li><strong>Communication</strong>: Become aware of the gap and feel discomfort about the gap. Seek assistance if needed.</li>
-<li><strong>Analysis</strong>: Clarify your knowledge, what do you want, what are your values, interests and skills and so on.</li>
-<li><strong>Synthesis</strong>: Solve the gap, avoid missing alternatives and reduce to a manageable amount of options.</li>
-<li><strong>Valuing</strong>: Judge the benefit (and cost) and rank them to find the best choice. Select an option.</li>
-<li><strong>Execution</strong>: Convert decisions into action, formulate a goal and a plan, and execute the plan.</li>
-<li><strong>Communication</strong>: Review the state and think has the gap been closed. It is an on-going process.</li>
-</ul>
-<h3 id="3-Brown-talks-about-four-general-role-categories-of-people-in-teams-Name-these-roles-and-describe-them-shortly-12"><a href="#3-Brown-talks-about-four-general-role-categories-of-people-in-teams-Name-these-roles-and-describe-them-shortly-12" class="headerlink" title="3. Brown talks about four general role categories of people in teams. Name these roles and describe them shortly? (12)"></a>3. Brown talks about four general role categories of people in teams. Name these roles and describe them shortly? (12)</h3><ul>
-<li><strong>Designers</strong>: People responsible for generating and documenting ideas about how the product works, looks, or behaves.</li>
-<li><strong>Managers</strong>: People responsible for ensuring the project team delivers on its obligations, creates plans to do so, and successfully executes against those plans.</li>
-<li><strong>Subject Matter Experts</strong>: People responsible for contributing information to the design process.</li>
-<li><strong>Stakeholders</strong>: People ultimately accountable for the success of the project.</li>
-</ul>
-<h3 id="4-Consider-the-following-questions-among-individuals-where-we-have-different-characteristics-Select-three-of-them-Describe-how-people-individuals-can-have-different-characteristics-Describe-pros-and-cons-and-possible-consequences-to-a-characteristic-Comments-if-the-characteristics-you-choose-are-good-characteristics-or-not"><a href="#4-Consider-the-following-questions-among-individuals-where-we-have-different-characteristics-Select-three-of-them-Describe-how-people-individuals-can-have-different-characteristics-Describe-pros-and-cons-and-possible-consequences-to-a-characteristic-Comments-if-the-characteristics-you-choose-are-good-characteristics-or-not" class="headerlink" title="4. Consider the following questions among individuals where we have different characteristics. Select three of them. Describe how people (individuals), can have different characteristics. Describe pros and cons, and possible consequences to a characteristic. Comments if the characteristics you choose are good characteristics or not."></a>4. Consider the following questions among individuals where we have different characteristics. Select three of them. Describe how people (individuals), can have different characteristics. Describe pros and cons, and possible consequences to a characteristic. Comments if the characteristics you choose are good characteristics or not.</h3><p>  <strong>a. Can I interrupt you?</strong><br>  <strong>b. Do you attend agreed meetings?</strong><br>  <strong>c. Are you late to meetings?</strong><br>  <strong>d. Are you focusing on details or the big-picture?</strong><br>  <strong>e. Which tasks do you prefer to commit to?</strong><br>  <strong>f. How quickly do you respond to e-mail?</strong><br>  <strong>g. Do you treat others how you would like to be treated yourself?</strong><br>  <strong>h. Can she/he say no? Can you say no?</strong><br>  <strong>i. Does she/he usually say no/yes?</strong><br>  <strong>(12)</strong></p>
-<h3 id="5-Describe-at-least-4-positive-consequences-to-conflicts-8"><a href="#5-Describe-at-least-4-positive-consequences-to-conflicts-8" class="headerlink" title="5. Describe at least 4 positive consequences to conflicts. (8)"></a>5. Describe at least 4 positive consequences to conflicts. (8)</h3><ul>
-<li>Produces better ideas</li>
-<li>Forces people to search for new approaches</li>
-<li>Causes problems to surface</li>
-<li>Forces clarification</li>
-</ul>
-<h3 id="6-Brown-draws-a-triangle-for-the-model-of-conflict-Specify-this-triangle-and-describe-the-elements-and-how-they-are-connected-9"><a href="#6-Brown-draws-a-triangle-for-the-model-of-conflict-Specify-this-triangle-and-describe-the-elements-and-how-they-are-connected-9" class="headerlink" title="6. Brown draws a triangle for the model of conflict. Specify this triangle and describe the elements and how they are connected. (9)"></a>6. Brown draws a triangle for the model of conflict. Specify this triangle and describe the elements and how they are connected. (9)</h3><p><img src="/2019/01/19/期末复习/Team-Collaboration-and-Career-Development/Team-Collaboration-and-Career-Development for Exam/1547737741192.png" alt=""></p>
-<blockquote>
-<p>Situations: The different ways conflict manifests itself</p>
-<p>Patterns: The behaviors team members can use to deal with conflict</p>
-<p>Traits: The inherent characteristics that shape our behaviors and perceptions</p>
-</blockquote>
-<h4 id="Situations-lt-gt-Patterns"><a href="#Situations-lt-gt-Patterns" class="headerlink" title="Situations &lt; &gt; Patterns"></a>Situations &lt; &gt; Patterns</h4><ul>
-<li>Designers can use patterns (specific behaviors) to untangle situations<ul>
-<li>Situations can also affect the outcome of patterns<h4 id="Patterns-lt-gt-Traits"><a href="#Patterns-lt-gt-Traits" class="headerlink" title="Patterns &lt; &gt; Traits"></a>Patterns &lt; &gt; Traits</h4></li>
-</ul>
-</li>
-<li>A designer’s traits influences which pattern she chooses for a particular situation</li>
-<li>By using a particular pattern successfully, a designer may take that to reinforce part of her personality<h4 id="Traits-lt-gt-Situations"><a href="#Traits-lt-gt-Situations" class="headerlink" title="Traits &lt; &gt; Situations"></a>Traits &lt; &gt; Situations</h4></li>
-<li>Traits can make certain situations worse by reinforcing the misunderstanding between people</li>
-<li>Some situations may amplify a designer’s trait</li>
-</ul>
-<h3 id="7-Brown-lists-three-areas-important-for-self-awareness-Describe-these-areas-and-give-one-example-from-each-area-for-improving-it-9"><a href="#7-Brown-lists-three-areas-important-for-self-awareness-Describe-these-areas-and-give-one-example-from-each-area-for-improving-it-9" class="headerlink" title="7. Brown lists three areas important for self-awareness. Describe these areas and give one example from each area for improving it. (9)"></a>7. Brown lists three areas important for self-awareness. Describe these areas and give one example from each area for improving it. (9)</h3><p>To understand your limitations, your boundaries, strengths</p>
-<ul>
-<li>Limitations: </li>
-<li>Boundaries: By understanding their limitations, designers can be honest and open about their capabilities, their ability to contribute to a project, and their level of comfort in asking for help.</li>
-<li>Strengths: </li>
+            <h1 id="章节概要"><a href="#章节概要" class="headerlink" title="章节概要"></a>章节概要</h1><ul>
+<li>完成影院模块业务开发</li>
+<li>修改全局异常返回</li>
+<li>学习 Dubbo 特性：并发控制，结果缓存</li>
 </ul>
 
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
@@ -221,7 +179,7 @@
             <div class="box sticky animated fadeInRight faster">
                 <div id="toc" class="subbox">
                     <h4>目录</h4>
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#During-the-lectures-we-defined-three-different-areas-important-for-every-individual-Values-Interests-and-Skills-These-should-be-described-regarding-your-internal-focus-in-a-resume"><span class="toc-number">1.</span> <span class="toc-text">During the lectures we defined three different areas important for every individual: Values, Interests and Skills. These should be described regarding your internal focus in a resume.</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Name-the-5-elements-of-the-Career-Development-Cycle-Draw-the-model-of-the-cycle-Describe-shortly-1-2-sentences-every-action-in-the-cycle-12"><span class="toc-number">2.</span> <span class="toc-text">2. Name the 5 elements of the Career Development Cycle. Draw the model of the cycle. Describe shortly, 1-2 sentences, every action in the cycle. (12)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-Brown-talks-about-four-general-role-categories-of-people-in-teams-Name-these-roles-and-describe-them-shortly-12"><span class="toc-number">3.</span> <span class="toc-text">3. Brown talks about four general role categories of people in teams. Name these roles and describe them shortly? (12)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-Consider-the-following-questions-among-individuals-where-we-have-different-characteristics-Select-three-of-them-Describe-how-people-individuals-can-have-different-characteristics-Describe-pros-and-cons-and-possible-consequences-to-a-characteristic-Comments-if-the-characteristics-you-choose-are-good-characteristics-or-not"><span class="toc-number">4.</span> <span class="toc-text">4. Consider the following questions among individuals where we have different characteristics. Select three of them. Describe how people (individuals), can have different characteristics. Describe pros and cons, and possible consequences to a characteristic. Comments if the characteristics you choose are good characteristics or not.</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-Describe-at-least-4-positive-consequences-to-conflicts-8"><span class="toc-number">5.</span> <span class="toc-text">5. Describe at least 4 positive consequences to conflicts. (8)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-Brown-draws-a-triangle-for-the-model-of-conflict-Specify-this-triangle-and-describe-the-elements-and-how-they-are-connected-9"><span class="toc-number">6.</span> <span class="toc-text">6. Brown draws a triangle for the model of conflict. Specify this triangle and describe the elements and how they are connected. (9)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-Brown-lists-three-areas-important-for-self-awareness-Describe-these-areas-and-give-one-example-from-each-area-for-improving-it-9"><span class="toc-number">7.</span> <span class="toc-text">7. Brown lists three areas important for self-awareness. Describe these areas and give one example from each area for improving it. (9)</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#章节概要"><span class="toc-number">1.</span> <span class="toc-text">章节概要</span></a></li></ol>
                 </div>
             </div>
             

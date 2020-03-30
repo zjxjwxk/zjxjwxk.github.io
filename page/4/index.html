@@ -122,29 +122,29 @@
     <div id="post0" class="else">
         <p class="animated fadeInDown">
             
-            <a href="/categories/期末复习"><b>「
-                </b>期末复习<b> 」</b></a>
+            <a href="/categories/Linux"><b>「
+                </b>LINUX<b> 」</b></a>
             
-            一月 20, 2019
+            一月 30, 2019
         </p>
         <h3 class="post-title animated fadeInDown">
-            <a href="/2019/01/20/期末复习/Applied-Software-Project-Management/Applied-Software-Project-Management/" title="Applied-Software-Project-Management" class="posttitle">Applied-Software-Project-Management</a></h3>
+            <a href="/2019/01/30/Linux/CentOS/CentOS jar包后台运行/" title="CentOS jar包后台运行" class="posttitle">CentOS jar包后台运行</a></h3>
         
         <p class="post-count animated fadeInDown">
             
             <span>
                 <b class="iconfont icon-text2"></b> <i>文章字数</i>
-                30k
+                1.6k
             </span>
             
             
             <span>
                 <b class="iconfont icon-timer__s"></b> <i>阅读约需</i>
-                28 mins.
+                1 mins.
             </span>
             
             
-            <span id="/2019/01/20/期末复习/Applied-Software-Project-Management/Applied-Software-Project-Management/" class="leancloud_visitors" data-flag-title="">
+            <span id="/2019/01/30/Linux/CentOS/CentOS jar包后台运行/" class="leancloud_visitors" data-flag-title="">
                 <b class="iconfont icon-read"></b> <i>阅读次数</i>
                 <span class="leancloud-visitors-count">-</span>
             </span>
@@ -152,17 +152,15 @@
         </p>
         
         
-        <ul class="animated fadeInDown post-tags-list"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/BTH/">BTH</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/期末复习/">期末复习</a></li></ul>
+        <ul class="animated fadeInDown post-tags-list"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/CentOS/">CentOS</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/Java/">Java</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/Linux/">Linux</a></li></ul>
         
         <div class="md-content animated fadeIn">
             
-            <p>A project is a temporary endeavour undertaken to create a unique product or service. It is specific, timely, usually multidisciplinary, and always conflict ridden. Projects are parts of overall programs and may be broken down into tasks, subtasks, and further if desired.</p>
-<ul>
-<li>Vary in size</li>
-<li>Vary in type</li>
-<li>Have...</li></ul>
+            <pre><code class="shell">java -jar application.jar
+</code></pre>
+<p>当前ssh窗口被锁定，可按CTRL + C打断...</p>
             
-            <span class="read-more"><a href="/2019/01/20/期末复习/Applied-Software-Project-Management/Applied-Software-Project-Management/" title="查看全文" class="posttitle">查看全文</a>
+            <span class="read-more"><a href="/2019/01/30/Linux/CentOS/CentOS jar包后台运行/" title="查看全文" class="posttitle">查看全文</a>
                 <b class="iconfont icon-arrow-right- gradient-text"></b></span>
         </div>
     </div>
@@ -183,6 +181,68 @@
 
     <div id="primary">
         
+<div class="post" id="post">
+    <div class="post-cover animated fadeIn" style="
+            background-image:
+            radial-gradient(ellipse closest-side, rgba(0, 0, 0, 0.65), #100e17),
+            url(/img/welcome-cover.jpg);">
+    </div>
+    <div class="else">
+        <p class="animated fadeInDown">
+            
+                <a href="/categories/Linux">
+                  <b>「 </b>LINUX<b> 」</b>
+                </a>
+            
+            一月 30, 2019
+        </p>
+        <h3 class="post-title animated fadeInDown"><a href="/2019/01/30/Linux/CentOS/CentOS jar包后台运行/" title="CentOS jar包后台运行" class="posttitle">CentOS jar包后台运行</a></h3>
+        
+            <p class="post-count animated fadeInDown">
+                
+                    <span>
+                        <b class="iconfont icon-text2"></b> <i>文章字数</i>
+                        1.6k
+                    </span>
+                
+                
+                    <span>
+                        <b class="iconfont icon-timer__s"></b> <i>阅读约需</i>
+                        1 mins.
+                    </span>
+                
+                
+                    <span id="/2019/01/30/Linux/CentOS/CentOS jar包后台运行/" class="leancloud_visitors" data-flag-title="">
+                        <b class="iconfont icon-read"></b> <i>阅读次数</i>
+                        <span class="leancloud-visitors-count">-</span>
+                    </span>
+                
+            </p>
+            
+                <ul class="animated fadeInDown post-tags-list"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/CentOS/">CentOS</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/Java/">Java</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/Linux/">Linux</a></li></ul>
+            
+        
+        <div class="md-content animated fadeIn">
+            
+                <pre><code class="shell">java -jar application.jar
+</code></pre>
+<p>当前ssh窗口被锁定，可按CTRL + C打断程序运行，或直接关闭窗口让程序退出。</p>
+<p>那如何让窗口不被锁定？</p>
+<pre><code class="shell">java -jar application.jar &amp;
+</code></pre>
+<p>&amp;代表在后台运行。</p>
+<p>当前ssh窗口不被锁定，但是当窗口关闭时，程序中止运行。</p>
+<p>继续改进，如何让窗口关闭时，程序仍然运行？</p>
+<pre><code class="shell">nohup java -jar application.jar &amp;
+</code></pre>
+<p>nohup 意思是不挂断运行命令,当账户退出或终端关闭时,程序仍...</p>
+            
+            <span class="read-more"><a href="/2019/01/30/Linux/CentOS/CentOS jar包后台运行/" title="查看全文" class="posttitle">查看全文</a> <b class="iconfont icon-arrow-right- gradient-text"></b></span>
+        </div>
+    </div>
+</div>
+
+
 <div class="post" id="post">
     <div class="post-cover animated fadeIn" style="
             background-image:
@@ -229,111 +289,6 @@
                 <p>A project is a temporary endeavour undertaken to create a unique product or service. It is specific, timely, usually multidisciplinary, and always conflict ridden. Projects are parts of overall programs and may be broken down into tasks, subtasks, and...</p>
             
             <span class="read-more"><a href="/2019/01/20/期末复习/Applied-Software-Project-Management/Applied-Software-Project-Management/" title="查看全文" class="posttitle">查看全文</a> <b class="iconfont icon-arrow-right- gradient-text"></b></span>
-        </div>
-    </div>
-</div>
-
-
-<div class="post" id="post">
-    <div class="post-cover animated fadeIn" style="
-            background-image:
-            radial-gradient(ellipse closest-side, rgba(0, 0, 0, 0.65), #100e17),
-            url(/img/welcome-cover.jpg);">
-    </div>
-    <div class="else">
-        <p class="animated fadeInDown">
-            
-                <a href="/categories/期末复习">
-                  <b>「 </b>期末复习<b> 」</b>
-                </a>
-            
-            一月 19, 2019
-        </p>
-        <h3 class="post-title animated fadeInDown"><a href="/2019/01/19/期末复习/Team-Collaboration-and-Career-Development/Team-Collaboration-and-Career-Development for Exam/" title="Team Collaboration and Career Development for Exam" class="posttitle">Team Collaboration and Career Development for Exam</a></h3>
-        
-            <p class="post-count animated fadeInDown">
-                
-                    <span>
-                        <b class="iconfont icon-text2"></b> <i>文章字数</i>
-                        10k
-                    </span>
-                
-                
-                    <span>
-                        <b class="iconfont icon-timer__s"></b> <i>阅读约需</i>
-                        9 mins.
-                    </span>
-                
-                
-                    <span id="/2019/01/19/期末复习/Team-Collaboration-and-Career-Development/Team-Collaboration-and-Career-Development for Exam/" class="leancloud_visitors" data-flag-title="">
-                        <b class="iconfont icon-read"></b> <i>阅读次数</i>
-                        <span class="leancloud-visitors-count">-</span>
-                    </span>
-                
-            </p>
-            
-                <ul class="animated fadeInDown post-tags-list"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/BTH/">BTH</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/期末复习/">期末复习</a></li></ul>
-            
-        
-        <div class="md-content animated fadeIn">
-            
-                <h3 id="During-the-lectures-we-defined-three-different-areas-important-for-every-individual-Values-Interests-and-Skills-These-should-be-described-regarding-your-internal-focus-in-a-resume"><a href="#During-the-lectures-we-defined-three-different-areas-important-for-every-individual-Values-Interests-and-Skills-These-should-be-described-regarding-your-internal-focus-in-a-resume" class="headerlink" title="During the lectures we defined three different areas important for every individual: Values, Interests and Skills. These should be described regarding your internal focus in a resume."></a>During the lectures we defined three different areas important for every individual: Values, Interests and Skills. These should be described regarding your internal focus in a resume.</h3><p><strong>a. Describe, explain, these three areas, including at least two examples...</strong></p>
-            
-            <span class="read-more"><a href="/2019/01/19/期末复习/Team-Collaboration-and-Career-Development/Team-Collaboration-and-Career-Development for Exam/" title="查看全文" class="posttitle">查看全文</a> <b class="iconfont icon-arrow-right- gradient-text"></b></span>
-        </div>
-    </div>
-</div>
-
-
-<div class="post" id="post">
-    <div class="post-cover animated fadeIn" style="
-            background-image:
-            radial-gradient(ellipse closest-side, rgba(0, 0, 0, 0.65), #100e17),
-            url(/img/welcome-cover.jpg);">
-    </div>
-    <div class="else">
-        <p class="animated fadeInDown">
-            
-                <a href="/categories/期末复习">
-                  <b>「 </b>期末复习<b> 」</b>
-                </a>
-            
-            一月 19, 2019
-        </p>
-        <h3 class="post-title animated fadeInDown"><a href="/2019/01/19/期末复习/Team-Collaboration-and-Career-Development/Team-Collaboration-and-Career-Development/" title="Team Collaboration and Career Development" class="posttitle">Team Collaboration and Career Development</a></h3>
-        
-            <p class="post-count animated fadeInDown">
-                
-                    <span>
-                        <b class="iconfont icon-text2"></b> <i>文章字数</i>
-                        48k
-                    </span>
-                
-                
-                    <span>
-                        <b class="iconfont icon-timer__s"></b> <i>阅读约需</i>
-                        43 mins.
-                    </span>
-                
-                
-                    <span id="/2019/01/19/期末复习/Team-Collaboration-and-Career-Development/Team-Collaboration-and-Career-Development/" class="leancloud_visitors" data-flag-title="">
-                        <b class="iconfont icon-read"></b> <i>阅读次数</i>
-                        <span class="leancloud-visitors-count">-</span>
-                    </span>
-                
-            </p>
-            
-                <ul class="animated fadeInDown post-tags-list"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/BTH/">BTH</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/期末复习/">期末复习</a></li></ul>
-            
-        
-        <div class="md-content animated fadeIn">
-            
-                <p></p>
-<p>Communication, Analysis, Synthesis, Valuing, Execution</p>
-<p><strong>Communication</strong>: Identifying the gap<br><strong>Analysis</strong>: Thinking about alternatives<br><strong>Synthesis</strong>: Creating likely alternatives<br><strong>Valuing</strong>: Prioritizing alternatives<br><strong>Execution</strong>: Taking action to narrow the gap</p>
-<p><strong>Communication...</strong></p>
-            
-            <span class="read-more"><a href="/2019/01/19/期末复习/Team-Collaboration-and-Career-Development/Team-Collaboration-and-Career-Development/" title="查看全文" class="posttitle">查看全文</a> <b class="iconfont icon-arrow-right- gradient-text"></b></span>
         </div>
     </div>
 </div>
@@ -441,6 +396,111 @@
 <p>There needs...</p>
             
             <span class="read-more"><a href="/2019/01/19/期末复习/The-design-and-analysis-of-algorithms/The-design-and-analysis-of-algorithms for Exam/" title="查看全文" class="posttitle">查看全文</a> <b class="iconfont icon-arrow-right- gradient-text"></b></span>
+        </div>
+    </div>
+</div>
+
+
+<div class="post" id="post">
+    <div class="post-cover animated fadeIn" style="
+            background-image:
+            radial-gradient(ellipse closest-side, rgba(0, 0, 0, 0.65), #100e17),
+            url(/img/welcome-cover.jpg);">
+    </div>
+    <div class="else">
+        <p class="animated fadeInDown">
+            
+                <a href="/categories/期末复习">
+                  <b>「 </b>期末复习<b> 」</b>
+                </a>
+            
+            一月 19, 2019
+        </p>
+        <h3 class="post-title animated fadeInDown"><a href="/2019/01/19/期末复习/Team-Collaboration-and-Career-Development/Team-Collaboration-and-Career-Development for Exam/" title="Team Collaboration and Career Development for Exam" class="posttitle">Team Collaboration and Career Development for Exam</a></h3>
+        
+            <p class="post-count animated fadeInDown">
+                
+                    <span>
+                        <b class="iconfont icon-text2"></b> <i>文章字数</i>
+                        10k
+                    </span>
+                
+                
+                    <span>
+                        <b class="iconfont icon-timer__s"></b> <i>阅读约需</i>
+                        9 mins.
+                    </span>
+                
+                
+                    <span id="/2019/01/19/期末复习/Team-Collaboration-and-Career-Development/Team-Collaboration-and-Career-Development for Exam/" class="leancloud_visitors" data-flag-title="">
+                        <b class="iconfont icon-read"></b> <i>阅读次数</i>
+                        <span class="leancloud-visitors-count">-</span>
+                    </span>
+                
+            </p>
+            
+                <ul class="animated fadeInDown post-tags-list"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/BTH/">BTH</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/期末复习/">期末复习</a></li></ul>
+            
+        
+        <div class="md-content animated fadeIn">
+            
+                <h3 id="During-the-lectures-we-defined-three-different-areas-important-for-every-individual-Values-Interests-and-Skills-These-should-be-described-regarding-your-internal-focus-in-a-resume"><a href="#During-the-lectures-we-defined-three-different-areas-important-for-every-individual-Values-Interests-and-Skills-These-should-be-described-regarding-your-internal-focus-in-a-resume" class="headerlink" title="During the lectures we defined three different areas important for every individual: Values, Interests and Skills. These should be described regarding your internal focus in a resume."></a>During the lectures we defined three different areas important for every individual: Values, Interests and Skills. These should be described regarding your internal focus in a resume.</h3><p><strong>a. Describe, explain, these three areas, including at least two examples...</strong></p>
+            
+            <span class="read-more"><a href="/2019/01/19/期末复习/Team-Collaboration-and-Career-Development/Team-Collaboration-and-Career-Development for Exam/" title="查看全文" class="posttitle">查看全文</a> <b class="iconfont icon-arrow-right- gradient-text"></b></span>
+        </div>
+    </div>
+</div>
+
+
+<div class="post" id="post">
+    <div class="post-cover animated fadeIn" style="
+            background-image:
+            radial-gradient(ellipse closest-side, rgba(0, 0, 0, 0.65), #100e17),
+            url(/img/welcome-cover.jpg);">
+    </div>
+    <div class="else">
+        <p class="animated fadeInDown">
+            
+                <a href="/categories/期末复习">
+                  <b>「 </b>期末复习<b> 」</b>
+                </a>
+            
+            一月 19, 2019
+        </p>
+        <h3 class="post-title animated fadeInDown"><a href="/2019/01/19/期末复习/Team-Collaboration-and-Career-Development/Team-Collaboration-and-Career-Development/" title="Team Collaboration and Career Development" class="posttitle">Team Collaboration and Career Development</a></h3>
+        
+            <p class="post-count animated fadeInDown">
+                
+                    <span>
+                        <b class="iconfont icon-text2"></b> <i>文章字数</i>
+                        48k
+                    </span>
+                
+                
+                    <span>
+                        <b class="iconfont icon-timer__s"></b> <i>阅读约需</i>
+                        43 mins.
+                    </span>
+                
+                
+                    <span id="/2019/01/19/期末复习/Team-Collaboration-and-Career-Development/Team-Collaboration-and-Career-Development/" class="leancloud_visitors" data-flag-title="">
+                        <b class="iconfont icon-read"></b> <i>阅读次数</i>
+                        <span class="leancloud-visitors-count">-</span>
+                    </span>
+                
+            </p>
+            
+                <ul class="animated fadeInDown post-tags-list"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/BTH/">BTH</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/期末复习/">期末复习</a></li></ul>
+            
+        
+        <div class="md-content animated fadeIn">
+            
+                <p></p>
+<p>Communication, Analysis, Synthesis, Valuing, Execution</p>
+<p><strong>Communication</strong>: Identifying the gap<br><strong>Analysis</strong>: Thinking about alternatives<br><strong>Synthesis</strong>: Creating likely alternatives<br><strong>Valuing</strong>: Prioritizing alternatives<br><strong>Execution</strong>: Taking action to narrow the gap</p>
+<p><strong>Communication...</strong></p>
+            
+            <span class="read-more"><a href="/2019/01/19/期末复习/Team-Collaboration-and-Career-Development/Team-Collaboration-and-Career-Development/" title="查看全文" class="posttitle">查看全文</a> <b class="iconfont icon-arrow-right- gradient-text"></b></span>
         </div>
     </div>
 </div>
