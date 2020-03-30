@@ -5,12 +5,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>微服务简介 - Zjxjwxk&#39;s Blog</title>
+    <title>PAT甲级 1049 Counting Ones (30分) - Zjxjwxk&#39;s Blog</title>
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="google" content="notranslate">
     <meta name="keywords" content="吴鑫康 zjxjwxk Wxk Java,"> 
-    <meta name="description" content="微服务简介定义The microservice architectural style is an approach to developing a single application runni,"> 
+    <meta name="description" content="The task is simple: given any positive integer N, you are supposed to count the total number of 1’s,"> 
     <meta name="author" content="吴鑫康"> 
     <link rel="alternative" href="atom.xml" title="Zjxjwxk&#39;s Blog" type="application/atom+xml"> 
     <link rel="icon" href="/img/favicon.png"> 
@@ -43,7 +43,7 @@
     <div class="navigation animated fadeIn fast delay-1s">
         <img id="home-icon" class="icon-home" src="/img/favicon.png" alt="" data-url="https://zjxjwxk.com">
         <div id="play-icon" title="Play/Pause" class="iconfont icon-play"></div>
-        <h3 class="subtitle">微服务简介</h3>
+        <h3 class="subtitle">PAT甲级 1049 Counting Ones (30分)</h3>
         <div class="social">
             <!--        <div class="like-icon">-->
             <!--            <a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
@@ -74,29 +74,29 @@
         <div class="else">
             <p class="animated fadeInDown">
                 
-                <a href="/categories/Spring-Cloud"><b>「
-                    </b>SPRING-CLOUD<b> 」</b></a>
+                <a href="/categories/PAT"><b>「
+                    </b>PAT<b> 」</b></a>
                 
-                一月 31, 2019
+                三月 30, 2020
             </p>
-            <h3 class="post-title animated fadeInDown"><a href="/2019/01/31/Spring Cloud/微服务架构/微服务简介/" title="微服务简介">微服务简介</a>
+            <h3 class="post-title animated fadeInDown"><a href="/2020/03/30/PAT/Advanced_Level/A1049/" title="PAT甲级 1049 Counting Ones (30分)">PAT甲级 1049 Counting Ones (30分)</a>
             </h3>
             
             <p class="post-count animated fadeInDown">
                 
                 <span>
                     <b class="iconfont icon-text2"></b> <i>文章字数</i>
-                    3.7k
+                    1.8k
                 </span>
                 
                 
                 <span>
                     <b class="iconfont icon-timer__s"></b> <i>阅读约需</i>
-                    3 mins.
+                    2 mins.
                 </span>
                 
                 
-                <span id="/2019/01/31/Spring Cloud/微服务架构/微服务简介/" class="leancloud_visitors" data-flag-title="微服务简介">
+                <span id="/2020/03/30/PAT/Advanced_Level/A1049/" class="leancloud_visitors" data-flag-title="PAT甲级 1049 Counting Ones (30分)">
                     <b class="iconfont icon-read"></b> <i>阅读次数</i>
                     <span class="leancloud-visitors-count">-</span>
                 </span>
@@ -105,7 +105,7 @@
             </p>
             
             
-            <ul class="animated fadeInDown post-tags-list"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/Java/">Java</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/Spring-Cloud/">Spring-Cloud</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/微服务架构/">微服务架构</a></li></ul>
+            <ul class="animated fadeInDown post-tags-list"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/PAT/">PAT</a></li></ul>
             
         </div>
     </div>
@@ -126,71 +126,42 @@
 <div class="article">
     <div class="main">
         <div class="content markdown animated fadeIn">
-            <h1 id="微服务简介"><a href="#微服务简介" class="headerlink" title="微服务简介"></a>微服务简介</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>The microservice architectural style is an approach to developing a single application running as <strong>a suite of small services</strong>, each <strong>running its own process</strong> and communicating with lightweight mechanisms, often an HTTP resource API. These services are <strong>built around business capabilities</strong> and <strong>independently deployable</strong> by fully automated deployment machinery. There is <strong>a bare minimum of centralized management of these services</strong>, which may be written in different programming languages and use different data storage technologies.</p>
-<ul>
-<li>一系列微小的服务共同组成</li>
-<li>跑在自己的进程里</li>
-<li>每个服务为独立的业务开发</li>
-<li>独立部署</li>
-<li>分布式的管理</li>
-</ul>
-<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>随着互联网的发展，网站应用的规模不断扩大，常规的垂直应用架构已无法应对，分布式服务架构以及流动计算架构势在必行，亟需一个治理系统确保架构有条不紊的演进。</p>
-<p><img src="http://dubbo.apache.org/docs/zh-cn/user/sources/images/dubbo-architecture-roadmap.jpg" alt="单一应用架构-&gt;垂直应用架构-&gt;分布式服务架构-&gt;流动计算架构"></p>
-<h3 id="单一应用架构"><a href="#单一应用架构" class="headerlink" title="单一应用架构"></a>单一应用架构</h3><p>当网站流量很小时，只需一个应用，将所有功能都部署在一起，以减少部署节点和成本。此时，用于简化增删改查工作量的数据访问框架(ORM)是关键。</p>
-<h3 id="垂直应用架构"><a href="#垂直应用架构" class="headerlink" title="垂直应用架构"></a>垂直应用架构</h3><p>当访问量逐渐增大，单一应用增加机器带来的加速度越来越小，将应用拆成互不相干的几个应用，以提升效率。此时，用于加速前端页面开发的Web框架(MVC)是关键。</p>
-<h3 id="分布式服务架构"><a href="#分布式服务架构" class="headerlink" title="分布式服务架构"></a>分布式服务架构</h3><p>当垂直应用越来越多，应用之间交互不可避免，将核心业务抽取出来，作为独立的服务，逐渐形成稳定的服务中心，使前端应用能更快速的响应多变的市场需求。此时，用于提高业务复用及整合的分布式服务框架(RPC)是关键。</p>
-<h3 id="流动计算架构"><a href="#流动计算架构" class="headerlink" title="流动计算架构"></a>流动计算架构</h3><p>当服务越来越多，容量的评估，小服务资源的浪费等问题逐渐显现，此时需增加一个调度中心基于访问压力实时管理集群容量，提高集群利用率。此时，用于提高机器利用率的资源调度和治理中心(SOA)是关键。</p>
-<h2 id="单体架构"><a href="#单体架构" class="headerlink" title="单体架构"></a>单体架构</h2><h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h3><ul>
-<li>容易测试</li>
-<li>容易部署</li>
-</ul>
-<h3 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h3><ul>
-<li>开发效率低</li>
-<li>代码维护难</li>
-<li>部署不灵活</li>
-<li>稳定性不高</li>
-<li>扩展性不够</li>
-</ul>
-<h2 id="分布式定义"><a href="#分布式定义" class="headerlink" title="分布式定义"></a>分布式定义</h2><p>旨在支持应用程序和服务的开发，可以利用物理架构，由多个自治的处理元素，不共享主内存，但通过网络发送消息合作。——Leslie Lamport</p>
-<h2 id="简单的微服务"><a href="#简单的微服务" class="headerlink" title="简单的微服务"></a>简单的微服务</h2><p><img src="/2019/01/31/Spring Cloud/微服务架构/微服务简介/image-20190131150906318.png" alt="简单的微服务"></p>
-<h3 id="微服务架构的基础框架-组件"><a href="#微服务架构的基础框架-组件" class="headerlink" title="微服务架构的基础框架/组件"></a>微服务架构的基础框架/组件</h3><ul>
-<li>服务注册发现</li>
-<li><p>服务网关（Service Gateway）</p>
-</li>
-<li><p>后端通用服务（也称中间层服务 Middle Tire Service）</p>
-</li>
-<li>前端服务（也称边缘服务 Edge Service）<ul>
-<li>聚合<ul>
-<li>对多个API调用进行聚合，从而减少客户端的请求数</li>
-</ul>
-</li>
-<li>裁剪<ul>
-<li>对返回不同的设备的内容进行裁剪（PC、移动端）</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="两大阵营"><a href="#两大阵营" class="headerlink" title="两大阵营"></a>两大阵营</h2><h3 id="阿里系"><a href="#阿里系" class="headerlink" title="阿里系"></a>阿里系</h3><ul>
-<li>Dubbo（服务化治理）</li>
-<li>Zookeeper（服务注册中心）</li>
-<li>Spring MVC or SpringBoot</li>
-<li>…</li>
-</ul>
-<h3 id="Spring-Cloud"><a href="#Spring-Cloud" class="headerlink" title="Spring Cloud"></a>Spring Cloud</h3><ul>
-<li>Spring Cloud Netflix Eureka</li>
-<li>SpringBoot</li>
-<li>…</li>
-</ul>
-<h2 id="Spring-Cloud-是什么"><a href="#Spring-Cloud-是什么" class="headerlink" title="Spring Cloud 是什么"></a>Spring Cloud 是什么</h2><ul>
-<li>Spring Cloud 是一个开发工具集，含了多个子项目<ul>
-<li>利用Spring Boot的开发便利</li>
-<li>主要是基于对Netflix开源组件的进一步封装</li>
-</ul>
-</li>
-<li>Spring Cloud 简化了分布式开发</li>
-<li>掌握如何使用，更要理解分布式、架构的特点</li>
-</ul>
+            <p>The task is simple: given any positive integer <em>N</em>, you are supposed to count the total number of 1’s in the decimal form of the integers from 1 to <em>N</em>. For example, given <em>N</em> being 12, there are five 1’s in 1, 10, 11, and 12.</p>
+<h1 id="Input-Specification"><a href="#Input-Specification" class="headerlink" title="Input Specification:"></a>Input Specification:</h1><p>Each input file contains one test case which gives the positive <em>N</em> (≤230).</p>
+<h1 id="Output-Specification"><a href="#Output-Specification" class="headerlink" title="Output Specification:"></a>Output Specification:</h1><p>For each test case, print the number of 1’s in one line.</p>
+<h1 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input:"></a>Sample Input:</h1><pre><code class="in">12
+</code></pre>
+<h1 id="Sample-Output"><a href="#Sample-Output" class="headerlink" title="Sample Output:"></a>Sample Output:</h1><pre><code class="out">5
+</code></pre>
+<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><p>从低位到高位考虑每一位为 1 的个数，设当前位的数为 i，该位左边的数为 leftNum，右边的数为 rightNum，e 从 1 开始每次遍历乘 10。通过数字举例，可以总结出这样的公式：</p>
+<ol>
+<li>i &gt; 1 时，个数为 (leftNum + 1) * e</li>
+<li>i == 1 时，个数为 leftNum * e + rightNum + 1</li>
+<li>i == 0 时，个数为 leftNum * e</li>
+</ol>
+<pre><code class="C++">#include &lt;cstdio&gt;
+
+int main() {
+    int n;
+    scanf(&quot;%d&quot;, &amp;n);
+    int i, leftNum = n, rightNum, e = 1, ans = 0;
+    while (leftNum != 0) {
+        i = n / e % 10;
+        leftNum /= 10;
+        rightNum = n % e;
+        if (i &gt; 1) {
+            ans += (leftNum + 1) * e;
+        } else if (i == 1) {
+            ans += leftNum * e + rightNum + 1;
+        } else {
+            ans += leftNum * e;
+        }
+        e *= 10;
+    }
+    printf(&quot;%d&quot;, ans);
+    return 0;
+}
+</code></pre>
 
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
@@ -234,7 +205,7 @@
             <div class="box sticky animated fadeInRight faster">
                 <div id="toc" class="subbox">
                     <h4>目录</h4>
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#微服务简介"><span class="toc-number">1.</span> <span class="toc-text">微服务简介</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#定义"><span class="toc-number">1.1.</span> <span class="toc-text">定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#背景"><span class="toc-number">1.2.</span> <span class="toc-text">背景</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#单一应用架构"><span class="toc-number">1.2.1.</span> <span class="toc-text">单一应用架构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#垂直应用架构"><span class="toc-number">1.2.2.</span> <span class="toc-text">垂直应用架构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#分布式服务架构"><span class="toc-number">1.2.3.</span> <span class="toc-text">分布式服务架构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#流动计算架构"><span class="toc-number">1.2.4.</span> <span class="toc-text">流动计算架构</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#单体架构"><span class="toc-number">1.3.</span> <span class="toc-text">单体架构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#优点"><span class="toc-number">1.3.1.</span> <span class="toc-text">优点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#缺点"><span class="toc-number">1.3.2.</span> <span class="toc-text">缺点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#分布式定义"><span class="toc-number">1.4.</span> <span class="toc-text">分布式定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#简单的微服务"><span class="toc-number">1.5.</span> <span class="toc-text">简单的微服务</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#微服务架构的基础框架-组件"><span class="toc-number">1.5.1.</span> <span class="toc-text">微服务架构的基础框架/组件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#两大阵营"><span class="toc-number">1.6.</span> <span class="toc-text">两大阵营</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#阿里系"><span class="toc-number">1.6.1.</span> <span class="toc-text">阿里系</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Spring-Cloud"><span class="toc-number">1.6.2.</span> <span class="toc-text">Spring Cloud</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Spring-Cloud-是什么"><span class="toc-number">1.7.</span> <span class="toc-text">Spring Cloud 是什么</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Input-Specification"><span class="toc-number">1.</span> <span class="toc-text">Input Specification:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Output-Specification"><span class="toc-number">2.</span> <span class="toc-text">Output Specification:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Sample-Input"><span class="toc-number">3.</span> <span class="toc-text">Sample Input:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Sample-Output"><span class="toc-number">4.</span> <span class="toc-text">Sample Output:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#思路"><span class="toc-number">5.</span> <span class="toc-text">思路</span></a></li></ol>
                 </div>
             </div>
             
