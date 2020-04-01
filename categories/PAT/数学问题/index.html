@@ -125,26 +125,26 @@
             <a href="/categories/PAT"><b>「
                 </b>PAT<b> 」</b></a>
             
-            三月 31, 2020
+            四月 01, 2020
         </p>
         <h3 class="post-title animated fadeInDown">
-            <a href="/2020/03/31/PAT/Basic_Level/B1008/" title="PAT乙级 1008 数组元素循环右移问题 (20分)" class="posttitle">PAT乙级 1008 数组元素循环右移问题 (20分)</a></h3>
+            <a href="/2020/04/01/PAT/Advanced_Level/A1081/" title="PAT甲级 1081 Rational Sum (20分)" class="posttitle">PAT甲级 1081 Rational Sum (20分)</a></h3>
         
         <p class="post-count animated fadeInDown">
             
             <span>
                 <b class="iconfont icon-text2"></b> <i>文章字数</i>
-                2.3k
+                3.5k
             </span>
             
             
             <span>
                 <b class="iconfont icon-timer__s"></b> <i>阅读约需</i>
-                2 mins.
+                3 mins.
             </span>
             
             
-            <span id="/2020/03/31/PAT/Basic_Level/B1008/" class="leancloud_visitors" data-flag-title="">
+            <span id="/2020/04/01/PAT/Advanced_Level/A1081/" class="leancloud_visitors" data-flag-title="">
                 <b class="iconfont icon-read"></b> <i>阅读次数</i>
                 <span class="leancloud-visitors-count">-</span>
             </span>
@@ -156,9 +156,11 @@
         
         <div class="md-content animated fadeIn">
             
-            <p>一个数组<em>A</em>中存有<em>N</em>（&gt;0）个整数，在不允许使用另外数组的前提下，将每个整数循环向右移<em>M</em>（≥0）个位置，即将<em>A</em>中的数据由（A<sub>0</sub> A<sub>1</sub> ⋯A <sub>N−1</sub> ）变换为（A <sub>N−M</sub> ⋯A <sub>N−1</sub> A <sub>0</sub> A ...</p>
+            <p>Given <em>N</em> rational numbers in the form <code>numerator/denominator</code>, you are supposed to calculate their sum.</p>
+<p>Each input file contains one test case. Each case starts with a positive integer <em>N</em> (≤100), followed in the next line <em>N</em> rational numbers <code>a1/b1 a2/b2 ...</code> where all the numerators and denominators are in the range of <strong>long int</strong>. If there is a negative number, then the sign must appear in front of the numerator.</p>
+<p>For each test case, output the sum in the simplest form <code>integer numerator/denominator</code> where...</p>
             
-            <span class="read-more"><a href="/2020/03/31/PAT/Basic_Level/B1008/" title="查看全文" class="posttitle">查看全文</a>
+            <span class="read-more"><a href="/2020/04/01/PAT/Advanced_Level/A1081/" title="查看全文" class="posttitle">查看全文</a>
                 <b class="iconfont icon-arrow-right- gradient-text"></b></span>
         </div>
     </div>
@@ -179,6 +181,59 @@
 
     <div id="primary">
         
+<div class="post" id="post">
+    <div class="post-cover animated fadeIn" style="
+            background-image:
+            radial-gradient(ellipse closest-side, rgba(0, 0, 0, 0.65), #100e17),
+            url(/img/welcome-cover.jpg);">
+    </div>
+    <div class="else">
+        <p class="animated fadeInDown">
+            
+                <a href="/categories/PAT">
+                  <b>「 </b>PAT<b> 」</b>
+                </a>
+            
+            三月 31, 2020
+        </p>
+        <h3 class="post-title animated fadeInDown"><a href="/2020/03/31/PAT/Basic_Level/B1008/" title="PAT乙级 1008 数组元素循环右移问题 (20分)" class="posttitle">PAT乙级 1008 数组元素循环右移问题 (20分)</a></h3>
+        
+            <p class="post-count animated fadeInDown">
+                
+                    <span>
+                        <b class="iconfont icon-text2"></b> <i>文章字数</i>
+                        2.3k
+                    </span>
+                
+                
+                    <span>
+                        <b class="iconfont icon-timer__s"></b> <i>阅读约需</i>
+                        2 mins.
+                    </span>
+                
+                
+                    <span id="/2020/03/31/PAT/Basic_Level/B1008/" class="leancloud_visitors" data-flag-title="">
+                        <b class="iconfont icon-read"></b> <i>阅读次数</i>
+                        <span class="leancloud-visitors-count">-</span>
+                    </span>
+                
+            </p>
+            
+                <ul class="animated fadeInDown post-tags-list"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/PAT/">PAT</a></li></ul>
+            
+        
+        <div class="md-content animated fadeIn">
+            
+                <p>一个数组<em>A</em>中存有<em>N</em>（&gt;0）个整数，在不允许使用另外数组的前提下，将每个整数循环向右移<em>M</em>（≥0）个位置，即将<em>A</em>中的数据由（A<sub>0</sub> A<sub>1</sub> ⋯A <sub>N−1</sub> ）变换为（A <sub>N−M</sub> ⋯A <sub>N−1</sub> A <sub>0</sub> A <sub>1</sub>⋯A  <sub>N−M−1</sub> ）（最后<em>M</em>个数循环移至最前面的<em>M</em>个位置）。如果需要考虑程序移动数据的次数尽量少，要如何设计移动的方法？</p>
+<p>每个输入包含一个测试用例，第1行输入<em>N</em>（1≤<em>N</em>≤100）和<em>M</em>（≥0）；第2行输入<em>N</em>个整数，之间用空格分隔。</p>
+<p>在一行中输出循环右移<em>M</em>位以后的整数序列，之间用空格分隔，序列结尾不能...</p>
+            
+            <span class="read-more"><a href="/2020/03/31/PAT/Basic_Level/B1008/" title="查看全文" class="posttitle">查看全文</a> <b class="iconfont icon-arrow-right- gradient-text"></b></span>
+        </div>
+    </div>
+</div>
+
+
 <div class="post" id="post">
     <div class="post-cover animated fadeIn" style="
             background-image:

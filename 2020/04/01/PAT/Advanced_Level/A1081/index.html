@@ -5,12 +5,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>CentOS 7 Tomcat开机自启动配置 - Zjxjwxk&#39;s Blog</title>
+    <title>PAT甲级 1081 Rational Sum (20分) - Zjxjwxk&#39;s Blog</title>
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="google" content="notranslate">
     <meta name="keywords" content="吴鑫康 zjxjwxk Wxk Java,"> 
-    <meta name="description" content="CentOS 7 Tomcat开机自启动配置配置开机运行Tomcat增加启动参数Tomcat需要增加一个pid文件，在 $CATALINA_HOME/bin 目录下面，增加 setenv.sh 配置,"> 
+    <meta name="description" content="Given N rational numbers in the form numerator/denominator, you are supposed to calculate their sum,"> 
     <meta name="author" content="吴鑫康"> 
     <link rel="alternative" href="atom.xml" title="Zjxjwxk&#39;s Blog" type="application/atom+xml"> 
     <link rel="icon" href="/img/favicon.png"> 
@@ -43,7 +43,7 @@
     <div class="navigation animated fadeIn fast delay-1s">
         <img id="home-icon" class="icon-home" src="/img/favicon.png" alt="" data-url="https://zjxjwxk.com">
         <div id="play-icon" title="Play/Pause" class="iconfont icon-play"></div>
-        <h3 class="subtitle">CentOS 7 Tomcat开机自启动配置</h3>
+        <h3 class="subtitle">PAT甲级 1081 Rational Sum (20分)</h3>
         <div class="social">
             <!--        <div class="like-icon">-->
             <!--            <a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
@@ -74,19 +74,19 @@
         <div class="else">
             <p class="animated fadeInDown">
                 
-                <a href="/categories/Linux"><b>「
-                    </b>LINUX<b> 」</b></a>
+                <a href="/categories/PAT"><b>「
+                    </b>PAT<b> 」</b></a>
                 
-                一月 13, 2019
+                四月 01, 2020
             </p>
-            <h3 class="post-title animated fadeInDown"><a href="/2019/01/13/Linux/CentOS/CentOS 7 Tomcat的安装及开机自启动配置/" title="CentOS 7 Tomcat开机自启动配置">CentOS 7 Tomcat开机自启动配置</a>
+            <h3 class="post-title animated fadeInDown"><a href="/2020/04/01/PAT/Advanced_Level/A1081/" title="PAT甲级 1081 Rational Sum (20分)">PAT甲级 1081 Rational Sum (20分)</a>
             </h3>
             
             <p class="post-count animated fadeInDown">
                 
                 <span>
                     <b class="iconfont icon-text2"></b> <i>文章字数</i>
-                    3.2k
+                    3.5k
                 </span>
                 
                 
@@ -96,7 +96,7 @@
                 </span>
                 
                 
-                <span id="/2019/01/13/Linux/CentOS/CentOS 7 Tomcat的安装及开机自启动配置/" class="leancloud_visitors" data-flag-title="CentOS 7 Tomcat开机自启动配置">
+                <span id="/2020/04/01/PAT/Advanced_Level/A1081/" class="leancloud_visitors" data-flag-title="PAT甲级 1081 Rational Sum (20分)">
                     <b class="iconfont icon-read"></b> <i>阅读次数</i>
                     <span class="leancloud-visitors-count">-</span>
                 </span>
@@ -105,7 +105,7 @@
             </p>
             
             
-            <ul class="animated fadeInDown post-tags-list"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/CentOS/">CentOS</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/Linux/">Linux</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/Tomcat/">Tomcat</a></li></ul>
+            <ul class="animated fadeInDown post-tags-list"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/PAT/">PAT</a></li></ul>
             
         </div>
     </div>
@@ -126,66 +126,84 @@
 <div class="article">
     <div class="main">
         <div class="content markdown animated fadeIn">
-            <h1 id="CentOS-7-Tomcat开机自启动配置"><a href="#CentOS-7-Tomcat开机自启动配置" class="headerlink" title="CentOS 7 Tomcat开机自启动配置"></a>CentOS 7 Tomcat开机自启动配置</h1><h2 id="配置开机运行"><a href="#配置开机运行" class="headerlink" title="配置开机运行"></a>配置开机运行</h2><h3 id="Tomcat增加启动参数"><a href="#Tomcat增加启动参数" class="headerlink" title="Tomcat增加启动参数"></a>Tomcat增加启动参数</h3><p>Tomcat需要增加一个pid文件，在 <code>$CATALINA_HOME/bin</code> 目录下面，增加 <code>setenv.sh</code> 配置，<code>catalina.sh</code>启动的时候会调用，同时配置Java内存参数。添加如下命令：<br><code>[root@vps bin]# vim setenv.sh</code></p>
-<pre><code class="sh">#Tomcat startup pid
-
-#set Java runtime environment variable 
-export JAVA_HOME=/usr/java/jdk1.8.0_191-amd64
-export PATH=$PATH:$JAVA_HOME/bin
-export CATALINA_HOME=/developer/apache-tomcat-7.0.91
-export CATALINA_BASE=/developer/apache-tomcat-7.0.91
-
-#add Tomcat pid
-CATALINA_PID=&quot;$CATALINA_BASE/tomcat.pid&quot;
-
-#add Java opts
-JAVA_OPTS=&quot;-server -XX:PermSize=256M -XX:MaxPermSize=1024m -Xms512M -Xmx1024M -XX:MaxNewSize=256m&quot;
+            <p>Given <em>N</em> rational numbers in the form <code>numerator/denominator</code>, you are supposed to calculate their sum.</p>
+<h1 id="Input-Specification"><a href="#Input-Specification" class="headerlink" title="Input Specification:"></a>Input Specification:</h1><p>Each input file contains one test case. Each case starts with a positive integer <em>N</em> (≤100), followed in the next line <em>N</em> rational numbers <code>a1/b1 a2/b2 ...</code> where all the numerators and denominators are in the range of <strong>long int</strong>. If there is a negative number, then the sign must appear in front of the numerator.</p>
+<h1 id="Output-Specification"><a href="#Output-Specification" class="headerlink" title="Output Specification:"></a>Output Specification:</h1><p>For each test case, output the sum in the simplest form <code>integer numerator/denominator</code> where <code>integer</code> is the integer part of the sum, <code>numerator</code> &lt; <code>denominator</code>, and the numerator and the denominator have no common factor. You must output only the fractional part if the integer part is 0.</p>
+<h1 id="Sample-Input-1"><a href="#Sample-Input-1" class="headerlink" title="Sample Input 1:"></a>Sample Input 1:</h1><pre><code class="in">5
+2/5 4/15 1/30 -2/60 8/3
 </code></pre>
-<p><strong>注意:</strong> 配置开机运行时,需要再次添加 JAVA_HOME</p>
-<h3 id="增加-tomcat-service"><a href="#增加-tomcat-service" class="headerlink" title="增加 tomcat.service"></a>增加 tomcat.service</h3><p>在/usr/lib/systemd/system目录下增加tomcat.service，目录必须是绝对目录，添加如下命令：<br><code>[root@vps bin]# vim /usr/lib/systemd/system/tomcat.service</code></p>
-<pre><code class="sh"># conf service desc ,set do this after network started
-[Unit]
-Description=tomcat 
-After=syslog.target network.target remote-fs.target nss-lookup.target
-
-# conf service pid, start,stop and restart
-[Service]
-Type=forking
-PIDFile=/developer/apache-tomcat-7.0.91/tomcat.pid
-ExecStart=/developer/apache-tomcat-7.0.91/bin/startup.sh
-ExecStop=/bin/kill -s QUIT $MAINPID
-ExecReload=/bin/kill -s HUP $MAINPID
-PrivateTmp=true
-
-# conf user 
-[Install]
-WantedBy=multi-user.target
+<h1 id="Sample-Output-1"><a href="#Sample-Output-1" class="headerlink" title="Sample Output 1:"></a>Sample Output 1:</h1><pre><code class="out">3 1/3
 </code></pre>
-<p><em>[unit]:</em> 配置了服务的描述，规定了在network启动之后执行，</p>
-<p><em>[service]:</em> 配置服务的pid，服务的启动，停止，重启</p>
-<p><em>[install]:</em> 配置了使用用户</p>
-<h3 id="使用tomcat-service"><a href="#使用tomcat-service" class="headerlink" title="使用tomcat.service"></a>使用tomcat.service</h3><p>centos7使用systemctl替换了service命令，如需设置其他服务，替换此处的tomcat即可，如:<code>systemctl start vsftp.service</code></p>
-<ul>
-<li>启动服务<br>systemctl start tomcat.service</li>
-<li>停止服务<br>systemctl stop tomcat.service</li>
-<li>重启服务<br>systemctl restart tomcat.service</li>
-<li>增加开机启动<br>systemctl enable tomcat.service</li>
-<li>删除开机启动<br>systemctl disable tomcat.service</li>
+<h1 id="Sample-Input-2"><a href="#Sample-Input-2" class="headerlink" title="Sample Input 2:"></a>Sample Input 2:</h1><pre><code class="in">2
+4/3 2/3
+</code></pre>
+<h1 id="Sample-Output-2"><a href="#Sample-Output-2" class="headerlink" title="Sample Output 2:"></a>Sample Output 2:</h1><pre><code class="out">2
+</code></pre>
+<h1 id="Sample-Input-3"><a href="#Sample-Input-3" class="headerlink" title="Sample Input 3:"></a>Sample Input 3:</h1><pre><code class="in">3
+1/3 -1/6 1/8
+</code></pre>
+<h1 id="Sample-Output-3"><a href="#Sample-Output-3" class="headerlink" title="Sample Output 3:"></a>Sample Output 3:</h1><pre><code class="out">7/24
+</code></pre>
+<h1 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h1><ul>
+<li>数据范围为 int，但是两个分母相乘时，可能超出 int，最大可以达到 long long，所以如果使用 int，就会溢出，得到“答案错误”</li>
+<li>必须在每一步加法后都进行约分，如果等全部加完后才约分，则会溢出</li>
 </ul>
-<p>因为配置pid，在启动的时候会在Tomcat的根目录下生产tomcat.pid文件,服务停止后删除。<br>同时Tomcat在启动时，执行start不会启动两个Tomcat，保证始终只有一个Tomcat服务在运行。多个Tomcat可以配置在多个目录下，互不影响。</p>
-<h2 id="查看效果"><a href="#查看效果" class="headerlink" title="查看效果"></a>查看效果</h2><p>重启服务器后,通过wget访问，终端输出如下所示，配置tomcat开机自启动成功！</p>
-<pre><code class="shell">[root@vps ~]# wget 35.234.8.23:8080
---2019-01-12 16:02:41--  http://35.234.8.23:8080/
-Connecting to 35.234.8.23:8080... connected.
-HTTP request sent, awaiting response... 200 OK
-Length: 909 [text/html]
-Saving to: ‘index.html’
+<pre><code class="C++">#include &lt;cstdio&gt;
+#include &lt;algorithm&gt;
+using namespace std;
 
-100%[===========================================================&gt;] 909         --.-K/s   in 0s      
+struct Num {
+    long long a, b;
+} temp, ans;
 
-2019-01-12 16:02:41 (157 MB/s) - ‘index.html’ saved [909/909]
+long long gcd(long long a, long long b) {
+    if (b == 0) {
+        return a;
+    } else {
+        return gcd(b, a % b);
+    }
+}
+
+void simplify(Num &amp;n) {
+    if (n.b &lt; 0) {
+        n.a = -n.a;
+        n.b = -n.b;
+    }
+    if (n.a == 0) {
+        n.b = 1;
+    } else {
+        int d = gcd(abs(n.a), abs(n.b));
+        n.a /= d;
+        n.b /= d;
+    }
+}
+
+Num add(Num &amp;n1, Num &amp;n2) {
+    Num ret;
+    ret.a = n1.a * n2.b + n2.a * n1.b;
+    ret.b = n1.b * n2.b;
+    simplify(ret);
+    return ret;
+}
+
+int main() {
+    int n;
+    scanf(&quot;%d %lld/%lld&quot;, &amp;n, &amp;ans.a, &amp;ans.b);
+    simplify(ans);
+    for (int i = 1; i &lt; n; i++) {
+        scanf(&quot;%lld/%lld&quot;, &amp;temp.a, &amp;temp.b);
+        ans = add(ans, temp);
+    }
+    if (ans.b == 1) {
+        printf(&quot;%lld&quot;, ans.a);
+    } else if (ans.a &gt; ans.b) {
+        printf(&quot;%lld %lld/%lld&quot;, ans.a / ans.b, ans.a % ans.b, ans.b);
+    } else {
+        printf(&quot;%lld/%lld&quot;, ans.a, ans.b);
+    }
+    return 0;
+}
 </code></pre>
-<p>同时,客户端浏览器也能成功访问。</p>
 
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
@@ -229,7 +247,7 @@ Saving to: ‘index.html’
             <div class="box sticky animated fadeInRight faster">
                 <div id="toc" class="subbox">
                     <h4>目录</h4>
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#CentOS-7-Tomcat开机自启动配置"><span class="toc-number">1.</span> <span class="toc-text">CentOS 7 Tomcat开机自启动配置</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#配置开机运行"><span class="toc-number">1.1.</span> <span class="toc-text">配置开机运行</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Tomcat增加启动参数"><span class="toc-number">1.1.1.</span> <span class="toc-text">Tomcat增加启动参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#增加-tomcat-service"><span class="toc-number">1.1.2.</span> <span class="toc-text">增加 tomcat.service</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用tomcat-service"><span class="toc-number">1.1.3.</span> <span class="toc-text">使用tomcat.service</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#查看效果"><span class="toc-number">1.2.</span> <span class="toc-text">查看效果</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Input-Specification"><span class="toc-number">1.</span> <span class="toc-text">Input Specification:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Output-Specification"><span class="toc-number">2.</span> <span class="toc-text">Output Specification:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Sample-Input-1"><span class="toc-number">3.</span> <span class="toc-text">Sample Input 1:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Sample-Output-1"><span class="toc-number">4.</span> <span class="toc-text">Sample Output 1:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Sample-Input-2"><span class="toc-number">5.</span> <span class="toc-text">Sample Input 2:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Sample-Output-2"><span class="toc-number">6.</span> <span class="toc-text">Sample Output 2:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Sample-Input-3"><span class="toc-number">7.</span> <span class="toc-text">Sample Input 3:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Sample-Output-3"><span class="toc-number">8.</span> <span class="toc-text">Sample Output 3:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#注意点"><span class="toc-number">9.</span> <span class="toc-text">注意点</span></a></li></ol>
                 </div>
             </div>
             
