@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://zjxjwxk.com/"/>
-  <updated>2020-04-01T08:29:24.000Z</updated>
+  <updated>2020-04-02T13:04:21.000Z</updated>
   <id>https://zjxjwxk.com/</id>
   
   <author>
@@ -15,6 +15,60 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>PAT甲级 1096 Consecutive Factors (20分)</title>
+    <link href="https://zjxjwxk.com/2020/04/02/PAT/Advanced_Level/A1096/"/>
+    <id>https://zjxjwxk.com/2020/04/02/PAT/Advanced_Level/A1096/</id>
+    <published>2020-04-02T12:53:00.000Z</published>
+    <updated>2020-04-02T13:04:21.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>Among all the factors of a positive integer N, there may exist several consecutive numbers. For example, 630 can be factored as 3×5×6×7, where 5, 6, and 7 are the three consecutive numbers. Now given any positive N, you are supposed to find the maximum number of consecutive factors, and list the smallest sequence of the consecutive factors.</p><h1 id="Input-Specification"><a href="#Input-Specification" class="headerlink" title="Input Specification:"></a>Input Specification:</h1><p>Each input file contains one test case, which gives the integer N (1&lt;N&lt;$2^{31}$).</p><h1 id="Output-Specification"><a href="#Output-Specification" class="headerlink" title="Output Specification:"></a>Output Specification:</h1><p>For each test case, print in the first line the maximum number of consecutive factors. Then in the second line, print the smallest sequence of the consecutive factors in the format <code>factor[1]*factor[2]*...*factor[k]</code>, where the factors are listed in increasing order, and 1 is NOT included.</p><h1 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input:"></a>Sample Input:</h1><pre><code class="in">630</code></pre><h1 id="Sample-Output"><a href="#Sample-Output" class="headerlink" title="Sample Output:"></a>Sample Output:</h1><pre><code class="out">35*6*7</code></pre><h1 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h1><ul><li>N 不会被自己以为的大于 $\sqrt{N}$ 的多个连续整数整除，因此只需要从 2 ～ $\sqrt{N}$ 遍历连续整数的第一个。</li><li>如果遍历结束后 ansLen 依然为 0，说明不超过 $\sqrt{N}$ 的整数中不存在能整除 N 的连续整数，因此答案就是 N 本身。此时输出特例，即连续个数为 1，因数为 N 本身。</li><li>需要用 long long，防止中间乘积超过 int 导致溢出。</li></ul><pre><code class="C++">#include &lt;cstdio&gt;#include &lt;cmath&gt;int main() {    long long n;    scanf(&quot;%lld&quot;, &amp;n);    long long ansI, ansLen = 0, sqr = sqrt(1.0 * n);    for (long long i = 2; i &lt;= sqr; i++) {        long long temp = 1;        for (long long j = i; j &lt;= n ; j++) {            temp *= j;            if (n % temp == 0) {                if (j - i + 1 &gt; ansLen) {                    ansLen = j - i + 1;                    ansI = i;                }            } else {                break;            }        }    }    if (ansLen == 0) {        printf(&quot;1\n%lld&quot;, n);    } else {        printf(&quot;%lld\n&quot;, ansLen);        for (long long i = 0; i &lt; ansLen; i++) {            printf(&quot;%lld&quot;, ansI + i);            if (i != ansLen - 1) {                printf(&quot;*&quot;);            }        }    }    return 0;}</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;Among all the factors of a positive integer N, there may exist several consecutive numbers. For example, 630 can be factored as 3×5×6×7, 
+      
+    
+    </summary>
+    
+      <category term="PAT" scheme="https://zjxjwxk.com/categories/PAT/"/>
+    
+      <category term="数学问题" scheme="https://zjxjwxk.com/categories/PAT/%E6%95%B0%E5%AD%A6%E9%97%AE%E9%A2%98/"/>
+    
+    
+      <category term="PAT" scheme="https://zjxjwxk.com/tags/PAT/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>PAT甲级 1078 Hashing (25分)</title>
+    <link href="https://zjxjwxk.com/2020/04/02/PAT/Advanced_Level/A1078/"/>
+    <id>https://zjxjwxk.com/2020/04/02/PAT/Advanced_Level/A1078/</id>
+    <published>2020-04-02T09:04:00.000Z</published>
+    <updated>2020-04-02T09:14:36.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>The task of this problem is simple: insert a sequence of distinct positive integers into a hash table, and output the positions of the input numbers. The hash function is defined to be H(key)=key%TSize where TSize is the maximum size of the hash table. Quadratic probing (with positive increments only) is used to solve the collisions.</p><p>Note that the table size is better to be prime. If the maximum size given by the user is not prime, you must re-define the table size to be the smallest prime number which is larger than the size given by the user.</p><h1 id="Input-Specification"><a href="#Input-Specification" class="headerlink" title="Input Specification:"></a>Input Specification:</h1><p>Each input file contains one test case. For each case, the first line contains two positive numbers: <strong>MSize</strong> (≤ $10^4$ ) and <strong>N</strong> (≤MSize) which are the user-defined table size and the number of input numbers, respectively. Then N distinct positive integers are given in the next line. All the numbers in a line are separated by a space.</p><h1 id="Output-Specification"><a href="#Output-Specification" class="headerlink" title="Output Specification:"></a>Output Specification:</h1><p>For each test case, print the corresponding positions (index starts from 0) of the input numbers in one line. All the numbers in a line are separated by a space, and there must be no extra space at the end of the line. In case it is impossible to insert the number, print “-“ instead.</p><h1 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input:"></a>Sample Input:</h1><pre><code class="in">4 410 6 4 15</code></pre><h1 id="Sample-Output"><a href="#Sample-Output" class="headerlink" title="Sample Output:"></a>Sample Output:</h1><pre><code class="out">0 1 4 -</code></pre><h1 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h1><ul><li>进行二次探测时，当 step 自增达到 TSize 时如果还没有找到可用位置，则表明这个元素无法被插入。</li><li>创建哈希表时数组大小应该尽量比 $10^4$ 大一些，因为当寻找大于 MSize 的最小质数时可能超过 $10^4$。</li></ul><pre><code class="C++">#include &lt;cstdio&gt;#include &lt;cmath&gt;const int maxn = 10010;bool isPrime(int n) {    if (n &lt;= 1) {        return false;    } else if (n == 2) {        return true;    } else {        int q = (int) sqrt(1.0 * n);        for (int i = 2; i &lt;= q; i++) {            if (n % i == 0) {                return false;            }        }        return true;    }}int main() {    int tSize, n, nums[maxn] = {0}, num;    scanf(&quot;%d %d&quot;, &amp;tSize, &amp;n);    while (!isPrime(tSize)) {        tSize++;    }    for (int i = 0; i &lt; n; i++) {        scanf(&quot;%d&quot;, &amp;num);        int index = num % tSize;        if (nums[index] == 0) {            nums[index] = num;            if (i != 0) {                printf(&quot; &quot;);            }            printf(&quot;%d&quot;, index);        } else {            int j;            for (j = 1; j &lt;= tSize; j++) {                index = (num + j * j) % tSize;                if (nums[index] == 0) {                    nums[index] = num;                    printf(&quot; %d&quot;, index);                    break;                }            }            if (j &gt; tSize) {                printf(&quot; -&quot;);            }        }    }    return 0;}</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;The task of this problem is simple: insert a sequence of distinct positive integers into a hash table, and output the positions of the in
+      
+    
+    </summary>
+    
+      <category term="PAT" scheme="https://zjxjwxk.com/categories/PAT/"/>
+    
+      <category term="数学问题" scheme="https://zjxjwxk.com/categories/PAT/%E6%95%B0%E5%AD%A6%E9%97%AE%E9%A2%98/"/>
+    
+    
+      <category term="PAT" scheme="https://zjxjwxk.com/tags/PAT/"/>
+    
+  </entry>
   
   <entry>
     <title>PAT甲级 1081 Rational Sum (20分)</title>
