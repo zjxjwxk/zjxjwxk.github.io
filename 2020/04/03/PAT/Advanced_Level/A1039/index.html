@@ -5,13 +5,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>PAT乙级 1010 一元多项式求导 (25分) - Zjxjwxk&#39;s Blog</title>
+    <title>PAT甲级 1039 Course List for Student (25分) - Zjxjwxk&#39;s Blog</title>
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="google" content="notranslate">
     <meta name="keywords" content="吴鑫康 zjxjwxk Wxk Java,"> 
-    <meta name="description" content="设计函数求一元多项式的导数。（注：$x^n$（n为整数）的一阶导数为$nx^{n−1}$。）
-输入格式:以指数递降方式输入多项式非零项系数和指数（绝对值均为不超过 1000 的整数）。数字间以空格分,"> 
+    <meta name="description" content="Zhejiang University has 40000 students and provides 2500 courses. Now given the student name lists ,"> 
     <meta name="author" content="吴鑫康"> 
     <link rel="alternative" href="atom.xml" title="Zjxjwxk&#39;s Blog" type="application/atom+xml"> 
     <link rel="icon" href="/img/favicon.png"> 
@@ -44,7 +43,7 @@
     <div class="navigation animated fadeIn fast delay-1s">
         <img id="home-icon" class="icon-home" src="/img/favicon.png" alt="" data-url="https://zjxjwxk.com">
         <div id="play-icon" title="Play/Pause" class="iconfont icon-play"></div>
-        <h3 class="subtitle">PAT乙级 1010 一元多项式求导 (25分)</h3>
+        <h3 class="subtitle">PAT甲级 1039 Course List for Student (25分)</h3>
         <div class="social">
             <!--        <div class="like-icon">-->
             <!--            <a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
@@ -78,26 +77,26 @@
                 <a href="/categories/PAT"><b>「
                     </b>PAT<b> 」</b></a>
                 
-                三月 17, 2020
+                四月 03, 2020
             </p>
-            <h3 class="post-title animated fadeInDown"><a href="/2020/03/17/PAT/Basic_Level/B1010/" title="PAT乙级 1010 一元多项式求导 (25分)">PAT乙级 1010 一元多项式求导 (25分)</a>
+            <h3 class="post-title animated fadeInDown"><a href="/2020/04/03/PAT/Advanced_Level/A1039/" title="PAT甲级 1039 Course List for Student (25分)">PAT甲级 1039 Course List for Student (25分)</a>
             </h3>
             
             <p class="post-count animated fadeInDown">
                 
                 <span>
                     <b class="iconfont icon-text2"></b> <i>文章字数</i>
-                    1.7k
+                    3.6k
                 </span>
                 
                 
                 <span>
                     <b class="iconfont icon-timer__s"></b> <i>阅读约需</i>
-                    2 mins.
+                    3 mins.
                 </span>
                 
                 
-                <span id="/2020/03/17/PAT/Basic_Level/B1010/" class="leancloud_visitors" data-flag-title="PAT乙级 1010 一元多项式求导 (25分)">
+                <span id="/2020/04/03/PAT/Advanced_Level/A1039/" class="leancloud_visitors" data-flag-title="PAT甲级 1039 Course List for Student (25分)">
                     <b class="iconfont icon-read"></b> <i>阅读次数</i>
                     <span class="leancloud-visitors-count">-</span>
                 </span>
@@ -127,56 +126,77 @@
 <div class="article">
     <div class="main">
         <div class="content markdown animated fadeIn">
-            <p>设计函数求一元多项式的导数。（注：$x^n$（<em>n</em>为整数）的一阶导数为$nx^{n−1}$。）</p>
-<h1 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式:"></a>输入格式:</h1><p>以指数递降方式输入多项式非零项系数和指数（绝对值均为不超过 1000 的整数）。数字间以空格分隔。</p>
-<h1 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式:"></a>输出格式:</h1><p>以与输入相同的格式输出导数多项式非零项的系数和指数。数字间以空格分隔，但结尾不能有多余空格。注意“零多项式”的指数和系数都是 0，但是表示为 <code>0 0</code>。</p>
-<h1 id="输入样例"><a href="#输入样例" class="headerlink" title="输入样例:"></a>输入样例:</h1><pre><code class="in">3 4 -5 2 6 1 -2 0
+            <p>Zhejiang University has 40000 students and provides 2500 courses. Now given the student name lists of all the courses, you are supposed to output the registered course list for each student who comes for a query.</p>
+<h1 id="Input-Specification"><a href="#Input-Specification" class="headerlink" title="Input Specification:"></a>Input Specification:</h1><p>Each input file contains one test case. For each case, the first line contains 2 positive integers: <em>N</em> (≤40,000), the number of students who look for their course lists, and <em>K</em> (≤2,500), the total number of courses. Then the student name lists are given for the courses (numbered from 1 to <em>K</em>) in the following format: for each course <em>i</em>, first the course index <em>i</em> and the number of registered students N <sub>i</sub> (≤200) are given in a line. Then in the next line, N <sub>i</sub> student names are given. A student name consists of 3 capital English letters plus a one-digit number. Finally the last line contains the <em>N</em> names of students who come for a query. All the names and numbers in a line are separated by a space.</p>
+<h1 id="Output-Specification"><a href="#Output-Specification" class="headerlink" title="Output Specification:"></a>Output Specification:</h1><p>For each test case, print your results in <em>N</em> lines. Each line corresponds to one student, in the following format: first print the student’s name, then the total number of registered courses of that student, and finally the indices of the courses in increasing order. The query results must be printed in the same order as input. All the data in a line must be separated by a space, with no extra space at the end of the line.</p>
+<h1 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input:"></a>Sample Input:</h1><pre><code class="in">11 5
+4 7
+BOB5 DON2 FRA8 JAY9 KAT3 LOR6 ZOE1
+1 4
+ANN0 BOB5 JAY9 LOR6
+2 7
+ANN0 BOB5 FRA8 JAY9 JOE4 KAT3 LOR6
+3 1
+BOB5
+5 9
+AMY7 ANN0 BOB5 DON2 FRA8 JAY9 KAT3 LOR6 ZOE1
+ZOE1 ANN0 BOB5 JOE4 JAY9 FRA8 DON2 AMY7 KAT3 LOR6 NON9
+
 </code></pre>
-<h1 id="输出样例"><a href="#输出样例" class="headerlink" title="输出样例:"></a>输出样例:</h1><pre><code class="out">12 3 -10 1 6 0
+<h1 id="Sample-Output"><a href="#Sample-Output" class="headerlink" title="Sample Output:"></a>Sample Output:</h1><pre><code class="out">ZOE1 2 4 5
+ANN0 3 1 2 5
+BOB5 5 1 2 3 4 5
+JOE4 1 2
+JAY9 4 1 2 4 5
+FRA8 3 2 4 5
+DON2 2 4 5
+AMY7 1 5
+KAT3 3 2 4 5
+LOR6 4 1 2 4 5
+NON9 0
 </code></pre>
 <h1 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h1><ul>
-<li>用 while……EOF 的格式来读入系数和指数（黑框中触发 EOF 要按 <code>ctrl + Z</code>，并回车）</li>
-<li>经测试，该题的指数都是非负整数</li>
-<li>求导必须从低次项枚举到高次项，否则结果可能为出错</li>
-<li>在求导后，当前系数必须清空为0，否则当前无法被后面覆盖</li>
-<li>如果求导之后没有任何非零项，需要输出 <code>0 0</code></li>
+<li>本题最后一个测试点数据量比较大，使用 map, string 会导致超时，因此只能使用字符串 hash 进行求解，使用 vector<int> 数组或 set<int> 数组（自动排序课程号）。</int></int></li>
 </ul>
-<pre><code class="C++">#include &lt;cstdio&gt;
+<pre><code>#include &lt;cstdio&gt;
+#include &lt;set&gt;
+using namespace std;
 
-const int maxn = 1001;
+const int maxn = 26 * 26 * 26 * 10;
+set&lt;int&gt; course[maxn];
+
+int getID(char name[]) {
+    int id = 0;
+    for (int i = 0; i &lt; 3; i++) {
+        id = id * 26 + (name[i] - &#39;A&#39;);
+    }
+    id = id * 10 + (name[3] - &#39;0&#39;);
+    return id;
+}
 
 int main() {
-    int n[maxn] = {0}, c, e, cnt = 0;
-    while (scanf(&quot;%d%d&quot;, &amp;c, &amp;e) != EOF) {
-        n[e] = c;
-    }
-    n[0] = 0;
-    for (int i = 1; i &lt; maxn; i++) {
-        n[i - 1] = i * n[i];
-        n[i] = 0;
-        if (n[i - 1] != 0) {
-            cnt++;
+    int n, k, index, num;
+    scanf(&quot;%d %d&quot;, &amp;n, &amp;k);
+    char name[5];
+    for (int i = 0; i &lt; k; i++) {
+        scanf(&quot;%d %d&quot;, &amp;index, &amp;num);
+        for (int j = 0; j &lt; num; j++) {
+            scanf(&quot;%s&quot;, name);
+            course[getID(name)].insert(index);
         }
     }
-    if (cnt == 0) {
-        printf(&quot;0 0&quot;);
-    } else {
-        for (int i = maxn - 1; i &gt;= 0; i--) {
-            if (n[i] != 0) {
-                printf(&quot;%d %d&quot;, n[i], i);
-                cnt--;
-                if (cnt != 0) {
-                    printf(&quot; &quot;);
-                } else {
-                    break;
-                }
-            }
+    for (int i = 0; i &lt; n; i++) {
+        scanf(&quot;%s&quot;, name);
+        int id = getID(name);
+        printf(&quot;%s %d&quot;, name, course[id].size());
+        for (auto it = course[id].begin(); it != course[id].end(); it++) {
+            printf(&quot;% d&quot;, *it);
         }
+        printf(&quot;\n&quot;);
     }
     return 0;
 }
 </code></pre>
-
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
                 <source type="audio/mpeg" src="">
@@ -219,7 +239,7 @@ int main() {
             <div class="box sticky animated fadeInRight faster">
                 <div id="toc" class="subbox">
                     <h4>目录</h4>
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#输入格式"><span class="toc-number">1.</span> <span class="toc-text">输入格式:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#输出格式"><span class="toc-number">2.</span> <span class="toc-text">输出格式:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#输入样例"><span class="toc-number">3.</span> <span class="toc-text">输入样例:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#输出样例"><span class="toc-number">4.</span> <span class="toc-text">输出样例:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#注意点"><span class="toc-number">5.</span> <span class="toc-text">注意点</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Input-Specification"><span class="toc-number">1.</span> <span class="toc-text">Input Specification:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Output-Specification"><span class="toc-number">2.</span> <span class="toc-text">Output Specification:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Sample-Input"><span class="toc-number">3.</span> <span class="toc-text">Sample Input:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Sample-Output"><span class="toc-number">4.</span> <span class="toc-text">Sample Output:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#注意点"><span class="toc-number">5.</span> <span class="toc-text">注意点</span></a></li></ol>
                 </div>
             </div>
             
