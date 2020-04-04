@@ -92,7 +92,7 @@ Dubbo 结果缓存
                 
                 <span>
                     <b class="iconfont icon-text2"></b> <i>文章字数</i>
-                    6.7k
+                    6.2k
                 </span>
                 
                 
@@ -183,7 +183,7 @@ Dubbo 结果缓存
 <h4 id="客户端连接控制-1"><a href="#客户端连接控制-1" class="headerlink" title="客户端连接控制"></a>客户端连接控制</h4><p>服务端可以接受任意个请求，但是客户端只能接受 10 个请求。</p>
 <p><img src="/2020/03/30/Dubbo/Dubbo微服务影院系列/7.Dubbo服务开发（影院模块开发）/Dubbo微服务影院系列（7）：Dubbo服务开发（影院模块开发）/image-20200405000145642.png" alt="客户端连接控制"></p>
 <p>如果超出了限制，则会报和没有启动服务类似的异常：</p>
-<pre><code>Caused by: java.lang.IllegalStateException: Failed to check the status of the service com.zjut.zjxjwxk.dubbo.ServiceAPI. No provider available for the service com.zjut.zjxjwxk.dubbo.ServiceAPI from the url zookeeper://localhost:2181/com.alibaba.dubbo.registry.RegistryService?accepts=1&amp;anyhost=true&amp;application=consumer-of-hello-world-app&amp;cache=lru&amp;check=false&amp;dubbo=2.5.3&amp;interface=com.zjut.zjxjwxk.dubbo.ServiceAPI&amp;loadbalance=roundrobin&amp;methods=sendMessage02,sendMessage&amp;pid=8509&amp;side=consumer&amp;timeout=10000&amp;timestamp=1586017005147 to the consumer 192.168.6.102 use dubbo version 2.5.3
+<pre><code>Caused by: java.lang.IllegalStateException: Failed to check the status of the service com.zjut.zjxjwxk.dubbo.ServiceAPI. No provider available for the service com.zjut.zjxjwxk.dubbo.ServiceAPI ...
 </code></pre><h2 id="Dubbo-并发控制"><a href="#Dubbo-并发控制" class="headerlink" title="Dubbo 并发控制"></a>Dubbo 并发控制</h2><blockquote>
 <p>官方文档：<a href="https://dubbo.apache.org/zh-cn/docs/user/demos/concurrency-control.html" target="_blank" rel="noopener">https://dubbo.apache.org/zh-cn/docs/user/demos/concurrency-control.html</a></p>
 </blockquote>
