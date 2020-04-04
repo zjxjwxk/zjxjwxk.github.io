@@ -460,13 +460,13 @@
                 
                     <span>
                         <b class="iconfont icon-text2"></b> <i>文章字数</i>
-                        155
+                        6.7k
                     </span>
                 
                 
                     <span>
                         <b class="iconfont icon-timer__s"></b> <i>阅读约需</i>
-                        1 mins.
+                        6 mins.
                     </span>
                 
                 
@@ -487,7 +487,13 @@
 <li>修改全局异常返回</li>
 <li>学习 Dubbo 特性：并发控制，结果缓存</li>
 </ul>
-
+<blockquote>
+<p>官方文档：<a href="https://dubbo.apache.org/zh-cn/docs/user/demos/result-cache.html" target="_blank" rel="noopener">https://dubbo.apache.org/zh-cn/docs/user/demos/result-cache.html</a></p>
+</blockquote>
+<p>用于加速热门数据的访问速度，Dubbo 提供声明式缓存，以减少用户加缓存的工作量。</p>
+<ul>
+<li><code>lru</code> 基于最近最少使用原则删除多余缓存，保持最热的数据被缓存。</li>
+<li><code>threadlocal</code> 当前线程缓存，比如一个页面渲染，用到很多 portal，每个 portal 都要去查用户信息...</li></ul>
             
             <span class="read-more"><a href="/2020/03/30/Dubbo/Dubbo微服务影院系列/7.Dubbo服务开发（影院模块开发）/Dubbo微服务影院系列（7）：Dubbo服务开发（影院模块开发）/" title="查看全文" class="posttitle">查看全文</a> <b class="iconfont icon-arrow-right- gradient-text"></b></span>
         </div>

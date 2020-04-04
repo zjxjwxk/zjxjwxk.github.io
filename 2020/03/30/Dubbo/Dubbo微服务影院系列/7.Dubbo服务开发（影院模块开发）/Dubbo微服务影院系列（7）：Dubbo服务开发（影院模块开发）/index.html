@@ -15,7 +15,8 @@
 修改全局异常返回
 学习 Dubbo 特性：并发控制，结果缓存
 
-"> 
+Dubbo 结果缓存
+官方文档：https://dubbo.apache.org/zh-cn/docs,"> 
     <meta name="author" content="吴鑫康"> 
     <link rel="alternative" href="atom.xml" title="Zjxjwxk&#39;s Blog" type="application/atom+xml"> 
     <link rel="icon" href="/img/favicon.png"> 
@@ -91,13 +92,13 @@
                 
                 <span>
                     <b class="iconfont icon-text2"></b> <i>文章字数</i>
-                    155
+                    6.7k
                 </span>
                 
                 
                 <span>
                     <b class="iconfont icon-timer__s"></b> <i>阅读约需</i>
-                    1 mins.
+                    6 mins.
                 </span>
                 
                 
@@ -136,6 +137,87 @@
 <li>修改全局异常返回</li>
 <li>学习 Dubbo 特性：并发控制，结果缓存</li>
 </ul>
+<h1 id="Dubbo-结果缓存"><a href="#Dubbo-结果缓存" class="headerlink" title="Dubbo 结果缓存"></a>Dubbo 结果缓存</h1><blockquote>
+<p>官方文档：<a href="https://dubbo.apache.org/zh-cn/docs/user/demos/result-cache.html" target="_blank" rel="noopener">https://dubbo.apache.org/zh-cn/docs/user/demos/result-cache.html</a></p>
+</blockquote>
+<p>用于加速热门数据的访问速度，Dubbo 提供声明式缓存，以减少用户加缓存的工作量。</p>
+<h2 id="缓存类型"><a href="#缓存类型" class="headerlink" title="缓存类型"></a>缓存类型</h2><ul>
+<li><code>lru</code> 基于最近最少使用原则删除多余缓存，保持最热的数据被缓存。</li>
+<li><code>threadlocal</code> 当前线程缓存，比如一个页面渲染，用到很多 portal，每个 portal 都要去查用户信息，通过线程缓存，可以减少这种多余访问。</li>
+</ul>
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><pre><code class="xml">&lt;dubbo:reference interface=&quot;com.foo.BarService&quot; cache=&quot;lru&quot; /&gt;
+</code></pre>
+<p>或：</p>
+<pre><code class="xml">&lt;dubbo:reference interface=&quot;com.foo.BarService&quot;&gt;
+    &lt;dubbo:method name=&quot;findBar&quot; cache=&quot;lru&quot; /&gt;
+&lt;/dubbo:reference&gt;
+</code></pre>
+<p>了解 Dubbo 结果缓存与 Redis 缓存等的区别：</p>
+<ul>
+<li>Dubbo 结果缓存是本地缓存，保存在当前 JVM 中，多台机器存储多份缓存。适合数据量小的数据，存储在本地占用资源少，而且速度较快。</li>
+<li>Redis 缓存则是分布式缓存，多台机器共享缓存。</li>
+<li>小数据量的可以放在 Dubbo 结果缓存中，需要计算和共享的缓存数据可以放在 Redis 中。</li>
+</ul>
+<h1 id="Dubbo-连接、并发控制"><a href="#Dubbo-连接、并发控制" class="headerlink" title="Dubbo 连接、并发控制"></a>Dubbo 连接、并发控制</h1><ul>
+<li>Dubbo 可以对连接、并发数量进行控制</li>
+<li>超出部分以错误形式返回</li>
+</ul>
+<h2 id="Dubbo-连接控制"><a href="#Dubbo-连接控制" class="headerlink" title="Dubbo 连接控制"></a>Dubbo 连接控制</h2><blockquote>
+<p>官方文档：<a href="https://dubbo.apache.org/zh-cn/docs/user/demos/config-connections.html" target="_blank" rel="noopener">https://dubbo.apache.org/zh-cn/docs/user/demos/config-connections.html</a></p>
+</blockquote>
+<h3 id="服务端连接控制"><a href="#服务端连接控制" class="headerlink" title="服务端连接控制"></a>服务端连接控制</h3><p>限制服务器端接受的连接不能超过 10 个：</p>
+<pre><code class="xml">&lt;dubbo:provider protocol=&quot;dubbo&quot; accepts=&quot;10&quot; /&gt;
+</code></pre>
+<p>或</p>
+<pre><code class="xml">&lt;dubbo:protocol name=&quot;dubbo&quot; accepts=&quot;10&quot; /&gt;
+</code></pre>
+<h3 id="客户端连接控制"><a href="#客户端连接控制" class="headerlink" title="客户端连接控制"></a>客户端连接控制</h3><p>限制客户端服务使用连接不能超过 10 个（如果是长连接，比如 Dubbo 协议，connections 表示该服务对每个提供者建立的长连接数）：</p>
+<pre><code class="xml">&lt;dubbo:reference interface=&quot;com.foo.BarService&quot; connections=&quot;10&quot; /&gt;
+</code></pre>
+<p>或</p>
+<pre><code class="xml">&lt;dubbo:service interface=&quot;com.foo.BarService&quot; connections=&quot;10&quot; /&gt;
+</code></pre>
+<p>如果 dubbo:service 和 dubbo:reference 都配了 connections，dubbo:reference 优先。</p>
+<h3 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h3><h4 id="服务端连接控制-1"><a href="#服务端连接控制-1" class="headerlink" title="服务端连接控制"></a>服务端连接控制</h4><p>服务端只能接受来自客户端的 10 个请求：</p>
+<p><img src="/2020/03/30/Dubbo/Dubbo微服务影院系列/7.Dubbo服务开发（影院模块开发）/Dubbo微服务影院系列（7）：Dubbo服务开发（影院模块开发）/image-20200405000110013.png" alt="服务端连接控制"></p>
+<h4 id="客户端连接控制-1"><a href="#客户端连接控制-1" class="headerlink" title="客户端连接控制"></a>客户端连接控制</h4><p>服务端可以接受任意个请求，但是客户端只能接受 10 个请求。</p>
+<p><img src="/2020/03/30/Dubbo/Dubbo微服务影院系列/7.Dubbo服务开发（影院模块开发）/Dubbo微服务影院系列（7）：Dubbo服务开发（影院模块开发）/image-20200405000145642.png" alt="客户端连接控制"></p>
+<p>如果超出了限制，则会报和没有启动服务类似的异常：</p>
+<pre><code>Caused by: java.lang.IllegalStateException: Failed to check the status of the service com.zjut.zjxjwxk.dubbo.ServiceAPI. No provider available for the service com.zjut.zjxjwxk.dubbo.ServiceAPI from the url zookeeper://localhost:2181/com.alibaba.dubbo.registry.RegistryService?accepts=1&amp;anyhost=true&amp;application=consumer-of-hello-world-app&amp;cache=lru&amp;check=false&amp;dubbo=2.5.3&amp;interface=com.zjut.zjxjwxk.dubbo.ServiceAPI&amp;loadbalance=roundrobin&amp;methods=sendMessage02,sendMessage&amp;pid=8509&amp;side=consumer&amp;timeout=10000&amp;timestamp=1586017005147 to the consumer 192.168.6.102 use dubbo version 2.5.3
+</code></pre><h2 id="Dubbo-并发控制"><a href="#Dubbo-并发控制" class="headerlink" title="Dubbo 并发控制"></a>Dubbo 并发控制</h2><blockquote>
+<p>官方文档：<a href="https://dubbo.apache.org/zh-cn/docs/user/demos/concurrency-control.html" target="_blank" rel="noopener">https://dubbo.apache.org/zh-cn/docs/user/demos/concurrency-control.html</a></p>
+</blockquote>
+<h3 id="服务端服务级别"><a href="#服务端服务级别" class="headerlink" title="服务端服务级别"></a>服务端服务级别</h3><p>限制 <code>com.foo.BarService</code> 的每个方法，服务器端并发执行（或占用线程池线程数）不能超过 10 个：</p>
+<pre><code class="xml">&lt;dubbo:service interface=&quot;com.foo.BarService&quot; executes=&quot;10&quot; /&gt;
+</code></pre>
+<h3 id="服务端方法级别"><a href="#服务端方法级别" class="headerlink" title="服务端方法级别"></a>服务端方法级别</h3><p>限制 <code>com.foo.BarService</code> 的 <code>sayHello</code> 方法，服务器端并发执行（或占用线程池线程数）不能超过 10 个：</p>
+<pre><code class="xml">&lt;dubbo:service interface=&quot;com.foo.BarService&quot;&gt;
+    &lt;dubbo:method name=&quot;sayHello&quot; executes=&quot;10&quot; /&gt;
+&lt;/dubbo:service&gt;
+</code></pre>
+<h3 id="客户端服务界别"><a href="#客户端服务界别" class="headerlink" title="客户端服务界别"></a>客户端服务界别</h3><p>限制 <code>com.foo.BarService</code> 的每个方法，每客户端并发执行（或占用连接的请求数）不能超过 10 个：</p>
+<pre><code class="xml">&lt;dubbo:service interface=&quot;com.foo.BarService&quot; actives=&quot;10&quot; /&gt;
+</code></pre>
+<p>或</p>
+<pre><code class="xml">&lt;dubbo:reference interface=&quot;com.foo.BarService&quot; actives=&quot;10&quot; /&gt;
+</code></pre>
+<h3 id="客户端方法级别"><a href="#客户端方法级别" class="headerlink" title="客户端方法级别"></a>客户端方法级别</h3><p>限制 <code>com.foo.BarService</code> 的 <code>sayHello</code> 方法，每客户端并发执行（或占用连接的请求数）不能超过 10 个：</p>
+<pre><code class="xml">&lt;dubbo:service interface=&quot;com.foo.BarService&quot;&gt;
+    &lt;dubbo:method name=&quot;sayHello&quot; actives=&quot;10&quot; /&gt;
+&lt;/dubbo:service&gt;
+</code></pre>
+<p>或</p>
+<pre><code class="xml">&lt;dubbo:reference interface=&quot;com.foo.BarService&quot;&gt;
+    &lt;dubbo:method name=&quot;sayHello&quot; actives=&quot;10&quot; /&gt;
+&lt;/dubbo:service&gt;
+</code></pre>
+<p>如果 dubbo:service 和 dubbo:reference 都配了actives，dubbo:reference 优先</p>
+<h3 id="Load-Balance-均衡"><a href="#Load-Balance-均衡" class="headerlink" title="Load Balance 均衡"></a>Load Balance 均衡</h3><p>配置服务的客户端的 <code>loadbalance</code> 属性为 <code>leastactive</code>，此 Loadbalance 会调用并发数最小的 Provider（Consumer端并发数）。</p>
+<pre><code class="xml">&lt;dubbo:reference interface=&quot;com.foo.BarService&quot; loadbalance=&quot;leastactive&quot; /&gt;
+</code></pre>
+<p>或</p>
+<pre><code class="xml">&lt;dubbo:service interface=&quot;com.foo.BarService&quot; loadbalance=&quot;leastactive&quot; /&gt;
+</code></pre>
 
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
@@ -179,7 +261,7 @@
             <div class="box sticky animated fadeInRight faster">
                 <div id="toc" class="subbox">
                     <h4>目录</h4>
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#章节概要"><span class="toc-number">1.</span> <span class="toc-text">章节概要</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#章节概要"><span class="toc-number">1.</span> <span class="toc-text">章节概要</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Dubbo-结果缓存"><span class="toc-number">2.</span> <span class="toc-text">Dubbo 结果缓存</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#缓存类型"><span class="toc-number">2.1.</span> <span class="toc-text">缓存类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#配置"><span class="toc-number">2.2.</span> <span class="toc-text">配置</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Dubbo-连接、并发控制"><span class="toc-number">3.</span> <span class="toc-text">Dubbo 连接、并发控制</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Dubbo-连接控制"><span class="toc-number">3.1.</span> <span class="toc-text">Dubbo 连接控制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#服务端连接控制"><span class="toc-number">3.1.1.</span> <span class="toc-text">服务端连接控制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#客户端连接控制"><span class="toc-number">3.1.2.</span> <span class="toc-text">客户端连接控制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#区别"><span class="toc-number">3.1.3.</span> <span class="toc-text">区别</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Dubbo-并发控制"><span class="toc-number">3.2.</span> <span class="toc-text">Dubbo 并发控制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#服务端服务级别"><span class="toc-number">3.2.1.</span> <span class="toc-text">服务端服务级别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#服务端方法级别"><span class="toc-number">3.2.2.</span> <span class="toc-text">服务端方法级别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#客户端服务界别"><span class="toc-number">3.2.3.</span> <span class="toc-text">客户端服务界别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#客户端方法级别"><span class="toc-number">3.2.4.</span> <span class="toc-text">客户端方法级别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Load-Balance-均衡"><span class="toc-number">3.2.5.</span> <span class="toc-text">Load Balance 均衡</span></a></li></ol></li></ol></li></ol>
                 </div>
             </div>
             
