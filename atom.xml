@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://zjxjwxk.com/"/>
-  <updated>2020-04-04T15:01:29.000Z</updated>
+  <updated>2020-04-06T11:15:26.000Z</updated>
   <id>https://zjxjwxk.com/</id>
   
   <author>
@@ -15,6 +15,93 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>PAT甲级 1056 Mice and Rice (25分)</title>
+    <link href="https://zjxjwxk.com/2020/04/06/PAT/Advanced_Level/A1056/"/>
+    <id>https://zjxjwxk.com/2020/04/06/PAT/Advanced_Level/A1056/</id>
+    <published>2020-04-06T11:04:00.000Z</published>
+    <updated>2020-04-06T11:15:26.000Z</updated>
+    
+    <content type="html"><![CDATA[<p><strong>Mice and Rice</strong> is the name of a programming contest in which each programmer must write a piece of code to control the movements of a mouse in a given map. The goal of each mouse is to eat as much rice as possible in order to become a FatMouse.</p><p>First the playing order is randomly decided for N <sub>P</sub> programmers. Then every N <sub>G</sub> programmers are grouped in a match. The fattest mouse in a group wins and enters the next turn. All the losers in this turn are ranked the same. Every N <sub>G</sub> winners are then grouped in the next match until a final winner is determined.</p><p>For the sake of simplicity, assume that the weight of each mouse is fixed once the programmer submits his/her code. Given the weights of all the mice and the initial playing order, you are supposed to output the ranks for the programmers.</p><h1 id="Input-Specification"><a href="#Input-Specification" class="headerlink" title="Input Specification:"></a>Input Specification:</h1><p>Each input file contains one test case. For each case, the first line contains 2 positive integers: N <sub>P</sub> and N <sub>G</sub> (≤1000), the number of programmers and the maximum number of mice in a group, respectively. If there are less than N <sub>G</sub> mice at the end of the player’s list, then all the mice left will be put into the last group. The second line contains N <sub>P</sub> distinct non-negative numbers W <sub>i</sub> (<em>i</em>=0,⋯,N <sub>P</sub> − 1) where each W <sub>i</sub> is the weight of the <em>i</em>-th mouse respectively. The third line gives the initial playing order which is a permutation of 0,⋯,N <sub>P</sub> − 1 (assume that the programmers are numbered from 0 to N <sub>P</sub> - 1). All the numbers in a line are separated by a space.</p><h1 id="Output-Specification"><a href="#Output-Specification" class="headerlink" title="Output Specification:"></a>Output Specification:</h1><p>For each test case, print the final ranks in a line. The <em>i</em>-th number is the rank of the <em>i</em>-th programmer, and all the numbers must be separated by a space, with no extra space at the end of the line.</p><h1 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input:"></a>Sample Input:</h1><pre><code class="in">11 325 18 0 46 37 3 19 22 57 56 106 0 8 7 10 5 9 1 4 2 3</code></pre><h1 id="Sample-Output"><a href="#Sample-Output" class="headerlink" title="Sample Output:"></a>Sample Output:</h1><pre><code class="out">5 5 5 2 5 5 5 3 1 3 5</code></pre><h1 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h1><p>在计算当前循环所要确定的排名时，需要分为是否能整除两种情况：</p><ol><li>如果剩下还未确定排名的数量（len）不能整除每组的人数（ng），则该轮循环可以确定的排名是 len / ng + 2</li><li>否则，该轮循环可以确定的排名是 len / ng + 1</li></ol><pre><code class="C++">#include &lt;cstdio&gt;#include &lt;queue&gt;using namespace std;const int maxn = 1000;int main() {    int np, ng, index, w[maxn], rank[maxn];    scanf(&quot;%d %d&quot;, &amp;np, &amp;ng);    queue&lt;int&gt; que;    for (int i = 0; i &lt; np; i++) {        scanf(&quot;%d&quot;, &amp;w[i]);    }    for (int i = 0; i &lt; np; i++) {        scanf(&quot;%d&quot;, &amp;index);        que.push(index);    }    int len = que.size(), nowRank;    while (len &gt; 1) {        if (len % ng == 0) {            nowRank = len / ng + 1;        } else {            nowRank = len / ng + 2;        }        for (int i = 0; i &lt; len; i += ng) {            int maxW = -1, maxI = -1;            for (int j = i; j &lt; i + ng &amp;&amp; j &lt; len; j++) {                int tempI = que.front();                if (w[tempI] &gt; maxW) {                    maxW = w[tempI];                    maxI = tempI;                }                rank[tempI] = nowRank;                que.pop();            }            que.push(maxI);        }        len = que.size();    }    rank[que.front()] = 1;    for (int i = 0; i &lt; np; i++) {        printf(&quot;%d&quot;, rank[i]);        if (i != np - 1) {            printf(&quot; &quot;);        }    }    return 0;}</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;&lt;strong&gt;Mice and Rice&lt;/strong&gt; is the name of a programming contest in which each programmer must write a piece of code to control the mo
+      
+    
+    </summary>
+    
+      <category term="PAT" scheme="https://zjxjwxk.com/categories/PAT/"/>
+    
+      <category term="队列" scheme="https://zjxjwxk.com/categories/PAT/%E9%98%9F%E5%88%97/"/>
+    
+    
+      <category term="PAT" scheme="https://zjxjwxk.com/tags/PAT/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>PAT甲级 1100 Mars Numbers (20分)</title>
+    <link href="https://zjxjwxk.com/2020/04/06/PAT/Advanced_Level/A1100/"/>
+    <id>https://zjxjwxk.com/2020/04/06/PAT/Advanced_Level/A1100/</id>
+    <published>2020-04-06T07:17:00.000Z</published>
+    <updated>2020-04-06T07:20:55.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>People on Mars count their numbers with base 13:</p><ul><li>Zero on Earth is called “tret” on Mars.</li><li>The numbers 1 to 12 on Earth is called “jan, feb, mar, apr, may, jun, jly, aug, sep, oct, nov, dec” on Mars, respectively.</li><li>For the next higher digit, Mars people name the 12 numbers as “tam, hel, maa, huh, tou, kes, hei, elo, syy, lok, mer, jou”, respectively.</li></ul><p>For examples, the number 29 on Earth is called “hel mar” on Mars; and “elo nov” on Mars corresponds to 115 on Earth. In order to help communication between people from these two planets, you are supposed to write a program for mutual translation between Earth and Mars number systems.</p><h1 id="Input-Specification"><a href="#Input-Specification" class="headerlink" title="Input Specification:"></a>Input Specification:</h1><p>Each input file contains one test case. For each case, the first line contains a positive integer <em>N</em> (&lt;100). Then <em>N</em> lines follow, each contains a number in [0, 169), given either in the form of an Earth number, or that of Mars.</p><h1 id="Output-Specification"><a href="#Output-Specification" class="headerlink" title="Output Specification:"></a>Output Specification:</h1><p>For each number, print in a line the corresponding number in the other language.</p><h1 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input:"></a>Sample Input:</h1><pre><code class="in">4295elo novtam</code></pre><h1 id="Sample-Output"><a href="#Sample-Output" class="headerlink" title="Sample Output:"></a>Sample Output:</h1><pre><code class="out">hel marmay11513</code></pre><h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><p>直接针对给出的输入进行模拟会相对复杂，考虑到数据范围最多不超过168，因此不妨将 [0, 168] 的所有数都预处理出来（即打表），然后查询一个输出一个即可。</p><h1 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h1><ul><li>由于个位或十位为 0 时，不应该将其输出为 “tret”，所以在大表时，应该将个位或十位为 0 的数与其他数分开考虑。</li></ul><pre><code class="C++">#include &lt;iostream&gt;#include &lt;string&gt;#include &lt;map&gt;using namespace std;int n;string num[4];string unitDigit[13] = {&quot;tret&quot;, &quot;jan&quot;, &quot;feb&quot;, &quot;mar&quot;, &quot;apr&quot;, &quot;may&quot;, &quot;jun&quot;, &quot;jly&quot;, &quot;aug&quot;, &quot;sep&quot;, &quot;oct&quot;, &quot;nov&quot;, &quot;dec&quot;};string tenDigit[13] = {&quot;tret&quot;, &quot;tam&quot;, &quot;hel&quot;, &quot;maa&quot;, &quot;huh&quot;, &quot;tou&quot;, &quot;kes&quot;, &quot;hei&quot;, &quot;elo&quot;, &quot;syy&quot;, &quot;lok&quot;, &quot;mer&quot;, &quot;jou&quot;};map&lt;string, int&gt; marsToNum;string numToMars[170];void init() {    for (int i = 0; i &lt; 13; i++) {        numToMars[i] = unitDigit[i];        marsToNum[unitDigit[i]] = i;        numToMars[i * 13] = tenDigit[i];        marsToNum[tenDigit[i]] = i * 13;    }    for (int i = 1; i &lt; 13; i++) {        for (int j = 1; j &lt; 13; j++) {            string mars = tenDigit[i] + &quot; &quot; + unitDigit[j];            numToMars[i * 13 + j] = mars;            marsToNum[mars] = i * 13 + j;        }    }}int main() {    scanf(&quot;%d&quot;, &amp;n);    getchar();    string str;    init();    for (int i = 0; i &lt; n; i++) {        getline(cin, str);        if (str[0] &gt;= &#39;0&#39; &amp;&amp; str[0] &lt;= &#39;9&#39;) {            printf(&quot;%s\n&quot;, numToMars[stoi(str)].c_str());        } else {            printf(&quot;%d\n&quot;, marsToNum[str]);        }    }    return 0;}</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;People on Mars count their numbers with base 13:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Zero on Earth is called “tret” on Mars.&lt;/li&gt;
+&lt;li&gt;The numbers 1 to 12 on Ear
+      
+    
+    </summary>
+    
+      <category term="PAT" scheme="https://zjxjwxk.com/categories/PAT/"/>
+    
+      <category term="STL" scheme="https://zjxjwxk.com/categories/PAT/STL/"/>
+    
+    
+      <category term="PAT" scheme="https://zjxjwxk.com/tags/PAT/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Dubbo微服务影院系列（8）：Dubbo服务开发（订单模块开发）</title>
+    <link href="https://zjxjwxk.com/2020/04/05/Dubbo/Dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/8.Dubbo%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91%EF%BC%88%E8%AE%A2%E5%8D%95%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91%EF%BC%89/Dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97%EF%BC%888%EF%BC%89%EF%BC%9ADubbo%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91%EF%BC%88%E8%AE%A2%E5%8D%95%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91%EF%BC%89/"/>
+    <id>https://zjxjwxk.com/2020/04/05/Dubbo/Dubbo微服务影院系列/8.Dubbo服务开发（订单模块开发）/Dubbo微服务影院系列（8）：Dubbo服务开发（订单模块开发）/</id>
+    <published>2020-04-05T11:30:00.000Z</published>
+    <updated>2020-04-05T11:41:51.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="章节概要"><a href="#章节概要" class="headerlink" title="章节概要"></a>章节概要</h1><ul><li>完成订单模块业务开发</li><li>完成限流和熔断、降级相关内容</li><li>Dubbo 特性之分组、聚合和版本控制</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;章节概要&quot;&gt;&lt;a href=&quot;#章节概要&quot; class=&quot;headerlink&quot; title=&quot;章节概要&quot;&gt;&lt;/a&gt;章节概要&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;完成订单模块业务开发&lt;/li&gt;
+&lt;li&gt;完成限流和熔断、降级相关内容&lt;/li&gt;
+&lt;li&gt;Dubbo 特性之分组、
+      
+    
+    </summary>
+    
+      <category term="Dubbo" scheme="https://zjxjwxk.com/categories/Dubbo/"/>
+    
+    
+      <category term="微服务架构" scheme="https://zjxjwxk.com/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/"/>
+    
+      <category term="Dubbo" scheme="https://zjxjwxk.com/tags/Dubbo/"/>
+    
+  </entry>
   
   <entry>
     <title>PAT甲级 1060 Are They Equal (25分)</title>
@@ -237,19 +324,19 @@
   </entry>
   
   <entry>
-    <title>PAT乙级 1003 我要通过！ (20分)</title>
-    <link href="https://zjxjwxk.com/2020/03/30/PAT/Basic_Level/B1003/"/>
-    <id>https://zjxjwxk.com/2020/03/30/PAT/Basic_Level/B1003/</id>
+    <title>PAT甲级 1104 Sum of Number Segments (20分)</title>
+    <link href="https://zjxjwxk.com/2020/03/30/PAT/Advanced_Level/A1104/"/>
+    <id>https://zjxjwxk.com/2020/03/30/PAT/Advanced_Level/A1104/</id>
     <published>2020-03-30T08:26:00.000Z</published>
-    <updated>2020-03-31T07:49:29.000Z</updated>
+    <updated>2020-03-30T08:33:34.000Z</updated>
     
-    <content type="html"><![CDATA[<p>“<strong>答案正确</strong>”是自动判题系统给出的最令人欢喜的回复。本题属于 PAT 的“<strong>答案正确</strong>”大派送 —— 只要读入的字符串满足下列条件，系统就输出“<strong>答案正确</strong>”，否则输出“<strong>答案错误</strong>”。</p><p>得到“<strong>答案正确</strong>”的条件是：</p><ol><li>字符串中必须仅有 <code>P</code>、 <code>A</code>、 <code>T</code>这三种字符，不可以包含其它字符；</li><li>任意形如 <code>xPATx</code> 的字符串都可以获得“<strong>答案正确</strong>”，其中 <code>x</code> 或者是空字符串，或者是仅由字母 <code>A</code> 组成的字符串；</li><li>如果 <code>aPbTc</code> 是正确的，那么 <code>aPbATca</code> 也是正确的，其中 <code>a</code>、 <code>b</code>、 <code>c</code> 均或者是空字符串，或者是仅由字母 <code>A</code> 组成的字符串。</li></ol><p>现在就请你为 PAT 写一个自动裁判程序，判定哪些字符串是可以获得“<strong>答案正确</strong>”的。</p><h1 id="输入格式："><a href="#输入格式：" class="headerlink" title="输入格式："></a>输入格式：</h1><p>每个测试输入包含 1 个测试用例。第 1 行给出一个正整数 <em>n</em> (&lt;10)，是需要检测的字符串个数。接下来每个字符串占一行，字符串长度不超过 100，且不包含空格。</p><h1 id="输出格式："><a href="#输出格式：" class="headerlink" title="输出格式："></a>输出格式：</h1><p>每个字符串的检测结果占一行，如果该字符串可以获得“<strong>答案正确</strong>”，则输出 <code>YES</code>，否则输出 <code>NO</code>。</p><h1 id="输入样例："><a href="#输入样例：" class="headerlink" title="输入样例："></a>输入样例：</h1><pre><code class="in">8PATPAATAAPATAAAAPAATAAAAxPATxPTWhateverAPAAATAA</code></pre><h1 id="输出样例："><a href="#输出样例：" class="headerlink" title="输出样例："></a>输出样例：</h1><pre><code class="out">YESYESYESYESNONONONO</code></pre><h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><ul><li>可以找到这样的规律：正确的字符串应该遵循 P 左侧的 A 个数乘 P 与 T 中间的 A 个数等于 T 右侧的 A 个数。且 P 和 T 的个数必须为1，中间 A 的个数不能为 0，除了 P，A，T 的其他的字符个数必须为 0。</li></ul><pre><code class="C++">#include &lt;cstdio&gt;#include &lt;cstring&gt;const int maxn = 101;int main() {    int n, len;    scanf(&quot;%d&quot;, &amp;n);    char str[maxn];    for (int i = 0; i &lt; n; i++) {        scanf(&quot;%s&quot;, str);        len = strlen(str);        int PNum = 0, TNum = 0, otherNum = 0, PIndex, TIndex;        for (int j = 0; j &lt; len; j++) {            if (str[j] == &#39;P&#39;) {                PNum++;                PIndex = j;            } else if (str[j] == &#39;T&#39;) {                TNum++;                TIndex = j;            } else if (str[j] != &#39;A&#39;) {                otherNum++;            }        }        if (PNum != 1 || TNum != 1 || otherNum != 0 || (TIndex - PIndex) &lt;= 1) {            printf(&quot;NO\n&quot;);            continue;        }        int leftA = PIndex, midA = TIndex - PIndex - 1, rightA = len - TIndex - 1;        if (leftA * midA == rightA) {            printf(&quot;YES\n&quot;);        } else {            printf(&quot;NO\n&quot;);        }    }    return 0;}</code></pre>]]></content>
+    <content type="html"><![CDATA[<p>Given a sequence of positive numbers, a segment is defined to be a consecutive subsequence. For example, given the sequence { 0.1, 0.2, 0.3, 0.4 }, we have 10 segments: (0.1) (0.1, 0.2) (0.1, 0.2, 0.3) (0.1, 0.2, 0.3, 0.4) (0.2) (0.2, 0.3) (0.2, 0.3, 0.4) (0.3) (0.3, 0.4) and (0.4).</p><p>Now given a sequence, you are supposed to find the sum of all the numbers in all the segments. For the previous example, the sum of all the 10 segments is 0.1 + 0.3 + 0.6 + 1.0 + 0.2 + 0.5 + 0.9 + 0.3 + 0.7 + 0.4 = 5.0.</p><h1 id="Input-Specification"><a href="#Input-Specification" class="headerlink" title="Input Specification:"></a>Input Specification:</h1><p>Each input file contains one test case. For each case, the first line gives a positive integer <em>N</em>, the size of the sequence which is no more than $10^5$ . The next line contains <em>N</em> positive numbers in the sequence, each no more than 1.0, separated by a space.</p><h1 id="Output-Specification"><a href="#Output-Specification" class="headerlink" title="Output Specification:"></a>Output Specification:</h1><p>For each test case, print in one line the sum of all the numbers in all the segments, accurate up to 2 decimal places.</p><h1 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input:"></a>Sample Input:</h1><pre><code class="in">40.1 0.2 0.3 0.4</code></pre><h1 id="Sample-Output"><a href="#Sample-Output" class="headerlink" title="Sample Output:"></a>Sample Output:</h1><pre><code class="out">5.00</code></pre><h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><ul><li>包含第 i 个数的片段，其首指针有 i 中选择：1, 2, 3, … i，其尾指针有 n - i + 1 中选择：i, i + 1, … n。所以包含第 i 个数的片段有 i * (n - i + 1) 种。将 i 从 1 到 n 遍历，将包含每个数的片段数相加即可。</li></ul><pre><code class="C++">#include &lt;cstdio&gt;const int maxn = 100000;int main() {    int n;    scanf(&quot;%d&quot;, &amp;n);    double temp, ans = 0;    for (int i = 1; i &lt;= n; i++) {        scanf(&quot;%lf&quot;, &amp;temp);        ans += temp * i * (n - i + 1);    }    printf(&quot;%.2f&quot;, ans);    return 0;}</code></pre>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;p&gt;“&lt;strong&gt;答案正确&lt;/strong&gt;”是自动判题系统给出的最令人欢喜的回复。本题属于 PAT 的“&lt;strong&gt;答案正确&lt;/strong&gt;”大派送 —— 只要读入的字符串满足下列条件，系统就输出“&lt;strong&gt;答案正确&lt;/strong&gt;”，否则输出“&lt;stron
+        &lt;p&gt;Given a sequence of positive numbers, a segment is defined to be a consecutive subsequence. For example, given the sequence { 0.1, 0.2, 0
       
     
     </summary>
@@ -264,19 +351,19 @@
   </entry>
   
   <entry>
-    <title>PAT甲级 1104 Sum of Number Segments (20分)</title>
-    <link href="https://zjxjwxk.com/2020/03/30/PAT/Advanced_Level/A1104/"/>
-    <id>https://zjxjwxk.com/2020/03/30/PAT/Advanced_Level/A1104/</id>
+    <title>PAT乙级 1003 我要通过！ (20分)</title>
+    <link href="https://zjxjwxk.com/2020/03/30/PAT/Basic_Level/B1003/"/>
+    <id>https://zjxjwxk.com/2020/03/30/PAT/Basic_Level/B1003/</id>
     <published>2020-03-30T08:26:00.000Z</published>
-    <updated>2020-03-30T08:33:34.000Z</updated>
+    <updated>2020-03-31T07:49:29.000Z</updated>
     
-    <content type="html"><![CDATA[<p>Given a sequence of positive numbers, a segment is defined to be a consecutive subsequence. For example, given the sequence { 0.1, 0.2, 0.3, 0.4 }, we have 10 segments: (0.1) (0.1, 0.2) (0.1, 0.2, 0.3) (0.1, 0.2, 0.3, 0.4) (0.2) (0.2, 0.3) (0.2, 0.3, 0.4) (0.3) (0.3, 0.4) and (0.4).</p><p>Now given a sequence, you are supposed to find the sum of all the numbers in all the segments. For the previous example, the sum of all the 10 segments is 0.1 + 0.3 + 0.6 + 1.0 + 0.2 + 0.5 + 0.9 + 0.3 + 0.7 + 0.4 = 5.0.</p><h1 id="Input-Specification"><a href="#Input-Specification" class="headerlink" title="Input Specification:"></a>Input Specification:</h1><p>Each input file contains one test case. For each case, the first line gives a positive integer <em>N</em>, the size of the sequence which is no more than $10^5$ . The next line contains <em>N</em> positive numbers in the sequence, each no more than 1.0, separated by a space.</p><h1 id="Output-Specification"><a href="#Output-Specification" class="headerlink" title="Output Specification:"></a>Output Specification:</h1><p>For each test case, print in one line the sum of all the numbers in all the segments, accurate up to 2 decimal places.</p><h1 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input:"></a>Sample Input:</h1><pre><code class="in">40.1 0.2 0.3 0.4</code></pre><h1 id="Sample-Output"><a href="#Sample-Output" class="headerlink" title="Sample Output:"></a>Sample Output:</h1><pre><code class="out">5.00</code></pre><h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><ul><li>包含第 i 个数的片段，其首指针有 i 中选择：1, 2, 3, … i，其尾指针有 n - i + 1 中选择：i, i + 1, … n。所以包含第 i 个数的片段有 i * (n - i + 1) 种。将 i 从 1 到 n 遍历，将包含每个数的片段数相加即可。</li></ul><pre><code class="C++">#include &lt;cstdio&gt;const int maxn = 100000;int main() {    int n;    scanf(&quot;%d&quot;, &amp;n);    double temp, ans = 0;    for (int i = 1; i &lt;= n; i++) {        scanf(&quot;%lf&quot;, &amp;temp);        ans += temp * i * (n - i + 1);    }    printf(&quot;%.2f&quot;, ans);    return 0;}</code></pre>]]></content>
+    <content type="html"><![CDATA[<p>“<strong>答案正确</strong>”是自动判题系统给出的最令人欢喜的回复。本题属于 PAT 的“<strong>答案正确</strong>”大派送 —— 只要读入的字符串满足下列条件，系统就输出“<strong>答案正确</strong>”，否则输出“<strong>答案错误</strong>”。</p><p>得到“<strong>答案正确</strong>”的条件是：</p><ol><li>字符串中必须仅有 <code>P</code>、 <code>A</code>、 <code>T</code>这三种字符，不可以包含其它字符；</li><li>任意形如 <code>xPATx</code> 的字符串都可以获得“<strong>答案正确</strong>”，其中 <code>x</code> 或者是空字符串，或者是仅由字母 <code>A</code> 组成的字符串；</li><li>如果 <code>aPbTc</code> 是正确的，那么 <code>aPbATca</code> 也是正确的，其中 <code>a</code>、 <code>b</code>、 <code>c</code> 均或者是空字符串，或者是仅由字母 <code>A</code> 组成的字符串。</li></ol><p>现在就请你为 PAT 写一个自动裁判程序，判定哪些字符串是可以获得“<strong>答案正确</strong>”的。</p><h1 id="输入格式："><a href="#输入格式：" class="headerlink" title="输入格式："></a>输入格式：</h1><p>每个测试输入包含 1 个测试用例。第 1 行给出一个正整数 <em>n</em> (&lt;10)，是需要检测的字符串个数。接下来每个字符串占一行，字符串长度不超过 100，且不包含空格。</p><h1 id="输出格式："><a href="#输出格式：" class="headerlink" title="输出格式："></a>输出格式：</h1><p>每个字符串的检测结果占一行，如果该字符串可以获得“<strong>答案正确</strong>”，则输出 <code>YES</code>，否则输出 <code>NO</code>。</p><h1 id="输入样例："><a href="#输入样例：" class="headerlink" title="输入样例："></a>输入样例：</h1><pre><code class="in">8PATPAATAAPATAAAAPAATAAAAxPATxPTWhateverAPAAATAA</code></pre><h1 id="输出样例："><a href="#输出样例：" class="headerlink" title="输出样例："></a>输出样例：</h1><pre><code class="out">YESYESYESYESNONONONO</code></pre><h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><ul><li>可以找到这样的规律：正确的字符串应该遵循 P 左侧的 A 个数乘 P 与 T 中间的 A 个数等于 T 右侧的 A 个数。且 P 和 T 的个数必须为1，中间 A 的个数不能为 0，除了 P，A，T 的其他的字符个数必须为 0。</li></ul><pre><code class="C++">#include &lt;cstdio&gt;#include &lt;cstring&gt;const int maxn = 101;int main() {    int n, len;    scanf(&quot;%d&quot;, &amp;n);    char str[maxn];    for (int i = 0; i &lt; n; i++) {        scanf(&quot;%s&quot;, str);        len = strlen(str);        int PNum = 0, TNum = 0, otherNum = 0, PIndex, TIndex;        for (int j = 0; j &lt; len; j++) {            if (str[j] == &#39;P&#39;) {                PNum++;                PIndex = j;            } else if (str[j] == &#39;T&#39;) {                TNum++;                TIndex = j;            } else if (str[j] != &#39;A&#39;) {                otherNum++;            }        }        if (PNum != 1 || TNum != 1 || otherNum != 0 || (TIndex - PIndex) &lt;= 1) {            printf(&quot;NO\n&quot;);            continue;        }        int leftA = PIndex, midA = TIndex - PIndex - 1, rightA = len - TIndex - 1;        if (leftA * midA == rightA) {            printf(&quot;YES\n&quot;);        } else {            printf(&quot;NO\n&quot;);        }    }    return 0;}</code></pre>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;p&gt;Given a sequence of positive numbers, a segment is defined to be a consecutive subsequence. For example, given the sequence { 0.1, 0.2, 0
+        &lt;p&gt;“&lt;strong&gt;答案正确&lt;/strong&gt;”是自动判题系统给出的最令人欢喜的回复。本题属于 PAT 的“&lt;strong&gt;答案正确&lt;/strong&gt;”大派送 —— 只要读入的字符串满足下列条件，系统就输出“&lt;strong&gt;答案正确&lt;/strong&gt;”，否则输出“&lt;stron
       
     
     </summary>
@@ -483,33 +570,6 @@
   </entry>
   
   <entry>
-    <title>PAT甲级 1095 Cars on Campus (30分)</title>
-    <link href="https://zjxjwxk.com/2020/03/22/PAT/Advanced_Level/A1095/"/>
-    <id>https://zjxjwxk.com/2020/03/22/PAT/Advanced_Level/A1095/</id>
-    <published>2020-03-22T09:24:00.000Z</published>
-    <updated>2020-03-29T10:33:20.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>Zhejiang University has 8 campuses and a lot of gates. From each gate we can collect the in/out times and the plate numbers of the cars crossing the gate. Now with all the information available, you are supposed to tell, at any specific time point, the number of cars parking on campus, and at the end of the day find the cars that have parked for the longest time period.</p><h1 id="Input-Specification"><a href="#Input-Specification" class="headerlink" title="Input Specification:"></a>Input Specification:</h1><p>Each input file contains one test case. Each case starts with two positive integers <em>N</em> (≤ ${10^4}$), the number of records, and <em>K</em> (≤ $8×10^4$) the number of queries. Then <em>N</em> lines follow, each gives a record in the format:</p><pre><code>plate_number hh:mm:ss status</code></pre><p>where <code>plate_number</code> is a string of 7 English capital letters or 1-digit numbers; <code>hh:mm:ss</code> represents the time point in a day by hour:minute:second, with the earliest time being <code>00:00:00</code> and the latest <code>23:59:59</code>; and <code>status</code> is either <code>in</code> or <code>out</code>.</p><p>Note that all times will be within a single day. Each <code>in</code> record is paired with the chronologically next record for the same car provided it is an <code>out</code> record. Any <code>in</code> records that are not paired with an <code>out</code> record are ignored, as are <code>out</code> records not paired with an <code>in</code> record. It is guaranteed that at least one car is well paired in the input, and no car is both <code>in</code> and <code>out</code> at the same moment. Times are recorded using a 24-hour clock.</p><p>Then <em>K</em> lines of queries follow, each gives a time point in the format <code>hh:mm:ss</code>. Note: the queries are given in <strong>ascending</strong> order of the times.</p><h1 id="Output-Specification"><a href="#Output-Specification" class="headerlink" title="Output Specification:"></a>Output Specification:</h1><p>For each query, output in a line the total number of cars parking on campus. The last line of output is supposed to give the plate number of the car that has parked for the longest time period, and the corresponding time length. If such a car is not unique, then output all of their plate numbers in a line in alphabetical order, separated by a space.</p><h1 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input:"></a>Sample Input:</h1><pre><code class="in">16 7JH007BD 18:00:01 inZD00001 11:30:08 outDB8888A 13:00:00 outZA3Q625 23:59:50 outZA133CH 10:23:00 inZD00001 04:09:59 inJH007BD 05:09:59 inZA3Q625 11:42:01 outJH007BD 05:10:33 inZA3Q625 06:30:50 inJH007BD 12:23:42 outZA3Q625 23:55:00 inJH007BD 12:24:23 outZA133CH 17:11:22 outJH007BD 18:07:01 outDB8888A 06:30:50 in05:10:0006:30:5011:00:0012:23:4214:00:0018:00:0023:59:00</code></pre><h1 id="Sample-Output"><a href="#Sample-Output" class="headerlink" title="Sample Output:"></a>Sample Output:</h1><pre><code class="out">1452101JH007BD ZD00001 07:20:09</code></pre><h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><ul><li>将时间统一转换为秒，方便比较；将 “in” 状态表示为1，“out” 状态表示为-1，方便停车数 cnt 的计算（即 cnt += status）</li><li>将记录的结构体数组，根据先 id，后 time 的顺序进行排序。然后从中找出合法的记录，加入 vector，顺便用 map&lt;string, int&gt; 存储各个车辆的总停车时长，并记录最大中停车时长</li><li>然后输入查询时间，每输入一个查询 id，就接着上次遍历这个 vector，一边遍历，一边计算当前停车数 cnt，直到当前时间大于查询时间，即可输出 cnt</li><li>最后，再遍历一遍 map，输出所有等于 maxLen 的车辆 id（map 已根据 id 的字母顺序自动排序）</li></ul><h1 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h1><ul><li>最长停车时长（parked for the longest time period），指的是一辆车在一天中的总停车时长，而不是指某一次停车的时长</li><li>如果一辆车多次 in，应该取最后一个 in 记录；如果一辆车多次 out，应该取第一个 out 记录</li></ul><pre><code class="C++">#include &lt;cstdio&gt;#include &lt;cstring&gt;#include &lt;algorithm&gt;#include &lt;vector&gt;#include &lt;map&gt;using namespace std;const int maxn = 10000;struct Record {    char id[8];    int time, status;} records[maxn];vector&lt;Record&gt; vec;map&lt;string, int&gt; lenMap;int cmpByIdAndTime(Record r1, Record r2) {    int strCmp = strcmp(r1.id, r2.id);    if (strCmp != 0) {        return strCmp &lt; 0;    } else {        return r1.time &lt; r2.time;    }}int cmpByTime(Record r1, Record r2) {    return r1.time &lt; r2.time;}int main() {    int n, k, hour, min, sec, time, cnt = 0, maxLen = -1, j = 0;    scanf(&quot;%d %d&quot;, &amp;n, &amp;k);    char status[3];    for (int i = 0; i &lt; n; i++) {        scanf(&quot;%s %d:%d:%d %s&quot;, records[i].id, &amp;hour, &amp;min, &amp;sec, status);        records[i].time = hour * 3600 + min * 60 + sec;        if (strcmp(status, &quot;in&quot;) == 0) {            records[i].status = 1;        } else {            records[i].status = -1;        }    }    sort(records, records + n, cmpByIdAndTime);    for (int i = 1; i &lt; n; i++) {        if (strcmp(records[i].id, records[i - 1].id) == 0 &amp;&amp; records[i - 1].status == 1 &amp;&amp; records[i].status == -1) {            vec.push_back(records[i - 1]);            vec.push_back(records[i]);            lenMap[records[i].id] += records[i].time - records[i - 1].time;            if (lenMap[records[i].id] &gt; maxLen) {                maxLen = lenMap[records[i].id];            }        }    }    sort(vec.begin(), vec.end(), cmpByTime);    for (int i = 0; i &lt; k; i++) {        scanf(&quot;%d:%d:%d&quot;, &amp;hour, &amp;min, &amp;sec);        time = hour * 60 * 60 + min * 60 + sec;        while (j &lt; vec.size() &amp;&amp; vec[j].time &lt;= time) {            cnt += vec[j].status;            j++;        }        printf(&quot;%d\n&quot;, cnt);    }    for (auto it : lenMap) {        if (it.second == maxLen) {            printf(&quot;%s &quot;, it.first.c_str());        }    }    printf(&quot;%02d:%02d:%02d&quot;, maxLen / 3600, maxLen % 3600 / 60, maxLen % 60);    return 0;}</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;Zhejiang University has 8 campuses and a lot of gates. From each gate we can collect the in/out times and the plate numbers of the cars c
-      
-    
-    </summary>
-    
-      <category term="PAT" scheme="https://zjxjwxk.com/categories/PAT/"/>
-    
-      <category term="排序" scheme="https://zjxjwxk.com/categories/PAT/%E6%8E%92%E5%BA%8F/"/>
-    
-    
-      <category term="PAT" scheme="https://zjxjwxk.com/tags/PAT/"/>
-    
-  </entry>
-  
-  <entry>
     <title>PAT甲级 1033 To Fill or Not to Fill (25分)</title>
     <link href="https://zjxjwxk.com/2020/03/22/PAT/Advanced_Level/A1033/"/>
     <id>https://zjxjwxk.com/2020/03/22/PAT/Advanced_Level/A1033/</id>
@@ -530,6 +590,33 @@
       <category term="PAT" scheme="https://zjxjwxk.com/categories/PAT/"/>
     
       <category term="贪心" scheme="https://zjxjwxk.com/categories/PAT/%E8%B4%AA%E5%BF%83/"/>
+    
+    
+      <category term="PAT" scheme="https://zjxjwxk.com/tags/PAT/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>PAT甲级 1095 Cars on Campus (30分)</title>
+    <link href="https://zjxjwxk.com/2020/03/22/PAT/Advanced_Level/A1095/"/>
+    <id>https://zjxjwxk.com/2020/03/22/PAT/Advanced_Level/A1095/</id>
+    <published>2020-03-22T09:24:00.000Z</published>
+    <updated>2020-03-29T10:33:20.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>Zhejiang University has 8 campuses and a lot of gates. From each gate we can collect the in/out times and the plate numbers of the cars crossing the gate. Now with all the information available, you are supposed to tell, at any specific time point, the number of cars parking on campus, and at the end of the day find the cars that have parked for the longest time period.</p><h1 id="Input-Specification"><a href="#Input-Specification" class="headerlink" title="Input Specification:"></a>Input Specification:</h1><p>Each input file contains one test case. Each case starts with two positive integers <em>N</em> (≤ ${10^4}$), the number of records, and <em>K</em> (≤ $8×10^4$) the number of queries. Then <em>N</em> lines follow, each gives a record in the format:</p><pre><code>plate_number hh:mm:ss status</code></pre><p>where <code>plate_number</code> is a string of 7 English capital letters or 1-digit numbers; <code>hh:mm:ss</code> represents the time point in a day by hour:minute:second, with the earliest time being <code>00:00:00</code> and the latest <code>23:59:59</code>; and <code>status</code> is either <code>in</code> or <code>out</code>.</p><p>Note that all times will be within a single day. Each <code>in</code> record is paired with the chronologically next record for the same car provided it is an <code>out</code> record. Any <code>in</code> records that are not paired with an <code>out</code> record are ignored, as are <code>out</code> records not paired with an <code>in</code> record. It is guaranteed that at least one car is well paired in the input, and no car is both <code>in</code> and <code>out</code> at the same moment. Times are recorded using a 24-hour clock.</p><p>Then <em>K</em> lines of queries follow, each gives a time point in the format <code>hh:mm:ss</code>. Note: the queries are given in <strong>ascending</strong> order of the times.</p><h1 id="Output-Specification"><a href="#Output-Specification" class="headerlink" title="Output Specification:"></a>Output Specification:</h1><p>For each query, output in a line the total number of cars parking on campus. The last line of output is supposed to give the plate number of the car that has parked for the longest time period, and the corresponding time length. If such a car is not unique, then output all of their plate numbers in a line in alphabetical order, separated by a space.</p><h1 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input:"></a>Sample Input:</h1><pre><code class="in">16 7JH007BD 18:00:01 inZD00001 11:30:08 outDB8888A 13:00:00 outZA3Q625 23:59:50 outZA133CH 10:23:00 inZD00001 04:09:59 inJH007BD 05:09:59 inZA3Q625 11:42:01 outJH007BD 05:10:33 inZA3Q625 06:30:50 inJH007BD 12:23:42 outZA3Q625 23:55:00 inJH007BD 12:24:23 outZA133CH 17:11:22 outJH007BD 18:07:01 outDB8888A 06:30:50 in05:10:0006:30:5011:00:0012:23:4214:00:0018:00:0023:59:00</code></pre><h1 id="Sample-Output"><a href="#Sample-Output" class="headerlink" title="Sample Output:"></a>Sample Output:</h1><pre><code class="out">1452101JH007BD ZD00001 07:20:09</code></pre><h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><ul><li>将时间统一转换为秒，方便比较；将 “in” 状态表示为1，“out” 状态表示为-1，方便停车数 cnt 的计算（即 cnt += status）</li><li>将记录的结构体数组，根据先 id，后 time 的顺序进行排序。然后从中找出合法的记录，加入 vector，顺便用 map&lt;string, int&gt; 存储各个车辆的总停车时长，并记录最大中停车时长</li><li>然后输入查询时间，每输入一个查询 id，就接着上次遍历这个 vector，一边遍历，一边计算当前停车数 cnt，直到当前时间大于查询时间，即可输出 cnt</li><li>最后，再遍历一遍 map，输出所有等于 maxLen 的车辆 id（map 已根据 id 的字母顺序自动排序）</li></ul><h1 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h1><ul><li>最长停车时长（parked for the longest time period），指的是一辆车在一天中的总停车时长，而不是指某一次停车的时长</li><li>如果一辆车多次 in，应该取最后一个 in 记录；如果一辆车多次 out，应该取第一个 out 记录</li></ul><pre><code class="C++">#include &lt;cstdio&gt;#include &lt;cstring&gt;#include &lt;algorithm&gt;#include &lt;vector&gt;#include &lt;map&gt;using namespace std;const int maxn = 10000;struct Record {    char id[8];    int time, status;} records[maxn];vector&lt;Record&gt; vec;map&lt;string, int&gt; lenMap;int cmpByIdAndTime(Record r1, Record r2) {    int strCmp = strcmp(r1.id, r2.id);    if (strCmp != 0) {        return strCmp &lt; 0;    } else {        return r1.time &lt; r2.time;    }}int cmpByTime(Record r1, Record r2) {    return r1.time &lt; r2.time;}int main() {    int n, k, hour, min, sec, time, cnt = 0, maxLen = -1, j = 0;    scanf(&quot;%d %d&quot;, &amp;n, &amp;k);    char status[3];    for (int i = 0; i &lt; n; i++) {        scanf(&quot;%s %d:%d:%d %s&quot;, records[i].id, &amp;hour, &amp;min, &amp;sec, status);        records[i].time = hour * 3600 + min * 60 + sec;        if (strcmp(status, &quot;in&quot;) == 0) {            records[i].status = 1;        } else {            records[i].status = -1;        }    }    sort(records, records + n, cmpByIdAndTime);    for (int i = 1; i &lt; n; i++) {        if (strcmp(records[i].id, records[i - 1].id) == 0 &amp;&amp; records[i - 1].status == 1 &amp;&amp; records[i].status == -1) {            vec.push_back(records[i - 1]);            vec.push_back(records[i]);            lenMap[records[i].id] += records[i].time - records[i - 1].time;            if (lenMap[records[i].id] &gt; maxLen) {                maxLen = lenMap[records[i].id];            }        }    }    sort(vec.begin(), vec.end(), cmpByTime);    for (int i = 0; i &lt; k; i++) {        scanf(&quot;%d:%d:%d&quot;, &amp;hour, &amp;min, &amp;sec);        time = hour * 60 * 60 + min * 60 + sec;        while (j &lt; vec.size() &amp;&amp; vec[j].time &lt;= time) {            cnt += vec[j].status;            j++;        }        printf(&quot;%d\n&quot;, cnt);    }    for (auto it : lenMap) {        if (it.second == maxLen) {            printf(&quot;%s &quot;, it.first.c_str());        }    }    printf(&quot;%02d:%02d:%02d&quot;, maxLen / 3600, maxLen % 3600 / 60, maxLen % 60);    return 0;}</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;Zhejiang University has 8 campuses and a lot of gates. From each gate we can collect the in/out times and the plate numbers of the cars c
+      
+    
+    </summary>
+    
+      <category term="PAT" scheme="https://zjxjwxk.com/categories/PAT/"/>
+    
+      <category term="排序" scheme="https://zjxjwxk.com/categories/PAT/%E6%8E%92%E5%BA%8F/"/>
     
     
       <category term="PAT" scheme="https://zjxjwxk.com/tags/PAT/"/>
