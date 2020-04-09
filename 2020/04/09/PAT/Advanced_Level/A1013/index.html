@@ -5,12 +5,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>PAT甲级 1010 Radix (25分) - Zjxjwxk&#39;s Blog</title>
+    <title>PAT甲级 1013 Battle Over Cities (25分) - Zjxjwxk&#39;s Blog</title>
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="google" content="notranslate">
     <meta name="keywords" content="吴鑫康 zjxjwxk Wxk Java,"> 
-    <meta name="description" content="Given a pair of positive integers, for example, 6 and 110, can this equation 6 = 110 be true? The a,"> 
+    <meta name="description" content="It is vitally important to have all the cities connected by highways in a war. If a city is occupie,"> 
     <meta name="author" content="吴鑫康"> 
     <link rel="alternative" href="atom.xml" title="Zjxjwxk&#39;s Blog" type="application/atom+xml"> 
     <link rel="icon" href="/img/favicon.png"> 
@@ -43,7 +43,7 @@
     <div class="navigation animated fadeIn fast delay-1s">
         <img id="home-icon" class="icon-home" src="/img/favicon.png" alt="" data-url="https://zjxjwxk.com">
         <div id="play-icon" title="Play/Pause" class="iconfont icon-play"></div>
-        <h3 class="subtitle">PAT甲级 1010 Radix (25分)</h3>
+        <h3 class="subtitle">PAT甲级 1013 Battle Over Cities (25分)</h3>
         <div class="social">
             <!--        <div class="like-icon">-->
             <!--            <a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
@@ -77,26 +77,26 @@
                 <a href="/categories/PAT"><b>「
                     </b>PAT<b> 」</b></a>
                 
-                三月 29, 2020
+                四月 09, 2020
             </p>
-            <h3 class="post-title animated fadeInDown"><a href="/2020/03/29/PAT/Advanced_Level/A1010/" title="PAT甲级 1010 Radix (25分)">PAT甲级 1010 Radix (25分)</a>
+            <h3 class="post-title animated fadeInDown"><a href="/2020/04/09/PAT/Advanced_Level/A1013/" title="PAT甲级 1013 Battle Over Cities (25分)">PAT甲级 1013 Battle Over Cities (25分)</a>
             </h3>
             
             <p class="post-count animated fadeInDown">
                 
                 <span>
                     <b class="iconfont icon-text2"></b> <i>文章字数</i>
-                    4.7k
+                    3k
                 </span>
                 
                 
                 <span>
                     <b class="iconfont icon-timer__s"></b> <i>阅读约需</i>
-                    4 mins.
+                    3 mins.
                 </span>
                 
                 
-                <span id="/2020/03/29/PAT/Advanced_Level/A1010/" class="leancloud_visitors" data-flag-title="PAT甲级 1010 Radix (25分)">
+                <span id="/2020/04/09/PAT/Advanced_Level/A1013/" class="leancloud_visitors" data-flag-title="PAT甲级 1013 Battle Over Cities (25分)">
                     <b class="iconfont icon-read"></b> <i>阅读次数</i>
                     <span class="leancloud-visitors-count">-</span>
                 </span>
@@ -126,102 +126,60 @@
 <div class="article">
     <div class="main">
         <div class="content markdown animated fadeIn">
-            <p>Given a pair of positive integers, for example, 6 and 110, can this equation 6 = 110 be true? The answer is <code>yes</code>, if 6 is a decimal number and 110 is a binary number.</p>
-<p>Now for any pair of positive integers <em>N</em>1 and <em>N</em>2, your task is to find the radix of one number while that of the other is given.</p>
-<h1 id="Input-Specification"><a href="#Input-Specification" class="headerlink" title="Input Specification:"></a>Input Specification:</h1><p>Each input file contains one test case. Each case occupies a line which contains 4 positive integers:</p>
-<pre><code>N1 N2 tag radix
-</code></pre><p>Here <code>N1</code> and <code>N2</code> each has no more than 10 digits. A digit is less than its radix and is chosen from the set { 0-9, <code>a</code>-<code>z</code> } where 0-9 represent the decimal numbers 0-9, and <code>a</code>-<code>z</code> represent the decimal numbers 10-35. The last number <code>radix</code> is the radix of <code>N1</code> if <code>tag</code> is 1, or of <code>N2</code> if <code>tag</code> is 2.</p>
-<h1 id="Output-Specification"><a href="#Output-Specification" class="headerlink" title="Output Specification:"></a>Output Specification:</h1><p>For each test case, print in one line the radix of the other number so that the equation <code>N1</code> = <code>N2</code> is true. If the equation is impossible, print <code>Impossible</code>. If the solution is not unique, output the smallest possible radix.</p>
-<h1 id="Sample-Input-1"><a href="#Sample-Input-1" class="headerlink" title="Sample Input 1:"></a>Sample Input 1:</h1><pre><code class="in">6 110 1 10
+            <p>It is vitally important to have all the cities connected by highways in a war. If a city is occupied by the enemy, all the highways from/toward that city are closed. We must know immediately if we need to repair any other highways to keep the rest of the cities connected. Given the map of cities which have all the remaining highways marked, you are supposed to tell the number of highways need to be repaired, quickly.</p>
+<p>For example, if we have 3 cities and 2 highways connecting city1-city2 and city1-city3. Then if city1 is occupied by the enemy, we must have 1 highway repaired, that is the highway city2-city3.</p>
+<h1 id="Input-Specification"><a href="#Input-Specification" class="headerlink" title="Input Specification:"></a>Input Specification:</h1><p>Each input file contains one test case. Each case starts with a line containing 3 numbers <em>N</em> (&lt;1000), <em>M</em> and <em>K</em>, which are the total number of cities, the number of remaining highways, and the number of cities to be checked, respectively. Then <em>M</em> lines follow, each describes a highway by 2 integers, which are the numbers of the cities the highway connects. The cities are numbered from 1 to <em>N</em>. Finally there is a line containing <em>K</em> numbers, which represent the cities we concern.</p>
+<h1 id="Output-Specification"><a href="#Output-Specification" class="headerlink" title="Output Specification:"></a>Output Specification:</h1><p>For each of the <em>K</em> cities, output in a line the number of highways need to be repaired if that city is lost.</p>
+<h1 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input:"></a>Sample Input:</h1><pre><code class="in">3 2 3
+1 2
+1 3
+1 2 3
 </code></pre>
-<h1 id="Sample-Output-1"><a href="#Sample-Output-1" class="headerlink" title="Sample Output 1:"></a>Sample Output 1:</h1><pre><code class="out">2
+<h1 id="Sample-Output"><a href="#Sample-Output" class="headerlink" title="Sample Output:"></a>Sample Output:</h1><pre><code class="out">1
+0
+0
 </code></pre>
-<h1 id="Sample-Input-2"><a href="#Sample-Input-2" class="headerlink" title="Sample Input 2:"></a>Sample Input 2:</h1><pre><code class="in">1 ab 1 2
-</code></pre>
-<h1 id="Sample-Output-2"><a href="#Sample-Output-2" class="headerlink" title="Sample Output 2:"></a>Sample Output 2:</h1><pre><code class="out">Impossible
-</code></pre>
-<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><ul>
-<li>二分：对一个确定的数字串来说，它的进制越大，该数字串转换为十进制的结果也就越大。</li>
-</ul>
-<h2 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h2><ul>
-<li>使用遍历进制的暴力法会超时，因使用二分法。</li>
-<li>本题的变量尽量使用 long long 类型。另外，经测试得到，本题中 radix 的范围最大为 INT_MAX ，即$2^{31}-1$，因此必须在在计算过程中判断是否溢出。</li>
-<li>N2 进制的<strong>下界</strong>为所有数位中最大的那个+1，<strong>上界</strong>为 N1 的十进制（num1）与下界（lower）的较大值+1（即 max(num1, lower) + 1）。</li>
+<h1 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h1><ul>
+<li>可能原图就是不连通的，所以需要对每个顶点进行 DFS</li>
 </ul>
 <pre><code class="C++">#include &lt;cstdio&gt;
+#include &lt;vector&gt;
 #include &lt;cstring&gt;
-#include &lt;algorithm&gt;
 using namespace std;
 
-char n1[11], n2[11], temp[11];
-int tag;
-long long radix, num1, inf = (1LL &lt;&lt; 63) - 1;
+const int maxn = 1000;
+int n, m, k, q;
+vector&lt;int&gt; G[maxn];
+bool vis[maxn] = {false};
 
-long long strToNum(char str[], long long radix, long long upper) {
-    int len = strlen(str);
-    long long num = 0;
-    for (int i = 0; i &lt; len; i++) {
-        long long digit;
-        if (str[i] &gt;= &#39;a&#39; &amp;&amp; str[i] &lt;= &#39;z&#39;) {
-            digit = str[i] - &#39;a&#39; + 10;
-        } else {
-            digit = str[i] - &#39;0&#39;;
-        }
-        num = num * radix + digit;
-        if (num &lt; 0 || num &gt; upper) {
-            return -1;
+void DFS(int root) {
+    vis[root] = true;
+    for (int i = 0; i &lt; G[root].size(); i++) {
+        if (G[root][i] != q &amp;&amp; vis[G[root][i]] == false) {
+            DFS(G[root][i]);
         }
     }
-    return num;
-}
-
-long long findLower(char str[]) {
-    long long maxDigit = -1;
-    int len = strlen(str);
-    for (int i = 0; i &lt; len; i++) {
-        long long digit;
-        if (str[i] &gt;= &#39;a&#39; &amp;&amp; str[i] &lt;= &#39;z&#39;) {
-            digit = str[i] - &#39;a&#39; + 10;
-        } else {
-            digit = str[i] - &#39;0&#39;;
-        }
-        if (digit &gt; maxDigit) {
-            maxDigit = digit;
-        }
-    }
-    return maxDigit + 1;
-}
-
-int binarySearch(long long left, long long right, char str[], long long upper) {
-    long long mid, num2;
-    while (left &lt;= right) {
-        mid = left + (right - left) / 2;
-        long long num2 = strToNum(n2, mid, upper);
-        if (num2 == num1) {
-            return mid;
-        } else if (num2 &gt; num1 || num2 == -1) {
-            right = mid - 1;
-        } else {
-            left = mid + 1;
-        }
-    }
-    return -1;
 }
 
 int main() {
-    scanf(&quot;%s %s %d %d&quot;, n1, n2, &amp;tag, &amp;radix);
-    if (tag == 2) {
-        strcpy(temp, n1);
-        strcpy(n1, n2);
-        strcpy(n2, temp);
+    scanf(&quot;%d %d %d&quot;, &amp;n, &amp;m, &amp;k);
+    int c1, c2;
+    for (int i = 0; i &lt; m; i++) {
+        scanf(&quot;%d %d&quot;, &amp;c1, &amp;c2);
+        G[c1].push_back(c2);
+        G[c2].push_back(c1);
     }
-    long long lower = findLower(n2);
-    num1 = strToNum(n1, radix, inf);
-    long long radix2 = binarySearch(lower, max(num1, lower) + 1, n2, num1);
-    if (radix2 == -1) {
-        printf(&quot;Impossible&quot;);
-    } else {
-        printf(&quot;%d&quot;, radix2);
+    for (int i = 0; i &lt; k; i++) {
+        scanf(&quot;%d&quot;, &amp;q);
+        int cnt = -1;
+        memset(vis + 1, false, n);
+        for (int j = 1; j &lt;= n; j++) {
+            if (j != q &amp;&amp; vis[j] == false) {
+                DFS(j);
+                cnt++;
+            }
+        }
+        printf(&quot;%d\n&quot;, cnt);
     }
     return 0;
 }
@@ -269,7 +227,7 @@ int main() {
             <div class="box sticky animated fadeInRight faster">
                 <div id="toc" class="subbox">
                     <h4>目录</h4>
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Input-Specification"><span class="toc-number">1.</span> <span class="toc-text">Input Specification:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Output-Specification"><span class="toc-number">2.</span> <span class="toc-text">Output Specification:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Sample-Input-1"><span class="toc-number">3.</span> <span class="toc-text">Sample Input 1:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Sample-Output-1"><span class="toc-number">4.</span> <span class="toc-text">Sample Output 1:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Sample-Input-2"><span class="toc-number">5.</span> <span class="toc-text">Sample Input 2:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Sample-Output-2"><span class="toc-number">6.</span> <span class="toc-text">Sample Output 2:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#思路"><span class="toc-number">7.</span> <span class="toc-text">思路</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#注意点"><span class="toc-number">7.1.</span> <span class="toc-text">注意点</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Input-Specification"><span class="toc-number">1.</span> <span class="toc-text">Input Specification:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Output-Specification"><span class="toc-number">2.</span> <span class="toc-text">Output Specification:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Sample-Input"><span class="toc-number">3.</span> <span class="toc-text">Sample Input:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Sample-Output"><span class="toc-number">4.</span> <span class="toc-text">Sample Output:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#注意点"><span class="toc-number">5.</span> <span class="toc-text">注意点</span></a></li></ol>
                 </div>
             </div>
             
