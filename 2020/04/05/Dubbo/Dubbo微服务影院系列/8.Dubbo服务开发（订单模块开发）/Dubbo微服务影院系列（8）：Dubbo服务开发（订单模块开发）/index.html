@@ -95,13 +95,13 @@ Dubbo 特性之分组、聚合和版本控制
                 
                 <span>
                     <b class="iconfont icon-text2"></b> <i>文章字数</i>
-                    3.6k
+                    9.9k
                 </span>
                 
                 
                 <span>
                     <b class="iconfont icon-timer__s"></b> <i>阅读约需</i>
-                    3 mins.
+                    9 mins.
                 </span>
                 
                 
@@ -146,7 +146,7 @@ Dubbo 特性之分组、聚合和版本控制
 <li>服务熔断和降级？</li>
 <li>如何保证多版本的蓝绿上线？</li>
 </ul>
-<h1 id="分库分表"><a href="#分库分表" class="headerlink" title="分库分表"></a>分库分表</h1><p><img src="/2020/04/05/Dubbo/Dubbo微服务影院系列/8.Dubbo服务开发（订单模块开发）/Dubbo微服务影院系列（8）：Dubbo服务开发（订单模块开发）/image-20200408000355380.png" alt="横向拆分和纵向拆分"></p>
+<h1 id="横向拆分和纵向拆分"><a href="#横向拆分和纵向拆分" class="headerlink" title="横向拆分和纵向拆分"></a>横向拆分和纵向拆分</h1><p><img src="/2020/04/05/Dubbo/Dubbo微服务影院系列/8.Dubbo服务开发（订单模块开发）/Dubbo微服务影院系列（8）：Dubbo服务开发（订单模块开发）/image-20200408000355380.png" alt="横向拆分和纵向拆分"></p>
 <h1 id="Dubbo-服务分组"><a href="#Dubbo-服务分组" class="headerlink" title="Dubbo 服务分组"></a>Dubbo 服务分组</h1><blockquote>
 <p>官方文档：<a href="https://dubbo.apache.org/zh-cn/docs/user/demos/service-group.html" target="_blank" rel="noopener">https://dubbo.apache.org/zh-cn/docs/user/demos/service-group.html</a></p>
 </blockquote>
@@ -190,6 +190,143 @@ Dubbo 特性之分组、聚合和版本控制
     &lt;dubbo:method name=&quot;getMenuItems&quot; merger=&quot;.addAll&quot; /&gt;
 &lt;/dubbo:reference&gt;
 </code></pre>
+<h1 id="Dubbo-多版本"><a href="#Dubbo-多版本" class="headerlink" title="Dubbo 多版本"></a>Dubbo 多版本</h1><p>当一个接口实现，出现不兼容升级时，可以用版本号过渡，版本号不同的服务相互间不引用。</p>
+<p>可以按照以下的步骤进行版本迁移：</p>
+<ol>
+<li>在低压力时间段，先升级一半提供者为新版本</li>
+<li>再将所有消费者升级为新版本</li>
+<li>然后将剩下的一半提供者升级为新版本</li>
+</ol>
+<h2 id="配置-1"><a href="#配置-1" class="headerlink" title="配置"></a>配置</h2><p>老版本服务提供者配置：</p>
+<pre><code class="xml">&lt;dubbo:service interface=&quot;com.foo.BarService&quot; version=&quot;1.0.0&quot; /&gt;
+</code></pre>
+<p>新版本服务提供者配置：</p>
+<pre><code class="xml">&lt;dubbo:service interface=&quot;com.foo.BarService&quot; version=&quot;2.0.0&quot; /&gt;
+</code></pre>
+<p>老版本服务消费者配置：</p>
+<pre><code class="xml">&lt;dubbo:reference id=&quot;barService&quot; interface=&quot;com.foo.BarService&quot; version=&quot;1.0.0&quot; /&gt;
+</code></pre>
+<p>新版本服务消费者配置：</p>
+<pre><code class="xml">&lt;dubbo:reference id=&quot;barService&quot; interface=&quot;com.foo.BarService&quot; version=&quot;2.0.0&quot; /&gt;
+</code></pre>
+<p>如果不需要区分版本，可以按照以下的方式配置：</p>
+<pre><code class="xml">&lt;dubbo:reference id=&quot;barService&quot; interface=&quot;com.foo.BarService&quot; version=&quot;*&quot; /&gt;
+</code></pre>
+<h1 id="限流思路"><a href="#限流思路" class="headerlink" title="限流思路"></a>限流思路</h1><ul>
+<li>限流措施是系统高可用的一种手段</li>
+<li>使用并发与连接控制进行限流</li>
+<li>使用<strong>漏桶算法（Leaky Bucket）</strong>和<strong>令牌桶算法（Token Bucket）</strong>算法进行限流</li>
+</ul>
+<h2 id="漏桶算法（Leaky-Bucket）"><a href="#漏桶算法（Leaky-Bucket）" class="headerlink" title="漏桶算法（Leaky Bucket）"></a>漏桶算法（Leaky Bucket）</h2><p><img src="/2020/04/05/Dubbo/Dubbo微服务影院系列/8.Dubbo服务开发（订单模块开发）/Dubbo微服务影院系列（8）：Dubbo服务开发（订单模块开发）/rate-limit1.png" alt="漏桶法"></p>
+<h2 id="令牌桶算法（Token-Bucket）"><a href="#令牌桶算法（Token-Bucket）" class="headerlink" title="令牌桶算法（Token Bucket）"></a>令牌桶算法（Token Bucket）</h2><p><img src="/2020/04/05/Dubbo/Dubbo微服务影院系列/8.Dubbo服务开发（订单模块开发）/Dubbo微服务影院系列（8）：Dubbo服务开发（订单模块开发）/token_bucket.JPG" alt="令牌桶"></p>
+<h2 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h2><ul>
+<li>漏桶算法以均匀的速度处理请求，不需要承载较高的访问峰值</li>
+<li>令牌桶算法则可能在短时间内处理大量请求，所以需要可以承载较高的访问峰值</li>
+</ul>
+<h2 id="令牌桶算法实现"><a href="#令牌桶算法实现" class="headerlink" title="令牌桶算法实现"></a>令牌桶算法实现</h2><pre><code class="C++">public class TokenBucket {
+
+    /**
+     * 桶的容量
+     */
+    private int bucketNums = 100;
+
+    /**
+     * 流入速度
+     */
+    private int rate = 1;
+
+    /**
+     * 当前令牌数
+     */
+    private int nowTokens;
+
+    /**
+     * 上次刷新当前令牌数的时间
+     */
+    private long lastTime = getNowTime();
+
+    private long getNowTime() {
+        return System.currentTimeMillis();
+    }
+
+    public boolean getToken() {
+
+        // 记录当前时间
+        long nowTime = getNowTime();
+
+        // 刷新令牌
+        nowTokens += (nowTime - lastTime) * rate;
+
+        // 若令牌数比桶容量大，则改为桶容量
+        nowTokens = Math.min(bucketNums, nowTokens);
+        System.out.println(&quot;当前令牌数：&quot; + nowTokens);
+
+        // 修改上次刷新令牌数的时间为当前时间
+        lastTime = nowTime;
+
+        // 判断令牌是否足够
+        if (nowTokens &gt; 0) {
+            nowTokens--;
+            return true;
+        } else {
+            return false;
+        }
+    }
+}
+
+</code></pre>
+<h1 id="Hystrix-熔断降级"><a href="#Hystrix-熔断降级" class="headerlink" title="Hystrix 熔断降级"></a>Hystrix 熔断降级</h1><p><img src="/2020/04/05/Dubbo/Dubbo微服务影院系列/8.Dubbo服务开发（订单模块开发）/Dubbo微服务影院系列（8）：Dubbo服务开发（订单模块开发）/hystrix-command-flow-chart.png" alt="Hystrix 熔断降级"></p>
+<p>网关模块添加依赖：</p>
+<pre><code class="xml">        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-cloud-starter-netflix-hystrix&lt;/artifactId&gt;
+            &lt;version&gt;2.0.0.RELEASE&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-starter-actuator&lt;/artifactId&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-cloud-starter-netflix-hystrix-dashboard&lt;/artifactId&gt;
+            &lt;version&gt;2.0.0.RELEASE&lt;/version&gt;
+        &lt;/dependency&gt;
+</code></pre>
+<p>GatewayApplication 添加注解：</p>
+<pre><code class="Java">@EnableHystrixDashboard
+@EnableCircuitBreaker
+@EnableHystrix
+</code></pre>
+<p>给需要熔断器的控制器方法添加注解：</p>
+<pre><code class="Java">@HystrixCommand(fallbackMethod = &quot;error&quot;,
+            commandProperties = {
+                @HystrixProperty(name = &quot;execution.isolation.strategy&quot;, value = &quot;THREAD&quot;),
+                @HystrixProperty(name = &quot;execution.isolation.thread.timeoutInMilliseconds&quot;, value = &quot;4000&quot;),
+                @HystrixProperty(name = &quot;circuitBreaker.requestVolumeThreshold&quot;, value = &quot;10&quot;),
+                @HystrixProperty(name = &quot;circuitBreaker.errorThresholdPercentage&quot;, value = &quot;50&quot;)
+            },
+            threadPoolProperties = {
+                    @HystrixProperty(name = &quot;coreSize&quot;, value = &quot;1&quot;),
+                    @HystrixProperty(name = &quot;maxQueueSize&quot;, value = &quot;10&quot;),
+                    @HystrixProperty(name = &quot;keepAliveTimeMinutes&quot;, value = &quot;1000&quot;),
+                    @HystrixProperty(name = &quot;queueSizeRejectionThreshold&quot;, value = &quot;8&quot;),
+                    @HystrixProperty(name = &quot;metrics.rollingStats.numBuckets&quot;, value = &quot;12&quot;),
+                    @HystrixProperty(name = &quot;metrics.rollingStats.timeInMilliseconds&quot;, value = &quot;1500&quot;)
+            })
+</code></pre>
+<p>定义 fallbackMethod 方法，用于服务降级：</p>
+<pre><code class="Java">public ResponseVO error(Integer fieldId, String soldSeats, String seatsName) {
+    return ResponseVO.serviceFail(&quot;抱歉，下单的人太多了，请稍后重试&quot;);
+}
+</code></pre>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><ul>
+<li>学习了限流措施以及实现方法（在真实业务环境中，可能会根据请求的字节数大小分配 TokenBucket）</li>
+<li>掌握了 Dubbo 的分组聚合、版本控制</li>
+<li>留下一个思考，如何处理事务？<ul>
+<li>假如，下订单时，将 1. 验证所购买的票是否为真和 2. 检查所购买的票是否已售出，这两个 service 接口改为异步调用（因为要连接 FTP 和读取文件，速度较慢），那么可能还没有调用结束，就已经生成了订单……但是如果异步调用的验证结果不为真，该怎么办？这时候就需要事务来保证 ACID 了。那么应该如何处理分布式事务呢？且看下回分解。</li>
+</ul>
+</li>
+</ul>
 
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
@@ -222,7 +359,7 @@ Dubbo 特性之分组、聚合和版本控制
                     </dl>
                 </div>
                 <ul>
-                    <li><a href="/">50 <p>文章</p></a></li>
+                    <li><a href="/">51 <p>文章</p></a></li>
                     <li><a href="/categories">19 <p>分类</p></a></li>
                     <li><a href="/tags">13 <p>标签</p></a></li>
                 </ul>
@@ -233,7 +370,7 @@ Dubbo 特性之分组、聚合和版本控制
             <div class="box sticky animated fadeInRight faster">
                 <div id="toc" class="subbox">
                     <h4>目录</h4>
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#章节概要"><span class="toc-number">1.</span> <span class="toc-text">章节概要</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#订单模块问题"><span class="toc-number">2.</span> <span class="toc-text">订单模块问题</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#分库分表"><span class="toc-number">3.</span> <span class="toc-text">分库分表</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Dubbo-服务分组"><span class="toc-number">4.</span> <span class="toc-text">Dubbo 服务分组</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#服务"><span class="toc-number">4.1.</span> <span class="toc-text">服务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#引用"><span class="toc-number">4.2.</span> <span class="toc-text">引用</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Dubbo-分组聚合"><span class="toc-number">5.</span> <span class="toc-text">Dubbo 分组聚合</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#配置"><span class="toc-number">5.1.</span> <span class="toc-text">配置</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#章节概要"><span class="toc-number">1.</span> <span class="toc-text">章节概要</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#订单模块问题"><span class="toc-number">2.</span> <span class="toc-text">订单模块问题</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#横向拆分和纵向拆分"><span class="toc-number">3.</span> <span class="toc-text">横向拆分和纵向拆分</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Dubbo-服务分组"><span class="toc-number">4.</span> <span class="toc-text">Dubbo 服务分组</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#服务"><span class="toc-number">4.1.</span> <span class="toc-text">服务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#引用"><span class="toc-number">4.2.</span> <span class="toc-text">引用</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Dubbo-分组聚合"><span class="toc-number">5.</span> <span class="toc-text">Dubbo 分组聚合</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#配置"><span class="toc-number">5.1.</span> <span class="toc-text">配置</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Dubbo-多版本"><span class="toc-number">6.</span> <span class="toc-text">Dubbo 多版本</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#配置-1"><span class="toc-number">6.1.</span> <span class="toc-text">配置</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#限流思路"><span class="toc-number">7.</span> <span class="toc-text">限流思路</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#漏桶算法（Leaky-Bucket）"><span class="toc-number">7.1.</span> <span class="toc-text">漏桶算法（Leaky Bucket）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#令牌桶算法（Token-Bucket）"><span class="toc-number">7.2.</span> <span class="toc-text">令牌桶算法（Token Bucket）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#区别"><span class="toc-number">7.3.</span> <span class="toc-text">区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#令牌桶算法实现"><span class="toc-number">7.4.</span> <span class="toc-text">令牌桶算法实现</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Hystrix-熔断降级"><span class="toc-number">8.</span> <span class="toc-text">Hystrix 熔断降级</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#总结"><span class="toc-number">9.</span> <span class="toc-text">总结</span></a></li></ol>
                 </div>
             </div>
             

@@ -128,23 +128,23 @@
             一月 31, 2019
         </p>
         <h3 class="post-title animated fadeInDown">
-            <a href="/2019/01/31/Spring Cloud/微服务架构/微服务简介/" title="微服务简介" class="posttitle">微服务简介</a></h3>
+            <a href="/2019/01/31/Spring Cloud/服务注册与发现/Spring-Cloud-Eureka/" title="Spring Cloud Eureka" class="posttitle">Spring Cloud Eureka</a></h3>
         
         <p class="post-count animated fadeInDown">
             
             <span>
                 <b class="iconfont icon-text2"></b> <i>文章字数</i>
-                3.7k
+                2.6k
             </span>
             
             
             <span>
                 <b class="iconfont icon-timer__s"></b> <i>阅读约需</i>
-                3 mins.
+                2 mins.
             </span>
             
             
-            <span id="/2019/01/31/Spring Cloud/微服务架构/微服务简介/" class="leancloud_visitors" data-flag-title="">
+            <span id="/2019/01/31/Spring Cloud/服务注册与发现/Spring-Cloud-Eureka/" class="leancloud_visitors" data-flag-title="">
                 <b class="iconfont icon-read"></b> <i>阅读次数</i>
                 <span class="leancloud-visitors-count">-</span>
             </span>
@@ -156,9 +156,31 @@
         
         <div class="md-content animated fadeIn">
             
-            <p>The microservice architectural style is an approach to developing a single application running as <strong>a suite of small services</strong>, each <strong>running its own process</strong> and communicating with lightweight mechanisms, often an HTTP resource API. These services are <strong>built around business capabilities</strong> and <strong>independently...</strong></p>
+            <ul>
+<li>基于 Netflix Eureka 做了二次封装</li>
+<li>两个组件组成：<ul>
+<li>Eureka Server 注册中心<ul>
+<li>作为具有服务注册功能的服务器，是服务注册中心，系统中的其他微服务使用 Eureka Client 连接到Eureka Server ，并维持心跳连接以监控各个微服务是否正常运行。</li>
+</ul>
+</li>
+<li>Eureka Client 服务注册<ul>
+<li>用于简化与服务器的交互，作为轮询负载均衡器，并提供服务的故障切换支持。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<pre><code class="Java">@SpringBootApplication
+@EnableEurekaServer
+public class EurekaApplication {
+
+    public static void...</code></pre>
             
-            <span class="read-more"><a href="/2019/01/31/Spring Cloud/微服务架构/微服务简介/" title="查看全文" class="posttitle">查看全文</a>
+            <span class="read-more"><a href="/2019/01/31/Spring Cloud/服务注册与发现/Spring-Cloud-Eureka/" title="查看全文" class="posttitle">查看全文</a>
                 <b class="iconfont icon-arrow-right- gradient-text"></b></span>
         </div>
     </div>
@@ -179,6 +201,76 @@
 
     <div id="primary">
         
+<div class="post" id="post">
+    <div class="post-cover animated fadeIn" style="
+            background-image:
+            radial-gradient(ellipse closest-side, rgba(0, 0, 0, 0.65), #100e17),
+            url(/img/welcome-cover.jpg);">
+    </div>
+    <div class="else">
+        <p class="animated fadeInDown">
+            
+                <a href="/categories/Spring-Cloud">
+                  <b>「 </b>SPRING-CLOUD<b> 」</b>
+                </a>
+            
+            一月 31, 2019
+        </p>
+        <h3 class="post-title animated fadeInDown"><a href="/2019/01/31/Spring Cloud/服务注册与发现/Spring-Cloud-Eureka/" title="Spring Cloud Eureka" class="posttitle">Spring Cloud Eureka</a></h3>
+        
+            <p class="post-count animated fadeInDown">
+                
+                    <span>
+                        <b class="iconfont icon-text2"></b> <i>文章字数</i>
+                        2.6k
+                    </span>
+                
+                
+                    <span>
+                        <b class="iconfont icon-timer__s"></b> <i>阅读约需</i>
+                        2 mins.
+                    </span>
+                
+                
+                    <span id="/2019/01/31/Spring Cloud/服务注册与发现/Spring-Cloud-Eureka/" class="leancloud_visitors" data-flag-title="">
+                        <b class="iconfont icon-read"></b> <i>阅读次数</i>
+                        <span class="leancloud-visitors-count">-</span>
+                    </span>
+                
+            </p>
+            
+                <ul class="animated fadeInDown post-tags-list"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/Java/">Java</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/Spring-Cloud/">Spring-Cloud</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/微服务架构/">微服务架构</a></li></ul>
+            
+        
+        <div class="md-content animated fadeIn">
+            
+                <ul>
+<li>基于 Netflix Eureka 做了二次封装</li>
+<li>两个组件组成：<ul>
+<li>Eureka Server 注册中心<ul>
+<li>作为具有服务注册功能的服务器，是服务注册中心，系统中的其他微服务使用 Eureka Client 连接到Eureka Server ，并维持心跳连接以监控各个微服务是否正常运行。</li>
+</ul>
+</li>
+<li>Eureka Client 服务注册<ul>
+<li>用于简化与服务器的交互，作为轮询负载均衡器，并提供服务的故障切换支持。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<pre><code class="Java">@SpringBootApplication
+@EnableEurekaServer...</code></pre>
+            
+            <span class="read-more"><a href="/2019/01/31/Spring Cloud/服务注册与发现/Spring-Cloud-Eureka/" title="查看全文" class="posttitle">查看全文</a> <b class="iconfont icon-arrow-right- gradient-text"></b></span>
+        </div>
+    </div>
+</div>
+
+
 <div class="post" id="post">
     <div class="post-cover animated fadeIn" style="
             background-image:
@@ -662,68 +754,9 @@ export...</code></pre>
 </div>
 
 
-<div class="post" id="post">
-    <div class="post-cover animated fadeIn" style="
-            background-image:
-            radial-gradient(ellipse closest-side, rgba(0, 0, 0, 0.65), #100e17),
-            url(/img/welcome-cover.jpg);">
     </div>
-    <div class="else">
-        <p class="animated fadeInDown">
-            
-                <a href="/categories/Java">
-                  <b>「 </b>JAVA<b> 」</b>
-                </a>
-            
-            一月 03, 2019
-        </p>
-        <h3 class="post-title animated fadeInDown"><a href="/2019/01/03/Java/Java核心/Java基础知识/" title="Java基础知识" class="posttitle">Java基础知识</a></h3>
-        
-            <p class="post-count animated fadeInDown">
-                
-                    <span>
-                        <b class="iconfont icon-text2"></b> <i>文章字数</i>
-                        21k
-                    </span>
-                
-                
-                    <span>
-                        <b class="iconfont icon-timer__s"></b> <i>阅读约需</i>
-                        19 mins.
-                    </span>
-                
-                
-                    <span id="/2019/01/03/Java/Java核心/Java基础知识/" class="leancloud_visitors" data-flag-title="">
-                        <b class="iconfont icon-read"></b> <i>阅读次数</i>
-                        <span class="leancloud-visitors-count">-</span>
-                    </span>
-                
-            </p>
-            
-                <ul class="animated fadeInDown post-tags-list"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/Java/">Java</a></li></ul>
-            
-        
-        <div class="md-content animated fadeIn">
-            
-                <h3 id="面向过程"><a href="#面向过程" class="headerlink" title="面向过程"></a>面向过程</h3><p><strong>优点：</strong> 性能比面向对象高，因为类调用时需要实例化，开销比较大，比较消耗资源;比如单片机、嵌入式开发、Linux/Unix等一般采用面向过程开发，性能是最重要的因素。</p>
-<p><strong>缺点：</strong> 没有面向对象易维护、易复用、易扩展</p>
-<h3 id="面向对象"><a href="#面向对象" class="headerlink" title="面向对象"></a>面向对象</h3><p><strong>优点：</strong> 易维护、易复用、易扩展，由于面向对象有封装、继承、多态性的特性，可以设计出低耦合的系统，使系统更加灵活、更加易于维护</p>
-<p><strong>缺点：</strong> 性能比面向过程低</p>
-<ol>
-<li>简单易学；</li>
-<li>面向对象（封装，继承，多态）；</li>
-<li>平台无关性（ Java 虚拟机实现平台无关性）；</li>
-<li>可靠性；</li>
-<li>安全性；</li>
-<li>支持多...</li></ol>
-            
-            <span class="read-more"><a href="/2019/01/03/Java/Java核心/Java基础知识/" title="查看全文" class="posttitle">查看全文</a> <b class="iconfont icon-arrow-right- gradient-text"></b></span>
-        </div>
-    </div>
-</div>
-
-
-    </div>
+    
+    <div id="pager"><a href="/page/6/" class="more" data-loading="加载中..." data-load-more="加载更多">加载更多</a></div>
     
 </div>
 <div id="preview"></div>
