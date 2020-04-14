@@ -14,7 +14,10 @@
 完成支付模块业务开发
 Dubbo 特性学习：隐式参数、参数验证等
 
-"> 
+Dubbo 本地存根
+本地存根类似于 Dubbo 的静态代理
+Dubbo 会在客户端生成一个代理，处理部分业务
+Stub,"> 
     <meta name="author" content="吴鑫康"> 
     <link rel="alternative" href="atom.xml" title="Zjxjwxk&#39;s Blog" type="application/atom+xml"> 
     <link rel="icon" href="/img/favicon.png"> 
@@ -90,13 +93,13 @@ Dubbo 特性学习：隐式参数、参数验证等
                 
                 <span>
                     <b class="iconfont icon-text2"></b> <i>文章字数</i>
-                    137
+                    1.9k
                 </span>
                 
                 
                 <span>
                     <b class="iconfont icon-timer__s"></b> <i>阅读约需</i>
-                    1 mins.
+                    2 mins.
                 </span>
                 
                 
@@ -134,6 +137,48 @@ Dubbo 特性学习：隐式参数、参数验证等
 <li>完成支付模块业务开发</li>
 <li>Dubbo 特性学习：隐式参数、参数验证等</li>
 </ul>
+<h1 id="Dubbo-本地存根"><a href="#Dubbo-本地存根" class="headerlink" title="Dubbo 本地存根"></a>Dubbo 本地存根</h1><ul>
+<li>本地存根类似于 Dubbo 的静态代理</li>
+<li>Dubbo 会在客户端生成一个代理，处理部分业务</li>
+<li>Stub 必须有可传入 Proxy 的构造函数</li>
+</ul>
+<blockquote>
+<p>官方文档：<a href="https://dubbo.apache.org/zh-cn/docs/user/demos/local-stub.html" target="_blank" rel="noopener">https://dubbo.apache.org/zh-cn/docs/user/demos/local-stub.html</a></p>
+</blockquote>
+<p>远程服务后，客户端通常只剩下接口，而实现全在服务器端，但提供方有些时候想在客户端也执行部分逻辑，比如：做 ThreadLocal 缓存，提前验证参数，调用失败后伪造容错数据等等，此时就需要在 API 中带上 Stub，客户端生成 Proxy 实例，会把 Proxy 通过构造函数传给 Stub，然后把 Stub 暴露给用户，Stub 可以决定要不要去调 Proxy。</p>
+<p><img src="/2020/04/11/Dubbo/Dubbo微服务影院系列/9.Dubbo服务开发（支付模块开发）/Dubbo微服务影院系列（9）：Dubbo服务开发（支付模块开发）/stub.jpg" alt="/user-guide/images/stub.jpg"></p>
+<p>在 spring 配置文件中按以下方式配置：</p>
+<pre><code class="xml">&lt;dubbo:service interface=&quot;com.foo.BarService&quot; stub=&quot;true&quot; /&gt;
+</code></pre>
+<p>或</p>
+<pre><code class="xml">&lt;dubbo:service interface=&quot;com.foo.BarService&quot; stub=&quot;com.foo.BarServiceStub&quot; /&gt;
+</code></pre>
+<p>提供 Stub 的实现：</p>
+<pre><code class="java">package com.foo;
+public class BarServiceStub implements BarService {
+    private final BarService barService;
+
+    // 构造函数传入真正的远程代理对象
+    public BarServiceStub(BarService barService){
+        this.barService = barService;
+    }
+
+    public String sayHello(String name) {
+        // 此代码在客户端执行, 你可以在客户端做ThreadLocal本地缓存，或预先验证参数是否合法，等等
+        try {
+            return barService.sayHello(name);
+        } catch (Exception e) {
+            // 你可以容错，可以做任何AOP拦截事项
+            return &quot;容错数据&quot;;
+        }
+    }
+}
+</code></pre>
+<ol>
+<li>Stub 必须有可传入 Proxy 的构造函数。</li>
+<li>在 interface 旁边放一个 Stub 实现，它实现 BarService 接口，并有一个传入远程 BarService 实例的构造函数</li>
+</ol>
+<p># </p>
 
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
@@ -177,7 +222,7 @@ Dubbo 特性学习：隐式参数、参数验证等
             <div class="box sticky animated fadeInRight faster">
                 <div id="toc" class="subbox">
                     <h4>目录</h4>
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#章节概要"><span class="toc-number">1.</span> <span class="toc-text">章节概要</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#章节概要"><span class="toc-number">1.</span> <span class="toc-text">章节概要</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Dubbo-本地存根"><span class="toc-number">2.</span> <span class="toc-text">Dubbo 本地存根</span></a></li></ol>
                 </div>
             </div>
             

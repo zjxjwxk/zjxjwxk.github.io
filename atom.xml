@@ -75,9 +75,9 @@
     <link href="https://zjxjwxk.com/2020/04/11/Dubbo/Dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/9.Dubbo%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91%EF%BC%88%E6%94%AF%E4%BB%98%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91%EF%BC%89/Dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97%EF%BC%889%EF%BC%89%EF%BC%9ADubbo%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91%EF%BC%88%E6%94%AF%E4%BB%98%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91%EF%BC%89/"/>
     <id>https://zjxjwxk.com/2020/04/11/Dubbo/Dubbo微服务影院系列/9.Dubbo服务开发（支付模块开发）/Dubbo微服务影院系列（9）：Dubbo服务开发（支付模块开发）/</id>
     <published>2020-04-11T12:14:00.000Z</published>
-    <updated>2020-04-11T12:16:11.000Z</updated>
+    <updated>2020-04-14T15:54:55.000Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="章节概要"><a href="#章节概要" class="headerlink" title="章节概要"></a>章节概要</h1><ul><li>完成支付模块业务开发</li><li>Dubbo 特性学习：隐式参数、参数验证等</li></ul>]]></content>
+    <content type="html"><![CDATA[<h1 id="章节概要"><a href="#章节概要" class="headerlink" title="章节概要"></a>章节概要</h1><ul><li>完成支付模块业务开发</li><li>Dubbo 特性学习：隐式参数、参数验证等</li></ul><h1 id="Dubbo-本地存根"><a href="#Dubbo-本地存根" class="headerlink" title="Dubbo 本地存根"></a>Dubbo 本地存根</h1><ul><li>本地存根类似于 Dubbo 的静态代理</li><li>Dubbo 会在客户端生成一个代理，处理部分业务</li><li>Stub 必须有可传入 Proxy 的构造函数</li></ul><blockquote><p>官方文档：<a href="https://dubbo.apache.org/zh-cn/docs/user/demos/local-stub.html" target="_blank" rel="noopener">https://dubbo.apache.org/zh-cn/docs/user/demos/local-stub.html</a></p></blockquote><p>远程服务后，客户端通常只剩下接口，而实现全在服务器端，但提供方有些时候想在客户端也执行部分逻辑，比如：做 ThreadLocal 缓存，提前验证参数，调用失败后伪造容错数据等等，此时就需要在 API 中带上 Stub，客户端生成 Proxy 实例，会把 Proxy 通过构造函数传给 Stub，然后把 Stub 暴露给用户，Stub 可以决定要不要去调 Proxy。</p><p><img src="/2020/04/11/Dubbo/Dubbo微服务影院系列/9.Dubbo服务开发（支付模块开发）/Dubbo微服务影院系列（9）：Dubbo服务开发（支付模块开发）/stub.jpg" alt="/user-guide/images/stub.jpg"></p><p>在 spring 配置文件中按以下方式配置：</p><pre><code class="xml">&lt;dubbo:service interface=&quot;com.foo.BarService&quot; stub=&quot;true&quot; /&gt;</code></pre><p>或</p><pre><code class="xml">&lt;dubbo:service interface=&quot;com.foo.BarService&quot; stub=&quot;com.foo.BarServiceStub&quot; /&gt;</code></pre><p>提供 Stub 的实现：</p><pre><code class="java">package com.foo;public class BarServiceStub implements BarService {    private final BarService barService;    // 构造函数传入真正的远程代理对象    public BarServiceStub(BarService barService){        this.barService = barService;    }    public String sayHello(String name) {        // 此代码在客户端执行, 你可以在客户端做ThreadLocal本地缓存，或预先验证参数是否合法，等等        try {            return barService.sayHello(name);        } catch (Exception e) {            // 你可以容错，可以做任何AOP拦截事项            return &quot;容错数据&quot;;        }    }}</code></pre><ol><li>Stub 必须有可传入 Proxy 的构造函数。</li><li>在 interface 旁边放一个 Stub 实现，它实现 BarService 接口，并有一个传入远程 BarService 实例的构造函数</li></ol><p># </p>]]></content>
     
     <summary type="html">
     
@@ -87,7 +87,7 @@
 &lt;li&gt;完成支付模块业务开发&lt;/li&gt;
 &lt;li&gt;Dubbo 特性学习：隐式参数、参数验证等&lt;/li&gt;
 &lt;/ul&gt;
-
+&lt;h1
       
     
     </summary>
@@ -765,33 +765,6 @@
   </entry>
   
   <entry>
-    <title>PAT甲级 1033 To Fill or Not to Fill (25分)</title>
-    <link href="https://zjxjwxk.com/2020/03/22/PAT/Advanced_Level/A1033/"/>
-    <id>https://zjxjwxk.com/2020/03/22/PAT/Advanced_Level/A1033/</id>
-    <published>2020-03-22T09:24:00.000Z</published>
-    <updated>2020-03-29T10:33:13.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>With highways available, driving a car from Hangzhou to any other city is easy. But since the tank capacity of a car is limited, we have to find gas stations on the way from time to time. Different gas station may give different price. You are asked to carefully design the cheapest route to go.</p><h1 id="Input-Specification"><a href="#Input-Specification" class="headerlink" title="Input Specification:"></a>Input Specification:</h1><p>Each input file contains one test case. For each case, the first line contains 4 positive numbers: <em>Cmax</em> (≤ 100), the maximum capacity of the tank; <em>D</em> (≤30000), the distance between Hangzhou and the destination city; <em>Davg</em> (≤20), the average distance per unit gas that the car can run; and <em>N</em> (≤ 500), the total number of gas stations. Then <em>N</em> lines follow, each contains a pair of non-negative numbers: <em>Pi</em>, the unit gas price, and <em>Di</em> (≤<em>D</em>), the distance between this station and Hangzhou, for <em>i</em>=1,⋯,<em>N</em>. All the numbers in a line are separated by a space.</p><h1 id="Output-Specification"><a href="#Output-Specification" class="headerlink" title="Output Specification:"></a>Output Specification:</h1><p>For each test case, print the cheapest price in a line, accurate up to 2 decimal places. It is assumed that the tank is empty at the beginning. If it is impossible to reach the destination, print <code>The maximum travel distance = X</code> where <code>X</code> is the maximum possible distance the car can run, accurate up to 2 decimal places.</p><h1 id="Sample-Input-1"><a href="#Sample-Input-1" class="headerlink" title="Sample Input 1:"></a>Sample Input 1:</h1><pre><code class="in">50 1300 12 86.00 12507.00 6007.00 1507.10 07.20 2007.50 4007.30 10006.85 300</code></pre><h1 id="Sample-Output-1"><a href="#Sample-Output-1" class="headerlink" title="Sample Output 1:"></a>Sample Output 1:</h1><pre><code class="out">749.17</code></pre><h1 id="Sample-Input-2"><a href="#Sample-Input-2" class="headerlink" title="Sample Input 2:"></a>Sample Input 2:</h1><pre><code>50 1300 12 27.10 07.00 600</code></pre><h1 id="Sample-Output-2"><a href="#Sample-Output-2" class="headerlink" title="Sample Output 2:"></a>Sample Output 2:</h1><pre><code>The maximum travel distance = 1200.00</code></pre><h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><ul><li>把终点视为单位油价为0，离起点距离为 destD 的加油站（以便在最后选择下一站时，能够直接选到终点）</li><li>贪心：寻找距离当前加油站<strong>最近的</strong>油价低于当前油价的加油站，加恰好能够到达该加油站的油，然后前往该加油站；如果找不到油价低于当前油价的加油站，则寻找油价最低的加油站，在当前加油站加满油，然后前往该加油站</li></ul><h1 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h1><ul><li>在距离为0处必须有加油站，否则无法出发，一定无法到达终点</li></ul><pre><code class="C++">#include &lt;cstdio&gt;#include &lt;algorithm&gt;using namespace std;const int maxn = 501;struct Station {    double P;    double D;} stations[maxn];int cmp(Station s1, Station s2) {    return s1.D &lt; s2.D;}int main() {    double capacity, destD, avgD, nowC = 0, nowD = 0, cost = 0;    int n, nowIndex = 0;    scanf(&quot;%lf %lf %lf %d&quot;, &amp;capacity, &amp;destD, &amp;avgD, &amp;n);    for (int i = 0; i &lt; n; i++) {        scanf(&quot;%lf %lf&quot;, &amp;stations[i].P, &amp;stations[i].D);    }    stations[n].P = 0;    stations[n].D = destD;    sort(stations, stations + n, cmp);    if (stations[0].D != 0) {        printf(&quot;The maximum travel distance = 0.00&quot;);    } else {        while (nowD &lt; destD) {            if (nowIndex == n - 1 &amp;&amp; (capacity * avgD &lt; (destD - nowD)) || (nowIndex &lt; n - 1) &amp;&amp; (capacity * avgD &lt; (stations[nowIndex + 1].D - nowD))) {                nowD += capacity * avgD;                break;            }            double minP = stations[nowIndex].P, secondP = stations[nowIndex + 1].P;            int minIndex = -1, secondIndex = nowIndex + 1;            for (int i = nowIndex + 1; i &lt;= n; i++) {                if (capacity * avgD &gt;= (stations[i].D - nowD)) {                    if (stations[i].P &lt; minP) {                        minP = stations[i].P;                        minIndex = i;                        break;                    } else if (stations[i].P &lt; secondP) {                        secondP = stations[i].P;                        secondIndex = i;                    }                } else {                    break;                }            }            if (minIndex != -1) {                if (nowC * avgD &lt; (stations[minIndex].D - nowD)) {                    cost += ((stations[minIndex].D - nowD) / avgD - nowC) * stations[nowIndex].P;                    nowC = 0;                } else {                    nowC -= (stations[minIndex].D - nowD) / avgD;                }                nowD = stations[minIndex].D;                nowIndex = minIndex;            } else {                cost += (capacity - nowC) * stations[nowIndex].P;                nowC = capacity - (stations[secondIndex].D - nowD) / avgD;                nowD = stations[secondIndex].D;                nowIndex = secondIndex;            }        }        if (nowD &lt; destD) {            printf(&quot;The maximum travel distance = %.2f&quot;, nowD);        } else {            printf(&quot;%.2f&quot;, cost);        }    }    return 0;}</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;With highways available, driving a car from Hangzhou to any other city is easy. But since the tank capacity of a car is limited, we have 
-      
-    
-    </summary>
-    
-      <category term="PAT" scheme="https://zjxjwxk.com/categories/PAT/"/>
-    
-      <category term="贪心" scheme="https://zjxjwxk.com/categories/PAT/%E8%B4%AA%E5%BF%83/"/>
-    
-    
-      <category term="PAT" scheme="https://zjxjwxk.com/tags/PAT/"/>
-    
-  </entry>
-  
-  <entry>
     <title>PAT甲级 1095 Cars on Campus (30分)</title>
     <link href="https://zjxjwxk.com/2020/03/22/PAT/Advanced_Level/A1095/"/>
     <id>https://zjxjwxk.com/2020/03/22/PAT/Advanced_Level/A1095/</id>
@@ -812,6 +785,33 @@
       <category term="PAT" scheme="https://zjxjwxk.com/categories/PAT/"/>
     
       <category term="排序" scheme="https://zjxjwxk.com/categories/PAT/%E6%8E%92%E5%BA%8F/"/>
+    
+    
+      <category term="PAT" scheme="https://zjxjwxk.com/tags/PAT/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>PAT甲级 1033 To Fill or Not to Fill (25分)</title>
+    <link href="https://zjxjwxk.com/2020/03/22/PAT/Advanced_Level/A1033/"/>
+    <id>https://zjxjwxk.com/2020/03/22/PAT/Advanced_Level/A1033/</id>
+    <published>2020-03-22T09:24:00.000Z</published>
+    <updated>2020-03-29T10:33:13.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>With highways available, driving a car from Hangzhou to any other city is easy. But since the tank capacity of a car is limited, we have to find gas stations on the way from time to time. Different gas station may give different price. You are asked to carefully design the cheapest route to go.</p><h1 id="Input-Specification"><a href="#Input-Specification" class="headerlink" title="Input Specification:"></a>Input Specification:</h1><p>Each input file contains one test case. For each case, the first line contains 4 positive numbers: <em>Cmax</em> (≤ 100), the maximum capacity of the tank; <em>D</em> (≤30000), the distance between Hangzhou and the destination city; <em>Davg</em> (≤20), the average distance per unit gas that the car can run; and <em>N</em> (≤ 500), the total number of gas stations. Then <em>N</em> lines follow, each contains a pair of non-negative numbers: <em>Pi</em>, the unit gas price, and <em>Di</em> (≤<em>D</em>), the distance between this station and Hangzhou, for <em>i</em>=1,⋯,<em>N</em>. All the numbers in a line are separated by a space.</p><h1 id="Output-Specification"><a href="#Output-Specification" class="headerlink" title="Output Specification:"></a>Output Specification:</h1><p>For each test case, print the cheapest price in a line, accurate up to 2 decimal places. It is assumed that the tank is empty at the beginning. If it is impossible to reach the destination, print <code>The maximum travel distance = X</code> where <code>X</code> is the maximum possible distance the car can run, accurate up to 2 decimal places.</p><h1 id="Sample-Input-1"><a href="#Sample-Input-1" class="headerlink" title="Sample Input 1:"></a>Sample Input 1:</h1><pre><code class="in">50 1300 12 86.00 12507.00 6007.00 1507.10 07.20 2007.50 4007.30 10006.85 300</code></pre><h1 id="Sample-Output-1"><a href="#Sample-Output-1" class="headerlink" title="Sample Output 1:"></a>Sample Output 1:</h1><pre><code class="out">749.17</code></pre><h1 id="Sample-Input-2"><a href="#Sample-Input-2" class="headerlink" title="Sample Input 2:"></a>Sample Input 2:</h1><pre><code>50 1300 12 27.10 07.00 600</code></pre><h1 id="Sample-Output-2"><a href="#Sample-Output-2" class="headerlink" title="Sample Output 2:"></a>Sample Output 2:</h1><pre><code>The maximum travel distance = 1200.00</code></pre><h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><ul><li>把终点视为单位油价为0，离起点距离为 destD 的加油站（以便在最后选择下一站时，能够直接选到终点）</li><li>贪心：寻找距离当前加油站<strong>最近的</strong>油价低于当前油价的加油站，加恰好能够到达该加油站的油，然后前往该加油站；如果找不到油价低于当前油价的加油站，则寻找油价最低的加油站，在当前加油站加满油，然后前往该加油站</li></ul><h1 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h1><ul><li>在距离为0处必须有加油站，否则无法出发，一定无法到达终点</li></ul><pre><code class="C++">#include &lt;cstdio&gt;#include &lt;algorithm&gt;using namespace std;const int maxn = 501;struct Station {    double P;    double D;} stations[maxn];int cmp(Station s1, Station s2) {    return s1.D &lt; s2.D;}int main() {    double capacity, destD, avgD, nowC = 0, nowD = 0, cost = 0;    int n, nowIndex = 0;    scanf(&quot;%lf %lf %lf %d&quot;, &amp;capacity, &amp;destD, &amp;avgD, &amp;n);    for (int i = 0; i &lt; n; i++) {        scanf(&quot;%lf %lf&quot;, &amp;stations[i].P, &amp;stations[i].D);    }    stations[n].P = 0;    stations[n].D = destD;    sort(stations, stations + n, cmp);    if (stations[0].D != 0) {        printf(&quot;The maximum travel distance = 0.00&quot;);    } else {        while (nowD &lt; destD) {            if (nowIndex == n - 1 &amp;&amp; (capacity * avgD &lt; (destD - nowD)) || (nowIndex &lt; n - 1) &amp;&amp; (capacity * avgD &lt; (stations[nowIndex + 1].D - nowD))) {                nowD += capacity * avgD;                break;            }            double minP = stations[nowIndex].P, secondP = stations[nowIndex + 1].P;            int minIndex = -1, secondIndex = nowIndex + 1;            for (int i = nowIndex + 1; i &lt;= n; i++) {                if (capacity * avgD &gt;= (stations[i].D - nowD)) {                    if (stations[i].P &lt; minP) {                        minP = stations[i].P;                        minIndex = i;                        break;                    } else if (stations[i].P &lt; secondP) {                        secondP = stations[i].P;                        secondIndex = i;                    }                } else {                    break;                }            }            if (minIndex != -1) {                if (nowC * avgD &lt; (stations[minIndex].D - nowD)) {                    cost += ((stations[minIndex].D - nowD) / avgD - nowC) * stations[nowIndex].P;                    nowC = 0;                } else {                    nowC -= (stations[minIndex].D - nowD) / avgD;                }                nowD = stations[minIndex].D;                nowIndex = minIndex;            } else {                cost += (capacity - nowC) * stations[nowIndex].P;                nowC = capacity - (stations[secondIndex].D - nowD) / avgD;                nowD = stations[secondIndex].D;                nowIndex = secondIndex;            }        }        if (nowD &lt; destD) {            printf(&quot;The maximum travel distance = %.2f&quot;, nowD);        } else {            printf(&quot;%.2f&quot;, cost);        }    }    return 0;}</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;With highways available, driving a car from Hangzhou to any other city is easy. But since the tank capacity of a car is limited, we have 
+      
+    
+    </summary>
+    
+      <category term="PAT" scheme="https://zjxjwxk.com/categories/PAT/"/>
+    
+      <category term="贪心" scheme="https://zjxjwxk.com/categories/PAT/%E8%B4%AA%E5%BF%83/"/>
     
     
       <category term="PAT" scheme="https://zjxjwxk.com/tags/PAT/"/>
