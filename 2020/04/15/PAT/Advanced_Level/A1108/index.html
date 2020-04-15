@@ -5,14 +5,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>PAT考场 Dev C++ 5.10 配置 - Zjxjwxk&#39;s Blog</title>
+    <title>PAT甲级 1108 Finding Average (20分) - Zjxjwxk&#39;s Blog</title>
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="google" content="notranslate">
     <meta name="keywords" content="吴鑫康 zjxjwxk Wxk Java,"> 
-    <meta name="description" content="根据往年 (2019) 年浙大软件学院的考研复试公告，如果今年 (2020) 是线下复试，且考场没有变化的话，机试应该还是在 浙大紫金港校区（如下图）。
-
-浙大软院招生通知：http://www.c,"> 
+    <meta name="description" content="The basic task is simple: given N real numbers, you are supposed to calculate their average. But wh,"> 
     <meta name="author" content="吴鑫康"> 
     <link rel="alternative" href="atom.xml" title="Zjxjwxk&#39;s Blog" type="application/atom+xml"> 
     <link rel="icon" href="/img/favicon.png"> 
@@ -45,7 +43,7 @@
     <div class="navigation animated fadeIn fast delay-1s">
         <img id="home-icon" class="icon-home" src="/img/favicon.png" alt="" data-url="https://zjxjwxk.com">
         <div id="play-icon" title="Play/Pause" class="iconfont icon-play"></div>
-        <h3 class="subtitle">PAT考场 Dev C++ 5.10 配置</h3>
+        <h3 class="subtitle">PAT甲级 1108 Finding Average (20分)</h3>
         <div class="social">
             <!--        <div class="like-icon">-->
             <!--            <a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
@@ -79,26 +77,26 @@
                 <a href="/categories/PAT"><b>「
                     </b>PAT<b> 」</b></a>
                 
-                四月 11, 2020
+                四月 15, 2020
             </p>
-            <h3 class="post-title animated fadeInDown"><a href="/2020/04/11/PAT/考试攻略/考场环境配置/" title="PAT考场 Dev C++ 5.10 配置">PAT考场 Dev C++ 5.10 配置</a>
+            <h3 class="post-title animated fadeInDown"><a href="/2020/04/15/PAT/Advanced_Level/A1108/" title="PAT甲级 1108 Finding Average (20分)">PAT甲级 1108 Finding Average (20分)</a>
             </h3>
             
             <p class="post-count animated fadeInDown">
                 
                 <span>
                     <b class="iconfont icon-text2"></b> <i>文章字数</i>
-                    3.6k
+                    5.3k
                 </span>
                 
                 
                 <span>
                     <b class="iconfont icon-timer__s"></b> <i>阅读约需</i>
-                    3 mins.
+                    5 mins.
                 </span>
                 
                 
-                <span id="/2020/04/11/PAT/考试攻略/考场环境配置/" class="leancloud_visitors" data-flag-title="PAT考场 Dev C++ 5.10 配置">
+                <span id="/2020/04/15/PAT/Advanced_Level/A1108/" class="leancloud_visitors" data-flag-title="PAT甲级 1108 Finding Average (20分)">
                     <b class="iconfont icon-read"></b> <i>阅读次数</i>
                     <span class="leancloud-visitors-count">-</span>
                 </span>
@@ -128,37 +126,86 @@
 <div class="article">
     <div class="main">
         <div class="content markdown animated fadeIn">
-            <p>根据往年 (2019) 年浙大软件学院的考研复试公告，如果今年 (2020) 是线下复试，且考场没有变化的话，机试应该还是在 <code>浙大紫金港校区</code>（如下图）。</p>
-<blockquote>
-<p>浙大软院招生通知：<a href="http://www.cst.zju.edu.cn/2019/0307/c36207a1478348/page.htm" target="_blank" rel="noopener">http://www.cst.zju.edu.cn/2019/0307/c36207a1478348/page.htm</a></p>
-</blockquote>
-<p><img src="/2020/04/11/PAT/考试攻略/考场环境配置/image-20200411162644696.png" alt="软件学院2019年统考研究生招生复试安排"></p>
-<p>从 PAT 官网可以找到紫金港的机房配置：</p>
-<blockquote>
-<p>PAT 考点联盟：<a href="https://www.patest.cn/location" target="_blank" rel="noopener">https://www.patest.cn/location</a></p>
-</blockquote>
-<p><img src="/2020/04/11/PAT/考试攻略/考场环境配置/PAT紫金港配置.png" alt="PAT紫金港配置.png"></p>
-<p>我本人选择使用 <code>Dev C++ 5.10</code> 版本，考试那天在考场需要先对其作以下配置（当然也许已经配置好了）：</p>
-<h1 id="打开产生调试信息"><a href="#打开产生调试信息" class="headerlink" title="打开产生调试信息"></a>打开产生调试信息</h1><p>在 <code>“工具(Tools)”</code> -&gt; <code>“编译选项(Compiler Options)&quot;</code> 中：</p>
-<p><img src="/2020/04/11/PAT/考试攻略/考场环境配置/image-20200411163457056.png" alt="编译选项"></p>
-<p>点击 <code>“代码生成/优化(Settings)”</code> 选项卡中的 <code>&quot;连接器(Linker)&quot;</code> 选项卡，将 <code>&quot;产生调试信息(Generate debugging information)&quot;</code> 选项改为 <code>“Yes”</code>。</p>
-<p><img src="/2020/04/11/PAT/考试攻略/考场环境配置/image-20200411163800036.png" alt="产生调试信息"></p>
-<p>这样，就可以愉快的 Debug 了～</p>
-<h1 id="添加-C-11-支持"><a href="#添加-C-11-支持" class="headerlink" title="添加 C++ 11 支持"></a>添加 C++ 11 支持</h1><p>由于 PAT 的 OJ 是支持 C++ 11 的，故最好打开 C++ 11 支持。</p>
-<h2 id="方法一（推荐）"><a href="#方法一（推荐）" class="headerlink" title="方法一（推荐）"></a>方法一（推荐）</h2><p>在 <code>“工具(Tools)”</code> -&gt; <code>“编译选项(Compiler Options)&quot;</code> 中，<code>“代码生成/优化(Settings)”</code> 选项卡下的 <code>“代码生成(Code Generation)”</code> 选项卡中，将 <code>“语言标准(Language Standard)(-std)”</code> 设置为 <code>ISO C++11</code> 即可。</p>
-<p><img src="/2020/04/11/PAT/考试攻略/考场环境配置/image-20200411180355580.png" alt="语言标准"></p>
-<h2 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h2><p>同样，也可以在<code>“工具(Tools)”</code> -&gt; <code>“编译选项(Compiler Options)&quot;</code>中，在<code>&quot;编译器(General)&quot;</code>选项卡中，勾选<code>&quot;编译时加入以下命令：(Add the following commands when calling the compiler:)&quot;</code>，并在下方加入 <code>-std=c++11</code>。</p>
-<p><img src="/2020/04/11/PAT/考试攻略/考场环境配置/image-20200411164259368.png" alt="C++ 11 支持"></p>
-<h1 id="字体大小"><a href="#字体大小" class="headerlink" title="字体大小"></a>字体大小</h1><p>由于默认字体是 10，实在太小了不能接受，可以在 <code>“工具(Tools)”</code> -&gt; <code>“编译器选项(Editor Options)&quot;</code> 中的<code>&quot;显示(Fonts)&quot;</code>选项卡，修改字体<code>大小(Size)</code>。或者通过 <code>Ctrl + 滚轮</code> 修改字体大小（更方便）。</p>
-<p><img src="/2020/04/11/PAT/考试攻略/考场环境配置/image-20200411164704403.png" alt="字体大小"></p>
-<h1 id="代码补全"><a href="#代码补全" class="headerlink" title="代码补全"></a>代码补全</h1><h2 id="打开代码补全"><a href="#打开代码补全" class="headerlink" title="打开代码补全"></a>打开代码补全</h2><p>Dev C++ 是有一定的代码补全功能的，在<code>“工具(Tools)”</code> -&gt; <code>“编译器选项(Editor Options)&quot;</code>中，在 <code>“代码补全(Completion)”</code> 选项卡下的 <code>Code Completion</code> 选项卡中，将所有勾勾上即可。</p>
-<p><img src="/2020/04/11/PAT/考试攻略/考场环境配置/image-20200411171339011.png" alt="代码补全"></p>
-<p><img src="/2020/04/11/PAT/考试攻略/考场环境配置/image-20200411171544336.png" alt="代码补全效果"></p>
-<h2 id="快捷键"><a href="#快捷键" class="headerlink" title="快捷键"></a>快捷键</h2><p>同时，可以通过<code>“工具(Tools)”</code> -&gt; <code>“快捷键选项(Configure Shortcuts)”</code> 来配置 <code>Show Code Completion</code> 的快捷键以唤出代码补全（默认为 Ctrl + Space）：</p>
-<p><img src="/2020/04/11/PAT/考试攻略/考场环境配置/image-20200411171955523.png" alt="代码补全快捷键"></p>
-<p><img src="/2020/04/11/PAT/考试攻略/考场环境配置/image-20200411172339097.png" alt="代码补全快捷键效果"></p>
-<p>然后，就可以愉快地考试了～</p>
+            <p>The basic task is simple: given <em>N</em> real numbers, you are supposed to calculate their average. But what makes it complicated is that some of the input numbers might not be legal. A <strong>legal</strong> input is a real number in [−1000,1000] and is accurate up to no more than 2 decimal places. When you calculate the average, those illegal numbers must not be counted in.</p>
+<h1 id="Input-Specification"><a href="#Input-Specification" class="headerlink" title="Input Specification:"></a>Input Specification:</h1><p>Each input file contains one test case. For each case, the first line gives a positive integer <em>N</em> (≤100). Then <em>N</em> numbers are given in the next line, separated by one space.</p>
+<h1 id="Output-Specification"><a href="#Output-Specification" class="headerlink" title="Output Specification:"></a>Output Specification:</h1><p>For each illegal input number, print in a line <code>ERROR: X is not a legal number</code> where <code>X</code> is the input. Then finally print in a line the result: <code>The average of K numbers is Y</code> where <code>K</code> is the number of legal inputs and <code>Y</code> is their average, accurate to 2 decimal places. In case the average cannot be calculated, output <code>Undefined</code> instead of <code>Y</code>. In case <code>K</code> is only 1, output <code>The average of 1 number is Y</code> instead.</p>
+<h1 id="Sample-Input-1"><a href="#Sample-Input-1" class="headerlink" title="Sample Input 1:"></a>Sample Input 1:</h1><pre><code class="in">7
+5 -3.2 aaa 9999 2.3.4 7.123 2.35
+</code></pre>
+<h1 id="Sample-Output-1"><a href="#Sample-Output-1" class="headerlink" title="Sample Output 1:"></a>Sample Output 1:</h1><pre><code class="out">ERROR: aaa is not a legal number
+ERROR: 9999 is not a legal number
+ERROR: 2.3.4 is not a legal number
+ERROR: 7.123 is not a legal number
+The average of 3 numbers is 1.38
+</code></pre>
+<h1 id="Sample-Input-2"><a href="#Sample-Input-2" class="headerlink" title="Sample Input 2:"></a>Sample Input 2:</h1><pre><code class="in">2
+aaa -9999
+</code></pre>
+<h1 id="Sample-Output-2"><a href="#Sample-Output-2" class="headerlink" title="Sample Output 2:"></a>Sample Output 2:</h1><pre><code class="out">ERROR: aaa is not a legal number
+ERROR: -9999 is not a legal number
+The average of 0 numbers is Undefined
+</code></pre>
+<h1 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h1><ul>
+<li>字符串数组不能开太小，否则会造成 “运行时错误”，即数组越界。实测大小至少为50.</li>
+</ul>
+<h1 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h1><p>来自柳神，不容易想到。运用 sscanf 和 sprintf 后可以方便判断是否为合法数字。利用 sscanf(a, “%lf”, &amp;temp) 将原字符串输入为 double 型，再利用 sprintf(b, “%.2f”,temp) 将该 double 型数字输出为保留两位小数的字符串。之后判断保留两位小数后的字符串和原字符串是否相同，即可判断是否合法。</p>
+<p><code>`</code>　C++</p>
+<p>#include <iostream></iostream></p>
+<p>#include <cstdio></cstdio></p>
+<p>#include &lt;string.h&gt;<br>using namespace std;<br>int main() {<br>    int n, cnt = 0;<br>    char a[50], b[50];<br>    double temp, sum = 0.0;<br>    cin &gt;&gt; n;<br>    for(int i = 0; i &lt; n; i++) {<br>        scanf(“%s”, a);<br>        sscanf(a, “%lf”, &amp;temp);<br>        sprintf(b, “%.2f”,temp);<br>        int flag = 0;<br>        for(int j = 0; j &lt; strlen(a); j++)<br>            if(a[j] != b[j]) flag = 1;<br>        if(flag || temp &lt; -1000 || temp &gt; 1000) {<br>            printf(“ERROR: %s is not a legal number\n”, a);<br>            continue;<br>        } else {<br>            sum += temp;<br>            cnt++;<br>        }<br>    }<br>    if(cnt == 1)<br>        printf(“The average of 1 number is %.2f”, sum);<br>    else if(cnt &gt; 1)<br>        printf(“The average of %d numbers is %.2f”, cnt, sum / cnt);<br>    else<br>        printf(“The average of 0 numbers is Undefined”);<br>    return 0;<br>}</p>
+<pre><code>
+# 方法二
 
+我的方法比较笨，但最直接，思路简单，就是直接遍历原字符串的每个字符，判断是否合法。
+
+```C++
+#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;string&gt;
+using namespace std;
+
+int main() {
+    int n, cnt = 0;
+    scanf(&quot;%d&quot;, &amp;n);
+    char str[50];
+    double total = 0;
+    for (int i = 0; i &lt; n; i++) {
+        scanf(&quot;%s&quot;, str);
+        int len = strlen(str), index = -1;
+        bool flag = true;
+        for (int i = 0; i &lt; len; i++) {
+            if (str[i] == &#39;.&#39;) {
+                if (i &lt; len - 3 || index != -1) {
+                    flag = false;
+                    break;
+                }
+                index = i;
+            } else if ((str[i] &lt; &#39;0&#39; || str[i] &gt; &#39;9&#39;) &amp;&amp; !(i == 0 &amp;&amp; str[i] == &#39;-&#39;)) {
+                flag = false;
+            }
+        }
+        if (!flag) {
+            printf(&quot;ERROR: %s is not a legal number\n&quot;, str);
+        } else {
+            double num = stod(str);
+            if (num &lt; -1000 || num &gt; 1000) {
+                printf(&quot;ERROR: %s is not a legal number\n&quot;, str);
+            } else {
+                cnt++;
+                total += num;
+            }
+        }
+    }
+    if (cnt == 0) {
+        printf(&quot;The average of 0 numbers is Undefined&quot;);
+    } else if (cnt == 1) {
+        printf(&quot;The average of 1 number is %.2f&quot;, total / cnt);
+    } else {
+        printf(&quot;The average of %d numbers is %.2f&quot;, cnt, total / cnt);
+    }
+    return 0;
+}
+</code></pre>
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
                 <source type="audio/mpeg" src="">
@@ -201,7 +248,7 @@
             <div class="box sticky animated fadeInRight faster">
                 <div id="toc" class="subbox">
                     <h4>目录</h4>
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#打开产生调试信息"><span class="toc-number">1.</span> <span class="toc-text">打开产生调试信息</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#添加-C-11-支持"><span class="toc-number">2.</span> <span class="toc-text">添加 C++ 11 支持</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#方法一（推荐）"><span class="toc-number">2.1.</span> <span class="toc-text">方法一（推荐）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#方法二"><span class="toc-number">2.2.</span> <span class="toc-text">方法二</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#字体大小"><span class="toc-number">3.</span> <span class="toc-text">字体大小</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#代码补全"><span class="toc-number">4.</span> <span class="toc-text">代码补全</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#打开代码补全"><span class="toc-number">4.1.</span> <span class="toc-text">打开代码补全</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#快捷键"><span class="toc-number">4.2.</span> <span class="toc-text">快捷键</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Input-Specification"><span class="toc-number">1.</span> <span class="toc-text">Input Specification:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Output-Specification"><span class="toc-number">2.</span> <span class="toc-text">Output Specification:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Sample-Input-1"><span class="toc-number">3.</span> <span class="toc-text">Sample Input 1:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Sample-Output-1"><span class="toc-number">4.</span> <span class="toc-text">Sample Output 1:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Sample-Input-2"><span class="toc-number">5.</span> <span class="toc-text">Sample Input 2:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Sample-Output-2"><span class="toc-number">6.</span> <span class="toc-text">Sample Output 2:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#注意点"><span class="toc-number">7.</span> <span class="toc-text">注意点</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#方法一"><span class="toc-number">8.</span> <span class="toc-text">方法一</span></a></li></ol>
                 </div>
             </div>
             
