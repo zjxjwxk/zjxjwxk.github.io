@@ -11,13 +11,15 @@
     <meta name="google" content="notranslate">
     <meta name="keywords" content="吴鑫康 zjxjwxk Wxk Java,"> 
     <meta name="description" content="章节概要
-完成支付模块业务开发
-Dubbo 特性学习：隐式参数、参数验证等
+事务简介
+分布式事务的前世今生
+分布式事务解决方案
+主流分布式事务框架介绍
 
-Dubbo 本地存根
-本地存根类似于 Dubbo 的静态代理
-Dubbo 会在客户端生成一个代理，处理部分业务
-Stub,"> 
+事务简介
+事务是用来保证一组数据操作的完整性和一致性的
+事务必须满足 ACID 的四大特性
+事务具有四种隔离级,"> 
     <meta name="author" content="吴鑫康"> 
     <link rel="alternative" href="atom.xml" title="Zjxjwxk&#39;s Blog" type="application/atom+xml"> 
     <link rel="icon" href="/img/favicon.png"> 
@@ -86,24 +88,24 @@ Stub,">
                 
                 四月 11, 2020
             </p>
-            <h3 class="post-title animated fadeInDown"><a href="/2020/04/11/Dubbo/Dubbo微服务影院系列/9.Dubbo服务开发（支付模块开发）/Dubbo微服务影院系列（9）：Dubbo服务开发（支付模块开发）/" title="Dubbo微服务影院系列（9）：Dubbo服务开发（支付模块开发）">Dubbo微服务影院系列（9）：Dubbo服务开发（支付模块开发）</a>
+            <h3 class="post-title animated fadeInDown"><a href="/2020/04/11/Dubbo/Dubbo微服务影院系列/10.分布式事务/Dubbo微服务影院系列（10）：分布式事务/" title="Dubbo微服务影院系列（9）：Dubbo服务开发（支付模块开发）">Dubbo微服务影院系列（9）：Dubbo服务开发（支付模块开发）</a>
             </h3>
             
             <p class="post-count animated fadeInDown">
                 
                 <span>
                     <b class="iconfont icon-text2"></b> <i>文章字数</i>
-                    7.6k
+                    3.1k
                 </span>
                 
                 
                 <span>
                     <b class="iconfont icon-timer__s"></b> <i>阅读约需</i>
-                    7 mins.
+                    3 mins.
                 </span>
                 
                 
-                <span id="/2020/04/11/Dubbo/Dubbo微服务影院系列/9.Dubbo服务开发（支付模块开发）/Dubbo微服务影院系列（9）：Dubbo服务开发（支付模块开发）/" class="leancloud_visitors" data-flag-title="Dubbo微服务影院系列（9）：Dubbo服务开发（支付模块开发）">
+                <span id="/2020/04/11/Dubbo/Dubbo微服务影院系列/10.分布式事务/Dubbo微服务影院系列（10）：分布式事务/" class="leancloud_visitors" data-flag-title="Dubbo微服务影院系列（9）：Dubbo服务开发（支付模块开发）">
                     <b class="iconfont icon-read"></b> <i>阅读次数</i>
                     <span class="leancloud-visitors-count">-</span>
                 </span>
@@ -134,147 +136,50 @@ Stub,">
     <div class="main">
         <div class="content markdown animated fadeIn">
             <h1 id="章节概要"><a href="#章节概要" class="headerlink" title="章节概要"></a>章节概要</h1><ul>
-<li>完成支付模块业务开发</li>
-<li>Dubbo 特性学习：隐式参数、参数验证等</li>
+<li>事务简介</li>
+<li>分布式事务的前世今生</li>
+<li>分布式事务解决方案</li>
+<li>主流分布式事务框架介绍</li>
 </ul>
-<h1 id="Dubbo-本地存根"><a href="#Dubbo-本地存根" class="headerlink" title="Dubbo 本地存根"></a>Dubbo 本地存根</h1><ul>
-<li>本地存根类似于 Dubbo 的静态代理</li>
-<li>Dubbo 会在客户端生成一个代理，处理部分业务</li>
-<li>Stub 必须有可传入 Proxy 的构造函数</li>
+<h1 id="事务简介"><a href="#事务简介" class="headerlink" title="事务简介"></a>事务简介</h1><ul>
+<li>事务是用来保证一组<strong>数据操作</strong>的完整性和一致性的</li>
+<li>事务必须满足 ACID 的四大特性</li>
+<li>事务具有四种隔离级别</li>
+<li>事务具有七种传播行为</li>
 </ul>
-<blockquote>
-<p>官方文档：<a href="https://dubbo.apache.org/zh-cn/docs/user/demos/local-stub.html" target="_blank" rel="noopener">https://dubbo.apache.org/zh-cn/docs/user/demos/local-stub.html</a></p>
-</blockquote>
-<p>远程服务后，客户端通常只剩下接口，而实现全在服务器端，但提供方有些时候想在客户端也执行部分逻辑，比如：做 ThreadLocal 缓存，提前验证参数，调用失败后伪造容错数据等等，此时就需要在 API 中带上 Stub，客户端生成 Proxy 实例，会把 Proxy 通过构造函数传给 Stub，然后把 Stub 暴露给用户，Stub 可以决定要不要去调 Proxy。</p>
-<p><img src="/2020/04/11/Dubbo/Dubbo微服务影院系列/9.Dubbo服务开发（支付模块开发）/Dubbo微服务影院系列（9）：Dubbo服务开发（支付模块开发）/stub.jpg" alt="Dubbo本地存根"></p>
-<p>在 spring 配置文件中按以下方式配置：</p>
-<pre><code class="xml">&lt;dubbo:service interface=&quot;com.foo.BarService&quot; stub=&quot;true&quot; /&gt;
-</code></pre>
-<p>或</p>
-<pre><code class="xml">&lt;dubbo:service interface=&quot;com.foo.BarService&quot; stub=&quot;com.foo.BarServiceStub&quot; /&gt;
-</code></pre>
-<p>提供 Stub 的实现：</p>
-<pre><code class="java">package com.foo;
-public class BarServiceStub implements BarService {
-    private final BarService barService;
-
-    // 构造函数传入真正的远程代理对象
-    public BarServiceStub(BarService barService){
-        this.barService = barService;
-    }
-
-    public String sayHello(String name) {
-        // 此代码在客户端执行, 你可以在客户端做ThreadLocal本地缓存，或预先验证参数是否合法，等等
-        try {
-            return barService.sayHello(name);
-        } catch (Exception e) {
-            // 你可以容错，可以做任何AOP拦截事项
-            return &quot;容错数据&quot;;
-        }
-    }
-}
-</code></pre>
-<ol>
-<li>Stub 必须有可传入 Proxy 的构造函数。</li>
-<li>在 interface 旁边放一个 Stub 实现，它实现 BarService 接口，并有一个传入远程 BarService 实例的构造函数</li>
-</ol>
-<h1 id="Dubbo-本地伪装"><a href="#Dubbo-本地伪装" class="headerlink" title="Dubbo 本地伪装"></a>Dubbo 本地伪装</h1><ul>
-<li>本地伪装是本地存根的一个子集</li>
-<li>通常会使用本地伪装处理服务降级</li>
-<li>建议本地伪装在客户端实现</li>
+<h2 id="事务属性"><a href="#事务属性" class="headerlink" title="事务属性"></a>事务属性</h2><ul>
+<li>原子性（Atomicity）</li>
+<li>一致性（Consistency）</li>
+<li>隔离型（Isolation）</li>
+<li>持久性（Durability）</li>
 </ul>
-<blockquote>
-<p>官方文档：<a href="https://dubbo.apache.org/zh-cn/docs/user/demos/local-mock.html" target="_blank" rel="noopener">https://dubbo.apache.org/zh-cn/docs/user/demos/local-mock.html</a></p>
-</blockquote>
-<p>本地伪装通常用于服务降级，比如某验权服务，当服务提供方全部挂掉后，客户端不抛出异常，而是通过 Mock 数据返回授权失败。</p>
-<p>在 spring 配置文件中按以下方式配置：</p>
-<pre><code class="xml">&lt;dubbo:reference interface=&quot;com.foo.BarService&quot; mock=&quot;true&quot; /&gt;
-</code></pre>
-<p>或</p>
-<pre><code class="xml">&lt;dubbo:reference interface=&quot;com.foo.BarService&quot; mock=&quot;com.foo.BarServiceMock&quot; /&gt;
-</code></pre>
-<p>在工程中提供 Mock 实现：</p>
-<pre><code class="java">package com.foo;
-public class BarServiceMock implements BarService {
-    public String sayHello(String name) {
-        // 你可以伪造容错数据，此方法只在出现RpcException时被执行
-        return &quot;容错数据&quot;;
-    }
-}
-</code></pre>
-<p>如果服务的消费方经常需要 try-catch 捕获异常，如：</p>
-<pre><code class="java">Offer offer = null;
-try {
-    offer = offerService.findOffer(offerId);
-} catch (RpcException e) {
-   logger.error(e);
-}
-</code></pre>
-<p>请考虑改为 Mock 实现，并在 Mock 实现中 return null。如果只是想简单的忽略异常，在 <code>2.0.11</code> 以上版本可用：</p>
-<pre><code class="xml">&lt;dubbo:reference interface=&quot;com.foo.BarService&quot; mock=&quot;return null&quot; /&gt;
-</code></pre>
-<h2 id="进阶用法"><a href="#进阶用法" class="headerlink" title="进阶用法"></a>进阶用法</h2><h3 id="return"><a href="#return" class="headerlink" title="return"></a>return</h3><p>使用 <code>return</code> 来返回一个字符串表示的对象，作为 Mock 的返回值。合法的字符串可以是：</p>
-<ul>
-<li><em>empty</em>: 代表空，基本类型的默认值，或者集合类的空值</li>
-<li><em>null</em>: <code>null</code></li>
-<li><em>true</em>: <code>true</code></li>
-<li><em>false</em>: <code>false</code></li>
-<li><em>JSON 格式</em>: 反序列化 JSON 所得到的对象</li>
+<h1 id="分布式事务"><a href="#分布式事务" class="headerlink" title="分布式事务"></a>分布式事务</h1><h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><ul>
+<li>分布式事务就是将多个节点的事务看成一个整体处理</li>
+<li>分布式事务由事务参与者、资源服务器、事务管理器等组成</li>
+<li>常见的分布式事务的例子：支付、下订单等</li>
 </ul>
-<h3 id="throw"><a href="#throw" class="headerlink" title="throw"></a>throw</h3><p>使用 <code>throw</code> 来返回一个 Exception 对象，作为 Mock 的返回值。</p>
-<p>当调用出错时，抛出一个默认的 RPCException:</p>
-<pre><code class="xml">&lt;dubbo:reference interface=&quot;com.foo.BarService&quot; mock=&quot;throw&quot; /&gt;
-</code></pre>
-<p>当调用出错时，抛出指定的 Exception：</p>
-<pre><code class="xml">&lt;dubbo:reference interface=&quot;com.foo.BarService&quot; mock=&quot;throw com.foo.MockException&quot; /&gt;
-</code></pre>
-<h3 id="force-和-fail"><a href="#force-和-fail" class="headerlink" title="force 和 fail"></a>force 和 fail</h3><p>在 <code>2.6.6</code> 以上的版本，可以开始在 Spring XML 配置文件中使用 <code>fail:</code> 和 <code>force:</code>。<code>force:</code> 代表强制使用 Mock 行为，在这种情况下不会走远程调用。<code>fail:</code> 与默认行为一致，只有当远程调用发生错误时才使用 Mock 行为。<code>force:</code> 和 <code>fail:</code> 都支持与 <code>throw</code> 或者 <code>return</code> 组合使用。</p>
-<p>强制返回指定值：</p>
-<pre><code class="xml">&lt;dubbo:reference interface=&quot;com.foo.BarService&quot; mock=&quot;force:return fake&quot; /&gt;
-</code></pre>
-<p>强制抛出指定异常：</p>
-<pre><code class="xml">&lt;dubbo:reference interface=&quot;com.foo.BarService&quot; mock=&quot;force:throw com.foo.MockException&quot; /&gt;
-</code></pre>
-<h3 id="在方法级别配置-Mock"><a href="#在方法级别配置-Mock" class="headerlink" title="在方法级别配置 Mock"></a>在方法级别配置 Mock</h3><p>Mock 可以在方法级别上指定，假定 <code>com.foo.BarService</code> 上有好几个方法，我们可以单独为 <code>sayHello()</code> 方法指定 Mock 行为。具体配置如下所示，在本例中，只要 <code>sayHello()</code> 被调用到时，强制返回 “fake”:</p>
-<pre><code class="xml">&lt;dubbo:reference id=&quot;demoService&quot; check=&quot;false&quot; interface=&quot;com.foo.BarService&quot;&gt;
-    &lt;dubbo:parameter key=&quot;sayHello.mock&quot; value=&quot;force:return fake&quot;/&gt;
-&lt;/dubbo:reference&gt;
-</code></pre>
-<ol>
-<li>Mock 是 Stub 的一个子集，便于服务提供方在客户端执行容错逻辑，因经常需要在出现 RpcException (比如网络失败，超时等)时进行容错，而在出现业务异常(比如登录用户名密码错误)时不需要容错，如果用 Stub，可能就需要捕获并依赖 RpcException 类，而用 Mock 就可以不依赖 RpcException，因为它的约定就是只有出现 RpcException 时才执行。 </li>
-<li>在 interface 旁放一个 Mock 实现，它实现 BarService 接口，并有一个无参构造函数。</li>
-</ol>
-<p>在使用 SpringBoot + Dubbo 的项目中，优先使用 Hystrix 提供的熔断降级，因为 <strong>Mock 只能捕获 RpcException (比如网络失败，超时等)</strong>，而不能捕获 Java 异常。</p>
-<h1 id="Dubbo-隐式参数"><a href="#Dubbo-隐式参数" class="headerlink" title="Dubbo 隐式参数"></a>Dubbo 隐式参数</h1><ul>
-<li>Dubbo 提供了参数的隐式传递</li>
-<li>Dubbo 的隐式参数仅单次调用可用</li>
-<li>注意隐式参数的保留字段</li>
+<h2 id="实现思路"><a href="#实现思路" class="headerlink" title="实现思路"></a>实现思路</h2><ul>
+<li>两段式事务和三段式事务</li>
+<li>基于 XA 的分布式事务</li>
+<li>基于消息的最终一致性方案</li>
+<li><strong>TCC 编程式补偿性事务</strong></li>
 </ul>
-<blockquote>
-<p>官方文档：<a href="https://dubbo.apache.org/zh-cn/docs/user/demos/attachment.html" target="_blank" rel="noopener">https://dubbo.apache.org/zh-cn/docs/user/demos/attachment.html</a></p>
-</blockquote>
-<p>可以通过 <code>RpcContext</code> 上的 <code>setAttachment</code> 和 <code>getAttachment</code> 在服务消费方和提供方之间进行参数的隐式传递。</p>
-<p><img src="/2020/04/11/Dubbo/Dubbo微服务影院系列/9.Dubbo服务开发（支付模块开发）/Dubbo微服务影院系列（9）：Dubbo服务开发（支付模块开发）/context.png" alt="/user-guide/images/context.png"></p>
-<h2 id="在服务消费方端设置隐式参数"><a href="#在服务消费方端设置隐式参数" class="headerlink" title="在服务消费方端设置隐式参数"></a>在服务消费方端设置隐式参数</h2><p><code>setAttachment</code> 设置的 KV 对，在完成下面一次远程调用会被清空，即多次远程调用要多次设置。</p>
-<pre><code class="xml">RpcContext.getContext().setAttachment(&quot;index&quot;, &quot;1&quot;); // 隐式传参，后面的远程调用都会隐式将这些参数发送到服务器端，类似cookie，用于框架集成，不建议常规业务使用
-xxxService.xxx(); // 远程调用
-// ...
-</code></pre>
-<h2 id="在服务提供方端获取隐式参数"><a href="#在服务提供方端获取隐式参数" class="headerlink" title="在服务提供方端获取隐式参数"></a>在服务提供方端获取隐式参数</h2><pre><code class="java">public class XxxServiceImpl implements XxxService {
-
-    public void xxx() {
-        // 获取客户端隐式传入的参数，用于框架集成，不建议常规业务使用
-        String index = RpcContext.getContext().getAttachment(&quot;index&quot;); 
-    }
-}
-</code></pre>
-<ol>
-<li>注意：path, group, version, dubbo, token, timeout 几个 key 是保留字段，请使用其它值。</li>
-</ol>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><ul>
-<li>Dubbo 特性之隐式参数</li>
-<li>Dubbo 特性之本地存根和本地伪装（更常用）</li>
-<li>支付宝当面付功能对接</li>
+<h1 id="分布式事务类型"><a href="#分布式事务类型" class="headerlink" title="分布式事务类型"></a>分布式事务类型</h1><h2 id="两段式和三段式事务"><a href="#两段式和三段式事务" class="headerlink" title="两段式和三段式事务"></a>两段式和三段式事务</h2><h3 id="两段式事务"><a href="#两段式事务" class="headerlink" title="两段式事务"></a>两段式事务</h3><p><img src="/2020/04/11/Dubbo/Dubbo微服务影院系列/10.分布式事务/Dubbo微服务影院系列（10）：分布式事务/63d3220513cf709f84fdcd06457c3b65.png" alt="两段式事务"></p>
+<h3 id="三段式事务"><a href="#三段式事务" class="headerlink" title="三段式事务"></a>三段式事务</h3><p><img src="/2020/04/11/Dubbo/Dubbo微服务影院系列/10.分布式事务/Dubbo微服务影院系列（10）：分布式事务/image-20200416213159506.png" alt="三段式事务"></p>
+<h2 id="基于-XA-的分布式事务"><a href="#基于-XA-的分布式事务" class="headerlink" title="基于 XA 的分布式事务"></a>基于 XA 的分布式事务</h2><p><img src="/2020/04/11/Dubbo/Dubbo微服务影院系列/10.分布式事务/Dubbo微服务影院系列（10）：分布式事务/image-20200416213551917.png" alt="基于XA的分布式事务"></p>
+<h2 id="基于消息的一致性方案"><a href="#基于消息的一致性方案" class="headerlink" title="基于消息的一致性方案"></a>基于消息的一致性方案</h2><p><img src="/2020/04/11/Dubbo/Dubbo微服务影院系列/10.分布式事务/Dubbo微服务影院系列（10）：分布式事务/image-20200416215409588.png" alt="基于消息的一致性方案"></p>
+<h2 id="TCC-补偿性事务"><a href="#TCC-补偿性事务" class="headerlink" title="TCC 补偿性事务"></a>TCC 补偿性事务</h2><p><img src="/2020/04/11/Dubbo/Dubbo微服务影院系列/10.分布式事务/Dubbo微服务影院系列（10）：分布式事务/image-20200416220735799.png" alt="TCC补偿性事务"></p>
+<h3 id="基于消息的一致性方案和-TCC-补偿性事务的区别"><a href="#基于消息的一致性方案和-TCC-补偿性事务的区别" class="headerlink" title="基于消息的一致性方案和 TCC 补偿性事务的区别"></a>基于消息的一致性方案和 TCC 补偿性事务的区别</h3><ul>
+<li>基于消息的事务是强一致性事务，会存在浪费</li>
+<li>TCC 事务是柔性事务，在 try 阶段要对资源做预留</li>
+<li>TCC 事务在确认或取消阶段释放资源</li>
+<li>与基于消息的事务对比，TCC 的时效性更好</li>
+</ul>
+<h1 id="分布式事务框架"><a href="#分布式事务框架" class="headerlink" title="分布式事务框架"></a>分布式事务框架</h1><ul>
+<li>全局事务服务（Global Transaction Service，简称 GTS）</li>
+<li>蚂蚁金服分布式事务（Distributed Transaction-eXtended，简称 DTX）</li>
+<li><strong>开源 TCC 框架（TCC-Transaction）</strong>（<a href="https://github.com/changmingxie/tcc-transaction）" target="_blank" rel="noopener">https://github.com/changmingxie/tcc-transaction）</a></li>
+<li>开源 TCC 框架（ByteTCC）（<a href="https://github.com/liuyangming/ByteTCC）" target="_blank" rel="noopener">https://github.com/liuyangming/ByteTCC）</a></li>
 </ul>
 
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
@@ -319,7 +224,7 @@ xxxService.xxx(); // 远程调用
             <div class="box sticky animated fadeInRight faster">
                 <div id="toc" class="subbox">
                     <h4>目录</h4>
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#章节概要"><span class="toc-number">1.</span> <span class="toc-text">章节概要</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Dubbo-本地存根"><span class="toc-number">2.</span> <span class="toc-text">Dubbo 本地存根</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Dubbo-本地伪装"><span class="toc-number">3.</span> <span class="toc-text">Dubbo 本地伪装</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#进阶用法"><span class="toc-number">3.1.</span> <span class="toc-text">进阶用法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#return"><span class="toc-number">3.1.1.</span> <span class="toc-text">return</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#throw"><span class="toc-number">3.1.2.</span> <span class="toc-text">throw</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#force-和-fail"><span class="toc-number">3.1.3.</span> <span class="toc-text">force 和 fail</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#在方法级别配置-Mock"><span class="toc-number">3.1.4.</span> <span class="toc-text">在方法级别配置 Mock</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Dubbo-隐式参数"><span class="toc-number">4.</span> <span class="toc-text">Dubbo 隐式参数</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#在服务消费方端设置隐式参数"><span class="toc-number">4.1.</span> <span class="toc-text">在服务消费方端设置隐式参数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#在服务提供方端获取隐式参数"><span class="toc-number">4.2.</span> <span class="toc-text">在服务提供方端获取隐式参数</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#总结"><span class="toc-number">5.</span> <span class="toc-text">总结</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#章节概要"><span class="toc-number">1.</span> <span class="toc-text">章节概要</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#事务简介"><span class="toc-number">2.</span> <span class="toc-text">事务简介</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#事务属性"><span class="toc-number">2.1.</span> <span class="toc-text">事务属性</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#分布式事务"><span class="toc-number">3.</span> <span class="toc-text">分布式事务</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#概念"><span class="toc-number">3.1.</span> <span class="toc-text">概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实现思路"><span class="toc-number">3.2.</span> <span class="toc-text">实现思路</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#分布式事务类型"><span class="toc-number">4.</span> <span class="toc-text">分布式事务类型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#两段式和三段式事务"><span class="toc-number">4.1.</span> <span class="toc-text">两段式和三段式事务</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#两段式事务"><span class="toc-number">4.1.1.</span> <span class="toc-text">两段式事务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三段式事务"><span class="toc-number">4.1.2.</span> <span class="toc-text">三段式事务</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#基于-XA-的分布式事务"><span class="toc-number">4.2.</span> <span class="toc-text">基于 XA 的分布式事务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#基于消息的一致性方案"><span class="toc-number">4.3.</span> <span class="toc-text">基于消息的一致性方案</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TCC-补偿性事务"><span class="toc-number">4.4.</span> <span class="toc-text">TCC 补偿性事务</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#基于消息的一致性方案和-TCC-补偿性事务的区别"><span class="toc-number">4.4.1.</span> <span class="toc-text">基于消息的一致性方案和 TCC 补偿性事务的区别</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#分布式事务框架"><span class="toc-number">5.</span> <span class="toc-text">分布式事务框架</span></a></li></ol>
                 </div>
             </div>
             
