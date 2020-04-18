@@ -95,13 +95,13 @@
                 
                 <span>
                     <b class="iconfont icon-text2"></b> <i>文章字数</i>
-                    3.1k
+                    10k
                 </span>
                 
                 
                 <span>
                     <b class="iconfont icon-timer__s"></b> <i>阅读约需</i>
-                    3 mins.
+                    9 mins.
                 </span>
                 
                 
@@ -181,6 +181,134 @@
 <li><strong>开源 TCC 框架（TCC-Transaction）</strong>（<a href="https://github.com/changmingxie/tcc-transaction）" target="_blank" rel="noopener">https://github.com/changmingxie/tcc-transaction）</a></li>
 <li>开源 TCC 框架（ByteTCC）（<a href="https://github.com/liuyangming/ByteTCC）" target="_blank" rel="noopener">https://github.com/liuyangming/ByteTCC）</a></li>
 </ul>
+<h1 id="TCC-Transaction-分布式事务框架"><a href="#TCC-Transaction-分布式事务框架" class="headerlink" title="TCC-Transaction 分布式事务框架"></a>TCC-Transaction 分布式事务框架</h1><ol>
+<li>在需要提供分布式事务支持的接口方法上添加 @Compensable</li>
+<li>在对应的接口实现方法上也添加 @Compensable，并添加注解参数 confirmMethod, cancelMethod 和 transactionContextEditor</li>
+<li>实现对应的 confirmMethod 和 cancelMethod（必须和 try 方法在同一个类中）</li>
+</ol>
+<p>注意：</p>
+<ol>
+<li>在分布式事务框架中，不要轻易在业务层捕获所有异常，只有在抛出异常的情况下，分布式事务框架才知道该业务是执行失败的。</li>
+<li>使用 TCC-Transaction 时，confirm 和 cancel 的幂等性问题需要自己解决。</li>
+</ol>
+<h2 id="子事务：红包模块"><a href="#子事务：红包模块" class="headerlink" title="子事务：红包模块"></a>子事务：红包模块</h2><h3 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h3><pre><code class="Java">public interface RedPacketTradeOrderService {
+
+    @Compensable
+    public String record(RedPacketTradeOrderDto tradeOrderDto);
+}
+</code></pre>
+<h3 id="实现类"><a href="#实现类" class="headerlink" title="实现类"></a>实现类</h3><pre><code class="Java">@Service(&quot;redPacketTradeOrderService&quot;)
+public class RedPacketTradeOrderServiceImpl implements RedPacketTradeOrderService {
+
+    @Autowired
+    RedPacketAccountRepository redPacketAccountRepository;
+
+    @Autowired
+    TradeOrderRepository tradeOrderRepository;
+
+    @Override
+    @Compensable(confirmMethod = &quot;confirmRecord&quot;, cancelMethod = &quot;cancelRecord&quot;, transactionContextEditor = DubboTransactionContextEditor.class)
+    @Transactional
+    public String record(RedPacketTradeOrderDto tradeOrderDto) {
+        TradeOrder foundTradeOrder = tradeOrderRepository.findByMerchantOrderNo(tradeOrderDto.getMerchantOrderNo());
+        // check if trade order has been recorded, if yes, return success directly.
+        if (foundTradeOrder == null) {
+            TradeOrder tradeOrder = new TradeOrder(
+                    tradeOrderDto.getSelfUserId(),
+                    tradeOrderDto.getOppositeUserId(),
+                    tradeOrderDto.getMerchantOrderNo(),
+                    tradeOrderDto.getAmount()
+            );
+            try {
+                tradeOrderRepository.insert(tradeOrder);
+                RedPacketAccount transferFromAccount = redPacketAccountRepository.findByUserId(tradeOrderDto.getSelfUserId());
+                transferFromAccount.transferFrom(tradeOrderDto.getAmount());
+                redPacketAccountRepository.save(transferFromAccount);
+            } catch (DataIntegrityViolationException e) {
+                // this exception may happen when insert trade order concurrently, if happened, ignore this insert operation.
+            }
+        }
+        return &quot;success&quot;;
+    }
+
+    @Transactional
+    public void confirmRecord(RedPacketTradeOrderDto tradeOrderDto) {
+        TradeOrder tradeOrder = tradeOrderRepository.findByMerchantOrderNo(tradeOrderDto.getMerchantOrderNo());
+        // check if the trade order status is DRAFT, if yes, return directly, ensure idempotency.
+        if (tradeOrder != null &amp;&amp; tradeOrder.getStatus().equals(&quot;DRAFT&quot;)) {
+            tradeOrder.confirm();
+            tradeOrderRepository.update(tradeOrder);
+            RedPacketAccount transferToAccount = redPacketAccountRepository.findByUserId(tradeOrderDto.getOppositeUserId());
+            transferToAccount.transferTo(tradeOrderDto.getAmount());
+            redPacketAccountRepository.save(transferToAccount);
+        }
+    }
+
+    @Transactional
+    public void cancelRecord(RedPacketTradeOrderDto tradeOrderDto) {
+        TradeOrder tradeOrder = tradeOrderRepository.findByMerchantOrderNo(tradeOrderDto.getMerchantOrderNo());
+        // check if the trade order status is DRAFT, if yes, return directly, ensure idempotency.
+        if (null != tradeOrder &amp;&amp; &quot;DRAFT&quot;.equals(tradeOrder.getStatus())) {
+            tradeOrder.cancel();
+            tradeOrderRepository.update(tradeOrder);
+            RedPacketAccount capitalAccount = redPacketAccountRepository.findByUserId(tradeOrderDto.getSelfUserId());
+            capitalAccount.cancelTransfer(tradeOrderDto.getAmount());
+            redPacketAccountRepository.save(capitalAccount);
+        }
+    }
+}
+</code></pre>
+<p>思考：为什么要在 confirm 和 cancel 方法里先检查订单状态是否为 DRAFT（在 try 方法中新增的一个订单），而不直接修改为结束状态？</p>
+<p>答：为了保证服务的幂等性，即使用相同参数对同一资源重复调用某个接口的结果与调用一次的结果相同。</p>
+<h2 id="主事务：订单模块"><a href="#主事务：订单模块" class="headerlink" title="主事务：订单模块"></a>主事务：订单模块</h2><p>注意：要在主事务的业务已经实现的差不多的时候才调用子事务。</p>
+<pre><code class="Java">@Service
+public class PaymentServiceImpl {
+
+    @Autowired
+    CapitalTradeOrderService capitalTradeOrderService;
+
+    @Autowired
+    RedPacketTradeOrderService redPacketTradeOrderService;
+
+    @Autowired
+    OrderRepository orderRepository;
+
+    @Compensable(confirmMethod = &quot;confirmMakePayment&quot;, cancelMethod = &quot;cancelMakePayment&quot;, asyncConfirm = false, delayCancelExceptions = {SocketTimeoutException.class, org.apache.dubbo.remoting.TimeoutException.class})
+    public void makePayment(@UniqueIdentity String orderNo, BigDecimal redPacketPayAmount, BigDecimal capitalPayAmount) {
+        Order order = orderRepository.findByMerchantOrderNo(orderNo);
+        // check if the order status is DRAFT, if no, means that another call makePayment for the same order happened, ignore this call makePayment.
+        if (order.getStatus().equals(&quot;DRAFT&quot;)) {
+            order.pay(redPacketPayAmount, capitalPayAmount);
+            try {
+                orderRepository.updateOrder(order);
+            } catch (OptimisticLockingFailureException e) {
+                // ignore the concurrently update order exception, ensure idempotency.
+            }
+        }
+      // 调用子事务
+        String result = capitalTradeOrderService.record(buildCapitalTradeOrderDto(order));
+        String result2 = redPacketTradeOrderService.record(buildRedPacketTradeOrderDto(order));
+    }
+
+    public void confirmMakePayment(String orderNo, BigDecimal redPacketPayAmount, BigDecimal capitalPayAmount) {
+        Order foundOrder = orderRepository.findByMerchantOrderNo(orderNo);
+        // check if the trade order status is PAYING, if no, means another call confirmMakePayment happened, return directly, ensure idempotency.
+        if (foundOrder != null &amp;&amp; foundOrder.getStatus().equals(&quot;PAYING&quot;)) {
+            foundOrder.confirm();
+            orderRepository.updateOrder(foundOrder);
+        }
+    }
+
+    public void cancelMakePayment(String orderNo,  BigDecimal redPacketPayAmount, BigDecimal capitalPayAmount) {
+        Order foundOrder = orderRepository.findByMerchantOrderNo(orderNo);
+        // check if the trade order status is PAYING, if no, means another call cancelMakePayment happened, return directly, ensure idempotency.
+        if (foundOrder != null &amp;&amp; foundOrder.getStatus().equals(&quot;PAYING&quot;)) {
+            foundOrder.cancelPayment();
+            orderRepository.updateOrder(foundOrder);
+        }
+    }
+}
+</code></pre>
 
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
@@ -224,7 +352,7 @@
             <div class="box sticky animated fadeInRight faster">
                 <div id="toc" class="subbox">
                     <h4>目录</h4>
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#章节概要"><span class="toc-number">1.</span> <span class="toc-text">章节概要</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#事务简介"><span class="toc-number">2.</span> <span class="toc-text">事务简介</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#事务属性"><span class="toc-number">2.1.</span> <span class="toc-text">事务属性</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#分布式事务"><span class="toc-number">3.</span> <span class="toc-text">分布式事务</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#概念"><span class="toc-number">3.1.</span> <span class="toc-text">概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实现思路"><span class="toc-number">3.2.</span> <span class="toc-text">实现思路</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#分布式事务类型"><span class="toc-number">4.</span> <span class="toc-text">分布式事务类型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#两段式和三段式事务"><span class="toc-number">4.1.</span> <span class="toc-text">两段式和三段式事务</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#两段式事务"><span class="toc-number">4.1.1.</span> <span class="toc-text">两段式事务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三段式事务"><span class="toc-number">4.1.2.</span> <span class="toc-text">三段式事务</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#基于-XA-的分布式事务"><span class="toc-number">4.2.</span> <span class="toc-text">基于 XA 的分布式事务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#基于消息的一致性方案"><span class="toc-number">4.3.</span> <span class="toc-text">基于消息的一致性方案</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TCC-补偿性事务"><span class="toc-number">4.4.</span> <span class="toc-text">TCC 补偿性事务</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#基于消息的一致性方案和-TCC-补偿性事务的区别"><span class="toc-number">4.4.1.</span> <span class="toc-text">基于消息的一致性方案和 TCC 补偿性事务的区别</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#分布式事务框架"><span class="toc-number">5.</span> <span class="toc-text">分布式事务框架</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#章节概要"><span class="toc-number">1.</span> <span class="toc-text">章节概要</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#事务简介"><span class="toc-number">2.</span> <span class="toc-text">事务简介</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#事务属性"><span class="toc-number">2.1.</span> <span class="toc-text">事务属性</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#分布式事务"><span class="toc-number">3.</span> <span class="toc-text">分布式事务</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#概念"><span class="toc-number">3.1.</span> <span class="toc-text">概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实现思路"><span class="toc-number">3.2.</span> <span class="toc-text">实现思路</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#分布式事务类型"><span class="toc-number">4.</span> <span class="toc-text">分布式事务类型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#两段式和三段式事务"><span class="toc-number">4.1.</span> <span class="toc-text">两段式和三段式事务</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#两段式事务"><span class="toc-number">4.1.1.</span> <span class="toc-text">两段式事务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三段式事务"><span class="toc-number">4.1.2.</span> <span class="toc-text">三段式事务</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#基于-XA-的分布式事务"><span class="toc-number">4.2.</span> <span class="toc-text">基于 XA 的分布式事务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#基于消息的一致性方案"><span class="toc-number">4.3.</span> <span class="toc-text">基于消息的一致性方案</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TCC-补偿性事务"><span class="toc-number">4.4.</span> <span class="toc-text">TCC 补偿性事务</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#基于消息的一致性方案和-TCC-补偿性事务的区别"><span class="toc-number">4.4.1.</span> <span class="toc-text">基于消息的一致性方案和 TCC 补偿性事务的区别</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#分布式事务框架"><span class="toc-number">5.</span> <span class="toc-text">分布式事务框架</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#TCC-Transaction-分布式事务框架"><span class="toc-number">6.</span> <span class="toc-text">TCC-Transaction 分布式事务框架</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#子事务：红包模块"><span class="toc-number">6.1.</span> <span class="toc-text">子事务：红包模块</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#接口"><span class="toc-number">6.1.1.</span> <span class="toc-text">接口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实现类"><span class="toc-number">6.1.2.</span> <span class="toc-text">实现类</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#主事务：订单模块"><span class="toc-number">6.2.</span> <span class="toc-text">主事务：订单模块</span></a></li></ol></li></ol>
                 </div>
             </div>
             
