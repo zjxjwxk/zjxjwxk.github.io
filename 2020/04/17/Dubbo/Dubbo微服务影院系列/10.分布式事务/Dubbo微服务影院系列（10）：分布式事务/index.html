@@ -95,13 +95,13 @@
                 
                 <span>
                     <b class="iconfont icon-text2"></b> <i>文章字数</i>
-                    10k
+                    11k
                 </span>
                 
                 
                 <span>
                     <b class="iconfont icon-timer__s"></b> <i>阅读约需</i>
-                    9 mins.
+                    10 mins.
                 </span>
                 
                 
@@ -191,13 +191,13 @@
 <li>在分布式事务框架中，不要轻易在业务层捕获所有异常，只有在抛出异常的情况下，分布式事务框架才知道该业务是执行失败的。</li>
 <li>使用 TCC-Transaction 时，confirm 和 cancel 的幂等性问题需要自己解决。</li>
 </ol>
-<h2 id="子事务：红包模块"><a href="#子事务：红包模块" class="headerlink" title="子事务：红包模块"></a>子事务：红包模块</h2><h3 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h3><pre><code class="Java">public interface RedPacketTradeOrderService {
+<h2 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h2><h3 id="子事务：红包模块"><a href="#子事务：红包模块" class="headerlink" title="子事务：红包模块"></a>子事务：红包模块</h3><h4 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h4><pre><code class="Java">public interface RedPacketTradeOrderService {
 
     @Compensable
     public String record(RedPacketTradeOrderDto tradeOrderDto);
 }
 </code></pre>
-<h3 id="实现类"><a href="#实现类" class="headerlink" title="实现类"></a>实现类</h3><pre><code class="Java">@Service(&quot;redPacketTradeOrderService&quot;)
+<h4 id="实现类"><a href="#实现类" class="headerlink" title="实现类"></a>实现类</h4><pre><code class="Java">@Service(&quot;redPacketTradeOrderService&quot;)
 public class RedPacketTradeOrderServiceImpl implements RedPacketTradeOrderService {
 
     @Autowired
@@ -260,7 +260,7 @@ public class RedPacketTradeOrderServiceImpl implements RedPacketTradeOrderServic
 </code></pre>
 <p>思考：为什么要在 confirm 和 cancel 方法里先检查订单状态是否为 DRAFT（在 try 方法中新增的一个订单），而不直接修改为结束状态？</p>
 <p>答：为了保证服务的幂等性，即使用相同参数对同一资源重复调用某个接口的结果与调用一次的结果相同。</p>
-<h2 id="主事务：订单模块"><a href="#主事务：订单模块" class="headerlink" title="主事务：订单模块"></a>主事务：订单模块</h2><p>注意：要在主事务的业务已经实现的差不多的时候才调用子事务。</p>
+<h3 id="主事务：订单模块"><a href="#主事务：订单模块" class="headerlink" title="主事务：订单模块"></a>主事务：订单模块</h3><p>注意：要在主事务的业务已经实现的差不多的时候才调用子事务。</p>
 <pre><code class="Java">@Service
 public class PaymentServiceImpl {
 
@@ -309,7 +309,31 @@ public class PaymentServiceImpl {
     }
 }
 </code></pre>
-
+<h2 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h2><p><img src="/2020/04/17/Dubbo/Dubbo微服务影院系列/10.分布式事务/Dubbo微服务影院系列（10）：分布式事务/image-20200420202720213.png" alt="TCC-Transaction-Core"></p>
+<h2 id="隐式参数"><a href="#隐式参数" class="headerlink" title="隐式参数"></a>隐式参数</h2><p>根据官方文档可以得知，1.2.x 版本支持 rpc 框架支持隐式传参情况下将事务上下文参数 TransactionContext 以隐式传参方式进行传递。</p>
+<p>那么，在子事务的 Service 实现代码中获取 Dubbo 隐式参数：</p>
+<pre><code class="Java">Map&lt;String, String&gt; attachments = RpcContext.getContext().getAttachments();
+</code></pre>
+<p><img src="/2020/04/17/Dubbo/Dubbo微服务影院系列/10.分布式事务/Dubbo微服务影院系列（10）：分布式事务/image-20200422004334435.png" alt="Dubbo隐式参数attachments"></p>
+<p>打一个断点，可以从隐式参数中得到 key 为 TRANSACTION_CONTEXT，value 为以下信息的键值对：</p>
+<pre><code class="JSON">{
+  &quot;attachments&quot;:{},
+  &quot;status&quot;:1,
+  &quot;xid&quot;:{
+    &quot;branchQualifier&quot;:&quot;hMBMmir6Q56M0hskfmPebw==&quot;,
+    &quot;formatId&quot;:1,
+    &quot;globalTransactionId&quot;:&quot;trSosXg0Soi8Q9xlauTToQ==&quot;
+  }
+}
+</code></pre>
+<p>其中，包含了 globalTransactionId 这一全局事务 id，和 branchQualifier 分支事务 id。</p>
+<p>##问题</p>
+<ol>
+<li>什么时候生成的 TRANSACTION_CONTEXT 隐式参数？</li>
+<li>如何判断一个大的事务下，都有哪些小的事务？</li>
+<li>为什么要有 @Compensable 注解？</li>
+</ol>
+<h2 id="源码分析"><a href="#源码分析" class="headerlink" title="源码分析"></a>源码分析</h2>
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
                 <source type="audio/mpeg" src="">
@@ -352,7 +376,7 @@ public class PaymentServiceImpl {
             <div class="box sticky animated fadeInRight faster">
                 <div id="toc" class="subbox">
                     <h4>目录</h4>
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#章节概要"><span class="toc-number">1.</span> <span class="toc-text">章节概要</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#事务简介"><span class="toc-number">2.</span> <span class="toc-text">事务简介</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#事务属性"><span class="toc-number">2.1.</span> <span class="toc-text">事务属性</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#分布式事务"><span class="toc-number">3.</span> <span class="toc-text">分布式事务</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#概念"><span class="toc-number">3.1.</span> <span class="toc-text">概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实现思路"><span class="toc-number">3.2.</span> <span class="toc-text">实现思路</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#分布式事务类型"><span class="toc-number">4.</span> <span class="toc-text">分布式事务类型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#两段式和三段式事务"><span class="toc-number">4.1.</span> <span class="toc-text">两段式和三段式事务</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#两段式事务"><span class="toc-number">4.1.1.</span> <span class="toc-text">两段式事务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三段式事务"><span class="toc-number">4.1.2.</span> <span class="toc-text">三段式事务</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#基于-XA-的分布式事务"><span class="toc-number">4.2.</span> <span class="toc-text">基于 XA 的分布式事务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#基于消息的一致性方案"><span class="toc-number">4.3.</span> <span class="toc-text">基于消息的一致性方案</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TCC-补偿性事务"><span class="toc-number">4.4.</span> <span class="toc-text">TCC 补偿性事务</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#基于消息的一致性方案和-TCC-补偿性事务的区别"><span class="toc-number">4.4.1.</span> <span class="toc-text">基于消息的一致性方案和 TCC 补偿性事务的区别</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#分布式事务框架"><span class="toc-number">5.</span> <span class="toc-text">分布式事务框架</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#TCC-Transaction-分布式事务框架"><span class="toc-number">6.</span> <span class="toc-text">TCC-Transaction 分布式事务框架</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#子事务：红包模块"><span class="toc-number">6.1.</span> <span class="toc-text">子事务：红包模块</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#接口"><span class="toc-number">6.1.1.</span> <span class="toc-text">接口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实现类"><span class="toc-number">6.1.2.</span> <span class="toc-text">实现类</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#主事务：订单模块"><span class="toc-number">6.2.</span> <span class="toc-text">主事务：订单模块</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#章节概要"><span class="toc-number">1.</span> <span class="toc-text">章节概要</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#事务简介"><span class="toc-number">2.</span> <span class="toc-text">事务简介</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#事务属性"><span class="toc-number">2.1.</span> <span class="toc-text">事务属性</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#分布式事务"><span class="toc-number">3.</span> <span class="toc-text">分布式事务</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#概念"><span class="toc-number">3.1.</span> <span class="toc-text">概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实现思路"><span class="toc-number">3.2.</span> <span class="toc-text">实现思路</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#分布式事务类型"><span class="toc-number">4.</span> <span class="toc-text">分布式事务类型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#两段式和三段式事务"><span class="toc-number">4.1.</span> <span class="toc-text">两段式和三段式事务</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#两段式事务"><span class="toc-number">4.1.1.</span> <span class="toc-text">两段式事务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三段式事务"><span class="toc-number">4.1.2.</span> <span class="toc-text">三段式事务</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#基于-XA-的分布式事务"><span class="toc-number">4.2.</span> <span class="toc-text">基于 XA 的分布式事务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#基于消息的一致性方案"><span class="toc-number">4.3.</span> <span class="toc-text">基于消息的一致性方案</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TCC-补偿性事务"><span class="toc-number">4.4.</span> <span class="toc-text">TCC 补偿性事务</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#基于消息的一致性方案和-TCC-补偿性事务的区别"><span class="toc-number">4.4.1.</span> <span class="toc-text">基于消息的一致性方案和 TCC 补偿性事务的区别</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#分布式事务框架"><span class="toc-number">5.</span> <span class="toc-text">分布式事务框架</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#TCC-Transaction-分布式事务框架"><span class="toc-number">6.</span> <span class="toc-text">TCC-Transaction 分布式事务框架</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Demo"><span class="toc-number">6.1.</span> <span class="toc-text">Demo</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#子事务：红包模块"><span class="toc-number">6.1.1.</span> <span class="toc-text">子事务：红包模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#主事务：订单模块"><span class="toc-number">6.1.2.</span> <span class="toc-text">主事务：订单模块</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#流程"><span class="toc-number">6.2.</span> <span class="toc-text">流程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#隐式参数"><span class="toc-number">6.3.</span> <span class="toc-text">隐式参数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#源码分析"><span class="toc-number">6.4.</span> <span class="toc-text">源码分析</span></a></li></ol></li></ol>
                 </div>
             </div>
             
