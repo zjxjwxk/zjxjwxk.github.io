@@ -95,13 +95,13 @@
                 
                 <span>
                     <b class="iconfont icon-text2"></b> <i>文章字数</i>
-                    22k
+                    26k
                 </span>
                 
                 
                 <span>
                     <b class="iconfont icon-timer__s"></b> <i>阅读约需</i>
-                    20 mins.
+                    24 mins.
                 </span>
                 
                 
@@ -327,15 +327,78 @@ public class PaymentServiceImpl {
 }
 </code></pre>
 <p>其中，包含了 <code>globalTransactionId</code> 这一全局事务 id，和 <code>branchQualifier</code> 分支事务 id。</p>
-<p>##问题</p>
+<p>##提出疑问</p>
 <ol>
 <li>什么时候生成的 <code>TRANSACTION_CONTEXT</code> 隐式参数？</li>
 <li>如何判断一个大的事务下，都有哪些小的事务？</li>
 <li>为什么要有 <code>@Compensable</code> 注解？</li>
+<li>两个拦截器都没有处理 confirm 和 cancel，谁来处理？</li>
 </ol>
-<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p><img src="/2020/04/17/Dubbo/Dubbo微服务影院系列/10.分布式事务/Dubbo微服务影院系列（10）：分布式事务/image-20200422191933706.png" alt="调用流程"></p>
-<h3 id="intercepter-包"><a href="#intercepter-包" class="headerlink" title="intercepter 包"></a>intercepter 包</h3><p><img src="/2020/04/17/Dubbo/Dubbo微服务影院系列/10.分布式事务/Dubbo微服务影院系列（10）：分布式事务/image-20200422224921576.png" alt="intercepter包"></p>
-<h4 id="CompensableTransactionAspect"><a href="#CompensableTransactionAspect" class="headerlink" title="CompensableTransactionAspect"></a>CompensableTransactionAspect</h4><p>这是一个 AOP 切面。<code>@Pointcut</code> 将 <code>@Compensable</code> 注解标记为切入点，其签名为 <code>compensableService()</code>。<code>@Around</code> 表示在 <code>compensableService()</code> 之前和之后调用 <code>interceptCompensableMethod()</code>，其中调用了 <code>CompensableTransactionInterceptor</code> 的 <code>interceptCompensableMethod()</code>。</p>
+<h2 id="源码分析"><a href="#源码分析" class="headerlink" title="源码分析"></a>源码分析</h2><p><img src="/2020/04/17/Dubbo/Dubbo微服务影院系列/10.分布式事务/Dubbo微服务影院系列（10）：分布式事务/image-20200422191933706.png" alt="调用流程"></p>
+<h3 id="事务拦截器"><a href="#事务拦截器" class="headerlink" title="事务拦截器"></a>事务拦截器</h3><p>重点介绍 tcc-transaction-core 核心包的 interceptor 包，也就是拦截器包。</p>
+<p><img src="/2020/04/17/Dubbo/Dubbo微服务影院系列/10.分布式事务/Dubbo微服务影院系列（10）：分布式事务/image-20200422224921576.png" alt="intercepter包"></p>
+<h4 id="CompensableMethodContext"><a href="#CompensableMethodContext" class="headerlink" title="CompensableMethodContext"></a>CompensableMethodContext</h4><p>这是加了 <code>@Compensable</code> 注释的目标方法对象的上下文类。通过构造函数，利用拦截的目标对象上下文，获取被拦截目标对象方法的各种信息。</p>
+<pre><code class="Java">public CompensableMethodContext(ProceedingJoinPoint pjp) {
+        this.pjp = pjp;
+      // 获取待访问对象的方法名称
+        this.method = getCompensableMethod();
+      // 获取目标对象的 Compensable 注解
+        this.compensable = method.getAnnotation(Compensable.class);
+      // 获取目标对象的事务传播属性（默认为 REQUIRED）
+        this.propagation = compensable.propagation();
+      // 获取事务上下文
+        this.transactionContext = FactoryBuilder.factoryOf(compensable.transactionContextEditor()).getInstance().get(pjp.getTarget(), method, pjp.getArgs());
+}
+</code></pre>
+<p>其中，transactionContext 是一个 <code>TransactionContext</code> 类，定义在 tcc-transaction-api 模块中：</p>
+<pre><code class="Java">public class TransactionContext implements Serializable {
+
+    private static final long serialVersionUID = -8199390103169700387L;
+    private TransactionXid xid;
+
+    private int status;
+   /**
+     * 保存当前事务有几个子事务
+     */
+    private Map&lt;String, String&gt; attachments = new ConcurrentHashMap&lt;String, String&gt;();
+
+    public TransactionContext() {
+
+    }
+
+    public TransactionContext(TransactionXid xid, int status) {
+        this.xid = xid;
+        this.status = status;
+    }
+
+    public void setXid(TransactionXid xid) {
+        this.xid = xid;
+    }
+
+    public TransactionXid getXid() {
+        return xid.clone();
+    }
+
+    public void setAttachments(Map&lt;String, String&gt; attachments) {
+        if (attachments != null &amp;&amp; !attachments.isEmpty()) {
+            this.attachments.putAll(attachments);
+        }
+    }
+
+    public Map&lt;String, String&gt; getAttachments() {
+        return attachments;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+}
+</code></pre>
+<h4 id="CompensableTransactionAspect"><a href="#CompensableTransactionAspect" class="headerlink" title="CompensableTransactionAspect"></a>CompensableTransactionAspect</h4><p>这是一个 AOP 切面类。<code>@Pointcut</code> 将 <code>@Compensable</code> 注解标记为切入点，其签名为 <code>compensableService()</code>。<code>@Around</code> 表示在 <code>compensableService()</code> 之前和之后调用 <code>interceptCompensableMethod()</code>，其中调用了 <code>CompensableTransactionInterceptor</code> 的 <code>interceptCompensableMethod()</code>。</p>
 <pre><code class="Java">    @Pointcut(&quot;@annotation(org.mengyun.tcctransaction.api.Compensable)&quot;)
     public void compensableService() {
 
@@ -354,7 +417,7 @@ public class PaymentServiceImpl {
 <li>修改和清除事务管理区中的事务队列</li>
 <li>（并没有执行目标对象方法，pjp.proceed() 其实是交给了下一个拦截器 ResourceCoordinatorInterceptor）</li>
 </ol>
-<p>其中<code>interceptCompensableMethod()</code> 方法中，参数 pjp 表示被代理的目标对象，比如被加了 <code>@Compensable</code> 注解的 <code>makePayment</code> 方法对象，就会作为该参数，通过其获取该方法的各种信息。</p>
+<h5 id="interceptCompensableMethod"><a href="#interceptCompensableMethod" class="headerlink" title="interceptCompensableMethod"></a>interceptCompensableMethod</h5><p>其中<code>interceptCompensableMethod()</code> 方法中，参数 pjp 表示被代理的目标对象，比如被加了 <code>@Compensable</code> 注解的 <code>makePayment</code> 方法对象，就会作为该参数，通过其获取该方法的各种信息。</p>
 <pre><code class="Java">public Object interceptCompensableMethod(ProceedingJoinPoint pjp) throws Throwable {
 
        // 通过上下文对象，获取待访问对象的各种信息，见下方 CompensableMethodContext() 构造函数
@@ -487,65 +550,87 @@ public class PaymentServiceImpl {
         return ReflectionUtils.getNullValue(method.getReturnType());
     }
 </code></pre>
-<h4 id="CompensableMethodContext"><a href="#CompensableMethodContext" class="headerlink" title="CompensableMethodContext"></a>CompensableMethodContext</h4><p>这是加了 <code>@Compensable</code> 注释的目标方法对象的上下文类。通过构造函数，利用拦截的目标对象上下文，获取被拦截目标对象方法的各种信息。</p>
-<pre><code class="Java">public CompensableMethodContext(ProceedingJoinPoint pjp) {
-        this.pjp = pjp;
-      // 获取待访问对象的方法名称
-        this.method = getCompensableMethod();
-      // 获取目标对象的 Compensable 注解
-        this.compensable = method.getAnnotation(Compensable.class);
-      // 获取目标对象的事务传播属性（默认为 REQUIRED）
-        this.propagation = compensable.propagation();
-      // 获取事务上下文
-        this.transactionContext = FactoryBuilder.factoryOf(compensable.transactionContextEditor()).getInstance().get(pjp.getTarget(), method, pjp.getArgs());
-}
+<h4 id="ResourceCoordinatorAspect"><a href="#ResourceCoordinatorAspect" class="headerlink" title="ResourceCoordinatorAspect"></a>ResourceCoordinatorAspect</h4><p>资源协调切面类和 CompensableTransactionAspect 类似，几乎一样，不再赘述。</p>
+<pre><code class="Java">    @Pointcut(&quot;@annotation(org.mengyun.tcctransaction.api.Compensable)&quot;)
+    public void transactionContextCall() {
+
+    }
+
+    @Around(&quot;transactionContextCall()&quot;)
+    public Object interceptTransactionContextMethod(ProceedingJoinPoint pjp) throws Throwable {
+        return resourceCoordinatorInterceptor.interceptTransactionContextMethod(pjp);
+    }
 </code></pre>
-<p>其中，transactionContext 是一个 <code>TransactionContext</code> 类，定义在 tcc-transaction-api 模块中：</p>
-<pre><code class="Java">public class TransactionContext implements Serializable {
+<h4 id="ResourceCoordinatorInterceptor"><a href="#ResourceCoordinatorInterceptor" class="headerlink" title="ResourceCoordinatorInterceptor"></a>ResourceCoordinatorInterceptor</h4><p>主要处理 try 阶段的事情，在 try 阶段，就将所有的“资源”封装完成并交给事务管理器。</p>
+<p>其中“资源”指的是“事务资源”：</p>
+<p>即事务的参与者：</p>
+<ol>
+<li>confirm 上下文</li>
+<li>cancel 上下文</li>
+<li>分支事务信息</li>
+</ol>
+<p>然后事务管理器修改数据库状态。</p>
+<h5 id="interceptTransactionContextMethod"><a href="#interceptTransactionContextMethod" class="headerlink" title="interceptTransactionContextMethod"></a>interceptTransactionContextMethod</h5><pre><code class="Java">    public Object interceptTransactionContextMethod(ProceedingJoinPoint pjp) throws Throwable {
+        // 使用事务管理器，传递一些事务相关的信息（线程共享）
+        Transaction transaction = transactionManager.getCurrentTransaction();
 
-    private static final long serialVersionUID = -8199390103169700387L;
-    private TransactionXid xid;
+        if (transaction != null) {
 
-    private int status;
-    // 保存当前事务有几个子事务
-    private Map&lt;String, String&gt; attachments = new ConcurrentHashMap&lt;String, String&gt;();
-
-    public TransactionContext() {
-
-    }
-
-    public TransactionContext(TransactionXid xid, int status) {
-        this.xid = xid;
-        this.status = status;
-    }
-
-    public void setXid(TransactionXid xid) {
-        this.xid = xid;
-    }
-
-    public TransactionXid getXid() {
-        return xid.clone();
-    }
-
-    public void setAttachments(Map&lt;String, String&gt; attachments) {
-        if (attachments != null &amp;&amp; !attachments.isEmpty()) {
-            this.attachments.putAll(attachments);
+            switch (transaction.getStatus()) {
+                case TRYING:
+                    enlistParticipant(pjp);
+                    break;
+                case CONFIRMING:
+                    break;
+                case CANCELLING:
+                    break;
+            }
         }
-    }
 
-    public Map&lt;String, String&gt; getAttachments() {
-        return attachments;
+        return pjp.proceed(pjp.getArgs());
     }
-
-    public void setStatus(int status) {
-        this.status = status;
-    }
-
-    public int getStatus() {
-        return status;
-    }
-}
 </code></pre>
+<h5 id="enlistParticipant"><a href="#enlistParticipant" class="headerlink" title="enlistParticipant"></a>enlistParticipant</h5><pre><code class="Java">private void enlistParticipant(ProceedingJoinPoint pjp) throws IllegalAccessException, InstantiationException {
+        // 获取对象的方法
+        Method method = CompensableMethodUtils.getCompensableMethod(pjp);
+        if (method == null) {
+            throw new RuntimeException(String.format(&quot;join point not found method, point is : %s&quot;, pjp.getSignature().getName()));
+        }
+      // 获取对应的 @Compensable 对象
+        Compensable compensable = method.getAnnotation(Compensable.class);
+      // 获取配置的 confirm 和 cancel 方法
+
+        String confirmMethodName = compensable.confirmMethod();
+        String cancelMethodName = compensable.cancelMethod();
+
+        Transaction transaction = transactionManager.getCurrentTransaction();
+        TransactionXid xid = new TransactionXid(transaction.getXid().getGlobalTransactionId());
+
+        if (FactoryBuilder.factoryOf(compensable.transactionContextEditor()).getInstance().get(pjp.getTarget(), method, pjp.getArgs()) == null) {
+            FactoryBuilder.factoryOf(compensable.transactionContextEditor()).getInstance().set(new TransactionContext(xid, TransactionStatus.TRYING.getId()), pjp.getTarget(), ((MethodSignature) pjp.getSignature()).getMethod(), pjp.getArgs());
+        }
+
+        Class targetClass = ReflectionUtils.getDeclaringType(pjp.getTarget().getClass(), method.getName(), method.getParameterTypes());
+
+        InvocationContext confirmInvocation = new InvocationContext(targetClass,
+                confirmMethodName,
+                method.getParameterTypes(), pjp.getArgs());
+
+        InvocationContext cancelInvocation = new InvocationContext(targetClass,
+                cancelMethodName,
+                method.getParameterTypes(), pjp.getArgs());
+
+        Participant participant =
+                new Participant(
+                        xid,
+                        confirmInvocation,
+                        cancelInvocation,
+                        compensable.transactionContextEditor());
+
+        transactionManager.enlistParticipant(participant);
+    }
+</code></pre>
+<h3 id="调用目标对象"><a href="#调用目标对象" class="headerlink" title="调用目标对象"></a>调用目标对象</h3><p>经过两个拦截器后，才调用目标对象方法。</p>
 <h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><ol>
 <li><p>事务的相关信息（全局事务编号，乐观锁版本等要持久化存储）</p>
 </li>
@@ -596,7 +681,7 @@ public class PaymentServiceImpl {
             <div class="box sticky animated fadeInRight faster">
                 <div id="toc" class="subbox">
                     <h4>目录</h4>
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#章节概要"><span class="toc-number">1.</span> <span class="toc-text">章节概要</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#事务简介"><span class="toc-number">2.</span> <span class="toc-text">事务简介</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#事务属性"><span class="toc-number">2.1.</span> <span class="toc-text">事务属性</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#分布式事务"><span class="toc-number">3.</span> <span class="toc-text">分布式事务</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#概念"><span class="toc-number">3.1.</span> <span class="toc-text">概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实现思路"><span class="toc-number">3.2.</span> <span class="toc-text">实现思路</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#分布式事务类型"><span class="toc-number">4.</span> <span class="toc-text">分布式事务类型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#两段式和三段式事务"><span class="toc-number">4.1.</span> <span class="toc-text">两段式和三段式事务</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#两段式事务"><span class="toc-number">4.1.1.</span> <span class="toc-text">两段式事务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三段式事务"><span class="toc-number">4.1.2.</span> <span class="toc-text">三段式事务</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#基于-XA-的分布式事务"><span class="toc-number">4.2.</span> <span class="toc-text">基于 XA 的分布式事务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#基于消息的一致性方案"><span class="toc-number">4.3.</span> <span class="toc-text">基于消息的一致性方案</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TCC-补偿性事务"><span class="toc-number">4.4.</span> <span class="toc-text">TCC 补偿性事务</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#基于消息的一致性方案和-TCC-补偿性事务的区别"><span class="toc-number">4.4.1.</span> <span class="toc-text">基于消息的一致性方案和 TCC 补偿性事务的区别</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#分布式事务框架"><span class="toc-number">5.</span> <span class="toc-text">分布式事务框架</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#TCC-Transaction-分布式事务框架"><span class="toc-number">6.</span> <span class="toc-text">TCC-Transaction 分布式事务框架</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Demo"><span class="toc-number">6.1.</span> <span class="toc-text">Demo</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#子事务：红包模块"><span class="toc-number">6.1.1.</span> <span class="toc-text">子事务：红包模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#主事务：订单模块"><span class="toc-number">6.1.2.</span> <span class="toc-text">主事务：订单模块</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#流程"><span class="toc-number">6.2.</span> <span class="toc-text">流程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#隐式参数"><span class="toc-number">6.3.</span> <span class="toc-text">隐式参数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#分析"><span class="toc-number">6.4.</span> <span class="toc-text">分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#intercepter-包"><span class="toc-number">6.4.1.</span> <span class="toc-text">intercepter 包</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#小结"><span class="toc-number">6.5.</span> <span class="toc-text">小结</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#章节概要"><span class="toc-number">1.</span> <span class="toc-text">章节概要</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#事务简介"><span class="toc-number">2.</span> <span class="toc-text">事务简介</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#事务属性"><span class="toc-number">2.1.</span> <span class="toc-text">事务属性</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#分布式事务"><span class="toc-number">3.</span> <span class="toc-text">分布式事务</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#概念"><span class="toc-number">3.1.</span> <span class="toc-text">概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实现思路"><span class="toc-number">3.2.</span> <span class="toc-text">实现思路</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#分布式事务类型"><span class="toc-number">4.</span> <span class="toc-text">分布式事务类型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#两段式和三段式事务"><span class="toc-number">4.1.</span> <span class="toc-text">两段式和三段式事务</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#两段式事务"><span class="toc-number">4.1.1.</span> <span class="toc-text">两段式事务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三段式事务"><span class="toc-number">4.1.2.</span> <span class="toc-text">三段式事务</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#基于-XA-的分布式事务"><span class="toc-number">4.2.</span> <span class="toc-text">基于 XA 的分布式事务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#基于消息的一致性方案"><span class="toc-number">4.3.</span> <span class="toc-text">基于消息的一致性方案</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TCC-补偿性事务"><span class="toc-number">4.4.</span> <span class="toc-text">TCC 补偿性事务</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#基于消息的一致性方案和-TCC-补偿性事务的区别"><span class="toc-number">4.4.1.</span> <span class="toc-text">基于消息的一致性方案和 TCC 补偿性事务的区别</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#分布式事务框架"><span class="toc-number">5.</span> <span class="toc-text">分布式事务框架</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#TCC-Transaction-分布式事务框架"><span class="toc-number">6.</span> <span class="toc-text">TCC-Transaction 分布式事务框架</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Demo"><span class="toc-number">6.1.</span> <span class="toc-text">Demo</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#子事务：红包模块"><span class="toc-number">6.1.1.</span> <span class="toc-text">子事务：红包模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#主事务：订单模块"><span class="toc-number">6.1.2.</span> <span class="toc-text">主事务：订单模块</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#流程"><span class="toc-number">6.2.</span> <span class="toc-text">流程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#隐式参数"><span class="toc-number">6.3.</span> <span class="toc-text">隐式参数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#源码分析"><span class="toc-number">6.4.</span> <span class="toc-text">源码分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#事务拦截器"><span class="toc-number">6.4.1.</span> <span class="toc-text">事务拦截器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#调用目标对象"><span class="toc-number">6.4.2.</span> <span class="toc-text">调用目标对象</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#小结"><span class="toc-number">6.5.</span> <span class="toc-text">小结</span></a></li></ol></li></ol>
                 </div>
             </div>
             
