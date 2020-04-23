@@ -95,13 +95,13 @@
                 
                 <span>
                     <b class="iconfont icon-text2"></b> <i>文章字数</i>
-                    26k
+                    25k
                 </span>
                 
                 
                 <span>
                     <b class="iconfont icon-timer__s"></b> <i>阅读约需</i>
-                    24 mins.
+                    23 mins.
                 </span>
                 
                 
@@ -417,7 +417,8 @@ public class PaymentServiceImpl {
 <li>修改和清除事务管理区中的事务队列</li>
 <li>（并没有执行目标对象方法，pjp.proceed() 其实是交给了下一个拦截器 ResourceCoordinatorInterceptor）</li>
 </ol>
-<h5 id="interceptCompensableMethod"><a href="#interceptCompensableMethod" class="headerlink" title="interceptCompensableMethod"></a>interceptCompensableMethod</h5><p>其中<code>interceptCompensableMethod()</code> 方法中，参数 pjp 表示被代理的目标对象，比如被加了 <code>@Compensable</code> 注解的 <code>makePayment</code> 方法对象，就会作为该参数，通过其获取该方法的各种信息。</p>
+<p><strong>interceptCompensableMethod</strong></p>
+<p>其中<code>interceptCompensableMethod()</code> 方法中，参数 pjp 表示被代理的目标对象，比如被加了 <code>@Compensable</code> 注解的 <code>makePayment</code> 方法对象，就会作为该参数，通过其获取该方法的各种信息。</p>
 <pre><code class="Java">public Object interceptCompensableMethod(ProceedingJoinPoint pjp) throws Throwable {
 
        // 通过上下文对象，获取待访问对象的各种信息，见下方 CompensableMethodContext() 构造函数
@@ -439,7 +440,8 @@ public class PaymentServiceImpl {
         }
     }
 </code></pre>
-<h5 id="rootMethodProceed"><a href="#rootMethodProceed" class="headerlink" title="rootMethodProceed"></a>rootMethodProceed</h5><p>处理主事务的 <code>rootMethodProceed()</code> 方法，它会完成：</p>
+<p><strong>rootMethodProceed</strong></p>
+<p>处理主事务的 <code>rootMethodProceed()</code> 方法，它会完成：</p>
 <ol>
 <li>开启全局事务</li>
 <li>持久化全局事务</li>
@@ -501,7 +503,8 @@ public class PaymentServiceImpl {
         return transaction;
     }
 </code></pre>
-<h5 id="providerMethodProceed"><a href="#providerMethodProceed" class="headerlink" title="providerMethodProceed"></a>providerMethodProceed</h5><p>处理分支事务的 <code>providerMethodProceed()</code> 方法：</p>
+<p><strong>providerMethodProceed</strong></p>
+<p>处理分支事务的 <code>providerMethodProceed()</code> 方法：</p>
 <pre><code class="Java">    private Object providerMethodProceed(CompensableMethodContext compensableMethodContext) throws Throwable {
 
         Transaction transaction = null;
@@ -570,7 +573,8 @@ public class PaymentServiceImpl {
 <li>分支事务信息</li>
 </ol>
 <p>然后事务管理器修改数据库状态。</p>
-<h5 id="interceptTransactionContextMethod"><a href="#interceptTransactionContextMethod" class="headerlink" title="interceptTransactionContextMethod"></a>interceptTransactionContextMethod</h5><pre><code class="Java">    public Object interceptTransactionContextMethod(ProceedingJoinPoint pjp) throws Throwable {
+<p><strong>interceptTransactionContextMethod</strong></p>
+<pre><code class="Java">    public Object interceptTransactionContextMethod(ProceedingJoinPoint pjp) throws Throwable {
         // 使用事务管理器，传递一些事务相关的信息（线程共享）
         Transaction transaction = transactionManager.getCurrentTransaction();
 
@@ -590,7 +594,8 @@ public class PaymentServiceImpl {
         return pjp.proceed(pjp.getArgs());
     }
 </code></pre>
-<h5 id="enlistParticipant"><a href="#enlistParticipant" class="headerlink" title="enlistParticipant"></a>enlistParticipant</h5><pre><code class="Java">private void enlistParticipant(ProceedingJoinPoint pjp) throws IllegalAccessException, InstantiationException {
+<p><strong>enlistParticipant</strong></p>
+<pre><code class="Java">private void enlistParticipant(ProceedingJoinPoint pjp) throws IllegalAccessException, InstantiationException {
         // 获取对象的方法
         Method method = CompensableMethodUtils.getCompensableMethod(pjp);
         if (method == null) {
