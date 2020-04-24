@@ -101,7 +101,7 @@
                 
                 <span>
                     <b class="iconfont icon-timer__s"></b> <i>阅读约需</i>
-                    27 mins.
+                    26 mins.
                 </span>
                 
                 
@@ -200,13 +200,15 @@
 <p>其中，TCC 库用于实现分布式事务，其包含的表和表结构如下：</p>
 <p><img src="/2020/04/17/Dubbo/Dubbo微服务影院系列/10.分布式事务/Dubbo微服务影院系列（10）：分布式事务/image-20200424222245457.png" alt="TCC库"></p>
 <p><img src="/2020/04/17/Dubbo/Dubbo微服务影院系列/10.分布式事务/Dubbo微服务影院系列（10）：分布式事务/image-20200424222709615.png" alt="TCC表结构"></p>
-<h2 id="Dubbo-Demo"><a href="#Dubbo-Demo" class="headerlink" title="Dubbo Demo"></a>Dubbo Demo</h2><h3 id="子事务：红包模块"><a href="#子事务：红包模块" class="headerlink" title="子事务：红包模块"></a>子事务：红包模块</h3><h4 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h4><pre><code class="Java">public interface RedPacketTradeOrderService {
+<h2 id="Dubbo-Demo"><a href="#Dubbo-Demo" class="headerlink" title="Dubbo Demo"></a>Dubbo Demo</h2><h3 id="子事务：红包模块"><a href="#子事务：红包模块" class="headerlink" title="子事务：红包模块"></a>子事务：红包模块</h3><p><strong>接口</strong></p>
+<pre><code class="Java">public interface RedPacketTradeOrderService {
 
     @Compensable
     public String record(RedPacketTradeOrderDto tradeOrderDto);
 }
 </code></pre>
-<h4 id="实现类"><a href="#实现类" class="headerlink" title="实现类"></a>实现类</h4><pre><code class="Java">@Service(&quot;redPacketTradeOrderService&quot;)
+<p><strong>实现类</strong></p>
+<pre><code class="Java">@Service(&quot;redPacketTradeOrderService&quot;)
 public class RedPacketTradeOrderServiceImpl implements RedPacketTradeOrderService {
 
     @Autowired
@@ -346,7 +348,8 @@ public class PaymentServiceImpl {
 <h2 id="源码分析"><a href="#源码分析" class="headerlink" title="源码分析"></a>源码分析</h2><p><img src="/2020/04/17/Dubbo/Dubbo微服务影院系列/10.分布式事务/Dubbo微服务影院系列（10）：分布式事务/image-20200422191933706.png" alt="调用流程"></p>
 <h3 id="事务拦截器"><a href="#事务拦截器" class="headerlink" title="事务拦截器"></a>事务拦截器</h3><p>重点介绍 tcc-transaction-core 核心包的 interceptor 包，也就是拦截器包。</p>
 <p><img src="/2020/04/17/Dubbo/Dubbo微服务影院系列/10.分布式事务/Dubbo微服务影院系列（10）：分布式事务/image-20200422224921576.png" alt="intercepter包"></p>
-<h4 id="CompensableMethodContext"><a href="#CompensableMethodContext" class="headerlink" title="CompensableMethodContext"></a>CompensableMethodContext</h4><p>这是加了 <code>@Compensable</code> 注释的目标方法对象的上下文类。通过构造函数，利用拦截的目标对象上下文，获取被拦截目标对象方法的各种信息。</p>
+<p><strong>CompensableMethodContext</strong></p>
+<p>这是加了 <code>@Compensable</code> 注释的目标方法对象的上下文类。通过构造函数，利用拦截的目标对象上下文，获取被拦截目标对象方法的各种信息。</p>
 <pre><code class="Java">public CompensableMethodContext(ProceedingJoinPoint pjp) {
         this.pjp = pjp;
       // 获取待访问对象的方法名称
@@ -407,7 +410,8 @@ public class PaymentServiceImpl {
     }
 }
 </code></pre>
-<h4 id="CompensableTransactionAspect"><a href="#CompensableTransactionAspect" class="headerlink" title="CompensableTransactionAspect"></a>CompensableTransactionAspect</h4><p>这是一个 AOP 切面类。<code>@Pointcut</code> 将 <code>@Compensable</code> 注解标记为切入点，其签名为 <code>compensableService()</code>。<code>@Around</code> 表示在 <code>compensableService()</code> 之前和之后调用 <code>interceptCompensableMethod()</code>，其中调用了 <code>CompensableTransactionInterceptor</code> 的 <code>interceptCompensableMethod()</code>。</p>
+<p><strong>CompensableTransactionAspect</strong></p>
+<p>这是一个 AOP 切面类。<code>@Pointcut</code> 将 <code>@Compensable</code> 注解标记为切入点，其签名为 <code>compensableService()</code>。<code>@Around</code> 表示在 <code>compensableService()</code> 之前和之后调用 <code>interceptCompensableMethod()</code>，其中调用了 <code>CompensableTransactionInterceptor</code> 的 <code>interceptCompensableMethod()</code>。</p>
 <pre><code class="Java">    @Pointcut(&quot;@annotation(org.mengyun.tcctransaction.api.Compensable)&quot;)
     public void compensableService() {
 
@@ -419,7 +423,8 @@ public class PaymentServiceImpl {
         return compensableTransactionInterceptor.interceptCompensableMethod(pjp);
     }
 </code></pre>
-<h4 id="CompensableTransactionInterceptor"><a href="#CompensableTransactionInterceptor" class="headerlink" title="CompensableTransactionInterceptor"></a>CompensableTransactionInterceptor</h4><p>这是事务拦截器，具有以下作用：</p>
+<p><strong>CompensableTransactionInterceptor</strong></p>
+<p>这是事务拦截器，具有以下作用：</p>
 <ol>
 <li>将事务区分为 ROOT 事务和 PROVIDER 分支事务</li>
 <li>不断地修改数据库内的状态（初始化事务、修改事务状态）</li>
@@ -572,7 +577,8 @@ public class PaymentServiceImpl {
         return ReflectionUtils.getNullValue(method.getReturnType());
     }
 </code></pre>
-<h4 id="ResourceCoordinatorAspect"><a href="#ResourceCoordinatorAspect" class="headerlink" title="ResourceCoordinatorAspect"></a>ResourceCoordinatorAspect</h4><p>资源协调切面类和 CompensableTransactionAspect 类似，几乎一样，不再赘述。</p>
+<p><strong>ResourceCoordinatorAspect</strong></p>
+<p>资源协调切面类和 CompensableTransactionAspect 类似，几乎一样，不再赘述。</p>
 <pre><code class="Java">    @Pointcut(&quot;@annotation(org.mengyun.tcctransaction.api.Compensable)&quot;)
     public void transactionContextCall() {
 
@@ -583,7 +589,8 @@ public class PaymentServiceImpl {
         return resourceCoordinatorInterceptor.interceptTransactionContextMethod(pjp);
     }
 </code></pre>
-<h4 id="ResourceCoordinatorInterceptor"><a href="#ResourceCoordinatorInterceptor" class="headerlink" title="ResourceCoordinatorInterceptor"></a>ResourceCoordinatorInterceptor</h4><p>主要处理 try 阶段的事情，在 try 阶段，就将所有的“资源”封装完成并交给事务管理器。</p>
+<p><strong>ResourceCoordinatorInterceptor</strong></p>
+<p>主要处理 try 阶段的事情，在 try 阶段，就将所有的“资源”封装完成并交给事务管理器。</p>
 <p>其中“资源”指的是“事务资源”：</p>
 <p>即事务的参与者：</p>
 <ol>
@@ -656,7 +663,8 @@ public class PaymentServiceImpl {
 </code></pre>
 <p>这样，经过两个拦截器后，才调用目标对象方法。</p>
 <h3 id="幂等性问题"><a href="#幂等性问题" class="headerlink" title="幂等性问题"></a>幂等性问题</h3><p>TCC-Transaction 不能保证幂等性，需要自己实现幂等性。如以下 confirm 和 cancel 方法就实现了幂等性：</p>
-<h4 id="confirm-的幂等性"><a href="#confirm-的幂等性" class="headerlink" title="confirm 的幂等性"></a>confirm 的幂等性</h4><pre><code class="Java">@Transactional
+<p><strong>confirm 的幂等性</strong></p>
+<pre><code class="Java">@Transactional
     public void confirmRecord(RedPacketTradeOrderDto tradeOrderDto) {
 
         try {
@@ -682,7 +690,8 @@ public class PaymentServiceImpl {
         }
     }
 </code></pre>
-<h4 id="cancel-的幂等性"><a href="#cancel-的幂等性" class="headerlink" title="cancel 的幂等性"></a>cancel 的幂等性</h4><pre><code class="Java">@Transactional
+<p><strong>cancel 的幂等性</strong></p>
+<pre><code class="Java">@Transactional
     public void cancelRecord(RedPacketTradeOrderDto tradeOrderDto) {
 
         try {
