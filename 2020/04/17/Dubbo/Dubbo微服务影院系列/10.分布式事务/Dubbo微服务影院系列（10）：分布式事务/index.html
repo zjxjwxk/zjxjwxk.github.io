@@ -95,13 +95,13 @@
                 
                 <span>
                     <b class="iconfont icon-text2"></b> <i>文章字数</i>
-                    25k
+                    29k
                 </span>
                 
                 
                 <span>
                     <b class="iconfont icon-timer__s"></b> <i>阅读约需</i>
-                    23 mins.
+                    27 mins.
                 </span>
                 
                 
@@ -181,7 +181,10 @@
 <li><strong>开源 TCC 框架（TCC-Transaction）</strong>（<a href="https://github.com/changmingxie/tcc-transaction）" target="_blank" rel="noopener">https://github.com/changmingxie/tcc-transaction）</a></li>
 <li>开源 TCC 框架（ByteTCC）（<a href="https://github.com/liuyangming/ByteTCC）" target="_blank" rel="noopener">https://github.com/liuyangming/ByteTCC）</a></li>
 </ul>
-<h1 id="TCC-Transaction-分布式事务框架"><a href="#TCC-Transaction-分布式事务框架" class="headerlink" title="TCC-Transaction 分布式事务框架"></a>TCC-Transaction 分布式事务框架</h1><ol>
+<h1 id="TCC-Transaction-分布式事务框架"><a href="#TCC-Transaction-分布式事务框架" class="headerlink" title="TCC-Transaction 分布式事务框架"></a>TCC-Transaction 分布式事务框架</h1><blockquote>
+<p>Github 仓库：<a href="https://github.com/changmingxie/tcc-transaction" target="_blank" rel="noopener">https://github.com/changmingxie/tcc-transaction</a></p>
+</blockquote>
+<ol>
 <li>在需要提供分布式事务支持的接口方法上添加 <code>@Compensable</code></li>
 <li>在对应的接口实现方法上也添加 @Compensable，并添加注解参数 <code>confirmMethod</code>, <code>cancelMethod</code> 和 <code>transactionContextEditor</code></li>
 <li>实现对应的 <code>confirmMethod</code> 和 <code>cancelMethod</code>（必须和 try 方法在同一个类中）</li>
@@ -190,8 +193,14 @@
 <ol>
 <li>在分布式事务框架中，不要轻易在业务层捕获所有异常，只有在抛出异常的情况下，分布式事务框架才知道该业务是执行失败的。</li>
 <li>使用 TCC-Transaction 时，confirm 和 cancel 的幂等性问题需要自己解决。</li>
+<li>TCC 的数据库应该和业务数据库分开，以保证分布式事务的正常进行。</li>
 </ol>
-<h2 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h2><h3 id="子事务：红包模块"><a href="#子事务：红包模块" class="headerlink" title="子事务：红包模块"></a>子事务：红包模块</h3><h4 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h4><pre><code class="Java">public interface RedPacketTradeOrderService {
+<h2 id="建立用于分布式事务的数据库"><a href="#建立用于分布式事务的数据库" class="headerlink" title="建立用于分布式事务的数据库"></a>建立用于分布式事务的数据库</h2><p>TCC 的数据库应该和业务数据库分开，以保证分布式事务的正常进行。</p>
+<p><img src="/2020/04/17/Dubbo/Dubbo微服务影院系列/10.分布式事务/Dubbo微服务影院系列（10）：分布式事务/image-20200424222035114.png" alt="分布式事务数据库"></p>
+<p>其中，TCC 库用于实现分布式事务，其包含的表和表结构如下：</p>
+<p><img src="/2020/04/17/Dubbo/Dubbo微服务影院系列/10.分布式事务/Dubbo微服务影院系列（10）：分布式事务/image-20200424222245457.png" alt="TCC库"></p>
+<p><img src="/2020/04/17/Dubbo/Dubbo微服务影院系列/10.分布式事务/Dubbo微服务影院系列（10）：分布式事务/image-20200424222709615.png" alt="TCC表结构"></p>
+<h2 id="Dubbo-Demo"><a href="#Dubbo-Demo" class="headerlink" title="Dubbo Demo"></a>Dubbo Demo</h2><h3 id="子事务：红包模块"><a href="#子事务：红包模块" class="headerlink" title="子事务：红包模块"></a>子事务：红包模块</h3><h4 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h4><pre><code class="Java">public interface RedPacketTradeOrderService {
 
     @Compensable
     public String record(RedPacketTradeOrderDto tradeOrderDto);
@@ -309,7 +318,7 @@ public class PaymentServiceImpl {
     }
 }
 </code></pre>
-<h2 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h2><p><img src="/2020/04/17/Dubbo/Dubbo微服务影院系列/10.分布式事务/Dubbo微服务影院系列（10）：分布式事务/image-20200420202720213.png" alt="TCC-Transaction-Core"></p>
+<h2 id="流程图"><a href="#流程图" class="headerlink" title="流程图"></a>流程图</h2><p><img src="/2020/04/17/Dubbo/Dubbo微服务影院系列/10.分布式事务/Dubbo微服务影院系列（10）：分布式事务/image-20200420202720213.png" alt="TCC-Transaction-Core"></p>
 <h2 id="隐式参数"><a href="#隐式参数" class="headerlink" title="隐式参数"></a>隐式参数</h2><p>根据官方文档可以得知，1.2.x 版本支持 rpc 框架支持隐式传参情况下将事务上下文参数 <code>TransactionContext</code> 以隐式传参方式进行传递。</p>
 <p>那么，在子事务的 Service 实现代码中获取 Dubbo 隐式参数：</p>
 <pre><code class="Java">Map&lt;String, String&gt; attachments = RpcContext.getContext().getAttachments();
@@ -464,29 +473,39 @@ public class PaymentServiceImpl {
         allDelayCancelExceptions.addAll(Arrays.asList(compensableMethodContext.getAnnotation().delayCancelExceptions()));
 
         try {
-         // 让事务管理器开启一个全新的事务，持久化事务，并事务管理器注册该事务（加入事务队列）
+            // 让事务管理器开启一个全新的事务，持久化事务，并事务管理器注册该事务（加入事务队列）
             transaction = transactionManager.begin(compensableMethodContext.getUniqueIdentity());
 
             try {
-              // 执行目标方法（实际上会先调用 ResourceCoordinatorIntercepter 拦截器）
+                // 执行目标方法（实际上会先调用 ResourceCoordinatorIntercepter 拦截器）
                 returnValue = compensableMethodContext.proceed();
-              // 如果执行异常，就回滚，否则提交
+                // 如果执行异常，就回滚，否则提交
             } catch (Throwable tryingException) {
 
                 if (!isDelayCancelException(tryingException, allDelayCancelExceptions)) {
 
                     logger.warn(String.format(&quot;compensable transaction trying failed. transaction content:%s&quot;, JSON.toJSONString(transaction)), tryingException);
 
+                    /*
+                        1. 修改数据库状态
+                        2. 执行 rollback 方法
+                        3. 如果执行成功，则删除事务资源数据
+                     */
                     transactionManager.rollback(asyncCancel);
                 }
 
                 throw tryingException;
             }
 
+            /*
+                1. 修改数据库状态
+                2. 执行 confirm 方法
+                3. 如果执行成功，则删除事务资源数据
+             */
             transactionManager.commit(asyncConfirm);
 
         } finally {
-          // 到这里，分支事务就都执行完了，就清除队列中的事务
+            // 到这里，分支事务就都执行完了，就清除队列中的事务
             transactionManager.cleanAfterCompletion(transaction);
         }
 
@@ -635,14 +654,68 @@ public class PaymentServiceImpl {
         transactionManager.enlistParticipant(participant);
     }
 </code></pre>
-<h3 id="调用目标对象"><a href="#调用目标对象" class="headerlink" title="调用目标对象"></a>调用目标对象</h3><p>经过两个拦截器后，才调用目标对象方法。</p>
-<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><ol>
-<li><p>事务的相关信息（全局事务编号，乐观锁版本等要持久化存储）</p>
-</li>
-<li><p>资源：</p>
-<p>try 核心点：预留资源（业务资源、事务数据资源）</p>
-</li>
-</ol>
+<p>这样，经过两个拦截器后，才调用目标对象方法。</p>
+<h3 id="幂等性问题"><a href="#幂等性问题" class="headerlink" title="幂等性问题"></a>幂等性问题</h3><p>TCC-Transaction 不能保证幂等性，需要自己实现幂等性。如以下 confirm 和 cancel 方法就实现了幂等性：</p>
+<h4 id="confirm-的幂等性"><a href="#confirm-的幂等性" class="headerlink" title="confirm 的幂等性"></a>confirm 的幂等性</h4><pre><code class="Java">@Transactional
+    public void confirmRecord(RedPacketTradeOrderDto tradeOrderDto) {
+
+        try {
+            Thread.sleep(1000l);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
+        System.out.println(&quot;red packet confirm record called. time seq:&quot; + DateFormatUtils.format(Calendar.getInstance(), &quot;yyyy-MM-dd HH:mm:ss&quot;));
+
+        TradeOrder tradeOrder = tradeOrderRepository.findByMerchantOrderNo(tradeOrderDto.getMerchantOrderNo());
+
+        // 保证幂等性 check if the trade order status is DRAFT, if yes, return directly, ensure idempotency.
+        if (tradeOrder != null &amp;&amp; tradeOrder.getStatus().equals(&quot;DRAFT&quot;)) {
+            tradeOrder.confirm();
+            tradeOrderRepository.update(tradeOrder);
+
+            RedPacketAccount transferToAccount = redPacketAccountRepository.findByUserId(tradeOrderDto.getOppositeUserId());
+
+            transferToAccount.transferTo(tradeOrderDto.getAmount());
+
+            redPacketAccountRepository.save(transferToAccount);
+        }
+    }
+</code></pre>
+<h4 id="cancel-的幂等性"><a href="#cancel-的幂等性" class="headerlink" title="cancel 的幂等性"></a>cancel 的幂等性</h4><pre><code class="Java">@Transactional
+    public void cancelRecord(RedPacketTradeOrderDto tradeOrderDto) {
+
+        try {
+            Thread.sleep(1000l);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
+        System.out.println(&quot;red packet cancel record called. time seq:&quot; + DateFormatUtils.format(Calendar.getInstance(), &quot;yyyy-MM-dd HH:mm:ss&quot;));
+
+        TradeOrder tradeOrder = tradeOrderRepository.findByMerchantOrderNo(tradeOrderDto.getMerchantOrderNo());
+
+        // 保证幂等性 check if the trade order status is DRAFT, if yes, return directly, ensure idempotency.
+        if (null != tradeOrder &amp;&amp; &quot;DRAFT&quot;.equals(tradeOrder.getStatus())) {
+            tradeOrder.cancel();
+            tradeOrderRepository.update(tradeOrder);
+
+            RedPacketAccount capitalAccount = redPacketAccountRepository.findByUserId(tradeOrderDto.getSelfUserId());
+
+            capitalAccount.cancelTransfer(tradeOrderDto.getAmount());
+
+            redPacketAccountRepository.save(capitalAccount);
+        }
+    }
+</code></pre>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>事务的相关信息（全局事务编号，乐观锁版本等要持久化存储）</p>
+<h3 id="资源"><a href="#资源" class="headerlink" title="资源"></a>资源</h3><p>try 核心点：预留资源（业务资源、事务数据资源）</p>
+<h3 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h3><p>注册和初始化事务 -&gt; 组织事务参与者 -&gt; 执行目标方法（try） -&gt; 执行 confirm 和 cancel 方法</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><ul>
+<li>熟悉 TCC-Transaction 的分布式事务处理流程</li>
+<li>TCC-Transaction 不能保证幂等性</li>
+<li>TCC 分布式事务的核心是资源（业务资源和事务资源）</li>
+</ul>
 
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
@@ -686,7 +759,7 @@ public class PaymentServiceImpl {
             <div class="box sticky animated fadeInRight faster">
                 <div id="toc" class="subbox">
                     <h4>目录</h4>
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#章节概要"><span class="toc-number">1.</span> <span class="toc-text">章节概要</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#事务简介"><span class="toc-number">2.</span> <span class="toc-text">事务简介</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#事务属性"><span class="toc-number">2.1.</span> <span class="toc-text">事务属性</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#分布式事务"><span class="toc-number">3.</span> <span class="toc-text">分布式事务</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#概念"><span class="toc-number">3.1.</span> <span class="toc-text">概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实现思路"><span class="toc-number">3.2.</span> <span class="toc-text">实现思路</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#分布式事务类型"><span class="toc-number">4.</span> <span class="toc-text">分布式事务类型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#两段式和三段式事务"><span class="toc-number">4.1.</span> <span class="toc-text">两段式和三段式事务</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#两段式事务"><span class="toc-number">4.1.1.</span> <span class="toc-text">两段式事务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三段式事务"><span class="toc-number">4.1.2.</span> <span class="toc-text">三段式事务</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#基于-XA-的分布式事务"><span class="toc-number">4.2.</span> <span class="toc-text">基于 XA 的分布式事务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#基于消息的一致性方案"><span class="toc-number">4.3.</span> <span class="toc-text">基于消息的一致性方案</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TCC-补偿性事务"><span class="toc-number">4.4.</span> <span class="toc-text">TCC 补偿性事务</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#基于消息的一致性方案和-TCC-补偿性事务的区别"><span class="toc-number">4.4.1.</span> <span class="toc-text">基于消息的一致性方案和 TCC 补偿性事务的区别</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#分布式事务框架"><span class="toc-number">5.</span> <span class="toc-text">分布式事务框架</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#TCC-Transaction-分布式事务框架"><span class="toc-number">6.</span> <span class="toc-text">TCC-Transaction 分布式事务框架</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Demo"><span class="toc-number">6.1.</span> <span class="toc-text">Demo</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#子事务：红包模块"><span class="toc-number">6.1.1.</span> <span class="toc-text">子事务：红包模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#主事务：订单模块"><span class="toc-number">6.1.2.</span> <span class="toc-text">主事务：订单模块</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#流程"><span class="toc-number">6.2.</span> <span class="toc-text">流程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#隐式参数"><span class="toc-number">6.3.</span> <span class="toc-text">隐式参数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#源码分析"><span class="toc-number">6.4.</span> <span class="toc-text">源码分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#事务拦截器"><span class="toc-number">6.4.1.</span> <span class="toc-text">事务拦截器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#调用目标对象"><span class="toc-number">6.4.2.</span> <span class="toc-text">调用目标对象</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#小结"><span class="toc-number">6.5.</span> <span class="toc-text">小结</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#章节概要"><span class="toc-number">1.</span> <span class="toc-text">章节概要</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#事务简介"><span class="toc-number">2.</span> <span class="toc-text">事务简介</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#事务属性"><span class="toc-number">2.1.</span> <span class="toc-text">事务属性</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#分布式事务"><span class="toc-number">3.</span> <span class="toc-text">分布式事务</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#概念"><span class="toc-number">3.1.</span> <span class="toc-text">概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实现思路"><span class="toc-number">3.2.</span> <span class="toc-text">实现思路</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#分布式事务类型"><span class="toc-number">4.</span> <span class="toc-text">分布式事务类型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#两段式和三段式事务"><span class="toc-number">4.1.</span> <span class="toc-text">两段式和三段式事务</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#两段式事务"><span class="toc-number">4.1.1.</span> <span class="toc-text">两段式事务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三段式事务"><span class="toc-number">4.1.2.</span> <span class="toc-text">三段式事务</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#基于-XA-的分布式事务"><span class="toc-number">4.2.</span> <span class="toc-text">基于 XA 的分布式事务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#基于消息的一致性方案"><span class="toc-number">4.3.</span> <span class="toc-text">基于消息的一致性方案</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TCC-补偿性事务"><span class="toc-number">4.4.</span> <span class="toc-text">TCC 补偿性事务</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#基于消息的一致性方案和-TCC-补偿性事务的区别"><span class="toc-number">4.4.1.</span> <span class="toc-text">基于消息的一致性方案和 TCC 补偿性事务的区别</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#分布式事务框架"><span class="toc-number">5.</span> <span class="toc-text">分布式事务框架</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#TCC-Transaction-分布式事务框架"><span class="toc-number">6.</span> <span class="toc-text">TCC-Transaction 分布式事务框架</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#建立用于分布式事务的数据库"><span class="toc-number">6.1.</span> <span class="toc-text">建立用于分布式事务的数据库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Dubbo-Demo"><span class="toc-number">6.2.</span> <span class="toc-text">Dubbo Demo</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#子事务：红包模块"><span class="toc-number">6.2.1.</span> <span class="toc-text">子事务：红包模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#主事务：订单模块"><span class="toc-number">6.2.2.</span> <span class="toc-text">主事务：订单模块</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#流程图"><span class="toc-number">6.3.</span> <span class="toc-text">流程图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#隐式参数"><span class="toc-number">6.4.</span> <span class="toc-text">隐式参数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#源码分析"><span class="toc-number">6.5.</span> <span class="toc-text">源码分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#事务拦截器"><span class="toc-number">6.5.1.</span> <span class="toc-text">事务拦截器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#幂等性问题"><span class="toc-number">6.5.2.</span> <span class="toc-text">幂等性问题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#小结"><span class="toc-number">6.6.</span> <span class="toc-text">小结</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#资源"><span class="toc-number">6.6.1.</span> <span class="toc-text">资源</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#流程"><span class="toc-number">6.6.2.</span> <span class="toc-text">流程</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#总结"><span class="toc-number">7.</span> <span class="toc-text">总结</span></a></li></ol>
                 </div>
             </div>
             
