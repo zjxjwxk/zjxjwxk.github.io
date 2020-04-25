@@ -86,7 +86,7 @@
                 
                 <span>
                     <b class="iconfont icon-text2"></b> <i>文章字数</i>
-                    5.3k
+                    5.4k
                 </span>
                 
                 
@@ -149,17 +149,41 @@ The average of 0 numbers is Undefined
 <li>字符串数组不能开太小，否则会造成 “运行时错误”，即数组越界。实测大小至少为50.</li>
 </ul>
 <h1 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h1><p>来自柳神，不容易想到。运用 sscanf 和 sprintf 后可以方便判断是否为合法数字。利用 sscanf(a, “%lf”, &amp;temp) 将原字符串输入为 double 型，再利用 sprintf(b, “%.2f”,temp) 将该 double 型数字输出为保留两位小数的字符串。之后判断保留两位小数后的字符串和原字符串是否相同，即可判断是否合法。</p>
-<p><code>`</code>　C++</p>
-<p>#include <iostream></iostream></p>
-<p>#include <cstdio></cstdio></p>
-<p>#include &lt;string.h&gt;<br>using namespace std;<br>int main() {<br>    int n, cnt = 0;<br>    char a[50], b[50];<br>    double temp, sum = 0.0;<br>    cin &gt;&gt; n;<br>    for(int i = 0; i &lt; n; i++) {<br>        scanf(“%s”, a);<br>        sscanf(a, “%lf”, &amp;temp);<br>        sprintf(b, “%.2f”,temp);<br>        int flag = 0;<br>        for(int j = 0; j &lt; strlen(a); j++)<br>            if(a[j] != b[j]) flag = 1;<br>        if(flag || temp &lt; -1000 || temp &gt; 1000) {<br>            printf(“ERROR: %s is not a legal number\n”, a);<br>            continue;<br>        } else {<br>            sum += temp;<br>            cnt++;<br>        }<br>    }<br>    if(cnt == 1)<br>        printf(“The average of 1 number is %.2f”, sum);<br>    else if(cnt &gt; 1)<br>        printf(“The average of %d numbers is %.2f”, cnt, sum / cnt);<br>    else<br>        printf(“The average of 0 numbers is Undefined”);<br>    return 0;<br>}</p>
-<pre><code>
-# 方法二
-
-我的方法比较笨，但最直接，思路简单，就是直接遍历原字符串的每个字符，判断是否合法。
-
-```C++
+<pre><code class="C++">#include &lt;iostream&gt;
 #include &lt;cstdio&gt;
+#include &lt;string.h&gt;
+using namespace std;
+int main() {
+    int n, cnt = 0;
+    char a[50], b[50];
+    double temp, sum = 0.0;
+    cin &gt;&gt; n;
+    for(int i = 0; i &lt; n; i++) {
+        scanf(&quot;%s&quot;, a);
+        sscanf(a, &quot;%lf&quot;, &amp;temp);
+        sprintf(b, &quot;%.2f&quot;,temp);
+        int flag = 0;
+        for(int j = 0; j &lt; strlen(a); j++)
+            if(a[j] != b[j]) flag = 1;
+        if(flag || temp &lt; -1000 || temp &gt; 1000) {
+            printf(&quot;ERROR: %s is not a legal number\n&quot;, a);
+            continue;
+        } else {
+            sum += temp;
+            cnt++;
+        }
+    }
+    if(cnt == 1)
+        printf(&quot;The average of 1 number is %.2f&quot;, sum);
+    else if(cnt &gt; 1)
+        printf(&quot;The average of %d numbers is %.2f&quot;, cnt, sum / cnt);
+    else
+        printf(&quot;The average of 0 numbers is Undefined&quot;);
+    return 0;
+}
+</code></pre>
+<h1 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h1><p>我的方法比较笨，但最直接，思路简单，就是直接遍历原字符串的每个字符，判断是否合法。</p>
+<pre><code class="C++">#include &lt;cstdio&gt;
 #include &lt;cstring&gt;
 #include &lt;string&gt;
 using namespace std;
@@ -206,6 +230,7 @@ int main() {
     return 0;
 }
 </code></pre>
+
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
                 <source type="audio/mpeg" src="">
@@ -248,7 +273,7 @@ int main() {
             <div class="box sticky animated fadeInRight faster">
                 <div id="toc" class="subbox">
                     <h4>目录</h4>
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Input-Specification"><span class="toc-number">1.</span> <span class="toc-text">Input Specification:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Output-Specification"><span class="toc-number">2.</span> <span class="toc-text">Output Specification:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Sample-Input-1"><span class="toc-number">3.</span> <span class="toc-text">Sample Input 1:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Sample-Output-1"><span class="toc-number">4.</span> <span class="toc-text">Sample Output 1:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Sample-Input-2"><span class="toc-number">5.</span> <span class="toc-text">Sample Input 2:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Sample-Output-2"><span class="toc-number">6.</span> <span class="toc-text">Sample Output 2:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#注意点"><span class="toc-number">7.</span> <span class="toc-text">注意点</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#方法一"><span class="toc-number">8.</span> <span class="toc-text">方法一</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Input-Specification"><span class="toc-number">1.</span> <span class="toc-text">Input Specification:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Output-Specification"><span class="toc-number">2.</span> <span class="toc-text">Output Specification:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Sample-Input-1"><span class="toc-number">3.</span> <span class="toc-text">Sample Input 1:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Sample-Output-1"><span class="toc-number">4.</span> <span class="toc-text">Sample Output 1:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Sample-Input-2"><span class="toc-number">5.</span> <span class="toc-text">Sample Input 2:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Sample-Output-2"><span class="toc-number">6.</span> <span class="toc-text">Sample Output 2:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#注意点"><span class="toc-number">7.</span> <span class="toc-text">注意点</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#方法一"><span class="toc-number">8.</span> <span class="toc-text">方法一</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#方法二"><span class="toc-number">9.</span> <span class="toc-text">方法二</span></a></li></ol>
                 </div>
             </div>
             
