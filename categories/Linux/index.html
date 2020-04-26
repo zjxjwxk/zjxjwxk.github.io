@@ -125,26 +125,26 @@
             <a href="/categories/Linux"><b>「
                 </b>LINUX<b> 」</b></a>
             
-            一月 30, 2019
+            四月 27, 2020
         </p>
         <h3 class="post-title animated fadeInDown">
-            <a href="/2019/01/30/Linux/CentOS/CentOS jar包后台运行/" title="CentOS jar包后台运行" class="posttitle">CentOS jar包后台运行</a></h3>
+            <a href="/2020/04/27/Linux/MacOS/Terminal 终端代理加速/" title="Terminal 终端代理加速" class="posttitle">Terminal 终端代理加速</a></h3>
         
         <p class="post-count animated fadeInDown">
             
             <span>
                 <b class="iconfont icon-text2"></b> <i>文章字数</i>
-                1.6k
+                2k
             </span>
             
             
             <span>
                 <b class="iconfont icon-timer__s"></b> <i>阅读约需</i>
-                1 mins.
+                2 mins.
             </span>
             
             
-            <span id="/2019/01/30/Linux/CentOS/CentOS jar包后台运行/" class="leancloud_visitors" data-flag-title="">
+            <span id="/2020/04/27/Linux/MacOS/Terminal 终端代理加速/" class="leancloud_visitors" data-flag-title="">
                 <b class="iconfont icon-read"></b> <i>阅读次数</i>
                 <span class="leancloud-visitors-count">-</span>
             </span>
@@ -152,15 +152,18 @@
         </p>
         
         
-        <ul class="animated fadeInDown post-tags-list"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/CentOS/">CentOS</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/Java/">Java</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/Linux/">Linux</a></li></ul>
+        <ul class="animated fadeInDown post-tags-list"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/Linux/">Linux</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/MacOS/">MacOS</a></li></ul>
         
         <div class="md-content animated fadeIn">
             
-            <pre><code class="shell">java -jar application.jar
+            <p>在终端中直接运行命令</p>
+<pre><code class="shell">export http_proxy=http://proxyAddres.s:port
 </code></pre>
-<p>当前ssh窗口被锁定，可按CTRL + C打断...</p>
+<p>这个办法的好处是简单直接，并且影响面很小（只对当前终端有效，退出就不行了）。</p>
+<p>如果你用的是 s.s 代理，在当前终端运行以下命令，那么<code>wget</code> <code>curl</code> 这类网络命令都会经过 s.s 代理，port 端口号可以从 s.s 高级设置中查看，我的是1086。</p>
+<pre><code class="shell">export ALL_PROXY...</code></pre>
             
-            <span class="read-more"><a href="/2019/01/30/Linux/CentOS/CentOS jar包后台运行/" title="查看全文" class="posttitle">查看全文</a>
+            <span class="read-more"><a href="/2020/04/27/Linux/MacOS/Terminal 终端代理加速/" title="查看全文" class="posttitle">查看全文</a>
                 <b class="iconfont icon-arrow-right- gradient-text"></b></span>
         </div>
     </div>
@@ -181,6 +184,68 @@
 
     <div id="primary">
         
+<div class="post" id="post">
+    <div class="post-cover animated fadeIn" style="
+            background-image:
+            radial-gradient(ellipse closest-side, rgba(0, 0, 0, 0.65), #100e17),
+            url(/img/welcome-cover.jpg);">
+    </div>
+    <div class="else">
+        <p class="animated fadeInDown">
+            
+                <a href="/categories/Linux">
+                  <b>「 </b>LINUX<b> 」</b>
+                </a>
+            
+            一月 30, 2019
+        </p>
+        <h3 class="post-title animated fadeInDown"><a href="/2019/01/30/Linux/CentOS/CentOS jar包后台运行/" title="CentOS jar包后台运行" class="posttitle">CentOS jar包后台运行</a></h3>
+        
+            <p class="post-count animated fadeInDown">
+                
+                    <span>
+                        <b class="iconfont icon-text2"></b> <i>文章字数</i>
+                        1.6k
+                    </span>
+                
+                
+                    <span>
+                        <b class="iconfont icon-timer__s"></b> <i>阅读约需</i>
+                        1 mins.
+                    </span>
+                
+                
+                    <span id="/2019/01/30/Linux/CentOS/CentOS jar包后台运行/" class="leancloud_visitors" data-flag-title="">
+                        <b class="iconfont icon-read"></b> <i>阅读次数</i>
+                        <span class="leancloud-visitors-count">-</span>
+                    </span>
+                
+            </p>
+            
+                <ul class="animated fadeInDown post-tags-list"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/CentOS/">CentOS</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/Java/">Java</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/Linux/">Linux</a></li></ul>
+            
+        
+        <div class="md-content animated fadeIn">
+            
+                <pre><code class="shell">java -jar application.jar
+</code></pre>
+<p>当前ssh窗口被锁定，可按CTRL + C打断程序运行，或直接关闭窗口让程序退出。</p>
+<p>那如何让窗口不被锁定？</p>
+<pre><code class="shell">java -jar application.jar &amp;
+</code></pre>
+<p>&amp;代表在后台运行。</p>
+<p>当前ssh窗口不被锁定，但是当窗口关闭时，程序中止运行。</p>
+<p>继续改进，如何让窗口关闭时，程序仍然运行？</p>
+<pre><code class="shell">nohup java -jar application.jar &amp;
+</code></pre>
+<p>nohup 意思是不挂断运行命令,当账户退出或终端关闭时,程序仍...</p>
+            
+            <span class="read-more"><a href="/2019/01/30/Linux/CentOS/CentOS jar包后台运行/" title="查看全文" class="posttitle">查看全文</a> <b class="iconfont icon-arrow-right- gradient-text"></b></span>
+        </div>
+    </div>
+</div>
+
+
 <div class="post" id="post">
     <div class="post-cover animated fadeIn" style="
             background-image:

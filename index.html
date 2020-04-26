@@ -122,19 +122,19 @@
     <div id="post0" class="else">
         <p class="animated fadeInDown">
             
-            <a href="/categories/Dubbo"><b>「
-                </b>DUBBO<b> 」</b></a>
+            <a href="/categories/Linux"><b>「
+                </b>LINUX<b> 」</b></a>
             
-            四月 24, 2020
+            四月 27, 2020
         </p>
         <h3 class="post-title animated fadeInDown">
-            <a href="/2020/04/24/Dubbo/Dubbo微服务影院系列/11.服务监控/Dubbo微服务影院系列（11）：服务监控/" title="Dubbo微服务影院系列（11）：服务监控" class="posttitle">Dubbo微服务影院系列（11）：服务监控</a></h3>
+            <a href="/2020/04/27/Linux/MacOS/Terminal 终端代理加速/" title="Terminal 终端代理加速" class="posttitle">Terminal 终端代理加速</a></h3>
         
         <p class="post-count animated fadeInDown">
             
             <span>
                 <b class="iconfont icon-text2"></b> <i>文章字数</i>
-                2.6k
+                2k
             </span>
             
             
@@ -144,7 +144,7 @@
             </span>
             
             
-            <span id="/2020/04/24/Dubbo/Dubbo微服务影院系列/11.服务监控/Dubbo微服务影院系列（11）：服务监控/" class="leancloud_visitors" data-flag-title="">
+            <span id="/2020/04/27/Linux/MacOS/Terminal 终端代理加速/" class="leancloud_visitors" data-flag-title="">
                 <b class="iconfont icon-read"></b> <i>阅读次数</i>
                 <span class="leancloud-visitors-count">-</span>
             </span>
@@ -152,23 +152,18 @@
         </p>
         
         
-        <ul class="animated fadeInDown post-tags-list"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/Dubbo/">Dubbo</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/微服务架构/">微服务架构</a></li></ul>
+        <ul class="animated fadeInDown post-tags-list"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/Linux/">Linux</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/MacOS/">MacOS</a></li></ul>
         
         <div class="md-content animated fadeIn">
             
-            <ul>
-<li>了解 Dubbo 监控相关内容</li>
-<li>熟练掌握 Dubbo-admin 使用</li>
-<li>熟练掌握链路监控</li>
-<li>完成业务系统部署</li>
-</ul>
-<p></p>
-<p>目前，还可以从当当网的项目 Dubbox 中获取：<a href="https://github.com/dangdangdotcom/dubbox" target="_blank" rel="noopener">https://github.com/dangdangdotcom/dubbox</a> ，在项目中执行以下命令打包并拷贝到本地仓库（跳过单元测试）：</p>
-<pre><code class="shell">mvn package -Dmaven.test.skip=true  
+            <p>在终端中直接运行命令</p>
+<pre><code class="shell">export http_proxy=http://proxyAddres.s:port
 </code></pre>
-<p>其中，可能会遇到 Missing...</p>
+<p>这个办法的好处是简单直接，并且影响面很小（只对当前终端有效，退出就不行了）。</p>
+<p>如果你用的是 s.s 代理，在当前终端运行以下命令，那么<code>wget</code> <code>curl</code> 这类网络命令都会经过 s.s 代理，port 端口号可以从 s.s 高级设置中查看，我的是1086。</p>
+<pre><code class="shell">export ALL_PROXY...</code></pre>
             
-            <span class="read-more"><a href="/2020/04/24/Dubbo/Dubbo微服务影院系列/11.服务监控/Dubbo微服务影院系列（11）：服务监控/" title="查看全文" class="posttitle">查看全文</a>
+            <span class="read-more"><a href="/2020/04/27/Linux/MacOS/Terminal 终端代理加速/" title="查看全文" class="posttitle">查看全文</a>
                 <b class="iconfont icon-arrow-right- gradient-text"></b></span>
         </div>
     </div>
@@ -189,6 +184,67 @@
 
     <div id="primary">
         
+<div class="post" id="post">
+    <div class="post-cover animated fadeIn" style="
+            background-image:
+            radial-gradient(ellipse closest-side, rgba(0, 0, 0, 0.65), #100e17),
+            url(/img/welcome-cover.jpg);">
+    </div>
+    <div class="else">
+        <p class="animated fadeInDown">
+            
+                <a href="/categories/Dubbo">
+                  <b>「 </b>DUBBO<b> 」</b>
+                </a>
+            
+            四月 24, 2020
+        </p>
+        <h3 class="post-title animated fadeInDown"><a href="/2020/04/24/Dubbo/Dubbo微服务影院系列/11.服务监控/Dubbo微服务影院系列（11）：服务监控/" title="Dubbo微服务影院系列（11）：服务监控" class="posttitle">Dubbo微服务影院系列（11）：服务监控</a></h3>
+        
+            <p class="post-count animated fadeInDown">
+                
+                    <span>
+                        <b class="iconfont icon-text2"></b> <i>文章字数</i>
+                        2.9k
+                    </span>
+                
+                
+                    <span>
+                        <b class="iconfont icon-timer__s"></b> <i>阅读约需</i>
+                        3 mins.
+                    </span>
+                
+                
+                    <span id="/2020/04/24/Dubbo/Dubbo微服务影院系列/11.服务监控/Dubbo微服务影院系列（11）：服务监控/" class="leancloud_visitors" data-flag-title="">
+                        <b class="iconfont icon-read"></b> <i>阅读次数</i>
+                        <span class="leancloud-visitors-count">-</span>
+                    </span>
+                
+            </p>
+            
+                <ul class="animated fadeInDown post-tags-list"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/Dubbo/">Dubbo</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/微服务架构/">微服务架构</a></li></ul>
+            
+        
+        <div class="md-content animated fadeIn">
+            
+                <ul>
+<li>了解 Dubbo 监控相关内容</li>
+<li>熟练掌握 Dubbo-admin 使用</li>
+<li>熟练掌握链路监控</li>
+<li>完成业务系统部署</li>
+</ul>
+<p></p>
+<p>目前，还可以从当当网的项目 Dubbox 中获取：<a href="https://github.com/dangdangdotcom/dubbox" target="_blank" rel="noopener">https://github.com/dangdangdotcom/dubbox</a> ，在项目中执行以下命令打包并拷贝到本地仓库（跳过单元测试）：</p>
+<pre><code class="shell">mvn package -Dmaven.test.skip=true  
+</code></pre>
+<p>其中，可能会遇到 Missing artifact com.alibaba:dubbo:jar:2.8.4 的坑，需要在...</p>
+            
+            <span class="read-more"><a href="/2020/04/24/Dubbo/Dubbo微服务影院系列/11.服务监控/Dubbo微服务影院系列（11）：服务监控/" title="查看全文" class="posttitle">查看全文</a> <b class="iconfont icon-arrow-right- gradient-text"></b></span>
+        </div>
+    </div>
+</div>
+
+
 <div class="post" id="post">
     <div class="post-cover animated fadeIn" style="
             background-image:
@@ -641,57 +697,6 @@
                 <p>It is vitally important to have all the cities connected by highways in a war. If a city is occupied by the enemy, all the highways from/toward that city are closed. We must know immediately if we need to repair any other highways to keep the rest of...</p>
             
             <span class="read-more"><a href="/2020/04/09/PAT/Advanced_Level/A1013/" title="查看全文" class="posttitle">查看全文</a> <b class="iconfont icon-arrow-right- gradient-text"></b></span>
-        </div>
-    </div>
-</div>
-
-
-<div class="post" id="post">
-    <div class="post-cover animated fadeIn" style="
-            background-image:
-            radial-gradient(ellipse closest-side, rgba(0, 0, 0, 0.65), #100e17),
-            url(/img/welcome-cover.jpg);">
-    </div>
-    <div class="else">
-        <p class="animated fadeInDown">
-            
-                <a href="/categories/PAT">
-                  <b>「 </b>PAT<b> 」</b>
-                </a>
-            
-            四月 07, 2020
-        </p>
-        <h3 class="post-title animated fadeInDown"><a href="/2020/04/07/PAT/Advanced_Level/A1032/" title="PAT甲级 1032 Sharing (25分)" class="posttitle">PAT甲级 1032 Sharing (25分)</a></h3>
-        
-            <p class="post-count animated fadeInDown">
-                
-                    <span>
-                        <b class="iconfont icon-text2"></b> <i>文章字数</i>
-                        3.7k
-                    </span>
-                
-                
-                    <span>
-                        <b class="iconfont icon-timer__s"></b> <i>阅读约需</i>
-                        3 mins.
-                    </span>
-                
-                
-                    <span id="/2020/04/07/PAT/Advanced_Level/A1032/" class="leancloud_visitors" data-flag-title="">
-                        <b class="iconfont icon-read"></b> <i>阅读次数</i>
-                        <span class="leancloud-visitors-count">-</span>
-                    </span>
-                
-            </p>
-            
-                <ul class="animated fadeInDown post-tags-list"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/PAT/">PAT</a></li></ul>
-            
-        
-        <div class="md-content animated fadeIn">
-            
-                <p>To store English words, one method is to use linked lists and store a word letter by letter. To save some space, we may let the words share the same sublist if they share the same suffix. For example, <code>loading</code> and <code>being</code> are stored as showed in Figure ...</p>
-            
-            <span class="read-more"><a href="/2020/04/07/PAT/Advanced_Level/A1032/" title="查看全文" class="posttitle">查看全文</a> <b class="iconfont icon-arrow-right- gradient-text"></b></span>
         </div>
     </div>
 </div>

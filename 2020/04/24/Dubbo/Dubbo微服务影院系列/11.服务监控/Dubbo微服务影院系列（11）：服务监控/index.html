@@ -16,8 +16,8 @@
 熟练掌握链路监控
 完成业务系统部署
 
-Dubbo-Monitor
-源码下载目前，还可以从当当网的项目 Dubbox ,"> 
+Dubbo-monitor
+源码下载和打包目前，还可以从当当网的项目 Dubb,"> 
     <meta name="author" content="吴鑫康"> 
     <link rel="alternative" href="atom.xml" title="Zjxjwxk&#39;s Blog" type="application/atom+xml"> 
     <link rel="icon" href="/img/favicon.png"> 
@@ -93,13 +93,13 @@ Dubbo-Monitor
                 
                 <span>
                     <b class="iconfont icon-text2"></b> <i>文章字数</i>
-                    2.6k
+                    2.9k
                 </span>
                 
                 
                 <span>
                     <b class="iconfont icon-timer__s"></b> <i>阅读约需</i>
-                    2 mins.
+                    3 mins.
                 </span>
                 
                 
@@ -139,15 +139,15 @@ Dubbo-Monitor
 <li>熟练掌握链路监控</li>
 <li>完成业务系统部署</li>
 </ul>
-<h1 id="Dubbo-Monitor"><a href="#Dubbo-Monitor" class="headerlink" title="Dubbo-Monitor"></a>Dubbo-Monitor</h1><p><img src="/2020/04/24/Dubbo/Dubbo微服务影院系列/11.服务监控/Dubbo微服务影院系列（11）：服务监控/image-20200424231550404.png" alt="Dubbo架构"></p>
-<h2 id="源码下载"><a href="#源码下载" class="headerlink" title="源码下载"></a>源码下载</h2><p>目前，还可以从当当网的项目 Dubbox 中获取：<a href="https://github.com/dangdangdotcom/dubbox" target="_blank" rel="noopener">https://github.com/dangdangdotcom/dubbox</a> ，在项目中执行以下命令打包并拷贝到本地仓库（跳过单元测试）：</p>
+<h1 id="Dubbo-monitor"><a href="#Dubbo-monitor" class="headerlink" title="Dubbo-monitor"></a>Dubbo-monitor</h1><p><img src="/2020/04/24/Dubbo/Dubbo微服务影院系列/11.服务监控/Dubbo微服务影院系列（11）：服务监控/image-20200424231550404.png" alt="Dubbo架构"></p>
+<h2 id="源码下载和打包"><a href="#源码下载和打包" class="headerlink" title="源码下载和打包"></a>源码下载和打包</h2><p>目前，还可以从当当网的项目 Dubbox 中获取：<a href="https://github.com/dangdangdotcom/dubbox" target="_blank" rel="noopener">https://github.com/dangdangdotcom/dubbox</a> ，在项目中执行以下命令打包并拷贝到本地仓库（跳过单元测试）：</p>
 <pre><code class="shell">mvn package -Dmaven.test.skip=true  
 </code></pre>
 <p>其中，可能会遇到 Missing artifact com.alibaba:dubbo:jar:2.8.4 的坑，需要在根项目的 pom.xml 文件中添加以下 maven 插件：</p>
 <p><img src="/2020/04/24/Dubbo/Dubbo微服务影院系列/11.服务监控/Dubbo微服务影院系列（11）：服务监控/image-20200425004851922.png" alt="添加插件依赖"></p>
 <p>这样在本地仓库就有了 ~/.m2/repository/com/alibaba/dubbo-monitor-simple/2.8.4/dubbo-monitor-simple-2.8.4-assembly.tar.gz 这个 tar.gz 包，解压它可以得到以下文件：</p>
 <p><img src="/2020/04/24/Dubbo/Dubbo微服务影院系列/11.服务监控/Dubbo微服务影院系列（11）：服务监控/image-20200425004950736.png" alt="Dubbo-Monitor文件目录"></p>
-<p>在 conf 文件夹下，编辑 dubbo.properties，将相关参数配置如下：</p>
+<h2 id="启动服务监控"><a href="#启动服务监控" class="headerlink" title="启动服务监控"></a>启动服务监控</h2><p>在 conf 文件夹下，编辑 dubbo.properties，将相关参数配置如下：</p>
 <pre><code class="properties">dubbo.container=log4j,spring,registry,jetty
 dubbo.application.name=simple-monitor
 dubbo.application.owner=
@@ -171,6 +171,9 @@ dubbo.log4j.level=WARN
 <p><img src="/2020/04/24/Dubbo/Dubbo微服务影院系列/11.服务监控/Dubbo微服务影院系列（11）：服务监控/image-20200425010858667.png" alt="服务提供者详细信息"></p>
 <p>取消注册后，服务消费者将不能够调用该提供者的服务：</p>
 <p><img src="/2020/04/24/Dubbo/Dubbo微服务影院系列/11.服务监控/Dubbo微服务影院系列（11）：服务监控/image-20200425011020489.png" alt="提供者取消注册"></p>
+<h1 id="Dubbo-admin"><a href="#Dubbo-admin" class="headerlink" title="Dubbo-admin"></a>Dubbo-admin</h1><h2 id="Admin-版本"><a href="#Admin-版本" class="headerlink" title="Admin 版本"></a>Admin 版本</h2><ul>
+<li>Dubbo 原生的 admin 工程</li>
+</ul>
 
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
@@ -203,9 +206,9 @@ dubbo.log4j.level=WARN
                     </dl>
                 </div>
                 <ul>
-                    <li><a href="/">58 <p>文章</p></a></li>
+                    <li><a href="/">59 <p>文章</p></a></li>
                     <li><a href="/categories">21 <p>分类</p></a></li>
-                    <li><a href="/tags">13 <p>标签</p></a></li>
+                    <li><a href="/tags">14 <p>标签</p></a></li>
                 </ul>
             </div>
             
@@ -214,7 +217,7 @@ dubbo.log4j.level=WARN
             <div class="box sticky animated fadeInRight faster">
                 <div id="toc" class="subbox">
                     <h4>目录</h4>
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#章节概要"><span class="toc-number">1.</span> <span class="toc-text">章节概要</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Dubbo-Monitor"><span class="toc-number">2.</span> <span class="toc-text">Dubbo-Monitor</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#源码下载"><span class="toc-number">2.1.</span> <span class="toc-text">源码下载</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#章节概要"><span class="toc-number">1.</span> <span class="toc-text">章节概要</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Dubbo-monitor"><span class="toc-number">2.</span> <span class="toc-text">Dubbo-monitor</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#源码下载和打包"><span class="toc-number">2.1.</span> <span class="toc-text">源码下载和打包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#启动服务监控"><span class="toc-number">2.2.</span> <span class="toc-text">启动服务监控</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Dubbo-admin"><span class="toc-number">3.</span> <span class="toc-text">Dubbo-admin</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Admin-版本"><span class="toc-number">3.1.</span> <span class="toc-text">Admin 版本</span></a></li></ol></li></ol>
                 </div>
             </div>
             
