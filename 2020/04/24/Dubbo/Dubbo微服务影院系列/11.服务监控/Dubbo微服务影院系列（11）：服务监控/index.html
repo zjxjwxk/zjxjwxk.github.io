@@ -93,7 +93,7 @@ Dubbo-monitor
                 
                 <span>
                     <b class="iconfont icon-text2"></b> <i>文章字数</i>
-                    2.9k
+                    3.5k
                 </span>
                 
                 
@@ -171,9 +171,22 @@ dubbo.log4j.level=WARN
 <p><img src="/2020/04/24/Dubbo/Dubbo微服务影院系列/11.服务监控/Dubbo微服务影院系列（11）：服务监控/image-20200425010858667.png" alt="服务提供者详细信息"></p>
 <p>取消注册后，服务消费者将不能够调用该提供者的服务：</p>
 <p><img src="/2020/04/24/Dubbo/Dubbo微服务影院系列/11.服务监控/Dubbo微服务影院系列（11）：服务监控/image-20200425011020489.png" alt="提供者取消注册"></p>
-<h1 id="Dubbo-admin"><a href="#Dubbo-admin" class="headerlink" title="Dubbo-admin"></a>Dubbo-admin</h1><h2 id="Admin-版本"><a href="#Admin-版本" class="headerlink" title="Admin 版本"></a>Admin 版本</h2><ul>
-<li>Dubbo 原生的 admin 工程</li>
+<h1 id="Dubbo-admin"><a href="#Dubbo-admin" class="headerlink" title="Dubbo-admin"></a>Dubbo-admin</h1><blockquote>
+<p>官方文档：<a href="https://dubbo.apache.org/zh-cn/docs/admin/introduction.html" target="_blank" rel="noopener">https://dubbo.apache.org/zh-cn/docs/admin/introduction.html</a></p>
+</blockquote>
+<h2 id="Maven方式部署"><a href="#Maven方式部署" class="headerlink" title="Maven方式部署"></a>Maven方式部署</h2><ul>
+<li>安装</li>
 </ul>
+<pre><code class="sh">git clone https://github.com/apache/dubbo-admin.git
+cd dubbo-admin
+mvn clean package
+cd dubbo-admin-distribution/target
+java -jar dubbo-admin-0.1.jar
+</code></pre>
+<ul>
+<li>访问<br><a href="http://localhost:8080/" target="_blank" rel="noopener">http://localhost:8080</a></li>
+</ul>
+<p><img src="/2020/04/24/Dubbo/Dubbo微服务影院系列/11.服务监控/Dubbo微服务影院系列（11）：服务监控/image-20200427003703064.png" alt="Dubbo Admin界面"></p>
 
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
@@ -217,7 +230,7 @@ dubbo.log4j.level=WARN
             <div class="box sticky animated fadeInRight faster">
                 <div id="toc" class="subbox">
                     <h4>目录</h4>
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#章节概要"><span class="toc-number">1.</span> <span class="toc-text">章节概要</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Dubbo-monitor"><span class="toc-number">2.</span> <span class="toc-text">Dubbo-monitor</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#源码下载和打包"><span class="toc-number">2.1.</span> <span class="toc-text">源码下载和打包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#启动服务监控"><span class="toc-number">2.2.</span> <span class="toc-text">启动服务监控</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Dubbo-admin"><span class="toc-number">3.</span> <span class="toc-text">Dubbo-admin</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Admin-版本"><span class="toc-number">3.1.</span> <span class="toc-text">Admin 版本</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#章节概要"><span class="toc-number">1.</span> <span class="toc-text">章节概要</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Dubbo-monitor"><span class="toc-number">2.</span> <span class="toc-text">Dubbo-monitor</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#源码下载和打包"><span class="toc-number">2.1.</span> <span class="toc-text">源码下载和打包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#启动服务监控"><span class="toc-number">2.2.</span> <span class="toc-text">启动服务监控</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Dubbo-admin"><span class="toc-number">3.</span> <span class="toc-text">Dubbo-admin</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Maven方式部署"><span class="toc-number">3.1.</span> <span class="toc-text">Maven方式部署</span></a></li></ol></li></ol>
                 </div>
             </div>
             
