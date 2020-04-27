@@ -93,13 +93,13 @@ Dubbo-monitor
                 
                 <span>
                     <b class="iconfont icon-text2"></b> <i>文章字数</i>
-                    3.5k
+                    5.3k
                 </span>
                 
                 
                 <span>
                     <b class="iconfont icon-timer__s"></b> <i>阅读约需</i>
-                    3 mins.
+                    5 mins.
                 </span>
                 
                 
@@ -140,7 +140,7 @@ Dubbo-monitor
 <li>完成业务系统部署</li>
 </ul>
 <h1 id="Dubbo-monitor"><a href="#Dubbo-monitor" class="headerlink" title="Dubbo-monitor"></a>Dubbo-monitor</h1><p><img src="/2020/04/24/Dubbo/Dubbo微服务影院系列/11.服务监控/Dubbo微服务影院系列（11）：服务监控/image-20200424231550404.png" alt="Dubbo架构"></p>
-<h2 id="源码下载和打包"><a href="#源码下载和打包" class="headerlink" title="源码下载和打包"></a>源码下载和打包</h2><p>目前，还可以从当当网的项目 Dubbox 中获取：<a href="https://github.com/dangdangdotcom/dubbox" target="_blank" rel="noopener">https://github.com/dangdangdotcom/dubbox</a> ，在项目中执行以下命令打包并拷贝到本地仓库（跳过单元测试）：</p>
+<h2 id="源码下载和打包"><a href="#源码下载和打包" class="headerlink" title="源码下载和打包"></a>源码下载和打包</h2><p>目前，还可以从当当网的项目 Dubbox 中获取（很久没有维护了）：<a href="https://github.com/dangdangdotcom/dubbox" target="_blank" rel="noopener">https://github.com/dangdangdotcom/dubbox</a> ，在项目中执行以下命令打包并拷贝到本地仓库（跳过单元测试）：</p>
 <pre><code class="shell">mvn package -Dmaven.test.skip=true  
 </code></pre>
 <p>其中，可能会遇到 Missing artifact com.alibaba:dubbo:jar:2.8.4 的坑，需要在根项目的 pom.xml 文件中添加以下 maven 插件：</p>
@@ -171,10 +171,15 @@ dubbo.log4j.level=WARN
 <p><img src="/2020/04/24/Dubbo/Dubbo微服务影院系列/11.服务监控/Dubbo微服务影院系列（11）：服务监控/image-20200425010858667.png" alt="服务提供者详细信息"></p>
 <p>取消注册后，服务消费者将不能够调用该提供者的服务：</p>
 <p><img src="/2020/04/24/Dubbo/Dubbo微服务影院系列/11.服务监控/Dubbo微服务影院系列（11）：服务监控/image-20200425011020489.png" alt="提供者取消注册"></p>
-<h1 id="Dubbo-admin"><a href="#Dubbo-admin" class="headerlink" title="Dubbo-admin"></a>Dubbo-admin</h1><blockquote>
+<h1 id="Dubbo-admin"><a href="#Dubbo-admin" class="headerlink" title="Dubbo-admin"></a>Dubbo-admin</h1><p>现在有两种版本：</p>
+<ul>
+<li>Dubbo 原生的 admin 工程</li>
+<li>Apache 修正版</li>
+</ul>
+<h2 id="Apache-修正版"><a href="#Apache-修正版" class="headerlink" title="Apache 修正版"></a>Apache 修正版</h2><blockquote>
 <p>官方文档：<a href="https://dubbo.apache.org/zh-cn/docs/admin/introduction.html" target="_blank" rel="noopener">https://dubbo.apache.org/zh-cn/docs/admin/introduction.html</a></p>
 </blockquote>
-<h2 id="Maven方式部署"><a href="#Maven方式部署" class="headerlink" title="Maven方式部署"></a>Maven方式部署</h2><ul>
+<h3 id="Maven方式部署"><a href="#Maven方式部署" class="headerlink" title="Maven方式部署"></a>Maven方式部署</h3><ul>
 <li>安装</li>
 </ul>
 <pre><code class="sh">git clone https://github.com/apache/dubbo-admin.git
@@ -186,7 +191,23 @@ java -jar dubbo-admin-0.1.jar
 <ul>
 <li>访问<br><a href="http://localhost:8080/" target="_blank" rel="noopener">http://localhost:8080</a></li>
 </ul>
-<p><img src="/2020/04/24/Dubbo/Dubbo微服务影院系列/11.服务监控/Dubbo微服务影院系列（11）：服务监控/image-20200427003703064.png" alt="Dubbo Admin界面"></p>
+<p><img src="/2020/04/24/Dubbo/Dubbo微服务影院系列/11.服务监控/Dubbo微服务影院系列（11）：服务监控/image-20200427003703064.png" alt="Apache修正版界面"></p>
+<h2 id="Dubbo-原生"><a href="#Dubbo-原生" class="headerlink" title="Dubbo 原生"></a>Dubbo 原生</h2><p>现在很少能找到，但目前还能在当当网的 dubbox 项目中找到，打包当当网的 dubbox 项目后，可以在 dubbo-admin 模块下找到其 war 包。</p>
+<p><img src="/2020/04/24/Dubbo/Dubbo微服务影院系列/11.服务监控/Dubbo微服务影院系列（11）：服务监控/image-20200427201627442.png" alt="war包"></p>
+<p>将其放到 tomcat 目录的 webapps 下，启动 tomcat 即可在默认的 8080 端口访问到 Dubbo-admin 的界面，<a href="http://localhost:8080/dubbo-admin" target="_blank" rel="noopener">http://localhost:8080/dubbo-admin</a> ，dubbo-admin 为 war 包名称。默认 root 的登录密码为 root，可以在 WEB-INF 中的 dubbo.properties 中配置。</p>
+<p><img src="/2020/04/24/Dubbo/Dubbo微服务影院系列/11.服务监控/Dubbo微服务影院系列（11）：服务监控/image-20200427201911136.png" alt="Dubbo原生界面"></p>
+<p>可以在服务治理的服务中查看所有服务，点击服务名可以查看该服务的提供者、消费者等详细信息。</p>
+<h3 id="服务提供者"><a href="#服务提供者" class="headerlink" title="服务提供者"></a>服务提供者</h3><p>可以对其提供者进行权重修改（用于 Dubbo 的负载均衡特性），权重越高越容易被调用。也可以禁用某一台机器的服务，消费者将不会对其进行调用。</p>
+<p><img src="/2020/04/24/Dubbo/Dubbo微服务影院系列/11.服务监控/Dubbo微服务影院系列（11）：服务监控/image-20200427202649454.png" alt="服务提供者"></p>
+<h3 id="服务消费者"><a href="#服务消费者" class="headerlink" title="服务消费者"></a>服务消费者</h3><p>可以对服务消费者进行静止、屏蔽和容错。</p>
+<ul>
+<li>若禁止某一台消费者，则该消费者调用时将会抛出异常。</li>
+<li>若屏蔽某一台消费者，则该消费者将不会进行远程调用，并且直接返回空对象。</li>
+<li>若对某一台消费者开启容错，则报任何错误时都会返回一个空对象。</li>
+</ul>
+<p><img src="/2020/04/24/Dubbo/Dubbo微服务影院系列/11.服务监控/Dubbo微服务影院系列（11）：服务监控/image-20200427204820304.png" alt="服务消费者"></p>
+<h3 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h3><p>可以查看所有应用，包括提供者和消费者。</p>
+<p><img src="/2020/04/24/Dubbo/Dubbo微服务影院系列/11.服务监控/Dubbo微服务影院系列（11）：服务监控/image-20200427205426151.png" alt="应用"></p>
 
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
@@ -230,7 +251,7 @@ java -jar dubbo-admin-0.1.jar
             <div class="box sticky animated fadeInRight faster">
                 <div id="toc" class="subbox">
                     <h4>目录</h4>
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#章节概要"><span class="toc-number">1.</span> <span class="toc-text">章节概要</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Dubbo-monitor"><span class="toc-number">2.</span> <span class="toc-text">Dubbo-monitor</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#源码下载和打包"><span class="toc-number">2.1.</span> <span class="toc-text">源码下载和打包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#启动服务监控"><span class="toc-number">2.2.</span> <span class="toc-text">启动服务监控</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Dubbo-admin"><span class="toc-number">3.</span> <span class="toc-text">Dubbo-admin</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Maven方式部署"><span class="toc-number">3.1.</span> <span class="toc-text">Maven方式部署</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#章节概要"><span class="toc-number">1.</span> <span class="toc-text">章节概要</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Dubbo-monitor"><span class="toc-number">2.</span> <span class="toc-text">Dubbo-monitor</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#源码下载和打包"><span class="toc-number">2.1.</span> <span class="toc-text">源码下载和打包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#启动服务监控"><span class="toc-number">2.2.</span> <span class="toc-text">启动服务监控</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Dubbo-admin"><span class="toc-number">3.</span> <span class="toc-text">Dubbo-admin</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Apache-修正版"><span class="toc-number">3.1.</span> <span class="toc-text">Apache 修正版</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Maven方式部署"><span class="toc-number">3.1.1.</span> <span class="toc-text">Maven方式部署</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Dubbo-原生"><span class="toc-number">3.2.</span> <span class="toc-text">Dubbo 原生</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#服务提供者"><span class="toc-number">3.2.1.</span> <span class="toc-text">服务提供者</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#服务消费者"><span class="toc-number">3.2.2.</span> <span class="toc-text">服务消费者</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#应用"><span class="toc-number">3.2.3.</span> <span class="toc-text">应用</span></a></li></ol></li></ol></li></ol>
                 </div>
             </div>
             
