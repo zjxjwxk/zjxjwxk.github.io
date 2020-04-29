@@ -454,7 +454,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-02-03
+                    2020-04-29
                 </div>
                 
 
@@ -484,7 +484,7 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <h1 id="CentOS-7-Tomcat开机自启动配置"><a href="#CentOS-7-Tomcat开机自启动配置" class="headerlink" title="CentOS 7 Tomcat开机自启动配置"></a>CentOS 7 Tomcat开机自启动配置</h1><h2 id="配置开机运行"><a href="#配置开机运行" class="headerlink" title="配置开机运行"></a>配置开机运行</h2><h3 id="Tomcat增加启动参数"><a href="#Tomcat增加启动参数" class="headerlink" title="Tomcat增加启动参数"></a>Tomcat增加启动参数</h3><p>Tomcat需要增加一个pid文件，在 <code>$CATALINA_HOME/bin</code> 目录下面，增加 <code>setenv.sh</code> 配置，<code>catalina.sh</code>启动的时候会调用，同时配置Java内存参数。添加如下命令：<br><code>[root@vps bin]# vim setenv.sh</code></p>
-<pre class="line-numbers language-sh"><code class="language-sh">#Tomcat startup pid
+<pre class="line-numbers language-shell"><code class="language-shell">#Tomcat startup pid
 
 #set Java runtime environment variable 
 export JAVA_HOME=/usr/java/jdk1.8.0_191-amd64
@@ -500,7 +500,7 @@ JAVA_OPTS="-server -XX:PermSize=256M -XX:MaxPermSize=1024m -Xms512M -Xmx1024M -X
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><strong>注意:</strong> 配置开机运行时,需要再次添加 JAVA_HOME</p>
 <h3 id="增加-tomcat-service"><a href="#增加-tomcat-service" class="headerlink" title="增加 tomcat.service"></a>增加 tomcat.service</h3><p>在/usr/lib/systemd/system目录下增加tomcat.service，目录必须是绝对目录，添加如下命令：<br><code>[root@vps bin]# vim /usr/lib/systemd/system/tomcat.service</code></p>
-<pre class="line-numbers language-sh"><code class="language-sh"># conf service desc ,set do this after network started
+<pre class="line-numbers language-shell"><code class="language-shell"># conf service desc ,set do this after network started
 [Unit]
 Description=tomcat 
 After=syslog.target network.target remote-fs.target nss-lookup.target
@@ -531,7 +531,7 @@ WantedBy=multi-user.target
 </ul>
 <p>因为配置pid，在启动的时候会在Tomcat的根目录下生产tomcat.pid文件,服务停止后删除。<br>同时Tomcat在启动时，执行start不会启动两个Tomcat，保证始终只有一个Tomcat服务在运行。多个Tomcat可以配置在多个目录下，互不影响。</p>
 <h2 id="查看效果"><a href="#查看效果" class="headerlink" title="查看效果"></a>查看效果</h2><p>重启服务器后,通过wget访问，终端输出如下所示，配置tomcat开机自启动成功！</p>
-<pre class="line-numbers language-shell"><code class="language-shell">[root@vps ~]# wget 35.234.8.23:8080
+<pre class="line-numbers language-shellell"><code class="language-shellell">[root@vps ~]# wget 35.234.8.23:8080
 --2019-01-12 16:02:41--  http://35.234.8.23:8080/
 Connecting to 35.234.8.23:8080... connected.
 HTTP request sent, awaiting response... 200 OK
@@ -766,7 +766,7 @@ Saving to: ‘index.html’
                         <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
                     </div>
                     <div id="wechat">
-                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
                     </div>
                 </div>
             </div>
@@ -805,19 +805,19 @@ Saving to: ‘index.html’
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2019/01/19/期末复习/The-design-and-analysis-of-algorithms/The-design-and-analysis-of-algorithms for Exam/">
+                <a href="/2019/01/19/期末复习/Software-Architecture-and-Quality/Software-Architecture-and-Quality/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="The-design-and-analysis-of-algorithms for Exam">
+                        <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="Software-Architecture-and-Quality">
                         
-                        <span class="card-title">The-design-and-analysis-of-algorithms for Exam</span>
+                        <span class="card-title">Software-Architecture-and-Quality</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            This question tests your knowledge on algorithms and algorithm construction:(a) A function that is defined in terms of i
+                            CH 1. What is software architecture?What is software architectureThe software architecture of a system is the set of str
                         
                     </div>
                     <div class="publish-info">
@@ -1049,7 +1049,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
             <br>
             
-            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span class="white-color">65.6k</span>&nbsp;字
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span class="white-color">67.7k</span>&nbsp;字
             
             
             

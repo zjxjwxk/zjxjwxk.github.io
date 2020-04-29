@@ -450,14 +450,14 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-04-01
+                    2020-04-29
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    473
+                    487
                 </div>
                 
 
@@ -501,62 +501,62 @@
 <li>数据范围为 int，但是两个分母相乘时，可能超出 int，最大可以达到 long long，所以如果使用 int，就会溢出，得到“答案错误”</li>
 <li>必须在每一步加法后都进行约分，如果等全部加完后才约分，则会溢出</li>
 </ul>
-<pre class="line-numbers language-C++"><code class="language-C++">#include <cstdio>
-#include <algorithm>
-using namespace std;
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;cstdio></span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;algorithm></span></span>
+<span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
 
-struct Num {
-    long long a, b;
-} temp, ans;
+<span class="token keyword">struct</span> Num <span class="token punctuation">{</span>
+    <span class="token keyword">long</span> <span class="token keyword">long</span> a<span class="token punctuation">,</span> b<span class="token punctuation">;</span>
+<span class="token punctuation">}</span> temp<span class="token punctuation">,</span> ans<span class="token punctuation">;</span>
 
-long long gcd(long long a, long long b) {
-    if (b == 0) {
-        return a;
-    } else {
-        return gcd(b, a % b);
-    }
-}
+<span class="token keyword">long</span> <span class="token keyword">long</span> <span class="token function">gcd</span><span class="token punctuation">(</span><span class="token keyword">long</span> <span class="token keyword">long</span> a<span class="token punctuation">,</span> <span class="token keyword">long</span> <span class="token keyword">long</span> b<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>b <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> a<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token function">gcd</span><span class="token punctuation">(</span>b<span class="token punctuation">,</span> a <span class="token operator">%</span> b<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 
-void simplify(Num &n) {
-    if (n.b < 0) {
-        n.a = -n.a;
-        n.b = -n.b;
-    }
-    if (n.a == 0) {
-        n.b = 1;
-    } else {
-        int d = gcd(abs(n.a), abs(n.b));
-        n.a /= d;
-        n.b /= d;
-    }
-}
+<span class="token keyword">void</span> <span class="token function">simplify</span><span class="token punctuation">(</span>Num <span class="token operator">&amp;</span>n<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>n<span class="token punctuation">.</span>b <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        n<span class="token punctuation">.</span>a <span class="token operator">=</span> <span class="token operator">-</span>n<span class="token punctuation">.</span>a<span class="token punctuation">;</span>
+        n<span class="token punctuation">.</span>b <span class="token operator">=</span> <span class="token operator">-</span>n<span class="token punctuation">.</span>b<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>n<span class="token punctuation">.</span>a <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        n<span class="token punctuation">.</span>b <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+        <span class="token keyword">int</span> d <span class="token operator">=</span> <span class="token function">gcd</span><span class="token punctuation">(</span><span class="token function">abs</span><span class="token punctuation">(</span>n<span class="token punctuation">.</span>a<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">abs</span><span class="token punctuation">(</span>n<span class="token punctuation">.</span>b<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        n<span class="token punctuation">.</span>a <span class="token operator">/</span><span class="token operator">=</span> d<span class="token punctuation">;</span>
+        n<span class="token punctuation">.</span>b <span class="token operator">/</span><span class="token operator">=</span> d<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 
-Num add(Num &n1, Num &n2) {
-    Num ret;
-    ret.a = n1.a * n2.b + n2.a * n1.b;
-    ret.b = n1.b * n2.b;
-    simplify(ret);
-    return ret;
-}
+Num <span class="token function">add</span><span class="token punctuation">(</span>Num <span class="token operator">&amp;</span>n1<span class="token punctuation">,</span> Num <span class="token operator">&amp;</span>n2<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    Num ret<span class="token punctuation">;</span>
+    ret<span class="token punctuation">.</span>a <span class="token operator">=</span> n1<span class="token punctuation">.</span>a <span class="token operator">*</span> n2<span class="token punctuation">.</span>b <span class="token operator">+</span> n2<span class="token punctuation">.</span>a <span class="token operator">*</span> n1<span class="token punctuation">.</span>b<span class="token punctuation">;</span>
+    ret<span class="token punctuation">.</span>b <span class="token operator">=</span> n1<span class="token punctuation">.</span>b <span class="token operator">*</span> n2<span class="token punctuation">.</span>b<span class="token punctuation">;</span>
+    <span class="token function">simplify</span><span class="token punctuation">(</span>ret<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> ret<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-int main() {
-    int n;
-    scanf("%d %lld/%lld", &n, &ans.a, &ans.b);
-    simplify(ans);
-    for (int i = 1; i < n; i++) {
-        scanf("%lld/%lld", &temp.a, &temp.b);
-        ans = add(ans, temp);
-    }
-    if (ans.b == 1) {
-        printf("%lld", ans.a);
-    } else if (ans.a > ans.b) {
-        printf("%lld %lld/%lld", ans.a / ans.b, ans.a % ans.b, ans.b);
-    } else {
-        printf("%lld/%lld", ans.a, ans.b);
-    }
-    return 0;
-}
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></algorithm></cstdio></code></pre>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">int</span> n<span class="token punctuation">;</span>
+    <span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">"%d %lld/%lld"</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>n<span class="token punctuation">,</span> <span class="token operator">&amp;</span>ans<span class="token punctuation">.</span>a<span class="token punctuation">,</span> <span class="token operator">&amp;</span>ans<span class="token punctuation">.</span>b<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">simplify</span><span class="token punctuation">(</span>ans<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">"%lld/%lld"</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>temp<span class="token punctuation">.</span>a<span class="token punctuation">,</span> <span class="token operator">&amp;</span>temp<span class="token punctuation">.</span>b<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        ans <span class="token operator">=</span> <span class="token function">add</span><span class="token punctuation">(</span>ans<span class="token punctuation">,</span> temp<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>ans<span class="token punctuation">.</span>b <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%lld"</span><span class="token punctuation">,</span> ans<span class="token punctuation">.</span>a<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>ans<span class="token punctuation">.</span>a <span class="token operator">></span> ans<span class="token punctuation">.</span>b<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%lld %lld/%lld"</span><span class="token punctuation">,</span> ans<span class="token punctuation">.</span>a <span class="token operator">/</span> ans<span class="token punctuation">.</span>b<span class="token punctuation">,</span> ans<span class="token punctuation">.</span>a <span class="token operator">%</span> ans<span class="token punctuation">.</span>b<span class="token punctuation">,</span> ans<span class="token punctuation">.</span>b<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+        <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%lld/%lld"</span><span class="token punctuation">,</span> ans<span class="token punctuation">.</span>a<span class="token punctuation">,</span> ans<span class="token punctuation">.</span>b<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
@@ -772,7 +772,7 @@ int main() {
                         <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
                     </div>
                     <div id="wechat">
-                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
                     </div>
                 </div>
             </div>
@@ -1055,7 +1055,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
             <br>
             
-            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span class="white-color">65.6k</span>&nbsp;字
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span class="white-color">67.7k</span>&nbsp;字
             
             
             

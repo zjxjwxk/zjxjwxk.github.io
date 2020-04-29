@@ -450,14 +450,14 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-03-31
+                    2020-04-29
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    558
+                    601
                 </div>
                 
 
@@ -511,31 +511,44 @@ NO
 <h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><ul>
 <li>可以找到这样的规律：正确的字符串应该遵循 P 左侧的 A 个数乘 P 与 T 中间的 A 个数等于 T 右侧的 A 个数。且 P 和 T 的个数必须为1，中间 A 的个数不能为 0，除了 P，A，T 的其他的字符个数必须为 0。</li>
 </ul>
-<pre class="line-numbers language-C++"><code class="language-C++">#include <cstdio>
-#include <cstring>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;cstdio></span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;cstring></span></span>
 
-const int maxn = 101;
+<span class="token keyword">const</span> <span class="token keyword">int</span> maxn <span class="token operator">=</span> <span class="token number">101</span><span class="token punctuation">;</span>
 
-int main() {
-    int n, len;
-    scanf("%d", &n);
-    char str[maxn];
-    for (int i = 0; i < n; i++) {
-        scanf("%s", str);
-        len = strlen(str);
-        int PNum = 0, TNum = 0, otherNum = 0, PIndex, TIndex;
-        for (int j = 0; j < len; j++) {
-            if (str[j] == 'P') {
-                PNum++;
-                PIndex = j;
-            } else if (str[j] == 'T') {
-                TNum++;
-                TIndex = j;
-            } else if (str[j] != 'A') {
-                otherNum++;
-            }
-        }
-        if (PNum != 1 || TNum != 1 || otherNum != 0 || (TIndex - PIndex) <= 1)="" {="" printf("no\n");="" continue;="" }="" int="" lefta="PIndex," mida="TIndex" -="" pindex="" 1,="" righta="len" tindex="" 1;="" if="" (lefta="" *="" righta)="" printf("yes\n");="" else="" return="" 0;="" <span="" aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></=></cstring></cstdio></code></pre>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">int</span> n<span class="token punctuation">,</span> len<span class="token punctuation">;</span>
+    <span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>n<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">char</span> str<span class="token punctuation">[</span>maxn<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">"%s"</span><span class="token punctuation">,</span> str<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        len <span class="token operator">=</span> <span class="token function">strlen</span><span class="token punctuation">(</span>str<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">int</span> PNum <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> TNum <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> otherNum <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> PIndex<span class="token punctuation">,</span> TIndex<span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> j <span class="token operator">&lt;</span> len<span class="token punctuation">;</span> j<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>str<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">'P'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                PNum<span class="token operator">++</span><span class="token punctuation">;</span>
+                PIndex <span class="token operator">=</span> j<span class="token punctuation">;</span>
+            <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>str<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">'T'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                TNum<span class="token operator">++</span><span class="token punctuation">;</span>
+                TIndex <span class="token operator">=</span> j<span class="token punctuation">;</span>
+            <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>str<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">!=</span> <span class="token string">'A'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                otherNum<span class="token operator">++</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>PNum <span class="token operator">!=</span> <span class="token number">1</span> <span class="token operator">||</span> TNum <span class="token operator">!=</span> <span class="token number">1</span> <span class="token operator">||</span> otherNum <span class="token operator">!=</span> <span class="token number">0</span> <span class="token operator">||</span> <span class="token punctuation">(</span>TIndex <span class="token operator">-</span> PIndex<span class="token punctuation">)</span> <span class="token operator">&lt;=</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"NO\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">continue</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">int</span> leftA <span class="token operator">=</span> PIndex<span class="token punctuation">,</span> midA <span class="token operator">=</span> TIndex <span class="token operator">-</span> PIndex <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">,</span> rightA <span class="token operator">=</span> len <span class="token operator">-</span> TIndex <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>leftA <span class="token operator">*</span> midA <span class="token operator">==</span> rightA<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"YES\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+            <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"NO\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
@@ -751,7 +764,7 @@ int main() {
                         <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
                     </div>
                     <div id="wechat">
-                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
                     </div>
                 </div>
             </div>
@@ -790,19 +803,19 @@ int main() {
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2020/03/30/PAT/Advanced_Level/A1049/">
+                <a href="/2020/03/30/PAT/Advanced_Level/A1104/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/6.jpg" class="responsive-img" alt="PAT甲级 1049 Counting Ones (30分)">
+                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="PAT甲级 1104 Sum of Number Segments (20分)">
                         
-                        <span class="card-title">PAT甲级 1049 Counting Ones (30分)</span>
+                        <span class="card-title">PAT甲级 1104 Sum of Number Segments (20分)</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            The task is simple: given any positive integer N, you are supposed to count the total number of 1’s in the decimal form 
+                            Given a sequence of positive numbers, a segment is defined to be a consecutive subsequence. For example, given the seque
                         
                     </div>
                     <div class="publish-info">
@@ -843,24 +856,24 @@ int main() {
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/03/30/PAT/Advanced_Level/A1104/">
+                <a href="/2020/03/29/PAT/Advanced_Level/A1101/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="PAT甲级 1104 Sum of Number Segments (20分)">
+                        <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="PAT甲级 1101 Quick Sort (25分)">
                         
-                        <span class="card-title">PAT甲级 1104 Sum of Number Segments (20分)</span>
+                        <span class="card-title">PAT甲级 1101 Quick Sort (25分)</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Given a sequence of positive numbers, a segment is defined to be a consecutive subsequence. For example, given the seque
+                            There is a classical process named partition in the famous quick sort algorithm. In this process we typically choose one
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-03-30
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-03-29
                             </span>
                         <span class="publish-author">
                             
@@ -870,8 +883,8 @@ int main() {
                                     PAT
                                 </a>
                             
-                            <a href="/categories/PAT/数学问题/" class="post-category">
-                                    数学问题
+                            <a href="/categories/PAT/其他/" class="post-category">
+                                    其他
                                 </a>
                             
                             
@@ -1034,7 +1047,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
             <br>
             
-            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span class="white-color">65.6k</span>&nbsp;字
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span class="white-color">67.7k</span>&nbsp;字
             
             
             

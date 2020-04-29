@@ -450,14 +450,14 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-03-29
+                    2020-04-29
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.2k
+                    1.3k
                 </div>
                 
 
@@ -507,48 +507,48 @@
 </li>
 </ul>
 <p>如 gateway 中的影片模块的获取首页信息接口，将 filmServiceApi 的多个方法所获得的对象聚合为 FilmIndexVO 对象返回给前端，将原本需要的多个接口聚合为一个 /film/getIndex 接口，避免了前端对不同接口的多次调用。</p>
-<pre class="line-numbers language-Java"><code class="language-Java">@RequestMapping(value = "getIndex", method = RequestMethod.GET)
-    public ResponseVO getIndex() {
+<pre class="line-numbers language-java"><code class="language-java"><span class="token annotation punctuation">@RequestMapping</span><span class="token punctuation">(</span>value <span class="token operator">=</span> <span class="token string">"getIndex"</span><span class="token punctuation">,</span> method <span class="token operator">=</span> RequestMethod<span class="token punctuation">.</span>GET<span class="token punctuation">)</span>
+    <span class="token keyword">public</span> ResponseVO <span class="token function">getIndex</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
 
-        FilmIndexVO filmIndexVO = new FilmIndexVO();
-        // 获取banner信息
-        filmIndexVO.setBanners(filmServiceApi.getBanners());
-        // 获取热映的影片
-        filmIndexVO.setHotFilms(filmServiceApi.getHotFilms(true, 99, 99, 99, 99, 1, 8));
-        // 获取即将上映的影片
-        filmIndexVO.setSoonFilms(filmServiceApi.getSoonFilms(true, 99, 99, 99, 99, 1, 8));
-        // 获取票房排行榜
-        filmIndexVO.setBoxRanking(filmServiceApi.getBoxRanking());
-        // 获取人气榜单
-        filmIndexVO.setExpectRanking(filmServiceApi.getExpectRanking());
-        // 获取排行前100影片
-        filmIndexVO.setTop100(filmServiceApi.getTop());
-        return ResponseVO.success(IMG_PRE, filmIndexVO);
-    }
+        FilmIndexVO filmIndexVO <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">FilmIndexVO</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">// 获取banner信息</span>
+        filmIndexVO<span class="token punctuation">.</span><span class="token function">setBanners</span><span class="token punctuation">(</span>filmServiceApi<span class="token punctuation">.</span><span class="token function">getBanners</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">// 获取热映的影片</span>
+        filmIndexVO<span class="token punctuation">.</span><span class="token function">setHotFilms</span><span class="token punctuation">(</span>filmServiceApi<span class="token punctuation">.</span><span class="token function">getHotFilms</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token number">99</span><span class="token punctuation">,</span> <span class="token number">99</span><span class="token punctuation">,</span> <span class="token number">99</span><span class="token punctuation">,</span> <span class="token number">99</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">8</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">// 获取即将上映的影片</span>
+        filmIndexVO<span class="token punctuation">.</span><span class="token function">setSoonFilms</span><span class="token punctuation">(</span>filmServiceApi<span class="token punctuation">.</span><span class="token function">getSoonFilms</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token number">99</span><span class="token punctuation">,</span> <span class="token number">99</span><span class="token punctuation">,</span> <span class="token number">99</span><span class="token punctuation">,</span> <span class="token number">99</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">8</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">// 获取票房排行榜</span>
+        filmIndexVO<span class="token punctuation">.</span><span class="token function">setBoxRanking</span><span class="token punctuation">(</span>filmServiceApi<span class="token punctuation">.</span><span class="token function">getBoxRanking</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">// 获取人气榜单</span>
+        filmIndexVO<span class="token punctuation">.</span><span class="token function">setExpectRanking</span><span class="token punctuation">(</span>filmServiceApi<span class="token punctuation">.</span><span class="token function">getExpectRanking</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">// 获取排行前100影片</span>
+        filmIndexVO<span class="token punctuation">.</span><span class="token function">setTop100</span><span class="token punctuation">(</span>filmServiceApi<span class="token punctuation">.</span><span class="token function">getTop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> ResponseVO<span class="token punctuation">.</span><span class="token function">success</span><span class="token punctuation">(</span>IMG_PRE<span class="token punctuation">,</span> filmIndexVO<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h1 id="Mybatis-plus-自定义-SQL-实现"><a href="#Mybatis-plus-自定义-SQL-实现" class="headerlink" title="Mybatis-plus 自定义 SQL 实现"></a>Mybatis-plus 自定义 SQL 实现</h1><p>在相应的 Mapper 接口中添加方法</p>
-<pre class="line-numbers language-Java"><code class="language-Java">public interface ActorTMapper extends BaseMapper<actort> {
+<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">ActorTMapper</span> <span class="token keyword">extends</span> <span class="token class-name">BaseMapper</span><span class="token operator">&lt;</span>ActorT<span class="token operator">></span> <span class="token punctuation">{</span>
 
-    List<actorvo> getActors(@Param("filmId") String filmId);
-}
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></actorvo></actort></code></pre>
+    List<span class="token operator">&lt;</span>ActorVO<span class="token operator">></span> <span class="token function">getActors</span><span class="token punctuation">(</span><span class="token annotation punctuation">@Param</span><span class="token punctuation">(</span><span class="token string">"filmId"</span><span class="token punctuation">)</span> String filmId<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <p>在相应的 Mapper xml 配置文件中添加 select 语句</p>
-<pre class="line-numbers language-Java"><code class="language-Java"><mapper namespace="com.stylefeng.guns.rest.common.persistence.dao.ActorTMapper">
+<pre class="line-numbers language-java"><code class="language-java"><span class="token operator">&lt;</span>mapper namespace<span class="token operator">=</span><span class="token string">"com.stylefeng.guns.rest.common.persistence.dao.ActorTMapper"</span><span class="token operator">></span>
 
-    <!-- 通用查询映射结果 -->
-    <resultmap id="BaseResultMap" type="com.stylefeng.guns.rest.common.persistence.model.ActorT">
-        <id column="UUID" property="uuid">
-        <result column="actor_name" property="actorName">
-        <result column="actor_img" property="actorImg">
-    </result></result></id></resultmap>
+    <span class="token operator">&lt;</span><span class="token operator">!</span><span class="token operator">--</span> 通用查询映射结果 <span class="token operator">--</span><span class="token operator">></span>
+    <span class="token operator">&lt;</span>resultMap id<span class="token operator">=</span><span class="token string">"BaseResultMap"</span> type<span class="token operator">=</span><span class="token string">"com.stylefeng.guns.rest.common.persistence.model.ActorT"</span><span class="token operator">></span>
+        <span class="token operator">&lt;</span>id column<span class="token operator">=</span><span class="token string">"UUID"</span> property<span class="token operator">=</span><span class="token string">"uuid"</span> <span class="token operator">/</span><span class="token operator">></span>
+        <span class="token operator">&lt;</span>result column<span class="token operator">=</span><span class="token string">"actor_name"</span> property<span class="token operator">=</span><span class="token string">"actorName"</span> <span class="token operator">/</span><span class="token operator">></span>
+        <span class="token operator">&lt;</span>result column<span class="token operator">=</span><span class="token string">"actor_img"</span> property<span class="token operator">=</span><span class="token string">"actorImg"</span> <span class="token operator">/</span><span class="token operator">></span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>resultMap<span class="token operator">></span>
 
-    <select id="getActors" parametertype="java.lang.String" resulttype="com.stylefeng.guns.api.film.vo.ActorVO">
-        SELECT actor_img AS imgAddress, actor_name AS directorName, role_name AS roleName
-        FROM actor_t, film_actor_t
-        WHERE actor_t.UUID = film_actor_t.actor_id
-          AND film_actor_t.film_id = ${filmId}
-    </select>
-</mapper>
+    <span class="token operator">&lt;</span>select id<span class="token operator">=</span><span class="token string">"getActors"</span> parameterType<span class="token operator">=</span><span class="token string">"java.lang.String"</span> resultType<span class="token operator">=</span><span class="token string">"com.stylefeng.guns.api.film.vo.ActorVO"</span><span class="token operator">></span>
+        SELECT actor_img AS imgAddress<span class="token punctuation">,</span> actor_name AS directorName<span class="token punctuation">,</span> role_name AS roleName
+        FROM actor_t<span class="token punctuation">,</span> film_actor_t
+        WHERE actor_t<span class="token punctuation">.</span>UUID <span class="token operator">=</span> film_actor_t<span class="token punctuation">.</span>actor_id
+          AND film_actor_t<span class="token punctuation">.</span>film_id <span class="token operator">=</span> $<span class="token punctuation">{</span>filmId<span class="token punctuation">}</span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>select<span class="token operator">></span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>mapper<span class="token operator">></span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>这样，就能执行自定义 SQL 语句了，其实就是普通版 Mybatis 的正常使用而已…</p>
 <h1 id="Dubbo-异步调用"><a href="#Dubbo-异步调用" class="headerlink" title="Dubbo 异步调用"></a>Dubbo 异步调用</h1><blockquote>
@@ -569,9 +569,9 @@
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token namespace">dubbo:</span>reference</span><span class="token punctuation">></span></span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <h3 id="配置（SpringBoot）"><a href="#配置（SpringBoot）" class="headerlink" title="配置（SpringBoot）"></a>配置（SpringBoot）</h3><p>SpringBoot 的配置放在注解中，但只有服务级别，并没有方法级别。</p>
-<h4 id="服务端服务级别-1"><a href="#服务端服务级别-1" class="headerlink" title="服务端服务级别"></a>服务端服务级别</h4><pre class="line-numbers language-Java"><code class="language-Java">@Service(interfaceClass = xxx.class, async = true)
+<h4 id="服务端服务级别-1"><a href="#服务端服务级别-1" class="headerlink" title="服务端服务级别"></a>服务端服务级别</h4><pre class="line-numbers language-java"><code class="language-java"><span class="token annotation punctuation">@Service</span><span class="token punctuation">(</span>interfaceClass <span class="token operator">=</span> xxx<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">,</span> async <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">)</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<h4 id="客户端服务级别-1"><a href="#客户端服务级别-1" class="headerlink" title="客户端服务级别"></a>客户端服务级别</h4><pre class="line-numbers language-Java"><code class="language-Java">@Reference(interfaceClass = xxx.class, async = true)
+<h4 id="客户端服务级别-1"><a href="#客户端服务级别-1" class="headerlink" title="客户端服务级别"></a>客户端服务级别</h4><pre class="line-numbers language-java"><code class="language-java"><span class="token annotation punctuation">@Reference</span><span class="token punctuation">(</span>interfaceClass <span class="token operator">=</span> xxx<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">,</span> async <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">)</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <h3 id="使用RpcContext-1"><a href="#使用RpcContext-1" class="headerlink" title="使用RpcContext"></a>使用RpcContext</h3><p>在 consumer.xml 中配置方法级别的异步调用：</p>
 <pre class="line-numbers language-xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token namespace">dubbo:</span>reference</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>asyncService<span class="token punctuation">"</span></span> <span class="token attr-name">interface</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>org.apache.dubbo.samples.governance.api.AsyncService<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
@@ -604,70 +604,70 @@ future<span class="token punctuation">.</span><span class="token function">get</
 <p>需要注意的是，这里 asyncService.sayHello(“world”) 返回的是 null，不能通过该返回值获取结果，所有 asyncService 接口的 sayHello() 方法调用都需要通过 future 来获取结果。</p>
 <h4 id="SpringBoot中"><a href="#SpringBoot中" class="headerlink" title="SpringBoot中"></a>SpringBoot中</h4><p>由于 SpringBoot 没有方法级别的注解可以配置 async 参数，但如果加在服务级别，即客户端的 <code>@Reference</code> 或者服务端的 <code>@Service</code> 上，又会影响不需要使用异步调用的地方。</p>
 <p>所以，可以通过在 api 中再创建一个专门用于异步调用的接口来声明需要异步调用的方法。</p>
-<pre class="line-numbers language-Java"><code class="language-Java">public interface FilmAsyncServiceApi {
+<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">FilmAsyncServiceApi</span> <span class="token punctuation">{</span>
 
-    FilmDescVO getFilmDesc(String filmId);
+    FilmDescVO <span class="token function">getFilmDesc</span><span class="token punctuation">(</span>String filmId<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    ActorVO getDirectorInfo(String filmId);
+    ActorVO <span class="token function">getDirectorInfo</span><span class="token punctuation">(</span>String filmId<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    List<actorvo> getActors(String filmId);
-}
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></actorvo></code></pre>
+    List<span class="token operator">&lt;</span>ActorVO<span class="token operator">></span> <span class="token function">getActors</span><span class="token punctuation">(</span>String filmId<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>同时，在服务端中再创建一个用于异步调用的实现类。</p>
-<pre class="line-numbers language-Java"><code class="language-Java">@Component
-@Service(interfaceClass = FilmAsyncServiceApi.class)
-public class DefaultFilmAsyncServiceImpl implements FilmAsyncServiceApi {
+<pre class="line-numbers language-java"><code class="language-java"><span class="token annotation punctuation">@Component</span>
+<span class="token annotation punctuation">@Service</span><span class="token punctuation">(</span>interfaceClass <span class="token operator">=</span> FilmAsyncServiceApi<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">DefaultFilmAsyncServiceImpl</span> <span class="token keyword">implements</span> <span class="token class-name">FilmAsyncServiceApi</span> <span class="token punctuation">{</span>
 
-    @Override
-    public FilmDescVO getFilmDesc(String filmId) {
-        ...
-    }
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> FilmDescVO <span class="token function">getFilmDesc</span><span class="token punctuation">(</span>String filmId<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+    <span class="token punctuation">}</span>
 
-    @Override
-    public ActorVO getDirectorInfo(String filmId) {
-        ...
-    }
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> ActorVO <span class="token function">getDirectorInfo</span><span class="token punctuation">(</span>String filmId<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+    <span class="token punctuation">}</span>
 
-    @Override
-    public List<actorvo> getActors(String filmId) {
-        ...
-    }
-}
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></actorvo></code></pre>
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> List<span class="token operator">&lt;</span>ActorVO<span class="token operator">></span> <span class="token function">getActors</span><span class="token punctuation">(</span>String filmId<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>最后，在 API 网关的 Controller 中声明异步调用的接口，并使用 RpcContext 实现异步调用</p>
-<pre class="line-numbers language-Java"><code class="language-Java">@RequestMapping(value = "films/{searchParam}", method = RequestMethod.GET)
-    public ResponseVO films(@PathVariable("searchParam") String searchParam, int searchType) throws ExecutionException, InterruptedException {
+<pre class="line-numbers language-java"><code class="language-java"><span class="token annotation punctuation">@RequestMapping</span><span class="token punctuation">(</span>value <span class="token operator">=</span> <span class="token string">"films/{searchParam}"</span><span class="token punctuation">,</span> method <span class="token operator">=</span> RequestMethod<span class="token punctuation">.</span>GET<span class="token punctuation">)</span>
+    <span class="token keyword">public</span> ResponseVO <span class="token function">films</span><span class="token punctuation">(</span><span class="token annotation punctuation">@PathVariable</span><span class="token punctuation">(</span><span class="token string">"searchParam"</span><span class="token punctuation">)</span> String searchParam<span class="token punctuation">,</span> <span class="token keyword">int</span> searchType<span class="token punctuation">)</span> <span class="token keyword">throws</span> ExecutionException<span class="token punctuation">,</span> InterruptedException <span class="token punctuation">{</span>
 
-            filmAsyncServiceApi.getFilmDesc(filmId);
-            Future<filmdescvo> filmDescVOFuture = RpcContext.getContext().getFuture();
+            filmAsyncServiceApi<span class="token punctuation">.</span><span class="token function">getFilmDesc</span><span class="token punctuation">(</span>filmId<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            Future<span class="token operator">&lt;</span>FilmDescVO<span class="token operator">></span> filmDescVOFuture <span class="token operator">=</span> RpcContext<span class="token punctuation">.</span><span class="token function">getContext</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getFuture</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-            filmAsyncServiceApi.getDirectorInfo(filmId);
-            Future<actorvo> directorVOFuture = RpcContext.getContext().getFuture();
+            filmAsyncServiceApi<span class="token punctuation">.</span><span class="token function">getDirectorInfo</span><span class="token punctuation">(</span>filmId<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            Future<span class="token operator">&lt;</span>ActorVO<span class="token operator">></span> directorVOFuture <span class="token operator">=</span> RpcContext<span class="token punctuation">.</span><span class="token function">getContext</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getFuture</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-            filmAsyncServiceApi.getActors(filmId);
-            Future<list<actorvo>> actorsFuture = RpcContext.getContext().getFuture();
+            filmAsyncServiceApi<span class="token punctuation">.</span><span class="token function">getActors</span><span class="token punctuation">(</span>filmId<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            Future<span class="token operator">&lt;</span>List<span class="token operator">&lt;</span>ActorVO<span class="token operator">>></span> actorsFuture <span class="token operator">=</span> RpcContext<span class="token punctuation">.</span><span class="token function">getContext</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getFuture</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-            /*
+            <span class="token comment" spellcheck="true">/*
             省略无关代码...
-            */
-            actorRequestVO.setDirector(directorVOFuture.get());
-            actorRequestVO.setActors(actorsFuture.get());
-          infoRequestVO.setBiography(filmDescVOFuture.get().getBiography());
-            /*
+            */</span>
+            actorRequestVO<span class="token punctuation">.</span><span class="token function">setDirector</span><span class="token punctuation">(</span>directorVOFuture<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            actorRequestVO<span class="token punctuation">.</span><span class="token function">setActors</span><span class="token punctuation">(</span>actorsFuture<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+          infoRequestVO<span class="token punctuation">.</span><span class="token function">setBiography</span><span class="token punctuation">(</span>filmDescVOFuture<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getBiography</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token comment" spellcheck="true">/*
             省略无关代码...
-            */
-    }
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></list<actorvo></actorvo></filmdescvo></code></pre>
+            */</span>
+    <span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>需要注意的是，SpringBoot 还需要在 Application 上添加 <code>@EnableAsync</code> 注解</p>
-<pre class="line-numbers language-Java"><code class="language-Java">@SpringBootApplication(scanBasePackages = {"com.stylefeng.guns"})
-@EnableDubboConfiguration
-@EnableAsync
-public class GatewayApplication {
+<pre class="line-numbers language-java"><code class="language-java"><span class="token annotation punctuation">@SpringBootApplication</span><span class="token punctuation">(</span>scanBasePackages <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token string">"com.stylefeng.guns"</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token annotation punctuation">@EnableDubboConfiguration</span>
+<span class="token annotation punctuation">@EnableAsync</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">GatewayApplication</span> <span class="token punctuation">{</span>
 
-    public static void main(String[] args) {
-        SpringApplication.run(GatewayApplication.class, args);
-    }
-}
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        SpringApplication<span class="token punctuation">.</span><span class="token function">run</span><span class="token punctuation">(</span>GatewayApplication<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">,</span> args<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><ul>
 <li>API 网关的服务聚合</li>
@@ -893,7 +893,7 @@ public class GatewayApplication {
                         <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
                     </div>
                     <div id="wechat">
-                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
                     </div>
                 </div>
             </div>
@@ -1177,7 +1177,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
             <br>
             
-            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span class="white-color">65.6k</span>&nbsp;字
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span class="white-color">67.7k</span>&nbsp;字
             
             
             

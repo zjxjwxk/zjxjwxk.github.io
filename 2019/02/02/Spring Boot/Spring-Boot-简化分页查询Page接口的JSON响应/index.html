@@ -450,14 +450,14 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-02-03
+                    2020-04-29
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    784
+                    806
                 </div>
                 
 
@@ -480,198 +480,198 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <h3 id="多余的分页信息"><a href="#多余的分页信息" class="headerlink" title="多余的分页信息"></a>多余的分页信息</h3><p>Spring Data 的 Page 接口进行数据分页返回了很多很多垃圾信息：</p>
-<pre class="line-numbers language-JSON"><code class="language-JSON">{
-    "status": 0,
-    "data": {
-        "content": [
-            {
-                "goodsId": 1,
-                "producerId": 1,
-                "categoryId": 4,
-                "name": "耐克sb滑板鞋",
-                "price": 500,
-                "stock": 500,
-                "status": "正常",
-                "createTime": "2019-02-02T03:48:33.000+0000",
-                "updateTime": null
-            },
-            {
-                "goodsId": 2,
-                "producerId": 1,
-                "categoryId": 4,
-                "name": "阿迪达斯小白鞋",
-                "price": 500,
-                "stock": 300,
-                "status": "正常",
-                "createTime": "2019-02-02T03:48:59.000+0000",
-                "updateTime": null
-            }
-        ],
-        "pageable": {
-            "sort": {
-                "sorted": false,
-                "unsorted": true,
-                "empty": true
-            },
-            "offset": 0,
-            "pageSize": 10,
-            "pageNumber": 0,
-            "paged": true,
-            "unpaged": false
-        },
-        "last": true,
-        "totalPages": 1,
-        "totalElements": 2,
-        "size": 10,
-        "number": 0,
-        "numberOfElements": 2,
-        "sort": {
-            "sorted": false,
-            "unsorted": true,
-            "empty": true
-        },
-        "first": true,
-        "empty": false
-    }
-}
+<pre class="line-numbers language-json"><code class="language-json"><span class="token punctuation">{</span>
+    <span class="token property">"status"</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+    <span class="token property">"data"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token property">"content"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+            <span class="token punctuation">{</span>
+                <span class="token property">"goodsId"</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+                <span class="token property">"producerId"</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+                <span class="token property">"categoryId"</span><span class="token operator">:</span> <span class="token number">4</span><span class="token punctuation">,</span>
+                <span class="token property">"name"</span><span class="token operator">:</span> <span class="token string">"耐克sb滑板鞋"</span><span class="token punctuation">,</span>
+                <span class="token property">"price"</span><span class="token operator">:</span> <span class="token number">500</span><span class="token punctuation">,</span>
+                <span class="token property">"stock"</span><span class="token operator">:</span> <span class="token number">500</span><span class="token punctuation">,</span>
+                <span class="token property">"status"</span><span class="token operator">:</span> <span class="token string">"正常"</span><span class="token punctuation">,</span>
+                <span class="token property">"createTime"</span><span class="token operator">:</span> <span class="token string">"2019-02-02T03:48:33.000+0000"</span><span class="token punctuation">,</span>
+                <span class="token property">"updateTime"</span><span class="token operator">:</span> <span class="token null">null</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">{</span>
+                <span class="token property">"goodsId"</span><span class="token operator">:</span> <span class="token number">2</span><span class="token punctuation">,</span>
+                <span class="token property">"producerId"</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+                <span class="token property">"categoryId"</span><span class="token operator">:</span> <span class="token number">4</span><span class="token punctuation">,</span>
+                <span class="token property">"name"</span><span class="token operator">:</span> <span class="token string">"阿迪达斯小白鞋"</span><span class="token punctuation">,</span>
+                <span class="token property">"price"</span><span class="token operator">:</span> <span class="token number">500</span><span class="token punctuation">,</span>
+                <span class="token property">"stock"</span><span class="token operator">:</span> <span class="token number">300</span><span class="token punctuation">,</span>
+                <span class="token property">"status"</span><span class="token operator">:</span> <span class="token string">"正常"</span><span class="token punctuation">,</span>
+                <span class="token property">"createTime"</span><span class="token operator">:</span> <span class="token string">"2019-02-02T03:48:59.000+0000"</span><span class="token punctuation">,</span>
+                <span class="token property">"updateTime"</span><span class="token operator">:</span> <span class="token null">null</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">]</span><span class="token punctuation">,</span>
+        <span class="token property">"pageable"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+            <span class="token property">"sort"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+                <span class="token property">"sorted"</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+                <span class="token property">"unsorted"</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+                <span class="token property">"empty"</span><span class="token operator">:</span> <span class="token boolean">true</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token property">"offset"</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+            <span class="token property">"pageSize"</span><span class="token operator">:</span> <span class="token number">10</span><span class="token punctuation">,</span>
+            <span class="token property">"pageNumber"</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+            <span class="token property">"paged"</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+            <span class="token property">"unpaged"</span><span class="token operator">:</span> <span class="token boolean">false</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token property">"last"</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+        <span class="token property">"totalPages"</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+        <span class="token property">"totalElements"</span><span class="token operator">:</span> <span class="token number">2</span><span class="token punctuation">,</span>
+        <span class="token property">"size"</span><span class="token operator">:</span> <span class="token number">10</span><span class="token punctuation">,</span>
+        <span class="token property">"number"</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+        <span class="token property">"numberOfElements"</span><span class="token operator">:</span> <span class="token number">2</span><span class="token punctuation">,</span>
+        <span class="token property">"sort"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+            <span class="token property">"sorted"</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+            <span class="token property">"unsorted"</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+            <span class="token property">"empty"</span><span class="token operator">:</span> <span class="token boolean">true</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token property">"first"</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+        <span class="token property">"empty"</span><span class="token operator">:</span> <span class="token boolean">false</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h3 id="实际需要的分页信息"><a href="#实际需要的分页信息" class="headerlink" title="实际需要的分页信息"></a>实际需要的分页信息</h3><p>实际上我只需要下面这些分页信息：</p>
-<pre class="line-numbers language-JSON"><code class="language-JSON">"totalPages": 3,
-"totalElements": 20,
-"pageNumber": 2,
-"numberOfElements": 7
+<pre class="line-numbers language-json"><code class="language-json"><span class="token property">"totalPages"</span><span class="token operator">:</span> <span class="token number">3</span><span class="token punctuation">,</span>
+<span class="token property">"totalElements"</span><span class="token operator">:</span> <span class="token number">20</span><span class="token punctuation">,</span>
+<span class="token property">"pageNumber"</span><span class="token operator">:</span> <span class="token number">2</span><span class="token punctuation">,</span>
+<span class="token property">"numberOfElements"</span><span class="token operator">:</span> <span class="token number">7</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <h3 id="创建-PageChunk-类进行封装"><a href="#创建-PageChunk-类进行封装" class="headerlink" title="创建 PageChunk 类进行封装"></a>创建 PageChunk 类进行封装</h3><p>我的 GoodsRepository 接口为：</p>
-<pre class="line-numbers language-Java"><code class="language-Java">Page<goods> findByCategoryId(Integer categoryId, Pageable pageable);
-<span aria-hidden="true" class="line-numbers-rows"><span></span></span></goods></code></pre>
+<pre class="line-numbers language-java"><code class="language-java">Page<span class="token operator">&lt;</span>Goods<span class="token operator">></span> <span class="token function">findByCategoryId</span><span class="token punctuation">(</span>Integer categoryId<span class="token punctuation">,</span> Pageable pageable<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>我们看到返回了很多多余的，重复的数据。为了解决这个问题，创建一个Pagination DTO(<code>PageChunk</code>)来包装一下分页数据。这个类的作用很简单就是包含每一次分页的内容和分页元数据（<strong>总页数</strong>，<strong>搜索结果总数</strong>，<strong>当前页号</strong>， <strong>当前页包含多少项</strong>）。</p>
-<pre class="line-numbers language-Java"><code class="language-Java">import lombok.Data;
+<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">import</span> lombok<span class="token punctuation">.</span>Data<span class="token punctuation">;</span>
 
-import java.util.List;
+<span class="token keyword">import</span> java<span class="token punctuation">.</span>util<span class="token punctuation">.</span>List<span class="token punctuation">;</span>
 
-/**
+<span class="token comment" spellcheck="true">/**
  * @author zjxjwxk
- */
-@Data
-public class PageChunk<t> {
+ */</span>
+<span class="token annotation punctuation">@Data</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">PageChunk</span><span class="token operator">&lt;</span>T<span class="token operator">></span> <span class="token punctuation">{</span>
 
-    private List<t> content;
-    private int totalPages;
-    private long totalElements;
-    private int pageNumber;
-    private int numberOfElements;
-}
+    <span class="token keyword">private</span> List<span class="token operator">&lt;</span>T<span class="token operator">></span> content<span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token keyword">int</span> totalPages<span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token keyword">long</span> totalElements<span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token keyword">int</span> pageNumber<span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token keyword">int</span> numberOfElements<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></t></t></code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>同时，我根据业务需求对商品信息进行了DTO的包装，（只需要商品id，名称和价格即可）。</p>
-<pre class="line-numbers language-Java"><code class="language-Java">import lombok.Data;
+<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">import</span> lombok<span class="token punctuation">.</span>Data<span class="token punctuation">;</span>
 
-/**
+<span class="token comment" spellcheck="true">/**
  * @author zjxjwxk
- */
-@Data
-public class GoodsDTO {
+ */</span>
+<span class="token annotation punctuation">@Data</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">GoodsDTO</span> <span class="token punctuation">{</span>
 
-    private Integer goodsId;
-    private String name;
-    private Integer price;
+    <span class="token keyword">private</span> Integer goodsId<span class="token punctuation">;</span>
+    <span class="token keyword">private</span> String name<span class="token punctuation">;</span>
+    <span class="token keyword">private</span> Integer price<span class="token punctuation">;</span>
 
-}
+<span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h3 id="用-PageChunk-替代-Page"><a href="#用-PageChunk-替代-Page" class="headerlink" title="用 PageChunk 替代 Page"></a>用 PageChunk 替代 Page</h3><p>编写以下 getPageChunk 方法用于将 Page<goods> 对象转化为 PageChunk<goodsdto> 对象，仅仅提取 Page 对象中所需要的Content 和一些分页信息，将 PageChunk 对象封装并返回。编写 getGoodsDTO 方法用于简化商品信息。</goodsdto></goods></p>
-<pre class="line-numbers language-Java"><code class="language-Java">@Service("GoodsService")
-public class GoodsServiceImpl implements GoodsService {
+<pre class="line-numbers language-java"><code class="language-java"><span class="token annotation punctuation">@Service</span><span class="token punctuation">(</span><span class="token string">"GoodsService"</span><span class="token punctuation">)</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">GoodsServiceImpl</span> <span class="token keyword">implements</span> <span class="token class-name">GoodsService</span> <span class="token punctuation">{</span>
 
-    private final GoodsRepository goodsRepository;
+    <span class="token keyword">private</span> <span class="token keyword">final</span> GoodsRepository goodsRepository<span class="token punctuation">;</span>
 
-    @Autowired
-    public GoodsServiceImpl(GoodsRepository goodsRepository) {
-        this.goodsRepository = goodsRepository;
-    }
+    <span class="token annotation punctuation">@Autowired</span>
+    <span class="token keyword">public</span> <span class="token function">GoodsServiceImpl</span><span class="token punctuation">(</span>GoodsRepository goodsRepository<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>goodsRepository <span class="token operator">=</span> goodsRepository<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 
-    @Override
-    public ServerResponse getList(String keyword, Integer categoryId,
-                                               Integer pageNum, Integer pageSize,
-                                               String orderBy) {
-        PageRequest pageRequest = PageRequest.of(pageNum - 1, pageSize);
-        Page<goods> goodsPage = goodsRepository.findByCategoryId(categoryId, pageRequest);
-        return ServerResponse.createBySuccess(getPageChunk(goodsPage));
-    }
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> ServerResponse <span class="token function">getList</span><span class="token punctuation">(</span>String keyword<span class="token punctuation">,</span> Integer categoryId<span class="token punctuation">,</span>
+                                               Integer pageNum<span class="token punctuation">,</span> Integer pageSize<span class="token punctuation">,</span>
+                                               String orderBy<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        PageRequest pageRequest <span class="token operator">=</span> PageRequest<span class="token punctuation">.</span><span class="token function">of</span><span class="token punctuation">(</span>pageNum <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">,</span> pageSize<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        Page<span class="token operator">&lt;</span>Goods<span class="token operator">></span> goodsPage <span class="token operator">=</span> goodsRepository<span class="token punctuation">.</span><span class="token function">findByCategoryId</span><span class="token punctuation">(</span>categoryId<span class="token punctuation">,</span> pageRequest<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> ServerResponse<span class="token punctuation">.</span><span class="token function">createBySuccess</span><span class="token punctuation">(</span><span class="token function">getPageChunk</span><span class="token punctuation">(</span>goodsPage<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 
-    private PageChunk<goodsdto> getPageChunk(Page<goods> goodsPage) {
-        PageChunk<goodsdto> pageChunk = new PageChunk<>();
-        pageChunk.setContent(getGoodsDTO(goodsPage.getContent()));
-        pageChunk.setTotalPages(goodsPage.getTotalPages());
-        pageChunk.setTotalElements(goodsPage.getTotalElements());
-        pageChunk.setPageNumber(goodsPage.getPageable().getPageNumber() + 1);
-        pageChunk.setNumberOfElements(goodsPage.getNumberOfElements());
-        return pageChunk;
-    }
+    <span class="token keyword">private</span> PageChunk<span class="token operator">&lt;</span>GoodsDTO<span class="token operator">></span> <span class="token function">getPageChunk</span><span class="token punctuation">(</span>Page<span class="token operator">&lt;</span>Goods<span class="token operator">></span> goodsPage<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        PageChunk<span class="token operator">&lt;</span>GoodsDTO<span class="token operator">></span> pageChunk <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">PageChunk</span><span class="token operator">&lt;</span><span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        pageChunk<span class="token punctuation">.</span><span class="token function">setContent</span><span class="token punctuation">(</span><span class="token function">getGoodsDTO</span><span class="token punctuation">(</span>goodsPage<span class="token punctuation">.</span><span class="token function">getContent</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        pageChunk<span class="token punctuation">.</span><span class="token function">setTotalPages</span><span class="token punctuation">(</span>goodsPage<span class="token punctuation">.</span><span class="token function">getTotalPages</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        pageChunk<span class="token punctuation">.</span><span class="token function">setTotalElements</span><span class="token punctuation">(</span>goodsPage<span class="token punctuation">.</span><span class="token function">getTotalElements</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        pageChunk<span class="token punctuation">.</span><span class="token function">setPageNumber</span><span class="token punctuation">(</span>goodsPage<span class="token punctuation">.</span><span class="token function">getPageable</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getPageNumber</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        pageChunk<span class="token punctuation">.</span><span class="token function">setNumberOfElements</span><span class="token punctuation">(</span>goodsPage<span class="token punctuation">.</span><span class="token function">getNumberOfElements</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> pageChunk<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 
-    private List<goodsdto> getGoodsDTO(List<goods> goodsList) {
-        List<goodsdto> goodsDTOList = new ArrayList<>();
-        for (Goods goods :
-                goodsList) {
-            GoodsDTO goodsDTO = new GoodsDTO();
-            goodsDTO.setGoodsId(goods.getGoodsId());
-            goodsDTO.setName(goods.getName());
-            goodsDTO.setPrice(goods.getPrice());
+    <span class="token keyword">private</span> List<span class="token operator">&lt;</span>GoodsDTO<span class="token operator">></span> <span class="token function">getGoodsDTO</span><span class="token punctuation">(</span>List<span class="token operator">&lt;</span>Goods<span class="token operator">></span> goodsList<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        List<span class="token operator">&lt;</span>GoodsDTO<span class="token operator">></span> goodsDTOList <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ArrayList</span><span class="token operator">&lt;</span><span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span>Goods goods <span class="token operator">:</span>
+                goodsList<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            GoodsDTO goodsDTO <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">GoodsDTO</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            goodsDTO<span class="token punctuation">.</span><span class="token function">setGoodsId</span><span class="token punctuation">(</span>goods<span class="token punctuation">.</span><span class="token function">getGoodsId</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            goodsDTO<span class="token punctuation">.</span><span class="token function">setName</span><span class="token punctuation">(</span>goods<span class="token punctuation">.</span><span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            goodsDTO<span class="token punctuation">.</span><span class="token function">setPrice</span><span class="token punctuation">(</span>goods<span class="token punctuation">.</span><span class="token function">getPrice</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-            goodsDTOList.add(goodsDTO);
-        }
-        return goodsDTOList;
-    }
-}
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></goodsdto></goods></goodsdto></goodsdto></goods></goodsdto></goods></code></pre>
+            goodsDTOList<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>goodsDTO<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> goodsDTOList<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <blockquote>
 <p>为了返回 JSON 数据，我自定义了一个 ServerResponse 服务响应对象，它的作用是让我们返回的 JSON 有一个通用的格式</p>
 </blockquote>
-<h3 id="简化后的结果"><a href="#简化后的结果" class="headerlink" title="简化后的结果"></a>简化后的结果</h3><pre class="line-numbers language-JSON"><code class="language-JSON">{
-    "status": 0,
-    "data": {
-        "content": [
-            {
-                "goodsId": 8,
-                "name": "Clarks 男 Tri Spark生活休闲鞋26135668",
-                "price": 459
-            },
-            {
-                "goodsId": 9,
-                "name": "Adidas三叶草 男 休闲跑步鞋 STAN SMITH M20324",
-                "price": 415
-            },
-            {
-                "goodsId": 10,
-                "name": "Skechers 斯凯奇 SKECHERS SPORT系列 男 绑带运动鞋 999732-NVOR",
-                "price": 355
-            },
-            {
-                "goodsId": 11,
-                "name": "Saucony 圣康尼 RSP 男 休闲跑步鞋 KINETA RELAY S2524465",
-                "price": 479
-            },
-            {
-                "goodsId": 12,
-                "name": "Mustang 男 帆布鞋休闲运动 4058-305（亚马逊进口直采,德国品牌）",
-                "price": 324
-            },
-            {
-                "goodsId": 13,
-                "name": "Clarks 男 Tri Spark生活休闲鞋26135655",
-                "price": 123425
-            },
-            {
-                "goodsId": 14,
-                "name": "New Balance 574系列 男 休闲跑步鞋 ML574EG-D",
-                "price": 324
-            }
-        ],
-        "totalPages": 3,
-        "totalElements": 20,
-        "pageNumber": 2,
-        "numberOfElements": 7
-    }
-}
+<h3 id="简化后的结果"><a href="#简化后的结果" class="headerlink" title="简化后的结果"></a>简化后的结果</h3><pre class="line-numbers language-json"><code class="language-json"><span class="token punctuation">{</span>
+    <span class="token property">"status"</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+    <span class="token property">"data"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token property">"content"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+            <span class="token punctuation">{</span>
+                <span class="token property">"goodsId"</span><span class="token operator">:</span> <span class="token number">8</span><span class="token punctuation">,</span>
+                <span class="token property">"name"</span><span class="token operator">:</span> <span class="token string">"Clarks 男 Tri Spark生活休闲鞋26135668"</span><span class="token punctuation">,</span>
+                <span class="token property">"price"</span><span class="token operator">:</span> <span class="token number">459</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">{</span>
+                <span class="token property">"goodsId"</span><span class="token operator">:</span> <span class="token number">9</span><span class="token punctuation">,</span>
+                <span class="token property">"name"</span><span class="token operator">:</span> <span class="token string">"Adidas三叶草 男 休闲跑步鞋 STAN SMITH M20324"</span><span class="token punctuation">,</span>
+                <span class="token property">"price"</span><span class="token operator">:</span> <span class="token number">415</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">{</span>
+                <span class="token property">"goodsId"</span><span class="token operator">:</span> <span class="token number">10</span><span class="token punctuation">,</span>
+                <span class="token property">"name"</span><span class="token operator">:</span> <span class="token string">"Skechers 斯凯奇 SKECHERS SPORT系列 男 绑带运动鞋 999732-NVOR"</span><span class="token punctuation">,</span>
+                <span class="token property">"price"</span><span class="token operator">:</span> <span class="token number">355</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">{</span>
+                <span class="token property">"goodsId"</span><span class="token operator">:</span> <span class="token number">11</span><span class="token punctuation">,</span>
+                <span class="token property">"name"</span><span class="token operator">:</span> <span class="token string">"Saucony 圣康尼 RSP 男 休闲跑步鞋 KINETA RELAY S2524465"</span><span class="token punctuation">,</span>
+                <span class="token property">"price"</span><span class="token operator">:</span> <span class="token number">479</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">{</span>
+                <span class="token property">"goodsId"</span><span class="token operator">:</span> <span class="token number">12</span><span class="token punctuation">,</span>
+                <span class="token property">"name"</span><span class="token operator">:</span> <span class="token string">"Mustang 男 帆布鞋休闲运动 4058-305（亚马逊进口直采,德国品牌）"</span><span class="token punctuation">,</span>
+                <span class="token property">"price"</span><span class="token operator">:</span> <span class="token number">324</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">{</span>
+                <span class="token property">"goodsId"</span><span class="token operator">:</span> <span class="token number">13</span><span class="token punctuation">,</span>
+                <span class="token property">"name"</span><span class="token operator">:</span> <span class="token string">"Clarks 男 Tri Spark生活休闲鞋26135655"</span><span class="token punctuation">,</span>
+                <span class="token property">"price"</span><span class="token operator">:</span> <span class="token number">123425</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">{</span>
+                <span class="token property">"goodsId"</span><span class="token operator">:</span> <span class="token number">14</span><span class="token punctuation">,</span>
+                <span class="token property">"name"</span><span class="token operator">:</span> <span class="token string">"New Balance 574系列 男 休闲跑步鞋 ML574EG-D"</span><span class="token punctuation">,</span>
+                <span class="token property">"price"</span><span class="token operator">:</span> <span class="token number">324</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">]</span><span class="token punctuation">,</span>
+        <span class="token property">"totalPages"</span><span class="token operator">:</span> <span class="token number">3</span><span class="token punctuation">,</span>
+        <span class="token property">"totalElements"</span><span class="token operator">:</span> <span class="token number">20</span><span class="token punctuation">,</span>
+        <span class="token property">"pageNumber"</span><span class="token operator">:</span> <span class="token number">2</span><span class="token punctuation">,</span>
+        <span class="token property">"numberOfElements"</span><span class="token operator">:</span> <span class="token number">7</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <script>
         document.querySelectorAll('.github-emoji')
@@ -892,7 +892,7 @@ public class GoodsServiceImpl implements GoodsService {
                         <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
                     </div>
                     <div id="wechat">
-                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
                     </div>
                 </div>
             </div>
@@ -1185,7 +1185,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
             <br>
             
-            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span class="white-color">65.6k</span>&nbsp;字
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span class="white-color">67.7k</span>&nbsp;字
             
             
             

@@ -450,21 +450,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-03-29
+                    2020-04-29
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1k
+                    1.1k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    5 分
+                    6 分
                 </div>
                 
 
@@ -530,65 +530,79 @@ JH007BD ZD00001 07:20:09
 <li>最长停车时长（parked for the longest time period），指的是一辆车在一天中的总停车时长，而不是指某一次停车的时长</li>
 <li>如果一辆车多次 in，应该取最后一个 in 记录；如果一辆车多次 out，应该取第一个 out 记录</li>
 </ul>
-<pre class="line-numbers language-C++"><code class="language-C++">#include <cstdio>
-#include <cstring>
-#include <algorithm>
-#include <vector>
-#include <map>
-using namespace std;
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;cstdio></span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;cstring></span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;algorithm></span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;vector></span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;map></span></span>
+<span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
 
-const int maxn = 10000;
+<span class="token keyword">const</span> <span class="token keyword">int</span> maxn <span class="token operator">=</span> <span class="token number">10000</span><span class="token punctuation">;</span>
 
-struct Record {
-    char id[8];
-    int time, status;
-} records[maxn];
+<span class="token keyword">struct</span> Record <span class="token punctuation">{</span>
+    <span class="token keyword">char</span> id<span class="token punctuation">[</span><span class="token number">8</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> time<span class="token punctuation">,</span> status<span class="token punctuation">;</span>
+<span class="token punctuation">}</span> records<span class="token punctuation">[</span>maxn<span class="token punctuation">]</span><span class="token punctuation">;</span>
 
-vector<record> vec;
-map<string, int=""> lenMap;
+vector<span class="token operator">&lt;</span>Record<span class="token operator">></span> vec<span class="token punctuation">;</span>
+map<span class="token operator">&lt;</span>string<span class="token punctuation">,</span> <span class="token keyword">int</span><span class="token operator">></span> lenMap<span class="token punctuation">;</span>
 
-int cmpByIdAndTime(Record r1, Record r2) {
-    int strCmp = strcmp(r1.id, r2.id);
-    if (strCmp != 0) {
-        return strCmp < 0;
-    } else {
-        return r1.time < r2.time;
-    }
-}
+<span class="token keyword">int</span> <span class="token function">cmpByIdAndTime</span><span class="token punctuation">(</span>Record r1<span class="token punctuation">,</span> Record r2<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">int</span> strCmp <span class="token operator">=</span> <span class="token function">strcmp</span><span class="token punctuation">(</span>r1<span class="token punctuation">.</span>id<span class="token punctuation">,</span> r2<span class="token punctuation">.</span>id<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>strCmp <span class="token operator">!=</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> strCmp <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> r1<span class="token punctuation">.</span>time <span class="token operator">&lt;</span> r2<span class="token punctuation">.</span>time<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 
-int cmpByTime(Record r1, Record r2) {
-    return r1.time < r2.time;
-}
+<span class="token keyword">int</span> <span class="token function">cmpByTime</span><span class="token punctuation">(</span>Record r1<span class="token punctuation">,</span> Record r2<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> r1<span class="token punctuation">.</span>time <span class="token operator">&lt;</span> r2<span class="token punctuation">.</span>time<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-int main() {
-    int n, k, hour, min, sec, time, cnt = 0, maxLen = -1, j = 0;
-    scanf("%d %d", &n, &k);
-    char status[3];
-    for (int i = 0; i < n; i++) {
-        scanf("%s %d:%d:%d %s", records[i].id, &hour, &min, &sec, status);
-        records[i].time = hour * 3600 + min * 60 + sec;
-        if (strcmp(status, "in") == 0) {
-            records[i].status = 1;
-        } else {
-            records[i].status = -1;
-        }
-    }
-    sort(records, records + n, cmpByIdAndTime);
-    for (int i = 1; i < n; i++) {
-        if (strcmp(records[i].id, records[i - 1].id) == 0 && records[i - 1].status == 1 && records[i].status == -1) {
-            vec.push_back(records[i - 1]);
-            vec.push_back(records[i]);
-            lenMap[records[i].id] += records[i].time - records[i - 1].time;
-            if (lenMap[records[i].id] > maxLen) {
-                maxLen = lenMap[records[i].id];
-            }
-        }
-    }
-    sort(vec.begin(), vec.end(), cmpByTime);
-    for (int i = 0; i < k; i++) {
-        scanf("%d:%d:%d", &hour, &min, &sec);
-        time = hour * 60 * 60 + min * 60 + sec;
-        while (j < vec.size() && vec[j].time <= 3600="" time)="" {="" cnt="" +="vec[j].status;" j++;="" }="" printf("%d\n",="" cnt);="" for="" (auto="" it="" :="" lenmap)="" if="" (it.second="=" maxlen)="" printf("%s="" ",="" it.first.c_str());="" printf("%02d:%02d:%02d",="" maxlen="" 3600,="" %="" 60,="" 60);="" return="" 0;="" <span="" aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></=></string,></record></map></vector></algorithm></cstring></cstdio></code></pre>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">int</span> n<span class="token punctuation">,</span> k<span class="token punctuation">,</span> hour<span class="token punctuation">,</span> min<span class="token punctuation">,</span> sec<span class="token punctuation">,</span> time<span class="token punctuation">,</span> cnt <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> maxLen <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> j <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">"%d %d"</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>n<span class="token punctuation">,</span> <span class="token operator">&amp;</span>k<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">char</span> status<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">"%s %d:%d:%d %s"</span><span class="token punctuation">,</span> records<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>id<span class="token punctuation">,</span> <span class="token operator">&amp;</span>hour<span class="token punctuation">,</span> <span class="token operator">&amp;</span>min<span class="token punctuation">,</span> <span class="token operator">&amp;</span>sec<span class="token punctuation">,</span> status<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        records<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>time <span class="token operator">=</span> hour <span class="token operator">*</span> <span class="token number">3600</span> <span class="token operator">+</span> min <span class="token operator">*</span> <span class="token number">60</span> <span class="token operator">+</span> sec<span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">strcmp</span><span class="token punctuation">(</span>status<span class="token punctuation">,</span> <span class="token string">"in"</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            records<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>status <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+            records<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>status <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token function">sort</span><span class="token punctuation">(</span>records<span class="token punctuation">,</span> records <span class="token operator">+</span> n<span class="token punctuation">,</span> cmpByIdAndTime<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">strcmp</span><span class="token punctuation">(</span>records<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>id<span class="token punctuation">,</span> records<span class="token punctuation">[</span>i <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">.</span>id<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span> <span class="token operator">&amp;&amp;</span> records<span class="token punctuation">[</span>i <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">.</span>status <span class="token operator">==</span> <span class="token number">1</span> <span class="token operator">&amp;&amp;</span> records<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>status <span class="token operator">==</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            vec<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span>records<span class="token punctuation">[</span>i <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            vec<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span>records<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            lenMap<span class="token punctuation">[</span>records<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>id<span class="token punctuation">]</span> <span class="token operator">+</span><span class="token operator">=</span> records<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>time <span class="token operator">-</span> records<span class="token punctuation">[</span>i <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">.</span>time<span class="token punctuation">;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>lenMap<span class="token punctuation">[</span>records<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>id<span class="token punctuation">]</span> <span class="token operator">></span> maxLen<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                maxLen <span class="token operator">=</span> lenMap<span class="token punctuation">[</span>records<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>id<span class="token punctuation">]</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token function">sort</span><span class="token punctuation">(</span>vec<span class="token punctuation">.</span><span class="token function">begin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> vec<span class="token punctuation">.</span><span class="token function">end</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> cmpByTime<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> k<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">"%d:%d:%d"</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>hour<span class="token punctuation">,</span> <span class="token operator">&amp;</span>min<span class="token punctuation">,</span> <span class="token operator">&amp;</span>sec<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        time <span class="token operator">=</span> hour <span class="token operator">*</span> <span class="token number">60</span> <span class="token operator">*</span> <span class="token number">60</span> <span class="token operator">+</span> min <span class="token operator">*</span> <span class="token number">60</span> <span class="token operator">+</span> sec<span class="token punctuation">;</span>
+        <span class="token keyword">while</span> <span class="token punctuation">(</span>j <span class="token operator">&lt;</span> vec<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> vec<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">.</span>time <span class="token operator">&lt;=</span> time<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            cnt <span class="token operator">+</span><span class="token operator">=</span> vec<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">.</span>status<span class="token punctuation">;</span>
+            j<span class="token operator">++</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d\n"</span><span class="token punctuation">,</span> cnt<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">auto</span> it <span class="token operator">:</span> lenMap<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>it<span class="token punctuation">.</span>second <span class="token operator">==</span> maxLen<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%s "</span><span class="token punctuation">,</span> it<span class="token punctuation">.</span>first<span class="token punctuation">.</span><span class="token function">c_str</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%02d:%02d:%02d"</span><span class="token punctuation">,</span> maxLen <span class="token operator">/</span> <span class="token number">3600</span><span class="token punctuation">,</span> maxLen <span class="token operator">%</span> <span class="token number">3600</span> <span class="token operator">/</span> <span class="token number">60</span><span class="token punctuation">,</span> maxLen <span class="token operator">%</span> <span class="token number">60</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
@@ -804,7 +818,7 @@ int main() {
                         <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
                     </div>
                     <div id="wechat">
-                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
                     </div>
                 </div>
             </div>
@@ -1088,7 +1102,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
             <br>
             
-            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span class="white-color">65.6k</span>&nbsp;字
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span class="white-color">67.7k</span>&nbsp;字
             
             
             

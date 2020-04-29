@@ -450,7 +450,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-03-26
+                    2020-04-29
                 </div>
                 
 
@@ -494,64 +494,64 @@
 <li>初步了解 API 网关与服务之间交互的过程</li>
 <li>根据接口文档开发用户接口</li>
 </ul>
-<h1 id="创建用户表"><a href="#创建用户表" class="headerlink" title="创建用户表"></a>创建用户表</h1><pre class="line-numbers language-SQL"><code class="language-SQL">DROP TABLE IF EXISTS user;
-CREATE TABLE user(
-   UUID INT PRIMARY KEY AUTO_INCREMENT COMMENT '主键编号',
-   user_name VARCHAR(50) COMMENT '用户账号',
-   user_pwd VARCHAR(50) COMMENT '用户密码',
-   nick_name VARCHAR(50) COMMENT '用户昵称',
-   user_sex INT COMMENT '用户性别 0-男，1-女',
-   birthday VARCHAR(50) COMMENT '出生日期',
-   email VARCHAR(50) COMMENT '用户邮箱',
-   user_phone VARCHAR(50) COMMENT '用户手机号',
-   address VARCHAR(50) COMMENT '用户住址',
-   head_url VARCHAR(50) COMMENT '头像URL',
-   biography VARCHAR(200) COMMENT '个人介绍',
-   life_state INT COMMENT '生活状态 0-单身，1-热恋中，2-已婚，3-为人父母',
-   begin_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-   update_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间'
-) COMMENT '用户表' ENGINE = INNODB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+<h1 id="创建用户表"><a href="#创建用户表" class="headerlink" title="创建用户表"></a>创建用户表</h1><pre class="line-numbers language-sql"><code class="language-sql"><span class="token keyword">DROP</span> <span class="token keyword">TABLE</span> <span class="token keyword">IF</span> <span class="token keyword">EXISTS</span> <span class="token keyword">user</span><span class="token punctuation">;</span>
+<span class="token keyword">CREATE</span> <span class="token keyword">TABLE</span> <span class="token keyword">user</span><span class="token punctuation">(</span>
+   UUID <span class="token keyword">INT</span> <span class="token keyword">PRIMARY</span> <span class="token keyword">KEY</span> <span class="token keyword">AUTO_INCREMENT</span> <span class="token keyword">COMMENT</span> <span class="token string">'主键编号'</span><span class="token punctuation">,</span>
+   user_name <span class="token keyword">VARCHAR</span><span class="token punctuation">(</span><span class="token number">50</span><span class="token punctuation">)</span> <span class="token keyword">COMMENT</span> <span class="token string">'用户账号'</span><span class="token punctuation">,</span>
+   user_pwd <span class="token keyword">VARCHAR</span><span class="token punctuation">(</span><span class="token number">50</span><span class="token punctuation">)</span> <span class="token keyword">COMMENT</span> <span class="token string">'用户密码'</span><span class="token punctuation">,</span>
+   nick_name <span class="token keyword">VARCHAR</span><span class="token punctuation">(</span><span class="token number">50</span><span class="token punctuation">)</span> <span class="token keyword">COMMENT</span> <span class="token string">'用户昵称'</span><span class="token punctuation">,</span>
+   user_sex <span class="token keyword">INT</span> <span class="token keyword">COMMENT</span> <span class="token string">'用户性别 0-男，1-女'</span><span class="token punctuation">,</span>
+   birthday <span class="token keyword">VARCHAR</span><span class="token punctuation">(</span><span class="token number">50</span><span class="token punctuation">)</span> <span class="token keyword">COMMENT</span> <span class="token string">'出生日期'</span><span class="token punctuation">,</span>
+   email <span class="token keyword">VARCHAR</span><span class="token punctuation">(</span><span class="token number">50</span><span class="token punctuation">)</span> <span class="token keyword">COMMENT</span> <span class="token string">'用户邮箱'</span><span class="token punctuation">,</span>
+   user_phone <span class="token keyword">VARCHAR</span><span class="token punctuation">(</span><span class="token number">50</span><span class="token punctuation">)</span> <span class="token keyword">COMMENT</span> <span class="token string">'用户手机号'</span><span class="token punctuation">,</span>
+   address <span class="token keyword">VARCHAR</span><span class="token punctuation">(</span><span class="token number">50</span><span class="token punctuation">)</span> <span class="token keyword">COMMENT</span> <span class="token string">'用户住址'</span><span class="token punctuation">,</span>
+   head_url <span class="token keyword">VARCHAR</span><span class="token punctuation">(</span><span class="token number">50</span><span class="token punctuation">)</span> <span class="token keyword">COMMENT</span> <span class="token string">'头像URL'</span><span class="token punctuation">,</span>
+   biography <span class="token keyword">VARCHAR</span><span class="token punctuation">(</span><span class="token number">200</span><span class="token punctuation">)</span> <span class="token keyword">COMMENT</span> <span class="token string">'个人介绍'</span><span class="token punctuation">,</span>
+   life_state <span class="token keyword">INT</span> <span class="token keyword">COMMENT</span> <span class="token string">'生活状态 0-单身，1-热恋中，2-已婚，3-为人父母'</span><span class="token punctuation">,</span>
+   begin_time <span class="token keyword">TIMESTAMP</span> <span class="token keyword">DEFAULT</span> <span class="token keyword">CURRENT_TIMESTAMP</span> <span class="token keyword">COMMENT</span> <span class="token string">'创建时间'</span><span class="token punctuation">,</span>
+   update_time <span class="token keyword">TIMESTAMP</span> <span class="token keyword">DEFAULT</span> <span class="token keyword">CURRENT_TIMESTAMP</span> <span class="token keyword">ON</span> <span class="token keyword">UPDATE</span> <span class="token keyword">CURRENT_TIMESTAMP</span> <span class="token keyword">COMMENT</span> <span class="token string">'修改时间'</span>
+<span class="token punctuation">)</span> <span class="token keyword">COMMENT</span> <span class="token string">'用户表'</span> <span class="token keyword">ENGINE</span> <span class="token operator">=</span> <span class="token keyword">INNODB</span> <span class="token keyword">AUTO_INCREMENT</span> <span class="token operator">=</span> <span class="token number">2</span> <span class="token keyword">CHARACTER SET</span> <span class="token operator">=</span> utf8 <span class="token keyword">COLLATE</span> <span class="token operator">=</span> utf8_general_ci ROW_FORMAT <span class="token operator">=</span> DYNAMIC<span class="token punctuation">;</span>
 
-insert into user(user_name,user_pwd,nick_name,user_sex,birthday,email,user_phone,address,head_url,life_state,biography) values('admin','0192023a7bbd73250516f069df18b500','管理员',0,'2018-07-31','admin@gmail.com','13888888888','浙江省杭州市西湖区某路某号','cinema/img/head-img.jpg',0,'我是苦逼的管理员');
-insert into user(user_name,user_pwd,nick_name,user_sex,birthday,email,user_phone,address,head_url,life_state,biography) values('test','5e2de6bd1c9b50f6e27d4e55da43b917','测试用户',0,'2018-08-20','test@gmail.com','13866666666','测试地址','cinema/img/head-img.jpg',1,'我是测试用户');
+<span class="token keyword">insert</span> <span class="token keyword">into</span> <span class="token keyword">user</span><span class="token punctuation">(</span>user_name<span class="token punctuation">,</span>user_pwd<span class="token punctuation">,</span>nick_name<span class="token punctuation">,</span>user_sex<span class="token punctuation">,</span>birthday<span class="token punctuation">,</span>email<span class="token punctuation">,</span>user_phone<span class="token punctuation">,</span>address<span class="token punctuation">,</span>head_url<span class="token punctuation">,</span>life_state<span class="token punctuation">,</span>biography<span class="token punctuation">)</span> <span class="token keyword">values</span><span class="token punctuation">(</span><span class="token string">'admin'</span><span class="token punctuation">,</span><span class="token string">'0192023a7bbd73250516f069df18b500'</span><span class="token punctuation">,</span><span class="token string">'管理员'</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token string">'2018-07-31'</span><span class="token punctuation">,</span><span class="token string">'admin@gmail.com'</span><span class="token punctuation">,</span><span class="token string">'13888888888'</span><span class="token punctuation">,</span><span class="token string">'浙江省杭州市西湖区某路某号'</span><span class="token punctuation">,</span><span class="token string">'cinema/img/head-img.jpg'</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token string">'我是苦逼的管理员'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">insert</span> <span class="token keyword">into</span> <span class="token keyword">user</span><span class="token punctuation">(</span>user_name<span class="token punctuation">,</span>user_pwd<span class="token punctuation">,</span>nick_name<span class="token punctuation">,</span>user_sex<span class="token punctuation">,</span>birthday<span class="token punctuation">,</span>email<span class="token punctuation">,</span>user_phone<span class="token punctuation">,</span>address<span class="token punctuation">,</span>head_url<span class="token punctuation">,</span>life_state<span class="token punctuation">,</span>biography<span class="token punctuation">)</span> <span class="token keyword">values</span><span class="token punctuation">(</span><span class="token string">'test'</span><span class="token punctuation">,</span><span class="token string">'5e2de6bd1c9b50f6e27d4e55da43b917'</span><span class="token punctuation">,</span><span class="token string">'测试用户'</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token string">'2018-08-20'</span><span class="token punctuation">,</span><span class="token string">'test@gmail.com'</span><span class="token punctuation">,</span><span class="token string">'13866666666'</span><span class="token punctuation">,</span><span class="token string">'测试地址'</span><span class="token punctuation">,</span><span class="token string">'cinema/img/head-img.jpg'</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token string">'我是测试用户'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h1 id="用户服务与网关交互"><a href="#用户服务与网关交互" class="headerlink" title="用户服务与网关交互"></a>用户服务与网关交互</h1><p>在 guns 项目中复制一份 guns-gateway 模块并重命名为 guns-user（修改相应子模块和主模块的 pom.xml 等），并在 application.yml 中将其鉴权机制等关闭（网关才需要）</p>
-<pre class="line-numbers language-YAML"><code class="language-YAML">rest:
-  auth-open: false #jwt鉴权机制是否开启(true或者false)
-  sign-open: false #签名机制是否开启(true或false)
+<pre class="line-numbers language-yaml"><code class="language-yaml"><span class="token key atrule">rest</span><span class="token punctuation">:</span>
+  <span class="token key atrule">auth-open</span><span class="token punctuation">:</span> <span class="token boolean important">false </span><span class="token comment" spellcheck="true">#jwt鉴权机制是否开启(true或者false)</span>
+  <span class="token key atrule">sign-open</span><span class="token punctuation">:</span> <span class="token boolean important">false </span><span class="token comment" spellcheck="true">#签名机制是否开启(true或false)</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p>端口设为8083</p>
-<pre class="line-numbers language-YAML"><code class="language-YAML">server:
-  port: 8083 #项目端口
+<pre class="line-numbers language-yaml"><code class="language-yaml"><span class="token key atrule">server</span><span class="token punctuation">:</span>
+  <span class="token key atrule">port</span><span class="token punctuation">:</span> <span class="token number">8083 </span><span class="token comment" spellcheck="true">#项目端口</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>在 spring:dubbo: 下添加 Dubbo 协议和端口（UserApplication 需要向外部暴露接口，先向注册中心注册，然后通过 Dubbo 协议被远程调用）</p>
-<pre class="line-numbers language-YAML"><code class="language-YAML">spring:
-  application:
-    name: cinema-user
-  dubbo:
-    server: true
-    registry: zookeeper://localhost:2181
-    protocol:
-      name: dubbo
-      port: 20881
+<pre class="line-numbers language-yaml"><code class="language-yaml"><span class="token key atrule">spring</span><span class="token punctuation">:</span>
+  <span class="token key atrule">application</span><span class="token punctuation">:</span>
+    <span class="token key atrule">name</span><span class="token punctuation">:</span> cinema<span class="token punctuation">-</span>user
+  <span class="token key atrule">dubbo</span><span class="token punctuation">:</span>
+    <span class="token key atrule">server</span><span class="token punctuation">:</span> <span class="token boolean important">true</span>
+    <span class="token key atrule">registry</span><span class="token punctuation">:</span> zookeeper<span class="token punctuation">:</span>//localhost<span class="token punctuation">:</span><span class="token number">2181</span>
+    <span class="token key atrule">protocol</span><span class="token punctuation">:</span>
+      <span class="token key atrule">name</span><span class="token punctuation">:</span> dubbo
+      <span class="token key atrule">port</span><span class="token punctuation">:</span> <span class="token number">20881</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>在 guns-user 中编写 UserAPI 的实现类，其中 UserAPI 接口是来自于 guns-api 的（在前一章已经做了业务 API 抽离），并通过 @Service 向外部暴露</p>
-<pre class="line-numbers language-Java"><code class="language-Java">@Component
-@Service(interfaceClass = UserAPI.class)
-public class UserImpl implements UserAPI {
+<pre class="line-numbers language-java"><code class="language-java"><span class="token annotation punctuation">@Component</span>
+<span class="token annotation punctuation">@Service</span><span class="token punctuation">(</span>interfaceClass <span class="token operator">=</span> UserAPI<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">UserImpl</span> <span class="token keyword">implements</span> <span class="token class-name">UserAPI</span> <span class="token punctuation">{</span>
 
-    @Override
-    public boolean login(String username, String password) {
-        System.out.println("This is user service! " + username + ", " + password);
-        return false;
-    }
-}
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">login</span><span class="token punctuation">(</span>String username<span class="token punctuation">,</span> String password<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"This is user service! "</span> <span class="token operator">+</span> username <span class="token operator">+</span> <span class="token string">", "</span> <span class="token operator">+</span> password<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>然后，在 guns-gateway 中就可以远程调用 UserAPI 接口了</p>
-<pre class="line-numbers language-Java"><code class="language-Java">    @Reference(interfaceClass = UserAPI.class)
-    private UserAPI userAPI;
+<pre class="line-numbers language-java"><code class="language-java">    <span class="token annotation punctuation">@Reference</span><span class="token punctuation">(</span>interfaceClass <span class="token operator">=</span> UserAPI<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span>
+    <span class="token keyword">private</span> UserAPI userAPI<span class="token punctuation">;</span>
 
-    userAPI.login(username, password);
+    userAPI<span class="token punctuation">.</span><span class="token function">login</span><span class="token punctuation">(</span>username<span class="token punctuation">,</span> password<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <h1 id="基于-SpringBoot-配置忽略列表"><a href="#基于-SpringBoot-配置忽略列表" class="headerlink" title="基于 SpringBoot 配置忽略列表"></a>基于 SpringBoot 配置忽略列表</h1><p>配置 guns-gateway 网关模块中的 application.yml，在 jwt 下添加 ignore-url 配置，用逗号分隔 url（<strong>注意不能有空格！</strong>），这些接口将不通过 jwt 验证过滤器</p>
 <pre class="line-numbers language-yaml"><code class="language-yaml"><span class="token key atrule">jwt</span><span class="token punctuation">:</span>
@@ -563,192 +563,192 @@ public class UserImpl implements UserAPI {
   <span class="token key atrule">ignore-url</span><span class="token punctuation">:</span> /user/<span class="token punctuation">,</span>/film/  <span class="token comment" spellcheck="true">#忽略列表</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>在 JwtProperties 中添加一项成员变量，并添加 get、set 函数，这个类是配置类，<code>@ConfigurationProperties(prefix = JwtProperties.JWT_PREFIX)</code> 表示用于从配置文件 application.yml 中获取 jwt 开头的配置变量</p>
-<pre class="line-numbers language-Java"><code class="language-Java">@Configuration
-@ConfigurationProperties(prefix = JwtProperties.JWT_PREFIX)
-public class JwtProperties {
+<pre class="line-numbers language-java"><code class="language-java"><span class="token annotation punctuation">@Configuration</span>
+<span class="token annotation punctuation">@ConfigurationProperties</span><span class="token punctuation">(</span>prefix <span class="token operator">=</span> JwtProperties<span class="token punctuation">.</span>JWT_PREFIX<span class="token punctuation">)</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">JwtProperties</span> <span class="token punctuation">{</span>
 
-    public static final String JWT_PREFIX = "jwt";
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">final</span> String JWT_PREFIX <span class="token operator">=</span> <span class="token string">"jwt"</span><span class="token punctuation">;</span>
 
-    private String header = "Authorization";
+    <span class="token keyword">private</span> String header <span class="token operator">=</span> <span class="token string">"Authorization"</span><span class="token punctuation">;</span>
 
-    private String secret = "defaultSecret";
+    <span class="token keyword">private</span> String secret <span class="token operator">=</span> <span class="token string">"defaultSecret"</span><span class="token punctuation">;</span>
 
-    private Long expiration = 604800L;
+    <span class="token keyword">private</span> Long expiration <span class="token operator">=</span> 604800L<span class="token punctuation">;</span>
 
-    private String authPath = "auth";
+    <span class="token keyword">private</span> String authPath <span class="token operator">=</span> <span class="token string">"auth"</span><span class="token punctuation">;</span>
 
-    private String md5Key = "randomKey";
+    <span class="token keyword">private</span> String md5Key <span class="token operator">=</span> <span class="token string">"randomKey"</span><span class="token punctuation">;</span>
 
-    private String ignoreUrl = "";
+    <span class="token keyword">private</span> String ignoreUrl <span class="token operator">=</span> <span class="token string">""</span><span class="token punctuation">;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>在 AuthFilter 的 doFilterInternal 方法中添加以下代码，用于忽略配置列表</p>
-<pre class="line-numbers language-Java"><code class="language-Java">        // 配置忽略列表
-        String ignoreUrl = jwtProperties.getIgnoreUrl();
-        String[] ignoreUrls = ignoreUrl.split(",");
+<pre class="line-numbers language-java"><code class="language-java">        <span class="token comment" spellcheck="true">// 配置忽略列表</span>
+        String ignoreUrl <span class="token operator">=</span> jwtProperties<span class="token punctuation">.</span><span class="token function">getIgnoreUrl</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        String<span class="token punctuation">[</span><span class="token punctuation">]</span> ignoreUrls <span class="token operator">=</span> ignoreUrl<span class="token punctuation">.</span><span class="token function">split</span><span class="token punctuation">(</span><span class="token string">","</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-        for (int i = 0; i < ignoreUrls.length; i++) {
-            if (request.getServletPath().equals(ignoreUrls[i])) {
-                chain.doFilter(request, response);
-                return;
-            }
-        }
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> ignoreUrls<span class="token punctuation">.</span>length<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>request<span class="token punctuation">.</span><span class="token function">getServletPath</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span>ignoreUrls<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                chain<span class="token punctuation">.</span><span class="token function">doFilter</span><span class="token punctuation">(</span>request<span class="token punctuation">,</span> response<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token keyword">return</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h1 id="修改-JWT-申请的返回报文"><a href="#修改-JWT-申请的返回报文" class="headerlink" title="修改 JWT 申请的返回报文"></a>修改 JWT 申请的返回报文</h1><p>在 guns-gateway 模块中的 modular.vo 下，创建 ResponseVO 类作为响应VO类，其中包含了三种状态 Status ：0-成功，1-业务失败，999-系统异常</p>
-<pre class="line-numbers language-Java"><code class="language-Java">public class ResponseVO<m> {
+<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ResponseVO</span><span class="token operator">&lt;</span>M<span class="token operator">></span> <span class="token punctuation">{</span>
 
-    /**
+    <span class="token comment" spellcheck="true">/**
      * 返回状态 [0-成功，1-业务失败，999-系统异常]
-     */
-    private Integer status;
-    /**
+     */</span>
+    <span class="token keyword">private</span> Integer status<span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">/**
      * 返回信息
-     */
-    private String msg;
-    /**
+     */</span>
+    <span class="token keyword">private</span> String msg<span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">/**
      * 返回数据实体
-     */
-    private M data;
+     */</span>
+    <span class="token keyword">private</span> M data<span class="token punctuation">;</span>
 
-    private ResponseVO() {}
+    <span class="token keyword">private</span> <span class="token function">ResponseVO</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
 
-    public static<m> ResponseVO success(M m) {
-        ResponseVO responseVO = new ResponseVO();
-        responseVO.setStatus(0);
-        responseVO.setData(m);
-        return responseVO;
-    }
+    <span class="token keyword">public</span> <span class="token keyword">static</span><span class="token operator">&lt;</span>M<span class="token operator">></span> ResponseVO <span class="token function">success</span><span class="token punctuation">(</span>M m<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        ResponseVO responseVO <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ResponseVO</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        responseVO<span class="token punctuation">.</span><span class="token function">setStatus</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        responseVO<span class="token punctuation">.</span><span class="token function">setData</span><span class="token punctuation">(</span>m<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> responseVO<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 
-    public static ResponseVO serviceFail(String msg) {
-        ResponseVO responseVO = new ResponseVO();
-        responseVO.setStatus(1);
-        responseVO.setMsg(msg);
-        return responseVO;
-    }
+    <span class="token keyword">public</span> <span class="token keyword">static</span> ResponseVO <span class="token function">serviceFail</span><span class="token punctuation">(</span>String msg<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        ResponseVO responseVO <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ResponseVO</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        responseVO<span class="token punctuation">.</span><span class="token function">setStatus</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        responseVO<span class="token punctuation">.</span><span class="token function">setMsg</span><span class="token punctuation">(</span>msg<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> responseVO<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 
-    public static ResponseVO appFail(String msg) {
-        ResponseVO responseVO = new ResponseVO();
-        responseVO.setStatus(999);
-        responseVO.setMsg(msg);
-        return responseVO;
-    }
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></m></m></code></pre>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> ResponseVO <span class="token function">appFail</span><span class="token punctuation">(</span>String msg<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        ResponseVO responseVO <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ResponseVO</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        responseVO<span class="token punctuation">.</span><span class="token function">setStatus</span><span class="token punctuation">(</span><span class="token number">999</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        responseVO<span class="token punctuation">.</span><span class="token function">setMsg</span><span class="token punctuation">(</span>msg<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> responseVO<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>之后在 AuthController 中就可以用该类作为返回对象了</p>
-<pre class="line-numbers language-Java"><code class="language-Java">    @RequestMapping(value = "${jwt.auth-path}")
-    public ResponseVO createAuthenticationToken(AuthRequest authRequest) {
+<pre class="line-numbers language-java"><code class="language-java">    <span class="token annotation punctuation">@RequestMapping</span><span class="token punctuation">(</span>value <span class="token operator">=</span> <span class="token string">"${jwt.auth-path}"</span><span class="token punctuation">)</span>
+    <span class="token keyword">public</span> ResponseVO <span class="token function">createAuthenticationToken</span><span class="token punctuation">(</span>AuthRequest authRequest<span class="token punctuation">)</span> <span class="token punctuation">{</span>
 
-        boolean validate = true;
+        <span class="token keyword">boolean</span> validate <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
 
-        // 去掉guns自身携带的用户名密码验证机制，使用自己的
-        int userId = userAPI.login(authRequest.getUserName(), authRequest.getPassword());
+        <span class="token comment" spellcheck="true">// 去掉guns自身携带的用户名密码验证机制，使用自己的</span>
+        <span class="token keyword">int</span> userId <span class="token operator">=</span> userAPI<span class="token punctuation">.</span><span class="token function">login</span><span class="token punctuation">(</span>authRequest<span class="token punctuation">.</span><span class="token function">getUserName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> authRequest<span class="token punctuation">.</span><span class="token function">getPassword</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-        if (userId == 0) {
-            validate = false;
-        }
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>userId <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            validate <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
 
-        if (validate) {
-            // randomKey和token已经生成完毕
-            final String randomKey = jwtTokenUtil.getRandomKey();
-            final String token = jwtTokenUtil.generateToken("" + userId, randomKey);
-            // 返回值
-            return ResponseVO.success(new AuthResponse(token, randomKey));
-        } else {
-            return ResponseVO.serviceFail("用户名或密码错误");
-        }
-    }
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>validate<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token comment" spellcheck="true">// randomKey和token已经生成完毕</span>
+            <span class="token keyword">final</span> String randomKey <span class="token operator">=</span> jwtTokenUtil<span class="token punctuation">.</span><span class="token function">getRandomKey</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">final</span> String token <span class="token operator">=</span> jwtTokenUtil<span class="token punctuation">.</span><span class="token function">generateToken</span><span class="token punctuation">(</span><span class="token string">""</span> <span class="token operator">+</span> userId<span class="token punctuation">,</span> randomKey<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token comment" spellcheck="true">// 返回值</span>
+            <span class="token keyword">return</span> ResponseVO<span class="token punctuation">.</span><span class="token function">success</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">AuthResponse</span><span class="token punctuation">(</span>token<span class="token punctuation">,</span> randomKey<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> ResponseVO<span class="token punctuation">.</span><span class="token function">serviceFail</span><span class="token punctuation">(</span><span class="token string">"用户名或密码错误"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h1 id="增加-Threadlocal-的用户信息保存"><a href="#增加-Threadlocal-的用户信息保存" class="headerlink" title="增加 Threadlocal 的用户信息保存"></a>增加 Threadlocal 的用户信息保存</h1><p>在 guns-gateway 中的 common 下创建 CurrentUser 类用于保存 userId（不直接保存 userInfoModel 是因为更省空间，避免用户量大时出现内存溢出），该 userId 存在 ThreadLocal 中和线程绑定，同一线程内共享</p>
-<pre class="line-numbers language-Java"><code class="language-Java">public class CurrentUser {
+<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">CurrentUser</span> <span class="token punctuation">{</span>
 
-    /**
+    <span class="token comment" spellcheck="true">/**
      * 线程绑定的存储空间
-     */
-    private static final ThreadLocal<string> threadLocal = new ThreadLocal<>();
+     */</span>
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> ThreadLocal<span class="token operator">&lt;</span>String<span class="token operator">></span> threadLocal <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ThreadLocal</span><span class="token operator">&lt;</span><span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    public static void saveUserId(String userId) {
-        threadLocal.set(userId);
-    }
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">saveUserId</span><span class="token punctuation">(</span>String userId<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        threadLocal<span class="token punctuation">.</span><span class="token function">set</span><span class="token punctuation">(</span>userId<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 
-    public static String getCurrentUser() {
-        return threadLocal.get();
-    }
-}
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></string></code></pre>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> String <span class="token function">getCurrentUser</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> threadLocal<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>之后，在 AuthFilter 验证 token 时，就可以通过 token 获取 userID，并且将之存入 ThreadLocal，以便后续业务调用了</p>
-<pre class="line-numbers language-Java"><code class="language-Java">            String userId = jwtTokenUtil.getUsernameFromToken(authToken);
-            if (userId == null) {
-                return;
-            } else {
-                CurrentUser.saveUserId(userId);
-            }
+<pre class="line-numbers language-java"><code class="language-java">            String userId <span class="token operator">=</span> jwtTokenUtil<span class="token punctuation">.</span><span class="token function">getUsernameFromToken</span><span class="token punctuation">(</span>authToken<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>userId <span class="token operator">==</span> null<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token keyword">return</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+                CurrentUser<span class="token punctuation">.</span><span class="token function">saveUserId</span><span class="token punctuation">(</span>userId<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>在用户后续访问时，就可以取出 userId，并从数据库或 redis 中获取用户信息了</p>
-<pre class="line-numbers language-Java"><code class="language-Java">@Controller
-@RequestMapping("/hello")
-public class ExampleController {
+<pre class="line-numbers language-java"><code class="language-java"><span class="token annotation punctuation">@Controller</span>
+<span class="token annotation punctuation">@RequestMapping</span><span class="token punctuation">(</span><span class="token string">"/hello"</span><span class="token punctuation">)</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ExampleController</span> <span class="token punctuation">{</span>
 
-    @RequestMapping("")
-    public ResponseEntity hello() {
+    <span class="token annotation punctuation">@RequestMapping</span><span class="token punctuation">(</span><span class="token string">""</span><span class="token punctuation">)</span>
+    <span class="token keyword">public</span> ResponseEntity <span class="token function">hello</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
 
-        System.out.println(CurrentUser.getCurrentUser());
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>CurrentUser<span class="token punctuation">.</span><span class="token function">getCurrentUser</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-        // 这里将以userId为key，userInfo为value存在redis中，TTL为30分钟
-        // 或以userId为条件去数据库取出（和redis只有快慢的区别）
+        <span class="token comment" spellcheck="true">// 这里将以userId为key，userInfo为value存在redis中，TTL为30分钟</span>
+        <span class="token comment" spellcheck="true">// 或以userId为条件去数据库取出（和redis只有快慢的区别）</span>
 
-        return ResponseEntity.ok("请求成功!");
-    }
-}
+        <span class="token keyword">return</span> ResponseEntity<span class="token punctuation">.</span><span class="token function">ok</span><span class="token punctuation">(</span><span class="token string">"请求成功!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h1 id="用户模块开发"><a href="#用户模块开发" class="headerlink" title="用户模块开发"></a>用户模块开发</h1><h2 id="业务功能开发流程"><a href="#业务功能开发流程" class="headerlink" title="业务功能开发流程"></a>业务功能开发流程</h2><h3 id="使用代码生成器生成数据项"><a href="#使用代码生成器生成数据项" class="headerlink" title="使用代码生成器生成数据项"></a>使用代码生成器生成数据项</h3><p>在每个 guns 模块的 test 下，都有 enerator.EntityGenerator 这个用于实体生成的类，只需根据需要稍微修改一下方法的参数即可。在 guns-user 模块中生成即可得到：UserT, UserTMapper, UserTMapper.xml</p>
-<pre class="line-numbers language-Java"><code class="language-Java">...
-// 生成代码的绝对目录
-gc.setOutputDir("/Users/zjxjwxk/Documents/GitHub/Cinema-Dubbo/guns-user/src/main/java");
-...
-// 作者信息
-gc.setAuthor("zjxjwxk");
-...
-// 数据库连接配置
-dsc.setUsername("root");
-dsc.setPassword("19981018");
-dsc.setUrl("jdbc:mysql://127.0.0.1:3306/guns_rest?autoReconnect=true&useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8");
-...
-// 数据库表前缀
-strategy.setInclude(new String[]{"user_t"});
-...
-// 生成 Entity、Mapper、XML 的包的相对目录
-pc.setEntity("com.stylefeng.guns.rest.common.persistence.model");
-pc.setMapper("com.stylefeng.guns.rest.common.persistence.dao");
-pc.setXml("com.stylefeng.guns.rest.common.persistence.dao.mapping");
-...
+<pre class="line-numbers language-java"><code class="language-java"><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+<span class="token comment" spellcheck="true">// 生成代码的绝对目录</span>
+gc<span class="token punctuation">.</span><span class="token function">setOutputDir</span><span class="token punctuation">(</span><span class="token string">"/Users/zjxjwxk/Documents/GitHub/Cinema-Dubbo/guns-user/src/main/java"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+<span class="token comment" spellcheck="true">// 作者信息</span>
+gc<span class="token punctuation">.</span><span class="token function">setAuthor</span><span class="token punctuation">(</span><span class="token string">"zjxjwxk"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+<span class="token comment" spellcheck="true">// 数据库连接配置</span>
+dsc<span class="token punctuation">.</span><span class="token function">setUsername</span><span class="token punctuation">(</span><span class="token string">"root"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+dsc<span class="token punctuation">.</span><span class="token function">setPassword</span><span class="token punctuation">(</span><span class="token string">"19981018"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+dsc<span class="token punctuation">.</span><span class="token function">setUrl</span><span class="token punctuation">(</span><span class="token string">"jdbc:mysql://127.0.0.1:3306/guns_rest?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=utf8&amp;serverTimezone=GMT%2B8"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+<span class="token comment" spellcheck="true">// 数据库表前缀</span>
+strategy<span class="token punctuation">.</span><span class="token function">setInclude</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">{</span><span class="token string">"user_t"</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+<span class="token comment" spellcheck="true">// 生成 Entity、Mapper、XML 的包的相对目录</span>
+pc<span class="token punctuation">.</span><span class="token function">setEntity</span><span class="token punctuation">(</span><span class="token string">"com.stylefeng.guns.rest.common.persistence.model"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+pc<span class="token punctuation">.</span><span class="token function">setMapper</span><span class="token punctuation">(</span><span class="token string">"com.stylefeng.guns.rest.common.persistence.dao"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+pc<span class="token punctuation">.</span><span class="token function">setXml</span><span class="token punctuation">(</span><span class="token string">"com.stylefeng.guns.rest.common.persistence.dao.mapping"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>此处生成的实体类属于 guns-user 模块，用于和数据库打交道。以下是 guns-gateway 模块和 guns-user 模块不同的三种 user 类，UserModel 和 UserInfoModel 属于 BO，而 MoocUserT （即UserT） 属于 DO。</p>
 <p><img src="/2020/03/11/Dubbo/Dubbo微服务影院系列/5.Dubbo基本特性（用户模块开发）/Dubbo微服务影院系列（5）：Dubbo基本特性（用户模块开发）/image-20200317202533906.png" alt="不同模块中的User类"></p>
 <h3 id="实现相应的接口功能"><a href="#实现相应的接口功能" class="headerlink" title="实现相应的接口功能"></a>实现相应的接口功能</h3><p>在 guns-user 模块的 UserServiceImpl 中实现 UserAPI （在 guns-api 中）的接口，如：</p>
-<pre class="line-numbers language-Java"><code class="language-Java">@Component
-@Service(interfaceClass = UserAPI.class)
-public class UserServiceImpl implements UserAPI {
+<pre class="line-numbers language-java"><code class="language-java"><span class="token annotation punctuation">@Component</span>
+<span class="token annotation punctuation">@Service</span><span class="token punctuation">(</span>interfaceClass <span class="token operator">=</span> UserAPI<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">UserServiceImpl</span> <span class="token keyword">implements</span> <span class="token class-name">UserAPI</span> <span class="token punctuation">{</span>
 
-    @Autowired
-    private UserTMapper userTMapper;
+    <span class="token annotation punctuation">@Autowired</span>
+    <span class="token keyword">private</span> UserTMapper userTMapper<span class="token punctuation">;</span>
 
-    @Override
-    public boolean register(UserModel userModel)  {
-        ...
-    }
-}
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">register</span><span class="token punctuation">(</span>UserModel userModel<span class="token punctuation">)</span>  <span class="token punctuation">{</span>
+        <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>在 guns-gateway 模块的 UserController 中实现编写相应 url 和控制层代码，如：</p>
-<pre class="line-numbers language-Java"><code class="language-Java">@RequestMapping("/user/")
-@RestController
-public class UserController {
+<pre class="line-numbers language-java"><code class="language-java"><span class="token annotation punctuation">@RequestMapping</span><span class="token punctuation">(</span><span class="token string">"/user/"</span><span class="token punctuation">)</span>
+<span class="token annotation punctuation">@RestController</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">UserController</span> <span class="token punctuation">{</span>
 
-    @Reference(interfaceClass = UserAPI.class)
-    private UserAPI userAPI;
+    <span class="token annotation punctuation">@Reference</span><span class="token punctuation">(</span>interfaceClass <span class="token operator">=</span> UserAPI<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span>
+    <span class="token keyword">private</span> UserAPI userAPI<span class="token punctuation">;</span>
 
-    @RequestMapping(name = "register", method = RequestMethod.POST)
-    public ResponseVO register(UserModel userModel) {
-       ...
-    }
-}
+    <span class="token annotation punctuation">@RequestMapping</span><span class="token punctuation">(</span>name <span class="token operator">=</span> <span class="token string">"register"</span><span class="token punctuation">,</span> method <span class="token operator">=</span> RequestMethod<span class="token punctuation">.</span>POST<span class="token punctuation">)</span>
+    <span class="token keyword">public</span> ResponseVO <span class="token function">register</span><span class="token punctuation">(</span>UserModel userModel<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+       <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h1 id="Dubbo-特性"><a href="#Dubbo-特性" class="headerlink" title="Dubbo 特性"></a>Dubbo 特性</h1><h2 id="存在的问题"><a href="#存在的问题" class="headerlink" title="存在的问题"></a>存在的问题</h2><ul>
 <li>必须先启动服务提供者，否则会报错（如下）。如果有两个服务互相依赖，那么两个服务都无法启动成功。（Dubbo 启动检查）</li>
@@ -1086,7 +1086,7 @@ public class UserController {
                         <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
                     </div>
                     <div id="wechat">
-                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
                     </div>
                 </div>
             </div>
@@ -1377,7 +1377,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
             <br>
             
-            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span class="white-color">65.6k</span>&nbsp;字
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span class="white-color">67.7k</span>&nbsp;字
             
             
             

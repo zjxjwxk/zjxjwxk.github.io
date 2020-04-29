@@ -450,14 +450,14 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-03-30
+                    2020-04-29
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    287
+                    290
                 </div>
                 
 
@@ -492,29 +492,29 @@
 <li>i == 1 时，个数为 leftNum * e + rightNum + 1</li>
 <li>i == 0 时，个数为 leftNum * e</li>
 </ol>
-<pre class="line-numbers language-C++"><code class="language-C++">#include <cstdio>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;cstdio></span></span>
 
-int main() {
-    int n;
-    scanf("%d", &n);
-    int i, leftNum = n, rightNum, e = 1, ans = 0;
-    while (leftNum != 0) {
-        i = n / e % 10;
-        leftNum /= 10;
-        rightNum = n % e;
-        if (i > 1) {
-            ans += (leftNum + 1) * e;
-        } else if (i == 1) {
-            ans += leftNum * e + rightNum + 1;
-        } else {
-            ans += leftNum * e;
-        }
-        e *= 10;
-    }
-    printf("%d", ans);
-    return 0;
-}
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></cstdio></code></pre>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">int</span> n<span class="token punctuation">;</span>
+    <span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>n<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> i<span class="token punctuation">,</span> leftNum <span class="token operator">=</span> n<span class="token punctuation">,</span> rightNum<span class="token punctuation">,</span> e <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">,</span> ans <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>leftNum <span class="token operator">!=</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        i <span class="token operator">=</span> n <span class="token operator">/</span> e <span class="token operator">%</span> <span class="token number">10</span><span class="token punctuation">;</span>
+        leftNum <span class="token operator">/</span><span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
+        rightNum <span class="token operator">=</span> n <span class="token operator">%</span> e<span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>i <span class="token operator">></span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            ans <span class="token operator">+</span><span class="token operator">=</span> <span class="token punctuation">(</span>leftNum <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">*</span> e<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>i <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            ans <span class="token operator">+</span><span class="token operator">=</span> leftNum <span class="token operator">*</span> e <span class="token operator">+</span> rightNum <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+            ans <span class="token operator">+</span><span class="token operator">=</span> leftNum <span class="token operator">*</span> e<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        e <span class="token operator">*</span><span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span> ans<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
@@ -730,7 +730,7 @@ int main() {
                         <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
                     </div>
                     <div id="wechat">
-                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
                     </div>
                 </div>
             </div>
@@ -828,22 +828,19 @@ Dubbo 结果缓存
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/03/30/PAT/Basic_Level/B1003/">
+                <a href="/2020/03/30/PAT/Advanced_Level/A1104/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/6.jpg" class="responsive-img" alt="PAT乙级 1003 我要通过！ (20分)">
+                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="PAT甲级 1104 Sum of Number Segments (20分)">
                         
-                        <span class="card-title">PAT乙级 1003 我要通过！ (20分)</span>
+                        <span class="card-title">PAT甲级 1104 Sum of Number Segments (20分)</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            “答案正确”是自动判题系统给出的最令人欢喜的回复。本题属于 PAT 的“答案正确”大派送 —— 只要读入的字符串满足下列条件，系统就输出“答案正确”，否则输出“答案错误”。
-得到“答案正确”的条件是：
-
-字符串中必须仅有 P、 A、 T这三
+                            Given a sequence of positive numbers, a segment is defined to be a consecutive subsequence. For example, given the seque
                         
                     </div>
                     <div class="publish-info">
@@ -1022,7 +1019,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
             <br>
             
-            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span class="white-color">65.6k</span>&nbsp;字
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span class="white-color">67.7k</span>&nbsp;字
             
             
             

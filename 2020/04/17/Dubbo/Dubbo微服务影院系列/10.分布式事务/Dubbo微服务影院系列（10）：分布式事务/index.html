@@ -450,7 +450,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-04-24
+                    2020-04-29
                 </div>
                 
 
@@ -545,141 +545,141 @@
 <p><img src="/2020/04/17/Dubbo/Dubbo微服务影院系列/10.分布式事务/Dubbo微服务影院系列（10）：分布式事务/image-20200424222245457.png" alt="TCC库"></p>
 <p><img src="/2020/04/17/Dubbo/Dubbo微服务影院系列/10.分布式事务/Dubbo微服务影院系列（10）：分布式事务/image-20200424222709615.png" alt="TCC表结构"></p>
 <h2 id="Dubbo-Demo"><a href="#Dubbo-Demo" class="headerlink" title="Dubbo Demo"></a>Dubbo Demo</h2><h3 id="子事务：红包模块"><a href="#子事务：红包模块" class="headerlink" title="子事务：红包模块"></a>子事务：红包模块</h3><p><strong>接口</strong></p>
-<pre class="line-numbers language-Java"><code class="language-Java">public interface RedPacketTradeOrderService {
+<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">RedPacketTradeOrderService</span> <span class="token punctuation">{</span>
 
-    @Compensable
-    public String record(RedPacketTradeOrderDto tradeOrderDto);
-}
+    <span class="token annotation punctuation">@Compensable</span>
+    <span class="token keyword">public</span> String <span class="token function">record</span><span class="token punctuation">(</span>RedPacketTradeOrderDto tradeOrderDto<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><strong>实现类</strong></p>
-<pre class="line-numbers language-Java"><code class="language-Java">@Service("redPacketTradeOrderService")
-public class RedPacketTradeOrderServiceImpl implements RedPacketTradeOrderService {
+<pre class="line-numbers language-java"><code class="language-java"><span class="token annotation punctuation">@Service</span><span class="token punctuation">(</span><span class="token string">"redPacketTradeOrderService"</span><span class="token punctuation">)</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">RedPacketTradeOrderServiceImpl</span> <span class="token keyword">implements</span> <span class="token class-name">RedPacketTradeOrderService</span> <span class="token punctuation">{</span>
 
-    @Autowired
-    RedPacketAccountRepository redPacketAccountRepository;
+    <span class="token annotation punctuation">@Autowired</span>
+    RedPacketAccountRepository redPacketAccountRepository<span class="token punctuation">;</span>
 
-    @Autowired
-    TradeOrderRepository tradeOrderRepository;
+    <span class="token annotation punctuation">@Autowired</span>
+    TradeOrderRepository tradeOrderRepository<span class="token punctuation">;</span>
 
-    @Override
-    @Compensable(confirmMethod = "confirmRecord", cancelMethod = "cancelRecord", transactionContextEditor = DubboTransactionContextEditor.class)
-    @Transactional
-    public String record(RedPacketTradeOrderDto tradeOrderDto) {
-        TradeOrder foundTradeOrder = tradeOrderRepository.findByMerchantOrderNo(tradeOrderDto.getMerchantOrderNo());
-        // check if trade order has been recorded, if yes, return success directly.
-        if (foundTradeOrder == null) {
-            TradeOrder tradeOrder = new TradeOrder(
-                    tradeOrderDto.getSelfUserId(),
-                    tradeOrderDto.getOppositeUserId(),
-                    tradeOrderDto.getMerchantOrderNo(),
-                    tradeOrderDto.getAmount()
-            );
-            try {
-                tradeOrderRepository.insert(tradeOrder);
-                RedPacketAccount transferFromAccount = redPacketAccountRepository.findByUserId(tradeOrderDto.getSelfUserId());
-                transferFromAccount.transferFrom(tradeOrderDto.getAmount());
-                redPacketAccountRepository.save(transferFromAccount);
-            } catch (DataIntegrityViolationException e) {
-                // this exception may happen when insert trade order concurrently, if happened, ignore this insert operation.
-            }
-        }
-        return "success";
-    }
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token annotation punctuation">@Compensable</span><span class="token punctuation">(</span>confirmMethod <span class="token operator">=</span> <span class="token string">"confirmRecord"</span><span class="token punctuation">,</span> cancelMethod <span class="token operator">=</span> <span class="token string">"cancelRecord"</span><span class="token punctuation">,</span> transactionContextEditor <span class="token operator">=</span> DubboTransactionContextEditor<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span>
+    <span class="token annotation punctuation">@Transactional</span>
+    <span class="token keyword">public</span> String <span class="token function">record</span><span class="token punctuation">(</span>RedPacketTradeOrderDto tradeOrderDto<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        TradeOrder foundTradeOrder <span class="token operator">=</span> tradeOrderRepository<span class="token punctuation">.</span><span class="token function">findByMerchantOrderNo</span><span class="token punctuation">(</span>tradeOrderDto<span class="token punctuation">.</span><span class="token function">getMerchantOrderNo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">// check if trade order has been recorded, if yes, return success directly.</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>foundTradeOrder <span class="token operator">==</span> null<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            TradeOrder tradeOrder <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">TradeOrder</span><span class="token punctuation">(</span>
+                    tradeOrderDto<span class="token punctuation">.</span><span class="token function">getSelfUserId</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+                    tradeOrderDto<span class="token punctuation">.</span><span class="token function">getOppositeUserId</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+                    tradeOrderDto<span class="token punctuation">.</span><span class="token function">getMerchantOrderNo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+                    tradeOrderDto<span class="token punctuation">.</span><span class="token function">getAmount</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+            <span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">try</span> <span class="token punctuation">{</span>
+                tradeOrderRepository<span class="token punctuation">.</span><span class="token function">insert</span><span class="token punctuation">(</span>tradeOrder<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                RedPacketAccount transferFromAccount <span class="token operator">=</span> redPacketAccountRepository<span class="token punctuation">.</span><span class="token function">findByUserId</span><span class="token punctuation">(</span>tradeOrderDto<span class="token punctuation">.</span><span class="token function">getSelfUserId</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                transferFromAccount<span class="token punctuation">.</span><span class="token function">transferFrom</span><span class="token punctuation">(</span>tradeOrderDto<span class="token punctuation">.</span><span class="token function">getAmount</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                redPacketAccountRepository<span class="token punctuation">.</span><span class="token function">save</span><span class="token punctuation">(</span>transferFromAccount<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">DataIntegrityViolationException</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token comment" spellcheck="true">// this exception may happen when insert trade order concurrently, if happened, ignore this insert operation.</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> <span class="token string">"success"</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 
-    @Transactional
-    public void confirmRecord(RedPacketTradeOrderDto tradeOrderDto) {
-        TradeOrder tradeOrder = tradeOrderRepository.findByMerchantOrderNo(tradeOrderDto.getMerchantOrderNo());
-        // check if the trade order status is DRAFT, if yes, return directly, ensure idempotency.
-        if (tradeOrder != null && tradeOrder.getStatus().equals("DRAFT")) {
-            tradeOrder.confirm();
-            tradeOrderRepository.update(tradeOrder);
-            RedPacketAccount transferToAccount = redPacketAccountRepository.findByUserId(tradeOrderDto.getOppositeUserId());
-            transferToAccount.transferTo(tradeOrderDto.getAmount());
-            redPacketAccountRepository.save(transferToAccount);
-        }
-    }
+    <span class="token annotation punctuation">@Transactional</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">confirmRecord</span><span class="token punctuation">(</span>RedPacketTradeOrderDto tradeOrderDto<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        TradeOrder tradeOrder <span class="token operator">=</span> tradeOrderRepository<span class="token punctuation">.</span><span class="token function">findByMerchantOrderNo</span><span class="token punctuation">(</span>tradeOrderDto<span class="token punctuation">.</span><span class="token function">getMerchantOrderNo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">// check if the trade order status is DRAFT, if yes, return directly, ensure idempotency.</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>tradeOrder <span class="token operator">!=</span> null <span class="token operator">&amp;&amp;</span> tradeOrder<span class="token punctuation">.</span><span class="token function">getStatus</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span><span class="token string">"DRAFT"</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            tradeOrder<span class="token punctuation">.</span><span class="token function">confirm</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            tradeOrderRepository<span class="token punctuation">.</span><span class="token function">update</span><span class="token punctuation">(</span>tradeOrder<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            RedPacketAccount transferToAccount <span class="token operator">=</span> redPacketAccountRepository<span class="token punctuation">.</span><span class="token function">findByUserId</span><span class="token punctuation">(</span>tradeOrderDto<span class="token punctuation">.</span><span class="token function">getOppositeUserId</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            transferToAccount<span class="token punctuation">.</span><span class="token function">transferTo</span><span class="token punctuation">(</span>tradeOrderDto<span class="token punctuation">.</span><span class="token function">getAmount</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            redPacketAccountRepository<span class="token punctuation">.</span><span class="token function">save</span><span class="token punctuation">(</span>transferToAccount<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
 
-    @Transactional
-    public void cancelRecord(RedPacketTradeOrderDto tradeOrderDto) {
-        TradeOrder tradeOrder = tradeOrderRepository.findByMerchantOrderNo(tradeOrderDto.getMerchantOrderNo());
-        // check if the trade order status is DRAFT, if yes, return directly, ensure idempotency.
-        if (null != tradeOrder && "DRAFT".equals(tradeOrder.getStatus())) {
-            tradeOrder.cancel();
-            tradeOrderRepository.update(tradeOrder);
-            RedPacketAccount capitalAccount = redPacketAccountRepository.findByUserId(tradeOrderDto.getSelfUserId());
-            capitalAccount.cancelTransfer(tradeOrderDto.getAmount());
-            redPacketAccountRepository.save(capitalAccount);
-        }
-    }
-}
+    <span class="token annotation punctuation">@Transactional</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">cancelRecord</span><span class="token punctuation">(</span>RedPacketTradeOrderDto tradeOrderDto<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        TradeOrder tradeOrder <span class="token operator">=</span> tradeOrderRepository<span class="token punctuation">.</span><span class="token function">findByMerchantOrderNo</span><span class="token punctuation">(</span>tradeOrderDto<span class="token punctuation">.</span><span class="token function">getMerchantOrderNo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">// check if the trade order status is DRAFT, if yes, return directly, ensure idempotency.</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>null <span class="token operator">!=</span> tradeOrder <span class="token operator">&amp;&amp;</span> <span class="token string">"DRAFT"</span><span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span>tradeOrder<span class="token punctuation">.</span><span class="token function">getStatus</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            tradeOrder<span class="token punctuation">.</span><span class="token function">cancel</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            tradeOrderRepository<span class="token punctuation">.</span><span class="token function">update</span><span class="token punctuation">(</span>tradeOrder<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            RedPacketAccount capitalAccount <span class="token operator">=</span> redPacketAccountRepository<span class="token punctuation">.</span><span class="token function">findByUserId</span><span class="token punctuation">(</span>tradeOrderDto<span class="token punctuation">.</span><span class="token function">getSelfUserId</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            capitalAccount<span class="token punctuation">.</span><span class="token function">cancelTransfer</span><span class="token punctuation">(</span>tradeOrderDto<span class="token punctuation">.</span><span class="token function">getAmount</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            redPacketAccountRepository<span class="token punctuation">.</span><span class="token function">save</span><span class="token punctuation">(</span>capitalAccount<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>思考：为什么要在 <code>confirm</code> 和 <code>cancel</code> 方法里先检查订单状态是否为 DRAFT（在 try 方法中新增的一个订单），而不直接修改为结束状态？</p>
 <p>答：为了保证服务的幂等性，即使用相同参数对同一资源重复调用某个接口的结果与调用一次的结果相同。</p>
 <h3 id="主事务：订单模块"><a href="#主事务：订单模块" class="headerlink" title="主事务：订单模块"></a>主事务：订单模块</h3><p>注意：要在主事务的业务已经实现的差不多的时候才调用子事务。</p>
-<pre class="line-numbers language-Java"><code class="language-Java">@Service
-public class PaymentServiceImpl {
+<pre class="line-numbers language-java"><code class="language-java"><span class="token annotation punctuation">@Service</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">PaymentServiceImpl</span> <span class="token punctuation">{</span>
 
-    @Autowired
-    CapitalTradeOrderService capitalTradeOrderService;
+    <span class="token annotation punctuation">@Autowired</span>
+    CapitalTradeOrderService capitalTradeOrderService<span class="token punctuation">;</span>
 
-    @Autowired
-    RedPacketTradeOrderService redPacketTradeOrderService;
+    <span class="token annotation punctuation">@Autowired</span>
+    RedPacketTradeOrderService redPacketTradeOrderService<span class="token punctuation">;</span>
 
-    @Autowired
-    OrderRepository orderRepository;
+    <span class="token annotation punctuation">@Autowired</span>
+    OrderRepository orderRepository<span class="token punctuation">;</span>
 
-    @Compensable(confirmMethod = "confirmMakePayment", cancelMethod = "cancelMakePayment", asyncConfirm = false, delayCancelExceptions = {SocketTimeoutException.class, org.apache.dubbo.remoting.TimeoutException.class})
-    public void makePayment(@UniqueIdentity String orderNo, BigDecimal redPacketPayAmount, BigDecimal capitalPayAmount) {
-        Order order = orderRepository.findByMerchantOrderNo(orderNo);
-        // check if the order status is DRAFT, if no, means that another call makePayment for the same order happened, ignore this call makePayment.
-        if (order.getStatus().equals("DRAFT")) {
-            order.pay(redPacketPayAmount, capitalPayAmount);
-            try {
-                orderRepository.updateOrder(order);
-            } catch (OptimisticLockingFailureException e) {
-                // ignore the concurrently update order exception, ensure idempotency.
-            }
-        }
-      // 调用子事务
-        String result = capitalTradeOrderService.record(buildCapitalTradeOrderDto(order));
-        String result2 = redPacketTradeOrderService.record(buildRedPacketTradeOrderDto(order));
-    }
+    <span class="token annotation punctuation">@Compensable</span><span class="token punctuation">(</span>confirmMethod <span class="token operator">=</span> <span class="token string">"confirmMakePayment"</span><span class="token punctuation">,</span> cancelMethod <span class="token operator">=</span> <span class="token string">"cancelMakePayment"</span><span class="token punctuation">,</span> asyncConfirm <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">,</span> delayCancelExceptions <span class="token operator">=</span> <span class="token punctuation">{</span>SocketTimeoutException<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">,</span> org<span class="token punctuation">.</span>apache<span class="token punctuation">.</span>dubbo<span class="token punctuation">.</span>remoting<span class="token punctuation">.</span>TimeoutException<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">makePayment</span><span class="token punctuation">(</span><span class="token annotation punctuation">@UniqueIdentity</span> String orderNo<span class="token punctuation">,</span> BigDecimal redPacketPayAmount<span class="token punctuation">,</span> BigDecimal capitalPayAmount<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        Order order <span class="token operator">=</span> orderRepository<span class="token punctuation">.</span><span class="token function">findByMerchantOrderNo</span><span class="token punctuation">(</span>orderNo<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">// check if the order status is DRAFT, if no, means that another call makePayment for the same order happened, ignore this call makePayment.</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>order<span class="token punctuation">.</span><span class="token function">getStatus</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span><span class="token string">"DRAFT"</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            order<span class="token punctuation">.</span><span class="token function">pay</span><span class="token punctuation">(</span>redPacketPayAmount<span class="token punctuation">,</span> capitalPayAmount<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">try</span> <span class="token punctuation">{</span>
+                orderRepository<span class="token punctuation">.</span><span class="token function">updateOrder</span><span class="token punctuation">(</span>order<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">OptimisticLockingFailureException</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token comment" spellcheck="true">// ignore the concurrently update order exception, ensure idempotency.</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+      <span class="token comment" spellcheck="true">// 调用子事务</span>
+        String result <span class="token operator">=</span> capitalTradeOrderService<span class="token punctuation">.</span><span class="token function">record</span><span class="token punctuation">(</span><span class="token function">buildCapitalTradeOrderDto</span><span class="token punctuation">(</span>order<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        String result2 <span class="token operator">=</span> redPacketTradeOrderService<span class="token punctuation">.</span><span class="token function">record</span><span class="token punctuation">(</span><span class="token function">buildRedPacketTradeOrderDto</span><span class="token punctuation">(</span>order<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 
-    public void confirmMakePayment(String orderNo, BigDecimal redPacketPayAmount, BigDecimal capitalPayAmount) {
-        Order foundOrder = orderRepository.findByMerchantOrderNo(orderNo);
-        // check if the trade order status is PAYING, if no, means another call confirmMakePayment happened, return directly, ensure idempotency.
-        if (foundOrder != null && foundOrder.getStatus().equals("PAYING")) {
-            foundOrder.confirm();
-            orderRepository.updateOrder(foundOrder);
-        }
-    }
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">confirmMakePayment</span><span class="token punctuation">(</span>String orderNo<span class="token punctuation">,</span> BigDecimal redPacketPayAmount<span class="token punctuation">,</span> BigDecimal capitalPayAmount<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        Order foundOrder <span class="token operator">=</span> orderRepository<span class="token punctuation">.</span><span class="token function">findByMerchantOrderNo</span><span class="token punctuation">(</span>orderNo<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">// check if the trade order status is PAYING, if no, means another call confirmMakePayment happened, return directly, ensure idempotency.</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>foundOrder <span class="token operator">!=</span> null <span class="token operator">&amp;&amp;</span> foundOrder<span class="token punctuation">.</span><span class="token function">getStatus</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span><span class="token string">"PAYING"</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            foundOrder<span class="token punctuation">.</span><span class="token function">confirm</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            orderRepository<span class="token punctuation">.</span><span class="token function">updateOrder</span><span class="token punctuation">(</span>foundOrder<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
 
-    public void cancelMakePayment(String orderNo,  BigDecimal redPacketPayAmount, BigDecimal capitalPayAmount) {
-        Order foundOrder = orderRepository.findByMerchantOrderNo(orderNo);
-        // check if the trade order status is PAYING, if no, means another call cancelMakePayment happened, return directly, ensure idempotency.
-        if (foundOrder != null && foundOrder.getStatus().equals("PAYING")) {
-            foundOrder.cancelPayment();
-            orderRepository.updateOrder(foundOrder);
-        }
-    }
-}
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">cancelMakePayment</span><span class="token punctuation">(</span>String orderNo<span class="token punctuation">,</span>  BigDecimal redPacketPayAmount<span class="token punctuation">,</span> BigDecimal capitalPayAmount<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        Order foundOrder <span class="token operator">=</span> orderRepository<span class="token punctuation">.</span><span class="token function">findByMerchantOrderNo</span><span class="token punctuation">(</span>orderNo<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">// check if the trade order status is PAYING, if no, means another call cancelMakePayment happened, return directly, ensure idempotency.</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>foundOrder <span class="token operator">!=</span> null <span class="token operator">&amp;&amp;</span> foundOrder<span class="token punctuation">.</span><span class="token function">getStatus</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span><span class="token string">"PAYING"</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            foundOrder<span class="token punctuation">.</span><span class="token function">cancelPayment</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            orderRepository<span class="token punctuation">.</span><span class="token function">updateOrder</span><span class="token punctuation">(</span>foundOrder<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h2 id="流程图"><a href="#流程图" class="headerlink" title="流程图"></a>流程图</h2><p><img src="/2020/04/17/Dubbo/Dubbo微服务影院系列/10.分布式事务/Dubbo微服务影院系列（10）：分布式事务/image-20200420202720213.png" alt="TCC-Transaction-Core"></p>
 <h2 id="隐式参数"><a href="#隐式参数" class="headerlink" title="隐式参数"></a>隐式参数</h2><p>根据官方文档可以得知，1.2.x 版本支持 rpc 框架支持隐式传参情况下将事务上下文参数 <code>TransactionContext</code> 以隐式传参方式进行传递。</p>
 <p>那么，在子事务的 Service 实现代码中获取 Dubbo 隐式参数：</p>
-<pre class="line-numbers language-Java"><code class="language-Java">Map<string, string=""> attachments = RpcContext.getContext().getAttachments();
-<span aria-hidden="true" class="line-numbers-rows"><span></span></span></string,></code></pre>
+<pre class="line-numbers language-java"><code class="language-java">Map<span class="token operator">&lt;</span>String<span class="token punctuation">,</span> String<span class="token operator">></span> attachments <span class="token operator">=</span> RpcContext<span class="token punctuation">.</span><span class="token function">getContext</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getAttachments</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p><img src="/2020/04/17/Dubbo/Dubbo微服务影院系列/10.分布式事务/Dubbo微服务影院系列（10）：分布式事务/image-20200422004334435.png" alt="Dubbo隐式参数attachments"></p>
 <p>打一个断点，可以从隐式参数中得到 key 为 TRANSACTION_CONTEXT，value 为以下信息的键值对：</p>
-<pre class="line-numbers language-JSON"><code class="language-JSON">{
-  "attachments":{},
-  "status":1,
-  "xid":{
-    "branchQualifier":"hMBMmir6Q56M0hskfmPebw==",
-    "formatId":1,
-    "globalTransactionId":"trSosXg0Soi8Q9xlauTToQ=="
-  }
-}
+<pre class="line-numbers language-json"><code class="language-json"><span class="token punctuation">{</span>
+  <span class="token property">"attachments"</span><span class="token operator">:</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token property">"status"</span><span class="token operator">:</span><span class="token number">1</span><span class="token punctuation">,</span>
+  <span class="token property">"xid"</span><span class="token operator">:</span><span class="token punctuation">{</span>
+    <span class="token property">"branchQualifier"</span><span class="token operator">:</span><span class="token string">"hMBMmir6Q56M0hskfmPebw=="</span><span class="token punctuation">,</span>
+    <span class="token property">"formatId"</span><span class="token operator">:</span><span class="token number">1</span><span class="token punctuation">,</span>
+    <span class="token property">"globalTransactionId"</span><span class="token operator">:</span><span class="token string">"trSosXg0Soi8Q9xlauTToQ=="</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>其中，包含了 <code>globalTransactionId</code> 这一全局事务 id，和 <code>branchQualifier</code> 分支事务 id。</p>
 <p>##提出疑问</p>
@@ -694,78 +694,78 @@ public class PaymentServiceImpl {
 <p><img src="/2020/04/17/Dubbo/Dubbo微服务影院系列/10.分布式事务/Dubbo微服务影院系列（10）：分布式事务/image-20200422224921576.png" alt="intercepter包"></p>
 <p><strong>CompensableMethodContext</strong></p>
 <p>这是加了 <code>@Compensable</code> 注释的目标方法对象的上下文类。通过构造函数，利用拦截的目标对象上下文，获取被拦截目标对象方法的各种信息。</p>
-<pre class="line-numbers language-Java"><code class="language-Java">public CompensableMethodContext(ProceedingJoinPoint pjp) {
-        this.pjp = pjp;
-      // 获取待访问对象的方法名称
-        this.method = getCompensableMethod();
-      // 获取目标对象的 Compensable 注解
-        this.compensable = method.getAnnotation(Compensable.class);
-      // 获取目标对象的事务传播属性（默认为 REQUIRED）
-        this.propagation = compensable.propagation();
-      // 获取事务上下文
-        this.transactionContext = FactoryBuilder.factoryOf(compensable.transactionContextEditor()).getInstance().get(pjp.getTarget(), method, pjp.getArgs());
-}
+<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token function">CompensableMethodContext</span><span class="token punctuation">(</span>ProceedingJoinPoint pjp<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>pjp <span class="token operator">=</span> pjp<span class="token punctuation">;</span>
+      <span class="token comment" spellcheck="true">// 获取待访问对象的方法名称</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>method <span class="token operator">=</span> <span class="token function">getCompensableMethod</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token comment" spellcheck="true">// 获取目标对象的 Compensable 注解</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>compensable <span class="token operator">=</span> method<span class="token punctuation">.</span><span class="token function">getAnnotation</span><span class="token punctuation">(</span>Compensable<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token comment" spellcheck="true">// 获取目标对象的事务传播属性（默认为 REQUIRED）</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>propagation <span class="token operator">=</span> compensable<span class="token punctuation">.</span><span class="token function">propagation</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token comment" spellcheck="true">// 获取事务上下文</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>transactionContext <span class="token operator">=</span> FactoryBuilder<span class="token punctuation">.</span><span class="token function">factoryOf</span><span class="token punctuation">(</span>compensable<span class="token punctuation">.</span><span class="token function">transactionContextEditor</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>pjp<span class="token punctuation">.</span><span class="token function">getTarget</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> method<span class="token punctuation">,</span> pjp<span class="token punctuation">.</span><span class="token function">getArgs</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>其中，transactionContext 是一个 <code>TransactionContext</code> 类，定义在 tcc-transaction-api 模块中：</p>
-<pre class="line-numbers language-Java"><code class="language-Java">public class TransactionContext implements Serializable {
+<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">TransactionContext</span> <span class="token keyword">implements</span> <span class="token class-name">Serializable</span> <span class="token punctuation">{</span>
 
-    private static final long serialVersionUID = -8199390103169700387L;
-    private TransactionXid xid;
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">long</span> serialVersionUID <span class="token operator">=</span> <span class="token operator">-</span>8199390103169700387L<span class="token punctuation">;</span>
+    <span class="token keyword">private</span> TransactionXid xid<span class="token punctuation">;</span>
 
-    private int status;
-   /**
+    <span class="token keyword">private</span> <span class="token keyword">int</span> status<span class="token punctuation">;</span>
+   <span class="token comment" spellcheck="true">/**
      * 保存当前事务有几个子事务
-     */
-    private Map<string, string=""> attachments = new ConcurrentHashMap<string, string="">();
+     */</span>
+    <span class="token keyword">private</span> Map<span class="token operator">&lt;</span>String<span class="token punctuation">,</span> String<span class="token operator">></span> attachments <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ConcurrentHashMap</span><span class="token operator">&lt;</span>String<span class="token punctuation">,</span> String<span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    public TransactionContext() {
+    <span class="token keyword">public</span> <span class="token function">TransactionContext</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
 
-    }
+    <span class="token punctuation">}</span>
 
-    public TransactionContext(TransactionXid xid, int status) {
-        this.xid = xid;
-        this.status = status;
-    }
+    <span class="token keyword">public</span> <span class="token function">TransactionContext</span><span class="token punctuation">(</span>TransactionXid xid<span class="token punctuation">,</span> <span class="token keyword">int</span> status<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>xid <span class="token operator">=</span> xid<span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>status <span class="token operator">=</span> status<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 
-    public void setXid(TransactionXid xid) {
-        this.xid = xid;
-    }
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setXid</span><span class="token punctuation">(</span>TransactionXid xid<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>xid <span class="token operator">=</span> xid<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 
-    public TransactionXid getXid() {
-        return xid.clone();
-    }
+    <span class="token keyword">public</span> TransactionXid <span class="token function">getXid</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> xid<span class="token punctuation">.</span><span class="token function">clone</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 
-    public void setAttachments(Map<string, string=""> attachments) {
-        if (attachments != null && !attachments.isEmpty()) {
-            this.attachments.putAll(attachments);
-        }
-    }
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setAttachments</span><span class="token punctuation">(</span>Map<span class="token operator">&lt;</span>String<span class="token punctuation">,</span> String<span class="token operator">></span> attachments<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>attachments <span class="token operator">!=</span> null <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span>attachments<span class="token punctuation">.</span><span class="token function">isEmpty</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">this</span><span class="token punctuation">.</span>attachments<span class="token punctuation">.</span><span class="token function">putAll</span><span class="token punctuation">(</span>attachments<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
 
-    public Map<string, string=""> getAttachments() {
-        return attachments;
-    }
+    <span class="token keyword">public</span> Map<span class="token operator">&lt;</span>String<span class="token punctuation">,</span> String<span class="token operator">></span> <span class="token function">getAttachments</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> attachments<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 
-    public void setStatus(int status) {
-        this.status = status;
-    }
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setStatus</span><span class="token punctuation">(</span><span class="token keyword">int</span> status<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>status <span class="token operator">=</span> status<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 
-    public int getStatus() {
-        return status;
-    }
-}
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></string,></string,></string,></string,></code></pre>
+    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">getStatus</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> status<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><strong>CompensableTransactionAspect</strong></p>
 <p>这是一个 AOP 切面类。<code>@Pointcut</code> 将 <code>@Compensable</code> 注解标记为切入点，其签名为 <code>compensableService()</code>。<code>@Around</code> 表示在 <code>compensableService()</code> 之前和之后调用 <code>interceptCompensableMethod()</code>，其中调用了 <code>CompensableTransactionInterceptor</code> 的 <code>interceptCompensableMethod()</code>。</p>
-<pre class="line-numbers language-Java"><code class="language-Java">    @Pointcut("@annotation(org.mengyun.tcctransaction.api.Compensable)")
-    public void compensableService() {
+<pre class="line-numbers language-java"><code class="language-java">    <span class="token annotation punctuation">@Pointcut</span><span class="token punctuation">(</span><span class="token string">"@annotation(org.mengyun.tcctransaction.api.Compensable)"</span><span class="token punctuation">)</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">compensableService</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
 
-    }
+    <span class="token punctuation">}</span>
 
-    @Around("compensableService()")
-    public Object interceptCompensableMethod(ProceedingJoinPoint pjp) throws Throwable {
+    <span class="token annotation punctuation">@Around</span><span class="token punctuation">(</span><span class="token string">"compensableService()"</span><span class="token punctuation">)</span>
+    <span class="token keyword">public</span> Object <span class="token function">interceptCompensableMethod</span><span class="token punctuation">(</span>ProceedingJoinPoint pjp<span class="token punctuation">)</span> <span class="token keyword">throws</span> Throwable <span class="token punctuation">{</span>
 
-        return compensableTransactionInterceptor.interceptCompensableMethod(pjp);
-    }
+        <span class="token keyword">return</span> compensableTransactionInterceptor<span class="token punctuation">.</span><span class="token function">interceptCompensableMethod</span><span class="token punctuation">(</span>pjp<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><strong>CompensableTransactionInterceptor</strong></p>
 <p>这是事务拦截器，具有以下作用：</p>
@@ -777,26 +777,26 @@ public class PaymentServiceImpl {
 </ol>
 <p><strong>interceptCompensableMethod</strong></p>
 <p>其中<code>interceptCompensableMethod()</code> 方法中，参数 pjp 表示被代理的目标对象，比如被加了 <code>@Compensable</code> 注解的 <code>makePayment</code> 方法对象，就会作为该参数，通过其获取该方法的各种信息。</p>
-<pre class="line-numbers language-Java"><code class="language-Java">public Object interceptCompensableMethod(ProceedingJoinPoint pjp) throws Throwable {
+<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">public</span> Object <span class="token function">interceptCompensableMethod</span><span class="token punctuation">(</span>ProceedingJoinPoint pjp<span class="token punctuation">)</span> <span class="token keyword">throws</span> Throwable <span class="token punctuation">{</span>
 
-       // 通过上下文对象，获取待访问对象的各种信息，见下方 CompensableMethodContext() 构造函数
-        CompensableMethodContext compensableMethodContext = new CompensableMethodContext(pjp);
-      // 通过事务管理器，来判断是否有存在的事务队列（从 ThreadLocal 获取 transactions 来判断当前线程是否已经有事务）
-        boolean isTransactionActive = transactionManager.isTransactionActive();
+       <span class="token comment" spellcheck="true">// 通过上下文对象，获取待访问对象的各种信息，见下方 CompensableMethodContext() 构造函数</span>
+        CompensableMethodContext compensableMethodContext <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">CompensableMethodContext</span><span class="token punctuation">(</span>pjp<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token comment" spellcheck="true">// 通过事务管理器，来判断是否有存在的事务队列（从 ThreadLocal 获取 transactions 来判断当前线程是否已经有事务）</span>
+        <span class="token keyword">boolean</span> isTransactionActive <span class="token operator">=</span> transactionManager<span class="token punctuation">.</span><span class="token function">isTransactionActive</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-        if (!TransactionUtils.isLegalTransactionContext(isTransactionActive, compensableMethodContext)) {
-            throw new SystemException("no active compensable transaction while propagation is mandatory for method " + compensableMethodContext.getMethod().getName());
-        }
-      // 获取并判断当前事务的角色（ROOT 表示主事务，PROVIDER 表示分支事务或事务参与者），并根据其角色调用不同的方法来处理
-        switch (compensableMethodContext.getMethodRole(isTransactionActive)) {
-            case ROOT:
-                return rootMethodProceed(compensableMethodContext);
-            case PROVIDER:
-                return providerMethodProceed(compensableMethodContext);
-            default:
-                return pjp.proceed();
-        }
-    }
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>TransactionUtils<span class="token punctuation">.</span><span class="token function">isLegalTransactionContext</span><span class="token punctuation">(</span>isTransactionActive<span class="token punctuation">,</span> compensableMethodContext<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">SystemException</span><span class="token punctuation">(</span><span class="token string">"no active compensable transaction while propagation is mandatory for method "</span> <span class="token operator">+</span> compensableMethodContext<span class="token punctuation">.</span><span class="token function">getMethod</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+      <span class="token comment" spellcheck="true">// 获取并判断当前事务的角色（ROOT 表示主事务，PROVIDER 表示分支事务或事务参与者），并根据其角色调用不同的方法来处理</span>
+        <span class="token keyword">switch</span> <span class="token punctuation">(</span>compensableMethodContext<span class="token punctuation">.</span><span class="token function">getMethodRole</span><span class="token punctuation">(</span>isTransactionActive<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">case</span> ROOT<span class="token operator">:</span>
+                <span class="token keyword">return</span> <span class="token function">rootMethodProceed</span><span class="token punctuation">(</span>compensableMethodContext<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">case</span> PROVIDER<span class="token operator">:</span>
+                <span class="token keyword">return</span> <span class="token function">providerMethodProceed</span><span class="token punctuation">(</span>compensableMethodContext<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">default</span><span class="token operator">:</span>
+                <span class="token keyword">return</span> pjp<span class="token punctuation">.</span><span class="token function">proceed</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><strong>rootMethodProceed</strong></p>
 <p>处理主事务的 <code>rootMethodProceed()</code> 方法，它会完成：</p>
@@ -807,131 +807,131 @@ public class PaymentServiceImpl {
 <li>判断应该 confirm 还是 cancel</li>
 <li>清除事务队列</li>
 </ol>
-<pre class="line-numbers language-Java"><code class="language-Java">private Object rootMethodProceed(CompensableMethodContext compensableMethodContext) throws Throwable {
+<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">private</span> Object <span class="token function">rootMethodProceed</span><span class="token punctuation">(</span>CompensableMethodContext compensableMethodContext<span class="token punctuation">)</span> <span class="token keyword">throws</span> Throwable <span class="token punctuation">{</span>
 
-        Object returnValue = null;
+        Object returnValue <span class="token operator">=</span> null<span class="token punctuation">;</span>
 
-        Transaction transaction = null;
+        Transaction transaction <span class="token operator">=</span> null<span class="token punctuation">;</span>
 
-        boolean asyncConfirm = compensableMethodContext.getAnnotation().asyncConfirm();
+        <span class="token keyword">boolean</span> asyncConfirm <span class="token operator">=</span> compensableMethodContext<span class="token punctuation">.</span><span class="token function">getAnnotation</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">asyncConfirm</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-        boolean asyncCancel = compensableMethodContext.getAnnotation().asyncCancel();
+        <span class="token keyword">boolean</span> asyncCancel <span class="token operator">=</span> compensableMethodContext<span class="token punctuation">.</span><span class="token function">getAnnotation</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">asyncCancel</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-        Set<class<? extends="" exception="">> allDelayCancelExceptions = new HashSet<class<? extends="" exception="">>();
-        allDelayCancelExceptions.addAll(this.delayCancelExceptions);
-        allDelayCancelExceptions.addAll(Arrays.asList(compensableMethodContext.getAnnotation().delayCancelExceptions()));
+        Set<span class="token operator">&lt;</span>Class<span class="token operator">&lt;</span><span class="token operator">?</span> <span class="token keyword">extends</span> <span class="token class-name">Exception</span><span class="token operator">>></span> allDelayCancelExceptions <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HashSet</span><span class="token operator">&lt;</span>Class<span class="token operator">&lt;</span><span class="token operator">?</span> <span class="token keyword">extends</span> <span class="token class-name">Exception</span><span class="token operator">>></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        allDelayCancelExceptions<span class="token punctuation">.</span><span class="token function">addAll</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>delayCancelExceptions<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        allDelayCancelExceptions<span class="token punctuation">.</span><span class="token function">addAll</span><span class="token punctuation">(</span>Arrays<span class="token punctuation">.</span><span class="token function">asList</span><span class="token punctuation">(</span>compensableMethodContext<span class="token punctuation">.</span><span class="token function">getAnnotation</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">delayCancelExceptions</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-        try {
-            // 让事务管理器开启一个全新的事务，持久化事务，并事务管理器注册该事务（加入事务队列）
-            transaction = transactionManager.begin(compensableMethodContext.getUniqueIdentity());
+        <span class="token keyword">try</span> <span class="token punctuation">{</span>
+            <span class="token comment" spellcheck="true">// 让事务管理器开启一个全新的事务，持久化事务，并事务管理器注册该事务（加入事务队列）</span>
+            transaction <span class="token operator">=</span> transactionManager<span class="token punctuation">.</span><span class="token function">begin</span><span class="token punctuation">(</span>compensableMethodContext<span class="token punctuation">.</span><span class="token function">getUniqueIdentity</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-            try {
-                // 执行目标方法（实际上会先调用 ResourceCoordinatorIntercepter 拦截器）
-                returnValue = compensableMethodContext.proceed();
-                // 如果执行异常，就回滚，否则提交
-            } catch (Throwable tryingException) {
+            <span class="token keyword">try</span> <span class="token punctuation">{</span>
+                <span class="token comment" spellcheck="true">// 执行目标方法（实际上会先调用 ResourceCoordinatorIntercepter 拦截器）</span>
+                returnValue <span class="token operator">=</span> compensableMethodContext<span class="token punctuation">.</span><span class="token function">proceed</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token comment" spellcheck="true">// 如果执行异常，就回滚，否则提交</span>
+            <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">Throwable</span> tryingException<span class="token punctuation">)</span> <span class="token punctuation">{</span>
 
-                if (!isDelayCancelException(tryingException, allDelayCancelExceptions)) {
+                <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">isDelayCancelException</span><span class="token punctuation">(</span>tryingException<span class="token punctuation">,</span> allDelayCancelExceptions<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
 
-                    logger.warn(String.format("compensable transaction trying failed. transaction content:%s", JSON.toJSONString(transaction)), tryingException);
+                    logger<span class="token punctuation">.</span><span class="token function">warn</span><span class="token punctuation">(</span>String<span class="token punctuation">.</span><span class="token function">format</span><span class="token punctuation">(</span><span class="token string">"compensable transaction trying failed. transaction content:%s"</span><span class="token punctuation">,</span> JSON<span class="token punctuation">.</span><span class="token function">toJSONString</span><span class="token punctuation">(</span>transaction<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span> tryingException<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-                    /*
+                    <span class="token comment" spellcheck="true">/*
                         1. 修改数据库状态
                         2. 执行 rollback 方法
                         3. 如果执行成功，则删除事务资源数据
-                     */
-                    transactionManager.rollback(asyncCancel);
-                }
+                     */</span>
+                    transactionManager<span class="token punctuation">.</span><span class="token function">rollback</span><span class="token punctuation">(</span>asyncCancel<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
 
-                throw tryingException;
-            }
+                <span class="token keyword">throw</span> tryingException<span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
 
-            /*
+            <span class="token comment" spellcheck="true">/*
                 1. 修改数据库状态
                 2. 执行 confirm 方法
                 3. 如果执行成功，则删除事务资源数据
-             */
-            transactionManager.commit(asyncConfirm);
+             */</span>
+            transactionManager<span class="token punctuation">.</span><span class="token function">commit</span><span class="token punctuation">(</span>asyncConfirm<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-        } finally {
-            // 到这里，分支事务就都执行完了，就清除队列中的事务
-            transactionManager.cleanAfterCompletion(transaction);
-        }
+        <span class="token punctuation">}</span> <span class="token keyword">finally</span> <span class="token punctuation">{</span>
+            <span class="token comment" spellcheck="true">// 到这里，分支事务就都执行完了，就清除队列中的事务</span>
+            transactionManager<span class="token punctuation">.</span><span class="token function">cleanAfterCompletion</span><span class="token punctuation">(</span>transaction<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
 
-        return returnValue;
-    }
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></class<?></class<?></code></pre>
+        <span class="token keyword">return</span> returnValue<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>其中事务管理器 <code>TransactionManager</code> 的 <code>begin()</code> 方法：</p>
-<pre class="line-numbers language-Java"><code class="language-Java">    public Transaction begin(Object uniqueIdentify) {
-        Transaction transaction = new Transaction(uniqueIdentify,TransactionType.ROOT);
-      // 持久化事务
-        transactionRepository.create(transaction);
-      // 注册事务，向事务队列中加入该事务
-        registerTransaction(transaction);
-        return transaction;
-    }
+<pre class="line-numbers language-java"><code class="language-java">    <span class="token keyword">public</span> Transaction <span class="token function">begin</span><span class="token punctuation">(</span>Object uniqueIdentify<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        Transaction transaction <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Transaction</span><span class="token punctuation">(</span>uniqueIdentify<span class="token punctuation">,</span>TransactionType<span class="token punctuation">.</span>ROOT<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token comment" spellcheck="true">// 持久化事务</span>
+        transactionRepository<span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span>transaction<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token comment" spellcheck="true">// 注册事务，向事务队列中加入该事务</span>
+        <span class="token function">registerTransaction</span><span class="token punctuation">(</span>transaction<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> transaction<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><strong>providerMethodProceed</strong></p>
 <p>处理分支事务的 <code>providerMethodProceed()</code> 方法：</p>
-<pre class="line-numbers language-Java"><code class="language-Java">    private Object providerMethodProceed(CompensableMethodContext compensableMethodContext) throws Throwable {
+<pre class="line-numbers language-java"><code class="language-java">    <span class="token keyword">private</span> Object <span class="token function">providerMethodProceed</span><span class="token punctuation">(</span>CompensableMethodContext compensableMethodContext<span class="token punctuation">)</span> <span class="token keyword">throws</span> Throwable <span class="token punctuation">{</span>
 
-        Transaction transaction = null;
+        Transaction transaction <span class="token operator">=</span> null<span class="token punctuation">;</span>
 
-        boolean asyncConfirm = compensableMethodContext.getAnnotation().asyncConfirm();
+        <span class="token keyword">boolean</span> asyncConfirm <span class="token operator">=</span> compensableMethodContext<span class="token punctuation">.</span><span class="token function">getAnnotation</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">asyncConfirm</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-        boolean asyncCancel = compensableMethodContext.getAnnotation().asyncCancel();
+        <span class="token keyword">boolean</span> asyncCancel <span class="token operator">=</span> compensableMethodContext<span class="token punctuation">.</span><span class="token function">getAnnotation</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">asyncCancel</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-        try {
-        // 根据事务的不同状态，执行不同的动作
-            switch (TransactionStatus.valueOf(compensableMethodContext.getTransactionContext().getStatus())) {
-                case TRYING:
-                    // propagationNewBegin() 持久化事务参与者的数据到当前服务中（默认状态为 TRYING），并向事务管理器注册事务
-                    transaction = transactionManager.propagationNewBegin(compensableMethodContext.getTransactionContext());
-                    return compensableMethodContext.proceed();
-                case CONFIRMING:
-                    try {
-                      // propagationExistBegin() 修改事务状态，并注册事务
-                        transaction = transactionManager.propagationExistBegin(compensableMethodContext.getTransactionContext());
-                      // commit() 修改事务状态为 CONFIRMING，并持久化更新，提交事务
-                        transactionManager.commit(asyncConfirm);
-                    } catch (NoExistedTransactionException excepton) {
-                        //the transaction has been commit,ignore it.
-                    }
-                    break;
-                case CANCELLING:
+        <span class="token keyword">try</span> <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">// 根据事务的不同状态，执行不同的动作</span>
+            <span class="token keyword">switch</span> <span class="token punctuation">(</span>TransactionStatus<span class="token punctuation">.</span><span class="token function">valueOf</span><span class="token punctuation">(</span>compensableMethodContext<span class="token punctuation">.</span><span class="token function">getTransactionContext</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getStatus</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token keyword">case</span> TRYING<span class="token operator">:</span>
+                    <span class="token comment" spellcheck="true">// propagationNewBegin() 持久化事务参与者的数据到当前服务中（默认状态为 TRYING），并向事务管理器注册事务</span>
+                    transaction <span class="token operator">=</span> transactionManager<span class="token punctuation">.</span><span class="token function">propagationNewBegin</span><span class="token punctuation">(</span>compensableMethodContext<span class="token punctuation">.</span><span class="token function">getTransactionContext</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token keyword">return</span> compensableMethodContext<span class="token punctuation">.</span><span class="token function">proceed</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token keyword">case</span> CONFIRMING<span class="token operator">:</span>
+                    <span class="token keyword">try</span> <span class="token punctuation">{</span>
+                      <span class="token comment" spellcheck="true">// propagationExistBegin() 修改事务状态，并注册事务</span>
+                        transaction <span class="token operator">=</span> transactionManager<span class="token punctuation">.</span><span class="token function">propagationExistBegin</span><span class="token punctuation">(</span>compensableMethodContext<span class="token punctuation">.</span><span class="token function">getTransactionContext</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                      <span class="token comment" spellcheck="true">// commit() 修改事务状态为 CONFIRMING，并持久化更新，提交事务</span>
+                        transactionManager<span class="token punctuation">.</span><span class="token function">commit</span><span class="token punctuation">(</span>asyncConfirm<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">NoExistedTransactionException</span> excepton<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                        <span class="token comment" spellcheck="true">//the transaction has been commit,ignore it.</span>
+                    <span class="token punctuation">}</span>
+                    <span class="token keyword">break</span><span class="token punctuation">;</span>
+                <span class="token keyword">case</span> CANCELLING<span class="token operator">:</span>
 
-                    try {
-                      // propagationExistBegin() 修改事务状态，并注册事务
-                        transaction = transactionManager.propagationExistBegin(compensableMethodContext.getTransactionContext());
-                      // rollback() 修改事务状态为 CANCELLING，并持久化更新，回滚事务
-                        transactionManager.rollback(asyncCancel);
-                    } catch (NoExistedTransactionException exception) {
-                        //the transaction has been rollback,ignore it.
-                    }
-                    break;
-            }
+                    <span class="token keyword">try</span> <span class="token punctuation">{</span>
+                      <span class="token comment" spellcheck="true">// propagationExistBegin() 修改事务状态，并注册事务</span>
+                        transaction <span class="token operator">=</span> transactionManager<span class="token punctuation">.</span><span class="token function">propagationExistBegin</span><span class="token punctuation">(</span>compensableMethodContext<span class="token punctuation">.</span><span class="token function">getTransactionContext</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                      <span class="token comment" spellcheck="true">// rollback() 修改事务状态为 CANCELLING，并持久化更新，回滚事务</span>
+                        transactionManager<span class="token punctuation">.</span><span class="token function">rollback</span><span class="token punctuation">(</span>asyncCancel<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">NoExistedTransactionException</span> exception<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                        <span class="token comment" spellcheck="true">//the transaction has been rollback,ignore it.</span>
+                    <span class="token punctuation">}</span>
+                    <span class="token keyword">break</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
 
-        } finally {
-          // 清除事务队列
-            transactionManager.cleanAfterCompletion(transaction);
-        }
+        <span class="token punctuation">}</span> <span class="token keyword">finally</span> <span class="token punctuation">{</span>
+          <span class="token comment" spellcheck="true">// 清除事务队列</span>
+            transactionManager<span class="token punctuation">.</span><span class="token function">cleanAfterCompletion</span><span class="token punctuation">(</span>transaction<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
 
-        Method method = compensableMethodContext.getMethod();
+        Method method <span class="token operator">=</span> compensableMethodContext<span class="token punctuation">.</span><span class="token function">getMethod</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-        return ReflectionUtils.getNullValue(method.getReturnType());
-    }
+        <span class="token keyword">return</span> ReflectionUtils<span class="token punctuation">.</span><span class="token function">getNullValue</span><span class="token punctuation">(</span>method<span class="token punctuation">.</span><span class="token function">getReturnType</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><strong>ResourceCoordinatorAspect</strong></p>
 <p>资源协调切面类和 CompensableTransactionAspect 类似，几乎一样，不再赘述。</p>
-<pre class="line-numbers language-Java"><code class="language-Java">    @Pointcut("@annotation(org.mengyun.tcctransaction.api.Compensable)")
-    public void transactionContextCall() {
+<pre class="line-numbers language-java"><code class="language-java">    <span class="token annotation punctuation">@Pointcut</span><span class="token punctuation">(</span><span class="token string">"@annotation(org.mengyun.tcctransaction.api.Compensable)"</span><span class="token punctuation">)</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">transactionContextCall</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
 
-    }
+    <span class="token punctuation">}</span>
 
-    @Around("transactionContextCall()")
-    public Object interceptTransactionContextMethod(ProceedingJoinPoint pjp) throws Throwable {
-        return resourceCoordinatorInterceptor.interceptTransactionContextMethod(pjp);
-    }
+    <span class="token annotation punctuation">@Around</span><span class="token punctuation">(</span><span class="token string">"transactionContextCall()"</span><span class="token punctuation">)</span>
+    <span class="token keyword">public</span> Object <span class="token function">interceptTransactionContextMethod</span><span class="token punctuation">(</span>ProceedingJoinPoint pjp<span class="token punctuation">)</span> <span class="token keyword">throws</span> Throwable <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> resourceCoordinatorInterceptor<span class="token punctuation">.</span><span class="token function">interceptTransactionContextMethod</span><span class="token punctuation">(</span>pjp<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><strong>ResourceCoordinatorInterceptor</strong></p>
 <p>主要处理 try 阶段的事情，在 try 阶段，就将所有的“资源”封装完成并交给事务管理器。</p>
@@ -944,122 +944,122 @@ public class PaymentServiceImpl {
 </ol>
 <p>然后事务管理器修改数据库状态。</p>
 <p><strong>interceptTransactionContextMethod</strong></p>
-<pre class="line-numbers language-Java"><code class="language-Java">    public Object interceptTransactionContextMethod(ProceedingJoinPoint pjp) throws Throwable {
-        // 使用事务管理器，传递一些事务相关的信息（线程共享）
-        Transaction transaction = transactionManager.getCurrentTransaction();
+<pre class="line-numbers language-java"><code class="language-java">    <span class="token keyword">public</span> Object <span class="token function">interceptTransactionContextMethod</span><span class="token punctuation">(</span>ProceedingJoinPoint pjp<span class="token punctuation">)</span> <span class="token keyword">throws</span> Throwable <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">// 使用事务管理器，传递一些事务相关的信息（线程共享）</span>
+        Transaction transaction <span class="token operator">=</span> transactionManager<span class="token punctuation">.</span><span class="token function">getCurrentTransaction</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-        if (transaction != null) {
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>transaction <span class="token operator">!=</span> null<span class="token punctuation">)</span> <span class="token punctuation">{</span>
 
-            switch (transaction.getStatus()) {
-                case TRYING:
-                    enlistParticipant(pjp);
-                    break;
-                case CONFIRMING:
-                    break;
-                case CANCELLING:
-                    break;
-            }
-        }
+            <span class="token keyword">switch</span> <span class="token punctuation">(</span>transaction<span class="token punctuation">.</span><span class="token function">getStatus</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token keyword">case</span> TRYING<span class="token operator">:</span>
+                    <span class="token function">enlistParticipant</span><span class="token punctuation">(</span>pjp<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token keyword">break</span><span class="token punctuation">;</span>
+                <span class="token keyword">case</span> CONFIRMING<span class="token operator">:</span>
+                    <span class="token keyword">break</span><span class="token punctuation">;</span>
+                <span class="token keyword">case</span> CANCELLING<span class="token operator">:</span>
+                    <span class="token keyword">break</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
 
-        return pjp.proceed(pjp.getArgs());
-    }
+        <span class="token keyword">return</span> pjp<span class="token punctuation">.</span><span class="token function">proceed</span><span class="token punctuation">(</span>pjp<span class="token punctuation">.</span><span class="token function">getArgs</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><strong>enlistParticipant</strong></p>
-<pre class="line-numbers language-Java"><code class="language-Java">private void enlistParticipant(ProceedingJoinPoint pjp) throws IllegalAccessException, InstantiationException {
-        // 获取对象的方法
-        Method method = CompensableMethodUtils.getCompensableMethod(pjp);
-        if (method == null) {
-            throw new RuntimeException(String.format("join point not found method, point is : %s", pjp.getSignature().getName()));
-        }
-      // 获取对应的 @Compensable 对象
-        Compensable compensable = method.getAnnotation(Compensable.class);
-      // 获取配置的 confirm 和 cancel 方法
+<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">private</span> <span class="token keyword">void</span> <span class="token function">enlistParticipant</span><span class="token punctuation">(</span>ProceedingJoinPoint pjp<span class="token punctuation">)</span> <span class="token keyword">throws</span> IllegalAccessException<span class="token punctuation">,</span> InstantiationException <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">// 获取对象的方法</span>
+        Method method <span class="token operator">=</span> CompensableMethodUtils<span class="token punctuation">.</span><span class="token function">getCompensableMethod</span><span class="token punctuation">(</span>pjp<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>method <span class="token operator">==</span> null<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">RuntimeException</span><span class="token punctuation">(</span>String<span class="token punctuation">.</span><span class="token function">format</span><span class="token punctuation">(</span><span class="token string">"join point not found method, point is : %s"</span><span class="token punctuation">,</span> pjp<span class="token punctuation">.</span><span class="token function">getSignature</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+      <span class="token comment" spellcheck="true">// 获取对应的 @Compensable 对象</span>
+        Compensable compensable <span class="token operator">=</span> method<span class="token punctuation">.</span><span class="token function">getAnnotation</span><span class="token punctuation">(</span>Compensable<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token comment" spellcheck="true">// 获取配置的 confirm 和 cancel 方法</span>
 
-        String confirmMethodName = compensable.confirmMethod();
-        String cancelMethodName = compensable.cancelMethod();
+        String confirmMethodName <span class="token operator">=</span> compensable<span class="token punctuation">.</span><span class="token function">confirmMethod</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        String cancelMethodName <span class="token operator">=</span> compensable<span class="token punctuation">.</span><span class="token function">cancelMethod</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-        Transaction transaction = transactionManager.getCurrentTransaction();
-        TransactionXid xid = new TransactionXid(transaction.getXid().getGlobalTransactionId());
+        Transaction transaction <span class="token operator">=</span> transactionManager<span class="token punctuation">.</span><span class="token function">getCurrentTransaction</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        TransactionXid xid <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">TransactionXid</span><span class="token punctuation">(</span>transaction<span class="token punctuation">.</span><span class="token function">getXid</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getGlobalTransactionId</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-        if (FactoryBuilder.factoryOf(compensable.transactionContextEditor()).getInstance().get(pjp.getTarget(), method, pjp.getArgs()) == null) {
-            FactoryBuilder.factoryOf(compensable.transactionContextEditor()).getInstance().set(new TransactionContext(xid, TransactionStatus.TRYING.getId()), pjp.getTarget(), ((MethodSignature) pjp.getSignature()).getMethod(), pjp.getArgs());
-        }
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>FactoryBuilder<span class="token punctuation">.</span><span class="token function">factoryOf</span><span class="token punctuation">(</span>compensable<span class="token punctuation">.</span><span class="token function">transactionContextEditor</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>pjp<span class="token punctuation">.</span><span class="token function">getTarget</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> method<span class="token punctuation">,</span> pjp<span class="token punctuation">.</span><span class="token function">getArgs</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">==</span> null<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            FactoryBuilder<span class="token punctuation">.</span><span class="token function">factoryOf</span><span class="token punctuation">(</span>compensable<span class="token punctuation">.</span><span class="token function">transactionContextEditor</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">set</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">TransactionContext</span><span class="token punctuation">(</span>xid<span class="token punctuation">,</span> TransactionStatus<span class="token punctuation">.</span>TRYING<span class="token punctuation">.</span><span class="token function">getId</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span> pjp<span class="token punctuation">.</span><span class="token function">getTarget</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>MethodSignature<span class="token punctuation">)</span> pjp<span class="token punctuation">.</span><span class="token function">getSignature</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getMethod</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> pjp<span class="token punctuation">.</span><span class="token function">getArgs</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
 
-        Class targetClass = ReflectionUtils.getDeclaringType(pjp.getTarget().getClass(), method.getName(), method.getParameterTypes());
+        Class <span class="token class-name">targetClass</span> <span class="token operator">=</span> ReflectionUtils<span class="token punctuation">.</span><span class="token function">getDeclaringType</span><span class="token punctuation">(</span>pjp<span class="token punctuation">.</span><span class="token function">getTarget</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getClass</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> method<span class="token punctuation">.</span><span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> method<span class="token punctuation">.</span><span class="token function">getParameterTypes</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-        InvocationContext confirmInvocation = new InvocationContext(targetClass,
-                confirmMethodName,
-                method.getParameterTypes(), pjp.getArgs());
+        InvocationContext confirmInvocation <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">InvocationContext</span><span class="token punctuation">(</span>targetClass<span class="token punctuation">,</span>
+                confirmMethodName<span class="token punctuation">,</span>
+                method<span class="token punctuation">.</span><span class="token function">getParameterTypes</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> pjp<span class="token punctuation">.</span><span class="token function">getArgs</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-        InvocationContext cancelInvocation = new InvocationContext(targetClass,
-                cancelMethodName,
-                method.getParameterTypes(), pjp.getArgs());
+        InvocationContext cancelInvocation <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">InvocationContext</span><span class="token punctuation">(</span>targetClass<span class="token punctuation">,</span>
+                cancelMethodName<span class="token punctuation">,</span>
+                method<span class="token punctuation">.</span><span class="token function">getParameterTypes</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> pjp<span class="token punctuation">.</span><span class="token function">getArgs</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-        Participant participant =
-                new Participant(
-                        xid,
-                        confirmInvocation,
-                        cancelInvocation,
-                        compensable.transactionContextEditor());
+        Participant participant <span class="token operator">=</span>
+                <span class="token keyword">new</span> <span class="token class-name">Participant</span><span class="token punctuation">(</span>
+                        xid<span class="token punctuation">,</span>
+                        confirmInvocation<span class="token punctuation">,</span>
+                        cancelInvocation<span class="token punctuation">,</span>
+                        compensable<span class="token punctuation">.</span><span class="token function">transactionContextEditor</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-        transactionManager.enlistParticipant(participant);
-    }
+        transactionManager<span class="token punctuation">.</span><span class="token function">enlistParticipant</span><span class="token punctuation">(</span>participant<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>这样，经过两个拦截器后，才调用目标对象方法。</p>
 <h3 id="幂等性问题"><a href="#幂等性问题" class="headerlink" title="幂等性问题"></a>幂等性问题</h3><p>TCC-Transaction 不能保证幂等性，需要自己实现幂等性。如以下 confirm 和 cancel 方法就实现了幂等性：</p>
 <p><strong>confirm 的幂等性</strong></p>
-<pre class="line-numbers language-Java"><code class="language-Java">@Transactional
-    public void confirmRecord(RedPacketTradeOrderDto tradeOrderDto) {
+<pre class="line-numbers language-java"><code class="language-java"><span class="token annotation punctuation">@Transactional</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">confirmRecord</span><span class="token punctuation">(</span>RedPacketTradeOrderDto tradeOrderDto<span class="token punctuation">)</span> <span class="token punctuation">{</span>
 
-        try {
-            Thread.sleep(1000l);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        <span class="token keyword">try</span> <span class="token punctuation">{</span>
+            Thread<span class="token punctuation">.</span><span class="token function">sleep</span><span class="token punctuation">(</span>1000l<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">InterruptedException</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">RuntimeException</span><span class="token punctuation">(</span>e<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
 
-        System.out.println("red packet confirm record called. time seq:" + DateFormatUtils.format(Calendar.getInstance(), "yyyy-MM-dd HH:mm:ss"));
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"red packet confirm record called. time seq:"</span> <span class="token operator">+</span> DateFormatUtils<span class="token punctuation">.</span><span class="token function">format</span><span class="token punctuation">(</span>Calendar<span class="token punctuation">.</span><span class="token function">getInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">"yyyy-MM-dd HH:mm:ss"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-        TradeOrder tradeOrder = tradeOrderRepository.findByMerchantOrderNo(tradeOrderDto.getMerchantOrderNo());
+        TradeOrder tradeOrder <span class="token operator">=</span> tradeOrderRepository<span class="token punctuation">.</span><span class="token function">findByMerchantOrderNo</span><span class="token punctuation">(</span>tradeOrderDto<span class="token punctuation">.</span><span class="token function">getMerchantOrderNo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-        // 保证幂等性 check if the trade order status is DRAFT, if yes, return directly, ensure idempotency.
-        if (tradeOrder != null && tradeOrder.getStatus().equals("DRAFT")) {
-            tradeOrder.confirm();
-            tradeOrderRepository.update(tradeOrder);
+        <span class="token comment" spellcheck="true">// 保证幂等性 check if the trade order status is DRAFT, if yes, return directly, ensure idempotency.</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>tradeOrder <span class="token operator">!=</span> null <span class="token operator">&amp;&amp;</span> tradeOrder<span class="token punctuation">.</span><span class="token function">getStatus</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span><span class="token string">"DRAFT"</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            tradeOrder<span class="token punctuation">.</span><span class="token function">confirm</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            tradeOrderRepository<span class="token punctuation">.</span><span class="token function">update</span><span class="token punctuation">(</span>tradeOrder<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-            RedPacketAccount transferToAccount = redPacketAccountRepository.findByUserId(tradeOrderDto.getOppositeUserId());
+            RedPacketAccount transferToAccount <span class="token operator">=</span> redPacketAccountRepository<span class="token punctuation">.</span><span class="token function">findByUserId</span><span class="token punctuation">(</span>tradeOrderDto<span class="token punctuation">.</span><span class="token function">getOppositeUserId</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-            transferToAccount.transferTo(tradeOrderDto.getAmount());
+            transferToAccount<span class="token punctuation">.</span><span class="token function">transferTo</span><span class="token punctuation">(</span>tradeOrderDto<span class="token punctuation">.</span><span class="token function">getAmount</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-            redPacketAccountRepository.save(transferToAccount);
-        }
-    }
+            redPacketAccountRepository<span class="token punctuation">.</span><span class="token function">save</span><span class="token punctuation">(</span>transferToAccount<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><strong>cancel 的幂等性</strong></p>
-<pre class="line-numbers language-Java"><code class="language-Java">@Transactional
-    public void cancelRecord(RedPacketTradeOrderDto tradeOrderDto) {
+<pre class="line-numbers language-java"><code class="language-java"><span class="token annotation punctuation">@Transactional</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">cancelRecord</span><span class="token punctuation">(</span>RedPacketTradeOrderDto tradeOrderDto<span class="token punctuation">)</span> <span class="token punctuation">{</span>
 
-        try {
-            Thread.sleep(1000l);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        <span class="token keyword">try</span> <span class="token punctuation">{</span>
+            Thread<span class="token punctuation">.</span><span class="token function">sleep</span><span class="token punctuation">(</span>1000l<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">InterruptedException</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">RuntimeException</span><span class="token punctuation">(</span>e<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
 
-        System.out.println("red packet cancel record called. time seq:" + DateFormatUtils.format(Calendar.getInstance(), "yyyy-MM-dd HH:mm:ss"));
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"red packet cancel record called. time seq:"</span> <span class="token operator">+</span> DateFormatUtils<span class="token punctuation">.</span><span class="token function">format</span><span class="token punctuation">(</span>Calendar<span class="token punctuation">.</span><span class="token function">getInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">"yyyy-MM-dd HH:mm:ss"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-        TradeOrder tradeOrder = tradeOrderRepository.findByMerchantOrderNo(tradeOrderDto.getMerchantOrderNo());
+        TradeOrder tradeOrder <span class="token operator">=</span> tradeOrderRepository<span class="token punctuation">.</span><span class="token function">findByMerchantOrderNo</span><span class="token punctuation">(</span>tradeOrderDto<span class="token punctuation">.</span><span class="token function">getMerchantOrderNo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-        // 保证幂等性 check if the trade order status is DRAFT, if yes, return directly, ensure idempotency.
-        if (null != tradeOrder && "DRAFT".equals(tradeOrder.getStatus())) {
-            tradeOrder.cancel();
-            tradeOrderRepository.update(tradeOrder);
+        <span class="token comment" spellcheck="true">// 保证幂等性 check if the trade order status is DRAFT, if yes, return directly, ensure idempotency.</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>null <span class="token operator">!=</span> tradeOrder <span class="token operator">&amp;&amp;</span> <span class="token string">"DRAFT"</span><span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span>tradeOrder<span class="token punctuation">.</span><span class="token function">getStatus</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            tradeOrder<span class="token punctuation">.</span><span class="token function">cancel</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            tradeOrderRepository<span class="token punctuation">.</span><span class="token function">update</span><span class="token punctuation">(</span>tradeOrder<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-            RedPacketAccount capitalAccount = redPacketAccountRepository.findByUserId(tradeOrderDto.getSelfUserId());
+            RedPacketAccount capitalAccount <span class="token operator">=</span> redPacketAccountRepository<span class="token punctuation">.</span><span class="token function">findByUserId</span><span class="token punctuation">(</span>tradeOrderDto<span class="token punctuation">.</span><span class="token function">getSelfUserId</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-            capitalAccount.cancelTransfer(tradeOrderDto.getAmount());
+            capitalAccount<span class="token punctuation">.</span><span class="token function">cancelTransfer</span><span class="token punctuation">(</span>tradeOrderDto<span class="token punctuation">.</span><span class="token function">getAmount</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-            redPacketAccountRepository.save(capitalAccount);
-        }
-    }
+            redPacketAccountRepository<span class="token punctuation">.</span><span class="token function">save</span><span class="token punctuation">(</span>capitalAccount<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>事务的相关信息（全局事务编号，乐观锁版本等要持久化存储）</p>
 <h3 id="资源"><a href="#资源" class="headerlink" title="资源"></a>资源</h3><p>try 核心点：预留资源（业务资源、事务数据资源）</p>
@@ -1288,7 +1288,7 @@ public class PaymentServiceImpl {
                         <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
                     </div>
                     <div id="wechat">
-                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
                     </div>
                 </div>
             </div>
@@ -1578,7 +1578,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
             <br>
             
-            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span class="white-color">65.6k</span>&nbsp;字
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span class="white-color">67.7k</span>&nbsp;字
             
             
             

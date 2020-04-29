@@ -450,14 +450,14 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-04-06
+                    2020-04-29
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    482
+                    521
                 </div>
                 
 
@@ -503,42 +503,50 @@ may
 <h1 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h1><ul>
 <li>由于个位或十位为 0 时，不应该将其输出为 “tret”，所以在大表时，应该将个位或十位为 0 的数与其他数分开考虑。</li>
 </ul>
-<pre class="line-numbers language-C++"><code class="language-C++">#include <iostream>
-#include <string>
-#include <map>
-using namespace std;
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;iostream></span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;string></span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;map></span></span>
+<span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
 
-int n;
-string num[4];
-string unitDigit[13] = {"tret", "jan", "feb", "mar", "apr", "may", "jun", "jly", "aug", "sep", "oct", "nov", "dec"};
-string tenDigit[13] = {"tret", "tam", "hel", "maa", "huh", "tou", "kes", "hei", "elo", "syy", "lok", "mer", "jou"};
-map<string, int=""> marsToNum;
-string numToMars[170];
+<span class="token keyword">int</span> n<span class="token punctuation">;</span>
+string num<span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+string unitDigit<span class="token punctuation">[</span><span class="token number">13</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token string">"tret"</span><span class="token punctuation">,</span> <span class="token string">"jan"</span><span class="token punctuation">,</span> <span class="token string">"feb"</span><span class="token punctuation">,</span> <span class="token string">"mar"</span><span class="token punctuation">,</span> <span class="token string">"apr"</span><span class="token punctuation">,</span> <span class="token string">"may"</span><span class="token punctuation">,</span> <span class="token string">"jun"</span><span class="token punctuation">,</span> <span class="token string">"jly"</span><span class="token punctuation">,</span> <span class="token string">"aug"</span><span class="token punctuation">,</span> <span class="token string">"sep"</span><span class="token punctuation">,</span> <span class="token string">"oct"</span><span class="token punctuation">,</span> <span class="token string">"nov"</span><span class="token punctuation">,</span> <span class="token string">"dec"</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+string tenDigit<span class="token punctuation">[</span><span class="token number">13</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token string">"tret"</span><span class="token punctuation">,</span> <span class="token string">"tam"</span><span class="token punctuation">,</span> <span class="token string">"hel"</span><span class="token punctuation">,</span> <span class="token string">"maa"</span><span class="token punctuation">,</span> <span class="token string">"huh"</span><span class="token punctuation">,</span> <span class="token string">"tou"</span><span class="token punctuation">,</span> <span class="token string">"kes"</span><span class="token punctuation">,</span> <span class="token string">"hei"</span><span class="token punctuation">,</span> <span class="token string">"elo"</span><span class="token punctuation">,</span> <span class="token string">"syy"</span><span class="token punctuation">,</span> <span class="token string">"lok"</span><span class="token punctuation">,</span> <span class="token string">"mer"</span><span class="token punctuation">,</span> <span class="token string">"jou"</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+map<span class="token operator">&lt;</span>string<span class="token punctuation">,</span> <span class="token keyword">int</span><span class="token operator">></span> marsToNum<span class="token punctuation">;</span>
+string numToMars<span class="token punctuation">[</span><span class="token number">170</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
 
-void init() {
-    for (int i = 0; i < 13; i++) {
-        numToMars[i] = unitDigit[i];
-        marsToNum[unitDigit[i]] = i;
-        numToMars[i * 13] = tenDigit[i];
-        marsToNum[tenDigit[i]] = i * 13;
-    }
-    for (int i = 1; i < 13; i++) {
-        for (int j = 1; j < 13; j++) {
-            string mars = tenDigit[i] + " " + unitDigit[j];
-            numToMars[i * 13 + j] = mars;
-            marsToNum[mars] = i * 13 + j;
-        }
-    }
-}
+<span class="token keyword">void</span> <span class="token function">init</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">13</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        numToMars<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> unitDigit<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        marsToNum<span class="token punctuation">[</span>unitDigit<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">]</span> <span class="token operator">=</span> i<span class="token punctuation">;</span>
+        numToMars<span class="token punctuation">[</span>i <span class="token operator">*</span> <span class="token number">13</span><span class="token punctuation">]</span> <span class="token operator">=</span> tenDigit<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        marsToNum<span class="token punctuation">[</span>tenDigit<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">]</span> <span class="token operator">=</span> i <span class="token operator">*</span> <span class="token number">13</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">13</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> j <span class="token operator">&lt;</span> <span class="token number">13</span><span class="token punctuation">;</span> j<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            string mars <span class="token operator">=</span> tenDigit<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">+</span> <span class="token string">" "</span> <span class="token operator">+</span> unitDigit<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">;</span>
+            numToMars<span class="token punctuation">[</span>i <span class="token operator">*</span> <span class="token number">13</span> <span class="token operator">+</span> j<span class="token punctuation">]</span> <span class="token operator">=</span> mars<span class="token punctuation">;</span>
+            marsToNum<span class="token punctuation">[</span>mars<span class="token punctuation">]</span> <span class="token operator">=</span> i <span class="token operator">*</span> <span class="token number">13</span> <span class="token operator">+</span> j<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 
-int main() {
-    scanf("%d", &n);
-    getchar();
-    string str;
-    init();
-    for (int i = 0; i < n; i++) {
-        getline(cin, str);
-        if (str[0] >= '0' && str[0] <= '9')="" {="" printf("%s\n",="" numtomars[stoi(str)].c_str());="" }="" else="" printf("%d\n",="" marstonum[str]);="" return="" 0;="" <span="" aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></=></string,></map></string></iostream></code></pre>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>n<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">getchar</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    string str<span class="token punctuation">;</span>
+    <span class="token function">init</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">getline</span><span class="token punctuation">(</span>cin<span class="token punctuation">,</span> str<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>str<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">>=</span> <span class="token string">'0'</span> <span class="token operator">&amp;&amp;</span> str<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">&lt;=</span> <span class="token string">'9'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%s\n"</span><span class="token punctuation">,</span> numToMars<span class="token punctuation">[</span><span class="token function">stoi</span><span class="token punctuation">(</span>str<span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">c_str</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+            <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d\n"</span><span class="token punctuation">,</span> marsToNum<span class="token punctuation">[</span>str<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
@@ -754,7 +762,7 @@ int main() {
                         <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
                     </div>
                     <div id="wechat">
-                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
                     </div>
                 </div>
             </div>
@@ -1048,7 +1056,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
             <br>
             
-            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span class="white-color">65.6k</span>&nbsp;字
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span class="white-color">67.7k</span>&nbsp;字
             
             
             

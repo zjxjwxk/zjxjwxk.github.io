@@ -450,7 +450,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-04-11
+                    2020-04-29
                 </div>
                 
 
@@ -567,56 +567,56 @@
 <li>漏桶算法以均匀的速度处理请求，不需要承载较高的访问峰值</li>
 <li>令牌桶算法则可能在短时间内处理大量请求，所以需要可以承载较高的访问峰值</li>
 </ul>
-<h2 id="令牌桶算法实现"><a href="#令牌桶算法实现" class="headerlink" title="令牌桶算法实现"></a>令牌桶算法实现</h2><pre class="line-numbers language-C++"><code class="language-C++">public class TokenBucket {
+<h2 id="令牌桶算法实现"><a href="#令牌桶算法实现" class="headerlink" title="令牌桶算法实现"></a>令牌桶算法实现</h2><pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">TokenBucket</span> <span class="token punctuation">{</span>
 
-    /**
+    <span class="token comment" spellcheck="true">/**
      * 桶的容量
-     */
-    private int bucketNums = 100;
+     */</span>
+    <span class="token keyword">private</span> <span class="token keyword">int</span> bucketNums <span class="token operator">=</span> <span class="token number">100</span><span class="token punctuation">;</span>
 
-    /**
+    <span class="token comment" spellcheck="true">/**
      * 流入速度
-     */
-    private int rate = 1;
+     */</span>
+    <span class="token keyword">private</span> <span class="token keyword">int</span> rate <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
 
-    /**
+    <span class="token comment" spellcheck="true">/**
      * 当前令牌数
-     */
-    private int nowTokens;
+     */</span>
+    <span class="token keyword">private</span> <span class="token keyword">int</span> nowTokens<span class="token punctuation">;</span>
 
-    /**
+    <span class="token comment" spellcheck="true">/**
      * 上次刷新当前令牌数的时间
-     */
-    private long lastTime = getNowTime();
+     */</span>
+    <span class="token keyword">private</span> <span class="token keyword">long</span> lastTime <span class="token operator">=</span> <span class="token function">getNowTime</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    private long getNowTime() {
-        return System.currentTimeMillis();
-    }
+    <span class="token keyword">private</span> <span class="token keyword">long</span> <span class="token function">getNowTime</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> System<span class="token punctuation">.</span><span class="token function">currentTimeMillis</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 
-    public boolean getToken() {
+    <span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">getToken</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
 
-        // 记录当前时间
-        long nowTime = getNowTime();
+        <span class="token comment" spellcheck="true">// 记录当前时间</span>
+        <span class="token keyword">long</span> nowTime <span class="token operator">=</span> <span class="token function">getNowTime</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-        // 刷新令牌
-        nowTokens += (nowTime - lastTime) * rate;
+        <span class="token comment" spellcheck="true">// 刷新令牌</span>
+        nowTokens <span class="token operator">+=</span> <span class="token punctuation">(</span>nowTime <span class="token operator">-</span> lastTime<span class="token punctuation">)</span> <span class="token operator">*</span> rate<span class="token punctuation">;</span>
 
-        // 若令牌数比桶容量大，则改为桶容量
-        nowTokens = Math.min(bucketNums, nowTokens);
-        System.out.println("当前令牌数：" + nowTokens);
+        <span class="token comment" spellcheck="true">// 若令牌数比桶容量大，则改为桶容量</span>
+        nowTokens <span class="token operator">=</span> Math<span class="token punctuation">.</span><span class="token function">min</span><span class="token punctuation">(</span>bucketNums<span class="token punctuation">,</span> nowTokens<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"当前令牌数："</span> <span class="token operator">+</span> nowTokens<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-        // 修改上次刷新令牌数的时间为当前时间
-        lastTime = nowTime;
+        <span class="token comment" spellcheck="true">// 修改上次刷新令牌数的时间为当前时间</span>
+        lastTime <span class="token operator">=</span> nowTime<span class="token punctuation">;</span>
 
-        // 判断令牌是否足够
-        if (nowTokens > 0) {
-            nowTokens--;
-            return true;
-        } else {
-            return false;
-        }
-    }
-}
+        <span class="token comment" spellcheck="true">// 判断令牌是否足够</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>nowTokens <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            nowTokens<span class="token operator">--</span><span class="token punctuation">;</span>
+            <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h1 id="Hystrix-熔断降级"><a href="#Hystrix-熔断降级" class="headerlink" title="Hystrix 熔断降级"></a>Hystrix 熔断降级</h1><p><img src="/2020/04/05/Dubbo/Dubbo微服务影院系列/8.Dubbo服务开发（订单模块开发）/Dubbo微服务影院系列（8）：Dubbo服务开发（订单模块开发）/hystrix-command-flow-chart.png" alt="Hystrix 熔断降级"></p>
@@ -637,31 +637,31 @@
         <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>GatewayApplication 添加注解：</p>
-<pre class="line-numbers language-Java"><code class="language-Java">@EnableHystrixDashboard
-@EnableCircuitBreaker
-@EnableHystrix
+<pre class="line-numbers language-java"><code class="language-java"><span class="token annotation punctuation">@EnableHystrixDashboard</span>
+<span class="token annotation punctuation">@EnableCircuitBreaker</span>
+<span class="token annotation punctuation">@EnableHystrix</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p>给需要熔断器的控制器方法添加注解：</p>
-<pre class="line-numbers language-Java"><code class="language-Java">@HystrixCommand(fallbackMethod = "error",
-            commandProperties = {
-                @HystrixProperty(name = "execution.isolation.strategy", value = "THREAD"),
-                @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "4000"),
-                @HystrixProperty(name = "circuitBreaker.requestVolumeThreshold", value = "10"),
-                @HystrixProperty(name = "circuitBreaker.errorThresholdPercentage", value = "50")
-            },
-            threadPoolProperties = {
-                    @HystrixProperty(name = "coreSize", value = "1"),
-                    @HystrixProperty(name = "maxQueueSize", value = "10"),
-                    @HystrixProperty(name = "keepAliveTimeMinutes", value = "1000"),
-                    @HystrixProperty(name = "queueSizeRejectionThreshold", value = "8"),
-                    @HystrixProperty(name = "metrics.rollingStats.numBuckets", value = "12"),
-                    @HystrixProperty(name = "metrics.rollingStats.timeInMilliseconds", value = "1500")
-            })
+<pre class="line-numbers language-java"><code class="language-java"><span class="token annotation punctuation">@HystrixCommand</span><span class="token punctuation">(</span>fallbackMethod <span class="token operator">=</span> <span class="token string">"error"</span><span class="token punctuation">,</span>
+            commandProperties <span class="token operator">=</span> <span class="token punctuation">{</span>
+                <span class="token annotation punctuation">@HystrixProperty</span><span class="token punctuation">(</span>name <span class="token operator">=</span> <span class="token string">"execution.isolation.strategy"</span><span class="token punctuation">,</span> value <span class="token operator">=</span> <span class="token string">"THREAD"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+                <span class="token annotation punctuation">@HystrixProperty</span><span class="token punctuation">(</span>name <span class="token operator">=</span> <span class="token string">"execution.isolation.thread.timeoutInMilliseconds"</span><span class="token punctuation">,</span> value <span class="token operator">=</span> <span class="token string">"4000"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+                <span class="token annotation punctuation">@HystrixProperty</span><span class="token punctuation">(</span>name <span class="token operator">=</span> <span class="token string">"circuitBreaker.requestVolumeThreshold"</span><span class="token punctuation">,</span> value <span class="token operator">=</span> <span class="token string">"10"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+                <span class="token annotation punctuation">@HystrixProperty</span><span class="token punctuation">(</span>name <span class="token operator">=</span> <span class="token string">"circuitBreaker.errorThresholdPercentage"</span><span class="token punctuation">,</span> value <span class="token operator">=</span> <span class="token string">"50"</span><span class="token punctuation">)</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            threadPoolProperties <span class="token operator">=</span> <span class="token punctuation">{</span>
+                    <span class="token annotation punctuation">@HystrixProperty</span><span class="token punctuation">(</span>name <span class="token operator">=</span> <span class="token string">"coreSize"</span><span class="token punctuation">,</span> value <span class="token operator">=</span> <span class="token string">"1"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+                    <span class="token annotation punctuation">@HystrixProperty</span><span class="token punctuation">(</span>name <span class="token operator">=</span> <span class="token string">"maxQueueSize"</span><span class="token punctuation">,</span> value <span class="token operator">=</span> <span class="token string">"10"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+                    <span class="token annotation punctuation">@HystrixProperty</span><span class="token punctuation">(</span>name <span class="token operator">=</span> <span class="token string">"keepAliveTimeMinutes"</span><span class="token punctuation">,</span> value <span class="token operator">=</span> <span class="token string">"1000"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+                    <span class="token annotation punctuation">@HystrixProperty</span><span class="token punctuation">(</span>name <span class="token operator">=</span> <span class="token string">"queueSizeRejectionThreshold"</span><span class="token punctuation">,</span> value <span class="token operator">=</span> <span class="token string">"8"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+                    <span class="token annotation punctuation">@HystrixProperty</span><span class="token punctuation">(</span>name <span class="token operator">=</span> <span class="token string">"metrics.rollingStats.numBuckets"</span><span class="token punctuation">,</span> value <span class="token operator">=</span> <span class="token string">"12"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+                    <span class="token annotation punctuation">@HystrixProperty</span><span class="token punctuation">(</span>name <span class="token operator">=</span> <span class="token string">"metrics.rollingStats.timeInMilliseconds"</span><span class="token punctuation">,</span> value <span class="token operator">=</span> <span class="token string">"1500"</span><span class="token punctuation">)</span>
+            <span class="token punctuation">}</span><span class="token punctuation">)</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>定义 fallbackMethod 方法，用于服务降级：</p>
-<pre class="line-numbers language-Java"><code class="language-Java">public ResponseVO error(Integer fieldId, String soldSeats, String seatsName) {
-    return ResponseVO.serviceFail("抱歉，下单的人太多了，请稍后重试");
-}
+<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">public</span> ResponseVO <span class="token function">error</span><span class="token punctuation">(</span>Integer fieldId<span class="token punctuation">,</span> String soldSeats<span class="token punctuation">,</span> String seatsName<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> ResponseVO<span class="token punctuation">.</span><span class="token function">serviceFail</span><span class="token punctuation">(</span><span class="token string">"抱歉，下单的人太多了，请稍后重试"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><ul>
 <li>学习了限流措施以及实现方法（在真实业务环境中，可能会根据请求的字节数大小分配 TokenBucket）</li>
@@ -887,7 +887,7 @@
                         <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
                     </div>
                     <div id="wechat">
-                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
                     </div>
                 </div>
             </div>
@@ -1173,7 +1173,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
             <br>
             
-            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span class="white-color">65.6k</span>&nbsp;字
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span class="white-color">67.7k</span>&nbsp;字
             
             
             

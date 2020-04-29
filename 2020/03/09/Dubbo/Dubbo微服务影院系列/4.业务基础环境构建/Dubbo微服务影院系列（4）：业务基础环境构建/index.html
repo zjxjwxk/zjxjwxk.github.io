@@ -450,14 +450,14 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-03-13
+                    2020-04-29
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    705
+                    808
                 </div>
                 
 
@@ -501,69 +501,69 @@
 <p><img src="/2020/03/09/Dubbo/Dubbo微服务影院系列/4.业务基础环境构建/Dubbo微服务影院系列（4）：业务基础环境构建/image-20200309200432132.png" alt="API网关作用"></p>
 <h1 id="Guns-环境构建"><a href="#Guns-环境构建" class="headerlink" title="Guns 环境构建"></a>Guns 环境构建</h1><h2 id="导入-guns-项目"><a href="#导入-guns-项目" class="headerlink" title="导入 guns 项目"></a>导入 guns 项目</h2><p><img src="/2020/03/09/Dubbo/Dubbo微服务影院系列/4.业务基础环境构建/Dubbo微服务影院系列（4）：业务基础环境构建/image-20200309203515871.png" alt="guns项目结构"></p>
 <h2 id="创建-guns-rest-数据库"><a href="#创建-guns-rest-数据库" class="headerlink" title="创建 guns_rest 数据库"></a>创建 guns_rest 数据库</h2><p><img src="/2020/03/09/Dubbo/Dubbo微服务影院系列/4.业务基础环境构建/Dubbo微服务影院系列（4）：业务基础环境构建/image-20200309203649262.png" alt="guns_rest数据库"></p>
-<h2 id="创建-user-表"><a href="#创建-user-表" class="headerlink" title="创建 user 表"></a>创建 user 表</h2><pre class="line-numbers language-SQL"><code class="language-SQL">-- ----------------------------
--- Table structure for user
--- ----------------------------
-DROP TABLE IF EXISTS `user`;
-CREATE TABLE `user`  (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `userName` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+<h2 id="创建-user-表"><a href="#创建-user-表" class="headerlink" title="创建 user 表"></a>创建 user 表</h2><pre class="line-numbers language-sql"><code class="language-sql"><span class="token comment" spellcheck="true">-- ----------------------------</span>
+<span class="token comment" spellcheck="true">-- Table structure for user</span>
+<span class="token comment" spellcheck="true">-- ----------------------------</span>
+<span class="token keyword">DROP</span> <span class="token keyword">TABLE</span> <span class="token keyword">IF</span> <span class="token keyword">EXISTS</span> <span class="token punctuation">`</span><span class="token keyword">user</span><span class="token punctuation">`</span><span class="token punctuation">;</span>
+<span class="token keyword">CREATE</span> <span class="token keyword">TABLE</span> <span class="token punctuation">`</span><span class="token keyword">user</span><span class="token punctuation">`</span>  <span class="token punctuation">(</span>
+  <span class="token punctuation">`</span>id<span class="token punctuation">`</span> <span class="token keyword">bigint</span><span class="token punctuation">(</span><span class="token number">20</span><span class="token punctuation">)</span> <span class="token operator">NOT</span> <span class="token boolean">NULL</span> <span class="token keyword">AUTO_INCREMENT</span><span class="token punctuation">,</span>
+  <span class="token punctuation">`</span>userName<span class="token punctuation">`</span> <span class="token keyword">varchar</span><span class="token punctuation">(</span><span class="token number">255</span><span class="token punctuation">)</span> <span class="token keyword">CHARACTER SET</span> utf8 <span class="token keyword">COLLATE</span> utf8_general_ci <span class="token keyword">DEFAULT</span> <span class="token boolean">NULL</span><span class="token punctuation">,</span>
+  <span class="token keyword">PRIMARY</span> <span class="token keyword">KEY</span> <span class="token punctuation">(</span><span class="token punctuation">`</span>id<span class="token punctuation">`</span><span class="token punctuation">)</span> <span class="token keyword">USING</span> <span class="token keyword">BTREE</span>
+<span class="token punctuation">)</span> <span class="token keyword">ENGINE</span> <span class="token operator">=</span> <span class="token keyword">InnoDB</span> <span class="token keyword">AUTO_INCREMENT</span> <span class="token operator">=</span> <span class="token number">2</span> <span class="token keyword">CHARACTER SET</span> <span class="token operator">=</span> utf8 <span class="token keyword">COLLATE</span> <span class="token operator">=</span> utf8_general_ci ROW_FORMAT <span class="token operator">=</span> Dynamic<span class="token punctuation">;</span>
 
--- ----------------------------
--- Records of user
--- ----------------------------
-INSERT INTO `user` VALUES (1, 'admin');
+<span class="token comment" spellcheck="true">-- ----------------------------</span>
+<span class="token comment" spellcheck="true">-- Records of user</span>
+<span class="token comment" spellcheck="true">-- ----------------------------</span>
+<span class="token keyword">INSERT</span> <span class="token keyword">INTO</span> <span class="token punctuation">`</span><span class="token keyword">user</span><span class="token punctuation">`</span> <span class="token keyword">VALUES</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">'admin'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-SET FOREIGN_KEY_CHECKS = 1;
+<span class="token keyword">SET</span> FOREIGN_KEY_CHECKS <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="添加-log4j-依赖"><a href="#添加-log4j-依赖" class="headerlink" title="添加 log4j 依赖"></a>添加 log4j 依赖</h2><pre class="line-numbers language-XML"><code class="language-XML"><dependency>
-  <groupid>log4j</groupid>
-  <artifactid>log4j</artifactid>
-  <version>1.2.17</version>
-</dependency>
+<h2 id="添加-log4j-依赖"><a href="#添加-log4j-依赖" class="headerlink" title="添加 log4j 依赖"></a>添加 log4j 依赖</h2><pre class="line-numbers language-xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>log4j<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>log4j<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>1.2.17<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h2 id="修改-datasource-的-url"><a href="#修改-datasource-的-url" class="headerlink" title="修改 datasource 的 url"></a>修改 datasource 的 url</h2><p>修改 application.yml 中 spring 的 datasource 的 url 为</p>
-<pre class="line-numbers language-YAML"><code class="language-YAML">url: jdbc:mysql://127.0.0.1:3306/guns_rest?autoReconnect=true&useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8
+<pre class="line-numbers language-yaml"><code class="language-yaml"><span class="token key atrule">url</span><span class="token punctuation">:</span> jdbc<span class="token punctuation">:</span>mysql<span class="token punctuation">:</span>//127.0.0.1<span class="token punctuation">:</span>3306/guns_rest<span class="token punctuation">?</span>autoReconnect=true<span class="token important">&amp;useUnicode</span>=true<span class="token important">&amp;characterEncoding</span>=utf8<span class="token important">&amp;serverTimezone</span>=GMT%2B8
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <h2 id="验证环境"><a href="#验证环境" class="headerlink" title="验证环境"></a>验证环境</h2><p>启动 GunsRestApplication，访问 url <a href="http://localhost/auth?userName=admin&amp;password=admin，若返回如下" target="_blank" rel="noopener">http://localhost/auth?userName=admin&amp;password=admin，若返回如下</a> token 则环境搭建成功。</p>
-<pre class="line-numbers language-JSON"><code class="language-JSON">{
-  "randomKey": "zd8rb8",
-  "token": "eyJhbGciOiJIUzUxMiJ9.eyJyYW5kb21LZXkiOiJ6ZDhyYjgiLCJzdWIiOiJhZG1pbiIsImV4cCI6MTU4NDM2MjkxOCwiaWF0IjoxNTgzNzU4MTE4fQ.mR7Elro8oK8T2Rx6FE02FWTvORJnUAcFfPka4-KbQYsSpoMQQl5iUgd-wd9wYIw_5wbXpn3TFoii72suPn0b4A"
-}
+<pre class="line-numbers language-json"><code class="language-json"><span class="token punctuation">{</span>
+  <span class="token property">"randomKey"</span><span class="token operator">:</span> <span class="token string">"zd8rb8"</span><span class="token punctuation">,</span>
+  <span class="token property">"token"</span><span class="token operator">:</span> <span class="token string">"eyJhbGciOiJIUzUxMiJ9.eyJyYW5kb21LZXkiOiJ6ZDhyYjgiLCJzdWIiOiJhZG1pbiIsImV4cCI6MTU4NDM2MjkxOCwiaWF0IjoxNTgzNzU4MTE4fQ.mR7Elro8oK8T2Rx6FE02FWTvORJnUAcFfPka4-KbQYsSpoMQQl5iUgd-wd9wYIw_5wbXpn3TFoii72suPn0b4A"</span>
+<span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <h1 id="API-网关模块构建测试"><a href="#API-网关模块构建测试" class="headerlink" title="API 网关模块构建测试"></a>API 网关模块构建测试</h1><p>在 guns 项目中复制一份 guns-rest 模块并重命名为 guns-gateway，在主模块 pom.xml 中添加 <module>guns-gateway</module></p>
-<pre class="line-numbers language-XML"><code class="language-XML">    <modules>
-        <module>guns-admin</module>
-        <module>guns-core</module>
-        <module>guns-rest</module>
-        <module>guns-generator</module>
-        <module>guns-gateway</module>
-    </modules>
+<pre class="line-numbers language-xml"><code class="language-xml">    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>modules</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>module</span><span class="token punctuation">></span></span>guns-admin<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>module</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>module</span><span class="token punctuation">></span></span>guns-core<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>module</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>module</span><span class="token punctuation">></span></span>guns-rest<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>module</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>module</span><span class="token punctuation">></span></span>guns-generator<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>module</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>module</span><span class="token punctuation">></span></span>guns-gateway<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>module</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>modules</span><span class="token punctuation">></span></span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>修改其 pom.xml 中有关名称为 guns-gateway，并在 Project Structure 中将该模块重命名为 guns-gateway，同时删除原来 guns-rest 中多余的 Content Root（从 guns-gateway 加入的）</p>
 <p><img src="/2020/03/09/Dubbo/Dubbo微服务影院系列/4.业务基础环境构建/Dubbo微服务影院系列（4）：业务基础环境构建/image-20200309210548081.png" alt="需删除的Content Root"></p>
 <p>这样 guns-gateway 就构建好了（测试同 guns-rest）。</p>
 <h1 id="API-网关集成-Dubbo"><a href="#API-网关集成-Dubbo" class="headerlink" title="API 网关集成 Dubbo"></a>API 网关集成 Dubbo</h1><p>在 guns-gateway 项目的 pom.xml 文件中添加 Dubbo 和 ZooKeeper 的依赖</p>
-<pre class="line-numbers language-XML"><code class="language-XML"><dependency>
-  <groupid>com.alibaba.spring.boot</groupid>
-  <artifactid>dubbo-spring-boot-starter</artifactid>
-  <version>2.0.0</version>
-</dependency>
-<dependency>
-  <groupid>com.101tec</groupid>
-  <artifactid>zkclient</artifactid>
-  <version>0.10</version>
-</dependency>
+<pre class="line-numbers language-xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>com.alibaba.spring.boot<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>dubbo-spring-boot-starter<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>2.0.0<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>com.101tec<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>zkclient<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>0.10<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>在 application.yml 中添加</p>
-<pre class="line-numbers language-YAML"><code class="language-YAML">spring:
-  application:
-    name: cinema-gateway
-  dubbo:
-    server: true
-    registry: zookeeper://localhost:2181
+<pre class="line-numbers language-yaml"><code class="language-yaml"><span class="token key atrule">spring</span><span class="token punctuation">:</span>
+  <span class="token key atrule">application</span><span class="token punctuation">:</span>
+    <span class="token key atrule">name</span><span class="token punctuation">:</span> cinema<span class="token punctuation">-</span>gateway
+  <span class="token key atrule">dubbo</span><span class="token punctuation">:</span>
+    <span class="token key atrule">server</span><span class="token punctuation">:</span> <span class="token boolean important">true</span>
+    <span class="token key atrule">registry</span><span class="token punctuation">:</span> zookeeper<span class="token punctuation">:</span>//localhost<span class="token punctuation">:</span><span class="token number">2181</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>在 Application 类上添加注解 @EnableDubboConfiguration</li>
@@ -579,19 +579,19 @@ SET FOREIGN_KEY_CHECKS = 1;
 <ul>
 <li>在主模块的 pom.xml 中添加依赖</li>
 </ul>
-<pre class="line-numbers language-XML"><code class="language-XML"><dependency>
-  <groupid>com.stylefeng</groupid>
-  <artifactid>guns-api</artifactid>
-  <version>${guns.version}</version>
-</dependency>
+<pre class="line-numbers language-xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>com.stylefeng<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>guns-api<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>${guns.version}<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>在 guns-gateway 的 pom.xml 中添加依赖</li>
 </ul>
-<pre class="line-numbers language-XML"><code class="language-XML"><dependency>
-  <groupid>com.stylefeng</groupid>
-  <artifactid>guns-api</artifactid>
-</dependency>
+<pre class="line-numbers language-xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>com.stylefeng<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>guns-api<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <p>之后，就可以在 guns-gateway 模块中，引入 guns-api 中的接口来使用了。这样接口类只需要在 guns-api 中写一份就够了，避免了冗余，达到了抽离业务 API 的效果。</p>
 <script>
@@ -813,7 +813,7 @@ SET FOREIGN_KEY_CHECKS = 1;
                         <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
                     </div>
                     <div id="wechat">
-                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
                     </div>
                 </div>
             </div>
@@ -1110,7 +1110,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
             <br>
             
-            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span class="white-color">65.6k</span>&nbsp;字
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span class="white-color">67.7k</span>&nbsp;字
             
             
             
