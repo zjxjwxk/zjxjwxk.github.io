@@ -457,14 +457,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.1k
+                    1.4k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    4 分
+                    5 分
                 </div>
                 
 
@@ -565,26 +565,76 @@ java -jar dubbo-admin-0.1.jar
 <p>官方文档：<a href="https://dubbo.apache.org/zh-cn/docs/user/demos/config-rule.html" target="_blank" rel="noopener">https://dubbo.apache.org/zh-cn/docs/user/demos/config-rule.html</a></p>
 </blockquote>
 <h1 id="链路监控"><a href="#链路监控" class="headerlink" title="链路监控"></a>链路监控</h1><p><img src="/2020/04/24/Dubbo/Dubbo微服务影院系列/11.服务监控/Dubbo微服务影院系列（11）：服务监控/image-20200429162539237.png" alt="请求链路"></p>
-<h2 id="Zipkin"><a href="#Zipkin" class="headerlink" title="Zipkin"></a>Zipkin</h2><p><img src="https://zipkin.io/public/img/architecture-1.png" alt="Zipkin architecture"></p>
-<script>
-        document.querySelectorAll('.github-emoji')
-          .forEach(el => {
-            if (!el.dataset.src) { return; }
-            const img = document.createElement('img');
-            img.style = 'display:none !important;';
-            img.src = el.dataset.src;
-            img.addEventListener('error', () => {
-              img.remove();
-              el.style.color = 'inherit';
-              el.style.backgroundImage = 'none';
-              el.style.background = 'none';
-            });
-            img.addEventListener('load', () => {
-              img.remove();
-            });
-            document.body.appendChild(img);
-          });
-      </script>
+<h2 id="Zipkin"><a href="#Zipkin" class="headerlink" title="Zipkin"></a>Zipkin</h2><p>Zipkin 是一个分布式跟踪系统。它有助于收集解决服务体系结构中的延迟问题所需的时序数据。功能包括该数据的收集和查找。</p>
+<h3 id="Zipkin-架构"><a href="#Zipkin-架构" class="headerlink" title="Zipkin 架构"></a>Zipkin 架构</h3><p><img src="/2020/04/24/Dubbo/Dubbo微服务影院系列/11.服务监控/Dubbo微服务影院系列（11）：服务监控/image-20200429203208048.png" alt="Zipkin architecture"></p>
+<h3 id="Zipkin-简介"><a href="#Zipkin-简介" class="headerlink" title="Zipkin 简介"></a>Zipkin 简介</h3><table>
+<thead>
+<tr>
+<th>构成</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TraceID</td>
+<td>全局唯一表示，单次请求唯一</td>
+</tr>
+<tr>
+<td>SpanID</td>
+<td>调用编号，每次远程调用唯一</td>
+</tr>
+<tr>
+<td>ParentID</td>
+<td>父请求编号，上一级 SpanID</td>
+</tr>
+<tr>
+<td>Client Start</td>
+<td>cs，表示客户端发起请求</td>
+</tr>
+<tr>
+<td>Server Receive</td>
+<td>sr，表示服务端收到请求</td>
+</tr>
+<tr>
+<td>Server Send</td>
+<td>ss，表示服务端完成处理</td>
+</tr>
+<tr>
+<td>Client Receive</td>
+<td>cr，表示客户端收到相应</td>
+</tr>
+</tbody>
+</table>
+<p><img src="/2020/04/24/Dubbo/Dubbo微服务影院系列/11.服务监控/Dubbo微服务影院系列（11）：服务监控/image-20200429210440297.png" alt="请求和响应流程"></p>
+<h2 id="Dubbo-Filter"><a href="#Dubbo-Filter" class="headerlink" title="Dubbo-Filter"></a>Dubbo-Filter</h2><ul>
+<li>Dubbo 支持 Filter 机制</li>
+<li>Dubbo 诸多工作都是通过 Filter 实现</li>
+<li>常见自定义 Filter：例子记录、trace 功能等</li>
+</ul>
+<h3 id="拦截器简介"><a href="#拦截器简介" class="headerlink" title="拦截器简介"></a>拦截器简介</h3><p><img src="/2020/04/24/Dubbo/Dubbo微服务影院系列/11.服务监控/Dubbo微服务影院系列（11）：服务监控/image-20200429210902897.png" alt="拦截器简介"></p>
+<h3 id="Dubbo-Filter-使用"><a href="#Dubbo-Filter-使用" class="headerlink" title="Dubbo-Filter 使用"></a>Dubbo-Filter 使用</h3><p>创建一个 Filter 类，实现 com.alibaba.dubbo.rpc.Filter 接口，可以在服务调用前后做一些事情，这里用控制台输出表示：</p>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">MyFilter</span> <span class="token keyword">implements</span> <span class="token class-name">Filter</span> <span class="token punctuation">{</span>
+
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> Result <span class="token function">invoke</span><span class="token punctuation">(</span>Invoker<span class="token operator">&lt;</span><span class="token operator">?</span><span class="token operator">></span> invoker<span class="token punctuation">,</span> Invocation invocation<span class="token punctuation">)</span> <span class="token keyword">throws</span> RpcException <span class="token punctuation">{</span>
+       <span class="token comment" spellcheck="true">// do something...</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"服务调用之前"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        Result result <span class="token operator">=</span> invoker<span class="token punctuation">.</span><span class="token function">invoke</span><span class="token punctuation">(</span>invocation<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"服务调用之后"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+       <span class="token comment" spellcheck="true">// do something...</span>
+        <span class="token keyword">return</span> result<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>在模块的 resources 下创建 META-INF 文件夹，并在 META-INF 下创建 dubbo 文件夹，在其中创建一个名为 com.alibaba.dubbo.rpc.Filter 的纯文件（File），并在其中添加之前创建的 Filter 类：</p>
+<pre class="line-numbers language-txt"><code class="language-txt">MyFilter=com.zjut.zjxjwxk.springboot.provider.filter.MyFilter
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>这样，在调用服务时，就会通过 MyFilter 拦截器调用服务。</p>
+<pre class="line-numbers language-out"><code class="language-out">服务调用之前
+quickstart-provider-message=Hello World!
+服务调用之后
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
             </div>
             <hr>
 
@@ -1085,7 +1135,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
             <br>
             
-            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span class="white-color">67.7k</span>&nbsp;字
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span class="white-color">65.1k</span>&nbsp;字
             
             
             

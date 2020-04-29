@@ -450,21 +450,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-04-27
+                    2020-04-29
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    438
+                    459
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    1 分
+                    2 分
                 </div>
                 
 
@@ -509,28 +509,18 @@ export https_proxy="socks5://127.0.0.1:1086"
 <pre class="line-numbers language-shell"><code class="language-shell">alias setproxy="export ALL_PROXY=socks5://127.0.0.1:1086"
 alias unsetproxy="unset ALL_PROXY"
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<h1 id="Git-代理"><a href="#Git-代理" class="headerlink" title="Git 代理"></a>Git 代理</h1><pre class="line-numbers language-shell"><code class="language-shell">git config --global http.proxy 'socks5://127.0.0.1:1086' 
+<h1 id="Git-代理"><a href="#Git-代理" class="headerlink" title="Git 代理"></a>Git 代理</h1><p>git 设置全局代理：</p>
+<pre class="line-numbers language-shell"><code class="language-shell">git config --global http.proxy 'socks5://127.0.0.1:1086' 
 git config --global https.proxy 'socks5://127.0.0.1:1086'
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<script>
-        document.querySelectorAll('.github-emoji')
-          .forEach(el => {
-            if (!el.dataset.src) { return; }
-            const img = document.createElement('img');
-            img.style = 'display:none !important;';
-            img.src = el.dataset.src;
-            img.addEventListener('error', () => {
-              img.remove();
-              el.style.color = 'inherit';
-              el.style.backgroundImage = 'none';
-              el.style.background = 'none';
-            });
-            img.addEventListener('load', () => {
-              img.remove();
-            });
-            document.body.appendChild(img);
-          });
-      </script>
+<p>git 仅针对 GitHub 的单独配置：</p>
+<pre class="line-numbers language-shell"><code class="language-shell">git config --global http.https://github.com.proxy 'socks5://127.0.0.1:1086' 
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>git 取消全局代理，只需加个 –unset，单独配置同理：</p>
+<pre class="line-numbers language-shell"><code class="language-shell">git config --global --unset http.proxy 'socks5://127.0.0.1:1086' 
+git config --globa --unset https.proxy 'socks5://127.0.0.1:1086'
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
             </div>
             <hr>
 
@@ -1027,7 +1017,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
             <br>
             
-            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span class="white-color">67.7k</span>&nbsp;字
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span class="white-color">65.1k</span>&nbsp;字
             
             
             

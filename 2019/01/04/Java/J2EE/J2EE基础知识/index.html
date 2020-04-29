@@ -516,7 +516,7 @@
 <h2 id="什么情况下调用doGet-和doPost"><a href="#什么情况下调用doGet-和doPost" class="headerlink" title="什么情况下调用doGet()和doPost()"></a>什么情况下调用doGet()和doPost()</h2><p>Form标签里的method的属性为get时调用doGet()，为post时调用doPost()。</p>
 <h2 id="转发-Forward-和重定向-Redirect-的区别"><a href="#转发-Forward-和重定向-Redirect-的区别" class="headerlink" title="转发(Forward)和重定向(Redirect)的区别"></a>转发(Forward)和重定向(Redirect)的区别</h2><p><strong>转发是服务器行为，重定向是客户端行为。</strong></p>
 <p><strong>转发（Forword）</strong> 通过RequestDispatcher对象的forward（HttpServletRequest request,HttpServletResponse response）方法实现的。RequestDispatcher可以通过HttpServletRequest 的getRequestDispatcher()方法获得。例如下面的代码就是跳转到login_success.jsp页面。</p>
-<pre><code>     request.getRequestDispatcher("login_success.jsp").forward(request, response);
+<pre><code>     request.getRequestDispatcher(&quot;login_success.jsp&quot;).forward(request, response);
 </code></pre><p><strong>重定向（Redirect）</strong> 是利用服务器返回的状态吗来实现的。客户端浏览器请求服务器的时候，服务器会返回一个状态码。服务器通过HttpServletRequestResponse的setStatus(int status)方法设置状态码。如果服务器返回301或者302，则浏览器会到新的网址重新请求该资源。</p>
 <ol>
 <li><strong>从地址栏显示来说</strong></li>
@@ -535,7 +535,7 @@
 </ol>
 <p>forward:高. redirect:低.</p>
 <h2 id="自动刷新-Refresh"><a href="#自动刷新-Refresh" class="headerlink" title="自动刷新(Refresh)"></a>自动刷新(Refresh)</h2><p>自动刷新不仅可以实现一段时间之后自动跳转到另一个页面，还可以实现一段时间之后自动刷新本页面。Servlet中通过HttpServletResponse对象设置Header属性实现自动刷新例如：</p>
-<pre><code>Response.setHeader("Refresh","5;URL=http://localhost:8080/servlet/example.htm");
+<pre><code>Response.setHeader(&quot;Refresh&quot;,&quot;5;URL=http://localhost:8080/servlet/example.htm&quot;);
 </code></pre><p>其中5为时间，单位为秒。URL指定就是要跳转的页面（如果设置自己的路径，就会实现每过一秒自动刷新本页面一次）</p>
 <h2 id="Servlet与线程安全"><a href="#Servlet与线程安全" class="headerlink" title="Servlet与线程安全"></a>Servlet与线程安全</h2><p><strong>Servlet不是线程安全的，多线程并发的读写会导致数据不同步的问题。</strong> 解决的办法是尽量不要定义name属性，而是要把name变量分别定义在doGet()和doPost()方法内。虽然使用synchronized(name){}语句块可以解决问题，但是会造成线程的等待，不是很科学的办法。 注意：多线程的并发的读写Servlet类属性会导致数据不同步。但是如果只是并发地读取属性而不写入，则不存在数据不同步的问题。因此Servlet里的只读属性最好定义为final类型的。</p>
 <p>参考：《javaweb整合开发王者归来》P92</p>
@@ -609,11 +609,11 @@
 <li><strong>使用Cookie</strong></li>
 </ol>
 <p>向客户端发送Cookie</p>
-<pre><code>Cookie c =new Cookie("name","value"); //创建Cookie 
+<pre><code>Cookie c =new Cookie(&quot;name&quot;,&quot;value&quot;); //创建Cookie 
 c.setMaxAge(60*60*24); //设置最大时效，此处设置的最大时效为一天
 response.addCookie(c); //把Cookie放入到HTTP响应中
 </code></pre><p>从客户端读取Cookie</p>
-<pre><code>String name ="name"; 
+<pre><code>String name =&quot;name&quot;; 
 Cookie[]cookies =request.getCookies(); 
 if(cookies !=null){ 
    for(int i= 0;i&lt;cookies.length;i++){ 
@@ -634,7 +634,7 @@ if(cookies !=null){
 <p><strong>优点：</strong> 在Cookie被禁用的时候依然可以使用</p>
 <p><strong>缺点：</strong> 必须对网站的URL进行编码，所有页面必须动态生成，不能用预先记录下来的URL进行访问。</p>
 <p>3.隐藏的表单域</p>
-<pre><code>&lt;input type="hidden" name ="session" value="..."/&gt;
+<pre><code>&lt;input type=&quot;hidden&quot; name =&quot;session&quot; value=&quot;...&quot;/&gt;
 </code></pre><p><strong>优点：</strong> Cookie被禁时可以使用</p>
 <p><strong>缺点：</strong> 所有页面必须是表单提交之后的结果。</p>
 <ol>
@@ -651,25 +651,7 @@ if(cookies !=null){
 <p><a href="https://www.zhihu.com/question/19786827/answer/28752144" target="_blank" rel="noopener">https://www.zhihu.com/question/19786827/answer/28752144</a></p>
 <p>《javaweb整合开发王者归来》P158 Cookie和Session的比较</p>
 </blockquote>
-<script>
-        document.querySelectorAll('.github-emoji')
-          .forEach(el => {
-            if (!el.dataset.src) { return; }
-            const img = document.createElement('img');
-            img.style = 'display:none !important;';
-            img.src = el.dataset.src;
-            img.addEventListener('error', () => {
-              img.remove();
-              el.style.color = 'inherit';
-              el.style.backgroundImage = 'none';
-              el.style.background = 'none';
-            });
-            img.addEventListener('load', () => {
-              img.remove();
-            });
-            document.body.appendChild(img);
-          });
-      </script>
+
             </div>
             <hr>
 
@@ -1154,7 +1136,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
             <br>
             
-            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span class="white-color">67.7k</span>&nbsp;字
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span class="white-color">65.1k</span>&nbsp;字
             
             
             

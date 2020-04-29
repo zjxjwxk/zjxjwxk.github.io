@@ -460,7 +460,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    27 分
+                    26 分
                 </div>
                 
 
@@ -601,18 +601,18 @@
 <p><strong>举个例子：</strong></p>
 <pre><code>public class test1 {
     public static void main(String[] args) {
-        String a = new String("ab"); // a 为一个引用
-        String b = new String("ab"); // b为另一个引用,对象的内容一样
-        String aa = "ab"; // 放在常量池中
-        String bb = "ab"; // 从常量池中查找
+        String a = new String(&quot;ab&quot;); // a 为一个引用
+        String b = new String(&quot;ab&quot;); // b为另一个引用,对象的内容一样
+        String aa = &quot;ab&quot;; // 放在常量池中
+        String bb = &quot;ab&quot;; // 从常量池中查找
         if (aa == bb) // true
-            System.out.println("aa==bb");
+            System.out.println(&quot;aa==bb&quot;);
         if (a == b) // false，非同一对象
-            System.out.println("a==b");
+            System.out.println(&quot;a==b&quot;);
         if (a.equals(b)) // true
-            System.out.println("aEQb");
+            System.out.println(&quot;aEQb&quot;);
         if (42 == 42.0) { // true
-            System.out.println("true");
+            System.out.println(&quot;true&quot;);
         }
     }
 }
@@ -695,25 +695,7 @@ String s = input.readLine();
 </code></pre><h1 id="Java基础学习书籍推荐"><a href="#Java基础学习书籍推荐" class="headerlink" title="Java基础学习书籍推荐"></a>Java基础学习书籍推荐</h1><p><strong>《Head First Java.第二版》：</strong> 可以说是我的 Java 启蒙书籍了，特别适合新手读当然也适合我们用来温故Java知识点。</p>
 <p><strong>《Java核心技术卷1+卷2》：</strong> 很棒的两本书，建议有点 Java 基础之后再读，介绍的还是比较深入的，非常推荐。</p>
 <p><strong>《Java编程思想(第4版)》：</strong> 这本书要常读，初学者可以快速概览，中等程序员可以深入看看 Java，老鸟还可以用之回顾 Java 的体系。这本书之所以厉害，因为它在无形中整合了设计模式，这本书之所以难读，也恰恰在于他对设计模式的整合是无形的。</p>
-<script>
-        document.querySelectorAll('.github-emoji')
-          .forEach(el => {
-            if (!el.dataset.src) { return; }
-            const img = document.createElement('img');
-            img.style = 'display:none !important;';
-            img.src = el.dataset.src;
-            img.addEventListener('error', () => {
-              img.remove();
-              el.style.color = 'inherit';
-              el.style.backgroundImage = 'none';
-              el.style.background = 'none';
-            });
-            img.addEventListener('load', () => {
-              img.remove();
-            });
-            document.body.appendChild(img);
-          });
-      </script>
+
             </div>
             <hr>
 
@@ -1191,7 +1173,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
             <br>
             
-            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span class="white-color">67.7k</span>&nbsp;字
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span class="white-color">65.1k</span>&nbsp;字
             
             
             

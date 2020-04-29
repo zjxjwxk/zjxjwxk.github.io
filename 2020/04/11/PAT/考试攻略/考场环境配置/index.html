@@ -457,7 +457,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    577
+                    540
                 </div>
                 
 
@@ -490,44 +490,26 @@
 </blockquote>
 <p><img src="/2020/04/11/PAT/考试攻略/考场环境配置/PAT紫金港配置.png" alt="PAT紫金港配置.png"></p>
 <p>我本人选择使用 <code>Dev C++ 5.10</code> 版本，考试那天在考场需要先对其作以下配置（当然也许已经配置好了）：</p>
-<h1 id="打开产生调试信息"><a href="#打开产生调试信息" class="headerlink" title="打开产生调试信息"></a>打开产生调试信息</h1><p>在 <code>“工具(Tools)”</code> -&gt; <code>“编译选项(Compiler Options)"</code> 中：</p>
+<h1 id="打开产生调试信息"><a href="#打开产生调试信息" class="headerlink" title="打开产生调试信息"></a>打开产生调试信息</h1><p>在 <code>“工具(Tools)”</code> -&gt; <code>“编译选项(Compiler Options)&quot;</code> 中：</p>
 <p><img src="/2020/04/11/PAT/考试攻略/考场环境配置/image-20200411163457056.png" alt="编译选项"></p>
-<p>点击 <code>“代码生成/优化(Settings)”</code> 选项卡中的 <code>"连接器(Linker)"</code> 选项卡，将 <code>"产生调试信息(Generate debugging information)"</code> 选项改为 <code>“Yes”</code>。</p>
+<p>点击 <code>“代码生成/优化(Settings)”</code> 选项卡中的 <code>&quot;连接器(Linker)&quot;</code> 选项卡，将 <code>&quot;产生调试信息(Generate debugging information)&quot;</code> 选项改为 <code>“Yes”</code>。</p>
 <p><img src="/2020/04/11/PAT/考试攻略/考场环境配置/image-20200411163800036.png" alt="产生调试信息"></p>
 <p>这样，就可以愉快的 Debug 了～</p>
 <h1 id="添加-C-11-支持"><a href="#添加-C-11-支持" class="headerlink" title="添加 C++ 11 支持"></a>添加 C++ 11 支持</h1><p>由于 PAT 的 OJ 是支持 C++ 11 的，故最好打开 C++ 11 支持。</p>
-<h2 id="方法一（推荐）"><a href="#方法一（推荐）" class="headerlink" title="方法一（推荐）"></a>方法一（推荐）</h2><p>在 <code>“工具(Tools)”</code> -&gt; <code>“编译选项(Compiler Options)"</code> 中，<code>“代码生成/优化(Settings)”</code> 选项卡下的 <code>“代码生成(Code Generation)”</code> 选项卡中，将 <code>“语言标准(Language Standard)(-std)”</code> 设置为 <code>ISO C++11</code> 即可。</p>
+<h2 id="方法一（推荐）"><a href="#方法一（推荐）" class="headerlink" title="方法一（推荐）"></a>方法一（推荐）</h2><p>在 <code>“工具(Tools)”</code> -&gt; <code>“编译选项(Compiler Options)&quot;</code> 中，<code>“代码生成/优化(Settings)”</code> 选项卡下的 <code>“代码生成(Code Generation)”</code> 选项卡中，将 <code>“语言标准(Language Standard)(-std)”</code> 设置为 <code>ISO C++11</code> 即可。</p>
 <p><img src="/2020/04/11/PAT/考试攻略/考场环境配置/image-20200411180355580.png" alt="语言标准"></p>
-<h2 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h2><p>同样，也可以在<code>“工具(Tools)”</code> -&gt; <code>“编译选项(Compiler Options)"</code>中，在<code>"编译器(General)"</code>选项卡中，勾选<code>"编译时加入以下命令：(Add the following commands when calling the compiler:)"</code>，并在下方加入 <code>-std=c++11</code>。</p>
+<h2 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h2><p>同样，也可以在<code>“工具(Tools)”</code> -&gt; <code>“编译选项(Compiler Options)&quot;</code>中，在<code>&quot;编译器(General)&quot;</code>选项卡中，勾选<code>&quot;编译时加入以下命令：(Add the following commands when calling the compiler:)&quot;</code>，并在下方加入 <code>-std=c++11</code>。</p>
 <p><img src="/2020/04/11/PAT/考试攻略/考场环境配置/image-20200411164259368.png" alt="C++ 11 支持"></p>
-<h1 id="字体大小"><a href="#字体大小" class="headerlink" title="字体大小"></a>字体大小</h1><p>由于默认字体是 10，实在太小了不能接受，可以在 <code>“工具(Tools)”</code> -&gt; <code>“编译器选项(Editor Options)"</code> 中的<code>"显示(Fonts)"</code>选项卡，修改字体<code>大小(Size)</code>。或者通过 <code>Ctrl + 滚轮</code> 修改字体大小（更方便）。</p>
+<h1 id="字体大小"><a href="#字体大小" class="headerlink" title="字体大小"></a>字体大小</h1><p>由于默认字体是 10，实在太小了不能接受，可以在 <code>“工具(Tools)”</code> -&gt; <code>“编译器选项(Editor Options)&quot;</code> 中的<code>&quot;显示(Fonts)&quot;</code>选项卡，修改字体<code>大小(Size)</code>。或者通过 <code>Ctrl + 滚轮</code> 修改字体大小（更方便）。</p>
 <p><img src="/2020/04/11/PAT/考试攻略/考场环境配置/image-20200411164704403.png" alt="字体大小"></p>
-<h1 id="代码补全"><a href="#代码补全" class="headerlink" title="代码补全"></a>代码补全</h1><h2 id="打开代码补全"><a href="#打开代码补全" class="headerlink" title="打开代码补全"></a>打开代码补全</h2><p>Dev C++ 是有一定的代码补全功能的，在<code>“工具(Tools)”</code> -&gt; <code>“编译器选项(Editor Options)"</code>中，在 <code>“代码补全(Completion)”</code> 选项卡下的 <code>Code Completion</code> 选项卡中，将所有勾勾上即可。</p>
+<h1 id="代码补全"><a href="#代码补全" class="headerlink" title="代码补全"></a>代码补全</h1><h2 id="打开代码补全"><a href="#打开代码补全" class="headerlink" title="打开代码补全"></a>打开代码补全</h2><p>Dev C++ 是有一定的代码补全功能的，在<code>“工具(Tools)”</code> -&gt; <code>“编译器选项(Editor Options)&quot;</code>中，在 <code>“代码补全(Completion)”</code> 选项卡下的 <code>Code Completion</code> 选项卡中，将所有勾勾上即可。</p>
 <p><img src="/2020/04/11/PAT/考试攻略/考场环境配置/image-20200411171339011.png" alt="代码补全"></p>
 <p><img src="/2020/04/11/PAT/考试攻略/考场环境配置/image-20200411171544336.png" alt="代码补全效果"></p>
 <h2 id="快捷键"><a href="#快捷键" class="headerlink" title="快捷键"></a>快捷键</h2><p>同时，可以通过<code>“工具(Tools)”</code> -&gt; <code>“快捷键选项(Configure Shortcuts)”</code> 来配置 <code>Show Code Completion</code> 的快捷键以唤出代码补全（默认为 Ctrl + Space）：</p>
 <p><img src="/2020/04/11/PAT/考试攻略/考场环境配置/image-20200411171955523.png" alt="代码补全快捷键"></p>
 <p><img src="/2020/04/11/PAT/考试攻略/考场环境配置/image-20200411172339097.png" alt="代码补全快捷键效果"></p>
 <p>然后，就可以愉快地考试了～</p>
-<script>
-        document.querySelectorAll('.github-emoji')
-          .forEach(el => {
-            if (!el.dataset.src) { return; }
-            const img = document.createElement('img');
-            img.style = 'display:none !important;';
-            img.src = el.dataset.src;
-            img.addEventListener('error', () => {
-              img.remove();
-              el.style.color = 'inherit';
-              el.style.backgroundImage = 'none';
-              el.style.background = 'none';
-            });
-            img.addEventListener('load', () => {
-              img.remove();
-            });
-            document.body.appendChild(img);
-          });
-      </script>
+
             </div>
             <hr>
 
@@ -1016,7 +998,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
             <br>
             
-            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span class="white-color">67.7k</span>&nbsp;字
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span class="white-color">65.1k</span>&nbsp;字
             
             
             
