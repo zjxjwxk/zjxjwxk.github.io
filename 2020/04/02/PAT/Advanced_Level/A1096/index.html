@@ -488,8 +488,8 @@
 5*6*7
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <h1 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h1><ul>
-<li>N 不会被自己以为的大于 \sqrt{N}​ 的多个连续整数整除，因此只需要从 2 ～ ​\sqrt{N}​ 遍历连续整数的第一个。</li>
-<li>如果遍历结束后 ansLen 依然为 0，说明不超过 \sqrt{N}​ 的整数中不存在能整除 N 的连续整数，因此答案就是 N 本身。此时输出特例，即连续个数为 1，因数为 N 本身。</li>
+<li>N 不会被自己以为的大于 $\sqrt{N}$​ 的多个连续整数整除，因此只需要从 2 ～ $\sqrt{N}$​ 遍历连续整数的第一个。</li>
+<li>如果遍历结束后 ansLen 依然为 0，说明不超过 $\sqrt{N}$​ 的整数中不存在能整除 N 的连续整数，因此答案就是 N 本身。此时输出特例，即连续个数为 1，因数为 N 本身。</li>
 <li>需要用 long long，防止中间乘积超过 int 导致溢出。</li>
 </ul>
 <pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;cstdio></span></span>
