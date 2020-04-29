@@ -450,14 +450,14 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-03-29
+                    2020-04-29
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    569
+                    676
                 </div>
                 
 
@@ -501,68 +501,84 @@
 <li>本题的变量尽量使用 long long 类型。另外，经测试得到，本题中 radix 的范围最大为 INT_MAX ，即$2^{31}-1$，因此必须在在计算过程中判断是否溢出。</li>
 <li>N2 进制的<strong>下界</strong>为所有数位中最大的那个+1，<strong>上界</strong>为 N1 的十进制（num1）与下界（lower）的较大值+1（即 max(num1, lower) + 1）。</li>
 </ul>
-<pre class="line-numbers language-C++"><code class="language-C++">#include <cstdio>
-#include <cstring>
-#include <algorithm>
-using namespace std;
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;cstdio></span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;cstring></span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;algorithm></span></span>
+<span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
 
-char n1[11], n2[11], temp[11];
-int tag;
-long long radix, num1, inf = (1LL << 63) - 1;
+<span class="token keyword">char</span> n1<span class="token punctuation">[</span><span class="token number">11</span><span class="token punctuation">]</span><span class="token punctuation">,</span> n2<span class="token punctuation">[</span><span class="token number">11</span><span class="token punctuation">]</span><span class="token punctuation">,</span> temp<span class="token punctuation">[</span><span class="token number">11</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> tag<span class="token punctuation">;</span>
+<span class="token keyword">long</span> <span class="token keyword">long</span> radix<span class="token punctuation">,</span> num1<span class="token punctuation">,</span> inf <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token number">1LL</span> <span class="token operator">&lt;&lt;</span> <span class="token number">63</span><span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">;</span>
 
-long long strToNum(char str[], long long radix, long long upper) {
-    int len = strlen(str);
-    long long num = 0;
-    for (int i = 0; i < len; i++) {
-        long long digit;
-        if (str[i] >= 'a' && str[i] <= 0="" 'z')="" {="" digit="str[i]" -="" 'a'="" +="" 10;="" }="" else="" '0';="" num="num" *="" radix="" digit;="" if="" (num="" <="" ||=""> upper) {
-            return -1;
-        }
-    }
-    return num;
-}
+<span class="token keyword">long</span> <span class="token keyword">long</span> <span class="token function">strToNum</span><span class="token punctuation">(</span><span class="token keyword">char</span> str<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token keyword">long</span> <span class="token keyword">long</span> radix<span class="token punctuation">,</span> <span class="token keyword">long</span> <span class="token keyword">long</span> upper<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">int</span> len <span class="token operator">=</span> <span class="token function">strlen</span><span class="token punctuation">(</span>str<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">long</span> <span class="token keyword">long</span> num <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> len<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">long</span> <span class="token keyword">long</span> digit<span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>str<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">>=</span> <span class="token string">'a'</span> <span class="token operator">&amp;&amp;</span> str<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">&lt;=</span> <span class="token string">'z'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            digit <span class="token operator">=</span> str<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">-</span> <span class="token string">'a'</span> <span class="token operator">+</span> <span class="token number">10</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+            digit <span class="token operator">=</span> str<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">-</span> <span class="token string">'0'</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        num <span class="token operator">=</span> num <span class="token operator">*</span> radix <span class="token operator">+</span> digit<span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>num <span class="token operator">&lt;</span> <span class="token number">0</span> <span class="token operator">||</span> num <span class="token operator">></span> upper<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> num<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-long long findLower(char str[]) {
-    long long maxDigit = -1;
-    int len = strlen(str);
-    for (int i = 0; i < len; i++) {
-        long long digit;
-        if (str[i] >= 'a' && str[i] <= 'z')="" {="" digit="str[i]" -="" 'a'="" +="" 10;="" }="" else="" '0';="" if="" (digit=""> maxDigit) {
-            maxDigit = digit;
-        }
-    }
-    return maxDigit + 1;
-}
+<span class="token keyword">long</span> <span class="token keyword">long</span> <span class="token function">findLower</span><span class="token punctuation">(</span><span class="token keyword">char</span> str<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">long</span> <span class="token keyword">long</span> maxDigit <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> len <span class="token operator">=</span> <span class="token function">strlen</span><span class="token punctuation">(</span>str<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> len<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">long</span> <span class="token keyword">long</span> digit<span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>str<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">>=</span> <span class="token string">'a'</span> <span class="token operator">&amp;&amp;</span> str<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">&lt;=</span> <span class="token string">'z'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            digit <span class="token operator">=</span> str<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">-</span> <span class="token string">'a'</span> <span class="token operator">+</span> <span class="token number">10</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+            digit <span class="token operator">=</span> str<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">-</span> <span class="token string">'0'</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>digit <span class="token operator">></span> maxDigit<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            maxDigit <span class="token operator">=</span> digit<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> maxDigit <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-int binarySearch(long long left, long long right, char str[], long long upper) {
-    long long mid, num2;
-    while (left <= right)="" {="" mid="left" +="" (right="" -="" left)="" 2;="" long="" num2="strToNum(n2," mid,="" upper);="" if="" (num2="=" num1)="" return="" mid;="" }="" else=""> num1 || num2 == -1) {
-            right = mid - 1;
-        } else {
-            left = mid + 1;
-        }
-    }
-    return -1;
-}
+<span class="token keyword">int</span> <span class="token function">binarySearch</span><span class="token punctuation">(</span><span class="token keyword">long</span> <span class="token keyword">long</span> left<span class="token punctuation">,</span> <span class="token keyword">long</span> <span class="token keyword">long</span> right<span class="token punctuation">,</span> <span class="token keyword">char</span> str<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token keyword">long</span> <span class="token keyword">long</span> upper<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">long</span> <span class="token keyword">long</span> mid<span class="token punctuation">,</span> num2<span class="token punctuation">;</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>left <span class="token operator">&lt;=</span> right<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        mid <span class="token operator">=</span> left <span class="token operator">+</span> <span class="token punctuation">(</span>right <span class="token operator">-</span> left<span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token number">2</span><span class="token punctuation">;</span>
+        <span class="token keyword">long</span> <span class="token keyword">long</span> num2 <span class="token operator">=</span> <span class="token function">strToNum</span><span class="token punctuation">(</span>n2<span class="token punctuation">,</span> mid<span class="token punctuation">,</span> upper<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>num2 <span class="token operator">==</span> num1<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> mid<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>num2 <span class="token operator">></span> num1 <span class="token operator">||</span> num2 <span class="token operator">==</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            right <span class="token operator">=</span> mid <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+            left <span class="token operator">=</span> mid <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-int main() {
-    scanf("%s %s %d %d", n1, n2, &tag, &radix);
-    if (tag == 2) {
-        strcpy(temp, n1);
-        strcpy(n1, n2);
-        strcpy(n2, temp);
-    }
-    long long lower = findLower(n2);
-    num1 = strToNum(n1, radix, inf);
-    long long radix2 = binarySearch(lower, max(num1, lower) + 1, n2, num1);
-    if (radix2 == -1) {
-        printf("Impossible");
-    } else {
-        printf("%d", radix2);
-    }
-    return 0;
-}
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></=></=></=></algorithm></cstring></cstdio></code></pre>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">"%s %s %d %d"</span><span class="token punctuation">,</span> n1<span class="token punctuation">,</span> n2<span class="token punctuation">,</span> <span class="token operator">&amp;</span>tag<span class="token punctuation">,</span> <span class="token operator">&amp;</span>radix<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>tag <span class="token operator">==</span> <span class="token number">2</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">strcpy</span><span class="token punctuation">(</span>temp<span class="token punctuation">,</span> n1<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">strcpy</span><span class="token punctuation">(</span>n1<span class="token punctuation">,</span> n2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">strcpy</span><span class="token punctuation">(</span>n2<span class="token punctuation">,</span> temp<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">long</span> <span class="token keyword">long</span> lower <span class="token operator">=</span> <span class="token function">findLower</span><span class="token punctuation">(</span>n2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    num1 <span class="token operator">=</span> <span class="token function">strToNum</span><span class="token punctuation">(</span>n1<span class="token punctuation">,</span> radix<span class="token punctuation">,</span> inf<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">long</span> <span class="token keyword">long</span> radix2 <span class="token operator">=</span> <span class="token function">binarySearch</span><span class="token punctuation">(</span>lower<span class="token punctuation">,</span> <span class="token function">max</span><span class="token punctuation">(</span>num1<span class="token punctuation">,</span> lower<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">,</span> n2<span class="token punctuation">,</span> num1<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>radix2 <span class="token operator">==</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"Impossible"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+        <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span> radix2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
@@ -1061,7 +1077,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
             <br>
             
-            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span class="white-color">64.6k</span>&nbsp;字
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span class="white-color">65.6k</span>&nbsp;字
             
             
             

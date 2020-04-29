@@ -450,14 +450,14 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-04-07
+                    2020-04-29
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    547
+                    556
                 </div>
                 
 
@@ -514,41 +514,41 @@
 <h1 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h1><ul>
 <li>使用 %05d 格式输出地址，使其高位补 0。</li>
 </ul>
-<pre class="line-numbers language-C++"><code class="language-C++">#include <cstdio>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;cstdio></span></span>
 
-const int maxn = 100000;
+<span class="token keyword">const</span> <span class="token keyword">int</span> maxn <span class="token operator">=</span> <span class="token number">100000</span><span class="token punctuation">;</span>
 
-struct Node {
-    char data;
-    int next;
-    bool flag = false;
-} nodes[maxn];
+<span class="token keyword">struct</span> Node <span class="token punctuation">{</span>
+    <span class="token keyword">char</span> data<span class="token punctuation">;</span>
+    <span class="token keyword">int</span> next<span class="token punctuation">;</span>
+    <span class="token keyword">bool</span> flag <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span> nodes<span class="token punctuation">[</span>maxn<span class="token punctuation">]</span><span class="token punctuation">;</span>
 
-int main() {
-    int root1, root2, n, address, next;
-    char data;
-    scanf("%d %d %d", &root1, &root2, &n);
-    for (int i = 0; i < n; i++) {
-        scanf("%d", &address);
-        scanf(" %c %d", &nodes[address].data, &nodes[address].next);
-    }
-    int cur = root1;
-    while (cur != -1) {
-        nodes[cur].flag = true;
-        cur = nodes[cur].next;
-    }
-    cur = root2;
-    while (cur != -1) {
-        if (nodes[cur].flag == true) {
-            printf("%05d", cur);
-            return 0;
-        }
-        cur = nodes[cur].next;
-    }
-    printf("-1");
-    return 0;
-}
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></cstdio></code></pre>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">int</span> root1<span class="token punctuation">,</span> root2<span class="token punctuation">,</span> n<span class="token punctuation">,</span> address<span class="token punctuation">,</span> next<span class="token punctuation">;</span>
+    <span class="token keyword">char</span> data<span class="token punctuation">;</span>
+    <span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">"%d %d %d"</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>root1<span class="token punctuation">,</span> <span class="token operator">&amp;</span>root2<span class="token punctuation">,</span> <span class="token operator">&amp;</span>n<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>address<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">" %c %d"</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>nodes<span class="token punctuation">[</span>address<span class="token punctuation">]</span><span class="token punctuation">.</span>data<span class="token punctuation">,</span> <span class="token operator">&amp;</span>nodes<span class="token punctuation">[</span>address<span class="token punctuation">]</span><span class="token punctuation">.</span>next<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">int</span> cur <span class="token operator">=</span> root1<span class="token punctuation">;</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>cur <span class="token operator">!=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        nodes<span class="token punctuation">[</span>cur<span class="token punctuation">]</span><span class="token punctuation">.</span>flag <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+        cur <span class="token operator">=</span> nodes<span class="token punctuation">[</span>cur<span class="token punctuation">]</span><span class="token punctuation">.</span>next<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    cur <span class="token operator">=</span> root2<span class="token punctuation">;</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>cur <span class="token operator">!=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>nodes<span class="token punctuation">[</span>cur<span class="token punctuation">]</span><span class="token punctuation">.</span>flag <span class="token operator">==</span> <span class="token boolean">true</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%05d"</span><span class="token punctuation">,</span> cur<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        cur <span class="token operator">=</span> nodes<span class="token punctuation">[</span>cur<span class="token punctuation">]</span><span class="token punctuation">.</span>next<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"-1"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
@@ -1047,7 +1047,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
             <br>
             
-            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span class="white-color">64.6k</span>&nbsp;字
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span class="white-color">65.6k</span>&nbsp;字
             
             
             

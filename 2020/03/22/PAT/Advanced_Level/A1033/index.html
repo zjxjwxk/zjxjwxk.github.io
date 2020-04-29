@@ -450,14 +450,14 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-03-29
+                    2020-04-29
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    734
+                    764
                 </div>
                 
 
@@ -505,79 +505,80 @@
 <h1 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h1><ul>
 <li>在距离为0处必须有加油站，否则无法出发，一定无法到达终点</li>
 </ul>
-<pre class="line-numbers language-C++"><code class="language-C++">#include <cstdio>
-#include <algorithm>
-using namespace std;
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;cstdio></span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;algorithm></span></span>
+<span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
 
-const int maxn = 501;
+<span class="token keyword">const</span> <span class="token keyword">int</span> maxn <span class="token operator">=</span> <span class="token number">501</span><span class="token punctuation">;</span>
 
-struct Station {
-    double P;
-    double D;
-} stations[maxn];
+<span class="token keyword">struct</span> Station <span class="token punctuation">{</span>
+    <span class="token keyword">double</span> P<span class="token punctuation">;</span>
+    <span class="token keyword">double</span> D<span class="token punctuation">;</span>
+<span class="token punctuation">}</span> stations<span class="token punctuation">[</span>maxn<span class="token punctuation">]</span><span class="token punctuation">;</span>
 
-int cmp(Station s1, Station s2) {
-    return s1.D < s2.D;
-}
+<span class="token keyword">int</span> <span class="token function">cmp</span><span class="token punctuation">(</span>Station s1<span class="token punctuation">,</span> Station s2<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> s1<span class="token punctuation">.</span>D <span class="token operator">&lt;</span> s2<span class="token punctuation">.</span>D<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-int main() {
-    double capacity, destD, avgD, nowC = 0, nowD = 0, cost = 0;
-    int n, nowIndex = 0;
-    scanf("%lf %lf %lf %d", &capacity, &destD, &avgD, &n);
-    for (int i = 0; i < n; i++) {
-        scanf("%lf %lf", &stations[i].P, &stations[i].D);
-    }
-    stations[n].P = 0;
-    stations[n].D = destD;
-    sort(stations, stations + n, cmp);
-    if (stations[0].D != 0) {
-        printf("The maximum travel distance = 0.00");
-    } else {
-        while (nowD < destD) {
-            if (nowIndex == n - 1 && (capacity * avgD < (destD - nowD)) || (nowIndex < n - 1) && (capacity * avgD < (stations[nowIndex + 1].D - nowD))) {
-                nowD += capacity * avgD;
-                break;
-            }
-            double minP = stations[nowIndex].P, secondP = stations[nowIndex + 1].P;
-            int minIndex = -1, secondIndex = nowIndex + 1;
-            for (int i = nowIndex + 1; i <= n;="" i++)="" {="" if="" (capacity="" *="" avgd="">= (stations[i].D - nowD)) {
-                    if (stations[i].P < minP) {
-                        minP = stations[i].P;
-                        minIndex = i;
-                        break;
-                    } else if (stations[i].P < secondP) {
-                        secondP = stations[i].P;
-                        secondIndex = i;
-                    }
-                } else {
-                    break;
-                }
-            }
-            if (minIndex != -1) {
-                if (nowC * avgD < (stations[minIndex].D - nowD)) {
-                    cost += ((stations[minIndex].D - nowD) / avgD - nowC) * stations[nowIndex].P;
-                    nowC = 0;
-                } else {
-                    nowC -= (stations[minIndex].D - nowD) / avgD;
-                }
-                nowD = stations[minIndex].D;
-                nowIndex = minIndex;
-            } else {
-                cost += (capacity - nowC) * stations[nowIndex].P;
-                nowC = capacity - (stations[secondIndex].D - nowD) / avgD;
-                nowD = stations[secondIndex].D;
-                nowIndex = secondIndex;
-            }
-        }
-        if (nowD < destD) {
-            printf("The maximum travel distance = %.2f", nowD);
-        } else {
-            printf("%.2f", cost);
-        }
-    }
-    return 0;
-}
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></=></algorithm></cstdio></code></pre>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">double</span> capacity<span class="token punctuation">,</span> destD<span class="token punctuation">,</span> avgD<span class="token punctuation">,</span> nowC <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> nowD <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> cost <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> n<span class="token punctuation">,</span> nowIndex <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">"%lf %lf %lf %d"</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>capacity<span class="token punctuation">,</span> <span class="token operator">&amp;</span>destD<span class="token punctuation">,</span> <span class="token operator">&amp;</span>avgD<span class="token punctuation">,</span> <span class="token operator">&amp;</span>n<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">"%lf %lf"</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>stations<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>P<span class="token punctuation">,</span> <span class="token operator">&amp;</span>stations<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>D<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    stations<span class="token punctuation">[</span>n<span class="token punctuation">]</span><span class="token punctuation">.</span>P <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    stations<span class="token punctuation">[</span>n<span class="token punctuation">]</span><span class="token punctuation">.</span>D <span class="token operator">=</span> destD<span class="token punctuation">;</span>
+    <span class="token function">sort</span><span class="token punctuation">(</span>stations<span class="token punctuation">,</span> stations <span class="token operator">+</span> n<span class="token punctuation">,</span> cmp<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>stations<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>D <span class="token operator">!=</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"The maximum travel distance = 0.00"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+        <span class="token keyword">while</span> <span class="token punctuation">(</span>nowD <span class="token operator">&lt;</span> destD<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>nowIndex <span class="token operator">==</span> n <span class="token operator">-</span> <span class="token number">1</span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">(</span>capacity <span class="token operator">*</span> avgD <span class="token operator">&lt;</span> <span class="token punctuation">(</span>destD <span class="token operator">-</span> nowD<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">||</span> <span class="token punctuation">(</span>nowIndex <span class="token operator">&lt;</span> n <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">(</span>capacity <span class="token operator">*</span> avgD <span class="token operator">&lt;</span> <span class="token punctuation">(</span>stations<span class="token punctuation">[</span>nowIndex <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">.</span>D <span class="token operator">-</span> nowD<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                nowD <span class="token operator">+</span><span class="token operator">=</span> capacity <span class="token operator">*</span> avgD<span class="token punctuation">;</span>
+                <span class="token keyword">break</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword">double</span> minP <span class="token operator">=</span> stations<span class="token punctuation">[</span>nowIndex<span class="token punctuation">]</span><span class="token punctuation">.</span>P<span class="token punctuation">,</span> secondP <span class="token operator">=</span> stations<span class="token punctuation">[</span>nowIndex <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">.</span>P<span class="token punctuation">;</span>
+            <span class="token keyword">int</span> minIndex <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> secondIndex <span class="token operator">=</span> nowIndex <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
+            <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> nowIndex <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>capacity <span class="token operator">*</span> avgD <span class="token operator">>=</span> <span class="token punctuation">(</span>stations<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>D <span class="token operator">-</span> nowD<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                    <span class="token keyword">if</span> <span class="token punctuation">(</span>stations<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>P <span class="token operator">&lt;</span> minP<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                        minP <span class="token operator">=</span> stations<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>P<span class="token punctuation">;</span>
+                        minIndex <span class="token operator">=</span> i<span class="token punctuation">;</span>
+                        <span class="token keyword">break</span><span class="token punctuation">;</span>
+                    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>stations<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>P <span class="token operator">&lt;</span> secondP<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                        secondP <span class="token operator">=</span> stations<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>P<span class="token punctuation">;</span>
+                        secondIndex <span class="token operator">=</span> i<span class="token punctuation">;</span>
+                    <span class="token punctuation">}</span>
+                <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+                    <span class="token keyword">break</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>minIndex <span class="token operator">!=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>nowC <span class="token operator">*</span> avgD <span class="token operator">&lt;</span> <span class="token punctuation">(</span>stations<span class="token punctuation">[</span>minIndex<span class="token punctuation">]</span><span class="token punctuation">.</span>D <span class="token operator">-</span> nowD<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                    cost <span class="token operator">+</span><span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>stations<span class="token punctuation">[</span>minIndex<span class="token punctuation">]</span><span class="token punctuation">.</span>D <span class="token operator">-</span> nowD<span class="token punctuation">)</span> <span class="token operator">/</span> avgD <span class="token operator">-</span> nowC<span class="token punctuation">)</span> <span class="token operator">*</span> stations<span class="token punctuation">[</span>nowIndex<span class="token punctuation">]</span><span class="token punctuation">.</span>P<span class="token punctuation">;</span>
+                    nowC <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+                    nowC <span class="token operator">-</span><span class="token operator">=</span> <span class="token punctuation">(</span>stations<span class="token punctuation">[</span>minIndex<span class="token punctuation">]</span><span class="token punctuation">.</span>D <span class="token operator">-</span> nowD<span class="token punctuation">)</span> <span class="token operator">/</span> avgD<span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+                nowD <span class="token operator">=</span> stations<span class="token punctuation">[</span>minIndex<span class="token punctuation">]</span><span class="token punctuation">.</span>D<span class="token punctuation">;</span>
+                nowIndex <span class="token operator">=</span> minIndex<span class="token punctuation">;</span>
+            <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+                cost <span class="token operator">+</span><span class="token operator">=</span> <span class="token punctuation">(</span>capacity <span class="token operator">-</span> nowC<span class="token punctuation">)</span> <span class="token operator">*</span> stations<span class="token punctuation">[</span>nowIndex<span class="token punctuation">]</span><span class="token punctuation">.</span>P<span class="token punctuation">;</span>
+                nowC <span class="token operator">=</span> capacity <span class="token operator">-</span> <span class="token punctuation">(</span>stations<span class="token punctuation">[</span>secondIndex<span class="token punctuation">]</span><span class="token punctuation">.</span>D <span class="token operator">-</span> nowD<span class="token punctuation">)</span> <span class="token operator">/</span> avgD<span class="token punctuation">;</span>
+                nowD <span class="token operator">=</span> stations<span class="token punctuation">[</span>secondIndex<span class="token punctuation">]</span><span class="token punctuation">.</span>D<span class="token punctuation">;</span>
+                nowIndex <span class="token operator">=</span> secondIndex<span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>nowD <span class="token operator">&lt;</span> destD<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"The maximum travel distance = %.2f"</span><span class="token punctuation">,</span> nowD<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+            <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%.2f"</span><span class="token punctuation">,</span> cost<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
@@ -1085,7 +1086,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
             <br>
             
-            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span class="white-color">64.6k</span>&nbsp;字
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span class="white-color">65.6k</span>&nbsp;字
             
             
             
