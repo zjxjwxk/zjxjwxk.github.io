@@ -498,7 +498,7 @@
 </ul>
 <h2 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h2><ul>
 <li>使用遍历进制的暴力法会超时，因使用二分法。</li>
-<li>本题的变量尽量使用 long long 类型。另外，经测试得到，本题中 radix 的范围最大为 INT_MAX ，即2^{31}-1​，因此必须在在计算过程中判断是否溢出。</li>
+<li>本题的变量尽量使用 long long 类型。另外，经测试得到，本题中 radix 的范围最大为 INT_MAX ，即2^{31}-1，因此必须在在计算过程中判断是否溢出。</li>
 <li>N2 进制的<strong>下界</strong>为所有数位中最大的那个+1，<strong>上界</strong>为 N1 的十进制（num1）与下界（lower）的较大值+1（即 max(num1, lower) + 1）。</li>
 </ul>
 <pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;cstdio></span></span>

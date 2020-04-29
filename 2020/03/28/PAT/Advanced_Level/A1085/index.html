@@ -481,7 +481,7 @@
             <div id="articleContent">
                 <p>Given a sequence of positive integers and another positive integer <em>p</em>. The sequence is said to be a <strong>perfect sequence</strong> if <em>M</em>≤<em>m</em>×<em>p</em> where <em>M</em> and <em>m</em> are the maximum and minimum numbers in the sequence, respectively.</p>
 <p>Now given a sequence and a parameter <em>p</em>, you are supposed to find from the sequence as many numbers as possible to form a perfect subsequence.</p>
-<h1 id="Input-Specification"><a href="#Input-Specification" class="headerlink" title="Input Specification:"></a>Input Specification:</h1><p>Each input file contains one test case. For each case, the first line contains two positive integers <em>N</em> and <em>p</em>, where <em>N</em> (≤10^5​) is the number of integers in the sequence, and <em>p</em> (≤​10^9​) is the parameter. In the second line there are <em>N</em> positive integers, each is no greater than 10^9.</p>
+<h1 id="Input-Specification"><a href="#Input-Specification" class="headerlink" title="Input Specification:"></a>Input Specification:</h1><p>Each input file contains one test case. For each case, the first line contains two positive integers <em>N</em> and <em>p</em>, where <em>N</em> (≤10^5) is the number of integers in the sequence, and <em>p</em> (≤ 10^9 ) is the parameter. In the second line there are <em>N</em> positive integers, each is no greater than 10^9.</p>
 <h1 id="Output-Specification"><a href="#Output-Specification" class="headerlink" title="Output Specification:"></a>Output Specification:</h1><p>For each test case, print in one line the maximum number of integers that can be chosen to form a perfect subsequence.</p>
 <h1 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input:"></a>Sample Input:</h1><pre class="line-numbers language-in"><code class="language-in">10 8
 2 3 20 4 5 1 6 7 8 9
@@ -490,11 +490,11 @@
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><ul>
 <li>能使选出的数个数最大的方案，一定是在该递增序列中选择连续的若干个数的方案</li>
-<li>如果强行进行O(n^2​)的二重循环遍历，那么根据题目的数据范围，肯定是会超时的。这里有两种方法解决这个问题：二分查找和 two pointers。</li>
+<li>如果强行进行O(n^2)的二重循环遍历，那么根据题目的数据范围，肯定是会超时的。这里有两种方法解决这个问题：二分查找和 two pointers。</li>
 <li>本人利用 upper_bound() 函数来二分寻找第一个大于 m * p 的数的位置，那么 M 的最大数的位置即为该位置 -1。</li>
 </ul>
 <h1 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h1><ul>
-<li>nums[i] * p 可能达到 10^{18}​，可以使用 long long 来定义数组。</li>
+<li>nums[i] * p 可能达到 10^{18}，可以使用 long long 来定义数组。</li>
 </ul>
 <pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;cstdio></span></span>
 <span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;algorithm></span></span>
