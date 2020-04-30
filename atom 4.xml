@@ -1,0 +1,593 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Zjxjwxk&#39;s Blog</title>
+  
+  <subtitle>A Java Developer</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="https://zjxjwxk.com/"/>
+  <updated>2020-04-29T15:01:04.000Z</updated>
+  <id>https://zjxjwxk.com/</id>
+  
+  <author>
+    <name>吴鑫康</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Terminal 终端代理加速</title>
+    <link href="https://zjxjwxk.com/2020/04/27/Linux/MacOS/Terminal%20%E7%BB%88%E7%AB%AF%E4%BB%A3%E7%90%86%E5%8A%A0%E9%80%9F/"/>
+    <id>https://zjxjwxk.com/2020/04/27/Linux/MacOS/Terminal 终端代理加速/</id>
+    <published>2020-04-27T15:11:00.000Z</published>
+    <updated>2020-04-29T15:01:04.000Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;方法1（暂时）&quot;&gt;&lt;a href=&quot;#方法1（暂时）&quot; class=&quot;headerlink&quot; title=&quot;方法1（暂时）:&quot;&gt;&lt;/a&gt;方法1（暂时）:&lt;/h1&gt;&lt;p&gt;在终端中直接运行命令&lt;/p&gt;
+&lt;pre class=&quot;line-numbers
+        
+      
+    
+    </summary>
+    
+      <category term="Linux" scheme="https://zjxjwxk.com/categories/Linux/"/>
+    
+    
+      <category term="Linux" scheme="https://zjxjwxk.com/tags/Linux/"/>
+    
+      <category term="MacOS" scheme="https://zjxjwxk.com/tags/MacOS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Dubbo微服务影院系列（11）：服务监控</title>
+    <link href="https://zjxjwxk.com/2020/04/24/Dubbo/Dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/11.%E6%9C%8D%E5%8A%A1%E7%9B%91%E6%8E%A7/Dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97%EF%BC%8811%EF%BC%89%EF%BC%9A%E6%9C%8D%E5%8A%A1%E7%9B%91%E6%8E%A7/"/>
+    <id>https://zjxjwxk.com/2020/04/24/Dubbo/Dubbo微服务影院系列/11.服务监控/Dubbo微服务影院系列（11）：服务监控/</id>
+    <published>2020-04-24T15:11:00.000Z</published>
+    <updated>2020-04-29T14:10:02.000Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;章节概要&quot;&gt;&lt;a href=&quot;#章节概要&quot; class=&quot;headerlink&quot; title=&quot;章节概要&quot;&gt;&lt;/a&gt;章节概要&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;了解 Dubbo 监控相关内容&lt;/li&gt;
+&lt;li&gt;熟练掌握 Dubbo-admin
+        
+      
+    
+    </summary>
+    
+      <category term="Dubbo" scheme="https://zjxjwxk.com/categories/Dubbo/"/>
+    
+    
+      <category term="微服务架构" scheme="https://zjxjwxk.com/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/"/>
+    
+      <category term="Dubbo" scheme="https://zjxjwxk.com/tags/Dubbo/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Dubbo微服务影院系列（10）：分布式事务</title>
+    <link href="https://zjxjwxk.com/2020/04/17/Dubbo/Dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/10.%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/Dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97%EF%BC%8810%EF%BC%89%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/"/>
+    <id>https://zjxjwxk.com/2020/04/17/Dubbo/Dubbo微服务影院系列/10.分布式事务/Dubbo微服务影院系列（10）：分布式事务/</id>
+    <published>2020-04-17T12:14:00.000Z</published>
+    <updated>2020-04-29T09:48:21.000Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;章节概要&quot;&gt;&lt;a href=&quot;#章节概要&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+      <category term="Dubbo" scheme="https://zjxjwxk.com/categories/Dubbo/"/>
+    
+    
+      <category term="微服务架构" scheme="https://zjxjwxk.com/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/"/>
+    
+      <category term="Dubbo" scheme="https://zjxjwxk.com/tags/Dubbo/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>PAT甲级 1108 Finding Average (20分)</title>
+    <link href="https://zjxjwxk.com/2020/04/15/PAT/Advanced_Level/A1108/"/>
+    <id>https://zjxjwxk.com/2020/04/15/PAT/Advanced_Level/A1108/</id>
+    <published>2020-04-15T13:39:00.000Z</published>
+    <updated>2020-04-29T09:18:12.000Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;The basic task is simple: given &lt;em&gt;N&lt;/em&gt; real numbers, you are supposed to calculate their average. But what makes it complicated is
+        
+      
+    
+    </summary>
+    
+      <category term="PAT" scheme="https://zjxjwxk.com/categories/PAT/"/>
+    
+      <category term="字符串" scheme="https://zjxjwxk.com/categories/PAT/%E5%AD%97%E7%AC%A6%E4%B8%B2/"/>
+    
+    
+      <category term="PAT" scheme="https://zjxjwxk.com/tags/PAT/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>PAT甲级 1072 Gas Station (30分)</title>
+    <link href="https://zjxjwxk.com/2020/04/13/PAT/Advanced_Level/A1072/"/>
+    <id>https://zjxjwxk.com/2020/04/13/PAT/Advanced_Level/A1072/</id>
+    <published>2020-04-12T16:11:00.000Z</published>
+    <updated>2020-04-29T11:10:23.000Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;A gas station has to be built at such a location that the minimum distance between the station and any of the residential housing is as
+        
+      
+    
+    </summary>
+    
+      <category term="PAT" scheme="https://zjxjwxk.com/categories/PAT/"/>
+    
+      <category term="最短路径" scheme="https://zjxjwxk.com/categories/PAT/%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84/"/>
+    
+    
+      <category term="PAT" scheme="https://zjxjwxk.com/tags/PAT/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>PAT甲级 1018 Public Bike Management (30分)</title>
+    <link href="https://zjxjwxk.com/2020/04/12/PAT/Advanced_Level/A1018/"/>
+    <id>https://zjxjwxk.com/2020/04/12/PAT/Advanced_Level/A1018/</id>
+    <published>2020-04-12T07:52:00.000Z</published>
+    <updated>2020-04-29T09:13:44.000Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;There is a public bike service in Hangzhou City which provides great convenience to the tourists from all over the world. One may rent a
+        
+      
+    
+    </summary>
+    
+      <category term="PAT" scheme="https://zjxjwxk.com/categories/PAT/"/>
+    
+      <category term="最短路径" scheme="https://zjxjwxk.com/categories/PAT/%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84/"/>
+    
+    
+      <category term="PAT" scheme="https://zjxjwxk.com/tags/PAT/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Dubbo微服务影院系列（9）：Dubbo服务开发（支付模块开发）</title>
+    <link href="https://zjxjwxk.com/2020/04/11/Dubbo/Dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/9.Dubbo%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91%EF%BC%88%E6%94%AF%E4%BB%98%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91%EF%BC%89/Dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97%EF%BC%889%EF%BC%89%EF%BC%9ADubbo%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91%EF%BC%88%E6%94%AF%E4%BB%98%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91%EF%BC%89/"/>
+    <id>https://zjxjwxk.com/2020/04/11/Dubbo/Dubbo微服务影院系列/9.Dubbo服务开发（支付模块开发）/Dubbo微服务影院系列（9）：Dubbo服务开发（支付模块开发）/</id>
+    <published>2020-04-11T12:14:00.000Z</published>
+    <updated>2020-04-15T16:45:54.000Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;章节概要&quot;&gt;&lt;a href=&quot;#章节概要&quot; class=&quot;headerlink&quot; title=&quot;章节概要&quot;&gt;&lt;/a&gt;章节概要&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;完成支付模块业务开发&lt;/li&gt;
+&lt;li&gt;Dubbo
+        
+      
+    
+    </summary>
+    
+      <category term="Dubbo" scheme="https://zjxjwxk.com/categories/Dubbo/"/>
+    
+    
+      <category term="微服务架构" scheme="https://zjxjwxk.com/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/"/>
+    
+      <category term="Dubbo" scheme="https://zjxjwxk.com/tags/Dubbo/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>PAT考场 Dev C++ 5.10 配置</title>
+    <link href="https://zjxjwxk.com/2020/04/11/PAT/%E8%80%83%E8%AF%95%E6%94%BB%E7%95%A5/%E8%80%83%E5%9C%BA%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/"/>
+    <id>https://zjxjwxk.com/2020/04/11/PAT/考试攻略/考场环境配置/</id>
+    <published>2020-04-11T08:17:00.000Z</published>
+    <updated>2020-04-11T12:14:22.000Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;根据往年 (2019) 年浙大软件学院的考研复试公告，如果今年 (2020) 是线下复试，且考场没有变化的话，机试应该还是在 &lt;code&gt;浙大紫金港校区&lt;/code&gt;（如下图）。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;浙大软院招生通知：&lt;a
+        
+      
+    
+    </summary>
+    
+      <category term="PAT" scheme="https://zjxjwxk.com/categories/PAT/"/>
+    
+      <category term="考试相关" scheme="https://zjxjwxk.com/categories/PAT/%E8%80%83%E8%AF%95%E7%9B%B8%E5%85%B3/"/>
+    
+    
+      <category term="PAT" scheme="https://zjxjwxk.com/tags/PAT/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>PAT甲级 1021 Deepest Root (25分)</title>
+    <link href="https://zjxjwxk.com/2020/04/10/PAT/Advanced_Level/A1021/"/>
+    <id>https://zjxjwxk.com/2020/04/10/PAT/Advanced_Level/A1021/</id>
+    <published>2020-04-10T09:55:00.000Z</published>
+    <updated>2020-04-29T10:31:21.000Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;A graph which is connected and acyclic can be considered a tree. The height of the tree depends on the selected root. Now you are
+        
+      
+    
+    </summary>
+    
+      <category term="PAT" scheme="https://zjxjwxk.com/categories/PAT/"/>
+    
+      <category term="图" scheme="https://zjxjwxk.com/categories/PAT/%E5%9B%BE/"/>
+    
+    
+      <category term="PAT" scheme="https://zjxjwxk.com/tags/PAT/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>PAT甲级 1013 Battle Over Cities (25分)</title>
+    <link href="https://zjxjwxk.com/2020/04/09/PAT/Advanced_Level/A1013/"/>
+    <id>https://zjxjwxk.com/2020/04/09/PAT/Advanced_Level/A1013/</id>
+    <published>2020-04-09T11:57:00.000Z</published>
+    <updated>2020-04-29T09:13:33.000Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;It is vitally important to have all the cities connected by highways in a war. If a city is occupied by the enemy, all the highways
+        
+      
+    
+    </summary>
+    
+      <category term="PAT" scheme="https://zjxjwxk.com/categories/PAT/"/>
+    
+      <category term="图" scheme="https://zjxjwxk.com/categories/PAT/%E5%9B%BE/"/>
+    
+    
+      <category term="PAT" scheme="https://zjxjwxk.com/tags/PAT/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>PAT甲级 1032 Sharing (25分)</title>
+    <link href="https://zjxjwxk.com/2020/04/07/PAT/Advanced_Level/A1032/"/>
+    <id>https://zjxjwxk.com/2020/04/07/PAT/Advanced_Level/A1032/</id>
+    <published>2020-04-07T08:34:00.000Z</published>
+    <updated>2020-04-29T11:08:43.000Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;To store English words, one method is to use linked lists and store a word letter by letter. To save some space, we may let the words
+        
+      
+    
+    </summary>
+    
+      <category term="PAT" scheme="https://zjxjwxk.com/categories/PAT/"/>
+    
+      <category term="链表" scheme="https://zjxjwxk.com/categories/PAT/%E9%93%BE%E8%A1%A8/"/>
+    
+    
+      <category term="PAT" scheme="https://zjxjwxk.com/tags/PAT/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>PAT甲级 1056 Mice and Rice (25分)</title>
+    <link href="https://zjxjwxk.com/2020/04/06/PAT/Advanced_Level/A1056/"/>
+    <id>https://zjxjwxk.com/2020/04/06/PAT/Advanced_Level/A1056/</id>
+    <published>2020-04-06T11:04:00.000Z</published>
+    <updated>2020-04-29T09:16:46.000Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;&lt;strong&gt;Mice and Rice&lt;/strong&gt; is the name of a programming contest in which each programmer must write a piece of code to control the
+        
+      
+    
+    </summary>
+    
+      <category term="PAT" scheme="https://zjxjwxk.com/categories/PAT/"/>
+    
+      <category term="队列" scheme="https://zjxjwxk.com/categories/PAT/%E9%98%9F%E5%88%97/"/>
+    
+    
+      <category term="PAT" scheme="https://zjxjwxk.com/tags/PAT/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>PAT甲级 1100 Mars Numbers (20分)</title>
+    <link href="https://zjxjwxk.com/2020/04/06/PAT/Advanced_Level/A1100/"/>
+    <id>https://zjxjwxk.com/2020/04/06/PAT/Advanced_Level/A1100/</id>
+    <published>2020-04-06T07:17:00.000Z</published>
+    <updated>2020-04-29T09:17:27.000Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;People on Mars count their numbers with base 13:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Zero on Earth is called “tret” on Mars.&lt;/li&gt;
+&lt;li&gt;The numbers 1 to 12 on
+        
+      
+    
+    </summary>
+    
+      <category term="PAT" scheme="https://zjxjwxk.com/categories/PAT/"/>
+    
+      <category term="STL" scheme="https://zjxjwxk.com/categories/PAT/STL/"/>
+    
+    
+      <category term="PAT" scheme="https://zjxjwxk.com/tags/PAT/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Dubbo微服务影院系列（8）：Dubbo服务开发（订单模块开发）</title>
+    <link href="https://zjxjwxk.com/2020/04/05/Dubbo/Dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/8.Dubbo%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91%EF%BC%88%E8%AE%A2%E5%8D%95%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91%EF%BC%89/Dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97%EF%BC%888%EF%BC%89%EF%BC%9ADubbo%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91%EF%BC%88%E8%AE%A2%E5%8D%95%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91%EF%BC%89/"/>
+    <id>https://zjxjwxk.com/2020/04/05/Dubbo/Dubbo微服务影院系列/8.Dubbo服务开发（订单模块开发）/Dubbo微服务影院系列（8）：Dubbo服务开发（订单模块开发）/</id>
+    <published>2020-04-05T11:30:00.000Z</published>
+    <updated>2020-04-29T09:43:25.000Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;章节概要&quot;&gt;&lt;a href=&quot;#章节概要&quot; class=&quot;headerlink&quot; title=&quot;章节概要&quot;&gt;&lt;/a&gt;章节概要&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;完成订单模块业务开发&lt;/li&gt;
+&lt;li&gt;完成限流和熔断、降级相关内容&lt;/li&gt;
+&lt;li&gt;Dubbo
+        
+      
+    
+    </summary>
+    
+      <category term="Dubbo" scheme="https://zjxjwxk.com/categories/Dubbo/"/>
+    
+    
+      <category term="微服务架构" scheme="https://zjxjwxk.com/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/"/>
+    
+      <category term="Dubbo" scheme="https://zjxjwxk.com/tags/Dubbo/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>PAT甲级 1060 Are They Equal (25分)</title>
+    <link href="https://zjxjwxk.com/2020/04/04/PAT/Advanced_Level/A1060/"/>
+    <id>https://zjxjwxk.com/2020/04/04/PAT/Advanced_Level/A1060/</id>
+    <published>2020-04-04T14:28:00.000Z</published>
+    <updated>2020-04-29T09:16:49.000Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;If a machine can save only 3 significant digits, the float numbers 12300 and 12358.9 are considered equal since they are both saved as
+        
+      
+    
+    </summary>
+    
+      <category term="PAT" scheme="https://zjxjwxk.com/categories/PAT/"/>
+    
+      <category term="STL" scheme="https://zjxjwxk.com/categories/PAT/STL/"/>
+    
+    
+      <category term="PAT" scheme="https://zjxjwxk.com/tags/PAT/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>PAT甲级 1039 Course List for Student (25分)</title>
+    <link href="https://zjxjwxk.com/2020/04/03/PAT/Advanced_Level/A1039/"/>
+    <id>https://zjxjwxk.com/2020/04/03/PAT/Advanced_Level/A1039/</id>
+    <published>2020-04-03T07:33:00.000Z</published>
+    <updated>2020-04-29T09:16:39.000Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;Zhejiang University has 40000 students and provides 2500 courses. Now given the student name lists of all the courses, you are supposed
+        
+      
+    
+    </summary>
+    
+      <category term="PAT" scheme="https://zjxjwxk.com/categories/PAT/"/>
+    
+      <category term="STL" scheme="https://zjxjwxk.com/categories/PAT/STL/"/>
+    
+    
+      <category term="PAT" scheme="https://zjxjwxk.com/tags/PAT/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>PAT甲级 1096 Consecutive Factors (20分)</title>
+    <link href="https://zjxjwxk.com/2020/04/02/PAT/Advanced_Level/A1096/"/>
+    <id>https://zjxjwxk.com/2020/04/02/PAT/Advanced_Level/A1096/</id>
+    <published>2020-04-02T12:53:00.000Z</published>
+    <updated>2020-04-29T12:29:50.000Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;Among all the factors of a positive integer N, there may exist several consecutive numbers. For example, 630 can be factored as 3×5×6×7,
+        
+      
+    
+    </summary>
+    
+      <category term="PAT" scheme="https://zjxjwxk.com/categories/PAT/"/>
+    
+      <category term="数学问题" scheme="https://zjxjwxk.com/categories/PAT/%E6%95%B0%E5%AD%A6%E9%97%AE%E9%A2%98/"/>
+    
+    
+      <category term="PAT" scheme="https://zjxjwxk.com/tags/PAT/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>PAT甲级 1078 Hashing (25分)</title>
+    <link href="https://zjxjwxk.com/2020/04/02/PAT/Advanced_Level/A1078/"/>
+    <id>https://zjxjwxk.com/2020/04/02/PAT/Advanced_Level/A1078/</id>
+    <published>2020-04-02T09:04:00.000Z</published>
+    <updated>2020-04-29T11:10:38.000Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;The task of this problem is simple: insert a sequence of distinct positive integers into a hash table, and output the positions of the
+        
+      
+    
+    </summary>
+    
+      <category term="PAT" scheme="https://zjxjwxk.com/categories/PAT/"/>
+    
+      <category term="数学问题" scheme="https://zjxjwxk.com/categories/PAT/%E6%95%B0%E5%AD%A6%E9%97%AE%E9%A2%98/"/>
+    
+    
+      <category term="PAT" scheme="https://zjxjwxk.com/tags/PAT/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>PAT甲级 1081 Rational Sum (20分)</title>
+    <link href="https://zjxjwxk.com/2020/04/01/PAT/Advanced_Level/A1081/"/>
+    <id>https://zjxjwxk.com/2020/04/01/PAT/Advanced_Level/A1081/</id>
+    <published>2020-04-01T08:29:00.000Z</published>
+    <updated>2020-04-29T09:17:10.000Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;Given &lt;em&gt;N&lt;/em&gt; rational numbers in the form &lt;code&gt;numerator/denominator&lt;/code&gt;, you are supposed to calculate their sum.&lt;/p&gt;
+&lt;h1
+        
+      
+    
+    </summary>
+    
+      <category term="PAT" scheme="https://zjxjwxk.com/categories/PAT/"/>
+    
+      <category term="数学问题" scheme="https://zjxjwxk.com/categories/PAT/%E6%95%B0%E5%AD%A6%E9%97%AE%E9%A2%98/"/>
+    
+    
+      <category term="PAT" scheme="https://zjxjwxk.com/tags/PAT/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>PAT乙级 1008 数组元素循环右移问题 (20分)</title>
+    <link href="https://zjxjwxk.com/2020/03/31/PAT/Basic_Level/B1008/"/>
+    <id>https://zjxjwxk.com/2020/03/31/PAT/Basic_Level/B1008/</id>
+    <published>2020-03-31T08:04:00.000Z</published>
+    <updated>2020-04-29T09:17:44.000Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;一个数组&lt;em&gt;A&lt;/em&gt;中存有&lt;em&gt;N&lt;/em&gt;（&amp;gt;0）个整数，在不允许使用另外数组的前提下，将每个整数循环向右移&lt;em&gt;M&lt;/em&gt;（≥0）个位置，即将&lt;em&gt;A&lt;/em&gt;中的数据由（A&lt;sub&gt;0&lt;/sub&gt; A&lt;sub&gt;1&lt;/sub&gt; ⋯A
+        
+      
+    
+    </summary>
+    
+      <category term="PAT" scheme="https://zjxjwxk.com/categories/PAT/"/>
+    
+      <category term="数学问题" scheme="https://zjxjwxk.com/categories/PAT/%E6%95%B0%E5%AD%A6%E9%97%AE%E9%A2%98/"/>
+    
+    
+      <category term="PAT" scheme="https://zjxjwxk.com/tags/PAT/"/>
+    
+  </entry>
+  
+</feed>
