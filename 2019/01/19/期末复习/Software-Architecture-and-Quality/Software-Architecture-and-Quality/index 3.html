@@ -1,0 +1,1318 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta name="keywords" content="Software-Architecture-and-Quality, Java">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>Software-Architecture-and-Quality | Zjxjwxk&#39;s Blog</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+
+<link rel="stylesheet" href="/css/prism-xonokai.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Zjxjwxk&#39;s Blog</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Zjxjwxk&#39;s Blog</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/zjxjwxk" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/zjxjwxk" class="github-corner tooltipped hide-on-med-and-down" target="_blank" data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewbox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/19.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">Software-Architecture-and-Quality</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    .toc-fixed .toc-link::before{
+        position: fixed!important;/*当toc的位置改为fixed时，.toc-link::before也要改为fixed*/
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/BTH/">
+                                <span class="chip bg-color">BTH</span>
+                            </a>
+                        
+                            <a href="/tags/期末复习/">
+                                <span class="chip bg-color">期末复习</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/期末复习/" class="post-category">
+                                期末复习
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2019-01-19
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2020-04-29
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    2.5k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    15 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="CH-1-What-is-software-architecture"><a href="#CH-1-What-is-software-architecture" class="headerlink" title="CH 1. What is software architecture?"></a>CH 1. What is software architecture?</h1><h2 id="What-is-software-architecture"><a href="#What-is-software-architecture" class="headerlink" title="What is software architecture"></a>What is software architecture</h2><p>The software architecture of a system is the set of structures needed to reason about the system, which comprise software elements, relations among them, and properties of both.</p>
+<ol>
+<li>To find out what users of the system think about the system. ×</li>
+<li>To assist in marketing activities. ×</li>
+<li>To make estimate for projects planning purposes. √</li>
+<li>To use as input for dividing up the work into tasks. √</li>
+<li>To analyze and predict characteristics of the implemented system. √</li>
+<li>To present the future development of the product. ×</li>
+</ol>
+<h2 id="Categories-of-structures"><a href="#Categories-of-structures" class="headerlink" title="Categories of structures"></a>Categories of structures</h2><ul>
+<li>First, some structures partition systems into implementation units called <strong>modules</strong>.</li>
+<li>Other structures are dynamic, meaning that they focus on the way the elements interact with each other at runtime to carry out the system’s functions. we will call runtime structures <strong>component-and-connector (C&amp;C) structures</strong>.</li>
+<li>A third kind of structure describes the mapping from software structures to the system’s organizational, developmental, installation, and execution environments. These mappings are called <strong>allocation structures</strong>.</li>
+</ul>
+<h2 id="Three-Kinds-of-Structures"><a href="#Three-Kinds-of-Structures" class="headerlink" title="Three Kinds of Structures"></a>Three Kinds of Structures</h2><h3 id="Module-structures"><a href="#Module-structures" class="headerlink" title="Module structures"></a><strong>Module structures</strong></h3><p>embody decisions as to how the system is to be structured as a set of code or data units that have to be constructed or procured. </p>
+<ul>
+<li><strong>Decomposition structure</strong>. The units are modules that are related to each other by the is-a-submodule-of relation, showing how modules are decomposed into smaller modules recursively until the modules are small enough to be easily understood.</li>
+<li><strong>Uses structure</strong>. The units are related by the uses relation, a specialized form of dependency.</li>
+<li><strong>Layer structure</strong>. The modules in this structure are called layers. A layer is an abstract “virtual machine” that provides a cohesive set of services through a managed interface.</li>
+</ul>
+<h3 id="Component-and-connector"><a href="#Component-and-connector" class="headerlink" title="Component-and-connector"></a><strong>Component-and-connector</strong></h3><p>structures embody decisions as to how the system is to be structured as a set of elements that have runtime behavior (components) and interactions (connectors). </p>
+<ul>
+<li><strong>Service structure</strong>. The units here are services that interoperate with each other by service coordination mechanisms.</li>
+<li><strong>Concurrency structure</strong>. This component-and-connector structure allows the architect to determine opportunities for parallelism and the locations where resource contention may occur.</li>
+</ul>
+<h3 id="Allocation-structures"><a href="#Allocation-structures" class="headerlink" title="Allocation structures"></a><strong>Allocation structures</strong></h3><p>embody decisions as to how the system will relate to nonsoftware structures in its environment (such as CPUs, file systems, networks, development teams, etc.).</p>
+<ul>
+<li><strong>Deployment structure</strong>. The deployment structure shows how software is assigned to hardware processing and communication elements.</li>
+<li><strong>Implementation structure</strong>. This structure shows how software elements (usually modules) are mapped to the file structure(s) in the system’s development, integration, or configuration control environments.</li>
+<li><strong>Work assignment structure</strong>. This structure assigns responsibility for implementing and integrating the modules to the teams who will carry it out.</li>
+</ul>
+<h1 id="CH-4-Understanding-Quality-Attributes"><a href="#CH-4-Understanding-Quality-Attributes" class="headerlink" title="CH 4. Understanding Quality Attributes"></a>CH 4. Understanding Quality Attributes</h1><h2 id="System-requirements-can-be-categorized-as"><a href="#System-requirements-can-be-categorized-as" class="headerlink" title="System requirements can be categorized as"></a>System requirements can be categorized as</h2><p><strong>Functional requirements</strong>. These requirements state what the system must do, and how it must behave or react to run-time stimuli. </p>
+<p><strong>Quality attribute requirements</strong>. These requirements annotate (qualify) functional requirements. Qualification might be how fast the function must be performed, how resilient it must be to erroneous input, how easy the function is to learn, etc.</p>
+<p><strong>Constraints</strong>. A constraint is a design decision with zero degrees of freedom. That is, it’s a design decision that has already been made for you.</p>
+<h2 id="Quality-Attribute-Requirements-six-parts"><a href="#Quality-Attribute-Requirements-six-parts" class="headerlink" title="Quality Attribute Requirements six parts"></a>Quality Attribute Requirements six parts</h2><ol>
+<li><strong>Source of stimulus</strong>. This is some entity (a human, a computer system, or any other actuator) that generated the stimulus.</li>
+<li><strong>Stimulus</strong>. The stimulus is a condition that requires a response when it arrives at a system.</li>
+<li><strong>Environment</strong>. The stimulus occurs under certain conditions. The system may be in an overload condition or in normal operation, or some other relevant state. For many systems, “normal” operation can refer to one of a number of modes. For these kinds of systems, the environment should specify in which mode the system is executing.</li>
+<li><strong>Artifact</strong>. Some artifact is stimulated. This may be a collection of systems, the whole system, or some piece or pieces of it.</li>
+<li><strong>Response</strong>. The response is the activity undertaken as the result of the arrival of the stimulus.</li>
+<li><strong>Response measure</strong>. When the response occurs, it should be measurable in some fashion so that the requirement can be tested.</li>
+</ol>
+<p><img src="/2019/01/19/期末复习/Software-Architecture-and-Quality/Software-Architecture-and-Quality/1547890359658.png" alt=""></p>
+<h2 id="Guiding-Quality-Design-Decisions"><a href="#Guiding-Quality-Design-Decisions" class="headerlink" title="Guiding Quality Design Decisions"></a>Guiding Quality Design Decisions</h2><ul>
+<li>Architecture design is a systematic approach to making design decisions.<h3 id="We-categorize-the-design-decisions-that-an-architect-needs-to-make-as-follows"><a href="#We-categorize-the-design-decisions-that-an-architect-needs-to-make-as-follows" class="headerlink" title="We categorize the design decisions that an architect needs to make as follows:"></a>We categorize the design decisions that an architect needs to make as follows:</h3><ul>
+<li>Allocation of responsibilities</li>
+<li><strong>Coordination model</strong></li>
+<li><strong>Data model</strong></li>
+<li>Management of resources</li>
+<li>Mapping among architectural elements</li>
+<li><strong>Binding time decisions</strong></li>
+<li>Choice of technology<h2 id="Coordination-model"><a href="#Coordination-model" class="headerlink" title="Coordination model"></a><strong>Coordination model</strong></h2><h3 id="Software-works-by-having-elements-interact-with-each-other-through-designed-mechanisms-These-mechanisms-are-collectively-referred-to-as-a-coordination-model-Decisions-about-the-coordination-model-include-these"><a href="#Software-works-by-having-elements-interact-with-each-other-through-designed-mechanisms-These-mechanisms-are-collectively-referred-to-as-a-coordination-model-Decisions-about-the-coordination-model-include-these" class="headerlink" title="Software works by having elements interact with each other through designed mechanisms. These mechanisms are collectively referred to as a coordination model. Decisions about the coordination  model include these:"></a>Software works by having elements interact with each other through designed mechanisms. These mechanisms are collectively referred to as a coordination model. Decisions about the coordination  model include these:</h3></li>
+</ul>
+</li>
+<li>Identifying the elements of the system that must coordinate, or are prohibited from coordinating.</li>
+<li>Determining the <strong>properties of the coordination</strong>, such as <strong>timeliness, currency, completeness, correctness, and consistency</strong>.</li>
+<li>Choosing the <strong>communication mechanisms</strong> (between systems, between our system and external entities, between elements of our system) that realize those properties. Important properties of the communication mechanisms include <strong>stateful versus stateless</strong>, <strong>synchronous versus asynchronous</strong>, <strong>guaranteed versus nonguaranteed delivery</strong>, and performance-related properties such as <strong>throughput and latency</strong>.<h3 id="Example"><a href="#Example" class="headerlink" title="Example:"></a>Example:</h3></li>
+<li>Both asynchronous communication and synchronous  communication can be used in the same system</li>
+<li>Asynchronous communication does not block the program thread until a response is ready </li>
+<li>Asynchronous communication guarantees when a response is returned<h2 id="Data-model"><a href="#Data-model" class="headerlink" title="Data model"></a><strong>Data model</strong></h2><h3 id="Every-system-must-represent-artifacts-of-system-wide-interest—data—in-some-internal-fashion-The-collection-of-those-representations-and-how-to-interpret-them-is-referred-to-as-the-data-model-Decisions-about-the-data-model-include-the-following"><a href="#Every-system-must-represent-artifacts-of-system-wide-interest—data—in-some-internal-fashion-The-collection-of-those-representations-and-how-to-interpret-them-is-referred-to-as-the-data-model-Decisions-about-the-data-model-include-the-following" class="headerlink" title="Every system must represent artifacts of system-wide interest—data—in some internal fashion. The collection of those representations and how to interpret them is referred to as the data model. Decisions about the data model include the following:"></a>Every system must represent artifacts of system-wide interest—data—in some internal fashion. The collection of those representations and how to interpret them is referred to as the data model. Decisions about the data model include the following:</h3></li>
+<li>Choosing the major <strong>data abstractions</strong>, their operations, and their properties. This includes determining how the data items are created, initialized, accessed, persisted, manipulated, translated, and destroyed.</li>
+</ul>
+<ol>
+<li><strong>Compiling metadata</strong> needed for consistent interpretation of the data.</li>
+<li><strong>Organizing the data</strong>. This includes determining whether the data is going to be kept in a relational database, a collection of objects, or both. If both, then the mapping between the two different locations of the data must be determined.<h3 id="Example-1"><a href="#Example-1" class="headerlink" title="Example:"></a>Example:</h3></li>
+</ol>
+<ul>
+<li>Choosing the major data abstractions, their operations, and their  properties.</li>
+<li>Compiling metadata needed for consistent interpretation of the data.</li>
+<li>Organizing the data.<h2 id="Binding-time-decisions"><a href="#Binding-time-decisions" class="headerlink" title="Binding time decisions"></a><strong>Binding time decisions</strong></h2></li>
+<li>Binding time decisions introduce allowable ranges of variation. This variation can be bound at different times in the software life cycle by different entities— from design time by a developer to runtime by an end user. A binding time decision establishes the scope, the point in the life cycle, and the mechanism for achieving the variation.<br>The decisions in the other six categories have an associated binding time decision. Examples of such binding time decisions include the following:</li>
+<li>For allocation of responsibilities, you can have <strong>build-time selection of modules</strong> via a parameterized makefile.</li>
+<li>For choice of coordination model, you can design <strong>runtime negotiation of protocols</strong>.</li>
+<li>For resource management, you can design a system to <strong>accept new peripheral devices plugged in at runtime</strong>, after which the system recognizes them and <strong>downloads and installs the right drivers automatically</strong>.</li>
+<li>For choice of technology, you can build an app store for a smartphone that <strong>automatically downloads the version of the app</strong> appropriate for the phone of the customer buying the app.<h3 id="Example-2"><a href="#Example-2" class="headerlink" title="Example:"></a>Example:</h3></li>
+<li>Setting the hostname of the server in a configuration file</li>
+<li>Using the user input to set the destination of a message</li>
+<li>Using inheritance in the code to execute the different subclass implementations depending on program state</li>
+</ul>
+<h2 id="Quality-attributes"><a href="#Quality-attributes" class="headerlink" title="Quality attributes"></a>Quality attributes</h2><ol>
+<li><strong>Availability</strong></li>
+<li>Interoperability</li>
+<li><strong>Modifiability</strong></li>
+<li><strong>Performance</strong></li>
+<li><strong>Security</strong></li>
+<li><strong>Testability</strong></li>
+<li>Usability</li>
+</ol>
+<h2 id="Development-time-qualities"><a href="#Development-time-qualities" class="headerlink" title="Development time qualities"></a>Development time qualities</h2><ul>
+<li>Modifiability</li>
+<li>Testability</li>
+</ul>
+<h1 id="CH5-Availability"><a href="#CH5-Availability" class="headerlink" title="CH5. Availability"></a>CH5. Availability</h1><h2 id="Terms"><a href="#Terms" class="headerlink" title="Terms"></a>Terms</h2><h3 id="Fault"><a href="#Fault" class="headerlink" title="Fault"></a><strong>Fault</strong></h3><ul>
+<li>A failure’s cause is called a <strong>fault</strong>. A fault can be either internal or  external to the system under consideration. Intermediate states between the occurrence of a fault and the occurrence of a failure are called <strong>errors</strong>. </li>
+</ul>
+<h3 id="Failure"><a href="#Failure" class="headerlink" title="Failure"></a><strong>Failure</strong></h3><ul>
+<li>A <strong>failure</strong> is the deviation of the system from its specification, where the deviation is externally visible.</li>
+</ul>
+<h3 id="Fault-and-failure"><a href="#Fault-and-failure" class="headerlink" title="Fault and failure"></a><strong>Fault and failure</strong></h3><h4 id="Fault-1"><a href="#Fault-1" class="headerlink" title="Fault"></a><strong>Fault</strong></h4><ul>
+<li>Internal or external deviation of correct function<h4 id="Failure-1"><a href="#Failure-1" class="headerlink" title="Failure"></a><strong>Failure</strong></h4></li>
+<li>When the system cannot provide its intended service</li>
+<li>Caused by faults that could not be handled/repaired<h3 id="Resilient"><a href="#Resilient" class="headerlink" title="Resilient"></a><strong>Resilient</strong></h3></li>
+<li>Faults can be prevented, tolerated, removed, or forecast. In this way a system becomes “<strong>resilient</strong>” to faults.</li>
+</ul>
+<h3 id="Degraded-operation-mode"><a href="#Degraded-operation-mode" class="headerlink" title="Degraded operation mode"></a><strong>Degraded operation mode</strong></h3><ul>
+<li>we are often concerned with the level of capability that remains when a failure has occurred—a degraded operating mode.<h3 id="MTBF"><a href="#MTBF" class="headerlink" title="MTBF"></a><strong>MTBF</strong></h3><ul>
+<li>mean time between failures<h3 id="MTTR"><a href="#MTTR" class="headerlink" title="MTTR"></a><strong>MTTR</strong></h3></li>
+<li>mean time to repair<h3 id="Formula"><a href="#Formula" class="headerlink" title="Formula"></a><strong>Formula</strong></h3>$$<br>MTBF\over(MTBF+MTTR)<br>$$</li>
+</ul>
+</li>
+</ul>
+<h2 id="Service-Level-Agreement-SLA"><a href="#Service-Level-Agreement-SLA" class="headerlink" title="Service Level Agreement, SLA"></a><strong>Service Level Agreement, SLA</strong></h2><ul>
+<li>The availability provided by a computer system or hosting service is frequently expressed as a <strong>service-level agreement</strong>. This SLA specifies the availability level that is guaranteed and, usually, the penalties that the computer system or hosting service will suffer if the SLA is violated.</li>
+</ul>
+<h2 id="Tactic"><a href="#Tactic" class="headerlink" title="Tactic"></a>Tactic</h2><p><img src="/2019/01/19/期末复习/Software-Architecture-and-Quality/Software-Architecture-and-Quality/1547958287611.png" alt=""></p>
+<h3 id="Detect-Faults"><a href="#Detect-Faults" class="headerlink" title="Detect Faults"></a>Detect Faults</h3><h4 id="Heart-beat"><a href="#Heart-beat" class="headerlink" title="Heart-beat"></a><strong>Heart-beat</strong></h4><ul>
+<li>Heartbeat is a fault detection mechanism that employs a periodic message exchange between a system monitor and a process being monitored.<h4 id="Ping-Echo"><a href="#Ping-Echo" class="headerlink" title="Ping/Echo"></a><strong>Ping/Echo</strong></h4></li>
+<li>Ping/echo refers to an asynchronous request/response message pair exchanged between nodes, used to determine reachability and the round-trip delay through the associated network path.<h4 id="Heart-beat-tactic-vs-Ping-Echo-tactic"><a href="#Heart-beat-tactic-vs-Ping-Echo-tactic" class="headerlink" title="Heart-beat tactic vs. Ping/Echo- tactic"></a><strong>Heart-beat tactic</strong> vs. <strong>Ping/Echo- tactic</strong></h4></li>
+<li>The big difference between heartbeat and ping/echo is who holds the responsibility for initiating the health check—the monitor or the component itself.<h3 id="Recover-from-Faults"><a href="#Recover-from-Faults" class="headerlink" title="Recover from Faults"></a>Recover from Faults</h3><h4 id="Active-Redundancy"><a href="#Active-Redundancy" class="headerlink" title="Active Redundancy"></a><strong>Active Redundancy</strong></h4></li>
+<li>Active redundancy (hot spare). This refers to a configuration where all of the nodes (active or redundant spare) in a protection group receive and process identical inputs in parallel, allowing the redundant spare(s) to maintain synchronous state with the active node(s).<h4 id="Passive-Redundancy"><a href="#Passive-Redundancy" class="headerlink" title="Passive Redundancy"></a><strong>Passive Redundancy</strong></h4></li>
+<li>Passive redundancy (warm spare). This refers to a configuration where only the active members of the protection group process input traffic; one of their duties is to provide the redundant spare(s) with periodic state updates.<h4 id="Spare"><a href="#Spare" class="headerlink" title="Spare"></a><strong>Spare</strong></h4></li>
+<li>Spare (cold spare). Cold sparing refers to a configuration where the redundant spares of a protection group remain out of service until a fail-over occurs, at which point a power-on-reset procedure is initiated on the redundant spare prior to its being placed in service.<h4 id="Rollback"><a href="#Rollback" class="headerlink" title="Rollback"></a><strong>Rollback</strong></h4></li>
+<li>Rollback. This tactic permits the system to revert to a previous known good state, referred to as the “rollback line”—rolling back time—upon the detection of a failure.</li>
+</ul>
+<h2 id="Fault-tree"><a href="#Fault-tree" class="headerlink" title="Fault tree"></a>Fault tree</h2><p>Fault tree analysis is an analytical technique that specifies a state of the system that negatively impacts safety or reliability, and then analyzes the system’s context and operation to find all the ways that the undesired state could occur.</p>
+<p><img src="/2019/01/19/期末复习/Software-Architecture-and-Quality/Software-Architecture-and-Quality/1547915772754.png" alt="A simple fault tree. D fails if A fails and either B or C fails."></p>
+<p><img src="/2019/01/19/期末复习/Software-Architecture-and-Quality/Software-Architecture-and-Quality/1547915852136.png" alt="Fault tree gate symbols"></p>
+<h1 id="CH7-Modifiability"><a href="#CH7-Modifiability" class="headerlink" title="CH7. Modifiability"></a>CH7. Modifiability</h1><h2 id="What-is-Modifiability？"><a href="#What-is-Modifiability？" class="headerlink" title="What is Modifiability？"></a>What is Modifiability？</h2><ul>
+<li>Modifiability is about change and our interest in it is in the cost and risk of making change</li>
+<li>To plan for modifiability, an architect has to consider <strong>four questions</strong>:</li>
+</ul>
+<ol>
+<li><strong>What can change?</strong><br>A change can occur to any aspect of a system: the <strong>functions</strong> that the system computes, the <strong>platform</strong> (the hardware, operating system, middleware), the <strong>environment</strong> in which the system operates (the systems with which it must interoperate, the <strong>protocols</strong> it uses to communicate with the rest of the world), the <strong>qualities</strong> the system exhibits (its performance, its reliability, and even its future modifications), and its <strong>capacity</strong> (number of users supported, number of simultaneous operations).</li>
+<li><strong>What is the likelihood of the change?</strong><br>One cannot plan a system for all potential changes—the system would never be done, or if it was done it would be far too expensive and would likely suffer quality attribute problems in other dimensions. Although anything might change, <strong>the architect has to make the tough decisions about which changes are likely, and hence which changes are to be supported, and which are not.</strong></li>
+<li><strong>When is the change made and who makes it?</strong><br>Most commonly in the past, a change was made to source code. Changes can be made to the <strong>implementation</strong> (by modifying the source code), during <strong>compile</strong> (using compile-time switches), during <strong>build</strong> (by choice of libraries), during <strong>configuration setup</strong> (by a range of techniques, including parameter setting), or during <strong>execution</strong> (by parameter settings, plugins, etc.). A change can also be made by a <strong>developer</strong>, an <strong>end user</strong>, or a <strong>system administrator</strong>.</li>
+<li><strong>What is the cost of the change?</strong><br>Making a system more modifiable involves two types of cost:</li>
+</ol>
+<ul>
+<li>The cost of introducing the mechanism(s) to make the system more modifiable</li>
+<li>The cost of making the modification using the mechanism(s)</li>
+</ul>
+<h1 id="CH8-Performance"><a href="#CH8-Performance" class="headerlink" title="CH8. Performance"></a>CH8. Performance</h1><h2 id="Performance-General-Scenario"><a href="#Performance-General-Scenario" class="headerlink" title="Performance General Scenario"></a>Performance General Scenario</h2><table>
+<thead>
+<tr>
+<th>Portion of Scenario</th>
+<th>Possible Values</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Source</td>
+<td>Internal or external to the system</td>
+</tr>
+<tr>
+<td>Stimulus</td>
+<td>Arrival of a periodic, sporadic, or stochastic event</td>
+</tr>
+<tr>
+<td>Artifact</td>
+<td>System or one or more components in the system</td>
+</tr>
+<tr>
+<td>Environment</td>
+<td>Operational mode: normal, emergency, peak load, overload</td>
+</tr>
+<tr>
+<td>Response</td>
+<td>Process events, change level of service</td>
+</tr>
+<tr>
+<td>Response Measure</td>
+<td>Latency, deadline, throughput, jitter, miss rate</td>
+</tr>
+</tbody>
+</table>
+<h2 id="Tactics-for-Performance"><a href="#Tactics-for-Performance" class="headerlink" title="Tactics for Performance"></a>Tactics for Performance</h2><p><img src="/2019/01/19/期末复习/Software-Architecture-and-Quality/Software-Architecture-and-Quality/1547962999199.png" alt="Performance tactics"></p>
+<h3 id="Control-Resource-Demand"><a href="#Control-Resource-Demand" class="headerlink" title="Control Resource Demand"></a><strong>Control Resource Demand</strong></h3><ul>
+<li><strong>Manage sampling rate</strong>. If it is possible to reduce the sampling frequency at which a stream of environmental data is captured, then demand can be reduced, typically with some attendant loss of fidelity.</li>
+<li><strong>Limit event response</strong>. Process events only up to a set maximum rate, thereby ensuring more predictable processing when the events are actually processed.</li>
+<li><strong>Prioritize events</strong>. If not all events are equally important, you can impose a priority scheme that ranks events according to how important it is to service them.<h3 id="Manage-Resources"><a href="#Manage-Resources" class="headerlink" title="Manage Resources"></a><strong>Manage Resources</strong></h3></li>
+<li><strong>Increase resources</strong>. Faster processors, additional processors, additional memory, and faster networks all have the potential for reducing latency.</li>
+<li><strong>Introduce concurrency</strong>. Concurrency can be introduced by processing different streams of events on different threads or by creating additional threads to process different sets of activities.</li>
+<li><strong>Maintain multiple copies of computations</strong>. Reduce the contention that would occur if all computations took place on a single server.</li>
+</ul>
+<h1 id="CH13-Patterns-and-Tactics"><a href="#CH13-Patterns-and-Tactics" class="headerlink" title="CH13. Patterns and Tactics"></a>CH13. Patterns and Tactics</h1><h2 id="What-is-a-Pattern"><a href="#What-is-a-Pattern" class="headerlink" title="What is a Pattern?"></a>What is a Pattern?</h2><p>An architectural pattern</p>
+<ul>
+<li>is a package of design decisions that is found repeatedly in practice,</li>
+<li>has known properties that permit reuse, and</li>
+<li>describes a class of architectures.</li>
+</ul>
+<h2 id="Architectural-Pattern"><a href="#Architectural-Pattern" class="headerlink" title="Architectural Pattern"></a>Architectural Pattern</h2><ul>
+<li><strong>A context</strong>. A recuSrring, common situation in the world that gives rise to a problem.</li>
+<li><strong>A problem</strong>. The problem, appropriately generalized, that arises in the given context. </li>
+<li><strong>A solution</strong>. A successful architectural resolution to the problem, appropriately abstracted. The solution for a pattern is determined and described by:<ul>
+<li>A set of element types (for example, data repositories, processes, and objects)</li>
+<li>A set of interaction mechanisms or connectors (for example, method calls, events, or message bus)</li>
+<li>A topological layout of the components</li>
+<li>A set of semantic constraints covering topology, element behavior, and interaction mechanisms</li>
+</ul>
+</li>
+</ul>
+<h1 id="CH18-Architecture-Document"><a href="#CH18-Architecture-Document" class="headerlink" title="CH18. Architecture Document"></a>CH18. Architecture Document</h1><h2 id="View-consistency"><a href="#View-consistency" class="headerlink" title="View consistency"></a>View consistency</h2><h3 id="A-view-is-consistent-with-its-definition-when"><a href="#A-view-is-consistent-with-its-definition-when" class="headerlink" title="A view is consistent with its definition when:"></a>A view is consistent with its definition when:</h3><ul>
+<li>All <strong>elements</strong> that fulfills the selection criterion is in the view</li>
+<li>All <strong>relations</strong> that fulfills the selection criterion is in the view</li>
+<li>That all <strong>properties</strong> that fulfills the selection criterion is in the view</li>
+<li>THAT <strong>NO additional</strong> elements, relation or properties that does not meet the selection is in the view<h4 id="Elements"><a href="#Elements" class="headerlink" title="Elements"></a>Elements</h4>All elements in the view must have a corresponding part in the view definition.<h4 id="Relation"><a href="#Relation" class="headerlink" title="Relation"></a>Relation</h4>Only relations that meet the selection criteria must be in the view.<h4 id="Properties"><a href="#Properties" class="headerlink" title="Properties"></a>Properties</h4>Properties must have values in the view.<h4 id="Criteria"><a href="#Criteria" class="headerlink" title="Criteria"></a>Criteria</h4>Selection criteria can exclude certain elements or relations from the view.</li>
+</ul>
+<h2 id="4-1-view-model"><a href="#4-1-view-model" class="headerlink" title="4+1 view model"></a>4+1 view model</h2><p>Logical, Process, Development, Physical + Use Cases</p>
+
+            </div>
+            <hr>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://zjxjwxk.com" rel="external nofollow noreferrer">吴鑫康</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://zjxjwxk.com/2019/01/19/期末复习/Software-Architecture-and-Quality/Software-Architecture-and-Quality/">https://zjxjwxk.com/2019/01/19/期末复习/Software-Architecture-and-Quality/Software-Architecture-and-Quality/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="https://zjxjwxk.com" target="_blank">吴鑫康</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/BTH/">
+                                    <span class="chip bg-color">BTH</span>
+                                </a>
+                            
+                                <a href="/tags/期末复习/">
+                                    <span class="chip bg-color">期末复习</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2019/01/19/期末复习/Team-Collaboration-and-Career-Development/Team-Collaboration-and-Career-Development/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="Team Collaboration and Career Development">
+                        
+                        <span class="card-title">Team Collaboration and Career Development</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            Career decision making cycle
+Know the elementsCommunication, Analysis, Synthesis, Valuing, Execution
+Know the definition
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2019-01-19
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/期末复习/" class="post-category">
+                                    期末复习
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/BTH/">
+                        <span class="chip bg-color">BTH</span>
+                    </a>
+                    
+                    <a href="/tags/期末复习/">
+                        <span class="chip bg-color">期末复习</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2019/01/13/Linux/CentOS/CentOS 7 Tomcat的安装及开机自启动配置/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="CentOS 7 Tomcat开机自启动配置">
+                        
+                        <span class="card-title">CentOS 7 Tomcat开机自启动配置</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            CentOS 7 Tomcat开机自启动配置配置开机运行Tomcat增加启动参数Tomcat需要增加一个pid文件，在 $CATALINA_HOME/bin 目录下面，增加 setenv.sh 配置，catalina.sh启动的时候会调用，
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-01-13
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Linux/" class="post-category">
+                                    Linux
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Linux/">
+                        <span class="chip bg-color">Linux</span>
+                    </a>
+                    
+                    <a href="/tags/CentOS/">
+                        <span class="chip bg-color">CentOS</span>
+                    </a>
+                    
+                    <a href="/tags/Tomcat/">
+                        <span class="chip bg-color">Tomcat</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h1, h2, h3, h4, h5, h6'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h1, h2, h3, h4, h5, h6').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$', '$'], ['\(', '\)']]}
+    });
+</script>
+
+
+
+    <footer class="page-footer bg-color">
+    
+    <div class="container row center-align" style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2019</span>
+            <a href="https://zjxjwxk.com" target="_blank">吴鑫康</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span class="white-color">65.1k</span>&nbsp;字
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv" class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv" class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/zjxjwxk" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:zjxjwxk@gmail.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=591775989" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 591775989" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字" class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/search.xml", 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>
