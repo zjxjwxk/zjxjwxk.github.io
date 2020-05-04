@@ -457,14 +457,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    2.3k
+                    2.6k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    10 分
+                    11 分
                 </div>
                 
 
@@ -574,7 +574,7 @@ java -jar dubbo-admin-0.1.jar
 <li>Dubbo 诸多工作都是通过 Filter 实现</li>
 <li>常见自定义 Filter：例子记录、trace 功能等</li>
 </ul>
-<h3 id="拦截器简介"><a href="#拦截器简介" class="headerlink" title="拦截器简介"></a>拦截器简介</h3><p><img src="file:///Users/zjxjwxk/Documents/GitHub/Hexo/source/_posts/Dubbo/Dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/11.%E6%9C%8D%E5%8A%A1%E7%9B%91%E6%8E%A7/Dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97%EF%BC%8811%EF%BC%89%EF%BC%9A%E6%9C%8D%E5%8A%A1%E7%9B%91%E6%8E%A7/image-20200429210902897.png?lastModify=1588237714" alt="拦截器简介"></p>
+<h3 id="拦截器简介"><a href="#拦截器简介" class="headerlink" title="拦截器简介"></a>拦截器简介</h3><p><img src="/2020/04/24/Dubbo/Dubbo微服务影院系列/11.服务监控/Dubbo微服务影院系列（11）：服务监控/image-20200503165744560.png" alt="拦截器"></p>
 <h3 id="Dubbo-Filter-使用"><a href="#Dubbo-Filter-使用" class="headerlink" title="Dubbo-Filter 使用"></a>Dubbo-Filter 使用</h3><p>Spring XML 配置：</p>
 <pre class="line-numbers language-xml"><code class="language-xml"><span class="token comment" spellcheck="true">&lt;!-- 消费方调用过程拦截 --></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token namespace">dubbo:</span>reference</span> <span class="token attr-name">filter</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>xxx,yyy<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
@@ -782,11 +782,11 @@ java -jar zipkin.jar
             <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>4.0.1<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
         <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>SpringBoot 不需要 Spring XML 文件，只需要创建一个 TraceConfig 配置类，该类每个需要监控的模块都需要一个，其 LocalServiceName 可以设置为服务名，如 order 模块：</p>
+<p>SpringBoot 不需要 Spring XML 文件，只需要创建一个 TraceConfig 配置类，该类每个需要监控的模块都需要一个，其 LocalServiceName 可以设置为服务名，如 order 模块中的该配置类（别忘了在 @Bean 中加上 “tracing” 名称）：</p>
 <pre class="line-numbers language-java"><code class="language-java"><span class="token annotation punctuation">@Configuration</span>
 <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">TraceConfig</span> <span class="token punctuation">{</span>
 
-    <span class="token annotation punctuation">@Bean</span>
+    <span class="token annotation punctuation">@Bean</span><span class="token punctuation">(</span><span class="token string">"tracing"</span><span class="token punctuation">)</span>
     <span class="token keyword">public</span> TracingFactoryBean <span class="token function">getTracingBean</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
         TracingFactoryBean tracingFactoryBean <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">TracingFactoryBean</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         tracingFactoryBean<span class="token punctuation">.</span><span class="token function">setLocalServiceName</span><span class="token punctuation">(</span><span class="token string">"order"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -795,7 +795,7 @@ java -jar zipkin.jar
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>然后在需要监控的消费者的 @Reference 和提供者的 @Service 中添加 filter 属性为 “tracing” 即可：</p>
+<h4 id="方法级别"><a href="#方法级别" class="headerlink" title="方法级别"></a>方法级别</h4><p>在需要监控的消费者的 @Reference 和提供者的 @Service 中添加 filter 属性为 “tracing” 即可：</p>
 <p>消费者：</p>
 <pre class="line-numbers language-java"><code class="language-java"><span class="token annotation punctuation">@Reference</span><span class="token punctuation">(</span>interfaceClass <span class="token operator">=</span> AlipayServiceApi<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">,</span> filter <span class="token operator">=</span> <span class="token string">"tracing"</span><span class="token punctuation">)</span>
     <span class="token keyword">private</span> AlipayServiceApi alipayServiceApi<span class="token punctuation">;</span>
@@ -803,6 +803,22 @@ java -jar zipkin.jar
 <p>提供者：</p>
 <pre class="line-numbers language-java"><code class="language-java"><span class="token annotation punctuation">@Service</span><span class="token punctuation">(</span>interfaceClass <span class="token operator">=</span> OrderServiceApi<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">,</span> filter <span class="token operator">=</span> <span class="token string">"tracing"</span><span class="token punctuation">)</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h4 id="服务级别"><a href="#服务级别" class="headerlink" title="服务级别"></a>服务级别</h4><p>在需要监控的服务的 application.yml 中添加如下配置，则对该服务的服务消费和提供均进行监控：</p>
+<pre class="line-numbers language-yaml"><code class="language-yaml"><span class="token key atrule">spring</span><span class="token punctuation">:</span>
+  <span class="token key atrule">dubbo</span><span class="token punctuation">:</span>
+    <span class="token key atrule">provider</span><span class="token punctuation">:</span>
+      <span class="token key atrule">filter</span><span class="token punctuation">:</span> tracing
+    <span class="token key atrule">consumer</span><span class="token punctuation">:</span>
+      <span class="token key atrule">filter</span><span class="token punctuation">:</span> tracing
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="Zipkin-监控面板"><a href="#Zipkin-监控面板" class="headerlink" title="Zipkin 监控面板"></a>Zipkin 监控面板</h3><p>之后每次调用被监控的服务，就能在 Zipkin 面板中找到对应的调用链路：</p>
+<p><img src="/2020/04/24/Dubbo/Dubbo微服务影院系列/11.服务监控/Dubbo微服务影院系列（11）：服务监控/image-20200503201604777.png" alt="Discover面板"></p>
+<p>可以在 Discover 面板中，找到一定时间内被监控的服务调用。</p>
+<p><img src="/2020/04/24/Dubbo/Dubbo微服务影院系列/11.服务监控/Dubbo微服务影院系列（11）：服务监控/image-20200503215735455.png" alt="链路调用详情"></p>
+<p>接口调用详情中，接口的调用链路和时间一目了然，可以找出哪个接口调用的时间较长，或者错误发生在哪个接口的调用过程中，还可以从右侧的 Annotaions 中看到客户端和服务器的 Start 和 Finish 时间，以判断哪一台服务器的访问速度较慢等。</p>
+<p><img src="/2020/04/24/Dubbo/Dubbo微服务影院系列/11.服务监控/Dubbo微服务影院系列（11）：服务监控/image-20200503220214486.png" alt="Dependencies面板"></p>
+<p>Dependencies 面板中，服务之间的依赖关系以及访问流量以可视化的方式呈现出来。</p>
+<p>（Zipkin 默认使用内存的形式存储数据，它也支持 MySQL 等持久化存储方式，以便于以后的数据分析）</p>
 
             </div>
             <hr>
@@ -1567,7 +1583,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
             <br>
             
-            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span class="white-color">66k</span>&nbsp;字
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span class="white-color">67.9k</span>&nbsp;字
             
             
             
