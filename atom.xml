@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://zjxjwxk.com/"/>
-  <updated>2020-05-04T11:57:02.000Z</updated>
+  <updated>2020-05-05T05:52:21.000Z</updated>
   <id>https://zjxjwxk.com/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Personal memo</title>
+    <link href="https://zjxjwxk.com/2020/05/05/Private/%E5%A4%8D%E8%AF%95%E9%97%AE%E7%AD%94/"/>
+    <id>https://zjxjwxk.com/2020/05/05/Private/复试问答/</id>
+    <published>2020-05-05T06:48:00.000Z</published>
+    <updated>2020-05-05T05:52:21.000Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;英文部分&quot;&gt;&lt;a href=&quot;#英文部分&quot; class=&quot;headerlink&quot; title=&quot;英文部分&quot;&gt;&lt;/a&gt;英文部分&lt;/h1&gt;&lt;h2 id=&quot;自我介绍（1～2分钟）&quot;&gt;&lt;a href=&quot;#自我介绍（1～2分钟）&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>Dubbo微服务影院系列（12）：系统部署</title>
@@ -551,35 +573,6 @@
         
         
           &lt;p&gt;The task of this problem is simple: insert a sequence of distinct positive integers into a hash table, and output the positions of the
-        
-      
-    
-    </summary>
-    
-      <category term="PAT" scheme="https://zjxjwxk.com/categories/PAT/"/>
-    
-      <category term="数学问题" scheme="https://zjxjwxk.com/categories/PAT/%E6%95%B0%E5%AD%A6%E9%97%AE%E9%A2%98/"/>
-    
-    
-      <category term="PAT" scheme="https://zjxjwxk.com/tags/PAT/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>PAT甲级 1081 Rational Sum (20分)</title>
-    <link href="https://zjxjwxk.com/2020/04/01/PAT/Advanced_Level/A1081/"/>
-    <id>https://zjxjwxk.com/2020/04/01/PAT/Advanced_Level/A1081/</id>
-    <published>2020-04-01T08:29:00.000Z</published>
-    <updated>2020-04-29T09:17:10.000Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;p&gt;Given &lt;em&gt;N&lt;/em&gt; rational numbers in the form &lt;code&gt;numerator/denominator&lt;/code&gt;, you are supposed to calculate their sum.&lt;/p&gt;
-&lt;h1
         
       
     
