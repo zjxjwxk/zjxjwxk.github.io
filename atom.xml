@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://zjxjwxk.com/"/>
-  <updated>2020-05-05T05:52:21.000Z</updated>
+  <updated>2020-05-08T07:02:27.000Z</updated>
   <id>https://zjxjwxk.com/</id>
   
   <author>
@@ -15,6 +15,37 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Hadoop 基础篇</title>
+    <link href="https://zjxjwxk.com/2020/05/06/%E5%A4%A7%E6%95%B0%E6%8D%AE/Hadoop/Hadoop%E5%9F%BA%E7%A1%80%E7%AF%87/"/>
+    <id>https://zjxjwxk.com/2020/05/06/大数据/Hadoop/Hadoop基础篇/</id>
+    <published>2020-05-06T12:08:00.000Z</published>
+    <updated>2020-05-08T07:02:27.000Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;概要&quot;&gt;&lt;a href=&quot;#概要&quot; class=&quot;headerlink&quot; title=&quot;概要&quot;&gt;&lt;/a&gt;概要&lt;/h1&gt;&lt;ol&gt;
+&lt;li&gt;大数据技术的相关概念&lt;/li&gt;
+&lt;li&gt;Hadoop 的架构和运行机制&lt;/li&gt;
+&lt;li&gt;实战：Hadoop
+        
+      
+    
+    </summary>
+    
+      <category term="大数据" scheme="https://zjxjwxk.com/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
+    
+    
+      <category term="大数据" scheme="https://zjxjwxk.com/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
+    
+      <category term="Hadoop" scheme="https://zjxjwxk.com/tags/Hadoop/"/>
+    
+  </entry>
   
   <entry>
     <title>Personal memo</title>
@@ -545,34 +576,6 @@
         
         
           &lt;p&gt;Among all the factors of a positive integer N, there may exist several consecutive numbers. For example, 630 can be factored as 3×5×6×7,
-        
-      
-    
-    </summary>
-    
-      <category term="PAT" scheme="https://zjxjwxk.com/categories/PAT/"/>
-    
-      <category term="数学问题" scheme="https://zjxjwxk.com/categories/PAT/%E6%95%B0%E5%AD%A6%E9%97%AE%E9%A2%98/"/>
-    
-    
-      <category term="PAT" scheme="https://zjxjwxk.com/tags/PAT/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>PAT甲级 1078 Hashing (25分)</title>
-    <link href="https://zjxjwxk.com/2020/04/02/PAT/Advanced_Level/A1078/"/>
-    <id>https://zjxjwxk.com/2020/04/02/PAT/Advanced_Level/A1078/</id>
-    <published>2020-04-02T09:04:00.000Z</published>
-    <updated>2020-04-29T11:10:38.000Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;p&gt;The task of this problem is simple: insert a sequence of distinct positive integers into a hash table, and output the positions of the
         
       
     
