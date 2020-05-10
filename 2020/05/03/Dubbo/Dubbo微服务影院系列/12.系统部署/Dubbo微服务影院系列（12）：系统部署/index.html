@@ -602,7 +602,7 @@ yum-config-manager --enable mysql57-community
 <pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">ps</span> -ef <span class="token operator">|</span> <span class="token function">grep</span> zookeeper
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <h1 id="数据初始化、工程打包和部署"><a href="#数据初始化、工程打包和部署" class="headerlink" title="数据初始化、工程打包和部署"></a>数据初始化、工程打包和部署</h1><p>将各个模块的 application.yml 配置为线上环境，包括数据库和 FTP 服务器的地址、用户名和密码等。然后直接对父模块使用 maven clean 和 package 打包各个模块为 jar 包，发送到服务器上部署运行即可（jar 包后台运行和日志输出重定向见 <a href="https://zjxjwxk.com/2019/01/30/Linux/CentOS/CentOS jar包后台运行/">CentOS jar包后台运行</a>）。当然，这里是一种比较 low 的部署方式，可以通过 Jenkins，k8s 等进行持续集成。</p>
-<p><img src="/2020/05/03/Dubbo/Dubbo微服务影院系列/12. 系统部署/Dubbo微服务影院系列（12）：系统部署/image-20200504122029175.png" alt="mvn clean and package"></p>
+<p><img src="/2020/05/03/Dubbo/Dubbo微服务影院系列/12.系统部署/Dubbo微服务影院系列（12）：系统部署/image-20200504122029175.png" alt="mvn clean and package"></p>
 <p>可以通过以下命令查看是否启动成功：</p>
 <pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">ps</span> -ef <span class="token operator">|</span> <span class="token function">grep</span> xxx
 或者
@@ -798,7 +798,7 @@ http <span class="token punctuation">{</span>
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://zjxjwxk.com/2020/05/03/Dubbo/Dubbo微服务影院系列/12. 系统部署/Dubbo微服务影院系列（12）：系统部署/">https://zjxjwxk.com/2020/05/03/Dubbo/Dubbo微服务影院系列/12. 系统部署/Dubbo微服务影院系列（12）：系统部署/</a>
+                    <a href="https://zjxjwxk.com/2020/05/03/Dubbo/Dubbo微服务影院系列/12.系统部署/Dubbo微服务影院系列（12）：系统部署/">https://zjxjwxk.com/2020/05/03/Dubbo/Dubbo微服务影院系列/12.系统部署/Dubbo微服务影院系列（12）：系统部署/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -1290,7 +1290,7 @@ http <span class="token punctuation">{</span>
                         
                             英文部分自我介绍（1～2分钟）
 Good morning everyone,
-Thank you for giving me this opportunity. It’s my pleasure to introduce myself. I
+Thank you for giving me this opportunity. It’s my pleasure to introduce myself. M
                         
                     </div>
                     <div class="publish-info">
@@ -1526,7 +1526,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
             <br>
             
-            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span class="white-color">75.4k</span>&nbsp;字
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span class="white-color">77.2k</span>&nbsp;字
             
             
             

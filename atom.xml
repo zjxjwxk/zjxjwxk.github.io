@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://zjxjwxk.com/"/>
-  <updated>2020-05-08T07:02:27.000Z</updated>
+  <updated>2020-05-08T11:34:44.000Z</updated>
   <id>https://zjxjwxk.com/</id>
   
   <author>
@@ -15,6 +15,37 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Hadoop 进阶篇</title>
+    <link href="https://zjxjwxk.com/2020/05/08/%E5%A4%A7%E6%95%B0%E6%8D%AE/Hadoop/Hadoop%E8%BF%9B%E9%98%B6%E7%AF%87/"/>
+    <id>https://zjxjwxk.com/2020/05/08/大数据/Hadoop/Hadoop进阶篇/</id>
+    <published>2020-05-08T08:36:00.000Z</published>
+    <updated>2020-05-08T11:34:44.000Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;概要&quot;&gt;&lt;a href=&quot;#概要&quot; class=&quot;headerlink&quot; title=&quot;概要&quot;&gt;&lt;/a&gt;概要&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;概述&lt;/li&gt;
+&lt;li&gt;深入探索 MapReduce 过程&lt;/li&gt;
+&lt;li&gt;Hadoop
+        
+      
+    
+    </summary>
+    
+      <category term="大数据" scheme="https://zjxjwxk.com/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
+    
+    
+      <category term="大数据" scheme="https://zjxjwxk.com/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
+    
+      <category term="Hadoop" scheme="https://zjxjwxk.com/tags/Hadoop/"/>
+    
+  </entry>
   
   <entry>
     <title>Hadoop 基础篇</title>
@@ -52,7 +83,7 @@
     <link href="https://zjxjwxk.com/2020/05/05/Private/%E5%A4%8D%E8%AF%95%E9%97%AE%E7%AD%94/"/>
     <id>https://zjxjwxk.com/2020/05/05/Private/复试问答/</id>
     <published>2020-05-05T06:48:00.000Z</published>
-    <updated>2020-05-08T07:10:22.000Z</updated>
+    <updated>2020-05-10T13:07:59.000Z</updated>
     
     <summary type="html">
     
@@ -77,8 +108,8 @@
   
   <entry>
     <title>Dubbo微服务影院系列（12）：系统部署</title>
-    <link href="https://zjxjwxk.com/2020/05/03/Dubbo/Dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/12.%20%E7%B3%BB%E7%BB%9F%E9%83%A8%E7%BD%B2/Dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97%EF%BC%8812%EF%BC%89%EF%BC%9A%E7%B3%BB%E7%BB%9F%E9%83%A8%E7%BD%B2/"/>
-    <id>https://zjxjwxk.com/2020/05/03/Dubbo/Dubbo微服务影院系列/12. 系统部署/Dubbo微服务影院系列（12）：系统部署/</id>
+    <link href="https://zjxjwxk.com/2020/05/03/Dubbo/Dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/12.%E7%B3%BB%E7%BB%9F%E9%83%A8%E7%BD%B2/Dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97%EF%BC%8812%EF%BC%89%EF%BC%9A%E7%B3%BB%E7%BB%9F%E9%83%A8%E7%BD%B2/"/>
+    <id>https://zjxjwxk.com/2020/05/03/Dubbo/Dubbo微服务影院系列/12.系统部署/Dubbo微服务影院系列（12）：系统部署/</id>
     <published>2020-05-03T14:34:00.000Z</published>
     <updated>2020-05-04T11:57:02.000Z</updated>
     
@@ -562,34 +593,6 @@
       <category term="PAT" scheme="https://zjxjwxk.com/categories/PAT/"/>
     
       <category term="STL" scheme="https://zjxjwxk.com/categories/PAT/STL/"/>
-    
-    
-      <category term="PAT" scheme="https://zjxjwxk.com/tags/PAT/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>PAT甲级 1096 Consecutive Factors (20分)</title>
-    <link href="https://zjxjwxk.com/2020/04/02/PAT/Advanced_Level/A1096/"/>
-    <id>https://zjxjwxk.com/2020/04/02/PAT/Advanced_Level/A1096/</id>
-    <published>2020-04-02T12:53:00.000Z</published>
-    <updated>2020-04-29T12:29:50.000Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;p&gt;Among all the factors of a positive integer N, there may exist several consecutive numbers. For example, 630 can be factored as 3×5×6×7,
-        
-      
-    
-    </summary>
-    
-      <category term="PAT" scheme="https://zjxjwxk.com/categories/PAT/"/>
-    
-      <category term="数学问题" scheme="https://zjxjwxk.com/categories/PAT/%E6%95%B0%E5%AD%A6%E9%97%AE%E9%A2%98/"/>
     
     
       <category term="PAT" scheme="https://zjxjwxk.com/tags/PAT/"/>
