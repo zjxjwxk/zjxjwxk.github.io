@@ -463,7 +463,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-05-04
+                    2020-05-16
                 </div>
                 
 
@@ -505,7 +505,7 @@ BAD PASSWORD: it does not contain enough DIFFERENT characters
 Retype new password: 
 passwd: all authentication tokens updated successfully.
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>给予其权限，首先需要赋予当前用户对 /etc/sudoers 的写权限，然后在 sudoers 文件中的 root ALL = (ALL) ALL 下增加一行，基于其在任何地方执行任何命令的权限：</p>
+<p>给予其权限，首先需要赋予当前用户对 /etc/sudoers 的写权限，然后在 sudoers 文件中的 root ALL = (ALL) ALL 下增加一行，赋予其在任何地方执行任何命令的权限：</p>
 <pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">chmod</span> u+w /etc/sudoers
 vim sudoers
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
@@ -535,7 +535,7 @@ cinema  ALL<span class="token operator">=</span><span class="token punctuation">
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>禁用最新版，使用 5.7 版本：</p>
 <pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">sudo</span> yum-config-manager --disable mysql80-community
-yum-config-manager --enable mysql57-community
+<span class="token function">sudo</span> yum-config-manager --enable mysql57-community
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>安装 MySQL：</p>
 <pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">sudo</span> yum <span class="token function">install</span> mysql-community-server
@@ -571,7 +571,14 @@ yum-config-manager --enable mysql57-community
 <h1 id="安装-vsftpd"><a href="#安装-vsftpd" class="headerlink" title="安装 vsftpd"></a>安装 vsftpd</h1><blockquote>
 <p>阿里云文档：<a href="https://help.aliyun.com/knowledge_detail/60152.html" target="_blank" rel="noopener">https://help.aliyun.com/knowledge_detail/60152.html</a></p>
 </blockquote>
-<h1 id="安装-JDK-和-Zookeeper"><a href="#安装-JDK-和-Zookeeper" class="headerlink" title="安装 JDK 和 Zookeeper"></a>安装 JDK 和 Zookeeper</h1><h2 id="安装-JDK"><a href="#安装-JDK" class="headerlink" title="安装 JDK"></a>安装 JDK</h2><p>从 Oracle 官网下载 jdk 的 tar.gz 包 <a href="https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html" target="_blank" rel="noopener">https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html</a> ，解压之：</p>
+<h1 id="安装-JDK-和-Zookeeper"><a href="#安装-JDK-和-Zookeeper" class="headerlink" title="安装 JDK 和 Zookeeper"></a>安装 JDK 和 Zookeeper</h1><h2 id="安装-JDK"><a href="#安装-JDK" class="headerlink" title="安装 JDK"></a>安装 JDK</h2><p>在本地上，从 Oracle 官网下载 jdk 的 tar.gz 包 <a href="https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html" target="_blank" rel="noopener">https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html</a> ，并上传到服务器上：</p>
+<pre class="line-numbers language-shell"><code class="language-shell">sudo scp jdk-8u251-linux-x64.tar.gz cinema@34.80.107.207:~/install/
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>如果 scp 出现 <code>Permission denied (publickey,gssapi-keyex,gssapi-with-mic).</code> ，则可能需要在服务器上设置密码登录为 <code>yes</code>：</p>
+<pre class="line-numbers language-shell"><code class="language-shell">sudo vim /etc/ssh/sshd_config
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>将 PasswordAuthentication no 中的 “no” 改为 “yes”。</p>
+<p>在服务器解压：</p>
 <pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">tar</span> -zxvf jdk-8u251-linux-x64.tar.gz
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>添加 JAVA_HOME 环境变量：</p>
@@ -1526,7 +1533,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
             <br>
             
-            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span class="white-color">77.3k</span>&nbsp;字
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span class="white-color">77.5k</span>&nbsp;字
             
             
             

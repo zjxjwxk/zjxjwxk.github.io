@@ -4,7 +4,7 @@
 
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="PAT甲级 1032 Sharing (25分), Java">
+    <meta name="keywords" content="Java">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>PAT甲级 1032 Sharing (25分) | Zjxjwxk&#39;s Blog</title>
+    <title>Zjxjwxk&#39;s Blog</title>
     <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/zjxjwxk/zjxjwxk.github.io/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/zjxjwxk/zjxjwxk.github.io/libs/awesome/css/all.css">
@@ -302,7 +302,7 @@
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">PAT甲级 1032 Sharing (25分)</h1>
+                    <h1 class="description center-align post-title"></h1>
                 </div>
             </div>
         </div>
@@ -425,29 +425,12 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                    <div class="article-tag">
-                        
-                            <a href="/tags/PAT/">
-                                <span class="chip bg-color">PAT</span>
-                            </a>
-                        
-                    </div>
+                          <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                          </div>
                     
                 </div>
                 <div class="col s5 right-align">
-                    
-                    <div class="post-cate">
-                        <i class="fas fa-bookmark fa-fw icon-category"></i>
-                        
-                            <a href="/categories/PAT/" class="post-category">
-                                PAT
-                            </a>
-                        
-                            <a href="/categories/PAT/链表/" class="post-category">
-                                链表
-                            </a>
-                        
-                    </div>
                     
                 </div>
             </div>
@@ -456,28 +439,28 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-04-07
+                    2020-05-15
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-04-29
+                    2020-05-15
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    504
+                    116
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    2 分
+                    1 分
                 </div>
                 
 
@@ -492,77 +475,7 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>To store English words, one method is to use linked lists and store a word letter by letter. To save some space, we may let the words share the same sublist if they share the same suffix. For example, <code>loading</code> and <code>being</code> are stored as showed in Figure 1.</p>
-<p><img src="/2020/04/07/PAT/Advanced_Level/A1032/ef0a1fdf-3d9f-46dc-9a27-21f989270fd4.jpg" alt="Figure 1"></p>
-<p>You are supposed to find the starting position of the common suffix (e.g. the position of <code>i</code> in Figure 1).</p>
-<h1 id="Input-Specification"><a href="#Input-Specification" class="headerlink" title="Input Specification:"></a>Input Specification:</h1><p>Each input file contains one test case. For each case, the first line contains two addresses of nodes and a positive <em>N</em> (≤ 10^5), where the two addresses are the addresses of the first nodes of the two words, and <em>N</em> is the total number of nodes. The address of a node is a 5-digit positive integer, and NULL is represented by −1.</p>
-<p>Then <em>N</em> lines follow, each describes a node in the format:</p>
-<pre><code>Address Data Next
-</code></pre><p>where<code>Address</code> is the position of the node, <code>Data</code> is the letter contained by this node which is an English letter chosen from { a-z, A-Z }, and <code>Next</code> is the position of the next node.</p>
-<h1 id="Output-Specification"><a href="#Output-Specification" class="headerlink" title="Output Specification:"></a>Output Specification:</h1><p>For each case, simply output the 5-digit starting position of the common suffix. If the two words have no common suffix, output <code>-1</code> instead.</p>
-<h1 id="Sample-Input-1"><a href="#Sample-Input-1" class="headerlink" title="Sample Input 1:"></a>Sample Input 1:</h1><pre class="line-numbers language-in"><code class="language-in">11111 22222 9
-67890 i 00002
-00010 a 12345
-00003 g -1
-12345 D 67890
-00002 n 00003
-22222 B 23456
-11111 L 00001
-23456 e 67890
-00001 o 00010
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h1 id="Sample-Output-1"><a href="#Sample-Output-1" class="headerlink" title="Sample Output 1:"></a>Sample Output 1:</h1><pre class="line-numbers language-out"><code class="language-out">67890
-<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<h1 id="Sample-Input-2"><a href="#Sample-Input-2" class="headerlink" title="Sample Input 2:"></a>Sample Input 2:</h1><pre class="line-numbers language-in"><code class="language-in">00001 00002 4
-00001 a 10001
-10001 s -1
-00002 a 10002
-10002 t -1
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h1 id="Sample-Output-2"><a href="#Sample-Output-2" class="headerlink" title="Sample Output 2:"></a>Sample Output 2:</h1><pre class="line-numbers language-out"><code class="language-out">-1
-<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><ul>
-<li>由于地址的范围较小，可以使用静态链表。并根据题意，为链表节点结构体增加一个 flag 变量，用于表示该节点是否在第一条链表中，默认为 false。先由第一条链表的首地址出发，遍历第一条链表，并将其节点的 flag 都设为 true。当遍历第二条链表时，只需输出第一个 flag 为true 的节点的地址即可。</li>
-</ul>
-<h1 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h1><ul>
-<li>使用 %05d 格式输出地址，使其高位补 0。</li>
-</ul>
-<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;cstdio></span></span>
-
-<span class="token keyword">const</span> <span class="token keyword">int</span> maxn <span class="token operator">=</span> <span class="token number">100000</span><span class="token punctuation">;</span>
-
-<span class="token keyword">struct</span> Node <span class="token punctuation">{</span>
-    <span class="token keyword">char</span> data<span class="token punctuation">;</span>
-    <span class="token keyword">int</span> next<span class="token punctuation">;</span>
-    <span class="token keyword">bool</span> flag <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span> nodes<span class="token punctuation">[</span>maxn<span class="token punctuation">]</span><span class="token punctuation">;</span>
-
-<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">int</span> root1<span class="token punctuation">,</span> root2<span class="token punctuation">,</span> n<span class="token punctuation">,</span> address<span class="token punctuation">,</span> next<span class="token punctuation">;</span>
-    <span class="token keyword">char</span> data<span class="token punctuation">;</span>
-    <span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">"%d %d %d"</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>root1<span class="token punctuation">,</span> <span class="token operator">&amp;</span>root2<span class="token punctuation">,</span> <span class="token operator">&amp;</span>n<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>address<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">" %c %d"</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>nodes<span class="token punctuation">[</span>address<span class="token punctuation">]</span><span class="token punctuation">.</span>data<span class="token punctuation">,</span> <span class="token operator">&amp;</span>nodes<span class="token punctuation">[</span>address<span class="token punctuation">]</span><span class="token punctuation">.</span>next<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-    <span class="token keyword">int</span> cur <span class="token operator">=</span> root1<span class="token punctuation">;</span>
-    <span class="token keyword">while</span> <span class="token punctuation">(</span>cur <span class="token operator">!=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        nodes<span class="token punctuation">[</span>cur<span class="token punctuation">]</span><span class="token punctuation">.</span>flag <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
-        cur <span class="token operator">=</span> nodes<span class="token punctuation">[</span>cur<span class="token punctuation">]</span><span class="token punctuation">.</span>next<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-    cur <span class="token operator">=</span> root2<span class="token punctuation">;</span>
-    <span class="token keyword">while</span> <span class="token punctuation">(</span>cur <span class="token operator">!=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>nodes<span class="token punctuation">[</span>cur<span class="token punctuation">]</span><span class="token punctuation">.</span>flag <span class="token operator">==</span> <span class="token boolean">true</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%05d"</span><span class="token punctuation">,</span> cur<span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-        cur <span class="token operator">=</span> nodes<span class="token punctuation">[</span>cur<span class="token punctuation">]</span><span class="token punctuation">.</span>next<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"-1"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
+                <h1 id="为什么针对我这个系统要用微服务架构？"><a href="#为什么针对我这个系统要用微服务架构？" class="headerlink" title="为什么针对我这个系统要用微服务架构？"></a>为什么针对我这个系统要用微服务架构？</h1><h1 id="为什么选用-Zookeeper-作为注册中心，还有其他的选择吗？"><a href="#为什么选用-Zookeeper-作为注册中心，还有其他的选择吗？" class="headerlink" title="为什么选用 Zookeeper 作为注册中心，还有其他的选择吗？"></a>为什么选用 Zookeeper 作为注册中心，还有其他的选择吗？</h1><h1 id="IP-地址的最小表示粒度？同一台主机的不同进程怎么区分？"><a href="#IP-地址的最小表示粒度？同一台主机的不同进程怎么区分？" class="headerlink" title="IP 地址的最小表示粒度？同一台主机的不同进程怎么区分？"></a>IP 地址的最小表示粒度？同一台主机的不同进程怎么区分？</h1><h1 id="IPv4-和-IPv6-的区别？"><a href="#IPv4-和-IPv6-的区别？" class="headerlink" title="IPv4 和 IPv6 的区别？"></a>IPv4 和 IPv6 的区别？</h1><h1 id="DNS-中-IPv4-和-IPv6-的区别？"><a href="#DNS-中-IPv4-和-IPv6-的区别？" class="headerlink" title="DNS 中 IPv4 和 IPv6 的区别？"></a>DNS 中 IPv4 和 IPv6 的区别？</h1><h1 id="SQL-缩写代表什么？扩写是什么？为什么叫这个？"><a href="#SQL-缩写代表什么？扩写是什么？为什么叫这个？" class="headerlink" title="SQL 缩写代表什么？扩写是什么？为什么叫这个？"></a>SQL 缩写代表什么？扩写是什么？为什么叫这个？</h1><h1 id="程序中用什么连接数据库？程序和-DBMS-的接口统一叫什么？"><a href="#程序中用什么连接数据库？程序和-DBMS-的接口统一叫什么？" class="headerlink" title="程序中用什么连接数据库？程序和 DBMS 的接口统一叫什么？"></a>程序中用什么连接数据库？程序和 DBMS 的接口统一叫什么？</h1>
             </div>
             <hr>
 
@@ -587,7 +500,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://zjxjwxk.com/2020/04/07/PAT/Advanced_Level/A1032/">https://zjxjwxk.com/2020/04/07/PAT/Advanced_Level/A1032/</a>
+                    <a href="https://zjxjwxk.com/2020/05/15/Private/面试题/">https://zjxjwxk.com/2020/05/15/Private/面试题/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -624,11 +537,7 @@
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            
-                                <a href="/tags/PAT/">
-                                    <span class="chip bg-color">PAT</span>
-                                </a>
-                            
+                            <span class="chip bg-color">无标签</span>
                         </div>
                     
                 </div>
@@ -1059,51 +968,37 @@
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2020/04/09/PAT/Advanced_Level/A1013/">
+                <a href="/2020/05/15/Private/面试题/">
                     <div class="card-image">
                         
                         
-                        <img src="https://cdn.jsdelivr.net/gh/zjxjwxk/zjxjwxk.github.io/medias/featureimages/10.jpg" class="responsive-img" alt="PAT甲级 1013 Battle Over Cities (25分)">
+                        <img src="https://cdn.jsdelivr.net/gh/zjxjwxk/zjxjwxk.github.io/medias/featureimages/0.jpg" class="responsive-img" alt="">
                         
-                        <span class="card-title">PAT甲级 1013 Battle Over Cities (25分)</span>
+                        <span class="card-title"></span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            It is vitally important to have all the cities connected by highways in a war. If a city is occupied by the enemy, all t
+                            为什么针对我这个系统要用微服务架构？为什么选用 Zookeeper 作为注册中心，还有其他的选择吗？IP 地址的最小表示粒度？同一台主机的不同进程怎么区分？IPv4 和 IPv6 的区别？DNS 中 IPv4 和 IPv6 的区别？SQL 
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-04-09
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-05-15
+                            </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/PAT/" class="post-category">
-                                    PAT
-                                </a>
-                            
-                            <a href="/categories/PAT/图/" class="post-category">
-                                    图
-                                </a>
-                            
+                            <i class="fas fa-user fa-fw"></i>
+                            吴鑫康
                             
                         </span>
                     </div>
                 </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/PAT/">
-                        <span class="chip bg-color">PAT</span>
-                    </a>
-                    
-                </div>
+
                 
             </div>
         </div>
@@ -1114,35 +1009,37 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/04/06/PAT/Advanced_Level/A1056/">
+                <a href="/2020/05/08/大数据/Hadoop/Hadoop进阶篇/">
                     <div class="card-image">
                         
                         
-                        <img src="https://cdn.jsdelivr.net/gh/zjxjwxk/zjxjwxk.github.io/medias/featureimages/10.jpg" class="responsive-img" alt="PAT甲级 1056 Mice and Rice (25分)">
+                        <img src="https://cdn.jsdelivr.net/gh/zjxjwxk/zjxjwxk.github.io/medias/featureimages/17.jpg" class="responsive-img" alt="Hadoop 进阶篇">
                         
-                        <span class="card-title">PAT甲级 1056 Mice and Rice (25分)</span>
+                        <span class="card-title">Hadoop 进阶篇</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Mice and Rice is the name of a programming contest in which each programmer must write a piece of code to control the mo
+                            概要
+概述
+深入探索 MapReduce 过程
+Hadoop 的分布式缓存
+Hadoop 应用——推荐算法
+
+HDFSHDFS 是 Hadoop 分布式文件系统的简称，由若干台计算机组成，用于存放 PB、TB 数量级以上的文件，每份文件可以
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-04-06
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-05-08
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/PAT/" class="post-category">
-                                    PAT
-                                </a>
-                            
-                            <a href="/categories/PAT/队列/" class="post-category">
-                                    队列
+                            <a href="/categories/大数据/" class="post-category">
+                                    大数据
                                 </a>
                             
                             
@@ -1152,8 +1049,12 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/PAT/">
-                        <span class="chip bg-color">PAT</span>
+                    <a href="/tags/大数据/">
+                        <span class="chip bg-color">大数据</span>
+                    </a>
+                    
+                    <a href="/tags/Hadoop/">
+                        <span class="chip bg-color">Hadoop</span>
                     </a>
                     
                 </div>
