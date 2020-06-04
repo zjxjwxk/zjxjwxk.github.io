@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://zjxjwxk.com/"/>
-  <updated>2020-05-19T05:52:29.000Z</updated>
+  <updated>2020-06-04T15:15:08.000Z</updated>
   <id>https://zjxjwxk.com/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>微服务容器化系列（1）：服务编排前奏</title>
+    <link href="https://zjxjwxk.com/2020/06/04/Docker/Docker%20+%20k8s%20%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%AE%B9%E5%99%A8%E5%8C%96/1.%20%E6%9C%8D%E5%8A%A1%E7%BC%96%E6%8E%92%E5%89%8D%E5%A5%8F/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%AE%B9%E5%99%A8%E5%8C%96%E7%B3%BB%E5%88%97%EF%BC%881%EF%BC%89%EF%BC%9A%E6%9C%8D%E5%8A%A1%E7%BC%96%E6%8E%92%E5%89%8D%E5%A5%8F/"/>
+    <id>https://zjxjwxk.com/2020/06/04/Docker/Docker + k8s 微服务容器化/1. 服务编排前奏/微服务容器化系列（1）：服务编排前奏/</id>
+    <published>2020-06-04T15:15:00.000Z</published>
+    <updated>2020-06-04T15:15:08.000Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;服务-Docker-化&quot;&gt;&lt;a href=&quot;#服务-Docker-化&quot; class=&quot;headerlink&quot; title=&quot;服务 Docker 化&quot;&gt;&lt;/a&gt;服务 Docker 化&lt;/h1&gt;&lt;h2 id=&quot;修改项目配置&quot;&gt;&lt;a href=&quot;#修改项目配置&quot;
+        
+      
+    
+    </summary>
+    
+      <category term="Docker" scheme="https://zjxjwxk.com/categories/Docker/"/>
+    
+    
+      <category term="微服务架构" scheme="https://zjxjwxk.com/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/"/>
+    
+      <category term="Docker" scheme="https://zjxjwxk.com/tags/Docker/"/>
+    
+  </entry>
   
   <entry>
     <title>Interview Question</title>
@@ -564,34 +592,6 @@
       <category term="微服务架构" scheme="https://zjxjwxk.com/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/"/>
     
       <category term="Dubbo" scheme="https://zjxjwxk.com/tags/Dubbo/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>PAT甲级 1060 Are They Equal (25分)</title>
-    <link href="https://zjxjwxk.com/2020/04/04/PAT/Advanced_Level/A1060/"/>
-    <id>https://zjxjwxk.com/2020/04/04/PAT/Advanced_Level/A1060/</id>
-    <published>2020-04-04T14:28:00.000Z</published>
-    <updated>2020-04-29T09:16:49.000Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;p&gt;If a machine can save only 3 significant digits, the float numbers 12300 and 12358.9 are considered equal since they are both saved as
-        
-      
-    
-    </summary>
-    
-      <category term="PAT" scheme="https://zjxjwxk.com/categories/PAT/"/>
-    
-      <category term="STL" scheme="https://zjxjwxk.com/categories/PAT/STL/"/>
-    
-    
-      <category term="PAT" scheme="https://zjxjwxk.com/tags/PAT/"/>
     
   </entry>
   
