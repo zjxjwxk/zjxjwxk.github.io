@@ -470,14 +470,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    2.2k
+                    2.4k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    9 分
+                    10 分
                 </div>
                 
 
@@ -529,18 +529,19 @@ make: *** <span class="token punctuation">[</span>build_product_image<span class
 <h2 id="系统需求"><a href="#系统需求" class="headerlink" title="系统需求"></a>系统需求</h2><p>建议在 Linux、MacOS 或 Solaris 上构建 OpenJDK</p>
 <p>本人采用的是 64 位操作系统，编译的也是 64 位的 OpenJDK</p>
 <h2 id="构建编译环境"><a href="#构建编译环境" class="headerlink" title="构建编译环境"></a>构建编译环境</h2><p>本人使用的是 MacOS ，需要安装最新版本的 XCode 和 Command Line Tools for Xcode，另外还要准备一个 N-1 （N 为要编译的OpenJDK 版本号）以上版本的 JDK，官方称这个 JDK 为 “Bootstrap JDK” 。此处由于编译的是 OpenJDK 8，我选用 JDK 7 作为 Bootstrap JDK。最后，需要下载一个 1.7.1 以上版本的 Apache Ant，并添加环境变量，用于执行 Java 编译代码中的 Ant 脚本。用 brew 安装 freetype 和 CUPS。</p>
-<h2 id="进行编译"><a href="#进行编译" class="headerlink" title="进行编译"></a>进行编译</h2><p>最后我们还需要对系统的环境变量做一些简单设置以便编译能够顺利通过，这里给出使用的编译 Shell 脚本（其中添加导出了一些 ALT_ 环境变量，如 freetype 和 CUPS，并将 COMPILER_WARNINGS_FATAL=false 以避免编译器的语法校验太严格）：</p>
+<h2 id="进行编译"><a href="#进行编译" class="headerlink" title="进行编译"></a>进行编译</h2><p>最后我们还需要对系统的环境变量做一些简单设置以便编译能够顺利通过，这里给出使用的编译 Shell 脚本。其中添加导出了一些 ALT_ 环境变量（在编译 OpenJDK 8 的时候警告 ALT_ 被弃用了，因此这里注释掉了），如 freetype 和 CUPS。</p>
+<p>并将 COMPILER_WARNINGS_FATAL=false 以避免编译器的语法校验太严格：</p>
 <pre class="line-numbers language-bash"><code class="language-bash"><span class="token comment" spellcheck="true">#语言选项,这个必须设置,否则编译好后会出现一个HashTable的NPE错</span>
 <span class="token function">export</span> LANG<span class="token operator">=</span>C
 <span class="token comment" spellcheck="true">#Bootstrap JDK的安装路径。必须设置</span>
-<span class="token function">export</span> ALT_BOOTDIR<span class="token operator">=</span>/Library/Java/JavaVirtualMachines/jdk1.7.0_80.jdk/Contents/Home
+<span class="token comment" spellcheck="true">#export ALT_BOOTDIR=/Library/Java/JavaVirtualMachines/jdk1.7.0_80.jdk/Contents/Home</span>
 
 <span class="token comment" spellcheck="true">#允许自动下载依赖</span>
 <span class="token function">export</span> ALLOW_DOWNLOADS<span class="token operator">=</span>true
 
 <span class="token comment" spellcheck="true">#并行编译的线程数,设置为和CPU内核数量一致即可</span>
 <span class="token function">export</span> HOTSPOT_BUILD_J0BS<span class="token operator">=</span>8
-<span class="token function">export</span> ALT_PARALLEL_COMPILE_JOBS<span class="token operator">=</span>8
+<span class="token comment" spellcheck="true">#export ALT_PARALLEL_COMPILE_JOBS=8</span>
 
 <span class="token comment" spellcheck="true">#比较本次build出来的映像与先前版本的差异。这对我们来说没有意义, </span>
 <span class="token comment" spellcheck="true">#必须设置为false,香则sanity检查会报缺少先前版本JDK的映像的错误提示。 </span>
@@ -571,23 +572,21 @@ BUILD_DEPLOY<span class="token operator">=</span>false
 BUILD_INSTALL<span class="token operator">=</span>false
 
 <span class="token comment" spellcheck="true">#编译结果所存放的路径</span>
-<span class="token function">export</span> ALT_OUTPUTDIR<span class="token operator">=</span>/Users/zjxjwxk/Documents/JVM/JDK-Build/build
+<span class="token comment" spellcheck="true">#export ALT_OUTPUTDIR=/Users/zjxjwxk/Documents/JVM/JDK-Build/build</span>
 
-<span class="token comment" spellcheck="true">#添加导出了一些ALT_环境变量，根据自己的freetype和CUPS路径设置</span>
-<span class="token function">export</span> ALT_FREETYPE_HEADERS_PATH<span class="token operator">=</span>/usr/local/Cellar/freetype/2.6.2/include/freetype2
-<span class="token function">export</span> ALT_FREETYPE_LIB_PATH<span class="token operator">=</span>/usr/local/Cellar/freetype/2.6.2/lib
+<span class="token comment" spellcheck="true">#export ALT_FREETYPE_HEADERS_PATH=/usr/local/Cellar/freetype/2.6.2/include/freetype2</span>
+<span class="token comment" spellcheck="true">#export ALT_FREETYPE_LIB_PATH=/usr/local/Cellar/freetype/2.6.2/lib</span>
 
-<span class="token function">export</span> ALT_CUPS_HEADERS_PATH<span class="token operator">=</span>/usr/local/Cellar/cups/2.3.3/include
+<span class="token comment" spellcheck="true">#export ALT_CUPS_HEADERS_PATH=/usr/local/Cellar/cups/2.3.3/include</span>
 
-<span class="token comment" spellcheck="true">#避免编译器的语法校验太严格</span>
 <span class="token function">export</span> COMPILER_WARNINGS_FATAL<span class="token operator">=</span>false
 
 <span class="token comment" spellcheck="true">#这两个环境变量必须去掉,不然会有很诡异的事情发生（我没有具体查过这些 "诡异的</span>
 <span class="token comment" spellcheck="true">#事情” ,Makefile脚本裣查到有这2个变量就会提示警告)</span>
 unset JAVA_HOME
 unset CLASSPATH
-<span class="token function">make</span> 2<span class="token operator">></span><span class="token operator">&amp;</span>1 <span class="token operator">|</span> <span class="token function">tee</span> <span class="token variable">$ALT_OUTPUTDIR</span>/build.log
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">make</span> 2<span class="token operator">></span><span class="token operator">&amp;</span>1 <span class="token operator">|</span> <span class="token function">tee</span> build/build.log
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h3 id="检查"><a href="#检查" class="headerlink" title="检查"></a>检查</h3><p>全部设置结束之后，可以输入 <code>make sanity</code> 来检查我们所做的设置是否全部正确。如果一切顺利，那么几秒钟之后会有类似代码清单1-2所示的输出。</p>
 <pre class="line-numbers language-bash"><code class="language-bash">~/Develop/JVM/jdkBuild/openjdk_7u4$ <span class="token function">make</span> sanity  
 Build Machine Information:  
@@ -655,37 +654,77 @@ error: <span class="token string">'&amp;&amp;'</span> within <span class="token 
 </ol>
 <h3 id="编译完成"><a href="#编译完成" class="headerlink" title="编译完成"></a>编译完成</h3><p>编译成功后，显示：</p>
 <pre class="line-numbers language-bash"><code class="language-bash">----- Build <span class="token function">times</span> -------
-Start 2020-07-16 10:49:57
-End   2020-07-16 10:54:21
-00:00:18 corba
-00:00:35 hotspot
+Start 2020-07-16 12:38:50
+End   2020-07-16 12:48:23
+00:00:17 corba
+00:05:36 hotspot
 00:00:11 jaxp
-00:00:18 jaxws
-00:03:02 jdk
-00:00:00 langtools
-00:04:24 TOTAL
+00:00:19 jaxws
+00:02:44 jdk
+00:00:25 langtools
+00:09:33 TOTAL
 -------------------------
 Finished building OpenJDK <span class="token keyword">for</span> target <span class="token string">'default'</span>
-
-WARNING: You have the following ALT_ variables set:
-ALT_CUPS_HEADERS_PATH<span class="token operator">=</span>/usr/local/Cellar/cups/2.3.3/include ALT_FREETYPE_HEADERS_PATH<span class="token operator">=</span>/usr/local/Cellar/freetype/2.6.2/include/freetype2 ALT_PARALLEL_COMPILE_JOBS<span class="token operator">=</span>8 ALT_FREETYPE_LIB_PATH<span class="token operator">=</span>/usr/local/Cellar/freetype/2.6.2/lib ALT_BOOTDIR<span class="token operator">=</span>/Library/Java/JavaVirtualMachines/jdk1.7.0_80.jdk/Contents/Home ALT_OUTPUTDIR<span class="token operator">=</span>/Users/zjxjwxk/Documents/JVM/JDK-Build/build
-ALT_ variables are deprecated and will be ignored. Please clean your environment.
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>编译完成后，进入 OpenJDK 源码下的 build/j2sdk-image 目录，这是整个 JDK 的完整编译结果，复制到 JAVA_HOME 目录，就可以作为一个完整的 JDK 使用，编译出来的虚拟机，在 <code>-version</code> 命令中带有用户的机器名。</p>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="运行-java-命令"><a href="#运行-java-命令" class="headerlink" title="运行 java 命令"></a>运行 java 命令</h3><p>编译完成后，进入 OpenJDK 源码下的 <code>build/macosx-x86_64-normal-server-release/jdk</code> 目录，这是整个 JDK 的完整编译结果，复制到 JAVA_HOME 目录，就可以作为一个完整的 JDK 使用，编译出来的虚拟机，在 <code>-version</code> 命令中带有用户的机器名。</p>
 <pre class="line-numbers language-bash"><code class="language-bash"><span class="token operator">></span> ./java -version  
-openjdk version <span class="token string">"1.7.0-internal-fastdebug"</span>  
-OpenJDK Runtime Environment <span class="token punctuation">(</span>build 1.7.0-internal-fastdebug-icyfenix_2012_12_24_15_57-b00<span class="token punctuation">)</span>  
-OpenJDK 64-Bit Server VM <span class="token punctuation">(</span>build 23.0-b21-fastdebug, mixed mode<span class="token punctuation">)</span> 
+openjdk version <span class="token string">"1.8.0-internal"</span>
+OpenJDK Runtime Environment <span class="token punctuation">(</span>build 1.8.0-internal-zjxjxk_2020_07_16_13_03-b00<span class="token punctuation">)</span>
+OpenJDK 64-Bit Server VM <span class="token punctuation">(</span>build 25.71-b00, mixed mode<span class="token punctuation">)</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="单独编译-HotSpot-虚拟机"><a href="#单独编译-HotSpot-虚拟机" class="headerlink" title="单独编译 HotSpot 虚拟机"></a>单独编译 HotSpot 虚拟机</h2><p>在大多数时候，如果我们不关心 JDK 中 HotSpot 虚拟机以外的内容，只想单独编译 HotSpot 虚拟机的话（例如调试虚拟机时，每次改动程序都执行整个 OpenJDK 的Makefile，速度肯定受不了），那么使用 hotspot/make 目录 下的 Makefile 进行替换即可，其他参数设置与前面是一致的，这时候虚拟机的输出结果存放在 build/hotspot/outputdir/bsd_amd64_compiler2 目录中，进入后可以见到以下几个目录。</p>
-<pre class="line-numbers language-bash"><code class="language-bash">0 drwxr-xr-x   15 IcyFenix  staff   510B 12 13 17:24 debug  
-0 drwxr-xr-x   15 IcyFenix  staff   510B 12 13 17:24 fastdebug  
-0 drwxr-xr-x   15 IcyFenix  staff   510B 12 13 17:25 generated  
-0 drwxr-xr-x   15 IcyFenix  staff   510B 12 13 17:24 jvmg  
-0 drwxr-xr-x   15 IcyFenix  staff   510B 12 13 17:24 optimized  
-0 drwxr-xr-x  584 IcyFenix  staff    19K 12 13 17:25 product  
-0 drwxr-xr-x   15 IcyFenix  staff   510B 12 13 17:24 profiled 
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="可能出现的运行问题"><a href="#可能出现的运行问题" class="headerlink" title="可能出现的运行问题"></a>可能出现的运行问题</h3><p>我这里运行时出现了一个类似以下的问题：</p>
+<pre class="line-numbers language-shell"><code class="language-shell">Error: A fatal exception has occurred. Program will exit.
+localhost:bin jjchen$ ./java -version
+openjdk version "1.8.0-internal"
+OpenJDK Runtime Environment (build 1.8.0-internal-jjchen_2018_09_13_10_00-b00)
+OpenJDK 64-Bit Server VM (build 25.71-b00, mixed mode)
+#
+# A fatal error has been detected by the Java Runtime Environment:
+#
+#  SIGILL (0x4) at pc=0x0000000107487f47, pid=88445, tid=0x0000000000002603
+#
+# JRE version: OpenJDK Runtime Environment (8.0) (build 1.8.0-internal-jjchen_2018_09_13_10_00-b00)
+# Java VM: OpenJDK 64-Bit Server VM (25.71-b00 mixed mode bsd-amd64 compressed oops)
+# Problematic frame:
+# V  [libjvm.dylib+0x487f47]
+#
+# Failed to write core dump. Core dumps have been disabled. To enable core dumping, try "ulimit -c unlimited" before starting Java again
+#
+# An error report file with more information is saved as:
+# /Users/jjchen/jvm/jdk8u-dev/build/macosx-x86_64-normal-server-release/jdk/bin/hs_err_pid88445.log
+#
+# If you would like to submit a bug report, please visit:
+#   http://bugreport.java.com/bugreport/crash.jsp
+#
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>在将 <code>hotspot/src/share/vm/runtime/perfData.cpp</code> 中的 <code>delete p</code> 注释掉，并重新编译后，得以正常运行。</p>
+<pre class="line-numbers language-c++"><code class="language-c++">void PerfDataManager::destroy() {
+
+  if (_all == NULL)
+    // destroy already called, or initialization never happened
+    return;
+
+  for (int index = 0; index < _all->length(); index++) {
+    PerfData* p = _all->at(index);
+    // delete p;
+  }
+
+  delete(_all);
+  delete(_sampled);
+  delete(_constants);
+
+  _all = NULL;
+  _sampled = NULL;
+  _constants = NULL;
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="单独编译-HotSpot-虚拟机"><a href="#单独编译-HotSpot-虚拟机" class="headerlink" title="单独编译 HotSpot 虚拟机"></a>单独编译 HotSpot 虚拟机</h2><p>在大多数时候，如果我们不关心 JDK 中 HotSpot 虚拟机以外的内容，只想单独编译 HotSpot 虚拟机的话（例如调试虚拟机时，每次改动程序都执行整个 OpenJDK 的Makefile，速度肯定受不了），那么使用 hotspot/make 目录 下的 Makefile 进行替换即可，其他参数设置与前面是一致的，这时候虚拟机的输出结果存放在 <code>build/macosx-x86_64-normal-server-release/hotspot/bsd_amd64_compiler2</code> 目录中，进入后可以见到以下几个目录。</p>
+<pre class="line-numbers language-bash"><code class="language-bash">drwxr-xr-x   11 zjxjwxk  staff    352  7 16 13:04 debug
+drwxr-xr-x   11 zjxjwxk  staff    352  7 16 13:04 fastdebug
+drwxr-xr-x   17 zjxjwxk  staff    544  7 16 13:04 generated
+drwxr-xr-x   11 zjxjwxk  staff    352  7 16 13:04 optimized
+drwxr-xr-x  643 zjxjwxk  staff  20576  7 16 13:09 product
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>这些目录对应了不同的优化级别，优化级别越高，性能自然越好，但是输出代码与源码的差别就越大，难于调试，具体哪个目录有内容，取决于 <code>make</code> 命令后面的参数。</p>
 <p>在编译结束之后、运行虚拟机之前，还要手工编辑目录下的 env.sh 文件，这个文件由编译脚本自动产生，用于设置虚拟机的环境变量，里面已经发布了 “JAVA_HOME、CLASSPATH、HOTSPOT_BUILD_USER” 3个环境变量，还需要增加一个“LD_LIBRARY_PATH”，内容如下：</p>
 <pre class="line-numbers language-bash"><code class="language-bash">LD_LIBRARY_PATH<span class="token operator">=</span>.:<span class="token variable">${JAVA_HOME}</span>/jre/lib/amd64/native_threads:<span class="token variable">${JAVA_HOME}</span>/jre/lib/amd64:  
@@ -1275,8 +1314,7 @@ OpenJDK 64-Bit Server VM <span class="token punctuation">(</span>build 23.0-b21,
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            坏的 : 镜像docker build 或是 pull 命令会产生临时镜像。如果我们用 Dockerfile 创建一个 HelloWorld 镜像后，因为版本更新需要重新创建，那么以前那个版本的镜像就会成为临时镜像。这个是需要删除的。
-删除
+                            坏的 none:none 镜像docker build 或是 pull 命令会产生临时镜像。如果我们用 Dockerfile 创建一个 HelloWorld 镜像后，因为版本更新需要重新创建，那么以前那个版本的镜像就会成为临时镜像。这个是需
                         
                     </div>
                     <div class="publish-info">
@@ -1451,7 +1489,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
             <br>
             
-            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span class="white-color">79.6k</span>&nbsp;字
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span class="white-color">79.8k</span>&nbsp;字
             
             
             
