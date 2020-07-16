@@ -427,12 +427,12 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/微服务架构/">
-                                <span class="chip bg-color">微服务架构</span>
-                            </a>
-                        
                             <a href="/tags/Docker/">
                                 <span class="chip bg-color">Docker</span>
+                            </a>
+                        
+                            <a href="/tags/微服务架构/">
+                                <span class="chip bg-color">微服务架构</span>
                             </a>
                         
                     </div>
@@ -463,21 +463,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-06-04
+                    2020-06-11
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    851
+                    1.1k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    3 分
+                    5 分
                 </div>
                 
 
@@ -596,7 +596,60 @@ docker build -t user:latest .
 <p>或是将镜像从 Docker Hub pull 下来：</p>
 <pre class="line-numbers language-shell"><code class="language-shell">docker pull zjxjwxk/cinema-user:latest
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<h2 id="使用-harbor"><a href="#使用-harbor" class="headerlink" title="使用 harbor"></a>使用 harbor</h2><p>从 <a href="https://github.com/goharbor/harbor/releases" target="_blank" rel="noopener">https://github.com/goharbor/harbor/releases</a> 下载 harbor-offline-installer，并安装。</p>
+<h2 id="使用-harbor"><a href="#使用-harbor" class="headerlink" title="使用 harbor"></a>使用 harbor</h2><p>从 <a href="https://github.com/goharbor/harbor/releases" target="_blank" rel="noopener">https://github.com/goharbor/harbor/releases</a> 下载 harbor-offline-installer，解压之。</p>
+<h3 id="配置-harbor-yml"><a href="#配置-harbor-yml" class="headerlink" title="配置 harbor.yml"></a>配置 harbor.yml</h3><p>配置其目录下的 <code>harbor.yml</code> ：</p>
+<p>将其中的 <code>hostname</code> 为 hub.xxx.com（xxx 为你的域名）。将 <code>http</code> 的 <code>port</code> 修改为 8080（由于 MacOS 80 端口不对外开放）。</p>
+<p>如果是 MacOS 系统，还需要将其中本机 host 相关的目录由根目录 <code>/</code> 改为 <code>/Users/xxx/</code> (xxx 为你当前系统的用户名)，避免挂载权限不足的问题。</p>
+<pre class="line-numbers language-yml"><code class="language-yml"># Configuration file of Harbor
+
+# The IP address or hostname to access admin UI and registry service.
+# DO NOT use localhost or 127.0.0.1, because Harbor needs to be accessed by external clients.
+hostname: hub.zjxjwxk.com
+
+# http related config
+http:
+  # port for http, default is 80. If https enabled, this port will redirect to https port
+  port: 8080
+
+# https related config
+#https:
+  # https port for harbor, default is 443
+#  port: 443
+  # The path of cert and key files for nginx
+#  certificate: /your/certificate/path
+#  private_key: /your/private/key/path
+
+# Uncomment external_url if you want to enable external proxy
+# And when it enabled the hostname will no longer used
+# external_url: https://reg.mydomain.com:8433
+
+# The initial password of Harbor admin
+# It only works in first time to install harbor
+# Remember Change the admin password from UI after launching Harbor.
+harbor_admin_password: Harbor12345
+
+# Harbor DB configuration
+database:
+  # The password for the root user of Harbor DB. Change this before any production use.
+  password: root123
+  # The maximum number of connections in the idle connection pool. If it <=0, 0="" 1="" 2="" 3="" 4="" 10="" 12="" 50="" 100="" 5140="" 6379="" no="" idle="" connections="" are="" retained.="" max_idle_conns:="" #="" the="" maximum="" number="" of="" open to="" database.="" if="" it="" <="0," then="" there="" is="" limit="" on="" connections.="" note:="" default for="" postgres.="" max_open_conns:="" data="" volume="" data_volume:="" users="" zjxjwxk="" harbor="" storage="" settings="" by="" using="" dir="" local="" filesystem="" uncomment="" storage_service="" setting="" you="" want="" external="" storage_service:="" ca_bundle="" path="" custom="" root="" ca="" certificate,="" which="" will="" be="" injected="" into="" truststore="" registry's="" and="" chart="" repository's="" containers.="" this="" usually="" needed="" when="" user="" hosts="" a="" internal="" with="" self="" signed="" certificate.="" ca_bundle:="" backend,="" filesystem,="" options="" include="" azure,="" gcs,="" s3,="" swift="" oss="" more="" info="" about="" configuration="" please="" refer="" https:="" docs.docker.com="" registry="" filesystem:="" maxthreads:="" set="" disable="" true="" redirect="" redirect:="" disabled:="" false="" clair="" clair:="" interval="" updaters,="" unit="" hour,="" updaters.="" updaters_interval:="" jobservice:="" job="" workers="" in="" service="" max_job_workers:="" notification:="" retry="" count="" webhook="" webhook_job_max_retry:="" chart:="" change="" value="" absolute_url="" enabled="" can="" enable="" absolute="" url="" absolute_url:="" disabled log="" configurations="" log:="" debug,="" info,="" warning,="" error,="" fatal="" level:="" configs="" logs="" local:="" files="" rotated="" log_rotate_count="" times="" before="" being="" removed.="" 0,="" old="" versions="" removed="" rather="" than="" rotated.="" rotate_count:="" only="" they="" grow="" bigger="" log_rotate_size="" bytes.="" size="" followed="" k,="" assumed="" kilobytes.="" m="" used,="" megabytes,="" g="" gigabytes.="" so="" 100,="" 100k,="" 100m="" 100g="" all="" valid.="" rotate_size:="" 200m="" directory="" your="" host="" that="" store="" location:="" var="" following="" lines="" syslog="" endpoint.="" external_endpoint:="" protocol="" used="" transmit="" endpoint,="" tcp="" or="" udp="" protocol:="" endpoint="" host:="" localhost="" port="" port:="" #this="" attribute="" migrator="" detect="" version="" .cfg="" file,="" do="" not="" modify!="" _version:="" 1.10.0="" external_database="" external_database:="" harbor:="" harbor_db_host="" harbor_db_port="" db_name:="" harbor_db_name="" username:="" harbor_db_username="" password:="" harbor_db_password="" ssl_mode:="" clair_db_host="" clair_db_port="" clair_db_name="" clair_db_username="" clair_db_password="" notary_signer:="" notary_signer_db_host="" notary_signer_db_port="" notary_signer_db_name="" notary_signer_db_username="" notary_signer_db_password="" notary_server:="" notary_server_db_host="" notary_server_db_port="" notary_server_db_name="" notary_server_db_username="" notary_server_db_password="" external_redis="" redis="" server="" external_redis:="" db_index="" core,="" it's="" unchangeable="" registry_db_index:="" jobservice_db_index:="" chartmuseum_db_index:="" clair_db_index:="" uaa="" trusting="" certificate="" instance="" hosted="" via="" self-signed="" cert.="" uaa:="" ca_file:="" global="" proxy="" config="" http="" components,="" e.g.="" http:="" my.proxy.com:3128="" components="" doesn't="" need="" connect="" each="" others="" proxy.="" remove="" component="" from="" `components`="" array="" it.="" use="" replication,="" must="" core="" jobservice,="" `http_proxy`="" `https_proxy`.="" add="" domain="" `no_proxy`="" field,="" some="" special="" registry.="" proxy:="" http_proxy:="" https_proxy:="" no_proxy="" endpoints="" appended="" 127.0.0.1,localhost,.local,.internal,log,db,redis,nginx,core,portal,postgresql,jobservice,registry,registryctl,clair,chartmuseum,notary-server="" no_proxy:="" components:="" -="" jobservice="" <span="" aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></=0,></code></pre>
+<h3 id="启动-harbar"><a href="#启动-harbar" class="headerlink" title="启动 harbar"></a>启动 harbar</h3><p>执行 <code>sh install.sh</code> 运行 harbar。</p>
+<p>出现以下则说明启动成功：</p>
+<pre class="line-numbers language-shell"><code class="language-shell">[Step 5]: starting Harbor ...
+Creating network "harbor_harbor" with the default driver
+Creating harbor-log ... done
+Creating redis         ... done
+Creating harbor-portal ... done
+Creating registryctl   ... done
+Creating harbor-db     ... done
+Creating registry      ... done
+Creating harbor-core   ... done
+Creating nginx             ... done
+Creating harbor-jobservice ... done
+✔ ----Harbor has been installed and started successfully.----
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>访问 localhost:8080 进入 Harbor UI 界面。默认账号为 admin，默认密码为 <code>harbor.yml</code> 中的 <code>harbor_admin_password</code> : Harbor12345。</p>
+<p><img src="/2020/06/04/Docker/Docker + k8s 微服务容器化/1. 服务编排前奏/微服务容器化系列（1）：服务编排前奏/image-20200611004219372.png" alt="Harbor 界面"></p>
 
             </div>
             <hr>
@@ -660,12 +713,12 @@ docker build -t user:latest .
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/微服务架构/">
-                                    <span class="chip bg-color">微服务架构</span>
-                                </a>
-                            
                                 <a href="/tags/Docker/">
                                     <span class="chip bg-color">Docker</span>
+                                </a>
+                            
+                                <a href="/tags/微服务架构/">
+                                    <span class="chip bg-color">微服务架构</span>
                                 </a>
                             
                         </div>
@@ -1343,7 +1396,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
             <br>
             
-            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span class="white-color">78.6k</span>&nbsp;字
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span class="white-color">79.6k</span>&nbsp;字
             
             
             

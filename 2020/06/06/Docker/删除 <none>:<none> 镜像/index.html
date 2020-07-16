@@ -4,7 +4,7 @@
 
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="自己编译JDK, Java">
+    <meta name="keywords" content="删除 &lt;none&gt;:&lt;none&gt; 镜像, Java">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>自己编译JDK | Zjxjwxk&#39;s Blog</title>
+    <title>删除 &lt;none&gt;:&lt;none&gt; 镜像 | Zjxjwxk&#39;s Blog</title>
     <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/zjxjwxk/zjxjwxk.github.io/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/zjxjwxk/zjxjwxk.github.io/libs/awesome/css/all.css">
@@ -297,12 +297,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/zjxjwxk/zjxjwxk.github.io/medias/featureimages/1.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/zjxjwxk/zjxjwxk.github.io/medias/featureimages/5.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">自己编译JDK</h1>
+                    <h1 class="description center-align post-title">删除 &lt;none&gt;:&lt;none&gt; 镜像</h1>
                 </div>
             </div>
         </div>
@@ -427,12 +427,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/Java/">
-                                <span class="chip bg-color">Java</span>
-                            </a>
-                        
-                            <a href="/tags/JVM/">
-                                <span class="chip bg-color">JVM</span>
+                            <a href="/tags/Docker/">
+                                <span class="chip bg-color">Docker</span>
                             </a>
                         
                     </div>
@@ -443,8 +439,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/Java/" class="post-category">
-                                Java
+                            <a href="/categories/Docker/" class="post-category">
+                                Docker
                             </a>
                         
                     </div>
@@ -456,28 +452,28 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2019-03-11
+                    2020-06-06
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-02-03
+                    2020-06-06
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.6k
+                    87
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    6 分
+                    1 分
                 </div>
                 
 
@@ -492,151 +488,10 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>想要一探 JDK 内部的实现机制，最便捷的捷径之一就是自己编译一套 JDK，通过阅读和跟踪调试 JDK 源码去了解 Java 技术体系的原理。本人选择了 OpenJDK 进行编译。</p>
-<h2 id="1-获取-JDK-源码"><a href="#1-获取-JDK-源码" class="headerlink" title="1. 获取 JDK 源码"></a>1. 获取 JDK 源码</h2><p>获取 JDK 源码有两种方式：</p>
-<h3 id="1-通过-Mercurial-代码版本管理工具从-Repository-中直接取得源码"><a href="#1-通过-Mercurial-代码版本管理工具从-Repository-中直接取得源码" class="headerlink" title="(1). 通过 Mercurial 代码版本管理工具从 Repository 中直接取得源码"></a>(1). 通过 Mercurial 代码版本管理工具从 Repository 中直接取得源码</h3><p>Repository 地址：<a href="http://hg.openjdk.java.net/jdk7u/jdk7u" target="_blank" rel="noopener">http://hg.openjdk.java.net/jdk7u/jdk7u</a></p>
-<p>获取过程如以下代码所示</p>
-<pre class="line-numbers language-shell"><code class="language-shell">hg clone http://hg.openjdk.java.net/jdk7u/jdk7u-dev
-cd jdk7u-dev
-chmod 755 get_source.sh
-./get_source.sh
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-<p>从版本管理中看变更轨迹效果较好，但不足之处是速度太慢，而且 Mercurial 不如 Git、SVN 等版本控制工具那样普及。</p>
-<h3 id="2-通过-OpenJDK™-Source-Releases-页面取得打包好的源码"><a href="#2-通过-OpenJDK™-Source-Releases-页面取得打包好的源码" class="headerlink" title="(2). 通过 OpenJDK™ Source Releases 页面取得打包好的源码"></a>(2). 通过 OpenJDK™ Source Releases 页面取得打包好的源码</h3><p>页面地址：<a href="https://download.java.net/openjdk/jdk7/" target="_blank" rel="noopener">https://download.java.net/openjdk/jdk7/</a></p>
-<h2 id="2-系统需求"><a href="#2-系统需求" class="headerlink" title="2. 系统需求"></a>2. 系统需求</h2><p>建议在 Linux、MacOS 或 Solaris 上构建 OpenJDK</p>
-<p>本人采用的是 64 位操作系统，编译的也是 64 位的 OpenJDK</p>
-<h2 id="3-构建编译环境"><a href="#3-构建编译环境" class="headerlink" title="3. 构建编译环境"></a>3. 构建编译环境</h2><p>本人使用的是 MacOS ，需要安装最新版本的 XCode 和 Command Line Tools for Xcode，另外还要准备一个 6u14 以上版本的 JDK，官方称这个 JDK 为 “Bootstrap JDK” 。最后，需要下载一个 1.7.1 以上版本的 Apache Ant，用于执行 Java 编译代码中的 Ant 脚本。</p>
-<h2 id="4-进行编译"><a href="#4-进行编译" class="headerlink" title="4. 进行编译"></a>4. 进行编译</h2><p>最后我们还需要对系统的环境变量做一些简单设置以便编译能够顺利通过，这里给出使用的编译 Shell 脚本：</p>
-<pre class="line-numbers language-bash"><code class="language-bash"><span class="token comment" spellcheck="true">#语言选项,这个必须设置,否则编译好后会出现一个HashTable的NPE错</span>
-<span class="token function">export</span> LANG<span class="token operator">=</span>C
-<span class="token comment" spellcheck="true">#Bootstrap JDK的安装路径。必须设置</span>
-<span class="token function">export</span> ALT_BOOTDIR<span class="token operator">=</span>/Library/Java/JavaVirtualMachines/jdk1.8.0_201.jdk/Contents/Home
-
-<span class="token comment" spellcheck="true">#允许自动下载依赖</span>
-<span class="token function">export</span> ALLOW_DOWNLOADS<span class="token operator">=</span>true
-
-<span class="token comment" spellcheck="true">#并行编译的线程数,设置为和CPU内核数量一致即可</span>
-<span class="token function">export</span> HOTSPOT_BUILD_J0BS<span class="token operator">=</span>8
-<span class="token function">export</span> ALT_PARALLEL_COMPILE_JOBS<span class="token operator">=</span>8
-
-<span class="token comment" spellcheck="true">#比较本次build出来的映像与先前版本的差异。这对我们来说没有意义, </span>
-<span class="token comment" spellcheck="true">#必须设置为false,香则sanity检查会报缺少先前版本JDK的映像的错误提示。 </span>
-<span class="token comment" spellcheck="true">#如桌已经设置dev或者DEV_ONLY=true,这个不显式设置也行</span>
-<span class="token function">export</span> SKIP_COMPARE_IMAGES<span class="token operator">=</span>true
-
-<span class="token comment" spellcheck="true">#使用预编译头文件,不加这个编译会更慢一些</span>
-<span class="token function">export</span> USE_PRECOMPILED_HEADER<span class="token operator">=</span>true
-
-<span class="token comment" spellcheck="true">#要编译的内容</span>
-<span class="token function">export</span> BUILD_LANGTOOLS<span class="token operator">=</span>true
-<span class="token comment" spellcheck="true">#export BUILD_JAXP=false</span>
-<span class="token comment" spellcheck="true">#export BUILD_JAXWS=fa1se</span>
-<span class="token comment" spellcheck="true">#export BUILD_CORBA=false</span>
-<span class="token function">export</span> BUILD_HOTSPOT<span class="token operator">=</span>true
-<span class="token function">export</span> BUILD_JDK<span class="token operator">=</span>true
-
-<span class="token comment" spellcheck="true">#要编译的版本</span>
-<span class="token comment" spellcheck="true">#export SKIP_DEBUG_BUILD=false</span>
-<span class="token comment" spellcheck="true">#export SKIP_FASTDEBUG_BUILD=true</span>
-<span class="token comment" spellcheck="true">#export DEBUG_NAME=debug</span>
-
-<span class="token comment" spellcheck="true">#把它设置为false可以避开java111`ws和浏览器Java插件之类的部分的build</span>
-BUILD_DEPLOY<span class="token operator">=</span>false
-
-<span class="token comment" spellcheck="true">#把它设置为false就不会build出安装包。因为安装包里有些奇怪的依赖, </span>
-<span class="token comment" spellcheck="true">#但即便不build出它也已经能得到完整的JDK映像,所以还是别build它好了</span>
-BUILD_INSTALL<span class="token operator">=</span>false
-
-<span class="token comment" spellcheck="true">#编译结果所存放的路径</span>
-<span class="token function">export</span> ALT_OUTPUTDIR<span class="token operator">=</span>/Users/zjxjwxk/Documents/JVM/JDK-Build/build
-
-<span class="token comment" spellcheck="true">#这两个环境变量必须去掉,不然会有很诡异的事情发生（我没有具体查过这些 "诡异的</span>
-<span class="token comment" spellcheck="true">#事情” ,Makefile脚本裣查到有这2个变量就会提示警告)</span>
-unset JAVA_HOME
-unset CLASSPATH
-<span class="token function">make</span> 2<span class="token operator">></span><span class="token operator">&amp;</span>1 <span class="token operator">|</span> <span class="token function">tee</span> <span class="token variable">$ALT_OUTPUTDIR</span>/build.log
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="5-检查"><a href="#5-检查" class="headerlink" title="5. 检查"></a>5. 检查</h2><p>全部设置结束之后，可以输入 <code>make sanity</code> 来检查我们所做的设置是否全部正确。如果一切顺利，那么几秒钟之后会有类似代码清单1-2所示的输出。</p>
-<pre class="line-numbers language-bash"><code class="language-bash">~/Develop/JVM/jdkBuild/openjdk_7u4$ <span class="token function">make</span> sanity  
-Build Machine Information:  
-   build machine <span class="token operator">=</span> IcyFenix-RMBP.local  
-
-Build Directory Structure:  
-   CWD <span class="token operator">=</span> /Users/IcyFenix/Develop/JVM/jdkBuild/openjdk_7u4  
-   TOPDIR <span class="token operator">=</span> <span class="token keyword">.</span>  
-   LANGTOOLS_TOPDIR <span class="token operator">=</span> ./langtools  
-   JAXP_TOPDIR <span class="token operator">=</span> ./jaxp  
-   JAXWS_TOPDIR <span class="token operator">=</span> ./jaxws  
-   CORBA_TOPDIR <span class="token operator">=</span> ./corba  
-   HOTSPOT_TOPDIR <span class="token operator">=</span> ./hotspot  
-   JDK_TOPDIR <span class="token operator">=</span> ./jdk  
-
-Build Directives:  
-   BUILD_LANGTOOLS <span class="token operator">=</span> <span class="token boolean">true</span>   
-   BUILD_JAXP <span class="token operator">=</span> <span class="token boolean">true</span>   
-   BUILD_JAXWS <span class="token operator">=</span> <span class="token boolean">true</span>   
-   BUILD_CORBA <span class="token operator">=</span> <span class="token boolean">true</span>   
-   BUILD_HOTSPOT <span class="token operator">=</span> <span class="token boolean">true</span>   
-   BUILD_JDK    <span class="token operator">=</span> <span class="token boolean">true</span>   
-   DEBUG_CLASSFILES <span class="token operator">=</span>    
-   DEBUG_BINARIES <span class="token operator">=</span>    
-
-……因篇幅关系，中间省略了大量的输出内容……  
-
-OpenJDK-specific settings:  
-  FREETYPE_HEADERS_PATH <span class="token operator">=</span> /usr/X11R6/include  
-    ALT_FREETYPE_HEADERS_PATH <span class="token operator">=</span>   
-  FREETYPE_LIB_PATH <span class="token operator">=</span> /usr/X11R6/lib  
-    ALT_FREETYPE_LIB_PATH <span class="token operator">=</span>   
-
-Previous JDK Settings:  
-  PREVIOUS_RELEASE_PATH <span class="token operator">=</span> USING-PREVIOUS_RELEASE_IMAGE  
-    ALT_PREVIOUS_RELEASE_PATH <span class="token operator">=</span>   
-  PREVIOUS_JDK_VERSION <span class="token operator">=</span> 1.6.0  
-    ALT_PREVIOUS_JDK_VERSION <span class="token operator">=</span>   
-  PREVIOUS_JDK_FILE <span class="token operator">=</span>   
-    ALT_PREVIOUS_JDK_FILE <span class="token operator">=</span>   
-  PREVIOUS_JRE_FILE <span class="token operator">=</span>   
-    ALT_PREVIOUS_JRE_FILE <span class="token operator">=</span>   
-  PREVIOUS_RELEASE_IMAGE <span class="token operator">=</span> /Library/Java/JavaVirtualMachines/jdk1.7.0_04.jdk/Contents/Home  
-    ALT_PREVIOUS_RELEASE_IMAGE <span class="token operator">=</span>   
-
-Sanity check passed.  
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>Makefile 的 Sanity 检查过程输出了编译所需的所有环境变量，如果看到 “Sanity check passed” 说明检查过程通过了，可以输入 <code>make</code> 执行整个 OpenJDK 编译 (make 不加参数，默认编译 make all)。</p>
-<p>编译完成后，进入 OpenJDK 源码下的 build/j2sdk-image 目录，这是整个 JDK 的完整编译结果，复制到 JAVA_HOME 目录，就可以作为一个完整的 JDK 使用，编译出来的虚拟机，在 <code>-version</code> 命令中带有用户的机器名。</p>
-<pre class="line-numbers language-bash"><code class="language-bash"><span class="token operator">></span> ./java -version  
-openjdk version <span class="token string">"1.7.0-internal-fastdebug"</span>  
-OpenJDK Runtime Environment <span class="token punctuation">(</span>build 1.7.0-internal-fastdebug-icyfenix_2012_12_24_15_57-b00<span class="token punctuation">)</span>  
-OpenJDK 64-Bit Server VM <span class="token punctuation">(</span>build 23.0-b21-fastdebug, mixed mode<span class="token punctuation">)</span> 
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="6-单独编译-HotSpot-虚拟机"><a href="#6-单独编译-HotSpot-虚拟机" class="headerlink" title="6. 单独编译 HotSpot 虚拟机"></a>6. 单独编译 HotSpot 虚拟机</h2><p>在大多数时候，如果我们不关心 JDK 中 HotSpot 虚拟机以外的内容，只想单独编译 HotSpot 虚拟机的话（例如调试虚拟机时，每次改动程序都执行整个 OpenJDK 的Makefile，速度肯定受不了），那么使用 hotspot/make 目录 下的 Makefile 进行替换即可，其他参数设置与前面是一致的，这时候虚拟机的输出结果存放在 build/hotspot/outputdir/bsd_amd64_compiler2 目录中，进入后可以见到以下几个目录。</p>
-<pre class="line-numbers language-bash"><code class="language-bash">0 drwxr-xr-x   15 IcyFenix  staff   510B 12 13 17:24 debug  
-0 drwxr-xr-x   15 IcyFenix  staff   510B 12 13 17:24 fastdebug  
-0 drwxr-xr-x   15 IcyFenix  staff   510B 12 13 17:25 generated  
-0 drwxr-xr-x   15 IcyFenix  staff   510B 12 13 17:24 jvmg  
-0 drwxr-xr-x   15 IcyFenix  staff   510B 12 13 17:24 optimized  
-0 drwxr-xr-x  584 IcyFenix  staff    19K 12 13 17:25 product  
-0 drwxr-xr-x   15 IcyFenix  staff   510B 12 13 17:24 profiled 
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>这些目录对应了不同的优化级别，优化级别越高，性能自然越好，但是输出代码与源码的差别就越大，难于调试，具体哪个目录有内容，取决于 <code>make</code> 命令后面的参数。</p>
-<p>在编译结束之后、运行虚拟机之前，还要手工编辑目录下的 env.sh 文件，这个文件由编译脚本自动产生，用于设置虚拟机的环境变量，里面已经发布了 “JAVA_HOME、CLASSPATH、HOTSPOT_BUILD_USER” 3个环境变量，还需要增加一个“LD_LIBRARY_PATH”，内容如下：</p>
-<pre class="line-numbers language-bash"><code class="language-bash">LD_LIBRARY_PATH<span class="token operator">=</span>.:<span class="token variable">${JAVA_HOME}</span>/jre/lib/amd64/native_threads:<span class="token variable">${JAVA_HOME}</span>/jre/lib/amd64:  
-<span class="token function">export</span> LD_LIBRARY_PATH 
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<p>然后执行以下命令启动虚拟机（这时的启动器名为gamma），输出版本号。</p>
-<pre class="line-numbers language-bash"><code class="language-bash"><span class="token keyword">.</span> ./env.sh  
-./gamma -version  
-Using java runtime at: /Library/Java/JavaVirtualMachines/jdk1.7.0_04.jdk/Contents/Home/jre  
-java version <span class="token string">"1.7.0_04"</span>  
-Java<span class="token punctuation">(</span>TM<span class="token punctuation">)</span> SE Runtime Environment <span class="token punctuation">(</span>build 1.7.0_04-b21<span class="token punctuation">)</span>  
-OpenJDK 64-Bit Server VM <span class="token punctuation">(</span>build 23.0-b21, mixed mode<span class="token punctuation">)</span> 
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>看到自己编译的虚拟机成功运行起来，很有成就感吧!</p>
-<blockquote>
-<p>来源：《深入理解Java虚拟机：JVM高级特性与最佳实践（第2版）》</p>
-<p>作者：周志明</p>
-</blockquote>
+                <h1 id="坏的-镜像"><a href="#坏的-镜像" class="headerlink" title="坏的 : 镜像"></a>坏的 <none>:<none> 镜像</none></none></h1><p><code>docker build</code> 或是 <code>pull</code> 命令会产生临时镜像。如果我们用 Dockerfile 创建一个 HelloWorld 镜像后，因为版本更新需要重新创建，那么以前那个版本的镜像就会成为临时镜像。这个是需要删除的。</p>
+<p>删除所有坏的 <none>:<none> 镜像：</none></none></p>
+<pre class="line-numbers language-shell"><code class="language-shell">docker rmi $(docker images -f "dangling=true" -q)
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
             </div>
             <hr>
@@ -662,7 +517,7 @@ OpenJDK 64-Bit Server VM <span class="token punctuation">(</span>build 23.0-b21,
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://zjxjwxk.com/2019/03/11/Java/JVM/自己编译JDK/">https://zjxjwxk.com/2019/03/11/Java/JVM/自己编译JDK/</a>
+                    <a href="https://zjxjwxk.com/2020/06/06/Docker/删除 <none>:<none> 镜像/">https://zjxjwxk.com/2020/06/06/Docker/删除 <none>:<none> 镜像/</none></none></a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -700,12 +555,8 @@ OpenJDK 64-Bit Server VM <span class="token punctuation">(</span>build 23.0-b21,
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/Java/">
-                                    <span class="chip bg-color">Java</span>
-                                </a>
-                            
-                                <a href="/tags/JVM/">
-                                    <span class="chip bg-color">JVM</span>
+                                <a href="/tags/Docker/">
+                                    <span class="chip bg-color">Docker</span>
                                 </a>
                             
                         </div>
@@ -1140,31 +991,32 @@ OpenJDK 64-Bit Server VM <span class="token punctuation">(</span>build 23.0-b21,
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2019/06/21/期末复习/Outsourcing/Outsourcing/">
+                <a href="/2020/07/16/Java/JVM/自己编译OpenJDK 8/">
                     <div class="card-image">
                         
                         
-                        <img src="https://cdn.jsdelivr.net/gh/zjxjwxk/zjxjwxk.github.io/medias/featureimages/14.jpg" class="responsive-img" alt="Outsourcing">
+                        <img src="https://cdn.jsdelivr.net/gh/zjxjwxk/zjxjwxk.github.io/medias/featureimages/21.jpg" class="responsive-img" alt="自己编译OpenJDK 8">
                         
-                        <span class="card-title">Outsourcing</span>
+                        <span class="card-title">自己编译OpenJDK 8</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            What is GSE?GSE is a complex phenomenon that unites many different collaboration models and project organization models.
+                            想要一探 JDK 内部的实现机制，最便捷的捷径之一就是自己编译一套 JDK，通过阅读和跟踪调试 JDK 源码去了解 Java 技术体系的原理。本人选择了 OpenJDK 进行编译。
+由于在编译 OpenJDK 7 时出现了如下不知如何解决的
                         
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2019-06-21
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-07-16
                         </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/期末复习/" class="post-category">
-                                    期末复习
+                            <a href="/categories/Java/" class="post-category">
+                                    Java
                                 </a>
                             
                             
@@ -1174,12 +1026,12 @@ OpenJDK 64-Bit Server VM <span class="token punctuation">(</span>build 23.0-b21,
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/BTH/">
-                        <span class="chip bg-color">BTH</span>
+                    <a href="/tags/Java/">
+                        <span class="chip bg-color">Java</span>
                     </a>
                     
-                    <a href="/tags/期末复习/">
-                        <span class="chip bg-color">期末复习</span>
+                    <a href="/tags/JVM/">
+                        <span class="chip bg-color">JVM</span>
                     </a>
                     
                 </div>
@@ -1193,30 +1045,27 @@ OpenJDK 64-Bit Server VM <span class="token punctuation">(</span>build 23.0-b21,
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2019/02/02/Spring Boot/Spring-Boot-简化分页查询Page接口的JSON响应/">
+                <a href="/2020/06/05/Spring Boot/Spring Boot 中的 JWT 跨域问题/">
                     <div class="card-image">
                         
                         
-                        <img src="https://cdn.jsdelivr.net/gh/zjxjwxk/zjxjwxk.github.io/medias/featureimages/9.jpg" class="responsive-img" alt="Spring Boot 简化分页查询Page接口的JSON响应">
+                        <img src="https://cdn.jsdelivr.net/gh/zjxjwxk/zjxjwxk.github.io/medias/featureimages/8.jpg" class="responsive-img" alt="Spring Boot 中的 JWT 跨域问题">
                         
-                        <span class="card-title">Spring Boot 简化分页查询Page接口的JSON响应</span>
+                        <span class="card-title">Spring Boot 中的 JWT 跨域问题</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            多余的分页信息Spring Data 的 Page 接口进行数据分页返回了很多很多垃圾信息：
-{
-    "status": 0,
-    "data": {
-        "content": [
-            {
-     
+                            主要问题前后端分离后，前端使用 Ajax 进行请求，存在一些跨域的问题。
+基于 Spring Boot 的后端通过给 Controlle类或其中的方法添加 @CrossOrigin 注解来解决跨域问题：
+@CrossOrigin
+@Requ
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2019-02-02
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-06-05
                             </span>
                         <span class="publish-author">
                             
@@ -1390,7 +1239,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
             <br>
             
-            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span class="white-color">78.6k</span>&nbsp;字
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span class="white-color">79.6k</span>&nbsp;字
             
             
             
