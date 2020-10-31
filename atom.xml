@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://zjxjwxk.com/"/>
-  <updated>2020-10-31T11:24:12.904Z</updated>
+  <updated>2020-10-31T12:01:40.543Z</updated>
   <id>https://zjxjwxk.com/</id>
   
   <author>
@@ -17,11 +17,11 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title></title>
-    <link href="https://zjxjwxk.com/2020/10/31/%E5%8C%BA%E5%9D%97%E9%93%BE/%E4%BB%A5%E5%A4%AA%E5%9D%8A%E9%BB%84%E7%9A%AE%E4%B9%A6%E8%A7%A3%E8%AF%BB%E6%8A%A5%E5%91%8A/"/>
-    <id>https://zjxjwxk.com/2020/10/31/区块链/以太坊黄皮书解读报告/</id>
-    <published>2020-10-31T10:35:19.273Z</published>
-    <updated>2020-10-31T11:24:12.904Z</updated>
+    <title>以太坊黄皮书解读</title>
+    <link href="https://zjxjwxk.com/2020/10/31/Blockchain/%E4%BB%A5%E5%A4%AA%E5%9D%8A%E9%BB%84%E7%9A%AE%E4%B9%A6%E8%A7%A3%E8%AF%BB%E6%8A%A5%E5%91%8A/"/>
+    <id>https://zjxjwxk.com/2020/10/31/Blockchain/以太坊黄皮书解读报告/</id>
+    <published>2020-10-31T12:00:00.000Z</published>
+    <updated>2020-10-31T12:01:40.543Z</updated>
     
     <summary type="html">
     
@@ -29,12 +29,18 @@
       
         
         
-          &lt;h1 id=&quot;以太坊黄皮书解读报告&quot;&gt;&lt;a href=&quot;#以太坊黄皮书解读报告&quot; class=&quot;headerlink&quot; title=&quot;以太坊黄皮书解读报告&quot;&gt;&lt;/a&gt;以太坊黄皮书解读报告&lt;/h1&gt;&lt;h1 id=&quot;内容结构&quot;&gt;&lt;a href=&quot;#内容结构&quot;
+          &lt;h1 id=&quot;以太坊黄皮书解读&quot;&gt;&lt;a href=&quot;#以太坊黄皮书解读&quot; class=&quot;headerlink&quot; title=&quot;以太坊黄皮书解读&quot;&gt;&lt;/a&gt;以太坊黄皮书解读&lt;/h1&gt;&lt;h1 id=&quot;内容结构&quot;&gt;&lt;a href=&quot;#内容结构&quot; class=&quot;headerlink&quot;
         
       
     
     </summary>
     
+      <category term="Blockchain" scheme="https://zjxjwxk.com/categories/Blockchain/"/>
+    
+    
+      <category term="Blockchain" scheme="https://zjxjwxk.com/tags/Blockchain/"/>
+    
+      <category term="Ethereum" scheme="https://zjxjwxk.com/tags/Ethereum/"/>
     
   </entry>
   
