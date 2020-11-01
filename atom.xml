@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://zjxjwxk.com/"/>
-  <updated>2020-07-16T15:33:35.505Z</updated>
+  <updated>2020-11-01T08:02:42.835Z</updated>
   <id>https://zjxjwxk.com/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title></title>
+    <link href="https://zjxjwxk.com/2020/11/01/Blockchain/%E4%BB%A5%E5%A4%AA%E5%9D%8A%E9%BB%84%E7%9A%AE%E4%B9%A6%E8%A7%A3%E8%AF%BB/"/>
+    <id>https://zjxjwxk.com/2020/11/01/Blockchain/以太坊黄皮书解读/</id>
+    <published>2020-11-01T07:44:13.851Z</published>
+    <updated>2020-11-01T08:02:42.835Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;以太坊黄皮书解读&quot;&gt;&lt;a href=&quot;#以太坊黄皮书解读&quot; class=&quot;headerlink&quot; title=&quot;以太坊黄皮书解读&quot;&gt;&lt;/a&gt;以太坊黄皮书解读&lt;/h1&gt;&lt;h1 id=&quot;内容结构&quot;&gt;&lt;a href=&quot;#内容结构&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>自己编译OpenJDK 8</title>
@@ -555,34 +577,6 @@
       <category term="PAT" scheme="https://zjxjwxk.com/categories/PAT/"/>
     
       <category term="图" scheme="https://zjxjwxk.com/categories/PAT/%E5%9B%BE/"/>
-    
-    
-      <category term="PAT" scheme="https://zjxjwxk.com/tags/PAT/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>PAT甲级 1032 Sharing (25分)</title>
-    <link href="https://zjxjwxk.com/2020/04/07/PAT/Advanced_Level/A1032/"/>
-    <id>https://zjxjwxk.com/2020/04/07/PAT/Advanced_Level/A1032/</id>
-    <published>2020-04-07T08:34:00.000Z</published>
-    <updated>2020-04-29T11:08:43.000Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;p&gt;To store English words, one method is to use linked lists and store a word letter by letter. To save some space, we may let the words
-        
-      
-    
-    </summary>
-    
-      <category term="PAT" scheme="https://zjxjwxk.com/categories/PAT/"/>
-    
-      <category term="链表" scheme="https://zjxjwxk.com/categories/PAT/%E9%93%BE%E8%A1%A8/"/>
     
     
       <category term="PAT" scheme="https://zjxjwxk.com/tags/PAT/"/>
