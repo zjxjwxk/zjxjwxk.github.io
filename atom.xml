@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://zjxjwxk.com/"/>
-  <updated>2020-11-01T08:02:42.835Z</updated>
+  <updated>2020-11-01T08:07:32.911Z</updated>
   <id>https://zjxjwxk.com/</id>
   
   <author>
@@ -17,11 +17,11 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title></title>
+    <title>以太坊黄皮书解读</title>
     <link href="https://zjxjwxk.com/2020/11/01/Blockchain/%E4%BB%A5%E5%A4%AA%E5%9D%8A%E9%BB%84%E7%9A%AE%E4%B9%A6%E8%A7%A3%E8%AF%BB/"/>
     <id>https://zjxjwxk.com/2020/11/01/Blockchain/以太坊黄皮书解读/</id>
-    <published>2020-11-01T07:44:13.851Z</published>
-    <updated>2020-11-01T08:02:42.835Z</updated>
+    <published>2020-11-01T08:06:00.000Z</published>
+    <updated>2020-11-01T08:07:32.911Z</updated>
     
     <summary type="html">
     
@@ -35,6 +35,12 @@
     
     </summary>
     
+      <category term="Blockchain" scheme="https://zjxjwxk.com/categories/Blockchain/"/>
+    
+    
+      <category term="Blockchain" scheme="https://zjxjwxk.com/tags/Blockchain/"/>
+    
+      <category term="Ethereum" scheme="https://zjxjwxk.com/tags/Ethereum/"/>
     
   </entry>
   
