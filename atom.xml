@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://zjxjwxk.com/"/>
-  <updated>2020-07-16T15:33:35.505Z</updated>
+  <updated>2020-11-03T13:57:10.265Z</updated>
   <id>https://zjxjwxk.com/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>以太坊私有链搭建</title>
+    <link href="https://zjxjwxk.com/2020/11/03/Blockchain/%E4%BB%A5%E5%A4%AA%E5%9D%8A%E7%A7%81%E6%9C%89%E9%93%BE%E6%90%AD%E5%BB%BA/"/>
+    <id>https://zjxjwxk.com/2020/11/03/Blockchain/以太坊私有链搭建/</id>
+    <published>2020-11-03T04:40:00.000Z</published>
+    <updated>2020-11-03T13:57:10.265Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;1-以太坊开发环境搭建&quot;&gt;&lt;a href=&quot;#1-以太坊开发环境搭建&quot; class=&quot;headerlink&quot; title=&quot;1. 以太坊开发环境搭建&quot;&gt;&lt;/a&gt;1. 以太坊开发环境搭建&lt;/h1&gt;&lt;h2 id=&quot;1-1-配置以太坊环境&quot;&gt;&lt;a
+        
+      
+    
+    </summary>
+    
+      <category term="Blockchain" scheme="https://zjxjwxk.com/categories/Blockchain/"/>
+    
+    
+      <category term="Blockchain" scheme="https://zjxjwxk.com/tags/Blockchain/"/>
+    
+      <category term="Ethereum" scheme="https://zjxjwxk.com/tags/Ethereum/"/>
+    
+  </entry>
   
   <entry>
     <title>自己编译OpenJDK 8</title>
@@ -555,34 +583,6 @@
       <category term="PAT" scheme="https://zjxjwxk.com/categories/PAT/"/>
     
       <category term="图" scheme="https://zjxjwxk.com/categories/PAT/%E5%9B%BE/"/>
-    
-    
-      <category term="PAT" scheme="https://zjxjwxk.com/tags/PAT/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>PAT甲级 1032 Sharing (25分)</title>
-    <link href="https://zjxjwxk.com/2020/04/07/PAT/Advanced_Level/A1032/"/>
-    <id>https://zjxjwxk.com/2020/04/07/PAT/Advanced_Level/A1032/</id>
-    <published>2020-04-07T08:34:00.000Z</published>
-    <updated>2020-04-29T11:08:43.000Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;p&gt;To store English words, one method is to use linked lists and store a word letter by letter. To save some space, we may let the words
-        
-      
-    
-    </summary>
-    
-      <category term="PAT" scheme="https://zjxjwxk.com/categories/PAT/"/>
-    
-      <category term="链表" scheme="https://zjxjwxk.com/categories/PAT/%E9%93%BE%E8%A1%A8/"/>
     
     
       <category term="PAT" scheme="https://zjxjwxk.com/tags/PAT/"/>
