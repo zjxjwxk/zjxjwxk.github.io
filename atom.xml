@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://zjxjwxk.com/"/>
-  <updated>2020-11-03T16:34:32.446Z</updated>
+  <updated>2021-03-19T16:55:07.775Z</updated>
   <id>https://zjxjwxk.com/</id>
   
   <author>
@@ -15,6 +15,36 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Shiro入门</title>
+    <link href="https://zjxjwxk.com/2021/03/19/Shiro/Shiro%E5%85%A5%E9%97%A8/"/>
+    <id>https://zjxjwxk.com/2021/03/19/Shiro/Shiro入门/</id>
+    <published>2021-03-19T13:15:00.000Z</published>
+    <updated>2021-03-19T16:55:07.775Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;学习目标&quot;&gt;&lt;a href=&quot;#学习目标&quot; class=&quot;headerlink&quot; title=&quot;学习目标&quot;&gt;&lt;/a&gt;学习目标&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;认识 Shiro 的整体架构，各组件的概念&lt;/li&gt;
+&lt;li&gt;Shiro
+        
+      
+    
+    </summary>
+    
+      <category term="Shiro" scheme="https://zjxjwxk.com/categories/Shiro/"/>
+    
+    
+      <category term="Java" scheme="https://zjxjwxk.com/tags/Java/"/>
+    
+      <category term="Shiro" scheme="https://zjxjwxk.com/tags/Shiro/"/>
+    
+  </entry>
   
   <entry>
     <title>以太坊私有链搭建</title>
@@ -547,34 +577,6 @@
         
         
           &lt;p&gt;A graph which is connected and acyclic can be considered a tree. The height of the tree depends on the selected root. Now you are
-        
-      
-    
-    </summary>
-    
-      <category term="PAT" scheme="https://zjxjwxk.com/categories/PAT/"/>
-    
-      <category term="图" scheme="https://zjxjwxk.com/categories/PAT/%E5%9B%BE/"/>
-    
-    
-      <category term="PAT" scheme="https://zjxjwxk.com/tags/PAT/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>PAT甲级 1013 Battle Over Cities (25分)</title>
-    <link href="https://zjxjwxk.com/2020/04/09/PAT/Advanced_Level/A1013/"/>
-    <id>https://zjxjwxk.com/2020/04/09/PAT/Advanced_Level/A1013/</id>
-    <published>2020-04-09T11:57:00.000Z</published>
-    <updated>2020-04-29T09:13:33.000Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;p&gt;It is vitally important to have all the cities connected by highways in a war. If a city is occupied by the enemy, all the highways
         
       
     
