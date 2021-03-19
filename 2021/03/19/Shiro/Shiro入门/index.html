@@ -492,7 +492,7 @@
 <li>不可脱离 Spring</li>
 <li>粒度更细</li>
 </ul>
-<h1 id="Shiro-整体架构"><a href="#Shiro-整体架构" class="headerlink" title="Shiro 整体架构"></a>Shiro 整体架构</h1><p><img src="/2021/03/19/Shiro/Shiro入门/Users/zjxjwxk/Documents/GitHub/Hexo/source/_posts/Shiro/Shiro入门/ShiroArchitecture-20210319212652355.png" alt="img"></p>
+<h1 id="Shiro-整体架构"><a href="#Shiro-整体架构" class="headerlink" title="Shiro 整体架构"></a>Shiro 整体架构</h1><p><img src="/2021/03/19/Shiro/Shiro入门/ShiroArchitecture-20210319212652355.png" alt="img"></p>
 <h1 id="Shiro-认证和授权"><a href="#Shiro-认证和授权" class="headerlink" title="Shiro 认证和授权"></a>Shiro 认证和授权</h1><h2 id="认证过程"><a href="#认证过程" class="headerlink" title="认证过程"></a>认证过程</h2><ul>
 <li>创建 SecurityManager -&gt; 主体提交认证 -&gt; SecurityManager 认证 -&gt; Authenticator 认证 -&gt; Realm 验证</li>
 </ul>
@@ -596,9 +596,9 @@
 <li>使用 JdbcRealm 作为 Realm</li>
 </ol>
 <p>数据库表如下：</p>
-<p><img src="/2021/03/19/Shiro/Shiro入门/Users/zjxjwxk/Documents/GitHub/Hexo/source/_posts/Shiro/Shiro入门/image-20210319232449955.png" alt="test_user 表"></p>
-<p><img src="/2021/03/19/Shiro/Shiro入门/Users/zjxjwxk/Documents/GitHub/Hexo/source/_posts/Shiro/Shiro入门/image-20210319232528339.png" alt="test_user_roles表"></p>
-<p><img src="/2021/03/19/Shiro/Shiro入门/Users/zjxjwxk/Documents/GitHub/Hexo/source/_posts/Shiro/Shiro入门/image-20210319232550252.png" alt="test_users_permissions表"></p>
+<p><img src="/2021/03/19/Shiro/Shiro入门/image-20210319232449955.png" alt="test_user 表"></p>
+<p><img src="/2021/03/19/Shiro/Shiro入门/image-20210319232528339.png" alt="test_user_roles表"></p>
+<p><img src="/2021/03/19/Shiro/Shiro入门/image-20210319232550252.png" alt="test_users_permissions表"></p>
 <p>测试代码如下：</p>
 <pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">JdbcRealmTest</span> <span class="token punctuation">{</span>
 
