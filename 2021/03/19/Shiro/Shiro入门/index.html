@@ -448,14 +448,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.7k
+                    2.4k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    8 分
+                    11 分
                 </div>
                 
 
@@ -492,7 +492,7 @@
 <li>不可脱离 Spring</li>
 <li>粒度更细</li>
 </ul>
-<h1 id="Shiro-整体架构"><a href="#Shiro-整体架构" class="headerlink" title="Shiro 整体架构"></a>Shiro 整体架构</h1><p><img src="/2021/03/19/Shiro/Shiro入门/ShiroArchitecture-20210319212652355.png" alt="img"></p>
+<h1 id="Shiro-整体架构"><a href="#Shiro-整体架构" class="headerlink" title="Shiro 整体架构"></a>Shiro 整体架构</h1><p><img src="/2021/03/19/Shiro/Shiro入门/ShiroArchitecture-20210319212652355.png" alt="Shiro 整体架构"></p>
 <h1 id="Shiro-认证和授权"><a href="#Shiro-认证和授权" class="headerlink" title="Shiro 认证和授权"></a>Shiro 认证和授权</h1><h2 id="认证过程"><a href="#认证过程" class="headerlink" title="认证过程"></a>认证过程</h2><ul>
 <li>创建 SecurityManager -&gt; 主体提交认证 -&gt; SecurityManager 认证 -&gt; Authenticator 认证 -&gt; Realm 验证</li>
 </ul>
@@ -776,8 +776,8 @@
 </ul>
 </li>
 </ul>
-<h2 id="HashedCredentialsMatcher"><a href="#HashedCredentialsMatcher" class="headerlink" title="HashedCredentialsMatcher"></a>HashedCredentialsMatcher</h2><ol>
-<li>数据库中的密码通过 md5 哈希加密，并加盐。</li>
+<ol>
+<li>数据库中的密码加盐后 md5 哈希加密。</li>
 <li>在 Realm 返回 AuthenticationInfo 前给其设置盐值：</li>
 </ol>
 <pre class="line-numbers language-java"><code class="language-java">SimpleAuthenticationInfo simpleAuthenticationInfo <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">SimpleAuthenticationInfo</span><span class="token punctuation">(</span>username<span class="token punctuation">,</span> password<span class="token punctuation">,</span> <span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -786,7 +786,7 @@ simpleAuthenticationInfo<span class="token punctuation">.</span><span class="tok
 <span class="token keyword">return</span> simpleAuthenticationInfo<span class="token punctuation">;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <ol start="3">
-<li>进行认证时，给 Realm 设置 HashedCredentialsMatcher</li>
+<li>进行认证时，给 Realm 设置 HashedCredentialsMatcher。</li>
 </ol>
 <pre class="line-numbers language-java"><code class="language-java"><span class="token comment" spellcheck="true">// 给Realm设置HashedCredentialsMatcher</span>
 HashedCredentialsMatcher matcher <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HashedCredentialsMatcher</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -923,6 +923,227 @@ myRealm<span class="token punctuation">.</span><span class="token function">setC
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h1 id="Shiro-过滤器"><a href="#Shiro-过滤器" class="headerlink" title="Shiro 过滤器"></a>Shiro 过滤器</h1><ul>
+<li>anon, authBasic, authc, user, logout</li>
+<li>perms, roles, ssl, port</li>
+</ul>
+<h2 id="自定义-Filter"><a href="#自定义-Filter" class="headerlink" title="自定义 Filter"></a>自定义 Filter</h2><p>如创建 RolesOrFilter 继承自 AuthorizationFilter，过滤条件为满足 roles 集合其中任何一个即可：：</p>
+<pre class="line-numbers language-java"><code class="language-java"> <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">RolesOrFilter</span> <span class="token keyword">extends</span> <span class="token class-name">AuthorizationFilter</span> <span class="token punctuation">{</span>
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">protected</span> <span class="token keyword">boolean</span> <span class="token function">isAccessAllowed</span><span class="token punctuation">(</span>javax<span class="token punctuation">.</span>servlet<span class="token punctuation">.</span>ServletRequest servletRequest<span class="token punctuation">,</span> javax<span class="token punctuation">.</span>servlet<span class="token punctuation">.</span>ServletResponse servletResponse<span class="token punctuation">,</span> Object o<span class="token punctuation">)</span> <span class="token keyword">throws</span> Exception <span class="token punctuation">{</span>
+        Subject subject <span class="token operator">=</span> <span class="token function">getSubject</span><span class="token punctuation">(</span>servletRequest<span class="token punctuation">,</span> servletResponse<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        String<span class="token punctuation">[</span><span class="token punctuation">]</span> roles <span class="token operator">=</span> <span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span> o<span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>roles <span class="token operator">==</span> null <span class="token operator">||</span> roles<span class="token punctuation">.</span>length <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span>String role <span class="token operator">:</span> roles<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>subject<span class="token punctuation">.</span><span class="token function">hasRole</span><span class="token punctuation">(</span>role<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h1 id="Shiro-会话管理"><a href="#Shiro-会话管理" class="headerlink" title="Shiro 会话管理"></a>Shiro 会话管理</h1><ul>
+<li>SessionManager、SessionDAO</li>
+<li>Redis 实现 Session 共享</li>
+</ul>
+<h2 id="1-SessionDAO"><a href="#1-SessionDAO" class="headerlink" title="1. SessionDAO"></a>1. SessionDAO</h2><p>实现自定义的 SessionDao 继承自 AbstractSessionDAO：</p>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">RedisSessionDao</span> <span class="token keyword">extends</span> <span class="token class-name">AbstractSessionDAO</span> <span class="token punctuation">{</span>
+
+    <span class="token annotation punctuation">@Resource</span>
+    <span class="token keyword">private</span> JedisUtil jedisUtil<span class="token punctuation">;</span>
+
+    <span class="token keyword">private</span> <span class="token keyword">final</span> <span class="token keyword">static</span> String SHIRO_SESSION_PREFIX <span class="token operator">=</span> <span class="token string">"session:"</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">private</span> <span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token function">getKey</span><span class="token punctuation">(</span>String key<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token punctuation">(</span>SHIRO_SESSION_PREFIX <span class="token operator">+</span> key<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getBytes</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">private</span> <span class="token keyword">void</span> <span class="token function">saveSession</span><span class="token punctuation">(</span>Session session<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>session <span class="token operator">!=</span> null <span class="token operator">&amp;&amp;</span> session<span class="token punctuation">.</span><span class="token function">getId</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">!=</span> null<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token punctuation">]</span> key <span class="token operator">=</span> <span class="token function">getKey</span><span class="token punctuation">(</span>session<span class="token punctuation">.</span><span class="token function">getId</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token punctuation">]</span> value <span class="token operator">=</span> SerializationUtils<span class="token punctuation">.</span><span class="token function">serialize</span><span class="token punctuation">(</span>session<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            jedisUtil<span class="token punctuation">.</span><span class="token function">set</span><span class="token punctuation">(</span>key<span class="token punctuation">,</span> value<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            jedisUtil<span class="token punctuation">.</span><span class="token function">expire</span><span class="token punctuation">(</span>key<span class="token punctuation">,</span> <span class="token number">600</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">protected</span> Serializable <span class="token function">doCreate</span><span class="token punctuation">(</span>Session session<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        Serializable sessionId <span class="token operator">=</span> <span class="token function">generateSessionId</span><span class="token punctuation">(</span>session<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">assignSessionId</span><span class="token punctuation">(</span>session<span class="token punctuation">,</span> sessionId<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">saveSession</span><span class="token punctuation">(</span>session<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> sessionId<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">protected</span> Session <span class="token function">doReadSession</span><span class="token punctuation">(</span>Serializable sessionId<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>sessionId <span class="token operator">==</span> null<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> null<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token punctuation">]</span> key <span class="token operator">=</span> <span class="token function">getKey</span><span class="token punctuation">(</span>sessionId<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token punctuation">]</span> value <span class="token operator">=</span> jedisUtil<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>key<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token punctuation">(</span>Session<span class="token punctuation">)</span> SerializationUtils<span class="token punctuation">.</span><span class="token function">deserialize</span><span class="token punctuation">(</span>value<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">update</span><span class="token punctuation">(</span>Session session<span class="token punctuation">)</span> <span class="token keyword">throws</span> UnknownSessionException <span class="token punctuation">{</span>
+        <span class="token function">saveSession</span><span class="token punctuation">(</span>session<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">delete</span><span class="token punctuation">(</span>Session session<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>session <span class="token operator">==</span> null <span class="token operator">||</span> session<span class="token punctuation">.</span><span class="token function">getId</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> null<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token punctuation">]</span> key <span class="token operator">=</span> <span class="token function">getKey</span><span class="token punctuation">(</span>session<span class="token punctuation">.</span><span class="token function">getId</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        jedisUtil<span class="token punctuation">.</span><span class="token function">del</span><span class="token punctuation">(</span>key<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> Collection<span class="token operator">&lt;</span>Session<span class="token operator">></span> <span class="token function">getActiveSessions</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        Set<span class="token operator">&lt;</span><span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token operator">></span> keys <span class="token operator">=</span> jedisUtil<span class="token punctuation">.</span><span class="token function">keys</span><span class="token punctuation">(</span>SHIRO_SESSION_PREFIX<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        Set<span class="token operator">&lt;</span>Session<span class="token operator">></span> sessions <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HashSet</span><span class="token operator">&lt;</span><span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>CollectionUtils<span class="token punctuation">.</span><span class="token function">isEmpty</span><span class="token punctuation">(</span>keys<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> sessions<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token punctuation">]</span> key <span class="token operator">:</span> keys<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            Session session <span class="token operator">=</span> <span class="token punctuation">(</span>Session<span class="token punctuation">)</span> SerializationUtils<span class="token punctuation">.</span><span class="token function">deserialize</span><span class="token punctuation">(</span>jedisUtil<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>key<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            sessions<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>session<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> sessions<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="2-SessionManager"><a href="#2-SessionManager" class="headerlink" title="2. SessionManager"></a>2. SessionManager</h2><p>实现自定义的 SessionManager 继承自 DefaultSessionManager：</p>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">MySessionManager</span> <span class="token keyword">extends</span> <span class="token class-name">DefaultWebSessionManager</span> <span class="token punctuation">{</span>
+
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">protected</span> Session <span class="token function">retrieveSession</span><span class="token punctuation">(</span>SessionKey sessionKey<span class="token punctuation">)</span> <span class="token keyword">throws</span> UnknownSessionException <span class="token punctuation">{</span>
+        Serializable sessionId <span class="token operator">=</span> <span class="token function">getSessionId</span><span class="token punctuation">(</span>sessionKey<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>sessionId <span class="token operator">==</span> null<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> null<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        ServletRequest request <span class="token operator">=</span> null<span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>sessionKey <span class="token keyword">instanceof</span> <span class="token class-name">WebSessionKey</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            request <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>WebSessionKey<span class="token punctuation">)</span> sessionKey<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getServletRequest</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        Session session <span class="token operator">=</span> null<span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>request <span class="token operator">!=</span> null<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token comment" spellcheck="true">// 先尝试从request中获取，以减少从redis中获取的次数</span>
+            session <span class="token operator">=</span> <span class="token punctuation">(</span>Session<span class="token punctuation">)</span> request<span class="token punctuation">.</span><span class="token function">getAttribute</span><span class="token punctuation">(</span>sessionId<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token comment" spellcheck="true">// 若从request获取不到，再按照自己重写的readSession()方法的方式获取，并存入request</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>session <span class="token operator">==</span> null<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                session <span class="token operator">=</span> <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">retrieveSession</span><span class="token punctuation">(</span>sessionKey<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                request<span class="token punctuation">.</span><span class="token function">setAttribute</span><span class="token punctuation">(</span>sessionId<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> session<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>session <span class="token operator">==</span> null<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            String msg <span class="token operator">=</span> <span class="token string">"Could not find session with ID ["</span> <span class="token operator">+</span> sessionId <span class="token operator">+</span> <span class="token string">"]"</span><span class="token punctuation">;</span>
+            <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">UnknownSessionException</span><span class="token punctuation">(</span>msg<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> session<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<ol start="3">
+<li>给 securityManager 设置 sessionManager。</li>
+</ol>
+<h1 id="Shiro-缓存管理"><a href="#Shiro-缓存管理" class="headerlink" title="Shiro 缓存管理"></a>Shiro 缓存管理</h1><ul>
+<li>CacheManager、Cache</li>
+<li>Redis 实现 CacheManager</li>
+</ul>
+<h2 id="1-RedisCache"><a href="#1-RedisCache" class="headerlink" title="1. RedisCache"></a>1. RedisCache</h2><p>自定义 RedisCache 继承自 Cache：</p>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">RedisCache</span><span class="token operator">&lt;</span>K<span class="token punctuation">,</span> V<span class="token operator">></span> <span class="token keyword">implements</span> <span class="token class-name">Cache</span><span class="token operator">&lt;</span>K<span class="token punctuation">,</span> V<span class="token operator">></span> <span class="token punctuation">{</span>
+
+    <span class="token annotation punctuation">@Resource</span>
+    <span class="token keyword">private</span> JedisUtil jedisUtil<span class="token punctuation">;</span>
+
+    <span class="token keyword">private</span> <span class="token keyword">final</span> <span class="token keyword">static</span> String CACHE_PREFIX <span class="token operator">=</span> <span class="token string">"cache:"</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">private</span> <span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token function">getKey</span><span class="token punctuation">(</span>K k<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>k <span class="token keyword">instanceof</span> <span class="token class-name">String</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> <span class="token punctuation">(</span>CACHE_PREFIX <span class="token operator">+</span> k<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getBytes</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> SerializationUtils<span class="token punctuation">.</span><span class="token function">serialize</span><span class="token punctuation">(</span>k<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> V <span class="token function">get</span><span class="token punctuation">(</span>K k<span class="token punctuation">)</span> <span class="token keyword">throws</span> CacheException <span class="token punctuation">{</span>
+        <span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token punctuation">]</span> value <span class="token operator">=</span> jedisUtil<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token function">getKey</span><span class="token punctuation">(</span>k<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>value <span class="token operator">!=</span> null<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> <span class="token punctuation">(</span>V<span class="token punctuation">)</span> SerializationUtils<span class="token punctuation">.</span><span class="token function">deserialize</span><span class="token punctuation">(</span>value<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> null<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> V <span class="token function">put</span><span class="token punctuation">(</span>K k<span class="token punctuation">,</span> V v<span class="token punctuation">)</span> <span class="token keyword">throws</span> CacheException <span class="token punctuation">{</span>
+        <span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token punctuation">]</span> key <span class="token operator">=</span> <span class="token function">getKey</span><span class="token punctuation">(</span>k<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token punctuation">]</span> value <span class="token operator">=</span> SerializationUtils<span class="token punctuation">.</span><span class="token function">serialize</span><span class="token punctuation">(</span>v<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        jedisUtil<span class="token punctuation">.</span><span class="token function">set</span><span class="token punctuation">(</span>key<span class="token punctuation">,</span> value<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        jedisUtil<span class="token punctuation">.</span><span class="token function">expire</span><span class="token punctuation">(</span>key<span class="token punctuation">,</span> <span class="token number">600</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> v<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> V <span class="token function">remove</span><span class="token punctuation">(</span>K k<span class="token punctuation">)</span> <span class="token keyword">throws</span> CacheException <span class="token punctuation">{</span>
+        <span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token punctuation">]</span> key <span class="token operator">=</span> <span class="token function">getKey</span><span class="token punctuation">(</span>k<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token punctuation">]</span> value <span class="token operator">=</span> jedisUtil<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>key<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        jedisUtil<span class="token punctuation">.</span><span class="token function">del</span><span class="token punctuation">(</span>key<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>value <span class="token operator">!=</span> null<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> <span class="token punctuation">(</span>V<span class="token punctuation">)</span> SerializationUtils<span class="token punctuation">.</span><span class="token function">deserialize</span><span class="token punctuation">(</span>value<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> null<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">clear</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">throws</span> CacheException <span class="token punctuation">{</span>
+
+    <span class="token punctuation">}</span>
+
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> Set<span class="token operator">&lt;</span>K<span class="token operator">></span> <span class="token function">keys</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> null<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> Collection<span class="token operator">&lt;</span>V<span class="token operator">></span> <span class="token function">values</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> null<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="2-RedisCacheManager"><a href="#2-RedisCacheManager" class="headerlink" title="2. RedisCacheManager"></a>2. RedisCacheManager</h2><p>自定义 RedisCacheManager 继承自 CacheManager：</p>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">RedisCacheManager</span> <span class="token keyword">implements</span> <span class="token class-name">CacheManager</span> <span class="token punctuation">{</span>
+
+    <span class="token annotation punctuation">@Resource</span>
+    <span class="token keyword">private</span> RedisCache redisCache<span class="token punctuation">;</span>
+
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token operator">&lt;</span>K<span class="token punctuation">,</span> V<span class="token operator">></span> Cache<span class="token operator">&lt;</span>K<span class="token punctuation">,</span> V<span class="token operator">></span> <span class="token function">getCache</span><span class="token punctuation">(</span>String s<span class="token punctuation">)</span> <span class="token keyword">throws</span> CacheException <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> redisCache<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<ol start="3">
+<li>给 securityManager 设置 cacheManager。</li>
+</ol>
+<h1 id="Shiro-RememberMe"><a href="#Shiro-RememberMe" class="headerlink" title="Shiro RememberMe"></a>Shiro RememberMe</h1><ol>
+<li>配置 Bean：CookieRememberMeManager 和 SimpleCookie。</li>
+<li>设置 CookieRememberMeManager 的 cookie 为 SimpleCookie。</li>
+<li>给 securityManager 设置 rememberMeManager。</li>
+<li>提交认证前，设置 rememberMe。</li>
+</ol>
+<pre class="line-numbers language-java"><code class="language-java">token<span class="token punctuation">.</span><span class="token function">setRememberMe</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+subject<span class="token punctuation">.</span><span class="token function">login</span><span class="token punctuation">(</span>token<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
             </div>
             <hr>
@@ -1676,7 +1897,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
             <br>
             
-            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span class="white-color">84.4k</span>&nbsp;字
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span class="white-color">85.1k</span>&nbsp;字
             
             
             
