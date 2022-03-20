@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://zjxjwxk.com/"/>
-  <updated>2022-03-20T14:06:59.259Z</updated>
+  <updated>2021-03-20T09:24:00.898Z</updated>
   <id>https://zjxjwxk.com/</id>
   
   <author>
@@ -15,32 +15,6 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title>Redis</title>
-    <link href="https://zjxjwxk.com/2022/03/20/Redis/Redis%E5%85%A5%E9%97%A8/"/>
-    <id>https://zjxjwxk.com/2022/03/20/Redis/Redis入门/</id>
-    <published>2022-03-20T14:06:00.000Z</published>
-    <updated>2022-03-20T14:06:59.259Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h1 id=&quot;Redis-初识&quot;&gt;&lt;a href=&quot;#Redis-初识&quot; class=&quot;headerlink&quot; title=&quot;Redis 初识&quot;&gt;&lt;/a&gt;Redis 初识&lt;/h1&gt;&lt;h2 id=&quot;Redis-是什么&quot;&gt;&lt;a href=&quot;#Redis-是什么&quot;
-        
-      
-    
-    </summary>
-    
-      <category term="Redis" scheme="https://zjxjwxk.com/categories/Redis/"/>
-    
-    
-      <category term="Redis" scheme="https://zjxjwxk.com/tags/Redis/"/>
-    
-  </entry>
   
   <entry>
     <title>Shiro入门</title>
@@ -583,6 +557,34 @@
       <category term="PAT" scheme="https://zjxjwxk.com/categories/PAT/"/>
     
       <category term="考试相关" scheme="https://zjxjwxk.com/categories/PAT/%E8%80%83%E8%AF%95%E7%9B%B8%E5%85%B3/"/>
+    
+    
+      <category term="PAT" scheme="https://zjxjwxk.com/tags/PAT/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>PAT甲级 1021 Deepest Root (25分)</title>
+    <link href="https://zjxjwxk.com/2020/04/10/PAT/Advanced_Level/A1021/"/>
+    <id>https://zjxjwxk.com/2020/04/10/PAT/Advanced_Level/A1021/</id>
+    <published>2020-04-10T09:55:00.000Z</published>
+    <updated>2020-04-29T10:31:21.000Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;A graph which is connected and acyclic can be considered a tree. The height of the tree depends on the selected root. Now you are
+        
+      
+    
+    </summary>
+    
+      <category term="PAT" scheme="https://zjxjwxk.com/categories/PAT/"/>
+    
+      <category term="图" scheme="https://zjxjwxk.com/categories/PAT/%E5%9B%BE/"/>
     
     
       <category term="PAT" scheme="https://zjxjwxk.com/tags/PAT/"/>
