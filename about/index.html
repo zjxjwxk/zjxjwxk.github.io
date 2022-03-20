@@ -321,7 +321,7 @@
 
 <script>
     // 每天切换 banner 图.  Switch banner image every day.
-    $('.bg-cover').css('background-image', 'url(/medias/banner/2.jpg)');
+    $('.bg-cover').css('background-image', 'url(/medias/banner/0.jpg)');
 </script>
 
 
@@ -514,7 +514,7 @@
         },
         xAxis: {
             type: 'category',
-            data: ["2021-01","2021-02","2021-03","2021-04","2021-05","2021-06","2021-07","2021-08","2021-09","2021-10","2021-11","2021-12","2022-01"]
+            data: ["2021-03","2021-04","2021-05","2021-06","2021-07","2021-08","2021-09","2021-10","2021-11","2021-12","2022-01","2022-02","2022-03"]
         },
         yAxis: {
             type: 'value',
@@ -524,7 +524,7 @@
                 name: '文章篇数',
                 type: 'line',
                 color: ['#6772e5'],
-                data: [0,0,2,0,0,0,0,0,0,0,0,0,0],
+                data: [1,0,0,0,0,0,0,0,0,0,0,0,1],
                 markPoint: {
                     symbolSize: 45,
                     color: ['#fa755a','#3ecf8e','#82d3f4'],
@@ -566,7 +566,7 @@
                 type: 'pie',
                 radius: '50%',
                 color: ['#6772e5', '#ff9e0f', '#fa755a', '#3ecf8e', '#82d3f4', '#ab47bc', '#525f7f', '#f51c47', '#26A69A'],
-                data: [{"name":"Blockchain","value":1},{"name":"Private","value":2},{"name":"Docker","value":2},{"name":"Spring-Boot","value":2},{"name":"Redis","value":1},{"name":"Shiro","value":1},{"name":"Java","value":3},{"name":"PAT","value":33},{"name":"模拟","value":3},{"name":"数学问题","value":7},{"name":"排序","value":3},{"name":"图","value":2},{"name":"散列","value":1},{"name":"链表","value":1},{"name":"贪心","value":3},{"name":"最短路径","value":2},{"name":"STL","value":3},{"name":"队列","value":1},{"name":"二分","value":2},{"name":"字符串","value":3},{"name":"其他","value":1},{"name":"考试相关","value":1},{"name":"Linux","value":3},{"name":"大数据","value":2},{"name":"期末复习","value":6},{"name":"Spring-Cloud","value":2},{"name":"Dubbo","value":12}],
+                data: [{"name":"Docker","value":2},{"name":"Redis","value":1},{"name":"Private","value":2},{"name":"Spring-Boot","value":2},{"name":"Blockchain","value":1},{"name":"Shiro","value":1},{"name":"Java","value":3},{"name":"Linux","value":3},{"name":"Spring-Cloud","value":2},{"name":"大数据","value":2},{"name":"期末复习","value":6},{"name":"PAT","value":33},{"name":"数学问题","value":7},{"name":"模拟","value":3},{"name":"字符串","value":3},{"name":"STL","value":3},{"name":"贪心","value":3},{"name":"最短路径","value":2},{"name":"散列","value":1},{"name":"二分","value":2},{"name":"图","value":2},{"name":"其他","value":1},{"name":"排序","value":3},{"name":"考试相关","value":1},{"name":"链表","value":1},{"name":"队列","value":1},{"name":"Dubbo","value":12}],
                 itemStyle: {
                     emphasis: {
                         shadowBlur: 10,
@@ -590,7 +590,7 @@
         xAxis: [
             {
                 type: 'category',
-                data: ["PAT","微服务架构","Dubbo","Java","BTH","期末复习","Linux","Private","Docker","Spring-Boot"]
+                data: ["PAT","微服务架构","Dubbo","Java","BTH","期末复习","Linux","Docker","Private","Spring-Boot"]
             }
         ],
         yAxis: [
@@ -764,26 +764,20 @@
         <div class="tag-chips center-align">
             
             
-            <a href="/tags/Blockchain/">
-                <span class="chip center-align waves-effect waves-light chip-default">Blockchain</span>
+            <a href="/tags/Docker/">
+                <span class="chip center-align waves-effect waves-light chip-default">Docker</span>
             </a>
             
             
             
-            <a href="/tags/Ethereum/">
-                <span class="chip center-align waves-effect waves-light chip-default">Ethereum</span>
+            <a href="/tags/Redis/">
+                <span class="chip center-align waves-effect waves-light chip-default">Redis</span>
             </a>
             
             
             
             <a href="/tags/Private/">
                 <span class="chip center-align waves-effect waves-light chip-default">Private</span>
-            </a>
-            
-            
-            
-            <a href="/tags/Docker/">
-                <span class="chip center-align waves-effect waves-light chip-default">Docker</span>
             </a>
             
             
@@ -796,26 +790,20 @@
             
             
             
-            <a href="/tags/Redis/">
-                <span class="chip center-align waves-effect waves-light chip-default">Redis</span>
+            <a href="/tags/Blockchain/">
+                <span class="chip center-align waves-effect waves-light chip-default">Blockchain</span>
+            </a>
+            
+            
+            
+            <a href="/tags/Ethereum/">
+                <span class="chip center-align waves-effect waves-light chip-default">Ethereum</span>
             </a>
             
             
             
             <a href="/tags/Shiro/">
                 <span class="chip center-align waves-effect waves-light chip-default">Shiro</span>
-            </a>
-            
-            
-            
-            <a href="/tags/J2EE/">
-                <span class="chip center-align waves-effect waves-light chip-default">J2EE</span>
-            </a>
-            
-            
-            
-            <a href="/tags/PAT/">
-                <span class="chip center-align waves-effect waves-light chip-default">PAT</span>
             </a>
             
             
@@ -828,14 +816,26 @@
             
             
             
+            <a href="/tags/CentOS/">
+                <span class="chip center-align waves-effect waves-light chip-default">CentOS</span>
+            </a>
+            
+            
+            
             <a href="/tags/MacOS/">
                 <span class="chip center-align waves-effect waves-light chip-default">MacOS</span>
             </a>
             
             
             
-            <a href="/tags/CentOS/">
-                <span class="chip center-align waves-effect waves-light chip-default">CentOS</span>
+            <a href="/tags/Spring-Cloud/">
+                <span class="chip center-align waves-effect waves-light chip-default">Spring-Cloud</span>
+            </a>
+            
+            
+            
+            <a href="/tags/微服务架构/">
+                <span class="chip center-align waves-effect waves-light chip-default">微服务架构</span>
             </a>
             
             
@@ -870,14 +870,14 @@
             
             
             
-            <a href="/tags/Spring-Cloud/">
-                <span class="chip center-align waves-effect waves-light chip-default">Spring-Cloud</span>
+            <a href="/tags/J2EE/">
+                <span class="chip center-align waves-effect waves-light chip-default">J2EE</span>
             </a>
             
             
             
-            <a href="/tags/微服务架构/">
-                <span class="chip center-align waves-effect waves-light chip-default">微服务架构</span>
+            <a href="/tags/PAT/">
+                <span class="chip center-align waves-effect waves-light chip-default">PAT</span>
             </a>
             
             
@@ -952,7 +952,7 @@
             |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
             <br>
             
-            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span class="white-color">83.8k</span>&nbsp;字
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span class="white-color">84.1k</span>&nbsp;字
             
             
             

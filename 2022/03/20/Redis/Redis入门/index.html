@@ -430,28 +430,28 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-03-20
+                    2022-03-20
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-03-23
+                    2022-03-20
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    286
+                    574
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    1 分
+                    2 分
                 </div>
                 
 
@@ -466,57 +466,119 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="NoSQL概述"><a href="#NoSQL概述" class="headerlink" title="NoSQL概述"></a>NoSQL概述</h1><h2 id="为什么需要-NoSQL"><a href="#为什么需要-NoSQL" class="headerlink" title="为什么需要 NoSQL"></a>为什么需要 NoSQL</h2><ul>
-<li>High performance - 高并发读写</li>
-<li>Huge Storage - 海量数据的高效率存储和访问</li>
-<li>High Scalability &amp;&amp; High Availability - 高可扩展性和高可用性</li>
+                <h1 id="Redis-初识"><a href="#Redis-初识" class="headerlink" title="Redis 初识"></a>Redis 初识</h1><h2 id="Redis-是什么"><a href="#Redis-是什么" class="headerlink" title="Redis 是什么"></a>Redis 是什么</h2><ul>
+<li>开源</li>
+<li>基于键值的存储服务系统</li>
+<li>多种数据结构</li>
+<li>高性能、功能丰富</li>
 </ul>
-<h2 id="主流-NoSQL-产品"><a href="#主流-NoSQL-产品" class="headerlink" title="主流 NoSQL 产品"></a>主流 NoSQL 产品</h2><ul>
-<li>Redis</li>
-<li>MongoDB</li>
-<li>Cassandra</li>
-<li>Neo4j</li>
+<h2 id="Redis-特性"><a href="#Redis-特性" class="headerlink" title="Redis 特性"></a>Redis 特性</h2><h3 id="1-速度快"><a href="#1-速度快" class="headerlink" title="1. 速度快"></a>1. 速度快</h3><ul>
+<li>10w OPS</li>
+<li>数据存储在内存中</li>
 </ul>
-<h2 id="NoSQL-数据库的四大分类"><a href="#NoSQL-数据库的四大分类" class="headerlink" title="NoSQL 数据库的四大分类"></a>NoSQL 数据库的四大分类</h2><ul>
-<li>键值（Key-Value）存储（Redis）</li>
-<li>列存储（HBase）</li>
-<li>文档数据库（MongoDB）</li>
-<li>图形数据库（Neo4j）</li>
+<p><img src="/2022/03/20/Redis/Redis入门/image-20220320155728047.png" alt=""></p>
+<p><img src="/2022/03/20/Redis/Redis入门/image-20220320155614406.png" alt=""></p>
+<ul>
+<li>C语言实现（50000行代码）</li>
+<li>单线程模型</li>
 </ul>
-<p><img src="/2021/03/20/Redis/Redis入门/image-20210320205335703.png" alt="NoSQL四大分类"></p>
-<h2 id="NoSQL-的特点"><a href="#NoSQL-的特点" class="headerlink" title="NoSQL 的特点"></a>NoSQL 的特点</h2><ul>
-<li>易扩展</li>
-<li>灵活的数据模型</li>
-<li>大数据量，高性能</li>
-<li>高可用</li>
+<h3 id="2-持久化"><a href="#2-持久化" class="headerlink" title="2. 持久化"></a>2. 持久化</h3><p>Redis 所有数据保存在内存中，对数据的更新将异步地保存到磁盘上。</p>
+<h3 id="3-多种数据结构"><a href="#3-多种数据结构" class="headerlink" title="3. 多种数据结构"></a>3. 多种数据结构</h3><p><img src="/2022/03/20/Redis/Redis入门/image-20220320161403754.png" alt="多种数据结构"></p>
+<ul>
+<li>Bitmap：位图</li>
+<li>Hyperloglog：超小内存唯一值计数</li>
+<li>GEO：地理信息定位</li>
 </ul>
-<h1 id="Redis-概述"><a href="#Redis-概述" class="headerlink" title="Redis 概述"></a>Redis 概述</h1><p>一个高性能键值对数据库。</p>
-<h2 id="支持的键值数据类型"><a href="#支持的键值数据类型" class="headerlink" title="支持的键值数据类型"></a>支持的键值数据类型</h2><ul>
-<li>字符串类型</li>
-<li>列表类型</li>
-<li>有序集合类型</li>
-<li>散列类型</li>
-<li>集合类型</li>
+<h3 id="4-支持多种编程语言"><a href="#4-支持多种编程语言" class="headerlink" title="4. 支持多种编程语言"></a>4. 支持多种编程语言</h3><ul>
+<li>Java、PHP、Python、Ruby、Lua、Node.js</li>
 </ul>
-<h2 id="Redis-的应用场景"><a href="#Redis-的应用场景" class="headerlink" title="Redis 的应用场景"></a>Redis 的应用场景</h2><ul>
-<li>缓存</li>
-<li>任务队列</li>
-<li>网站访问统计</li>
-<li>数据过期处理</li>
-<li>应用排行榜</li>
-<li>分布式集群架构中的 session 分离</li>
+<h3 id="5-功能丰富"><a href="#5-功能丰富" class="headerlink" title="5. 功能丰富"></a>5. 功能丰富</h3><ul>
+<li>发布订阅</li>
+<li>Lua 脚本</li>
+<li>事务</li>
+<li>pipeline</li>
 </ul>
-<h1 id="磁盘、内存、IO"><a href="#磁盘、内存、IO" class="headerlink" title="磁盘、内存、IO"></a>磁盘、内存、IO</h1><h2 id="磁盘"><a href="#磁盘" class="headerlink" title="磁盘"></a>磁盘</h2><ol>
-<li>寻址：单位 ms</li>
-<li>带宽：单位 G/M</li>
-</ol>
-<h2 id="内存"><a href="#内存" class="headerlink" title="内存"></a>内存</h2><ol>
-<li>寻址：单位 ns</li>
-<li>带宽：很大</li>
-</ol>
-<p>磁盘比内存在寻址上慢了 10W 倍（秒 &gt; 毫秒 &gt; 微秒 &gt; 纳秒）</p>
-<h2 id="I-O-buffer"><a href="#I-O-buffer" class="headerlink" title="I/O buffer"></a>I/O buffer</h2><p>磁盘：一个扇区 512 Byte，索引的成本变大</p>
-<p>操作系统：4K 对齐，无论读多少都至少是 4K</p>
+<h3 id="6-简单"><a href="#6-简单" class="headerlink" title="6. 简单"></a>6. 简单</h3><ul>
+<li>23000 行 C 语言代码（单机版本）</li>
+<li>不依赖外部库</li>
+<li>单线程模型</li>
+</ul>
+<h3 id="7-主从复制"><a href="#7-主从复制" class="headerlink" title="7. 主从复制"></a>7. 主从复制</h3><p><img src="/2022/03/20/Redis/Redis入门/image-20220320175822256.png" alt="主从复制"></p>
+<h3 id="8-高可用、分布式"><a href="#8-高可用、分布式" class="headerlink" title="8. 高可用、分布式"></a>8. 高可用、分布式</h3><ul>
+<li>高可用：Redis-Sentinel</li>
+<li>分布式：Redis-Cluster</li>
+</ul>
+<h2 id="Redis-典型使用场景"><a href="#Redis-典型使用场景" class="headerlink" title="Redis 典型使用场景"></a>Redis 典型使用场景</h2><h3 id="缓存"><a href="#缓存" class="headerlink" title="缓存"></a>缓存</h3><p><img src="/2022/03/20/Redis/Redis入门/image-20220320185000035.png" alt="缓存"></p>
+<h3 id="计数器"><a href="#计数器" class="headerlink" title="计数器"></a>计数器</h3><ul>
+<li>转发数、评论数、点赞数等。</li>
+</ul>
+<h3 id="消息队列"><a href="#消息队列" class="headerlink" title="消息队列"></a>消息队列</h3><ul>
+<li>发布订阅模式。</li>
+</ul>
+<h3 id="排行榜"><a href="#排行榜" class="headerlink" title="排行榜"></a>排行榜</h3><ul>
+<li>论坛帖子排行等。</li>
+</ul>
+<h3 id="社交网络"><a href="#社交网络" class="headerlink" title="社交网络"></a>社交网络</h3><ul>
+<li>粉丝数、关注数、共同关注等。</li>
+</ul>
+<h3 id="实时系统"><a href="#实时系统" class="headerlink" title="实时系统"></a>实时系统</h3><ul>
+<li>布隆过滤器、垃圾邮件过滤等。</li>
+</ul>
+<h2 id="Redis-安装和启动"><a href="#Redis-安装和启动" class="headerlink" title="Redis 安装和启动"></a>Redis 安装和启动</h2><h3 id="Redis-安装"><a href="#Redis-安装" class="headerlink" title="Redis 安装"></a>Redis 安装</h3><pre class="line-numbers language-shell"><code class="language-shell">wget http://download.redis.io/releases/redis-3.0.7.tar.gz
+tar -zxf redis-3.0.7.tar.gz
+ln -s redis-3.0.7 redis
+cd redis
+make && make install
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="可执行文件说明"><a href="#可执行文件说明" class="headerlink" title="可执行文件说明"></a>可执行文件说明</h3><ul>
+<li>redis-server（Redis 服务器）</li>
+<li>redis-cli（Redis 命令行客户端）</li>
+<li>redis-benchmark（Redis 性能测试工具）</li>
+<li>redis-check-aof（AOF 文件修复工具）</li>
+<li>redis-check-dump（RDB文件检查工具）</li>
+<li>redis-sentinel（Sentinel服务器）</li>
+</ul>
+<h3 id="三种启动方法"><a href="#三种启动方法" class="headerlink" title="三种启动方法"></a>三种启动方法</h3><h4 id="最简启动"><a href="#最简启动" class="headerlink" title="最简启动"></a>最简启动</h4><pre class="line-numbers language-shell"><code class="language-shell">redis-server
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>验证：</p>
+<pre class="line-numbers language-shell"><code class="language-shell">ps -ef | grep redis
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-shell"><code class="language-shell">netstat -antpl | grep redis
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-shell"><code class="language-shell">redis-cli -h <ip> -p <port> ping
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></port></ip></code></pre>
+<h4 id="动态参数启动"><a href="#动态参数启动" class="headerlink" title="动态参数启动"></a>动态参数启动</h4><pre class="line-numbers language-shell"><code class="language-shell">redis-server --port 6380
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h4 id="配置文件启动"><a href="#配置文件启动" class="headerlink" title="配置文件启动"></a>配置文件启动</h4><pre class="line-numbers language-shell"><code class="language-shell">redis-server <configpath>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></configpath></code></pre>
+<p>生产环境选择配置文件启动，单机多实例配置文件可以用端口区分</p>
+<h3 id="简单的客户端连接"><a href="#简单的客户端连接" class="headerlink" title="简单的客户端连接"></a>简单的客户端连接</h3><pre class="line-numbers language-shell"><code class="language-shell">redis-cli -h localhost -p 6379     
+localhost:6379> ping
+PONG
+localhost:6379> set hello world
+OK
+localhost:6379> get hello
+"world"
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="Redis-客户端返回值"><a href="#Redis-客户端返回值" class="headerlink" title="Redis 客户端返回值"></a>Redis 客户端返回值</h3><ul>
+<li>状态回复：PONG</li>
+<li>错误回复：(error) WRONGTYPE Operation against</li>
+<li>整数回复：(integer) 1</li>
+<li>字符串回复：”world”</li>
+<li>多行字符串回复：1) “world” 2) “bar”</li>
+</ul>
+<h2 id="Redis-常用配置"><a href="#Redis-常用配置" class="headerlink" title="Redis 常用配置"></a>Redis 常用配置</h2><p>配置文件目录：{安装目录}/redis-6.8.0/redis.conf</p>
+<ul>
+<li>daemonize（是否是守护进程（no | yes））</li>
+<li>port （Redis 对外端口号）</li>
+<li>logfile （Redis 日志目录）</li>
+<li>dir （Redis 工作目录）</li>
+<li>RDB config</li>
+<li>AOF config</li>
+<li>slow log config</li>
+<li>maxMemory</li>
+<li>……</li>
+</ul>
 
             </div>
             <hr>
@@ -542,7 +604,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://zjxjwxk.com/2021/03/20/Redis/Redis入门/">https://zjxjwxk.com/2021/03/20/Redis/Redis入门/</a>
+                    <a href="https://zjxjwxk.com/2022/03/20/Redis/Redis入门/">https://zjxjwxk.com/2022/03/20/Redis/Redis入门/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -1017,7 +1079,7 @@
                 <i class="far fa-dot-circle"></i>&nbsp;本篇
             </div>
             <div class="card">
-                <a href="/2021/03/20/Redis/Redis入门/">
+                <a href="/2022/03/20/Redis/Redis入门/">
                     <div class="card-image">
                         
                         
@@ -1029,15 +1091,28 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            NoSQL概述为什么需要 NoSQL
-High performance - 高并发读写
-Huge Storage - 海量数据的高效率存储和访问
-High Scalability &amp;&amp; High Availability -
+                            Redis 初识Redis 是什么
+开源
+基于键值的存储服务系统
+多种数据结构
+高性能、功能丰富
+
+Redis 特性1. 速度快
+10w OPS
+数据存储在内存中
+
+
+
+
+C语言实现（50000行代码）
+单线程模型
+
+2. 持久化Redis
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-03-20
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-03-20
                             </span>
                         <span class="publish-author">
                             
@@ -1263,7 +1338,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
             <br>
             
-            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span class="white-color">83.8k</span>&nbsp;字
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span class="white-color">84.1k</span>&nbsp;字
             
             
             
