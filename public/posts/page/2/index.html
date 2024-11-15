@@ -131,6 +131,32 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2 class="entry-hint-parent">Terminal 终端代理加速
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>方法1（暂时）: 在终端中直接运行命令
+export http_proxy=http://proxyAddres.s:port 这个办法的好处是简单直接，并且影响面很小（只对当前终端有效，退出就不行了）。
+如果你用的是 s.s 代理，在当前终端运行以下命令，那么wget curl 这类网络命令都会经过 s.s 代理，port 端口号可以从 s.s 高级设置中查看，我的是1086。
+export ALL_PROXY=socks5://127.0.0.1:1086 安装完软件以后，我们再执行以下命令取消终端代理
+unset ALL_PROXY 方法2（永久）: 把代理服务器地址写入 shell 配置文件.bashrc或者.zshrc
+直接在.bashrc或者.zshrc添加下面内容
+export http_proxy=&#34;http://localhost:port&#34; export https_proxy=&#34;http://localhost:port&#34; 以使用 s.s 代理为例，s.s 的代理端口为1086,那么应该设置为
+export http_proxy=&#34;socks5://127.0.0.1:1086&#34; export https_proxy=&#34;socks5://127.0.0.1:1086&#34; 或者直接设置 ALL_PROXY
+export ALL_PROXY=socks5://127.0.0.1:1086 localhost就是一个域名，域名默认指向 127.0.0.1，两者是一样的。
+然后ESC后:wq保存文件，接着在终端中执行source ~/.bashrc
+这个办法的好处是把代理服务器永久保存了，下次就可以直接用了。
+或者通过设置 alias 简写来简化操作，每次要用的时候输入setproxy，不用了就unsetproxy。
+alias setproxy=&#34;export ALL_PROXY=socks5://127.0.0.1:1086&#34; alias unsetproxy=&#34;unset ALL_PROXY&#34; Git 代理 git 设置全局代理：
+git config --global http.proxy &#39;socks5://127.0.0.1:1086&#39; git config --global https.proxy &#39;socks5://127.0.0.1:1086&#39; git 仅针对 GitHub 的单独配置：
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2020-04-27 23:11:00 +0000 UTC'>April 27, 2020</span></footer>
+  <a class="entry-link" aria-label="post link to Terminal 终端代理加速" href="http://localhost:1313/posts/linux/macos/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2 class="entry-hint-parent">Dubbo微服务影院系列（11）：服务监控
     </h2>
   </header>
@@ -268,20 +294,6 @@ Input Specification: Each input file contains one test case. For each case, the 
   </div>
   <footer class="entry-footer"><span title='2020-04-09 19:57:00 +0000 UTC'>April 9, 2020</span></footer>
   <a class="entry-link" aria-label="post link to PAT甲级 1013 Battle Over Cities (25分)" href="http://localhost:1313/posts/pat/advanced_level/a1013/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">PAT甲级 1032 Sharing (25分)
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>To store English words, one method is to use linked lists and store a word letter by letter. To save some space, we may let the words share the same sublist if they share the same suffix. For example, loading and being are stored as showed in Figure 1.
-You are supposed to find the starting position of the common suffix (e.g. the position of i in Figure 1).
-...</p>
-  </div>
-  <footer class="entry-footer"><span title='2020-04-07 16:34:00 +0000 UTC'>April 7, 2020</span></footer>
-  <a class="entry-link" aria-label="post link to PAT甲级 1032 Sharing (25分)" href="http://localhost:1313/posts/pat/advanced_level/a1032/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

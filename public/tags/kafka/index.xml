@@ -6,13 +6,23 @@
     <description>Recent content in Kafka on Xinkang&#39;s Blog</description>
     <generator>Hugo -- 0.138.0</generator>
     <language>en</language>
-    <lastBuildDate>Sat, 16 Nov 2024 01:27:59 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 16 Nov 2024 01:47:59 +0800</lastBuildDate>
     <atom:link href="http://localhost:1313/tags/kafka/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>Meet Kafka</title>
+      <link>http://localhost:1313/posts/mq/kafka/getting-started-with-apache-kafka/2.-meet-kafka/</link>
+      <pubDate>Sat, 16 Nov 2024 01:47:59 +0800</pubDate>
+      <guid>http://localhost:1313/posts/mq/kafka/getting-started-with-apache-kafka/2.-meet-kafka/</guid>
+      <description>&lt;h2 id=&#34;kafka-architecture&#34;&gt;Kafka Architecture&lt;/h2&gt;
+&lt;p&gt;&lt;img alt=&#34;image-20241116015015788&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/mq/kafka/getting-started-with-apache-kafka/2.-meet-kafka/images/image-20241116015015788.png&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;kafka-message&#34;&gt;Kafka Message&lt;/h2&gt;
+&lt;p&gt;&lt;img alt=&#34;image-20241116015252987&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/mq/kafka/getting-started-with-apache-kafka/2.-meet-kafka/images/image-20241116015252987.png&#34;&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
       <title>Pub-sub System</title>
-      <link>http://localhost:1313/posts/mq/kafka/</link>
+      <link>http://localhost:1313/posts/mq/kafka/getting-started-with-apache-kafka/1.-pub-sub-system/</link>
       <pubDate>Sat, 16 Nov 2024 01:27:59 +0800</pubDate>
-      <guid>http://localhost:1313/posts/mq/kafka/</guid>
+      <guid>http://localhost:1313/posts/mq/kafka/getting-started-with-apache-kafka/1.-pub-sub-system/</guid>
       <description>&lt;h2 id=&#34;we-call&#34;&gt;We Call&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;The entity/app creates a message, a publisher, or a producer.&lt;/li&gt;
@@ -27,7 +37,7 @@
 &lt;li&gt;And has exactly one processing when you only process a message once ensuring it wasn&amp;rsquo;t lost. Of course, this is the holy grail.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;we-had-a-ton-of-other-pubsub-systems-before&#34;&gt;We Had a Ton of Other Pub/Sub Systems Before&lt;/h2&gt;
-&lt;p&gt;&lt;img alt=&#34;image-20241116003710435&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/mq/kafka/images/image-20241116003710435.png&#34;&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;img alt=&#34;image-20241116003710435&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/mq/kafka/getting-started-with-apache-kafka/1.-pub-sub-system/images/image-20241116003710435.png&#34;&gt;&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

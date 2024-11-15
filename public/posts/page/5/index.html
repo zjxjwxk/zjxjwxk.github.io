@@ -131,6 +131,21 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2 class="entry-hint-parent">Dubbo微服务影院系列（6）：Dubbo服务开发（影片模块开发）
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>章节概要 掌握 API 网关服务聚合功能的实现 掌握 Mybatis-plus 自定义 SQL 实现 掌握 Dubbo 异步调用 服务聚合 服务聚合就是将多个服务调用封装 服务聚合可以简化前端调用方式 服务聚合提供更好的安全性、可扩展性 业务功能开发流程 根据接口文档思考功能列表 实现 API 接口和实体 服务提供者实现 影片模块创建 从 guns-user 拷贝一份重命名为 guns-film，修改相关配置
+API 网关功能聚合 优点 六个接口，一次请求，同一时刻节省了5次HTTP请求 同一个接口对外暴露，降低了前后端分离开发的难度和复杂度 缺点： 一次获取数据过多，容易出现问题 如 gateway 中的影片模块的获取首页信息接口，将 filmServiceApi 的多个方法所获得的对象聚合为 FilmIndexVO 对象返回给前端，将原本需要的多个接口聚合为一个 /film/getIndex 接口，避免了前端对不同接口的多次调用。
+@RequestMapping(value = &#34;getIndex&#34;, method = RequestMethod.GET) public ResponseVO getIndex() { FilmIndexVO filmIndexVO = new FilmIndexVO(); // 获取banner信息 filmIndexVO.setBanners(filmServiceApi.getBanners()); // 获取热映的影片 filmIndexVO.setHotFilms(filmServiceApi.getHotFilms(true, 99, 99, 99, 99, 1, 8)); // 获取即将上映的影片 filmIndexVO.setSoonFilms(filmServiceApi.getSoonFilms(true, 99, 99, 99, 99, 1, 8)); // 获取票房排行榜 filmIndexVO.setBoxRanking(filmServiceApi.getBoxRanking()); // 获取人气榜单 filmIndexVO.setExpectRanking(filmServiceApi.getExpectRanking()); // 获取排行前100影片 filmIndexVO.setTop100(filmServiceApi.getTop()); return ResponseVO.success(IMG_PRE, filmIndexVO); } Mybatis-plus 自定义 SQL 实现 在相应的 Mapper 接口中添加方法
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2020-03-22 19:47:00 +0000 UTC'>March 22, 2020</span></footer>
+  <a class="entry-link" aria-label="post link to Dubbo微服务影院系列（6）：Dubbo服务开发（影片模块开发）" href="http://localhost:1313/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/6.dubbo%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91%E5%BD%B1%E7%89%87%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2 class="entry-hint-parent">PAT甲级 1033 To Fill or Not to Fill (25分)
     </h2>
   </header>
@@ -250,19 +265,6 @@ Output Specification: For each test case, output in one line Case #X: true if A&
   </div>
   <footer class="entry-footer"><span title='2020-03-11 23:45:00 +0000 UTC'>March 11, 2020</span></footer>
   <a class="entry-link" aria-label="post link to Dubbo微服务影院系列（5）：Dubbo基本特性（用户模块开发）" href="http://localhost:1313/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/5.dubbo%E5%9F%BA%E6%9C%AC%E7%89%B9%E6%80%A7%E7%94%A8%E6%88%B7%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">Dubbo微服务影院系列（4）：业务基础环境构建
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>章节概要 构建基于 Guns &#43; SpringBoot &#43; Dubbo 的框架 学会抽离业务接口 学会 API 网关变形应用 API 网关介绍 API 网关有点类似于设计模式中的 Facade 模式 API 网关一般都是微服务系统中的门面 API 网关是微服务的重要组成部分 API 网关的常见作用 身份验证和安全 审查和检测 动态路由 压力测试 负载均衡（Dubbo 自带） 静态相应处理 Guns 环境构建 导入 guns 项目 创建 guns_rest 数据库 创建 user 表 -- ---------------------------- -- Table structure for user -- ---------------------------- DROP TABLE IF EXISTS `user`; CREATE TABLE `user` ( `id` bigint(20) NOT NULL AUTO_INCREMENT, `userName` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL, PRIMARY KEY (`id`) USING BTREE ) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic; -- ---------------------------- -- Records of user -- ---------------------------- INSERT INTO `user` VALUES (1, &#39;admin&#39;); SET FOREIGN_KEY_CHECKS = 1; 添加 log4j 依赖 &lt;dependency&gt; &lt;groupId&gt;log4j&lt;/groupId&gt; &lt;artifactId&gt;log4j&lt;/artifactId&gt; &lt;version&gt;1.2.17&lt;/version&gt; &lt;/dependency&gt; 修改 datasource 的 url 修改 application.yml 中 spring 的 datasource 的 url 为
-...</p>
-  </div>
-  <footer class="entry-footer"><span title='2020-03-09 22:25:00 +0000 UTC'>March 9, 2020</span></footer>
-  <a class="entry-link" aria-label="post link to Dubbo微服务影院系列（4）：业务基础环境构建" href="http://localhost:1313/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/4.%E4%B8%9A%E5%8A%A1%E5%9F%BA%E7%A1%80%E7%8E%AF%E5%A2%83%E6%9E%84%E5%BB%BA/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">
