@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Linux on Xinkang&#39;s Blog</title>
+    <link>https://zjxjwxk.github.io/tags/linux/</link>
+    <description>Recent content in Linux on Xinkang&#39;s Blog</description>
+    <generator>Hugo -- 0.138.0</generator>
+    <language>en</language>
+    <lastBuildDate>Mon, 27 Apr 2020 23:11:00 +0000</lastBuildDate>
+    <atom:link href="https://zjxjwxk.github.io/tags/linux/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Terminal 终端代理加速</title>
+      <link>https://zjxjwxk.github.io/posts/linux/macos/</link>
+      <pubDate>Mon, 27 Apr 2020 23:11:00 +0000</pubDate>
+      <guid>https://zjxjwxk.github.io/posts/linux/macos/</guid>
+      <description>&lt;h1 id=&#34;方法1暂时&#34;&gt;方法1（暂时）:&lt;/h1&gt;
+&lt;p&gt;在终端中直接运行命令&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;export http_proxy&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;http://proxyAddres.s:port
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这个办法的好处是简单直接，并且影响面很小（只对当前终端有效，退出就不行了）。&lt;/p&gt;
+&lt;p&gt;如果你用的是 s.s 代理，在当前终端运行以下命令，那么&lt;code&gt;wget&lt;/code&gt; &lt;code&gt;curl&lt;/code&gt; 这类网络命令都会经过 s.s 代理，port 端口号可以从 s.s 高级设置中查看，我的是1086。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;export ALL_PROXY&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;socks5://127.0.0.1:1086
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img alt=&#34;s.s端口&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/linux/macos/images/image-20200426235228770.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;安装完软件以后，我们再执行以下命令取消终端代理&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;unset ALL_PROXY
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;方法2永久&#34;&gt;方法2（永久）:&lt;/h1&gt;
+&lt;p&gt;把代理服务器地址写入 shell 配置文件&lt;code&gt;.bashrc&lt;/code&gt;或者&lt;code&gt;.zshrc&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;直接在&lt;code&gt;.bashrc&lt;/code&gt;或者&lt;code&gt;.zshrc&lt;/code&gt;添加下面内容&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;export http_proxy&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;http://localhost:port&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;export https_proxy&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;http://localhost:port&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;以使用 s.s 代理为例，s.s 的代理端口为&lt;code&gt;1086&lt;/code&gt;,那么应该设置为&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;export http_proxy&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;socks5://127.0.0.1:1086&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;export https_proxy&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;socks5://127.0.0.1:1086&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;或者直接设置 ALL_PROXY&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;export ALL_PROXY&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;socks5://127.0.0.1:1086
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;code&gt;localhost&lt;/code&gt;就是一个域名，域名默认指向 &lt;code&gt;127.0.0.1&lt;/code&gt;，两者是一样的。&lt;/p&gt;
+&lt;p&gt;然后&lt;code&gt;ESC&lt;/code&gt;后&lt;code&gt;:wq&lt;/code&gt;保存文件，接着在终端中执行&lt;code&gt;source ~/.bashrc&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;这个办法的好处是把代理服务器永久保存了，下次就可以直接用了。&lt;/p&gt;
+&lt;p&gt;或者通过设置 alias 简写来简化操作，每次要用的时候输入&lt;code&gt;setproxy&lt;/code&gt;，不用了就&lt;code&gt;unsetproxy&lt;/code&gt;。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;alias setproxy&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;export ALL_PROXY=socks5://127.0.0.1:1086&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;alias unsetproxy&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;unset ALL_PROXY&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;git-代理&#34;&gt;Git 代理&lt;/h1&gt;
+&lt;p&gt;git 设置全局代理：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git config --global http.proxy &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;socks5://127.0.0.1:1086&amp;#39;&lt;/span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git config --global https.proxy &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;socks5://127.0.0.1:1086&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;git 仅针对 GitHub 的单独配置：&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>CentOS jar包后台运行</title>
+      <link>https://zjxjwxk.github.io/posts/linux/centos/centos-jar%E5%8C%85%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C/</link>
+      <pubDate>Wed, 30 Jan 2019 00:54:00 +0000</pubDate>
+      <guid>https://zjxjwxk.github.io/posts/linux/centos/centos-jar%E5%8C%85%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C/</guid>
+      <description>&lt;h1 id=&#34;运行jar包命令&#34;&gt;运行jar包命令&lt;/h1&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;java -jar application.jar
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;当前ssh窗口被锁定，可按CTRL + C打断程序运行，或直接关闭窗口让程序退出。&lt;/p&gt;
+&lt;p&gt;那如何让窗口不被锁定？&lt;/p&gt;
+&lt;h1 id=&#34;方法一&#34;&gt;方法一&lt;/h1&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;java -jar application.jar &amp;amp;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&amp;amp;代表在后台运行。&lt;/p&gt;
+&lt;p&gt;当前ssh窗口不被锁定，但是当窗口关闭时，程序中止运行。&lt;/p&gt;
+&lt;p&gt;继续改进，如何让窗口关闭时，程序仍然运行？&lt;/p&gt;
+&lt;h1 id=&#34;方法二&#34;&gt;方法二&lt;/h1&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;nohup java -jar application.jar &amp;amp;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;nohup 意思是不挂断运行命令,当账户退出或终端关闭时,程序仍然运行。&lt;/p&gt;
+&lt;p&gt;那怎么不打印该程序输出的内容，而写入某个文件中呢？&lt;/p&gt;
+&lt;h1 id=&#34;方法四&#34;&gt;方法四&lt;/h1&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;nohup java -jar application.jar &amp;gt;out.txt &amp;amp;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;当用 nohup 命令执行作业时，缺省情况下该作业的所有输出被重定向到nohup.out的文件中，除非另外指定了输出文件，如 out.txt。&lt;/p&gt;
+&lt;p&gt;command &amp;gt;out.txt是将command的输出重定向到out.txt文件，即输出内容不打印到屏幕上，而是输出到out.txt文件中。&lt;/p&gt;
+&lt;h3 id=&#34;通过jobs命令查看后台运行任务&#34;&gt;通过jobs命令查看后台运行任务&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;jobs
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;那么就会列出所有后台执行的作业，并且每个作业前面都有个编号。&lt;/p&gt;
+&lt;h3 id=&#34;如果想将某个作业调回前台控制只需要-fg--编号即可&#34;&gt;如果想将某个作业调回前台控制，只需要 fg + 编号即可。&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;fg &lt;span style=&#34;color:#ae81ff&#34;&gt;23&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;查看某端口占用的线程的pid&#34;&gt;查看某端口占用的线程的pid&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;netstat -nlp |grep :9181
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+    </item>
+    <item>
+      <title>CentOS 7 Tomcat开机自启动配置</title>
+      <link>https://zjxjwxk.github.io/posts/linux/centos/centos-7-tomcat%E7%9A%84%E5%AE%89%E8%A3%85%E5%8F%8A%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF%E5%8A%A8%E9%85%8D%E7%BD%AE/</link>
+      <pubDate>Sun, 13 Jan 2019 00:04:00 +0000</pubDate>
+      <guid>https://zjxjwxk.github.io/posts/linux/centos/centos-7-tomcat%E7%9A%84%E5%AE%89%E8%A3%85%E5%8F%8A%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF%E5%8A%A8%E9%85%8D%E7%BD%AE/</guid>
+      <description>&lt;h1 id=&#34;centos-7-tomcat开机自启动配置&#34;&gt;CentOS 7 Tomcat开机自启动配置&lt;/h1&gt;
+&lt;h2 id=&#34;配置开机运行&#34;&gt;配置开机运行&lt;/h2&gt;
+&lt;h3 id=&#34;tomcat增加启动参数&#34;&gt;Tomcat增加启动参数&lt;/h3&gt;
+&lt;p&gt;Tomcat需要增加一个pid文件，在 &lt;code&gt;$CATALINA_HOME/bin&lt;/code&gt; 目录下面，增加 &lt;code&gt;setenv.sh&lt;/code&gt; 配置，&lt;code&gt;catalina.sh&lt;/code&gt;启动的时候会调用，同时配置Java内存参数。添加如下命令：
+&lt;code&gt;[root@vps bin]# vim setenv.sh&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#Tomcat startup pid&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#set Java runtime environment variable &lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;export JAVA_HOME&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;/usr/java/jdk1.8.0_191-amd64
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;export PATH&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;$PATH:$JAVA_HOME/bin
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;export CATALINA_HOME&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;/developer/apache-tomcat-7.0.91
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;export CATALINA_BASE&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;/developer/apache-tomcat-7.0.91
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#add Tomcat pid&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;CATALINA_PID&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;$CATALINA_BASE&lt;span style=&#34;color:#e6db74&#34;&gt;/tomcat.pid&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#add Java opts&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;JAVA_OPTS&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;-server -XX:PermSize=256M -XX:MaxPermSize=1024m -Xms512M -Xmx1024M -XX:MaxNewSize=256m&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;注意:&lt;/strong&gt; 配置开机运行时,需要再次添加 JAVA_HOME&lt;/p&gt;
+&lt;h3 id=&#34;增加-tomcatservice&#34;&gt;增加 tomcat.service&lt;/h3&gt;
+&lt;p&gt;在/usr/lib/systemd/system目录下增加tomcat.service，目录必须是绝对目录，添加如下命令：
+&lt;code&gt;[root@vps bin]# vim /usr/lib/systemd/system/tomcat.service&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# conf service desc ,set do this after network started&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;Unit&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Description&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;tomcat 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;After&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;syslog.target network.target remote-fs.target nss-lookup.target
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# conf service pid, start,stop and restart&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;Service&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Type&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;forking
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;PIDFile&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;/developer/apache-tomcat-7.0.91/tomcat.pid
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ExecStart&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;/developer/apache-tomcat-7.0.91/bin/startup.sh
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ExecStop&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;/bin/kill -s QUIT $MAINPID
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ExecReload&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;/bin/kill -s HUP $MAINPID
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;PrivateTmp&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;true
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# conf user &lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;Install&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;WantedBy&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;multi-user.target
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;em&gt;[unit]:&lt;/em&gt; 配置了服务的描述，规定了在network启动之后执行，&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

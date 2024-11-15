@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>模拟 on Xinkang&#39;s Blog</title>
+    <link>https://zjxjwxk.github.io/tags/%E6%A8%A1%E6%8B%9F/</link>
+    <description>Recent content in 模拟 on Xinkang&#39;s Blog</description>
+    <generator>Hugo -- 0.138.0</generator>
+    <language>en</language>
+    <lastBuildDate>Tue, 17 Mar 2020 15:11:00 +0000</lastBuildDate>
+    <atom:link href="https://zjxjwxk.github.io/tags/%E6%A8%A1%E6%8B%9F/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>PAT乙级 1010 一元多项式求导 (25分)</title>
+      <link>https://zjxjwxk.github.io/posts/pat/basic_level/b1010/</link>
+      <pubDate>Tue, 17 Mar 2020 15:11:00 +0000</pubDate>
+      <guid>https://zjxjwxk.github.io/posts/pat/basic_level/b1010/</guid>
+      <description>&lt;p&gt;设计函数求一元多项式的导数。（注：x^n（&lt;em&gt;n&lt;/em&gt;为整数）的一阶导数为nx^{n−1}。）&lt;/p&gt;
+&lt;h1 id=&#34;输入格式&#34;&gt;输入格式:&lt;/h1&gt;
+&lt;p&gt;以指数递降方式输入多项式非零项系数和指数（绝对值均为不超过 1000 的整数）。数字间以空格分隔。&lt;/p&gt;
+&lt;h1 id=&#34;输出格式&#34;&gt;输出格式:&lt;/h1&gt;
+&lt;p&gt;以与输入相同的格式输出导数多项式非零项的系数和指数。数字间以空格分隔，但结尾不能有多余空格。注意“零多项式”的指数和系数都是 0，但是表示为 &lt;code&gt;0 0&lt;/code&gt;。&lt;/p&gt;
+&lt;h1 id=&#34;输入样例&#34;&gt;输入样例:&lt;/h1&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-in&#34; data-lang=&#34;in&#34;&gt;3 4 -5 2 6 1 -2 0
+&lt;/code&gt;&lt;/pre&gt;&lt;h1 id=&#34;输出样例&#34;&gt;输出样例:&lt;/h1&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-out&#34; data-lang=&#34;out&#34;&gt;12 3 -10 1 6 0
+&lt;/code&gt;&lt;/pre&gt;&lt;h1 id=&#34;注意点&#34;&gt;注意点&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;用 while……EOF 的格式来读入系数和指数（黑框中触发 EOF 要按 &lt;code&gt;ctrl + Z&lt;/code&gt;，并回车）&lt;/li&gt;
+&lt;li&gt;经测试，该题的指数都是非负整数&lt;/li&gt;
+&lt;li&gt;求导必须从低次项枚举到高次项，否则结果可能为出错&lt;/li&gt;
+&lt;li&gt;在求导后，当前系数必须清空为0，否则当前无法被后面覆盖&lt;/li&gt;
+&lt;li&gt;如果求导之后没有任何非零项，需要输出 &lt;code&gt;0 0&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#include&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;&amp;lt;cstdio&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; maxn &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1001&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;main&lt;/span&gt;() {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; n[maxn] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; {&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;}, c, e, cnt &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; (scanf(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;%d%d&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt;c, &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt;e) &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; EOF) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        n[e] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; c;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    n[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; (&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;; i &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; maxn; i&lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        n[i &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; n[i];
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        n[i] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (n[i &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            cnt&lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (cnt &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        printf(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;0 0&amp;#34;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    } &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; (&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; maxn &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;; i &lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;; i&lt;span style=&#34;color:#f92672&#34;&gt;--&lt;/span&gt;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (n[i] &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                printf(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;%d %d&amp;#34;&lt;/span&gt;, n[i], i);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                cnt&lt;span style=&#34;color:#f92672&#34;&gt;--&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (cnt &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                    printf(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34; &amp;#34;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                } &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                    &lt;span style=&#34;color:#66d9ef&#34;&gt;break&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+    </item>
+    <item>
+      <title>PAT甲级 1065 A&#43;B and C (64bit) (20分)</title>
+      <link>https://zjxjwxk.github.io/posts/pat/advanced_level/a1065/</link>
+      <pubDate>Sun, 15 Mar 2020 18:04:00 +0000</pubDate>
+      <guid>https://zjxjwxk.github.io/posts/pat/advanced_level/a1065/</guid>
+      <description>&lt;p&gt;Given three integers &lt;em&gt;A&lt;/em&gt;, &lt;em&gt;B&lt;/em&gt; and &lt;em&gt;C&lt;/em&gt; in [−2^63,2^63], you are supposed to tell whether &lt;em&gt;A&lt;/em&gt;+&lt;em&gt;B&lt;/em&gt;&amp;gt;&lt;em&gt;C&lt;/em&gt;.&lt;/p&gt;
+&lt;h1 id=&#34;input-specification&#34;&gt;Input Specification:&lt;/h1&gt;
+&lt;p&gt;The first line of the input gives the positive number of test cases, &lt;em&gt;T&lt;/em&gt; (≤10). Then &lt;em&gt;T&lt;/em&gt; test cases follow, each consists of a single line containing three integers &lt;em&gt;A&lt;/em&gt;, &lt;em&gt;B&lt;/em&gt; and &lt;em&gt;C&lt;/em&gt;, separated by single spaces.&lt;/p&gt;
+&lt;h1 id=&#34;output-specification&#34;&gt;Output Specification:&lt;/h1&gt;
+&lt;p&gt;For each test case, output in one line &lt;code&gt;Case #X: true&lt;/code&gt; if &lt;em&gt;A&lt;/em&gt;+&lt;em&gt;B&lt;/em&gt;&amp;gt;&lt;em&gt;C&lt;/em&gt;, or &lt;code&gt;Case #X: false&lt;/code&gt; otherwise, where &lt;em&gt;X&lt;/em&gt; is the case number (starting from 1).&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>PAT甲级 1014 Waiting in Line (30分)</title>
+      <link>https://zjxjwxk.github.io/posts/pat/advanced_level/a1014/</link>
+      <pubDate>Sun, 08 Mar 2020 17:18:00 +0000</pubDate>
+      <guid>https://zjxjwxk.github.io/posts/pat/advanced_level/a1014/</guid>
+      <description>&lt;p&gt;Suppose a bank has N windows open for service. There is a yellow line in front of the windows which devides the waiting area into two parts. The rules for the customers to wait in line are:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The space inside the yellow line in front of each window is enough to contain a line with M customers. Hence when all the N lines are full, all the customers after (and including) the (NM+1)st one will have to wait in a line behind the yellow line.&lt;/li&gt;
+&lt;li&gt;Each customer will choose the shortest line to wait in when crossing the yellow line. If there are two or more lines with the same length, the customer will always choose the window with the smallest number.&lt;/li&gt;
+&lt;li&gt;Customer[i] will take T[i] minutes to have his/her transaction processed.&lt;/li&gt;
+&lt;li&gt;The first N customers are assumed to be served at 8:00am.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Now given the processing time of each customer, you are supposed to tell the exact time at which a customer has his/her business done.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

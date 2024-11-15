@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>The Design and Analysis of Algorithms for Exam | Xinkang&#39;s Blog</title>
+<meta name="keywords" content="BTH, 期末复习">
+<meta name="description" content="This question tests your knowledge on algorithms and algorithm construction:
+(a) A function that is defined in terms of itself is called a recursive function. Describe the purpose of a base case in a recursive function.(3p)
+A base case is an (input) value for which the function can be calculated without recursion.
+There needs to be at least one base case, which can be solved without recursion.
+For the cases that are solved using recursion, the recursive calls must progress towards a base case.">
+<meta name="author" content="">
+<link rel="canonical" href="https://zjxjwxk.github.io/posts/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/the-design-and-analysis-of-algorithms/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.d6fcd20a4fb86efa4dfac8ec95da60244cc8871042183da1ef28e3a762ad79c8.css" integrity="sha256-1vzSCk&#43;4bvpN&#43;sjsldpgJEzIhxBCGD2h7yjjp2Ktecg=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://zjxjwxk.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://zjxjwxk.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://zjxjwxk.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://zjxjwxk.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://zjxjwxk.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://zjxjwxk.github.io/posts/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/the-design-and-analysis-of-algorithms/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><meta property="og:url" content="https://zjxjwxk.github.io/posts/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/the-design-and-analysis-of-algorithms/">
+  <meta property="og:site_name" content="Xinkang&#39;s Blog">
+  <meta property="og:title" content="The Design and Analysis of Algorithms for Exam">
+  <meta property="og:description" content="This question tests your knowledge on algorithms and algorithm construction: (a) A function that is defined in terms of itself is called a recursive function. Describe the purpose of a base case in a recursive function.(3p)
+A base case is an (input) value for which the function can be calculated without recursion.
+There needs to be at least one base case, which can be solved without recursion.
+For the cases that are solved using recursion, the recursive calls must progress towards a base case.">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2019-01-19T22:01:00+00:00">
+    <meta property="article:modified_time" content="2019-01-19T22:01:00+00:00">
+    <meta property="article:tag" content="BTH">
+    <meta property="article:tag" content="期末复习">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="The Design and Analysis of Algorithms for Exam">
+<meta name="twitter:description" content="This question tests your knowledge on algorithms and algorithm construction:
+(a) A function that is defined in terms of itself is called a recursive function. Describe the purpose of a base case in a recursive function.(3p)
+A base case is an (input) value for which the function can be calculated without recursion.
+There needs to be at least one base case, which can be solved without recursion.
+For the cases that are solved using recursion, the recursive calls must progress towards a base case.">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://zjxjwxk.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "The Design and Analysis of Algorithms for Exam",
+      "item": "https://zjxjwxk.github.io/posts/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/the-design-and-analysis-of-algorithms/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "The Design and Analysis of Algorithms for Exam",
+  "name": "The Design and Analysis of Algorithms for Exam",
+  "description": "This question tests your knowledge on algorithms and algorithm construction: (a) A function that is defined in terms of itself is called a recursive function. Describe the purpose of a base case in a recursive function.(3p)\nA base case is an (input) value for which the function can be calculated without recursion.\nThere needs to be at least one base case, which can be solved without recursion.\nFor the cases that are solved using recursion, the recursive calls must progress towards a base case.\n",
+  "keywords": [
+    "BTH", "期末复习"
+  ],
+  "articleBody": "This question tests your knowledge on algorithms and algorithm construction: (a) A function that is defined in terms of itself is called a recursive function. Describe the purpose of a base case in a recursive function.(3p)\nA base case is an (input) value for which the function can be calculated without recursion.\nThere needs to be at least one base case, which can be solved without recursion.\nFor the cases that are solved using recursion, the recursive calls must progress towards a base case.\n(b) Mergesort is based on the principles of divide-and-conquer. Briefly describe what the mergesort algorithm does in the divide step and in the conquer step. (4p)\nDivide step: Divide the array into two parts to convert the problem of sorting the entire array into sub-problems (to sort the left and right arrays separately) until the size of the array is 1.\nConquer step: Repeatedly merging sorted lists into sorted lists of larger size until the initial list is sorted.\n(c) A constructive heuristic is a method that iteratively “builds up” a solution. It starts with nothing and adds (fixes) the value of exactly one variable (solution component) in each of the iterations. The algorithm ends when all variables have been assigned a value. Describe what is a greedy constructive heuristic. (3p)\nEach variable fixing is chosen as the variable that (locally) improves the objective most. Of course, variable fixings are chosen without breaking feasibility.\nThis question test your knowledge on graphs and trees. (a) What does a “worst case” binary tree look like? (5p)\nIn the worst case, if the binary search tree has n nodes, it can have O(n) height, when the unbalanced tree looks like a linked list.\nThe worst case occurs when inserting an sorted list into the tree in order.\n(b) Describe what is a topological ordering. (4p)\nA topological ordering of a directed non-cyclic graph is an ordering of the vertices such that if there is an edge (u, v) between u and v, then u comes before v in the ordering.\n(c) Illustrate and explain using an example why there can be no topological ordering of a graph that contains a cycle. (6p)\nConsider the cycle v5 -\u003e v6 -\u003e v8 -\u003e v5:\n(v5, v6) 属于 E =\u003e v5 needs to come before v6 in the topological order. (v6, v8) 属于 E =\u003e v6 needs to come before v8 in the topological order =\u003e v5 before v8 in the topological order. (v8, v5) 属于 E =\u003e v8 needs to come before v5 in the topological order, which is not possible as we previously concluded the opposite. This question concerns complexity analysis. (a) Briefly describe the complexity class P. (3p)\nAll problems that can be solved using a polynomial bound algorithm belongs to the same complexity class (complexity class P).\n(b) Describe what is a basic operation of an algorithm. (3p)\nA basic operation can be seen as an operation that is fundamental for the performance of a particular algorithm.\nThe performance of the algorithm is in principle proportional to the number of basic operations.\n(c) Describe the concepts of worst-case and average-case complexity of an algorithm. (6p)\nThe worst-case complexity W(n) of an algorithm is the maximum number of basic operations performed for any input of size n.\nThe average-case complexity A(n) of an algorithm is the average number of basic operations performed by the algorithm, where each input I occurs with some probability p(I).\n(d) What does it mean to say that a data structure has an amortized bound of O(n) per operation? (3p).\nThis means that regardless of which sequence of n operations, the worst-case average cost per operation is O(n).\nYour task for this question is to insert a node with value 5 into the following splay tree. You are required to show what the tree looks like after inserting the new node and after each of the (3) splay operations.\nHint: you will have to perform all three types of splay operations. (20p)\nYour task is to apply dynamic programming in order to solve a knapsack problem instance with 4 items: Item 1: Value: p1 = 8 - Weight: w1 = 2 Item 2: Value: p2 = 6 - Weight: w2 = 1 Item 3: Value: p3 = 7 - Weight: w3 = 2 Item 4: Value: p4 = 5 - Weight: w4 = 1 The knapsack (bag) has a weight capacity of 4 (W = 4). You should graphically illustrate your solution. (20p)\n",
+  "wordCount" : "748",
+  "inLanguage": "en",
+  "datePublished": "2019-01-19T22:01:00Z",
+  "dateModified": "2019-01-19T22:01:00Z",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://zjxjwxk.github.io/posts/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/the-design-and-analysis-of-algorithms/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Xinkang's Blog",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://zjxjwxk.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://zjxjwxk.github.io/" accesskey="h" title="Xinkang&#39;s Blog (Alt + H)">Xinkang&#39;s Blog</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://zjxjwxk.github.io/archives/" title="Archives">
+                    <span>Archives</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://zjxjwxk.github.io/categories/" title="Categories">
+                    <span>Categories</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://zjxjwxk.github.io/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://zjxjwxk.github.io/search/" title="Search (Alt &#43; /)" accesskey=/>
+                    <span>Search</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <div id="content-container">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      The Design and Analysis of Algorithms for Exam
+    </h1>
+    <div class="post-meta"><span title='2019-01-19 22:01:00 +0000 UTC'>January 19, 2019</span>
+
+</div>
+  </header> 
+  <div class="post-content"><h1 id="this-question-tests-your-knowledge-on-algorithms-and-algorithm-construction">This question tests your knowledge on algorithms and algorithm construction:<a hidden class="anchor" aria-hidden="true" href="#this-question-tests-your-knowledge-on-algorithms-and-algorithm-construction">#</a></h1>
+<p><strong>(a) A function that is defined in terms of itself is called a recursive function. Describe the purpose of a base case in a recursive function.(3p)</strong></p>
+<p>A base case is an (input) value for which the function can be calculated without recursion.</p>
+<p>There needs to be at least one base case, which can be solved without recursion.</p>
+<p>For the cases that are solved using recursion, the recursive calls must progress towards a base case.</p>
+<p><strong>(b) Mergesort is based on the principles of divide-and-conquer. Briefly describe what the mergesort algorithm does in the divide step and in the conquer step. (4p)</strong></p>
+<p><strong>Divide step:</strong> Divide the array into two parts to convert the problem of sorting the entire array into sub-problems (to sort the left and right arrays separately) until the size of the array is 1.</p>
+<p><strong>Conquer step:</strong> Repeatedly merging sorted lists into sorted lists of larger size until the initial list is sorted.</p>
+<p><strong>(c) A constructive heuristic is a method that iteratively “builds up” a solution. It starts with nothing and adds (fixes) the value of exactly one variable (solution component) in each of the iterations. The algorithm ends when all variables have been assigned a value. Describe what is a greedy constructive heuristic. (3p)</strong></p>
+<p>Each variable fixing is chosen as the variable that (locally) improves the objective most. Of course, variable fixings are chosen without breaking feasibility.</p>
+<h1 id="this-question-test-your-knowledge-on-graphs-and-trees">This question test your knowledge on graphs and trees.<a hidden class="anchor" aria-hidden="true" href="#this-question-test-your-knowledge-on-graphs-and-trees">#</a></h1>
+<p><strong>(a) What does a “worst case” binary tree look like? (5p)</strong></p>
+<p>In the <em>worst case</em>, if the binary search tree has n nodes,  it can have O(n) height, when the unbalanced <em>tree</em> looks like a linked list.</p>
+<p>The worst case occurs when inserting an sorted list into the tree in order.</p>
+<p><strong>(b) Describe what is a topological ordering. (4p)</strong></p>
+<p>A topological ordering of a directed non-cyclic graph is an ordering of the vertices such that if there is an edge (u, v) between u and v, then u comes before v in the ordering.</p>
+<p><strong>(c) Illustrate and explain using an example why there can be no topological ordering of a graph that contains a cycle. (6p)</strong></p>
+<p><img alt="graph" loading="lazy" src="/posts/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/the-design-and-analysis-of-algorithms/images/1547384256672.png"></p>
+<p>Consider the cycle v5 -&gt; v6 -&gt; v8 -&gt; v5:</p>
+<ul>
+<li>(v5, v6) 属于 E =&gt; v5 needs to come before v6 in the topological order.</li>
+<li>(v6, v8) 属于  E =&gt; v6 needs to come before v8 in the topological order =&gt; v5 before v8 in the topological order.</li>
+<li>(v8, v5) 属于  E =&gt; v8 needs to come before v5 in the topological order, which is not possible as we previously concluded the opposite.</li>
+</ul>
+<h1 id="this-question-concerns-complexity-analysis">This question concerns complexity analysis.<a hidden class="anchor" aria-hidden="true" href="#this-question-concerns-complexity-analysis">#</a></h1>
+<p><strong>(a) Briefly describe the complexity class P. (3p)</strong></p>
+<p>All problems that can be solved using a polynomial bound algorithm belongs to the same complexity class (complexity class P).</p>
+<p><strong>(b) Describe what is a basic operation of an algorithm. (3p)</strong></p>
+<p>A basic operation can be seen as an operation that is fundamental for the performance of a particular algorithm.</p>
+<p>The performance of the algorithm is in principle proportional to the number of basic operations.</p>
+<p><strong>(c) Describe the concepts of worst-case and average-case complexity of an algorithm. (6p)</strong></p>
+<p><strong>The worst-case</strong> complexity W(n) of an algorithm is the maximum number of basic operations performed for any input of size n.</p>
+<p><strong>The average-case</strong> complexity A(n) of an algorithm is the average number of basic operations performed by the algorithm, where each input I occurs with some probability p(I).</p>
+<p><strong>(d) What does it mean to say that a data structure has an amortized bound of O(n) per operation? (3p).</strong></p>
+<p>This means that regardless of which sequence of n operations, the worst-case average cost per operation is O(n).</p>
+<h1 id="your-task-for-this-question-is-to-insert-a-node-with-value-5-into-the-following-splay-tree">Your task for this question is to insert a node with value 5 into the following splay tree.<a hidden class="anchor" aria-hidden="true" href="#your-task-for-this-question-is-to-insert-a-node-with-value-5-into-the-following-splay-tree">#</a></h1>
+<p><img alt="tree" loading="lazy" src="/posts/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/the-design-and-analysis-of-algorithms/images/1547391999965.png"></p>
+<p>You are required to show what the tree looks like after inserting the new node and after each of the (3) splay operations.</p>
+<p>Hint: you will have to perform all three types of splay operations. (20p)</p>
+<p><img alt="1" loading="lazy" src="/posts/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/the-design-and-analysis-of-algorithms/images/1547392108870.png"></p>
+<p><img alt="2" loading="lazy" src="/posts/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/the-design-and-analysis-of-algorithms/images/1547392250882.png"></p>
+<p><img alt="3" loading="lazy" src="/posts/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/the-design-and-analysis-of-algorithms/images/1547392299434.png"></p>
+<p><img alt="4" loading="lazy" src="/posts/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/the-design-and-analysis-of-algorithms/images/1547392316867.png"></p>
+<h1 id="your-task-is-to-apply-dynamic-programming-in-order-to-solve-a-knapsack">Your task is to apply dynamic programming in order to solve a knapsack<a hidden class="anchor" aria-hidden="true" href="#your-task-is-to-apply-dynamic-programming-in-order-to-solve-a-knapsack">#</a></h1>
+<p>problem instance with 4 items:
+Item 1: Value: p1 = 8 - Weight: w1 = 2
+Item 2: Value: p2 = 6 - Weight: w2 = 1
+Item 3: Value: p3 = 7 - Weight: w3 = 2
+Item 4: Value: p4 = 5 - Weight: w4 = 1
+The knapsack (bag) has a weight capacity of 4 (W = 4).
+You should graphically illustrate your solution. (20p)</p>
+<p><img alt="solution" loading="lazy" src="/posts/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/the-design-and-analysis-of-algorithms/images/1547392549396.png"></p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://zjxjwxk.github.io/tags/bth/">BTH</a></li>
+      <li><a href="https://zjxjwxk.github.io/tags/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/">期末复习</a></li>
+    </ul>
+  </footer>
+</article>
+
+<script>
+  window.onload = function() {
+      var contentContainer = document.getElementById("content-container");
+      if ("" !== "") {
+          var password = prompt("Enter password:");
+          if (password === "") {
+              contentContainer.style.display = "block";
+          } else {
+              alert("Incorrect password");
+          }
+      } else {
+          contentContainer.style.display = "block";
+      }
+  };
+</script>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2024 <a href="https://zjxjwxk.github.io/">Xinkang&#39;s Blog</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

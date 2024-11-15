@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Dubbo微服务影院系列（12）：系统部署 | Xinkang&#39;s Blog</title>
+<meta name="keywords" content="Dubbo, 微服务架构">
+<meta name="description" content="运行环境
+
+CentOS 6
+云服务器
+
+创建用户
+创建一个 cinema 用户：
+[root@huawei ~]# useradd cinema
+[root@huawei ~]# passwd cinema
+Changing password for user cinema.
+New password: 
+BAD PASSWORD: it does not contain enough DIFFERENT characters
+Retype new password: 
+passwd: all authentication tokens updated successfully.
+给予其权限，首先需要赋予当前用户对 /etc/sudoers 的写权限，然后在 sudoers 文件中的 root ALL = (ALL) ALL 下增加一行，赋予其在任何地方执行任何命令的权限：
+chmod u&#43;w /etc/sudoers
+vim sudoers
+## Allow root to run any commands anywhere 
+root    ALL=(ALL)       ALL
+cinema  ALL=(ALL)       ALL
+最后，取消当前用户的写权限：">
+<meta name="author" content="">
+<link rel="canonical" href="https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/12.%E7%B3%BB%E7%BB%9F%E9%83%A8%E7%BD%B2/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.d6fcd20a4fb86efa4dfac8ec95da60244cc8871042183da1ef28e3a762ad79c8.css" integrity="sha256-1vzSCk&#43;4bvpN&#43;sjsldpgJEzIhxBCGD2h7yjjp2Ktecg=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://zjxjwxk.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://zjxjwxk.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://zjxjwxk.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://zjxjwxk.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://zjxjwxk.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/12.%E7%B3%BB%E7%BB%9F%E9%83%A8%E7%BD%B2/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><meta property="og:url" content="https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/12.%E7%B3%BB%E7%BB%9F%E9%83%A8%E7%BD%B2/">
+  <meta property="og:site_name" content="Xinkang&#39;s Blog">
+  <meta property="og:title" content="Dubbo微服务影院系列（12）：系统部署">
+  <meta property="og:description" content="运行环境 CentOS 6 云服务器 创建用户 创建一个 cinema 用户：
+[root@huawei ~]# useradd cinema [root@huawei ~]# passwd cinema Changing password for user cinema. New password: BAD PASSWORD: it does not contain enough DIFFERENT characters Retype new password: passwd: all authentication tokens updated successfully. 给予其权限，首先需要赋予当前用户对 /etc/sudoers 的写权限，然后在 sudoers 文件中的 root ALL = (ALL) ALL 下增加一行，赋予其在任何地方执行任何命令的权限：
+chmod u&#43;w /etc/sudoers vim sudoers ## Allow root to run any commands anywhere root ALL=(ALL) ALL cinema ALL=(ALL) ALL 最后，取消当前用户的写权限：">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2020-05-03T22:34:00+00:00">
+    <meta property="article:modified_time" content="2020-05-03T22:34:00+00:00">
+    <meta property="article:tag" content="Dubbo">
+    <meta property="article:tag" content="微服务架构">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Dubbo微服务影院系列（12）：系统部署">
+<meta name="twitter:description" content="运行环境
+
+CentOS 6
+云服务器
+
+创建用户
+创建一个 cinema 用户：
+[root@huawei ~]# useradd cinema
+[root@huawei ~]# passwd cinema
+Changing password for user cinema.
+New password: 
+BAD PASSWORD: it does not contain enough DIFFERENT characters
+Retype new password: 
+passwd: all authentication tokens updated successfully.
+给予其权限，首先需要赋予当前用户对 /etc/sudoers 的写权限，然后在 sudoers 文件中的 root ALL = (ALL) ALL 下增加一行，赋予其在任何地方执行任何命令的权限：
+chmod u&#43;w /etc/sudoers
+vim sudoers
+## Allow root to run any commands anywhere 
+root    ALL=(ALL)       ALL
+cinema  ALL=(ALL)       ALL
+最后，取消当前用户的写权限：">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://zjxjwxk.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Dubbo微服务影院系列（12）：系统部署",
+      "item": "https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/12.%E7%B3%BB%E7%BB%9F%E9%83%A8%E7%BD%B2/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Dubbo微服务影院系列（12）：系统部署",
+  "name": "Dubbo微服务影院系列（12）：系统部署",
+  "description": "运行环境 CentOS 6 云服务器 创建用户 创建一个 cinema 用户：\n[root@huawei ~]# useradd cinema [root@huawei ~]# passwd cinema Changing password for user cinema. New password: BAD PASSWORD: it does not contain enough DIFFERENT characters Retype new password: passwd: all authentication tokens updated successfully. 给予其权限，首先需要赋予当前用户对 /etc/sudoers 的写权限，然后在 sudoers 文件中的 root ALL = (ALL) ALL 下增加一行，赋予其在任何地方执行任何命令的权限：\nchmod u+w /etc/sudoers vim sudoers ## Allow root to run any commands anywhere root ALL=(ALL) ALL cinema ALL=(ALL) ALL 最后，取消当前用户的写权限：\n",
+  "keywords": [
+    "Dubbo", "微服务架构"
+  ],
+  "articleBody": "运行环境 CentOS 6 云服务器 创建用户 创建一个 cinema 用户：\n[root@huawei ~]# useradd cinema [root@huawei ~]# passwd cinema Changing password for user cinema. New password: BAD PASSWORD: it does not contain enough DIFFERENT characters Retype new password: passwd: all authentication tokens updated successfully. 给予其权限，首先需要赋予当前用户对 /etc/sudoers 的写权限，然后在 sudoers 文件中的 root ALL = (ALL) ALL 下增加一行，赋予其在任何地方执行任何命令的权限：\nchmod u+w /etc/sudoers vim sudoers ## Allow root to run any commands anywhere root ALL=(ALL) ALL cinema ALL=(ALL) ALL 最后，取消当前用户的写权限：\nchmod u-w /etc/sudoers 关闭 iptables 防火墙 我们只需要使用云服务器提供的防火墙就够了\nservice iptables stop 并且关闭开机启动\nchkconfig iptables off 安装数据库 下载并安装 MySQL Yum Repository（MySQL 镜像源）：\nwget https://dev.mysql.com/get/mysql80-community-release-el6-3.noarch.rpm sudo yum install mysql80-community-release-el6-3.noarch.rpm 验证安装是否成功：\nls /etc/yum.repos.d/ 若存在 mysql-community.repo 和 mysql-community-source.repo，则表示 MySQL Yum Repository 安装成功。\n查看所有 MySQL 版本：\nyum repolist all | grep mysql 禁用最新版，使用 5.7 版本：\nsudo yum-config-manager --disable mysql80-community sudo yum-config-manager --enable mysql57-community 安装 MySQL：\nsudo yum install mysql-community-server 开启 MySQL 服务：\nsudo service mysqld start 查看 MySQL 初始密码：\nsudo grep \"password\" /var/log/mysqld.log 利用初始密码登录数据库：\nmysql -uroot -p 修改初始密码：\nset password for 'root'@'localhost' = password('Zjxjwxk19981018_'); 查看当前有哪些用户：\nmysql\u003e select host, user from mysql.user; +---------+---------------+ | host | user | +-------- +---------------+ | localhost | mysql.session | | localhost | mysql.sys | | localhost | root | +-----------+-------------+ 修改 root 用户访问权限，使得其可以被远程访问：\nUPDATE mysql.user SET host = '%' WHERE user = 'root' and host = 'localhost'; 修改后重启 MySQL：\nsudo service mysqld restart 安装 vsftpd 阿里云文档：https://help.aliyun.com/knowledge_detail/60152.html\n安装 JDK 和 Zookeeper 安装 JDK 在本地上，从 Oracle 官网下载 jdk 的 tar.gz 包 https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html ，并上传到服务器上：\nsudo scp jdk-8u251-linux-x64.tar.gz cinema@34.80.107.207:~/install/ 如果 scp 出现 Permission denied (publickey,gssapi-keyex,gssapi-with-mic). ，则可能需要在服务器上设置密码登录为 yes：\nsudo vim /etc/ssh/sshd_config 将 PasswordAuthentication no 中的 “no” 改为 “yes”。\n在服务器解压：\ntar -zxvf jdk-8u251-linux-x64.tar.gz 添加 JAVA_HOME 环境变量：\nvim /etc/profile 添加以下几行：\n## JAVA_HOME export JAVA_HOME=/developer/jdk1.8.0_251 export PATH=$PATH:$JAVA_HOME/bin 生效环境变量：\nsource /etc/profile 安装 Zookeeper 从 Apache Zookeeper 官网获取 tar.gz 包：\nwget https://mirror.bit.edu.cn/apache/zookeeper/zookeeper-3.4.14/zookeeper-3.4.14.tar.gz 同样，解压之：\ntar -zxvf zookeeper-3.4.14.tar.gz 重命名 zoo_sample.cfg 为 zoo.cfg：\nmv zookeeper-3.4.14/conf/zoo_sample.cfg zoo.cfg 启动 Zookeeper：\nsh zookeeper-3.4.14/bin/zkServer.sh start 查看服务进程：\nps -ef | grep zookeeper 数据初始化、工程打包和部署 将各个模块的 application.yml 配置为线上环境，包括数据库和 FTP 服务器的地址、用户名和密码等。然后直接对父模块使用 maven clean 和 package 打包各个模块为 jar 包，发送到服务器上部署运行即可（jar 包后台运行和日志输出重定向见 [CentOS jar包后台运行](https://zjxjwxk.com/2019/01/30/Linux/CentOS/CentOS jar包后台运行/)）。当然，这里是一种比较 low 的部署方式，可以通过 Jenkins，k8s 等进行持续集成。\n可以通过以下命令查看是否启动成功：\nps -ef | grep xxx 或者 jobs 安装 OpenResty 安装前的准备 您必须将这些库 perl 5.6.1+, libpcre, libssl安装在您的电脑之中。 对于 Linux来说, 您需要确认使用 ldconfig 命令，让其在您的系统环境路径中能找到它们。\nFedora 和 RedHat 用户 推荐您使用yum安装以下的开发库:\nyum install pcre-devel openssl-devel gcc curl 构建 OpenResty 下载 从下载页 Download下载最新的 OpenResty® 源码包，并且像下面的示例一样将其解压:\ntar -xzvf openresty-VERSION.tar.gz VERSION 的地方替换成您下载的源码包的版本号，比如说 0.8.54.6。\n./configure 然后在进入 openresty-VERSION/ 目录, 然后输入以下命令配置:\n./configure 默认, --prefix=/usr/local/openresty 程序会被安装到/usr/local/openresty目录。\n您可以指定各种选项，比如\n./configure --prefix=/developer/openresty \\ --with-luajit \\ --without-http_redis2_module \\ --with-http_iconv_module 试着使用 ./configure --help 查看更多的选项。\n配置文件（./configure script）运行出错可以到 build/nginx-VERSION/objs/autoconf.err 找到。 VERSION 的地方必须与OpenResty版本号相对应, 比如 0.8.54.6。\n需要额外安装 postersql-devel\nsudo yum install -y postgresql-devel make 您可以使用下面的命令来编译：\nmake 如果您的电脑支持多核 make 工作的特性, 您可以这样编译:\nmake -j2 假设您是的机器是双核。\nmake install 如果前面的步骤都没有问题的话,您可以使用下面的命令安装 OpenResty 到您的系统中：\nmake install 在 Linux 上，通常需要使用 sudo 来获取 root 权限来完成安装。\n如果在 prefix 目录有了 openresty 目录，这代表安装完成。\n配置 Nginx 编辑 Nginx 的 nginx.conf\nvim openresty/nginx/conf/nginx.conf 在其中启用（去掉注释） error_log, pid, http 中的 log_format 和 access_log。\n在 http 的 server 中，去掉 access_log 的注释（全局也有一个 access_log，局部优先），并给 server_name 添加域名，将 location / 中修改为 proxy_pass http://127.0.0.1:8081 （此处为我的 gateway 网关模块运行端口），即代理访问 gateway 服务。FTP 服务器代理则为 root /ftpfile/ 。\n#user nobody; worker_processes 1; error_log logs/error.log; #error_log logs/error.log notice; #error_log logs/error.log info; pid logs/nginx.pid; events { worker_connections 1024; } http { include mime.types; default_type application/octet-stream; log_format main '$remote_addr - $remote_user [$time_local] \"$request\" ' '$status $body_bytes_sent \"$http_referer\" ' '\"$http_user_agent\" \"$http_x_forwarded_for\"'; access_log logs/access.log main; sendfile on; #tcp_nopush on; #keepalive_timeout 0; keepalive_timeout 65; #gzip on; server { listen 80; server_name localhost www.cinema.zjxjwxk.com cinema.zjxjwxk.com #charset koi8-r; access_log logs/host.access.log main; location / { proxy_pass http://127.0.0.1:8081 } #error_page 404 /404.html; # redirect server error pages to the static page /50x.html # error_page 500 502 503 504 /50x.html; location = /50x.html { root html; } # proxy the PHP scripts to Apache listening on 127.0.0.1:80 # #location ~ \\.php$ { # proxy_pass http://127.0.0.1; #} # pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000 # #location ~ \\.php$ { # root html; # fastcgi_pass 127.0.0.1:9000; # fastcgi_index index.php; # fastcgi_param SCRIPT_FILENAME /scripts$fastcgi_script_name; # include fastcgi_params; #} # deny access to .htaccess files, if Apache's document root # concurs with nginx's one # #location ~ /\\.ht { # deny all; #} } # another virtual host using mix of IP-, name-, and port-based configuration # # vsftpd FTP server #server { # listen 80; # server_name localhost img-cinema.zjxjwxk.com; # location / { # root /ftpfile/; # } #} # HTTPS server # #server { # listen 443 ssl; # server_name localhost; # ssl_certificate cert.pem; # ssl_certificate_key cert.key; # ssl_session_cache shared:SSL:1m; # ssl_session_timeout 5m; # ssl_ciphers HIGH:!aNULL:!MD5; # ssl_prefer_server_ciphers on; # location / { # root html; # index index.html index.htm; # } #} } 在 sbin 中执行以下命令查看配置是否合法\nsudo ./nginx -t 运行 nginx\n./nginx 验证是否运行成功\nnetstat -nlp | grep \"nginx\" ",
+  "wordCount" : "749",
+  "inLanguage": "en",
+  "datePublished": "2020-05-03T22:34:00Z",
+  "dateModified": "2020-05-03T22:34:00Z",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/12.%E7%B3%BB%E7%BB%9F%E9%83%A8%E7%BD%B2/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Xinkang's Blog",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://zjxjwxk.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://zjxjwxk.github.io/" accesskey="h" title="Xinkang&#39;s Blog (Alt + H)">Xinkang&#39;s Blog</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://zjxjwxk.github.io/archives/" title="Archives">
+                    <span>Archives</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://zjxjwxk.github.io/categories/" title="Categories">
+                    <span>Categories</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://zjxjwxk.github.io/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://zjxjwxk.github.io/search/" title="Search (Alt &#43; /)" accesskey=/>
+                    <span>Search</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <div id="content-container">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      Dubbo微服务影院系列（12）：系统部署
+    </h1>
+    <div class="post-meta"><span title='2020-05-03 22:34:00 +0000 UTC'>May 3, 2020</span>
+
+</div>
+  </header> 
+  <div class="post-content"><h1 id="运行环境">运行环境<a hidden class="anchor" aria-hidden="true" href="#运行环境">#</a></h1>
+<ul>
+<li>CentOS 6</li>
+<li>云服务器</li>
+</ul>
+<h1 id="创建用户">创建用户<a hidden class="anchor" aria-hidden="true" href="#创建用户">#</a></h1>
+<p>创建一个 cinema 用户：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#f92672">[</span>root@huawei ~<span style="color:#f92672">]</span><span style="color:#75715e"># useradd cinema</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>root@huawei ~<span style="color:#f92672">]</span><span style="color:#75715e"># passwd cinema</span>
+</span></span><span style="display:flex;"><span>Changing password <span style="color:#66d9ef">for</span> user cinema.
+</span></span><span style="display:flex;"><span>New password: 
+</span></span><span style="display:flex;"><span>BAD PASSWORD: it does not contain enough DIFFERENT characters
+</span></span><span style="display:flex;"><span>Retype new password: 
+</span></span><span style="display:flex;"><span>passwd: all authentication tokens updated successfully.
+</span></span></code></pre></div><p>给予其权限，首先需要赋予当前用户对 /etc/sudoers 的写权限，然后在 sudoers 文件中的 root ALL = (ALL) ALL 下增加一行，赋予其在任何地方执行任何命令的权限：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>chmod u+w /etc/sudoers
+</span></span><span style="display:flex;"><span>vim sudoers
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e">## Allow root to run any commands anywhere </span>
+</span></span><span style="display:flex;"><span>root    ALL<span style="color:#f92672">=(</span>ALL<span style="color:#f92672">)</span>       ALL
+</span></span><span style="display:flex;"><span>cinema  ALL<span style="color:#f92672">=(</span>ALL<span style="color:#f92672">)</span>       ALL
+</span></span></code></pre></div><p>最后，取消当前用户的写权限：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>chmod u-w /etc/sudoers
+</span></span></code></pre></div><h1 id="关闭-iptables-防火墙">关闭 iptables 防火墙<a hidden class="anchor" aria-hidden="true" href="#关闭-iptables-防火墙">#</a></h1>
+<p>我们只需要使用云服务器提供的防火墙就够了</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>service iptables stop
+</span></span></code></pre></div><p>并且关闭开机启动</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>chkconfig iptables off
+</span></span></code></pre></div><h1 id="安装数据库">安装数据库<a hidden class="anchor" aria-hidden="true" href="#安装数据库">#</a></h1>
+<p>下载并安装 MySQL Yum Repository（MySQL 镜像源）：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>wget https://dev.mysql.com/get/mysql80-community-release-el6-3.noarch.rpm
+</span></span><span style="display:flex;"><span>sudo yum install mysql80-community-release-el6-3.noarch.rpm
+</span></span></code></pre></div><p>验证安装是否成功：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ls /etc/yum.repos.d/
+</span></span></code></pre></div><p>若存在 mysql-community.repo 和 mysql-community-source.repo，则表示 MySQL Yum Repository 安装成功。</p>
+<p>查看所有 MySQL 版本：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>yum repolist all | grep mysql
+</span></span></code></pre></div><p>禁用最新版，使用 5.7 版本：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo yum-config-manager --disable mysql80-community
+</span></span><span style="display:flex;"><span>sudo yum-config-manager --enable mysql57-community
+</span></span></code></pre></div><p>安装 MySQL：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo yum install mysql-community-server
+</span></span></code></pre></div><p>开启 MySQL 服务：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo service mysqld start
+</span></span></code></pre></div><p>查看 MySQL 初始密码：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo grep <span style="color:#e6db74">&#34;password&#34;</span> /var/log/mysqld.log
+</span></span></code></pre></div><p>利用初始密码登录数据库：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>mysql -uroot -p
+</span></span></code></pre></div><p>修改初始密码：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>set password <span style="color:#66d9ef">for</span> <span style="color:#e6db74">&#39;root&#39;</span>@<span style="color:#e6db74">&#39;localhost&#39;</span> <span style="color:#f92672">=</span> password<span style="color:#f92672">(</span><span style="color:#e6db74">&#39;Zjxjwxk19981018_&#39;</span><span style="color:#f92672">)</span>;
+</span></span></code></pre></div><p>查看当前有哪些用户：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>mysql&gt; <span style="color:#66d9ef">select</span> host, user from mysql.user;
+</span></span><span style="display:flex;"><span>+---------+---------------+
+</span></span><span style="display:flex;"><span>| host          | user                      |
+</span></span><span style="display:flex;"><span>+-------- +---------------+
+</span></span><span style="display:flex;"><span>| localhost | mysql.session    |
+</span></span><span style="display:flex;"><span>| localhost | mysql.sys            |
+</span></span><span style="display:flex;"><span>| localhost | root                       |
+</span></span><span style="display:flex;"><span>+-----------+-------------+
+</span></span></code></pre></div><p>修改 root 用户访问权限，使得其可以被远程访问：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>UPDATE mysql.user SET host <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;%&#39;</span> WHERE user <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;root&#39;</span> and host <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;localhost&#39;</span>;
+</span></span></code></pre></div><p>修改后重启 MySQL：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo service mysqld restart
+</span></span></code></pre></div><h1 id="安装-vsftpd">安装 vsftpd<a hidden class="anchor" aria-hidden="true" href="#安装-vsftpd">#</a></h1>
+<blockquote>
+<p>阿里云文档：https://help.aliyun.com/knowledge_detail/60152.html</p>
+</blockquote>
+<h1 id="安装-jdk-和-zookeeper">安装 JDK 和 Zookeeper<a hidden class="anchor" aria-hidden="true" href="#安装-jdk-和-zookeeper">#</a></h1>
+<h2 id="安装-jdk">安装 JDK<a hidden class="anchor" aria-hidden="true" href="#安装-jdk">#</a></h2>
+<p>在本地上，从 Oracle 官网下载 jdk 的 tar.gz 包 <a href="https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html">https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html</a> ，并上传到服务器上：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sudo scp jdk-8u251-linux-x64.tar.gz cinema@34.80.107.207:~/install/
+</span></span></code></pre></div><p>如果 scp 出现 <code>Permission denied (publickey,gssapi-keyex,gssapi-with-mic).</code> ，则可能需要在服务器上设置密码登录为 <code>yes</code>：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sudo vim /etc/ssh/sshd_config
+</span></span></code></pre></div><p>将 PasswordAuthentication no 中的 “no” 改为 &ldquo;yes&rdquo;。</p>
+<p>在服务器解压：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>tar -zxvf jdk-8u251-linux-x64.tar.gz
+</span></span></code></pre></div><p>添加 JAVA_HOME 环境变量：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>vim /etc/profile
+</span></span></code></pre></div><p>添加以下几行：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e">## JAVA_HOME</span>
+</span></span><span style="display:flex;"><span>export JAVA_HOME<span style="color:#f92672">=</span>/developer/jdk1.8.0_251
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>export PATH<span style="color:#f92672">=</span>$PATH:$JAVA_HOME/bin
+</span></span></code></pre></div><p>生效环境变量：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>source /etc/profile
+</span></span></code></pre></div><h2 id="安装-zookeeper">安装 Zookeeper<a hidden class="anchor" aria-hidden="true" href="#安装-zookeeper">#</a></h2>
+<p>从 Apache Zookeeper 官网获取 tar.gz 包：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>wget https://mirror.bit.edu.cn/apache/zookeeper/zookeeper-3.4.14/zookeeper-3.4.14.tar.gz
+</span></span></code></pre></div><p>同样，解压之：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>tar -zxvf zookeeper-3.4.14.tar.gz
+</span></span></code></pre></div><p>重命名 zoo_sample.cfg 为 zoo.cfg：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>mv zookeeper-3.4.14/conf/zoo_sample.cfg zoo.cfg
+</span></span></code></pre></div><p>启动 Zookeeper：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sh zookeeper-3.4.14/bin/zkServer.sh start
+</span></span></code></pre></div><p>查看服务进程：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ps -ef | grep zookeeper
+</span></span></code></pre></div><h1 id="数据初始化工程打包和部署">数据初始化、工程打包和部署<a hidden class="anchor" aria-hidden="true" href="#数据初始化工程打包和部署">#</a></h1>
+<p>将各个模块的 application.yml 配置为线上环境，包括数据库和 FTP 服务器的地址、用户名和密码等。然后直接对父模块使用 maven clean 和 package 打包各个模块为 jar 包，发送到服务器上部署运行即可（jar 包后台运行和日志输出重定向见 [CentOS jar包后台运行](<a href="https://zjxjwxk.com/2019/01/30/Linux/CentOS/CentOS">https://zjxjwxk.com/2019/01/30/Linux/CentOS/CentOS</a> jar包后台运行/)）。当然，这里是一种比较 low 的部署方式，可以通过 Jenkins，k8s 等进行持续集成。</p>
+<p><img alt="mvn clean and package" loading="lazy" src="/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/12.%E7%B3%BB%E7%BB%9F%E9%83%A8%E7%BD%B2/images/image-20200504122029175.png"></p>
+<p>可以通过以下命令查看是否启动成功：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ps -ef | grep xxx
+</span></span><span style="display:flex;"><span>或者
+</span></span><span style="display:flex;"><span>jobs
+</span></span></code></pre></div><h1 id="安装-openresty">安装 OpenResty<a hidden class="anchor" aria-hidden="true" href="#安装-openresty">#</a></h1>
+<h2 id="安装前的准备">安装前的准备<a hidden class="anchor" aria-hidden="true" href="#安装前的准备">#</a></h2>
+<p>您必须将这些库 <code>perl 5.6.1+</code>, <code>libpcre</code>, <code>libssl</code>安装在您的电脑之中。 对于 Linux来说, 您需要确认使用 <code>ldconfig</code> 命令，让其在您的系统环境路径中能找到它们。</p>
+<h2 id="fedora-和-redhat-用户">Fedora 和 RedHat 用户<a hidden class="anchor" aria-hidden="true" href="#fedora-和-redhat-用户">#</a></h2>
+<p>推荐您使用yum安装以下的开发库:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>yum install pcre-devel openssl-devel gcc curl
+</span></span></code></pre></div><h1 id="构建-openresty">构建 OpenResty<a hidden class="anchor" aria-hidden="true" href="#构建-openresty">#</a></h1>
+<h2 id="下载">下载<a hidden class="anchor" aria-hidden="true" href="#下载">#</a></h2>
+<p>从下载页 <a href="https://openresty.org/cn/download.html">Download</a>下载最新的 OpenResty® 源码包，并且像下面的示例一样将其解压:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>tar -xzvf openresty-VERSION.tar.gz
+</span></span></code></pre></div><p><code>VERSION</code> 的地方替换成您下载的源码包的版本号，比如说 <code>0.8.54.6</code>。</p>
+<h2 id="configure">./configure<a hidden class="anchor" aria-hidden="true" href="#configure">#</a></h2>
+<p>然后在进入 <code>openresty-VERSION/</code> 目录, 然后输入以下命令配置:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>./configure
+</span></span></code></pre></div><p>默认, <code>--prefix=/usr/local/openresty</code> 程序会被安装到/usr/local/openresty目录。</p>
+<p>您可以指定各种选项，比如</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>./configure --prefix<span style="color:#f92672">=</span>/developer/openresty <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>            --with-luajit <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>            --without-http_redis2_module <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>            --with-http_iconv_module
+</span></span></code></pre></div><p>试着使用 <code>./configure --help</code> 查看更多的选项。</p>
+<p>配置文件（./configure script）运行出错可以到 <code>build/nginx-VERSION/objs/autoconf.err</code> 找到。 <code>VERSION</code> 的地方必须与<a href="https://openresty.org/cn/openresty.html">OpenResty</a>版本号相对应, 比如 <code>0.8.54.6</code>。</p>
+<p>需要额外安装 postersql-devel</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo yum install -y postgresql-devel
+</span></span></code></pre></div><h2 id="make">make<a hidden class="anchor" aria-hidden="true" href="#make">#</a></h2>
+<p>您可以使用下面的命令来编译：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>make
+</span></span></code></pre></div><p>如果您的电脑支持多核 <code>make</code> 工作的特性, 您可以这样编译:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>make -j2
+</span></span></code></pre></div><p>假设您是的机器是双核。</p>
+<h2 id="make-install">make install<a hidden class="anchor" aria-hidden="true" href="#make-install">#</a></h2>
+<p>如果前面的步骤都没有问题的话,您可以使用下面的命令安装 <a href="https://openresty.org/cn/openresty.html">OpenResty</a> 到您的系统中：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>make install
+</span></span></code></pre></div><p>在 Linux 上，通常需要使用 <code>sudo</code> 来获取 root 权限来完成安装。</p>
+<p>如果在 prefix 目录有了 openresty 目录，这代表安装完成。</p>
+<h2 id="配置-nginx">配置 Nginx<a hidden class="anchor" aria-hidden="true" href="#配置-nginx">#</a></h2>
+<p>编辑 Nginx 的 nginx.conf</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>vim openresty/nginx/conf/nginx.conf
+</span></span></code></pre></div><p>在其中启用（去掉注释） error_log, pid, http 中的 log_format 和 access_log。</p>
+<p>在 http 的 server 中，去掉 access_log 的注释（全局也有一个 access_log，局部优先），并给 server_name 添加域名，将 location / 中修改为 proxy_pass http://127.0.0.1:8081 （此处为我的 gateway 网关模块运行端口），即代理访问 gateway 服务。FTP 服务器代理则为 root /ftpfile/ 。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#user</span>  <span style="color:#960050;background-color:#1e0010">nobody;</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">worker_processes</span>  <span style="color:#ae81ff">1</span><span style="color:#960050;background-color:#1e0010">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">error_log</span>  <span style="color:#960050;background-color:#1e0010">logs/error.log;</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#error_log</span>  <span style="color:#960050;background-color:#1e0010">logs/error.log</span>  <span style="color:#960050;background-color:#1e0010">notice;</span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#error_log</span>  <span style="color:#960050;background-color:#1e0010">logs/error.log</span>  <span style="color:#960050;background-color:#1e0010">info;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">pid</span>        <span style="color:#960050;background-color:#1e0010">logs/nginx.pid;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">events</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">worker_connections</span>  <span style="color:#960050;background-color:#1e0010">1024;</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">http</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">include</span>       <span style="color:#960050;background-color:#1e0010">mime.types;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">default_type</span>  <span style="color:#960050;background-color:#1e0010">application/octet-stream;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">log_format</span>  <span style="color:#960050;background-color:#1e0010">main</span>  <span style="color:#960050;background-color:#1e0010">&#39;$remote_addr</span> <span style="color:#960050;background-color:#1e0010">-</span> <span style="color:#960050;background-color:#1e0010">$remote_user</span> <span style="color:#960050;background-color:#1e0010">[$time_local]</span> <span style="color:#f92672">&#34;$request&#34;</span> <span style="color:#960050;background-color:#1e0010">&#39;</span>
+</span></span><span style="display:flex;"><span>                      <span style="color:#960050;background-color:#1e0010">&#39;$status</span> <span style="color:#960050;background-color:#1e0010">$body_bytes_sent</span> <span style="color:#e6db74">&#34;$http_referer&#34;</span> <span style="color:#960050;background-color:#1e0010">&#39;</span>
+</span></span><span style="display:flex;"><span>                      <span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#e6db74">&#34;$http_user_agent&#34;</span> <span style="color:#e6db74">&#34;$http_x_forwarded_for&#34;</span><span style="color:#960050;background-color:#1e0010">&#39;;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">access_log</span>  <span style="color:#960050;background-color:#1e0010">logs/access.log</span>  <span style="color:#960050;background-color:#1e0010">main;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">sendfile</span>        <span style="color:#960050;background-color:#1e0010">on;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">#tcp_nopush</span>     <span style="color:#960050;background-color:#1e0010">on;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">#keepalive_timeout</span>  <span style="color:#ae81ff">0</span><span style="color:#960050;background-color:#1e0010">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">keepalive_timeout</span>  <span style="color:#ae81ff">65</span><span style="color:#960050;background-color:#1e0010">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">#gzip</span>  <span style="color:#960050;background-color:#1e0010">on;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">server</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#960050;background-color:#1e0010">listen</span>       <span style="color:#960050;background-color:#1e0010">80;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#960050;background-color:#1e0010">server_name</span>  <span style="color:#960050;background-color:#1e0010">localhost</span> <span style="color:#960050;background-color:#1e0010">www.cinema.zjxjwxk.com</span> <span style="color:#960050;background-color:#1e0010">cinema.zjxjwxk.com</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#960050;background-color:#1e0010">#charset</span> <span style="color:#960050;background-color:#1e0010">koi8-r;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#960050;background-color:#1e0010">access_log</span>  <span style="color:#960050;background-color:#1e0010">logs/host.access.log</span>  <span style="color:#960050;background-color:#1e0010">main;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#960050;background-color:#1e0010">location</span> <span style="color:#960050;background-color:#1e0010">/</span> <span style="color:#960050;background-color:#1e0010">{</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#960050;background-color:#1e0010">proxy_pass</span> <span style="color:#960050;background-color:#1e0010">http:</span><span style="color:#75715e">//127.0.0.1:8081
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#960050;background-color:#1e0010">#error_page</span>  <span style="color:#ae81ff">404</span>              <span style="color:#960050;background-color:#1e0010">/</span><span style="color:#ae81ff">404</span><span style="color:#960050;background-color:#1e0010">.html;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#960050;background-color:#1e0010">#</span> <span style="color:#960050;background-color:#1e0010">redirect</span> <span style="color:#960050;background-color:#1e0010">server</span> <span style="color:#960050;background-color:#1e0010">error</span> <span style="color:#960050;background-color:#1e0010">pages</span> <span style="color:#960050;background-color:#1e0010">to</span> <span style="color:#960050;background-color:#1e0010">the</span> <span style="color:#960050;background-color:#1e0010">static</span> <span style="color:#960050;background-color:#1e0010">page</span> <span style="color:#960050;background-color:#1e0010">/</span><span style="color:#ae81ff">50</span><span style="color:#960050;background-color:#1e0010">x.html</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#960050;background-color:#1e0010">#</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#960050;background-color:#1e0010">error_page</span>   <span style="color:#ae81ff">500</span> <span style="color:#ae81ff">502</span> <span style="color:#ae81ff">503</span> <span style="color:#ae81ff">504</span>  <span style="color:#960050;background-color:#1e0010">/</span><span style="color:#ae81ff">50</span><span style="color:#960050;background-color:#1e0010">x.html;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#960050;background-color:#1e0010">location</span> <span style="color:#960050;background-color:#1e0010">=</span> <span style="color:#960050;background-color:#1e0010">/</span><span style="color:#ae81ff">50</span><span style="color:#960050;background-color:#1e0010">x.html</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#960050;background-color:#1e0010">root</span>   <span style="color:#960050;background-color:#1e0010">html;</span>
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#960050;background-color:#1e0010">#</span> <span style="color:#960050;background-color:#1e0010">proxy</span> <span style="color:#960050;background-color:#1e0010">the</span> <span style="color:#960050;background-color:#1e0010">PHP</span> <span style="color:#960050;background-color:#1e0010">scripts</span> <span style="color:#960050;background-color:#1e0010">to</span> <span style="color:#960050;background-color:#1e0010">Apache</span> <span style="color:#960050;background-color:#1e0010">listening</span> <span style="color:#960050;background-color:#1e0010">on</span> <span style="color:#ae81ff">127.0</span><span style="color:#960050;background-color:#1e0010">.</span><span style="color:#ae81ff">0.1</span>:<span style="color:#ae81ff">80</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#960050;background-color:#1e0010">#</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#960050;background-color:#1e0010">#location</span> <span style="color:#960050;background-color:#1e0010">~</span> <span style="color:#960050;background-color:#1e0010">\.php$</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#960050;background-color:#1e0010">#</span>    <span style="color:#960050;background-color:#1e0010">proxy_pass</span>   <span style="color:#960050;background-color:#1e0010">http:</span><span style="color:#75715e">//127.0.0.1;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#960050;background-color:#1e0010">#</span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#960050;background-color:#1e0010">#</span> <span style="color:#960050;background-color:#1e0010">pass</span> <span style="color:#960050;background-color:#1e0010">the</span> <span style="color:#960050;background-color:#1e0010">PHP</span> <span style="color:#960050;background-color:#1e0010">scripts</span> <span style="color:#960050;background-color:#1e0010">to</span> <span style="color:#960050;background-color:#1e0010">FastCGI</span> <span style="color:#960050;background-color:#1e0010">server</span> <span style="color:#960050;background-color:#1e0010">listening</span> <span style="color:#960050;background-color:#1e0010">on</span> <span style="color:#ae81ff">127.0</span><span style="color:#960050;background-color:#1e0010">.</span><span style="color:#ae81ff">0.1</span>:<span style="color:#ae81ff">9000</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#960050;background-color:#1e0010">#</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#960050;background-color:#1e0010">#location</span> <span style="color:#960050;background-color:#1e0010">~</span> <span style="color:#960050;background-color:#1e0010">\.php$</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#960050;background-color:#1e0010">#</span>    <span style="color:#960050;background-color:#1e0010">root</span>           <span style="color:#960050;background-color:#1e0010">html;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#960050;background-color:#1e0010">#</span>    <span style="color:#960050;background-color:#1e0010">fastcgi_pass</span>   <span style="color:#960050;background-color:#1e0010">127.0.0.1:9000;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#960050;background-color:#1e0010">#</span>    <span style="color:#960050;background-color:#1e0010">fastcgi_index</span>  <span style="color:#960050;background-color:#1e0010">index.php;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#960050;background-color:#1e0010">#</span>    <span style="color:#960050;background-color:#1e0010">fastcgi_param</span>  <span style="color:#960050;background-color:#1e0010">SCRIPT_FILENAME</span>  <span style="color:#960050;background-color:#1e0010">/scripts$fastcgi_script_name;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#960050;background-color:#1e0010">#</span>    <span style="color:#960050;background-color:#1e0010">include</span>        <span style="color:#960050;background-color:#1e0010">fastcgi_params;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#960050;background-color:#1e0010">#</span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#960050;background-color:#1e0010">#</span> <span style="color:#960050;background-color:#1e0010">deny</span> <span style="color:#960050;background-color:#1e0010">access</span> <span style="color:#960050;background-color:#1e0010">to</span> <span style="color:#960050;background-color:#1e0010">.htaccess</span> <span style="color:#960050;background-color:#1e0010">files</span>, <span style="color:#960050;background-color:#1e0010">if</span> <span style="color:#960050;background-color:#1e0010">Apache&#39;s</span> <span style="color:#960050;background-color:#1e0010">document</span> <span style="color:#960050;background-color:#1e0010">root</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#960050;background-color:#1e0010">#</span> <span style="color:#960050;background-color:#1e0010">concurs</span> <span style="color:#960050;background-color:#1e0010">with</span> <span style="color:#960050;background-color:#1e0010">nginx&#39;s</span> <span style="color:#960050;background-color:#1e0010">one</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#960050;background-color:#1e0010">#</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#960050;background-color:#1e0010">#location</span> <span style="color:#960050;background-color:#1e0010">~</span> <span style="color:#960050;background-color:#1e0010">/\.ht</span> <span style="color:#960050;background-color:#1e0010">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#960050;background-color:#1e0010">#</span>    <span style="color:#960050;background-color:#1e0010">deny</span>  <span style="color:#960050;background-color:#1e0010">all;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#960050;background-color:#1e0010">#</span>}
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">#</span> <span style="color:#960050;background-color:#1e0010">another</span> <span style="color:#960050;background-color:#1e0010">virtual</span> <span style="color:#960050;background-color:#1e0010">host</span> <span style="color:#960050;background-color:#1e0010">using</span> <span style="color:#960050;background-color:#1e0010">mix</span> <span style="color:#960050;background-color:#1e0010">of</span> <span style="color:#960050;background-color:#1e0010">IP-,</span> <span style="color:#960050;background-color:#1e0010">name-,</span> <span style="color:#960050;background-color:#1e0010">and</span> <span style="color:#960050;background-color:#1e0010">port-based</span> <span style="color:#960050;background-color:#1e0010">configuration</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">#</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">#</span> <span style="color:#960050;background-color:#1e0010">vsftpd</span> <span style="color:#960050;background-color:#1e0010">FTP</span> <span style="color:#960050;background-color:#1e0010">server</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">#server</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">#</span>    <span style="color:#960050;background-color:#1e0010">listen</span>       <span style="color:#960050;background-color:#1e0010">80;</span>   
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">#</span>    <span style="color:#960050;background-color:#1e0010">server_name</span>  <span style="color:#960050;background-color:#1e0010">localhost</span> <span style="color:#960050;background-color:#1e0010">img-cinema.zjxjwxk.com;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">#</span>    <span style="color:#960050;background-color:#1e0010">location</span> <span style="color:#960050;background-color:#1e0010">/</span> <span style="color:#960050;background-color:#1e0010">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">#</span>        <span style="color:#960050;background-color:#1e0010">root</span>   <span style="color:#960050;background-color:#1e0010">/ftpfile/;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">#</span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">#}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">#</span> <span style="color:#960050;background-color:#1e0010">HTTPS</span> <span style="color:#960050;background-color:#1e0010">server</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">#</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">#server</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">#</span>    <span style="color:#960050;background-color:#1e0010">listen</span>       <span style="color:#960050;background-color:#1e0010">443</span> <span style="color:#960050;background-color:#1e0010">ssl;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">#</span>    <span style="color:#960050;background-color:#1e0010">server_name</span>  <span style="color:#960050;background-color:#1e0010">localhost;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">#</span>    <span style="color:#960050;background-color:#1e0010">ssl_certificate</span>      <span style="color:#960050;background-color:#1e0010">cert.pem;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">#</span>    <span style="color:#960050;background-color:#1e0010">ssl_certificate_key</span>  <span style="color:#960050;background-color:#1e0010">cert.key;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">#</span>    <span style="color:#960050;background-color:#1e0010">ssl_session_cache</span>    <span style="color:#960050;background-color:#1e0010">shared:SSL:1m;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">#</span>    <span style="color:#960050;background-color:#1e0010">ssl_session_timeout</span>  <span style="color:#960050;background-color:#1e0010">5m;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">#</span>    <span style="color:#960050;background-color:#1e0010">ssl_ciphers</span>  <span style="color:#960050;background-color:#1e0010">HIGH:!aNULL:!MD5;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">#</span>    <span style="color:#960050;background-color:#1e0010">ssl_prefer_server_ciphers</span>  <span style="color:#960050;background-color:#1e0010">on;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">#</span>    <span style="color:#960050;background-color:#1e0010">location</span> <span style="color:#960050;background-color:#1e0010">/</span> <span style="color:#960050;background-color:#1e0010">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">#</span>        <span style="color:#960050;background-color:#1e0010">root</span>   <span style="color:#960050;background-color:#1e0010">html;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">#</span>        <span style="color:#960050;background-color:#1e0010">index</span>  <span style="color:#960050;background-color:#1e0010">index.html</span> <span style="color:#960050;background-color:#1e0010">index.htm;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">#</span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">#}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">}</span>
+</span></span></code></pre></div><p>在 sbin 中执行以下命令查看配置是否合法</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo ./nginx -t
+</span></span></code></pre></div><p>运行 nginx</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>./nginx
+</span></span></code></pre></div><p>验证是否运行成功</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>netstat -nlp | grep <span style="color:#e6db74">&#34;nginx&#34;</span>
+</span></span></code></pre></div>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://zjxjwxk.github.io/tags/dubbo/">Dubbo</a></li>
+      <li><a href="https://zjxjwxk.github.io/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/">微服务架构</a></li>
+    </ul>
+  </footer>
+</article>
+
+<script>
+  window.onload = function() {
+      var contentContainer = document.getElementById("content-container");
+      if ("" !== "") {
+          var password = prompt("Enter password:");
+          if (password === "") {
+              contentContainer.style.display = "block";
+          } else {
+              alert("Incorrect password");
+          }
+      } else {
+          contentContainer.style.display = "block";
+      }
+  };
+</script>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2024 <a href="https://zjxjwxk.github.io/">Xinkang&#39;s Blog</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

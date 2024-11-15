@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Dubbo微服务影院系列（10）：分布式事务 | Xinkang&#39;s Blog</title>
+<meta name="keywords" content="Dubbo, 微服务架构">
+<meta name="description" content="章节概要
+
+事务简介
+分布式事务的前世今生
+分布式事务解决方案
+主流分布式事务框架介绍
+
+事务简介
+
+事务是用来保证一组数据操作的完整性和一致性的
+事务必须满足 ACID 的四大特性
+事务具有四种隔离级别
+事务具有七种传播行为
+
+事务属性
+
+原子性（Atomicity）
+一致性（Consistency）
+隔离型（Isolation）
+持久性（Durability）
+
+分布式事务
+概念
+
+分布式事务就是将多个节点的事务看成一个整体处理
+分布式事务由事务参与者、资源服务器、事务管理器等组成
+常见的分布式事务的例子：支付、下订单等
+
+实现思路
+
+两段式事务和三段式事务
+基于 XA 的分布式事务
+基于消息的最终一致性方案
+TCC 编程式补偿性事务
+
+分布式事务类型
+两段式和三段式事务
+两段式事务
+
+三段式事务
+
+基于 XA 的分布式事务
+
+基于消息的一致性方案
+
+TCC 补偿性事务
+
+基于消息的一致性方案和 TCC 补偿性事务的区别
+
+基于消息的事务是强一致性事务，会存在浪费
+TCC 事务是柔性事务，在 try 阶段要对资源做预留
+TCC 事务在确认或取消阶段释放资源
+与基于消息的事务对比，TCC 的时效性更好
+
+分布式事务框架
+
+全局事务服务（Global Transaction Service，简称 GTS）
+蚂蚁金服分布式事务（Distributed Transaction-eXtended，简称 DTX）
+开源 TCC 框架（TCC-Transaction）（https://github.com/changmingxie/tcc-transaction）
+开源 TCC 框架（ByteTCC）（https://github.com/liuyangming/ByteTCC）
+
+TCC-Transaction 分布式事务框架
+
+Github 仓库：https://github.com/changmingxie/tcc-transaction">
+<meta name="author" content="">
+<link rel="canonical" href="https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/10.%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.d6fcd20a4fb86efa4dfac8ec95da60244cc8871042183da1ef28e3a762ad79c8.css" integrity="sha256-1vzSCk&#43;4bvpN&#43;sjsldpgJEzIhxBCGD2h7yjjp2Ktecg=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://zjxjwxk.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://zjxjwxk.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://zjxjwxk.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://zjxjwxk.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://zjxjwxk.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/10.%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><meta property="og:url" content="https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/10.%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/">
+  <meta property="og:site_name" content="Xinkang&#39;s Blog">
+  <meta property="og:title" content="Dubbo微服务影院系列（10）：分布式事务">
+  <meta property="og:description" content="章节概要 事务简介 分布式事务的前世今生 分布式事务解决方案 主流分布式事务框架介绍 事务简介 事务是用来保证一组数据操作的完整性和一致性的 事务必须满足 ACID 的四大特性 事务具有四种隔离级别 事务具有七种传播行为 事务属性 原子性（Atomicity） 一致性（Consistency） 隔离型（Isolation） 持久性（Durability） 分布式事务 概念 分布式事务就是将多个节点的事务看成一个整体处理 分布式事务由事务参与者、资源服务器、事务管理器等组成 常见的分布式事务的例子：支付、下订单等 实现思路 两段式事务和三段式事务 基于 XA 的分布式事务 基于消息的最终一致性方案 TCC 编程式补偿性事务 分布式事务类型 两段式和三段式事务 两段式事务 三段式事务 基于 XA 的分布式事务 基于消息的一致性方案 TCC 补偿性事务 基于消息的一致性方案和 TCC 补偿性事务的区别 基于消息的事务是强一致性事务，会存在浪费 TCC 事务是柔性事务，在 try 阶段要对资源做预留 TCC 事务在确认或取消阶段释放资源 与基于消息的事务对比，TCC 的时效性更好 分布式事务框架 全局事务服务（Global Transaction Service，简称 GTS） 蚂蚁金服分布式事务（Distributed Transaction-eXtended，简称 DTX） 开源 TCC 框架（TCC-Transaction）（https://github.com/changmingxie/tcc-transaction） 开源 TCC 框架（ByteTCC）（https://github.com/liuyangming/ByteTCC） TCC-Transaction 分布式事务框架 Github 仓库：https://github.com/changmingxie/tcc-transaction">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2020-04-17T20:14:00+00:00">
+    <meta property="article:modified_time" content="2020-04-17T20:14:00+00:00">
+    <meta property="article:tag" content="Dubbo">
+    <meta property="article:tag" content="微服务架构">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Dubbo微服务影院系列（10）：分布式事务">
+<meta name="twitter:description" content="章节概要
+
+事务简介
+分布式事务的前世今生
+分布式事务解决方案
+主流分布式事务框架介绍
+
+事务简介
+
+事务是用来保证一组数据操作的完整性和一致性的
+事务必须满足 ACID 的四大特性
+事务具有四种隔离级别
+事务具有七种传播行为
+
+事务属性
+
+原子性（Atomicity）
+一致性（Consistency）
+隔离型（Isolation）
+持久性（Durability）
+
+分布式事务
+概念
+
+分布式事务就是将多个节点的事务看成一个整体处理
+分布式事务由事务参与者、资源服务器、事务管理器等组成
+常见的分布式事务的例子：支付、下订单等
+
+实现思路
+
+两段式事务和三段式事务
+基于 XA 的分布式事务
+基于消息的最终一致性方案
+TCC 编程式补偿性事务
+
+分布式事务类型
+两段式和三段式事务
+两段式事务
+
+三段式事务
+
+基于 XA 的分布式事务
+
+基于消息的一致性方案
+
+TCC 补偿性事务
+
+基于消息的一致性方案和 TCC 补偿性事务的区别
+
+基于消息的事务是强一致性事务，会存在浪费
+TCC 事务是柔性事务，在 try 阶段要对资源做预留
+TCC 事务在确认或取消阶段释放资源
+与基于消息的事务对比，TCC 的时效性更好
+
+分布式事务框架
+
+全局事务服务（Global Transaction Service，简称 GTS）
+蚂蚁金服分布式事务（Distributed Transaction-eXtended，简称 DTX）
+开源 TCC 框架（TCC-Transaction）（https://github.com/changmingxie/tcc-transaction）
+开源 TCC 框架（ByteTCC）（https://github.com/liuyangming/ByteTCC）
+
+TCC-Transaction 分布式事务框架
+
+Github 仓库：https://github.com/changmingxie/tcc-transaction">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://zjxjwxk.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Dubbo微服务影院系列（10）：分布式事务",
+      "item": "https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/10.%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Dubbo微服务影院系列（10）：分布式事务",
+  "name": "Dubbo微服务影院系列（10）：分布式事务",
+  "description": "章节概要 事务简介 分布式事务的前世今生 分布式事务解决方案 主流分布式事务框架介绍 事务简介 事务是用来保证一组数据操作的完整性和一致性的 事务必须满足 ACID 的四大特性 事务具有四种隔离级别 事务具有七种传播行为 事务属性 原子性（Atomicity） 一致性（Consistency） 隔离型（Isolation） 持久性（Durability） 分布式事务 概念 分布式事务就是将多个节点的事务看成一个整体处理 分布式事务由事务参与者、资源服务器、事务管理器等组成 常见的分布式事务的例子：支付、下订单等 实现思路 两段式事务和三段式事务 基于 XA 的分布式事务 基于消息的最终一致性方案 TCC 编程式补偿性事务 分布式事务类型 两段式和三段式事务 两段式事务 三段式事务 基于 XA 的分布式事务 基于消息的一致性方案 TCC 补偿性事务 基于消息的一致性方案和 TCC 补偿性事务的区别 基于消息的事务是强一致性事务，会存在浪费 TCC 事务是柔性事务，在 try 阶段要对资源做预留 TCC 事务在确认或取消阶段释放资源 与基于消息的事务对比，TCC 的时效性更好 分布式事务框架 全局事务服务（Global Transaction Service，简称 GTS） 蚂蚁金服分布式事务（Distributed Transaction-eXtended，简称 DTX） 开源 TCC 框架（TCC-Transaction）（https://github.com/changmingxie/tcc-transaction） 开源 TCC 框架（ByteTCC）（https://github.com/liuyangming/ByteTCC） TCC-Transaction 分布式事务框架 Github 仓库：https://github.com/changmingxie/tcc-transaction\n",
+  "keywords": [
+    "Dubbo", "微服务架构"
+  ],
+  "articleBody": "章节概要 事务简介 分布式事务的前世今生 分布式事务解决方案 主流分布式事务框架介绍 事务简介 事务是用来保证一组数据操作的完整性和一致性的 事务必须满足 ACID 的四大特性 事务具有四种隔离级别 事务具有七种传播行为 事务属性 原子性（Atomicity） 一致性（Consistency） 隔离型（Isolation） 持久性（Durability） 分布式事务 概念 分布式事务就是将多个节点的事务看成一个整体处理 分布式事务由事务参与者、资源服务器、事务管理器等组成 常见的分布式事务的例子：支付、下订单等 实现思路 两段式事务和三段式事务 基于 XA 的分布式事务 基于消息的最终一致性方案 TCC 编程式补偿性事务 分布式事务类型 两段式和三段式事务 两段式事务 三段式事务 基于 XA 的分布式事务 基于消息的一致性方案 TCC 补偿性事务 基于消息的一致性方案和 TCC 补偿性事务的区别 基于消息的事务是强一致性事务，会存在浪费 TCC 事务是柔性事务，在 try 阶段要对资源做预留 TCC 事务在确认或取消阶段释放资源 与基于消息的事务对比，TCC 的时效性更好 分布式事务框架 全局事务服务（Global Transaction Service，简称 GTS） 蚂蚁金服分布式事务（Distributed Transaction-eXtended，简称 DTX） 开源 TCC 框架（TCC-Transaction）（https://github.com/changmingxie/tcc-transaction） 开源 TCC 框架（ByteTCC）（https://github.com/liuyangming/ByteTCC） TCC-Transaction 分布式事务框架 Github 仓库：https://github.com/changmingxie/tcc-transaction\n在需要提供分布式事务支持的接口方法上添加 @Compensable 在对应的接口实现方法上也添加 @Compensable，并添加注解参数 confirmMethod, cancelMethod 和 transactionContextEditor 实现对应的 confirmMethod 和 cancelMethod（必须和 try 方法在同一个类中） 注意：\n在分布式事务框架中，不要轻易在业务层捕获所有异常，只有在抛出异常的情况下，分布式事务框架才知道该业务是执行失败的。 使用 TCC-Transaction 时，confirm 和 cancel 的幂等性问题需要自己解决。 TCC 的数据库应该和业务数据库分开，以保证分布式事务的正常进行。 建立用于分布式事务的数据库 TCC 的数据库应该和业务数据库分开，以保证分布式事务的正常进行。\n其中，TCC 库用于实现分布式事务，其包含的表和表结构如下：\nDubbo Demo 子事务：红包模块 接口\npublic interface RedPacketTradeOrderService { @Compensable public String record(RedPacketTradeOrderDto tradeOrderDto); } 实现类\n@Service(\"redPacketTradeOrderService\") public class RedPacketTradeOrderServiceImpl implements RedPacketTradeOrderService { @Autowired RedPacketAccountRepository redPacketAccountRepository; @Autowired TradeOrderRepository tradeOrderRepository; @Override @Compensable(confirmMethod = \"confirmRecord\", cancelMethod = \"cancelRecord\", transactionContextEditor = DubboTransactionContextEditor.class) @Transactional public String record(RedPacketTradeOrderDto tradeOrderDto) { TradeOrder foundTradeOrder = tradeOrderRepository.findByMerchantOrderNo(tradeOrderDto.getMerchantOrderNo()); // check if trade order has been recorded, if yes, return success directly. if (foundTradeOrder == null) { TradeOrder tradeOrder = new TradeOrder( tradeOrderDto.getSelfUserId(), tradeOrderDto.getOppositeUserId(), tradeOrderDto.getMerchantOrderNo(), tradeOrderDto.getAmount() ); try { tradeOrderRepository.insert(tradeOrder); RedPacketAccount transferFromAccount = redPacketAccountRepository.findByUserId(tradeOrderDto.getSelfUserId()); transferFromAccount.transferFrom(tradeOrderDto.getAmount()); redPacketAccountRepository.save(transferFromAccount); } catch (DataIntegrityViolationException e) { // this exception may happen when insert trade order concurrently, if happened, ignore this insert operation. } } return \"success\"; } @Transactional public void confirmRecord(RedPacketTradeOrderDto tradeOrderDto) { TradeOrder tradeOrder = tradeOrderRepository.findByMerchantOrderNo(tradeOrderDto.getMerchantOrderNo()); // check if the trade order status is DRAFT, if yes, return directly, ensure idempotency. if (tradeOrder != null \u0026\u0026 tradeOrder.getStatus().equals(\"DRAFT\")) { tradeOrder.confirm(); tradeOrderRepository.update(tradeOrder); RedPacketAccount transferToAccount = redPacketAccountRepository.findByUserId(tradeOrderDto.getOppositeUserId()); transferToAccount.transferTo(tradeOrderDto.getAmount()); redPacketAccountRepository.save(transferToAccount); } } @Transactional public void cancelRecord(RedPacketTradeOrderDto tradeOrderDto) { TradeOrder tradeOrder = tradeOrderRepository.findByMerchantOrderNo(tradeOrderDto.getMerchantOrderNo()); // check if the trade order status is DRAFT, if yes, return directly, ensure idempotency. if (null != tradeOrder \u0026\u0026 \"DRAFT\".equals(tradeOrder.getStatus())) { tradeOrder.cancel(); tradeOrderRepository.update(tradeOrder); RedPacketAccount capitalAccount = redPacketAccountRepository.findByUserId(tradeOrderDto.getSelfUserId()); capitalAccount.cancelTransfer(tradeOrderDto.getAmount()); redPacketAccountRepository.save(capitalAccount); } } } 思考：为什么要在 confirm 和 cancel 方法里先检查订单状态是否为 DRAFT（在 try 方法中新增的一个订单），而不直接修改为结束状态？\n答：为了保证服务的幂等性，即使用相同参数对同一资源重复调用某个接口的结果与调用一次的结果相同。\n主事务：订单模块 注意：要在主事务的业务已经实现的差不多的时候才调用子事务。\n@Service public class PaymentServiceImpl { @Autowired CapitalTradeOrderService capitalTradeOrderService; @Autowired RedPacketTradeOrderService redPacketTradeOrderService; @Autowired OrderRepository orderRepository; @Compensable(confirmMethod = \"confirmMakePayment\", cancelMethod = \"cancelMakePayment\", asyncConfirm = false, delayCancelExceptions = {SocketTimeoutException.class, org.apache.dubbo.remoting.TimeoutException.class}) public void makePayment(@UniqueIdentity String orderNo, BigDecimal redPacketPayAmount, BigDecimal capitalPayAmount) { Order order = orderRepository.findByMerchantOrderNo(orderNo); // check if the order status is DRAFT, if no, means that another call makePayment for the same order happened, ignore this call makePayment. if (order.getStatus().equals(\"DRAFT\")) { order.pay(redPacketPayAmount, capitalPayAmount); try { orderRepository.updateOrder(order); } catch (OptimisticLockingFailureException e) { // ignore the concurrently update order exception, ensure idempotency. } } // 调用子事务 String result = capitalTradeOrderService.record(buildCapitalTradeOrderDto(order)); String result2 = redPacketTradeOrderService.record(buildRedPacketTradeOrderDto(order)); } public void confirmMakePayment(String orderNo, BigDecimal redPacketPayAmount, BigDecimal capitalPayAmount) { Order foundOrder = orderRepository.findByMerchantOrderNo(orderNo); // check if the trade order status is PAYING, if no, means another call confirmMakePayment happened, return directly, ensure idempotency. if (foundOrder != null \u0026\u0026 foundOrder.getStatus().equals(\"PAYING\")) { foundOrder.confirm(); orderRepository.updateOrder(foundOrder); } } public void cancelMakePayment(String orderNo, BigDecimal redPacketPayAmount, BigDecimal capitalPayAmount) { Order foundOrder = orderRepository.findByMerchantOrderNo(orderNo); // check if the trade order status is PAYING, if no, means another call cancelMakePayment happened, return directly, ensure idempotency. if (foundOrder != null \u0026\u0026 foundOrder.getStatus().equals(\"PAYING\")) { foundOrder.cancelPayment(); orderRepository.updateOrder(foundOrder); } } } 流程图 隐式参数 根据官方文档可以得知，1.2.x 版本支持 rpc 框架支持隐式传参情况下将事务上下文参数 TransactionContext 以隐式传参方式进行传递。\n那么，在子事务的 Service 实现代码中获取 Dubbo 隐式参数：\nMap\u003cString, String\u003e attachments = RpcContext.getContext().getAttachments(); 打一个断点，可以从隐式参数中得到 key 为 TRANSACTION_CONTEXT，value 为以下信息的键值对：\n{ \"attachments\":{}, \"status\":1, \"xid\":{ \"branchQualifier\":\"hMBMmir6Q56M0hskfmPebw==\", \"formatId\":1, \"globalTransactionId\":\"trSosXg0Soi8Q9xlauTToQ==\" } } 其中，包含了 globalTransactionId 这一全局事务 id，和 branchQualifier 分支事务 id。\n##提出疑问\n什么时候生成的 TRANSACTION_CONTEXT 隐式参数？ 如何判断一个大的事务下，都有哪些小的事务？ 为什么要有 @Compensable 注解？ 两个拦截器都没有处理 confirm 和 cancel，谁来处理？ 源码分析 事务拦截器 重点介绍 tcc-transaction-core 核心包的 interceptor 包，也就是拦截器包。\nCompensableMethodContext\n这是加了 @Compensable 注释的目标方法对象的上下文类。通过构造函数，利用拦截的目标对象上下文，获取被拦截目标对象方法的各种信息。\npublic CompensableMethodContext(ProceedingJoinPoint pjp) { this.pjp = pjp; // 获取待访问对象的方法名称 this.method = getCompensableMethod(); // 获取目标对象的 Compensable 注解 this.compensable = method.getAnnotation(Compensable.class); // 获取目标对象的事务传播属性（默认为 REQUIRED） this.propagation = compensable.propagation(); // 获取事务上下文 this.transactionContext = FactoryBuilder.factoryOf(compensable.transactionContextEditor()).getInstance().get(pjp.getTarget(), method, pjp.getArgs()); } 其中，transactionContext 是一个 TransactionContext 类，定义在 tcc-transaction-api 模块中：\npublic class TransactionContext implements Serializable { private static final long serialVersionUID = -8199390103169700387L; private TransactionXid xid; private int status; /** * 保存当前事务有几个子事务 */ private Map\u003cString, String\u003e attachments = new ConcurrentHashMap\u003cString, String\u003e(); public TransactionContext() { } public TransactionContext(TransactionXid xid, int status) { this.xid = xid; this.status = status; } public void setXid(TransactionXid xid) { this.xid = xid; } public TransactionXid getXid() { return xid.clone(); } public void setAttachments(Map\u003cString, String\u003e attachments) { if (attachments != null \u0026\u0026 !attachments.isEmpty()) { this.attachments.putAll(attachments); } } public Map\u003cString, String\u003e getAttachments() { return attachments; } public void setStatus(int status) { this.status = status; } public int getStatus() { return status; } } CompensableTransactionAspect\n这是一个 AOP 切面类。@Pointcut 将 @Compensable 注解标记为切入点，其签名为 compensableService()。@Around 表示在 compensableService() 之前和之后调用 interceptCompensableMethod()，其中调用了 CompensableTransactionInterceptor 的 interceptCompensableMethod()。\n@Pointcut(\"@annotation(org.mengyun.tcctransaction.api.Compensable)\") public void compensableService() { } @Around(\"compensableService()\") public Object interceptCompensableMethod(ProceedingJoinPoint pjp) throws Throwable { return compensableTransactionInterceptor.interceptCompensableMethod(pjp); } CompensableTransactionInterceptor\n这是事务拦截器，具有以下作用：\n将事务区分为 ROOT 事务和 PROVIDER 分支事务 不断地修改数据库内的状态（初始化事务、修改事务状态） 修改和清除事务管理区中的事务队列 （并没有执行目标对象方法，pjp.proceed() 其实是交给了下一个拦截器 ResourceCoordinatorInterceptor） interceptCompensableMethod\n其中interceptCompensableMethod() 方法中，参数 pjp 表示被代理的目标对象，比如被加了 @Compensable 注解的 makePayment 方法对象，就会作为该参数，通过其获取该方法的各种信息。\npublic Object interceptCompensableMethod(ProceedingJoinPoint pjp) throws Throwable { // 通过上下文对象，获取待访问对象的各种信息，见下方 CompensableMethodContext() 构造函数 CompensableMethodContext compensableMethodContext = new CompensableMethodContext(pjp); // 通过事务管理器，来判断是否有存在的事务队列（从 ThreadLocal 获取 transactions 来判断当前线程是否已经有事务） boolean isTransactionActive = transactionManager.isTransactionActive(); if (!TransactionUtils.isLegalTransactionContext(isTransactionActive, compensableMethodContext)) { throw new SystemException(\"no active compensable transaction while propagation is mandatory for method \" + compensableMethodContext.getMethod().getName()); } // 获取并判断当前事务的角色（ROOT 表示主事务，PROVIDER 表示分支事务或事务参与者），并根据其角色调用不同的方法来处理 switch (compensableMethodContext.getMethodRole(isTransactionActive)) { case ROOT: return rootMethodProceed(compensableMethodContext); case PROVIDER: return providerMethodProceed(compensableMethodContext); default: return pjp.proceed(); } } rootMethodProceed\n处理主事务的 rootMethodProceed() 方法，它会完成：\n开启全局事务 持久化全局事务 注册全局事务 判断应该 confirm 还是 cancel 清除事务队列 private Object rootMethodProceed(CompensableMethodContext compensableMethodContext) throws Throwable { Object returnValue = null; Transaction transaction = null; boolean asyncConfirm = compensableMethodContext.getAnnotation().asyncConfirm(); boolean asyncCancel = compensableMethodContext.getAnnotation().asyncCancel(); Set\u003cClass\u003c? extends Exception\u003e\u003e allDelayCancelExceptions = new HashSet\u003cClass\u003c? extends Exception\u003e\u003e(); allDelayCancelExceptions.addAll(this.delayCancelExceptions); allDelayCancelExceptions.addAll(Arrays.asList(compensableMethodContext.getAnnotation().delayCancelExceptions())); try { // 让事务管理器开启一个全新的事务，持久化事务，并事务管理器注册该事务（加入事务队列） transaction = transactionManager.begin(compensableMethodContext.getUniqueIdentity()); try { // 执行目标方法（实际上会先调用 ResourceCoordinatorIntercepter 拦截器） returnValue = compensableMethodContext.proceed(); // 如果执行异常，就回滚，否则提交 } catch (Throwable tryingException) { if (!isDelayCancelException(tryingException, allDelayCancelExceptions)) { logger.warn(String.format(\"compensable transaction trying failed. transaction content:%s\", JSON.toJSONString(transaction)), tryingException); /* 1. 修改数据库状态 2. 执行 rollback 方法 3. 如果执行成功，则删除事务资源数据 */ transactionManager.rollback(asyncCancel); } throw tryingException; } /* 1. 修改数据库状态 2. 执行 confirm 方法 3. 如果执行成功，则删除事务资源数据 */ transactionManager.commit(asyncConfirm); } finally { // 到这里，分支事务就都执行完了，就清除队列中的事务 transactionManager.cleanAfterCompletion(transaction); } return returnValue; } 其中事务管理器 TransactionManager 的 begin() 方法：\npublic Transaction begin(Object uniqueIdentify) { Transaction transaction = new Transaction(uniqueIdentify,TransactionType.ROOT); // 持久化事务 transactionRepository.create(transaction); // 注册事务，向事务队列中加入该事务 registerTransaction(transaction); return transaction; } providerMethodProceed\n处理分支事务的 providerMethodProceed() 方法：\nprivate Object providerMethodProceed(CompensableMethodContext compensableMethodContext) throws Throwable { Transaction transaction = null; boolean asyncConfirm = compensableMethodContext.getAnnotation().asyncConfirm(); boolean asyncCancel = compensableMethodContext.getAnnotation().asyncCancel(); try { // 根据事务的不同状态，执行不同的动作 switch (TransactionStatus.valueOf(compensableMethodContext.getTransactionContext().getStatus())) { case TRYING: // propagationNewBegin() 持久化事务参与者的数据到当前服务中（默认状态为 TRYING），并向事务管理器注册事务 transaction = transactionManager.propagationNewBegin(compensableMethodContext.getTransactionContext()); return compensableMethodContext.proceed(); case CONFIRMING: try { // propagationExistBegin() 修改事务状态，并注册事务 transaction = transactionManager.propagationExistBegin(compensableMethodContext.getTransactionContext()); // commit() 修改事务状态为 CONFIRMING，并持久化更新，提交事务 transactionManager.commit(asyncConfirm); } catch (NoExistedTransactionException excepton) { //the transaction has been commit,ignore it. } break; case CANCELLING: try { // propagationExistBegin() 修改事务状态，并注册事务 transaction = transactionManager.propagationExistBegin(compensableMethodContext.getTransactionContext()); // rollback() 修改事务状态为 CANCELLING，并持久化更新，回滚事务 transactionManager.rollback(asyncCancel); } catch (NoExistedTransactionException exception) { //the transaction has been rollback,ignore it. } break; } } finally { // 清除事务队列 transactionManager.cleanAfterCompletion(transaction); } Method method = compensableMethodContext.getMethod(); return ReflectionUtils.getNullValue(method.getReturnType()); } ResourceCoordinatorAspect\n资源协调切面类和 CompensableTransactionAspect 类似，几乎一样，不再赘述。\n@Pointcut(\"@annotation(org.mengyun.tcctransaction.api.Compensable)\") public void transactionContextCall() { } @Around(\"transactionContextCall()\") public Object interceptTransactionContextMethod(ProceedingJoinPoint pjp) throws Throwable { return resourceCoordinatorInterceptor.interceptTransactionContextMethod(pjp); } ResourceCoordinatorInterceptor\n主要处理 try 阶段的事情，在 try 阶段，就将所有的“资源”封装完成并交给事务管理器。\n其中“资源”指的是“事务资源”：\n即事务的参与者：\nconfirm 上下文 cancel 上下文 分支事务信息 然后事务管理器修改数据库状态。\ninterceptTransactionContextMethod\npublic Object interceptTransactionContextMethod(ProceedingJoinPoint pjp) throws Throwable { // 使用事务管理器，传递一些事务相关的信息（线程共享） Transaction transaction = transactionManager.getCurrentTransaction(); if (transaction != null) { switch (transaction.getStatus()) { case TRYING: enlistParticipant(pjp); break; case CONFIRMING: break; case CANCELLING: break; } } return pjp.proceed(pjp.getArgs()); } enlistParticipant\nprivate void enlistParticipant(ProceedingJoinPoint pjp) throws IllegalAccessException, InstantiationException { // 获取对象的方法 Method method = CompensableMethodUtils.getCompensableMethod(pjp); if (method == null) { throw new RuntimeException(String.format(\"join point not found method, point is : %s\", pjp.getSignature().getName())); } // 获取对应的 @Compensable 对象 Compensable compensable = method.getAnnotation(Compensable.class); // 获取配置的 confirm 和 cancel 方法 String confirmMethodName = compensable.confirmMethod(); String cancelMethodName = compensable.cancelMethod(); Transaction transaction = transactionManager.getCurrentTransaction(); TransactionXid xid = new TransactionXid(transaction.getXid().getGlobalTransactionId()); if (FactoryBuilder.factoryOf(compensable.transactionContextEditor()).getInstance().get(pjp.getTarget(), method, pjp.getArgs()) == null) { FactoryBuilder.factoryOf(compensable.transactionContextEditor()).getInstance().set(new TransactionContext(xid, TransactionStatus.TRYING.getId()), pjp.getTarget(), ((MethodSignature) pjp.getSignature()).getMethod(), pjp.getArgs()); } Class targetClass = ReflectionUtils.getDeclaringType(pjp.getTarget().getClass(), method.getName(), method.getParameterTypes()); InvocationContext confirmInvocation = new InvocationContext(targetClass, confirmMethodName, method.getParameterTypes(), pjp.getArgs()); InvocationContext cancelInvocation = new InvocationContext(targetClass, cancelMethodName, method.getParameterTypes(), pjp.getArgs()); Participant participant = new Participant( xid, confirmInvocation, cancelInvocation, compensable.transactionContextEditor()); transactionManager.enlistParticipant(participant); } 这样，经过两个拦截器后，才调用目标对象方法。\n幂等性问题 TCC-Transaction 不能保证幂等性，需要自己实现幂等性。如以下 confirm 和 cancel 方法就实现了幂等性：\nconfirm 的幂等性\n@Transactional public void confirmRecord(RedPacketTradeOrderDto tradeOrderDto) { try { Thread.sleep(1000l); } catch (InterruptedException e) { throw new RuntimeException(e); } System.out.println(\"red packet confirm record called. time seq:\" + DateFormatUtils.format(Calendar.getInstance(), \"yyyy-MM-dd HH:mm:ss\")); TradeOrder tradeOrder = tradeOrderRepository.findByMerchantOrderNo(tradeOrderDto.getMerchantOrderNo()); // 保证幂等性 check if the trade order status is DRAFT, if yes, return directly, ensure idempotency. if (tradeOrder != null \u0026\u0026 tradeOrder.getStatus().equals(\"DRAFT\")) { tradeOrder.confirm(); tradeOrderRepository.update(tradeOrder); RedPacketAccount transferToAccount = redPacketAccountRepository.findByUserId(tradeOrderDto.getOppositeUserId()); transferToAccount.transferTo(tradeOrderDto.getAmount()); redPacketAccountRepository.save(transferToAccount); } } cancel 的幂等性\n@Transactional public void cancelRecord(RedPacketTradeOrderDto tradeOrderDto) { try { Thread.sleep(1000l); } catch (InterruptedException e) { throw new RuntimeException(e); } System.out.println(\"red packet cancel record called. time seq:\" + DateFormatUtils.format(Calendar.getInstance(), \"yyyy-MM-dd HH:mm:ss\")); TradeOrder tradeOrder = tradeOrderRepository.findByMerchantOrderNo(tradeOrderDto.getMerchantOrderNo()); // 保证幂等性 check if the trade order status is DRAFT, if yes, return directly, ensure idempotency. if (null != tradeOrder \u0026\u0026 \"DRAFT\".equals(tradeOrder.getStatus())) { tradeOrder.cancel(); tradeOrderRepository.update(tradeOrder); RedPacketAccount capitalAccount = redPacketAccountRepository.findByUserId(tradeOrderDto.getSelfUserId()); capitalAccount.cancelTransfer(tradeOrderDto.getAmount()); redPacketAccountRepository.save(capitalAccount); } } 小结 事务的相关信息（全局事务编号，乐观锁版本等要持久化存储）\n资源 try 核心点：预留资源（业务资源、事务数据资源）\n流程 注册和初始化事务 -\u003e 组织事务参与者 -\u003e 执行目标方法（try） -\u003e 执行 confirm 和 cancel 方法\n总结 熟悉 TCC-Transaction 的分布式事务处理流程 TCC-Transaction 不能保证幂等性 TCC 分布式事务的核心是资源（业务资源和事务资源） ",
+  "wordCount" : "1426",
+  "inLanguage": "en",
+  "datePublished": "2020-04-17T20:14:00Z",
+  "dateModified": "2020-04-17T20:14:00Z",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/10.%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Xinkang's Blog",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://zjxjwxk.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://zjxjwxk.github.io/" accesskey="h" title="Xinkang&#39;s Blog (Alt + H)">Xinkang&#39;s Blog</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://zjxjwxk.github.io/archives/" title="Archives">
+                    <span>Archives</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://zjxjwxk.github.io/categories/" title="Categories">
+                    <span>Categories</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://zjxjwxk.github.io/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://zjxjwxk.github.io/search/" title="Search (Alt &#43; /)" accesskey=/>
+                    <span>Search</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <div id="content-container">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      Dubbo微服务影院系列（10）：分布式事务
+    </h1>
+    <div class="post-meta"><span title='2020-04-17 20:14:00 +0000 UTC'>April 17, 2020</span>
+
+</div>
+  </header> 
+  <div class="post-content"><h1 id="章节概要">章节概要<a hidden class="anchor" aria-hidden="true" href="#章节概要">#</a></h1>
+<ul>
+<li>事务简介</li>
+<li>分布式事务的前世今生</li>
+<li>分布式事务解决方案</li>
+<li>主流分布式事务框架介绍</li>
+</ul>
+<h1 id="事务简介">事务简介<a hidden class="anchor" aria-hidden="true" href="#事务简介">#</a></h1>
+<ul>
+<li>事务是用来保证一组<strong>数据操作</strong>的完整性和一致性的</li>
+<li>事务必须满足 ACID 的四大特性</li>
+<li>事务具有四种隔离级别</li>
+<li>事务具有七种传播行为</li>
+</ul>
+<h2 id="事务属性">事务属性<a hidden class="anchor" aria-hidden="true" href="#事务属性">#</a></h2>
+<ul>
+<li>原子性（Atomicity）</li>
+<li>一致性（Consistency）</li>
+<li>隔离型（Isolation）</li>
+<li>持久性（Durability）</li>
+</ul>
+<h1 id="分布式事务">分布式事务<a hidden class="anchor" aria-hidden="true" href="#分布式事务">#</a></h1>
+<h2 id="概念">概念<a hidden class="anchor" aria-hidden="true" href="#概念">#</a></h2>
+<ul>
+<li>分布式事务就是将多个节点的事务看成一个整体处理</li>
+<li>分布式事务由事务参与者、资源服务器、事务管理器等组成</li>
+<li>常见的分布式事务的例子：支付、下订单等</li>
+</ul>
+<h2 id="实现思路">实现思路<a hidden class="anchor" aria-hidden="true" href="#实现思路">#</a></h2>
+<ul>
+<li>两段式事务和三段式事务</li>
+<li>基于 XA 的分布式事务</li>
+<li>基于消息的最终一致性方案</li>
+<li><strong>TCC 编程式补偿性事务</strong></li>
+</ul>
+<h1 id="分布式事务类型">分布式事务类型<a hidden class="anchor" aria-hidden="true" href="#分布式事务类型">#</a></h1>
+<h2 id="两段式和三段式事务">两段式和三段式事务<a hidden class="anchor" aria-hidden="true" href="#两段式和三段式事务">#</a></h2>
+<h3 id="两段式事务">两段式事务<a hidden class="anchor" aria-hidden="true" href="#两段式事务">#</a></h3>
+<p><img alt="两段式事务" loading="lazy" src="/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/10.%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/images/63d3220513cf709f84fdcd06457c3b65.png"></p>
+<h3 id="三段式事务">三段式事务<a hidden class="anchor" aria-hidden="true" href="#三段式事务">#</a></h3>
+<p><img alt="三段式事务" loading="lazy" src="/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/10.%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/images/image-20200416213159506.png"></p>
+<h2 id="基于-xa-的分布式事务">基于 XA 的分布式事务<a hidden class="anchor" aria-hidden="true" href="#基于-xa-的分布式事务">#</a></h2>
+<p><img alt="基于XA的分布式事务" loading="lazy" src="/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/10.%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/images/image-20200416213551917.png"></p>
+<h2 id="基于消息的一致性方案">基于消息的一致性方案<a hidden class="anchor" aria-hidden="true" href="#基于消息的一致性方案">#</a></h2>
+<p><img alt="基于消息的一致性方案" loading="lazy" src="/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/10.%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/images/image-20200416215409588.png"></p>
+<h2 id="tcc-补偿性事务">TCC 补偿性事务<a hidden class="anchor" aria-hidden="true" href="#tcc-补偿性事务">#</a></h2>
+<p><img alt="TCC补偿性事务" loading="lazy" src="/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/10.%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/images/image-20200416220735799.png"></p>
+<h3 id="基于消息的一致性方案和-tcc-补偿性事务的区别">基于消息的一致性方案和 TCC 补偿性事务的区别<a hidden class="anchor" aria-hidden="true" href="#基于消息的一致性方案和-tcc-补偿性事务的区别">#</a></h3>
+<ul>
+<li>基于消息的事务是强一致性事务，会存在浪费</li>
+<li>TCC 事务是柔性事务，在 try 阶段要对资源做预留</li>
+<li>TCC 事务在确认或取消阶段释放资源</li>
+<li>与基于消息的事务对比，TCC 的时效性更好</li>
+</ul>
+<h1 id="分布式事务框架">分布式事务框架<a hidden class="anchor" aria-hidden="true" href="#分布式事务框架">#</a></h1>
+<ul>
+<li>全局事务服务（Global Transaction Service，简称 GTS）</li>
+<li>蚂蚁金服分布式事务（Distributed Transaction-eXtended，简称 DTX）</li>
+<li><strong>开源 TCC 框架（TCC-Transaction）</strong>（https://github.com/changmingxie/tcc-transaction）</li>
+<li>开源 TCC 框架（ByteTCC）（https://github.com/liuyangming/ByteTCC）</li>
+</ul>
+<h1 id="tcc-transaction-分布式事务框架">TCC-Transaction 分布式事务框架<a hidden class="anchor" aria-hidden="true" href="#tcc-transaction-分布式事务框架">#</a></h1>
+<blockquote>
+<p>Github 仓库：https://github.com/changmingxie/tcc-transaction</p>
+</blockquote>
+<ol>
+<li>在需要提供分布式事务支持的接口方法上添加 <code>@Compensable</code></li>
+<li>在对应的接口实现方法上也添加 @Compensable，并添加注解参数 <code>confirmMethod</code>, <code>cancelMethod</code> 和 <code>transactionContextEditor</code></li>
+<li>实现对应的 <code>confirmMethod</code> 和 <code>cancelMethod</code>（必须和 try 方法在同一个类中）</li>
+</ol>
+<p>注意：</p>
+<ol>
+<li>在分布式事务框架中，不要轻易在业务层捕获所有异常，只有在抛出异常的情况下，分布式事务框架才知道该业务是执行失败的。</li>
+<li>使用 TCC-Transaction 时，confirm 和 cancel 的幂等性问题需要自己解决。</li>
+<li>TCC 的数据库应该和业务数据库分开，以保证分布式事务的正常进行。</li>
+</ol>
+<h2 id="建立用于分布式事务的数据库">建立用于分布式事务的数据库<a hidden class="anchor" aria-hidden="true" href="#建立用于分布式事务的数据库">#</a></h2>
+<p>TCC 的数据库应该和业务数据库分开，以保证分布式事务的正常进行。</p>
+<p><img alt="分布式事务数据库" loading="lazy" src="/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/10.%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/images/image-20200424222035114.png"></p>
+<p>其中，TCC 库用于实现分布式事务，其包含的表和表结构如下：</p>
+<p><img alt="TCC库" loading="lazy" src="/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/10.%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/images/image-20200424222245457.png"></p>
+<p><img alt="TCC表结构" loading="lazy" src="/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/10.%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/images/image-20200424222709615.png"></p>
+<h2 id="dubbo-demo">Dubbo Demo<a hidden class="anchor" aria-hidden="true" href="#dubbo-demo">#</a></h2>
+<h3 id="子事务红包模块">子事务：红包模块<a hidden class="anchor" aria-hidden="true" href="#子事务红包模块">#</a></h3>
+<p><strong>接口</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">RedPacketTradeOrderService</span> {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Compensable</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> String <span style="color:#a6e22e">record</span>(RedPacketTradeOrderDto tradeOrderDto);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p><strong>实现类</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#a6e22e">@Service</span>(<span style="color:#e6db74">&#34;redPacketTradeOrderService&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">RedPacketTradeOrderServiceImpl</span> <span style="color:#66d9ef">implements</span> RedPacketTradeOrderService {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Autowired</span>
+</span></span><span style="display:flex;"><span>    RedPacketAccountRepository redPacketAccountRepository;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Autowired</span>
+</span></span><span style="display:flex;"><span>    TradeOrderRepository tradeOrderRepository;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Override</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Compensable</span>(confirmMethod <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;confirmRecord&#34;</span>, cancelMethod <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;cancelRecord&#34;</span>, transactionContextEditor <span style="color:#f92672">=</span> DubboTransactionContextEditor.<span style="color:#a6e22e">class</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Transactional</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> String <span style="color:#a6e22e">record</span>(RedPacketTradeOrderDto tradeOrderDto) {
+</span></span><span style="display:flex;"><span>        TradeOrder foundTradeOrder <span style="color:#f92672">=</span> tradeOrderRepository.<span style="color:#a6e22e">findByMerchantOrderNo</span>(tradeOrderDto.<span style="color:#a6e22e">getMerchantOrderNo</span>());
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// check if trade order has been recorded, if yes, return success directly.</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (foundTradeOrder <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span>) {
+</span></span><span style="display:flex;"><span>            TradeOrder tradeOrder <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> TradeOrder(
+</span></span><span style="display:flex;"><span>                    tradeOrderDto.<span style="color:#a6e22e">getSelfUserId</span>(),
+</span></span><span style="display:flex;"><span>                    tradeOrderDto.<span style="color:#a6e22e">getOppositeUserId</span>(),
+</span></span><span style="display:flex;"><span>                    tradeOrderDto.<span style="color:#a6e22e">getMerchantOrderNo</span>(),
+</span></span><span style="display:flex;"><span>                    tradeOrderDto.<span style="color:#a6e22e">getAmount</span>()
+</span></span><span style="display:flex;"><span>            );
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>                tradeOrderRepository.<span style="color:#a6e22e">insert</span>(tradeOrder);
+</span></span><span style="display:flex;"><span>                RedPacketAccount transferFromAccount <span style="color:#f92672">=</span> redPacketAccountRepository.<span style="color:#a6e22e">findByUserId</span>(tradeOrderDto.<span style="color:#a6e22e">getSelfUserId</span>());
+</span></span><span style="display:flex;"><span>                transferFromAccount.<span style="color:#a6e22e">transferFrom</span>(tradeOrderDto.<span style="color:#a6e22e">getAmount</span>());
+</span></span><span style="display:flex;"><span>                redPacketAccountRepository.<span style="color:#a6e22e">save</span>(transferFromAccount);
+</span></span><span style="display:flex;"><span>            } <span style="color:#66d9ef">catch</span> (DataIntegrityViolationException e) {
+</span></span><span style="display:flex;"><span>                <span style="color:#75715e">// this exception may happen when insert trade order concurrently, if happened, ignore this insert operation.</span>
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;success&#34;</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Transactional</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">confirmRecord</span>(RedPacketTradeOrderDto tradeOrderDto) {
+</span></span><span style="display:flex;"><span>        TradeOrder tradeOrder <span style="color:#f92672">=</span> tradeOrderRepository.<span style="color:#a6e22e">findByMerchantOrderNo</span>(tradeOrderDto.<span style="color:#a6e22e">getMerchantOrderNo</span>());
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// check if the trade order status is DRAFT, if yes, return directly, ensure idempotency.</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (tradeOrder <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span> <span style="color:#f92672">&amp;&amp;</span> tradeOrder.<span style="color:#a6e22e">getStatus</span>().<span style="color:#a6e22e">equals</span>(<span style="color:#e6db74">&#34;DRAFT&#34;</span>)) {
+</span></span><span style="display:flex;"><span>            tradeOrder.<span style="color:#a6e22e">confirm</span>();
+</span></span><span style="display:flex;"><span>            tradeOrderRepository.<span style="color:#a6e22e">update</span>(tradeOrder);
+</span></span><span style="display:flex;"><span>            RedPacketAccount transferToAccount <span style="color:#f92672">=</span> redPacketAccountRepository.<span style="color:#a6e22e">findByUserId</span>(tradeOrderDto.<span style="color:#a6e22e">getOppositeUserId</span>());
+</span></span><span style="display:flex;"><span>            transferToAccount.<span style="color:#a6e22e">transferTo</span>(tradeOrderDto.<span style="color:#a6e22e">getAmount</span>());
+</span></span><span style="display:flex;"><span>            redPacketAccountRepository.<span style="color:#a6e22e">save</span>(transferToAccount);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Transactional</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">cancelRecord</span>(RedPacketTradeOrderDto tradeOrderDto) {
+</span></span><span style="display:flex;"><span>        TradeOrder tradeOrder <span style="color:#f92672">=</span> tradeOrderRepository.<span style="color:#a6e22e">findByMerchantOrderNo</span>(tradeOrderDto.<span style="color:#a6e22e">getMerchantOrderNo</span>());
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// check if the trade order status is DRAFT, if yes, return directly, ensure idempotency.</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">null</span> <span style="color:#f92672">!=</span> tradeOrder <span style="color:#f92672">&amp;&amp;</span> <span style="color:#e6db74">&#34;DRAFT&#34;</span>.<span style="color:#a6e22e">equals</span>(tradeOrder.<span style="color:#a6e22e">getStatus</span>())) {
+</span></span><span style="display:flex;"><span>            tradeOrder.<span style="color:#a6e22e">cancel</span>();
+</span></span><span style="display:flex;"><span>            tradeOrderRepository.<span style="color:#a6e22e">update</span>(tradeOrder);
+</span></span><span style="display:flex;"><span>            RedPacketAccount capitalAccount <span style="color:#f92672">=</span> redPacketAccountRepository.<span style="color:#a6e22e">findByUserId</span>(tradeOrderDto.<span style="color:#a6e22e">getSelfUserId</span>());
+</span></span><span style="display:flex;"><span>            capitalAccount.<span style="color:#a6e22e">cancelTransfer</span>(tradeOrderDto.<span style="color:#a6e22e">getAmount</span>());
+</span></span><span style="display:flex;"><span>            redPacketAccountRepository.<span style="color:#a6e22e">save</span>(capitalAccount);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>思考：为什么要在 <code>confirm</code> 和 <code>cancel</code> 方法里先检查订单状态是否为 DRAFT（在 try 方法中新增的一个订单），而不直接修改为结束状态？</p>
+<p>答：为了保证服务的幂等性，即使用相同参数对同一资源重复调用某个接口的结果与调用一次的结果相同。</p>
+<h3 id="主事务订单模块">主事务：订单模块<a hidden class="anchor" aria-hidden="true" href="#主事务订单模块">#</a></h3>
+<p>注意：要在主事务的业务已经实现的差不多的时候才调用子事务。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#a6e22e">@Service</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">PaymentServiceImpl</span> {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Autowired</span>
+</span></span><span style="display:flex;"><span>    CapitalTradeOrderService capitalTradeOrderService;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Autowired</span>
+</span></span><span style="display:flex;"><span>    RedPacketTradeOrderService redPacketTradeOrderService;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Autowired</span>
+</span></span><span style="display:flex;"><span>    OrderRepository orderRepository;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Compensable</span>(confirmMethod <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;confirmMakePayment&#34;</span>, cancelMethod <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;cancelMakePayment&#34;</span>, asyncConfirm <span style="color:#f92672">=</span> <span style="color:#66d9ef">false</span>, delayCancelExceptions <span style="color:#f92672">=</span> {SocketTimeoutException.<span style="color:#a6e22e">class</span>, org.<span style="color:#a6e22e">apache</span>.<span style="color:#a6e22e">dubbo</span>.<span style="color:#a6e22e">remoting</span>.<span style="color:#a6e22e">TimeoutException</span>.<span style="color:#a6e22e">class</span>})
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">makePayment</span>(<span style="color:#a6e22e">@UniqueIdentity</span> String orderNo, BigDecimal redPacketPayAmount, BigDecimal capitalPayAmount) {
+</span></span><span style="display:flex;"><span>        Order order <span style="color:#f92672">=</span> orderRepository.<span style="color:#a6e22e">findByMerchantOrderNo</span>(orderNo);
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// check if the order status is DRAFT, if no, means that another call makePayment for the same order happened, ignore this call makePayment.</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (order.<span style="color:#a6e22e">getStatus</span>().<span style="color:#a6e22e">equals</span>(<span style="color:#e6db74">&#34;DRAFT&#34;</span>)) {
+</span></span><span style="display:flex;"><span>            order.<span style="color:#a6e22e">pay</span>(redPacketPayAmount, capitalPayAmount);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>                orderRepository.<span style="color:#a6e22e">updateOrder</span>(order);
+</span></span><span style="display:flex;"><span>            } <span style="color:#66d9ef">catch</span> (OptimisticLockingFailureException e) {
+</span></span><span style="display:flex;"><span>                <span style="color:#75715e">// ignore the concurrently update order exception, ensure idempotency.</span>
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e">// 调用子事务</span>
+</span></span><span style="display:flex;"><span>        String result <span style="color:#f92672">=</span> capitalTradeOrderService.<span style="color:#a6e22e">record</span>(buildCapitalTradeOrderDto(order));
+</span></span><span style="display:flex;"><span>        String result2 <span style="color:#f92672">=</span> redPacketTradeOrderService.<span style="color:#a6e22e">record</span>(buildRedPacketTradeOrderDto(order));
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">confirmMakePayment</span>(String orderNo, BigDecimal redPacketPayAmount, BigDecimal capitalPayAmount) {
+</span></span><span style="display:flex;"><span>        Order foundOrder <span style="color:#f92672">=</span> orderRepository.<span style="color:#a6e22e">findByMerchantOrderNo</span>(orderNo);
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// check if the trade order status is PAYING, if no, means another call confirmMakePayment happened, return directly, ensure idempotency.</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (foundOrder <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span> <span style="color:#f92672">&amp;&amp;</span> foundOrder.<span style="color:#a6e22e">getStatus</span>().<span style="color:#a6e22e">equals</span>(<span style="color:#e6db74">&#34;PAYING&#34;</span>)) {
+</span></span><span style="display:flex;"><span>            foundOrder.<span style="color:#a6e22e">confirm</span>();
+</span></span><span style="display:flex;"><span>            orderRepository.<span style="color:#a6e22e">updateOrder</span>(foundOrder);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">cancelMakePayment</span>(String orderNo,  BigDecimal redPacketPayAmount, BigDecimal capitalPayAmount) {
+</span></span><span style="display:flex;"><span>        Order foundOrder <span style="color:#f92672">=</span> orderRepository.<span style="color:#a6e22e">findByMerchantOrderNo</span>(orderNo);
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// check if the trade order status is PAYING, if no, means another call cancelMakePayment happened, return directly, ensure idempotency.</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (foundOrder <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span> <span style="color:#f92672">&amp;&amp;</span> foundOrder.<span style="color:#a6e22e">getStatus</span>().<span style="color:#a6e22e">equals</span>(<span style="color:#e6db74">&#34;PAYING&#34;</span>)) {
+</span></span><span style="display:flex;"><span>            foundOrder.<span style="color:#a6e22e">cancelPayment</span>();
+</span></span><span style="display:flex;"><span>            orderRepository.<span style="color:#a6e22e">updateOrder</span>(foundOrder);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="流程图">流程图<a hidden class="anchor" aria-hidden="true" href="#流程图">#</a></h2>
+<p><img alt="TCC-Transaction-Core" loading="lazy" src="/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/10.%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/images/image-20200420202720213.png"></p>
+<h2 id="隐式参数">隐式参数<a hidden class="anchor" aria-hidden="true" href="#隐式参数">#</a></h2>
+<p>根据官方文档可以得知，1.2.x 版本支持 rpc 框架支持隐式传参情况下将事务上下文参数 <code>TransactionContext</code> 以隐式传参方式进行传递。</p>
+<p>那么，在子事务的 Service 实现代码中获取 Dubbo 隐式参数：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>Map<span style="color:#f92672">&lt;</span>String, String<span style="color:#f92672">&gt;</span> attachments <span style="color:#f92672">=</span> RpcContext.<span style="color:#a6e22e">getContext</span>().<span style="color:#a6e22e">getAttachments</span>();
+</span></span></code></pre></div><p><img alt="Dubbo隐式参数attachments" loading="lazy" src="/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/10.%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/images/image-20200422004334435.png"></p>
+<p>打一个断点，可以从隐式参数中得到 key 为 TRANSACTION_CONTEXT，value 为以下信息的键值对：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;attachments&#34;</span>:{},
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;status&#34;</span>:<span style="color:#ae81ff">1</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;xid&#34;</span>:{
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;branchQualifier&#34;</span>:<span style="color:#e6db74">&#34;hMBMmir6Q56M0hskfmPebw==&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;formatId&#34;</span>:<span style="color:#ae81ff">1</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;globalTransactionId&#34;</span>:<span style="color:#e6db74">&#34;trSosXg0Soi8Q9xlauTToQ==&#34;</span>
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>其中，包含了 <code>globalTransactionId</code> 这一全局事务 id，和 <code>branchQualifier</code> 分支事务 id。</p>
+<p>##提出疑问</p>
+<ol>
+<li>什么时候生成的 <code>TRANSACTION_CONTEXT</code> 隐式参数？</li>
+<li>如何判断一个大的事务下，都有哪些小的事务？</li>
+<li>为什么要有 <code>@Compensable</code> 注解？</li>
+<li>两个拦截器都没有处理 confirm 和 cancel，谁来处理？</li>
+</ol>
+<h2 id="源码分析">源码分析<a hidden class="anchor" aria-hidden="true" href="#源码分析">#</a></h2>
+<p><img alt="调用流程" loading="lazy" src="/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/10.%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/images/image-20200422191933706.png"></p>
+<h3 id="事务拦截器">事务拦截器<a hidden class="anchor" aria-hidden="true" href="#事务拦截器">#</a></h3>
+<p>重点介绍 tcc-transaction-core 核心包的 interceptor 包，也就是拦截器包。</p>
+<p><img alt="intercepter包" loading="lazy" src="/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/10.%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/images/image-20200422224921576.png"></p>
+<p><strong>CompensableMethodContext</strong></p>
+<p>这是加了 <code>@Compensable</code> 注释的目标方法对象的上下文类。通过构造函数，利用拦截的目标对象上下文，获取被拦截目标对象方法的各种信息。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#a6e22e">CompensableMethodContext</span>(ProceedingJoinPoint pjp) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">pjp</span> <span style="color:#f92672">=</span> pjp;
+</span></span><span style="display:flex;"><span>  	<span style="color:#75715e">// 获取待访问对象的方法名称</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">method</span> <span style="color:#f92672">=</span> getCompensableMethod();
+</span></span><span style="display:flex;"><span>  	<span style="color:#75715e">// 获取目标对象的 Compensable 注解</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">compensable</span> <span style="color:#f92672">=</span> method.<span style="color:#a6e22e">getAnnotation</span>(Compensable.<span style="color:#a6e22e">class</span>);
+</span></span><span style="display:flex;"><span>  	<span style="color:#75715e">// 获取目标对象的事务传播属性（默认为 REQUIRED）</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">propagation</span> <span style="color:#f92672">=</span> compensable.<span style="color:#a6e22e">propagation</span>();
+</span></span><span style="display:flex;"><span>  	<span style="color:#75715e">// 获取事务上下文</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">transactionContext</span> <span style="color:#f92672">=</span> FactoryBuilder.<span style="color:#a6e22e">factoryOf</span>(compensable.<span style="color:#a6e22e">transactionContextEditor</span>()).<span style="color:#a6e22e">getInstance</span>().<span style="color:#a6e22e">get</span>(pjp.<span style="color:#a6e22e">getTarget</span>(), method, pjp.<span style="color:#a6e22e">getArgs</span>());
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>其中，transactionContext 是一个 <code>TransactionContext</code> 类，定义在 tcc-transaction-api 模块中：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">TransactionContext</span> <span style="color:#66d9ef">implements</span> Serializable {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">final</span> <span style="color:#66d9ef">long</span> serialVersionUID <span style="color:#f92672">=</span> <span style="color:#f92672">-</span>8199390103169700387L;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> TransactionXid xid;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">int</span> status;
+</span></span><span style="display:flex;"><span>   <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * 保存当前事务有几个子事务
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> Map<span style="color:#f92672">&lt;</span>String, String<span style="color:#f92672">&gt;</span> attachments <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ConcurrentHashMap<span style="color:#f92672">&lt;</span>String, String<span style="color:#f92672">&gt;</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">TransactionContext</span>() {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">TransactionContext</span>(TransactionXid xid, <span style="color:#66d9ef">int</span> status) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">xid</span> <span style="color:#f92672">=</span> xid;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">status</span> <span style="color:#f92672">=</span> status;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setXid</span>(TransactionXid xid) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">xid</span> <span style="color:#f92672">=</span> xid;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> TransactionXid <span style="color:#a6e22e">getXid</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> xid.<span style="color:#a6e22e">clone</span>();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setAttachments</span>(Map<span style="color:#f92672">&lt;</span>String, String<span style="color:#f92672">&gt;</span> attachments) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (attachments <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#f92672">!</span>attachments.<span style="color:#a6e22e">isEmpty</span>()) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">attachments</span>.<span style="color:#a6e22e">putAll</span>(attachments);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> Map<span style="color:#f92672">&lt;</span>String, String<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">getAttachments</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> attachments;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setStatus</span>(<span style="color:#66d9ef">int</span> status) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">status</span> <span style="color:#f92672">=</span> status;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">getStatus</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> status;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p><strong>CompensableTransactionAspect</strong></p>
+<p>这是一个 AOP 切面类。<code>@Pointcut</code> 将 <code>@Compensable</code> 注解标记为切入点，其签名为 <code>compensableService()</code>。<code>@Around</code> 表示在 <code>compensableService()</code> 之前和之后调用 <code>interceptCompensableMethod()</code>，其中调用了 <code>CompensableTransactionInterceptor</code> 的 <code>interceptCompensableMethod()</code>。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>    <span style="color:#a6e22e">@Pointcut</span>(<span style="color:#e6db74">&#34;@annotation(org.mengyun.tcctransaction.api.Compensable)&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">compensableService</span>() {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Around</span>(<span style="color:#e6db74">&#34;compensableService()&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> Object <span style="color:#a6e22e">interceptCompensableMethod</span>(ProceedingJoinPoint pjp) <span style="color:#66d9ef">throws</span> Throwable {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> compensableTransactionInterceptor.<span style="color:#a6e22e">interceptCompensableMethod</span>(pjp);
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><p><strong>CompensableTransactionInterceptor</strong></p>
+<p>这是事务拦截器，具有以下作用：</p>
+<ol>
+<li>将事务区分为 ROOT 事务和 PROVIDER 分支事务</li>
+<li>不断地修改数据库内的状态（初始化事务、修改事务状态）</li>
+<li>修改和清除事务管理区中的事务队列</li>
+<li>（并没有执行目标对象方法，pjp.proceed() 其实是交给了下一个拦截器 ResourceCoordinatorInterceptor）</li>
+</ol>
+<p><strong>interceptCompensableMethod</strong></p>
+<p>其中<code>interceptCompensableMethod()</code> 方法中，参数 pjp 表示被代理的目标对象，比如被加了 <code>@Compensable</code> 注解的 <code>makePayment</code> 方法对象，就会作为该参数，通过其获取该方法的各种信息。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> Object <span style="color:#a6e22e">interceptCompensableMethod</span>(ProceedingJoinPoint pjp) <span style="color:#66d9ef">throws</span> Throwable {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  	 <span style="color:#75715e">// 通过上下文对象，获取待访问对象的各种信息，见下方 CompensableMethodContext() 构造函数</span>
+</span></span><span style="display:flex;"><span>        CompensableMethodContext compensableMethodContext <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> CompensableMethodContext(pjp);
+</span></span><span style="display:flex;"><span>	  <span style="color:#75715e">// 通过事务管理器，来判断是否有存在的事务队列（从 ThreadLocal 获取 transactions 来判断当前线程是否已经有事务）</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">boolean</span> isTransactionActive <span style="color:#f92672">=</span> transactionManager.<span style="color:#a6e22e">isTransactionActive</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>TransactionUtils.<span style="color:#a6e22e">isLegalTransactionContext</span>(isTransactionActive, compensableMethodContext)) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> SystemException(<span style="color:#e6db74">&#34;no active compensable transaction while propagation is mandatory for method &#34;</span> <span style="color:#f92672">+</span> compensableMethodContext.<span style="color:#a6e22e">getMethod</span>().<span style="color:#a6e22e">getName</span>());
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>	  <span style="color:#75715e">// 获取并判断当前事务的角色（ROOT 表示主事务，PROVIDER 表示分支事务或事务参与者），并根据其角色调用不同的方法来处理</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">switch</span> (compensableMethodContext.<span style="color:#a6e22e">getMethodRole</span>(isTransactionActive)) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">case</span> ROOT:
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span> rootMethodProceed(compensableMethodContext);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">case</span> PROVIDER:
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span> providerMethodProceed(compensableMethodContext);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">default</span>:
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span> pjp.<span style="color:#a6e22e">proceed</span>();
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><p><strong>rootMethodProceed</strong></p>
+<p>处理主事务的 <code>rootMethodProceed()</code> 方法，它会完成：</p>
+<ol>
+<li>开启全局事务</li>
+<li>持久化全局事务</li>
+<li>注册全局事务</li>
+<li>判断应该 confirm 还是 cancel</li>
+<li>清除事务队列</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">private</span> Object <span style="color:#a6e22e">rootMethodProceed</span>(CompensableMethodContext compensableMethodContext) <span style="color:#66d9ef">throws</span> Throwable {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        Object returnValue <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        Transaction transaction <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">boolean</span> asyncConfirm <span style="color:#f92672">=</span> compensableMethodContext.<span style="color:#a6e22e">getAnnotation</span>().<span style="color:#a6e22e">asyncConfirm</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">boolean</span> asyncCancel <span style="color:#f92672">=</span> compensableMethodContext.<span style="color:#a6e22e">getAnnotation</span>().<span style="color:#a6e22e">asyncCancel</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        Set<span style="color:#f92672">&lt;</span>Class<span style="color:#f92672">&lt;?</span> <span style="color:#66d9ef">extends</span> Exception<span style="color:#f92672">&gt;&gt;</span> allDelayCancelExceptions <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> HashSet<span style="color:#f92672">&lt;</span>Class<span style="color:#f92672">&lt;?</span> <span style="color:#66d9ef">extends</span> Exception<span style="color:#f92672">&gt;&gt;</span>();
+</span></span><span style="display:flex;"><span>        allDelayCancelExceptions.<span style="color:#a6e22e">addAll</span>(<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">delayCancelExceptions</span>);
+</span></span><span style="display:flex;"><span>        allDelayCancelExceptions.<span style="color:#a6e22e">addAll</span>(Arrays.<span style="color:#a6e22e">asList</span>(compensableMethodContext.<span style="color:#a6e22e">getAnnotation</span>().<span style="color:#a6e22e">delayCancelExceptions</span>()));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// 让事务管理器开启一个全新的事务，持久化事务，并事务管理器注册该事务（加入事务队列）</span>
+</span></span><span style="display:flex;"><span>            transaction <span style="color:#f92672">=</span> transactionManager.<span style="color:#a6e22e">begin</span>(compensableMethodContext.<span style="color:#a6e22e">getUniqueIdentity</span>());
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>                <span style="color:#75715e">// 执行目标方法（实际上会先调用 ResourceCoordinatorIntercepter 拦截器）</span>
+</span></span><span style="display:flex;"><span>                returnValue <span style="color:#f92672">=</span> compensableMethodContext.<span style="color:#a6e22e">proceed</span>();
+</span></span><span style="display:flex;"><span>                <span style="color:#75715e">// 如果执行异常，就回滚，否则提交</span>
+</span></span><span style="display:flex;"><span>            } <span style="color:#66d9ef">catch</span> (Throwable tryingException) {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>isDelayCancelException(tryingException, allDelayCancelExceptions)) {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>                    logger.<span style="color:#a6e22e">warn</span>(String.<span style="color:#a6e22e">format</span>(<span style="color:#e6db74">&#34;compensable transaction trying failed. transaction content:%s&#34;</span>, JSON.<span style="color:#a6e22e">toJSONString</span>(transaction)), tryingException);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#75715e">/*
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">                        1. 修改数据库状态
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">                        2. 执行 rollback 方法
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">                        3. 如果执行成功，则删除事务资源数据
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">                     */</span>
+</span></span><span style="display:flex;"><span>                    transactionManager.<span style="color:#a6e22e">rollback</span>(asyncCancel);
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">throw</span> tryingException;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">/*
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">                1. 修改数据库状态
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">                2. 执行 confirm 方法
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">                3. 如果执行成功，则删除事务资源数据
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">             */</span>
+</span></span><span style="display:flex;"><span>            transactionManager.<span style="color:#a6e22e">commit</span>(asyncConfirm);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">finally</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// 到这里，分支事务就都执行完了，就清除队列中的事务</span>
+</span></span><span style="display:flex;"><span>            transactionManager.<span style="color:#a6e22e">cleanAfterCompletion</span>(transaction);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> returnValue;
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><p>其中事务管理器 <code>TransactionManager</code> 的 <code>begin()</code> 方法：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> Transaction <span style="color:#a6e22e">begin</span>(Object uniqueIdentify) {
+</span></span><span style="display:flex;"><span>        Transaction transaction <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Transaction(uniqueIdentify,TransactionType.<span style="color:#a6e22e">ROOT</span>);
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e">// 持久化事务</span>
+</span></span><span style="display:flex;"><span>        transactionRepository.<span style="color:#a6e22e">create</span>(transaction);
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e">// 注册事务，向事务队列中加入该事务</span>
+</span></span><span style="display:flex;"><span>        registerTransaction(transaction);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> transaction;
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><p><strong>providerMethodProceed</strong></p>
+<p>处理分支事务的 <code>providerMethodProceed()</code> 方法：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> Object <span style="color:#a6e22e">providerMethodProceed</span>(CompensableMethodContext compensableMethodContext) <span style="color:#66d9ef">throws</span> Throwable {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        Transaction transaction <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>      
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">boolean</span> asyncConfirm <span style="color:#f92672">=</span> compensableMethodContext.<span style="color:#a6e22e">getAnnotation</span>().<span style="color:#a6e22e">asyncConfirm</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">boolean</span> asyncCancel <span style="color:#f92672">=</span> compensableMethodContext.<span style="color:#a6e22e">getAnnotation</span>().<span style="color:#a6e22e">asyncCancel</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#75715e">// 根据事务的不同状态，执行不同的动作</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">switch</span> (TransactionStatus.<span style="color:#a6e22e">valueOf</span>(compensableMethodContext.<span style="color:#a6e22e">getTransactionContext</span>().<span style="color:#a6e22e">getStatus</span>())) {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">case</span> TRYING:
+</span></span><span style="display:flex;"><span>                    <span style="color:#75715e">// propagationNewBegin() 持久化事务参与者的数据到当前服务中（默认状态为 TRYING），并向事务管理器注册事务</span>
+</span></span><span style="display:flex;"><span>                    transaction <span style="color:#f92672">=</span> transactionManager.<span style="color:#a6e22e">propagationNewBegin</span>(compensableMethodContext.<span style="color:#a6e22e">getTransactionContext</span>());
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">return</span> compensableMethodContext.<span style="color:#a6e22e">proceed</span>();
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">case</span> CONFIRMING:
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>                      <span style="color:#75715e">// propagationExistBegin() 修改事务状态，并注册事务</span>
+</span></span><span style="display:flex;"><span>                        transaction <span style="color:#f92672">=</span> transactionManager.<span style="color:#a6e22e">propagationExistBegin</span>(compensableMethodContext.<span style="color:#a6e22e">getTransactionContext</span>());
+</span></span><span style="display:flex;"><span>                      <span style="color:#75715e">// commit() 修改事务状态为 CONFIRMING，并持久化更新，提交事务</span>
+</span></span><span style="display:flex;"><span>                        transactionManager.<span style="color:#a6e22e">commit</span>(asyncConfirm);
+</span></span><span style="display:flex;"><span>                    } <span style="color:#66d9ef">catch</span> (NoExistedTransactionException excepton) {
+</span></span><span style="display:flex;"><span>                        <span style="color:#75715e">//the transaction has been commit,ignore it.</span>
+</span></span><span style="display:flex;"><span>                    }
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">case</span> CANCELLING:
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>                      <span style="color:#75715e">// propagationExistBegin() 修改事务状态，并注册事务</span>
+</span></span><span style="display:flex;"><span>                        transaction <span style="color:#f92672">=</span> transactionManager.<span style="color:#a6e22e">propagationExistBegin</span>(compensableMethodContext.<span style="color:#a6e22e">getTransactionContext</span>());
+</span></span><span style="display:flex;"><span>                      <span style="color:#75715e">// rollback() 修改事务状态为 CANCELLING，并持久化更新，回滚事务</span>
+</span></span><span style="display:flex;"><span>                        transactionManager.<span style="color:#a6e22e">rollback</span>(asyncCancel);
+</span></span><span style="display:flex;"><span>                    } <span style="color:#66d9ef">catch</span> (NoExistedTransactionException exception) {
+</span></span><span style="display:flex;"><span>                        <span style="color:#75715e">//the transaction has been rollback,ignore it.</span>
+</span></span><span style="display:flex;"><span>                    }
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">finally</span> {
+</span></span><span style="display:flex;"><span>          <span style="color:#75715e">// 清除事务队列</span>
+</span></span><span style="display:flex;"><span>            transactionManager.<span style="color:#a6e22e">cleanAfterCompletion</span>(transaction);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        Method method <span style="color:#f92672">=</span> compensableMethodContext.<span style="color:#a6e22e">getMethod</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ReflectionUtils.<span style="color:#a6e22e">getNullValue</span>(method.<span style="color:#a6e22e">getReturnType</span>());
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><p><strong>ResourceCoordinatorAspect</strong></p>
+<p>资源协调切面类和 CompensableTransactionAspect 类似，几乎一样，不再赘述。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>    <span style="color:#a6e22e">@Pointcut</span>(<span style="color:#e6db74">&#34;@annotation(org.mengyun.tcctransaction.api.Compensable)&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">transactionContextCall</span>() {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Around</span>(<span style="color:#e6db74">&#34;transactionContextCall()&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> Object <span style="color:#a6e22e">interceptTransactionContextMethod</span>(ProceedingJoinPoint pjp) <span style="color:#66d9ef">throws</span> Throwable {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> resourceCoordinatorInterceptor.<span style="color:#a6e22e">interceptTransactionContextMethod</span>(pjp);
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><p><strong>ResourceCoordinatorInterceptor</strong></p>
+<p>主要处理 try 阶段的事情，在 try 阶段，就将所有的“资源”封装完成并交给事务管理器。</p>
+<p>其中“资源”指的是“事务资源”：</p>
+<p>即事务的参与者：</p>
+<ol>
+<li>confirm 上下文</li>
+<li>cancel 上下文</li>
+<li>分支事务信息</li>
+</ol>
+<p>然后事务管理器修改数据库状态。</p>
+<p><strong>interceptTransactionContextMethod</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> Object <span style="color:#a6e22e">interceptTransactionContextMethod</span>(ProceedingJoinPoint pjp) <span style="color:#66d9ef">throws</span> Throwable {
+</span></span><span style="display:flex;"><span>		<span style="color:#75715e">// 使用事务管理器，传递一些事务相关的信息（线程共享）</span>
+</span></span><span style="display:flex;"><span>        Transaction transaction <span style="color:#f92672">=</span> transactionManager.<span style="color:#a6e22e">getCurrentTransaction</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (transaction <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span>) {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">switch</span> (transaction.<span style="color:#a6e22e">getStatus</span>()) {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">case</span> TRYING:
+</span></span><span style="display:flex;"><span>                    enlistParticipant(pjp);
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">case</span> CONFIRMING:
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">case</span> CANCELLING:
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> pjp.<span style="color:#a6e22e">proceed</span>(pjp.<span style="color:#a6e22e">getArgs</span>());
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><p><strong>enlistParticipant</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">private</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">enlistParticipant</span>(ProceedingJoinPoint pjp) <span style="color:#66d9ef">throws</span> IllegalAccessException, InstantiationException {
+</span></span><span style="display:flex;"><span>		<span style="color:#75715e">// 获取对象的方法</span>
+</span></span><span style="display:flex;"><span>        Method method <span style="color:#f92672">=</span> CompensableMethodUtils.<span style="color:#a6e22e">getCompensableMethod</span>(pjp);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (method <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> RuntimeException(String.<span style="color:#a6e22e">format</span>(<span style="color:#e6db74">&#34;join point not found method, point is : %s&#34;</span>, pjp.<span style="color:#a6e22e">getSignature</span>().<span style="color:#a6e22e">getName</span>()));
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>  	<span style="color:#75715e">// 获取对应的 @Compensable 对象</span>
+</span></span><span style="display:flex;"><span>        Compensable compensable <span style="color:#f92672">=</span> method.<span style="color:#a6e22e">getAnnotation</span>(Compensable.<span style="color:#a6e22e">class</span>);
+</span></span><span style="display:flex;"><span>	  <span style="color:#75715e">// 获取配置的 confirm 和 cancel 方法</span>
+</span></span><span style="display:flex;"><span>  	
+</span></span><span style="display:flex;"><span>        String confirmMethodName <span style="color:#f92672">=</span> compensable.<span style="color:#a6e22e">confirmMethod</span>();
+</span></span><span style="display:flex;"><span>        String cancelMethodName <span style="color:#f92672">=</span> compensable.<span style="color:#a6e22e">cancelMethod</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        Transaction transaction <span style="color:#f92672">=</span> transactionManager.<span style="color:#a6e22e">getCurrentTransaction</span>();
+</span></span><span style="display:flex;"><span>        TransactionXid xid <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> TransactionXid(transaction.<span style="color:#a6e22e">getXid</span>().<span style="color:#a6e22e">getGlobalTransactionId</span>());
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (FactoryBuilder.<span style="color:#a6e22e">factoryOf</span>(compensable.<span style="color:#a6e22e">transactionContextEditor</span>()).<span style="color:#a6e22e">getInstance</span>().<span style="color:#a6e22e">get</span>(pjp.<span style="color:#a6e22e">getTarget</span>(), method, pjp.<span style="color:#a6e22e">getArgs</span>()) <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span>) {
+</span></span><span style="display:flex;"><span>            FactoryBuilder.<span style="color:#a6e22e">factoryOf</span>(compensable.<span style="color:#a6e22e">transactionContextEditor</span>()).<span style="color:#a6e22e">getInstance</span>().<span style="color:#a6e22e">set</span>(<span style="color:#66d9ef">new</span> TransactionContext(xid, TransactionStatus.<span style="color:#a6e22e">TRYING</span>.<span style="color:#a6e22e">getId</span>()), pjp.<span style="color:#a6e22e">getTarget</span>(), ((MethodSignature) pjp.<span style="color:#a6e22e">getSignature</span>()).<span style="color:#a6e22e">getMethod</span>(), pjp.<span style="color:#a6e22e">getArgs</span>());
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        Class targetClass <span style="color:#f92672">=</span> ReflectionUtils.<span style="color:#a6e22e">getDeclaringType</span>(pjp.<span style="color:#a6e22e">getTarget</span>().<span style="color:#a6e22e">getClass</span>(), method.<span style="color:#a6e22e">getName</span>(), method.<span style="color:#a6e22e">getParameterTypes</span>());
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        InvocationContext confirmInvocation <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> InvocationContext(targetClass,
+</span></span><span style="display:flex;"><span>                confirmMethodName,
+</span></span><span style="display:flex;"><span>                method.<span style="color:#a6e22e">getParameterTypes</span>(), pjp.<span style="color:#a6e22e">getArgs</span>());
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        InvocationContext cancelInvocation <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> InvocationContext(targetClass,
+</span></span><span style="display:flex;"><span>                cancelMethodName,
+</span></span><span style="display:flex;"><span>                method.<span style="color:#a6e22e">getParameterTypes</span>(), pjp.<span style="color:#a6e22e">getArgs</span>());
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        Participant participant <span style="color:#f92672">=</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">new</span> Participant(
+</span></span><span style="display:flex;"><span>                        xid,
+</span></span><span style="display:flex;"><span>                        confirmInvocation,
+</span></span><span style="display:flex;"><span>                        cancelInvocation,
+</span></span><span style="display:flex;"><span>                        compensable.<span style="color:#a6e22e">transactionContextEditor</span>());
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        transactionManager.<span style="color:#a6e22e">enlistParticipant</span>(participant);
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><p>这样，经过两个拦截器后，才调用目标对象方法。</p>
+<h3 id="幂等性问题">幂等性问题<a hidden class="anchor" aria-hidden="true" href="#幂等性问题">#</a></h3>
+<p>TCC-Transaction 不能保证幂等性，需要自己实现幂等性。如以下 confirm 和 cancel 方法就实现了幂等性：</p>
+<p><strong>confirm 的幂等性</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#a6e22e">@Transactional</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">confirmRecord</span>(RedPacketTradeOrderDto tradeOrderDto) {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>            Thread.<span style="color:#a6e22e">sleep</span>(1000l);
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">catch</span> (InterruptedException e) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> RuntimeException(e);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;red packet confirm record called. time seq:&#34;</span> <span style="color:#f92672">+</span> DateFormatUtils.<span style="color:#a6e22e">format</span>(Calendar.<span style="color:#a6e22e">getInstance</span>(), <span style="color:#e6db74">&#34;yyyy-MM-dd HH:mm:ss&#34;</span>));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        TradeOrder tradeOrder <span style="color:#f92672">=</span> tradeOrderRepository.<span style="color:#a6e22e">findByMerchantOrderNo</span>(tradeOrderDto.<span style="color:#a6e22e">getMerchantOrderNo</span>());
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 保证幂等性 check if the trade order status is DRAFT, if yes, return directly, ensure idempotency.</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (tradeOrder <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span> <span style="color:#f92672">&amp;&amp;</span> tradeOrder.<span style="color:#a6e22e">getStatus</span>().<span style="color:#a6e22e">equals</span>(<span style="color:#e6db74">&#34;DRAFT&#34;</span>)) {
+</span></span><span style="display:flex;"><span>            tradeOrder.<span style="color:#a6e22e">confirm</span>();
+</span></span><span style="display:flex;"><span>            tradeOrderRepository.<span style="color:#a6e22e">update</span>(tradeOrder);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            RedPacketAccount transferToAccount <span style="color:#f92672">=</span> redPacketAccountRepository.<span style="color:#a6e22e">findByUserId</span>(tradeOrderDto.<span style="color:#a6e22e">getOppositeUserId</span>());
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            transferToAccount.<span style="color:#a6e22e">transferTo</span>(tradeOrderDto.<span style="color:#a6e22e">getAmount</span>());
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            redPacketAccountRepository.<span style="color:#a6e22e">save</span>(transferToAccount);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><p><strong>cancel 的幂等性</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#a6e22e">@Transactional</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">cancelRecord</span>(RedPacketTradeOrderDto tradeOrderDto) {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>            Thread.<span style="color:#a6e22e">sleep</span>(1000l);
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">catch</span> (InterruptedException e) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> RuntimeException(e);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;red packet cancel record called. time seq:&#34;</span> <span style="color:#f92672">+</span> DateFormatUtils.<span style="color:#a6e22e">format</span>(Calendar.<span style="color:#a6e22e">getInstance</span>(), <span style="color:#e6db74">&#34;yyyy-MM-dd HH:mm:ss&#34;</span>));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        TradeOrder tradeOrder <span style="color:#f92672">=</span> tradeOrderRepository.<span style="color:#a6e22e">findByMerchantOrderNo</span>(tradeOrderDto.<span style="color:#a6e22e">getMerchantOrderNo</span>());
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 保证幂等性 check if the trade order status is DRAFT, if yes, return directly, ensure idempotency.</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">null</span> <span style="color:#f92672">!=</span> tradeOrder <span style="color:#f92672">&amp;&amp;</span> <span style="color:#e6db74">&#34;DRAFT&#34;</span>.<span style="color:#a6e22e">equals</span>(tradeOrder.<span style="color:#a6e22e">getStatus</span>())) {
+</span></span><span style="display:flex;"><span>            tradeOrder.<span style="color:#a6e22e">cancel</span>();
+</span></span><span style="display:flex;"><span>            tradeOrderRepository.<span style="color:#a6e22e">update</span>(tradeOrder);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            RedPacketAccount capitalAccount <span style="color:#f92672">=</span> redPacketAccountRepository.<span style="color:#a6e22e">findByUserId</span>(tradeOrderDto.<span style="color:#a6e22e">getSelfUserId</span>());
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            capitalAccount.<span style="color:#a6e22e">cancelTransfer</span>(tradeOrderDto.<span style="color:#a6e22e">getAmount</span>());
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            redPacketAccountRepository.<span style="color:#a6e22e">save</span>(capitalAccount);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><h2 id="小结">小结<a hidden class="anchor" aria-hidden="true" href="#小结">#</a></h2>
+<p>事务的相关信息（全局事务编号，乐观锁版本等要持久化存储）</p>
+<h3 id="资源">资源<a hidden class="anchor" aria-hidden="true" href="#资源">#</a></h3>
+<p>try 核心点：预留资源（业务资源、事务数据资源）</p>
+<h3 id="流程">流程<a hidden class="anchor" aria-hidden="true" href="#流程">#</a></h3>
+<p>注册和初始化事务 -&gt; 组织事务参与者 -&gt; 执行目标方法（try） -&gt; 执行 confirm 和 cancel 方法</p>
+<h1 id="总结">总结<a hidden class="anchor" aria-hidden="true" href="#总结">#</a></h1>
+<ul>
+<li>熟悉 TCC-Transaction 的分布式事务处理流程</li>
+<li>TCC-Transaction 不能保证幂等性</li>
+<li>TCC 分布式事务的核心是资源（业务资源和事务资源）</li>
+</ul>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://zjxjwxk.github.io/tags/dubbo/">Dubbo</a></li>
+      <li><a href="https://zjxjwxk.github.io/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/">微服务架构</a></li>
+    </ul>
+  </footer>
+</article>
+
+<script>
+  window.onload = function() {
+      var contentContainer = document.getElementById("content-container");
+      if ("" !== "") {
+          var password = prompt("Enter password:");
+          if (password === "") {
+              contentContainer.style.display = "block";
+          } else {
+              alert("Incorrect password");
+          }
+      } else {
+          contentContainer.style.display = "block";
+      }
+  };
+</script>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2024 <a href="https://zjxjwxk.github.io/">Xinkang&#39;s Blog</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

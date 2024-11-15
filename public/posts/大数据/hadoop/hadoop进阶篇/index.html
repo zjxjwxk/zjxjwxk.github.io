@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Hadoop 进阶篇 | Xinkang&#39;s Blog</title>
+<meta name="keywords" content="Hadoop, 大数据">
+<meta name="description" content="概要
+
+概述
+深入探索 MapReduce 过程
+Hadoop 的分布式缓存
+Hadoop 应用——推荐算法
+
+HDFS
+HDFS 是 Hadoop 分布式文件系统的简称，由若干台计算机组成，用于存放 PB、TB 数量级以上的文件，每份文件可以有多个副本，所以 HDFS 是一个具有高冗余、高容错的文件系统。
+
+Hadoop
+Hadoop 1.x
+
+Hadoop 2.x
+Hadoop 1.0 到 2.0 的变化：Hadoop 2.0 以后的版本移除了原有的 JobTracker 和 TaskTracker，改由 Yarn 平台的 ResourceManager 负责集群中所有资源的统一管理和分配，NodeManager 管理 Hadoop 集群中单个计算节点。
+YARN 的设计减小了 JobTracker 的资源消耗，减少了 Hadoop 1.0 中发生单点故障的风险。我们还可以在 YARN 平台上运行 Spark 和 Storm 作业，充分利用资源。
+
+深入探索 MapReduce
+WordCount 实例回顾
+
+MapReduce 作业是一种大规模数据集的并行计算的编程模型。我们可以将 HDFS 中存放的海量数据，通过 MapReduce 作业进行计算，得到目标数据。">
+<meta name="author" content="">
+<link rel="canonical" href="https://zjxjwxk.github.io/posts/%E5%A4%A7%E6%95%B0%E6%8D%AE/hadoop/hadoop%E8%BF%9B%E9%98%B6%E7%AF%87/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.d6fcd20a4fb86efa4dfac8ec95da60244cc8871042183da1ef28e3a762ad79c8.css" integrity="sha256-1vzSCk&#43;4bvpN&#43;sjsldpgJEzIhxBCGD2h7yjjp2Ktecg=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://zjxjwxk.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://zjxjwxk.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://zjxjwxk.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://zjxjwxk.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://zjxjwxk.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://zjxjwxk.github.io/posts/%E5%A4%A7%E6%95%B0%E6%8D%AE/hadoop/hadoop%E8%BF%9B%E9%98%B6%E7%AF%87/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><meta property="og:url" content="https://zjxjwxk.github.io/posts/%E5%A4%A7%E6%95%B0%E6%8D%AE/hadoop/hadoop%E8%BF%9B%E9%98%B6%E7%AF%87/">
+  <meta property="og:site_name" content="Xinkang&#39;s Blog">
+  <meta property="og:title" content="Hadoop 进阶篇">
+  <meta property="og:description" content="概要 概述 深入探索 MapReduce 过程 Hadoop 的分布式缓存 Hadoop 应用——推荐算法 HDFS HDFS 是 Hadoop 分布式文件系统的简称，由若干台计算机组成，用于存放 PB、TB 数量级以上的文件，每份文件可以有多个副本，所以 HDFS 是一个具有高冗余、高容错的文件系统。
+Hadoop Hadoop 1.x Hadoop 2.x Hadoop 1.0 到 2.0 的变化：Hadoop 2.0 以后的版本移除了原有的 JobTracker 和 TaskTracker，改由 Yarn 平台的 ResourceManager 负责集群中所有资源的统一管理和分配，NodeManager 管理 Hadoop 集群中单个计算节点。
+YARN 的设计减小了 JobTracker 的资源消耗，减少了 Hadoop 1.0 中发生单点故障的风险。我们还可以在 YARN 平台上运行 Spark 和 Storm 作业，充分利用资源。
+深入探索 MapReduce WordCount 实例回顾 MapReduce 作业是一种大规模数据集的并行计算的编程模型。我们可以将 HDFS 中存放的海量数据，通过 MapReduce 作业进行计算，得到目标数据。">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2020-05-08T16:36:00+00:00">
+    <meta property="article:modified_time" content="2020-05-08T16:36:00+00:00">
+    <meta property="article:tag" content="Hadoop">
+    <meta property="article:tag" content="大数据">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hadoop 进阶篇">
+<meta name="twitter:description" content="概要
+
+概述
+深入探索 MapReduce 过程
+Hadoop 的分布式缓存
+Hadoop 应用——推荐算法
+
+HDFS
+HDFS 是 Hadoop 分布式文件系统的简称，由若干台计算机组成，用于存放 PB、TB 数量级以上的文件，每份文件可以有多个副本，所以 HDFS 是一个具有高冗余、高容错的文件系统。
+
+Hadoop
+Hadoop 1.x
+
+Hadoop 2.x
+Hadoop 1.0 到 2.0 的变化：Hadoop 2.0 以后的版本移除了原有的 JobTracker 和 TaskTracker，改由 Yarn 平台的 ResourceManager 负责集群中所有资源的统一管理和分配，NodeManager 管理 Hadoop 集群中单个计算节点。
+YARN 的设计减小了 JobTracker 的资源消耗，减少了 Hadoop 1.0 中发生单点故障的风险。我们还可以在 YARN 平台上运行 Spark 和 Storm 作业，充分利用资源。
+
+深入探索 MapReduce
+WordCount 实例回顾
+
+MapReduce 作业是一种大规模数据集的并行计算的编程模型。我们可以将 HDFS 中存放的海量数据，通过 MapReduce 作业进行计算，得到目标数据。">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://zjxjwxk.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Hadoop 进阶篇",
+      "item": "https://zjxjwxk.github.io/posts/%E5%A4%A7%E6%95%B0%E6%8D%AE/hadoop/hadoop%E8%BF%9B%E9%98%B6%E7%AF%87/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Hadoop 进阶篇",
+  "name": "Hadoop 进阶篇",
+  "description": "概要 概述 深入探索 MapReduce 过程 Hadoop 的分布式缓存 Hadoop 应用——推荐算法 HDFS HDFS 是 Hadoop 分布式文件系统的简称，由若干台计算机组成，用于存放 PB、TB 数量级以上的文件，每份文件可以有多个副本，所以 HDFS 是一个具有高冗余、高容错的文件系统。\nHadoop Hadoop 1.x Hadoop 2.x Hadoop 1.0 到 2.0 的变化：Hadoop 2.0 以后的版本移除了原有的 JobTracker 和 TaskTracker，改由 Yarn 平台的 ResourceManager 负责集群中所有资源的统一管理和分配，NodeManager 管理 Hadoop 集群中单个计算节点。\nYARN 的设计减小了 JobTracker 的资源消耗，减少了 Hadoop 1.0 中发生单点故障的风险。我们还可以在 YARN 平台上运行 Spark 和 Storm 作业，充分利用资源。\n深入探索 MapReduce WordCount 实例回顾 MapReduce 作业是一种大规模数据集的并行计算的编程模型。我们可以将 HDFS 中存放的海量数据，通过 MapReduce 作业进行计算，得到目标数据。\n",
+  "keywords": [
+    "Hadoop", "大数据"
+  ],
+  "articleBody": "概要 概述 深入探索 MapReduce 过程 Hadoop 的分布式缓存 Hadoop 应用——推荐算法 HDFS HDFS 是 Hadoop 分布式文件系统的简称，由若干台计算机组成，用于存放 PB、TB 数量级以上的文件，每份文件可以有多个副本，所以 HDFS 是一个具有高冗余、高容错的文件系统。\nHadoop Hadoop 1.x Hadoop 2.x Hadoop 1.0 到 2.0 的变化：Hadoop 2.0 以后的版本移除了原有的 JobTracker 和 TaskTracker，改由 Yarn 平台的 ResourceManager 负责集群中所有资源的统一管理和分配，NodeManager 管理 Hadoop 集群中单个计算节点。\nYARN 的设计减小了 JobTracker 的资源消耗，减少了 Hadoop 1.0 中发生单点故障的风险。我们还可以在 YARN 平台上运行 Spark 和 Storm 作业，充分利用资源。\n深入探索 MapReduce WordCount 实例回顾 MapReduce 作业是一种大规模数据集的并行计算的编程模型。我们可以将 HDFS 中存放的海量数据，通过 MapReduce 作业进行计算，得到目标数据。\n四个阶段 Split 阶段 Map 阶段（需要编码） Shuffle 阶段 Reduce 阶段（需要编码） Split 阶段 Split 分片（设置文件输入类型为 CombineFileInputFormat ，将文件合并后再分片）：\n分片结果，分别作为 Map 阶段的输入。\nMap 阶段（需要编码） Shuffle 阶段 Shuffle 阶段过程比较复杂，可以理解为 Map 输出到 Reduce 输入的过程，而且涉及到网络传输。\nReduce 阶段（需要编码） 总过程 从分片输入到 Map 输入文件 文件保存在 DataNode 的 block 块中：\nHadoop 1.x 默认的 block 大小：64MB Hadoop 2.x 默认的 block 大小：128MB 可以在 hdfs-site.xml 中设置参数：dfs.block.size\n分片输入（Split） 理想的输入文件：由于 NameNode 内存有限，大量的小文件会给 HDFS 带来性能上的问题。故 HDFS 适合存放大文件，对于大量小文件，可以采用压缩、合并小文件的优化策略。例如，设置文件输入类型为 CombineFileInputFormat 格式。\n节点 Map 任务的个数 在实际情况下，Map 任务的个数是受到多个条件的制约，一般一个 DataNode 的 Map 任务数量控制在 10 到 100 比较合适。\n控制 Map 任务数量的方法：\n增加 Map 个数，可增大 mapred.map.tasks 减少 Map 个数，可增大 mapred.min.split.size 如果要减少 Map 个数，但有很多小文件，可将小文件合并成大文件，再使用准则 2 ",
+  "wordCount" : "153",
+  "inLanguage": "en",
+  "datePublished": "2020-05-08T16:36:00Z",
+  "dateModified": "2020-05-08T16:36:00Z",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://zjxjwxk.github.io/posts/%E5%A4%A7%E6%95%B0%E6%8D%AE/hadoop/hadoop%E8%BF%9B%E9%98%B6%E7%AF%87/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Xinkang's Blog",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://zjxjwxk.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://zjxjwxk.github.io/" accesskey="h" title="Xinkang&#39;s Blog (Alt + H)">Xinkang&#39;s Blog</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://zjxjwxk.github.io/archives/" title="Archives">
+                    <span>Archives</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://zjxjwxk.github.io/categories/" title="Categories">
+                    <span>Categories</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://zjxjwxk.github.io/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://zjxjwxk.github.io/search/" title="Search (Alt &#43; /)" accesskey=/>
+                    <span>Search</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <div id="content-container">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      Hadoop 进阶篇
+    </h1>
+    <div class="post-meta"><span title='2020-05-08 16:36:00 +0000 UTC'>May 8, 2020</span>
+
+</div>
+  </header> 
+  <div class="post-content"><h1 id="概要">概要<a hidden class="anchor" aria-hidden="true" href="#概要">#</a></h1>
+<ul>
+<li>概述</li>
+<li>深入探索 MapReduce 过程</li>
+<li>Hadoop 的分布式缓存</li>
+<li>Hadoop 应用——推荐算法</li>
+</ul>
+<h1 id="hdfs">HDFS<a hidden class="anchor" aria-hidden="true" href="#hdfs">#</a></h1>
+<p>HDFS 是 Hadoop 分布式文件系统的简称，由若干台计算机组成，用于存放 PB、TB 数量级以上的文件，每份文件可以有多个副本，所以 HDFS 是一个具有高冗余、高容错的文件系统。</p>
+<p><img alt="HDFS架构" loading="lazy" src="/posts/%E5%A4%A7%E6%95%B0%E6%8D%AE/hadoop/hadoop%E8%BF%9B%E9%98%B6%E7%AF%87/images/image-20200508165016013.png"></p>
+<h1 id="hadoop">Hadoop<a hidden class="anchor" aria-hidden="true" href="#hadoop">#</a></h1>
+<h2 id="hadoop-1x">Hadoop 1.x<a hidden class="anchor" aria-hidden="true" href="#hadoop-1x">#</a></h2>
+<p><img alt="Hadoop 1.x" loading="lazy" src="/posts/%E5%A4%A7%E6%95%B0%E6%8D%AE/hadoop/hadoop%E8%BF%9B%E9%98%B6%E7%AF%87/images/image-20200508165127618.png"></p>
+<h2 id="hadoop-2x">Hadoop 2.x<a hidden class="anchor" aria-hidden="true" href="#hadoop-2x">#</a></h2>
+<p>Hadoop 1.0 到 2.0 的变化：Hadoop 2.0 以后的版本移除了原有的 JobTracker 和 TaskTracker，改由 Yarn 平台的 ResourceManager 负责集群中所有资源的统一管理和分配，NodeManager 管理 Hadoop 集群中单个计算节点。</p>
+<p>YARN 的设计减小了 JobTracker 的资源消耗，减少了 Hadoop 1.0 中发生单点故障的风险。我们还可以在 YARN 平台上运行 Spark 和 Storm 作业，充分利用资源。</p>
+<p><img alt="Hadoop 1.0 =&gt; Hadoop 2.0" loading="lazy" src="/posts/%E5%A4%A7%E6%95%B0%E6%8D%AE/hadoop/hadoop%E8%BF%9B%E9%98%B6%E7%AF%87/images/image-20200508165216140.png"></p>
+<h1 id="深入探索-mapreduce">深入探索 MapReduce<a hidden class="anchor" aria-hidden="true" href="#深入探索-mapreduce">#</a></h1>
+<h2 id="wordcount-实例回顾">WordCount 实例回顾<a hidden class="anchor" aria-hidden="true" href="#wordcount-实例回顾">#</a></h2>
+<p><img loading="lazy" src="/posts/%E5%A4%A7%E6%95%B0%E6%8D%AE/hadoop/hadoop%E8%BF%9B%E9%98%B6%E7%AF%87/images/image-20200508170750118.png"></p>
+<p>MapReduce 作业是一种大规模数据集的并行计算的编程模型。我们可以将 HDFS 中存放的海量数据，通过 MapReduce 作业进行计算，得到目标数据。</p>
+<h3 id="四个阶段">四个阶段<a hidden class="anchor" aria-hidden="true" href="#四个阶段">#</a></h3>
+<ul>
+<li>Split 阶段</li>
+<li>Map 阶段（需要编码）</li>
+<li>Shuffle 阶段</li>
+<li>Reduce 阶段（需要编码）</li>
+</ul>
+<h4 id="split-阶段">Split 阶段<a hidden class="anchor" aria-hidden="true" href="#split-阶段">#</a></h4>
+<p>Split 分片（设置文件输入类型为 CombineFileInputFormat ，将文件合并后再分片）：</p>
+<p><img alt="Split阶段" loading="lazy" src="/posts/%E5%A4%A7%E6%95%B0%E6%8D%AE/hadoop/hadoop%E8%BF%9B%E9%98%B6%E7%AF%87/images/image-20200508170958554.png"></p>
+<p>分片结果，分别作为 Map 阶段的输入。</p>
+<h4 id="map-阶段需要编码">Map 阶段（需要编码）<a hidden class="anchor" aria-hidden="true" href="#map-阶段需要编码">#</a></h4>
+<p><img alt="Map阶段" loading="lazy" src="/posts/%E5%A4%A7%E6%95%B0%E6%8D%AE/hadoop/hadoop%E8%BF%9B%E9%98%B6%E7%AF%87/images/image-20200508171722839.png"></p>
+<h4 id="shuffle-阶段">Shuffle 阶段<a hidden class="anchor" aria-hidden="true" href="#shuffle-阶段">#</a></h4>
+<p>Shuffle 阶段过程比较复杂，可以理解为 Map 输出到 Reduce 输入的过程，而且涉及到网络传输。</p>
+<p><img alt="Shuffle阶段" loading="lazy" src="/posts/%E5%A4%A7%E6%95%B0%E6%8D%AE/hadoop/hadoop%E8%BF%9B%E9%98%B6%E7%AF%87/images/image-20200508172031375.png"></p>
+<h4 id="reduce-阶段需要编码">Reduce 阶段（需要编码）<a hidden class="anchor" aria-hidden="true" href="#reduce-阶段需要编码">#</a></h4>
+<p><img alt="Reduce阶段" loading="lazy" src="/posts/%E5%A4%A7%E6%95%B0%E6%8D%AE/hadoop/hadoop%E8%BF%9B%E9%98%B6%E7%AF%87/images/image-20200508172406784.png"></p>
+<h4 id="总过程">总过程<a hidden class="anchor" aria-hidden="true" href="#总过程">#</a></h4>
+<p><img alt="总过程" loading="lazy" src="/posts/%E5%A4%A7%E6%95%B0%E6%8D%AE/hadoop/hadoop%E8%BF%9B%E9%98%B6%E7%AF%87/images/image-20200508172638663.png"></p>
+<h2 id="从分片输入到-map">从分片输入到 Map<a hidden class="anchor" aria-hidden="true" href="#从分片输入到-map">#</a></h2>
+<h3 id="输入文件">输入文件<a hidden class="anchor" aria-hidden="true" href="#输入文件">#</a></h3>
+<p>文件保存在 DataNode 的 block 块中：</p>
+<p><img alt="DataNode" loading="lazy" src="/posts/%E5%A4%A7%E6%95%B0%E6%8D%AE/hadoop/hadoop%E8%BF%9B%E9%98%B6%E7%AF%87/images/image-20200508174131906.png"></p>
+<ul>
+<li>Hadoop 1.x 默认的 block 大小：64MB</li>
+<li>Hadoop 2.x 默认的 block 大小：128MB</li>
+</ul>
+<p>可以在 hdfs-site.xml 中设置参数：dfs.block.size</p>
+<h3 id="分片输入split">分片输入（Split）<a hidden class="anchor" aria-hidden="true" href="#分片输入split">#</a></h3>
+<p><img alt="Split" loading="lazy" src="/posts/%E5%A4%A7%E6%95%B0%E6%8D%AE/hadoop/hadoop%E8%BF%9B%E9%98%B6%E7%AF%87/images/image-20200508174446605.png"></p>
+<p>理想的输入文件：由于 NameNode 内存有限，大量的小文件会给 HDFS 带来性能上的问题。故 HDFS 适合存放大文件，对于大量小文件，可以采用压缩、合并小文件的优化策略。例如，设置文件输入类型为 CombineFileInputFormat 格式。</p>
+<h3 id="节点-map-任务的个数">节点 Map 任务的个数<a hidden class="anchor" aria-hidden="true" href="#节点-map-任务的个数">#</a></h3>
+<p><img alt="Map任务" loading="lazy" src="/posts/%E5%A4%A7%E6%95%B0%E6%8D%AE/hadoop/hadoop%E8%BF%9B%E9%98%B6%E7%AF%87/images/image-20200508175348681.png"></p>
+<p>在实际情况下，Map 任务的个数是受到多个条件的制约，一般一个 DataNode 的 Map 任务数量控制在 10 到 100 比较合适。</p>
+<p>控制 Map 任务数量的方法：</p>
+<ul>
+<li>增加 Map 个数，可增大 mapred.map.tasks</li>
+<li>减少 Map 个数，可增大 mapred.min.split.size</li>
+<li>如果要减少 Map 个数，但有很多小文件，可将小文件合并成大文件，再使用准则 2</li>
+</ul>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://zjxjwxk.github.io/tags/hadoop/">Hadoop</a></li>
+      <li><a href="https://zjxjwxk.github.io/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/">大数据</a></li>
+    </ul>
+  </footer>
+</article>
+
+<script>
+  window.onload = function() {
+      var contentContainer = document.getElementById("content-container");
+      if ("" !== "") {
+          var password = prompt("Enter password:");
+          if (password === "") {
+              contentContainer.style.display = "block";
+          } else {
+              alert("Incorrect password");
+          }
+      } else {
+          contentContainer.style.display = "block";
+      }
+  };
+</script>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2024 <a href="https://zjxjwxk.github.io/">Xinkang&#39;s Blog</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

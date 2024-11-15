@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>PAT甲级 1016 Phone Bills (25分) | Xinkang&#39;s Blog</title>
+<meta name="keywords" content="PAT, 排序">
+<meta name="description" content="A long-distance telephone company charges its customers by the following rules:
+Making a long-distance call costs a certain amount per minute, depending on the time of day when the call is made. When a customer starts connecting a long-distance call, the time will be recorded, and so will be the time when the customer hangs up the phone. Every calendar month, a bill is sent to the customer for each minute called (at a rate determined by the time of day). Your job is to prepare the bills for each month, given a set of phone call records.">
+<meta name="author" content="">
+<link rel="canonical" href="https://zjxjwxk.github.io/posts/pat/advanced_level/a1016/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.d6fcd20a4fb86efa4dfac8ec95da60244cc8871042183da1ef28e3a762ad79c8.css" integrity="sha256-1vzSCk&#43;4bvpN&#43;sjsldpgJEzIhxBCGD2h7yjjp2Ktecg=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://zjxjwxk.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://zjxjwxk.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://zjxjwxk.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://zjxjwxk.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://zjxjwxk.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://zjxjwxk.github.io/posts/pat/advanced_level/a1016/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><meta property="og:url" content="https://zjxjwxk.github.io/posts/pat/advanced_level/a1016/">
+  <meta property="og:site_name" content="Xinkang&#39;s Blog">
+  <meta property="og:title" content="PAT甲级 1016 Phone Bills (25分)">
+  <meta property="og:description" content="A long-distance telephone company charges its customers by the following rules:
+Making a long-distance call costs a certain amount per minute, depending on the time of day when the call is made. When a customer starts connecting a long-distance call, the time will be recorded, and so will be the time when the customer hangs up the phone. Every calendar month, a bill is sent to the customer for each minute called (at a rate determined by the time of day). Your job is to prepare the bills for each month, given a set of phone call records.">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2020-03-20T22:29:00+00:00">
+    <meta property="article:modified_time" content="2020-03-20T22:29:00+00:00">
+    <meta property="article:tag" content="PAT">
+    <meta property="article:tag" content="排序">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="PAT甲级 1016 Phone Bills (25分)">
+<meta name="twitter:description" content="A long-distance telephone company charges its customers by the following rules:
+Making a long-distance call costs a certain amount per minute, depending on the time of day when the call is made. When a customer starts connecting a long-distance call, the time will be recorded, and so will be the time when the customer hangs up the phone. Every calendar month, a bill is sent to the customer for each minute called (at a rate determined by the time of day). Your job is to prepare the bills for each month, given a set of phone call records.">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://zjxjwxk.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "PAT甲级 1016 Phone Bills (25分)",
+      "item": "https://zjxjwxk.github.io/posts/pat/advanced_level/a1016/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "PAT甲级 1016 Phone Bills (25分)",
+  "name": "PAT甲级 1016 Phone Bills (25分)",
+  "description": "A long-distance telephone company charges its customers by the following rules:\nMaking a long-distance call costs a certain amount per minute, depending on the time of day when the call is made. When a customer starts connecting a long-distance call, the time will be recorded, and so will be the time when the customer hangs up the phone. Every calendar month, a bill is sent to the customer for each minute called (at a rate determined by the time of day). Your job is to prepare the bills for each month, given a set of phone call records.\n",
+  "keywords": [
+    "PAT", "排序"
+  ],
+  "articleBody": "A long-distance telephone company charges its customers by the following rules:\nMaking a long-distance call costs a certain amount per minute, depending on the time of day when the call is made. When a customer starts connecting a long-distance call, the time will be recorded, and so will be the time when the customer hangs up the phone. Every calendar month, a bill is sent to the customer for each minute called (at a rate determined by the time of day). Your job is to prepare the bills for each month, given a set of phone call records.\nInput Specification: Each input file contains one test case. Each case has two parts: the rate structure, and the phone call records.\nThe rate structure consists of a line with 24 non-negative integers denoting the toll (cents/minute) from 00:00 - 01:00, the toll from 01:00 - 02:00, and so on for each hour in the day.\nThe next line contains a positive number N (≤1000), followed by N lines of records. Each phone call record consists of the name of the customer (string of up to 20 characters without space), the time and date (mm:dd:hh:mm), and the word on-line or off-line.\nFor each test case, all dates will be within a single month. Each on-line record is paired with the chronologically next record for the same customer provided it is an off-line record. Any on-line records that are not paired with an off-line record are ignored, as are off-line records not paired with an on-line record. It is guaranteed that at least one call is well paired in the input. You may assume that no two records for the same customer have the same time. Times are recorded using a 24-hour clock.\nOutput Specification: For each test case, you must print a phone bill for each customer.\nBills must be printed in alphabetical order of customers’ names. For each customer, first print in a line the name of the customer and the month of the bill in the format shown by the sample. Then for each time period of a call, print in one line the beginning and ending time and date (dd:hh:mm), the lasting time (in minute) and the charge of the call. The calls must be listed in chronological order. Finally, print the total charge for the month in the format shown by the sample.\nSample Input: 10 10 10 10 10 10 20 20 20 15 15 15 15 15 15 15 20 30 20 15 15 10 10 10 10 CYLL 01:01:06:01 on-line CYLL 01:28:16:05 off-line CYJJ 01:01:07:00 off-line CYLL 01:01:08:03 off-line CYJJ 01:01:05:59 on-line aaa 01:01:01:03 on-line aaa 01:02:00:01 on-line CYLL 01:28:15:41 on-line aaa 01:05:02:24 on-line aaa 01:04:23:59 off-line Sample Output: CYJJ 01 01:05:59 01:07:00 61 $12.10 Total amount: $12.10 CYLL 01 01:06:01 01:08:03 122 $24.40 28:15:41 28:16:05 24 $3.85 Total amount: $28.25 aaa 01 02:00:01 04:23:59 4318 $638.80 Total amount: $638.80 思路 将通话记录，先根据姓名，再根据时间先后，进行排序。这样相同名字的记录就会排在一起，且其中的数据也是按照时间顺序的。 为了方便计算某一组通话的时长，可以把记录的时间都换算为相对于 00:00:00 的分钟数，则挂电话时间减去接电话时间，即为通话时长 为了方便计算某一组通话的费用，可以把挂电话相对于 00:00:00 的费用减去接电话相对于 00:00:00 的费用，即为该通话的费用 #include #include #include #include #include using namespace std; const int maxn = 2000; int n, rate[25] = {0}; struct Record { string name; int month, day, hour, min, time, status; } records[maxn]; double getCostFromZero(Record \u0026r) { double cost = 0; cost += (r.day - 1) * 60 * rate[24] + r.min * rate[r.hour]; for (int i = 0; i \u003c= r.hour - 1; i++) { cost += rate[i] * 60; } return cost; } int cmp(Record r1, Record r2) { if (r1.name != r2.name) { return r1.name \u003c r2.name; } else { return r1.time \u003c r2.time; } } int main() { for (int i = 0; i \u003c 24; i++) { scanf(\"%d\", \u0026rate[i]); rate[24] += rate[i]; } scanf(\"%d\", \u0026n); string status; for (int i = 0; i \u003c n; i++) { cin \u003e\u003e records[i].name; scanf(\"%d:%d:%d:%d\", \u0026records[i].month, \u0026records[i].day, \u0026records[i].hour, \u0026records[i].min); records[i].time = records[i].day * 24 * 60 + records[i].hour * 60 + records[i].min; cin \u003e\u003e status; if (status == \"on-line\") { records[i].status = 1; } else { records[i].status = 0; } } sort(records, records + n, cmp); map\u003cstring, vector\u003cRecord\u003e \u003e nameRecords; for (int i = 1; i \u003c n; i++) { if (records[i].name == records[i - 1].name \u0026\u0026 records[i - 1].status == 1 \u0026\u0026 records[i].status == 0) { nameRecords[records[i].name].push_back(records[i - 1]); nameRecords[records[i].name].push_back(records[i]); } } for (auto it : nameRecords) { vector\u003cRecord\u003e temp = it.second; printf(\"%s %02d\\n\", it.first.c_str(), temp[0].month); double totalCost = 0; for (int i = 0; i \u003c temp.size(); i += 2) { double cost = getCostFromZero(temp[i + 1]) - getCostFromZero(temp[i]); printf(\"%02d:%02d:%02d %02d:%02d:%02d %d $%.2f\\n\", temp[i].day, temp[i].hour, temp[i].min, temp[i + 1].day, temp[i + 1].hour, temp[i + 1].min, temp[i + 1].time - temp[i].time, cost / 100); totalCost += cost; } printf(\"Total amount: $%.2f\\n\", totalCost / 100); } return 0; } ",
+  "wordCount" : "789",
+  "inLanguage": "en",
+  "datePublished": "2020-03-20T22:29:00Z",
+  "dateModified": "2020-03-20T22:29:00Z",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://zjxjwxk.github.io/posts/pat/advanced_level/a1016/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Xinkang's Blog",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://zjxjwxk.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://zjxjwxk.github.io/" accesskey="h" title="Xinkang&#39;s Blog (Alt + H)">Xinkang&#39;s Blog</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://zjxjwxk.github.io/archives/" title="Archives">
+                    <span>Archives</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://zjxjwxk.github.io/categories/" title="Categories">
+                    <span>Categories</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://zjxjwxk.github.io/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://zjxjwxk.github.io/search/" title="Search (Alt &#43; /)" accesskey=/>
+                    <span>Search</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <div id="content-container">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      PAT甲级 1016 Phone Bills (25分)
+    </h1>
+    <div class="post-meta"><span title='2020-03-20 22:29:00 +0000 UTC'>March 20, 2020</span>
+
+</div>
+  </header> 
+  <div class="post-content"><p>A long-distance telephone company charges its customers by the following rules:</p>
+<p>Making a long-distance call costs a certain amount per minute, depending on the time of day when the call is made. When a customer starts connecting a long-distance call, the time will be recorded, and so will be the time when the customer hangs up the phone. Every calendar month, a bill is sent to the customer for each minute called (at a rate determined by the time of day). Your job is to prepare the bills for each month, given a set of phone call records.</p>
+<h1 id="input-specification">Input Specification:<a hidden class="anchor" aria-hidden="true" href="#input-specification">#</a></h1>
+<p>Each input file contains one test case. Each case has two parts: the rate structure, and the phone call records.</p>
+<p>The rate structure consists of a line with 24 non-negative integers denoting the toll (cents/minute) from 00:00 - 01:00, the toll from 01:00 - 02:00, and so on for each hour in the day.</p>
+<p>The next line contains a positive number <em>N</em> (≤1000), followed by <em>N</em> lines of records. Each phone call record consists of the name of the customer (string of up to 20 characters without space), the time and date (<code>mm:dd:hh:mm</code>), and the word <code>on-line</code> or <code>off-line</code>.</p>
+<p>For each test case, all dates will be within a single month. Each <code>on-line</code> record is paired with the chronologically next record for the same customer provided it is an <code>off-line</code> record. Any <code>on-line</code> records that are not paired with an <code>off-line</code> record are ignored, as are <code>off-line</code> records not paired with an <code>on-line</code> record. It is guaranteed that at least one call is well paired in the input. You may assume that no two records for the same customer have the same time. Times are recorded using a 24-hour clock.</p>
+<h1 id="output-specification">Output Specification:<a hidden class="anchor" aria-hidden="true" href="#output-specification">#</a></h1>
+<p>For each test case, you must print a phone bill for each customer.</p>
+<p>Bills must be printed in alphabetical order of customers&rsquo; names. For each customer, first print in a line the name of the customer and the month of the bill in the format shown by the sample. Then for each time period of a call, print in one line the beginning and ending time and date (<code>dd:hh:mm</code>), the lasting time (in minute) and the charge of the call. The calls must be listed in chronological order. Finally, print the total charge for the month in the format shown by the sample.</p>
+<h1 id="sample-input">Sample Input:<a hidden class="anchor" aria-hidden="true" href="#sample-input">#</a></h1>
+<pre tabindex="0"><code class="language-in" data-lang="in">10 10 10 10 10 10 20 20 20 15 15 15 15 15 15 15 20 30 20 15 15 10 10 10
+10
+CYLL 01:01:06:01 on-line
+CYLL 01:28:16:05 off-line
+CYJJ 01:01:07:00 off-line
+CYLL 01:01:08:03 off-line
+CYJJ 01:01:05:59 on-line
+aaa 01:01:01:03 on-line
+aaa 01:02:00:01 on-line
+CYLL 01:28:15:41 on-line
+aaa 01:05:02:24 on-line
+aaa 01:04:23:59 off-line
+</code></pre><h1 id="sample-output">Sample Output:<a hidden class="anchor" aria-hidden="true" href="#sample-output">#</a></h1>
+<pre tabindex="0"><code class="language-out" data-lang="out">CYJJ 01
+01:05:59 01:07:00 61 $12.10
+Total amount: $12.10
+CYLL 01
+01:06:01 01:08:03 122 $24.40
+28:15:41 28:16:05 24 $3.85
+Total amount: $28.25
+aaa 01
+02:00:01 04:23:59 4318 $638.80
+Total amount: $638.80
+</code></pre><h1 id="思路">思路<a hidden class="anchor" aria-hidden="true" href="#思路">#</a></h1>
+<ul>
+<li>将通话记录，先根据姓名，再根据时间先后，进行排序。这样相同名字的记录就会排在一起，且其中的数据也是按照时间顺序的。</li>
+<li>为了方便计算某一组通话的时长，可以把记录的时间都换算为相对于 00:00:00 的分钟数，则挂电话时间减去接电话时间，即为通话时长</li>
+<li>为了方便计算某一组通话的费用，可以把挂电话相对于 00:00:00 的费用减去接电话相对于 00:00:00 的费用，即为该通话的费用</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;string&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;map&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;vector&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;algorithm&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#66d9ef">int</span> maxn <span style="color:#f92672">=</span> <span style="color:#ae81ff">2000</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> n, rate[<span style="color:#ae81ff">25</span>] <span style="color:#f92672">=</span> {<span style="color:#ae81ff">0</span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">Record</span> {
+</span></span><span style="display:flex;"><span>    string name;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> month, day, hour, min, time, status;
+</span></span><span style="display:flex;"><span>} records[maxn];
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">double</span> <span style="color:#a6e22e">getCostFromZero</span>(Record <span style="color:#f92672">&amp;</span>r) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">double</span> cost <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    cost <span style="color:#f92672">+=</span> (r.day <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">*</span> <span style="color:#ae81ff">60</span> <span style="color:#f92672">*</span> rate[<span style="color:#ae81ff">24</span>] <span style="color:#f92672">+</span> r.min <span style="color:#f92672">*</span> rate[r.hour];
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;=</span> r.hour <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>        cost <span style="color:#f92672">+=</span> rate[i] <span style="color:#f92672">*</span> <span style="color:#ae81ff">60</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> cost;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">cmp</span>(Record r1, Record r2) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (r1.name <span style="color:#f92672">!=</span> r2.name) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> r1.name <span style="color:#f92672">&lt;</span> r2.name;
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> r1.time <span style="color:#f92672">&lt;</span> r2.time;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">24</span>; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>        scanf(<span style="color:#e6db74">&#34;%d&#34;</span>, <span style="color:#f92672">&amp;</span>rate[i]);
+</span></span><span style="display:flex;"><span>        rate[<span style="color:#ae81ff">24</span>] <span style="color:#f92672">+=</span> rate[i];
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    scanf(<span style="color:#e6db74">&#34;%d&#34;</span>, <span style="color:#f92672">&amp;</span>n);
+</span></span><span style="display:flex;"><span>    string status;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>        cin <span style="color:#f92672">&gt;&gt;</span> records[i].name;
+</span></span><span style="display:flex;"><span>        scanf(<span style="color:#e6db74">&#34;%d:%d:%d:%d&#34;</span>, <span style="color:#f92672">&amp;</span>records[i].month, <span style="color:#f92672">&amp;</span>records[i].day, <span style="color:#f92672">&amp;</span>records[i].hour, <span style="color:#f92672">&amp;</span>records[i].min);
+</span></span><span style="display:flex;"><span>        records[i].time <span style="color:#f92672">=</span> records[i].day <span style="color:#f92672">*</span> <span style="color:#ae81ff">24</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">60</span> <span style="color:#f92672">+</span> records[i].hour <span style="color:#f92672">*</span> <span style="color:#ae81ff">60</span> <span style="color:#f92672">+</span> records[i].min;
+</span></span><span style="display:flex;"><span>        cin <span style="color:#f92672">&gt;&gt;</span> status;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (status <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;on-line&#34;</span>) {
+</span></span><span style="display:flex;"><span>            records[i].status <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>            records[i].status <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    sort(records, records <span style="color:#f92672">+</span> n, cmp);
+</span></span><span style="display:flex;"><span>    map<span style="color:#f92672">&lt;</span>string, vector<span style="color:#f92672">&lt;</span>Record<span style="color:#f92672">&gt;</span> <span style="color:#f92672">&gt;</span> nameRecords;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (records[i].name <span style="color:#f92672">==</span> records[i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>].name <span style="color:#f92672">&amp;&amp;</span> records[i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>].status <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">&amp;&amp;</span> records[i].status <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) {
+</span></span><span style="display:flex;"><span>            nameRecords[records[i].name].push_back(records[i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>]);
+</span></span><span style="display:flex;"><span>            nameRecords[records[i].name].push_back(records[i]);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">auto</span> it : nameRecords) {
+</span></span><span style="display:flex;"><span>        vector<span style="color:#f92672">&lt;</span>Record<span style="color:#f92672">&gt;</span> temp <span style="color:#f92672">=</span> it.second;
+</span></span><span style="display:flex;"><span>        printf(<span style="color:#e6db74">&#34;%s %02d</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, it.first.c_str(), temp[<span style="color:#ae81ff">0</span>].month);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">double</span> totalCost <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> temp.size(); i <span style="color:#f92672">+=</span> <span style="color:#ae81ff">2</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">double</span> cost <span style="color:#f92672">=</span> getCostFromZero(temp[i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>]) <span style="color:#f92672">-</span> getCostFromZero(temp[i]);
+</span></span><span style="display:flex;"><span>            printf(<span style="color:#e6db74">&#34;%02d:%02d:%02d %02d:%02d:%02d %d $%.2f</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, temp[i].day, temp[i].hour, temp[i].min, temp[i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>].day, temp[i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>].hour, temp[i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>].min, temp[i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>].time <span style="color:#f92672">-</span> temp[i].time, cost <span style="color:#f92672">/</span> <span style="color:#ae81ff">100</span>);
+</span></span><span style="display:flex;"><span>            totalCost <span style="color:#f92672">+=</span> cost;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        printf(<span style="color:#e6db74">&#34;Total amount: $%.2f</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, totalCost <span style="color:#f92672">/</span> <span style="color:#ae81ff">100</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://zjxjwxk.github.io/tags/pat/">PAT</a></li>
+      <li><a href="https://zjxjwxk.github.io/tags/%E6%8E%92%E5%BA%8F/">排序</a></li>
+    </ul>
+  </footer>
+</article>
+
+<script>
+  window.onload = function() {
+      var contentContainer = document.getElementById("content-container");
+      if ("" !== "") {
+          var password = prompt("Enter password:");
+          if (password === "") {
+              contentContainer.style.display = "block";
+          } else {
+              alert("Incorrect password");
+          }
+      } else {
+          contentContainer.style.display = "block";
+      }
+  };
+</script>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2024 <a href="https://zjxjwxk.github.io/">Xinkang&#39;s Blog</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>图 on Xinkang&#39;s Blog</title>
+    <link>https://zjxjwxk.github.io/tags/%E5%9B%BE/</link>
+    <description>Recent content in 图 on Xinkang&#39;s Blog</description>
+    <generator>Hugo -- 0.138.0</generator>
+    <language>en</language>
+    <lastBuildDate>Fri, 10 Apr 2020 17:55:00 +0000</lastBuildDate>
+    <atom:link href="https://zjxjwxk.github.io/tags/%E5%9B%BE/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>PAT甲级 1021 Deepest Root (25分)</title>
+      <link>https://zjxjwxk.github.io/posts/pat/advanced_level/a1021/</link>
+      <pubDate>Fri, 10 Apr 2020 17:55:00 +0000</pubDate>
+      <guid>https://zjxjwxk.github.io/posts/pat/advanced_level/a1021/</guid>
+      <description>&lt;p&gt;A graph which is connected and acyclic can be considered a tree. The height of the tree depends on the selected root. Now you are supposed to find the root that results in a highest tree. Such a root is called &lt;strong&gt;the deepest root&lt;/strong&gt;.&lt;/p&gt;
+&lt;h1 id=&#34;input-specification&#34;&gt;Input Specification:&lt;/h1&gt;
+&lt;p&gt;Each input file contains one test case. For each case, the first line contains a positive integer &lt;em&gt;N&lt;/em&gt; (≤10^4) which is the number of nodes, and hence the nodes are numbered from 1 to &lt;em&gt;N&lt;/em&gt;. Then &lt;em&gt;N&lt;/em&gt;−1 lines follow, each describes an edge by given the two adjacent nodes&amp;rsquo; numbers.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>PAT甲级 1013 Battle Over Cities (25分)</title>
+      <link>https://zjxjwxk.github.io/posts/pat/advanced_level/a1013/</link>
+      <pubDate>Thu, 09 Apr 2020 19:57:00 +0000</pubDate>
+      <guid>https://zjxjwxk.github.io/posts/pat/advanced_level/a1013/</guid>
+      <description>&lt;p&gt;It is vitally important to have all the cities connected by highways in a war. If a city is occupied by the enemy, all the highways from/toward that city are closed. We must know immediately if we need to repair any other highways to keep the rest of the cities connected. Given the map of cities which have all the remaining highways marked, you are supposed to tell the number of highways need to be repaired, quickly.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

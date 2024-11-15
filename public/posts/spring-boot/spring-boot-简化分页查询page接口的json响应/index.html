@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Spring Boot 简化分页查询Page接口的JSON响应 | Xinkang&#39;s Blog</title>
+<meta name="keywords" content="Java, Spring Boot">
+<meta name="description" content="多余的分页信息
+Spring Data 的 Page 接口进行数据分页返回了很多很多垃圾信息：
+{
+    &#34;status&#34;: 0,
+    &#34;data&#34;: {
+        &#34;content&#34;: [
+            {
+                &#34;goodsId&#34;: 1,
+                &#34;producerId&#34;: 1,
+                &#34;categoryId&#34;: 4,
+                &#34;name&#34;: &#34;耐克sb滑板鞋&#34;,
+                &#34;price&#34;: 500,
+                &#34;stock&#34;: 500,
+                &#34;status&#34;: &#34;正常&#34;,
+                &#34;createTime&#34;: &#34;2019-02-02T03:48:33.000&#43;0000&#34;,
+                &#34;updateTime&#34;: null
+            },
+            {
+                &#34;goodsId&#34;: 2,
+                &#34;producerId&#34;: 1,
+                &#34;categoryId&#34;: 4,
+                &#34;name&#34;: &#34;阿迪达斯小白鞋&#34;,
+                &#34;price&#34;: 500,
+                &#34;stock&#34;: 300,
+                &#34;status&#34;: &#34;正常&#34;,
+                &#34;createTime&#34;: &#34;2019-02-02T03:48:59.000&#43;0000&#34;,
+                &#34;updateTime&#34;: null
+            }
+        ],
+        &#34;pageable&#34;: {
+            &#34;sort&#34;: {
+                &#34;sorted&#34;: false,
+                &#34;unsorted&#34;: true,
+                &#34;empty&#34;: true
+            },
+            &#34;offset&#34;: 0,
+            &#34;pageSize&#34;: 10,
+            &#34;pageNumber&#34;: 0,
+            &#34;paged&#34;: true,
+            &#34;unpaged&#34;: false
+        },
+        &#34;last&#34;: true,
+        &#34;totalPages&#34;: 1,
+        &#34;totalElements&#34;: 2,
+        &#34;size&#34;: 10,
+        &#34;number&#34;: 0,
+        &#34;numberOfElements&#34;: 2,
+        &#34;sort&#34;: {
+            &#34;sorted&#34;: false,
+            &#34;unsorted&#34;: true,
+            &#34;empty&#34;: true
+        },
+        &#34;first&#34;: true,
+        &#34;empty&#34;: false
+    }
+}
+实际需要的分页信息
+实际上我只需要下面这些分页信息：">
+<meta name="author" content="">
+<link rel="canonical" href="https://zjxjwxk.github.io/posts/spring-boot/spring-boot-%E7%AE%80%E5%8C%96%E5%88%86%E9%A1%B5%E6%9F%A5%E8%AF%A2page%E6%8E%A5%E5%8F%A3%E7%9A%84json%E5%93%8D%E5%BA%94/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.d6fcd20a4fb86efa4dfac8ec95da60244cc8871042183da1ef28e3a762ad79c8.css" integrity="sha256-1vzSCk&#43;4bvpN&#43;sjsldpgJEzIhxBCGD2h7yjjp2Ktecg=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://zjxjwxk.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://zjxjwxk.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://zjxjwxk.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://zjxjwxk.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://zjxjwxk.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://zjxjwxk.github.io/posts/spring-boot/spring-boot-%E7%AE%80%E5%8C%96%E5%88%86%E9%A1%B5%E6%9F%A5%E8%AF%A2page%E6%8E%A5%E5%8F%A3%E7%9A%84json%E5%93%8D%E5%BA%94/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><meta property="og:url" content="https://zjxjwxk.github.io/posts/spring-boot/spring-boot-%E7%AE%80%E5%8C%96%E5%88%86%E9%A1%B5%E6%9F%A5%E8%AF%A2page%E6%8E%A5%E5%8F%A3%E7%9A%84json%E5%93%8D%E5%BA%94/">
+  <meta property="og:site_name" content="Xinkang&#39;s Blog">
+  <meta property="og:title" content="Spring Boot 简化分页查询Page接口的JSON响应">
+  <meta property="og:description" content="多余的分页信息 Spring Data 的 Page 接口进行数据分页返回了很多很多垃圾信息：
+{ &#34;status&#34;: 0, &#34;data&#34;: { &#34;content&#34;: [ { &#34;goodsId&#34;: 1, &#34;producerId&#34;: 1, &#34;categoryId&#34;: 4, &#34;name&#34;: &#34;耐克sb滑板鞋&#34;, &#34;price&#34;: 500, &#34;stock&#34;: 500, &#34;status&#34;: &#34;正常&#34;, &#34;createTime&#34;: &#34;2019-02-02T03:48:33.000&#43;0000&#34;, &#34;updateTime&#34;: null }, { &#34;goodsId&#34;: 2, &#34;producerId&#34;: 1, &#34;categoryId&#34;: 4, &#34;name&#34;: &#34;阿迪达斯小白鞋&#34;, &#34;price&#34;: 500, &#34;stock&#34;: 300, &#34;status&#34;: &#34;正常&#34;, &#34;createTime&#34;: &#34;2019-02-02T03:48:59.000&#43;0000&#34;, &#34;updateTime&#34;: null } ], &#34;pageable&#34;: { &#34;sort&#34;: { &#34;sorted&#34;: false, &#34;unsorted&#34;: true, &#34;empty&#34;: true }, &#34;offset&#34;: 0, &#34;pageSize&#34;: 10, &#34;pageNumber&#34;: 0, &#34;paged&#34;: true, &#34;unpaged&#34;: false }, &#34;last&#34;: true, &#34;totalPages&#34;: 1, &#34;totalElements&#34;: 2, &#34;size&#34;: 10, &#34;number&#34;: 0, &#34;numberOfElements&#34;: 2, &#34;sort&#34;: { &#34;sorted&#34;: false, &#34;unsorted&#34;: true, &#34;empty&#34;: true }, &#34;first&#34;: true, &#34;empty&#34;: false } } 实际需要的分页信息 实际上我只需要下面这些分页信息：">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2019-02-02T17:15:00+00:00">
+    <meta property="article:modified_time" content="2019-02-02T17:15:00+00:00">
+    <meta property="article:tag" content="Java">
+    <meta property="article:tag" content="Spring Boot">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Spring Boot 简化分页查询Page接口的JSON响应">
+<meta name="twitter:description" content="多余的分页信息
+Spring Data 的 Page 接口进行数据分页返回了很多很多垃圾信息：
+{
+    &#34;status&#34;: 0,
+    &#34;data&#34;: {
+        &#34;content&#34;: [
+            {
+                &#34;goodsId&#34;: 1,
+                &#34;producerId&#34;: 1,
+                &#34;categoryId&#34;: 4,
+                &#34;name&#34;: &#34;耐克sb滑板鞋&#34;,
+                &#34;price&#34;: 500,
+                &#34;stock&#34;: 500,
+                &#34;status&#34;: &#34;正常&#34;,
+                &#34;createTime&#34;: &#34;2019-02-02T03:48:33.000&#43;0000&#34;,
+                &#34;updateTime&#34;: null
+            },
+            {
+                &#34;goodsId&#34;: 2,
+                &#34;producerId&#34;: 1,
+                &#34;categoryId&#34;: 4,
+                &#34;name&#34;: &#34;阿迪达斯小白鞋&#34;,
+                &#34;price&#34;: 500,
+                &#34;stock&#34;: 300,
+                &#34;status&#34;: &#34;正常&#34;,
+                &#34;createTime&#34;: &#34;2019-02-02T03:48:59.000&#43;0000&#34;,
+                &#34;updateTime&#34;: null
+            }
+        ],
+        &#34;pageable&#34;: {
+            &#34;sort&#34;: {
+                &#34;sorted&#34;: false,
+                &#34;unsorted&#34;: true,
+                &#34;empty&#34;: true
+            },
+            &#34;offset&#34;: 0,
+            &#34;pageSize&#34;: 10,
+            &#34;pageNumber&#34;: 0,
+            &#34;paged&#34;: true,
+            &#34;unpaged&#34;: false
+        },
+        &#34;last&#34;: true,
+        &#34;totalPages&#34;: 1,
+        &#34;totalElements&#34;: 2,
+        &#34;size&#34;: 10,
+        &#34;number&#34;: 0,
+        &#34;numberOfElements&#34;: 2,
+        &#34;sort&#34;: {
+            &#34;sorted&#34;: false,
+            &#34;unsorted&#34;: true,
+            &#34;empty&#34;: true
+        },
+        &#34;first&#34;: true,
+        &#34;empty&#34;: false
+    }
+}
+实际需要的分页信息
+实际上我只需要下面这些分页信息：">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://zjxjwxk.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Spring Boot 简化分页查询Page接口的JSON响应",
+      "item": "https://zjxjwxk.github.io/posts/spring-boot/spring-boot-%E7%AE%80%E5%8C%96%E5%88%86%E9%A1%B5%E6%9F%A5%E8%AF%A2page%E6%8E%A5%E5%8F%A3%E7%9A%84json%E5%93%8D%E5%BA%94/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Spring Boot 简化分页查询Page接口的JSON响应",
+  "name": "Spring Boot 简化分页查询Page接口的JSON响应",
+  "description": "多余的分页信息 Spring Data 的 Page 接口进行数据分页返回了很多很多垃圾信息：\n{ \u0026#34;status\u0026#34;: 0, \u0026#34;data\u0026#34;: { \u0026#34;content\u0026#34;: [ { \u0026#34;goodsId\u0026#34;: 1, \u0026#34;producerId\u0026#34;: 1, \u0026#34;categoryId\u0026#34;: 4, \u0026#34;name\u0026#34;: \u0026#34;耐克sb滑板鞋\u0026#34;, \u0026#34;price\u0026#34;: 500, \u0026#34;stock\u0026#34;: 500, \u0026#34;status\u0026#34;: \u0026#34;正常\u0026#34;, \u0026#34;createTime\u0026#34;: \u0026#34;2019-02-02T03:48:33.000+0000\u0026#34;, \u0026#34;updateTime\u0026#34;: null }, { \u0026#34;goodsId\u0026#34;: 2, \u0026#34;producerId\u0026#34;: 1, \u0026#34;categoryId\u0026#34;: 4, \u0026#34;name\u0026#34;: \u0026#34;阿迪达斯小白鞋\u0026#34;, \u0026#34;price\u0026#34;: 500, \u0026#34;stock\u0026#34;: 300, \u0026#34;status\u0026#34;: \u0026#34;正常\u0026#34;, \u0026#34;createTime\u0026#34;: \u0026#34;2019-02-02T03:48:59.000+0000\u0026#34;, \u0026#34;updateTime\u0026#34;: null } ], \u0026#34;pageable\u0026#34;: { \u0026#34;sort\u0026#34;: { \u0026#34;sorted\u0026#34;: false, \u0026#34;unsorted\u0026#34;: true, \u0026#34;empty\u0026#34;: true }, \u0026#34;offset\u0026#34;: 0, \u0026#34;pageSize\u0026#34;: 10, \u0026#34;pageNumber\u0026#34;: 0, \u0026#34;paged\u0026#34;: true, \u0026#34;unpaged\u0026#34;: false }, \u0026#34;last\u0026#34;: true, \u0026#34;totalPages\u0026#34;: 1, \u0026#34;totalElements\u0026#34;: 2, \u0026#34;size\u0026#34;: 10, \u0026#34;number\u0026#34;: 0, \u0026#34;numberOfElements\u0026#34;: 2, \u0026#34;sort\u0026#34;: { \u0026#34;sorted\u0026#34;: false, \u0026#34;unsorted\u0026#34;: true, \u0026#34;empty\u0026#34;: true }, \u0026#34;first\u0026#34;: true, \u0026#34;empty\u0026#34;: false } } 实际需要的分页信息 实际上我只需要下面这些分页信息：\n",
+  "keywords": [
+    "Java", "Spring Boot"
+  ],
+  "articleBody": "多余的分页信息 Spring Data 的 Page 接口进行数据分页返回了很多很多垃圾信息：\n{ \"status\": 0, \"data\": { \"content\": [ { \"goodsId\": 1, \"producerId\": 1, \"categoryId\": 4, \"name\": \"耐克sb滑板鞋\", \"price\": 500, \"stock\": 500, \"status\": \"正常\", \"createTime\": \"2019-02-02T03:48:33.000+0000\", \"updateTime\": null }, { \"goodsId\": 2, \"producerId\": 1, \"categoryId\": 4, \"name\": \"阿迪达斯小白鞋\", \"price\": 500, \"stock\": 300, \"status\": \"正常\", \"createTime\": \"2019-02-02T03:48:59.000+0000\", \"updateTime\": null } ], \"pageable\": { \"sort\": { \"sorted\": false, \"unsorted\": true, \"empty\": true }, \"offset\": 0, \"pageSize\": 10, \"pageNumber\": 0, \"paged\": true, \"unpaged\": false }, \"last\": true, \"totalPages\": 1, \"totalElements\": 2, \"size\": 10, \"number\": 0, \"numberOfElements\": 2, \"sort\": { \"sorted\": false, \"unsorted\": true, \"empty\": true }, \"first\": true, \"empty\": false } } 实际需要的分页信息 实际上我只需要下面这些分页信息：\n\"totalPages\": 3, \"totalElements\": 20, \"pageNumber\": 2, \"numberOfElements\": 7 创建 PageChunk 类进行封装 我的 GoodsRepository 接口为：\nPage\u003cGoods\u003e findByCategoryId(Integer categoryId, Pageable pageable); 我们看到返回了很多多余的，重复的数据。为了解决这个问题，创建一个Pagination DTO(PageChunk)来包装一下分页数据。这个类的作用很简单就是包含每一次分页的内容和分页元数据（总页数，搜索结果总数，当前页号， 当前页包含多少项）。\nimport lombok.Data; import java.util.List; /** * @author zjxjwxk */ @Data public class PageChunk\u003cT\u003e { private List\u003cT\u003e content; private int totalPages; private long totalElements; private int pageNumber; private int numberOfElements; } 同时，我根据业务需求对商品信息进行了DTO的包装，（只需要商品id，名称和价格即可）。\nimport lombok.Data; /** * @author zjxjwxk */ @Data public class GoodsDTO { private Integer goodsId; private String name; private Integer price; } 用 PageChunk 替代 Page 编写以下 getPageChunk 方法用于将 Page 对象转化为 PageChunk 对象，仅仅提取 Page 对象中所需要的Content 和一些分页信息，将 PageChunk 对象封装并返回。编写 getGoodsDTO 方法用于简化商品信息。\n@Service(\"GoodsService\") public class GoodsServiceImpl implements GoodsService { private final GoodsRepository goodsRepository; @Autowired public GoodsServiceImpl(GoodsRepository goodsRepository) { this.goodsRepository = goodsRepository; } @Override public ServerResponse getList(String keyword, Integer categoryId, Integer pageNum, Integer pageSize, String orderBy) { PageRequest pageRequest = PageRequest.of(pageNum - 1, pageSize); Page\u003cGoods\u003e goodsPage = goodsRepository.findByCategoryId(categoryId, pageRequest); return ServerResponse.createBySuccess(getPageChunk(goodsPage)); } private PageChunk\u003cGoodsDTO\u003e getPageChunk(Page\u003cGoods\u003e goodsPage) { PageChunk\u003cGoodsDTO\u003e pageChunk = new PageChunk\u003c\u003e(); pageChunk.setContent(getGoodsDTO(goodsPage.getContent())); pageChunk.setTotalPages(goodsPage.getTotalPages()); pageChunk.setTotalElements(goodsPage.getTotalElements()); pageChunk.setPageNumber(goodsPage.getPageable().getPageNumber() + 1); pageChunk.setNumberOfElements(goodsPage.getNumberOfElements()); return pageChunk; } private List\u003cGoodsDTO\u003e getGoodsDTO(List\u003cGoods\u003e goodsList) { List\u003cGoodsDTO\u003e goodsDTOList = new ArrayList\u003c\u003e(); for (Goods goods : goodsList) { GoodsDTO goodsDTO = new GoodsDTO(); goodsDTO.setGoodsId(goods.getGoodsId()); goodsDTO.setName(goods.getName()); goodsDTO.setPrice(goods.getPrice()); goodsDTOList.add(goodsDTO); } return goodsDTOList; } } 为了返回 JSON 数据，我自定义了一个 ServerResponse 服务响应对象，它的作用是让我们返回的 JSON 有一个通用的格式\n简化后的结果 { \"status\": 0, \"data\": { \"content\": [ { \"goodsId\": 8, \"name\": \"Clarks 男 Tri Spark生活休闲鞋26135668\", \"price\": 459 }, { \"goodsId\": 9, \"name\": \"Adidas三叶草 男 休闲跑步鞋 STAN SMITH M20324\", \"price\": 415 }, { \"goodsId\": 10, \"name\": \"Skechers 斯凯奇 SKECHERS SPORT系列 男 绑带运动鞋 999732-NVOR\", \"price\": 355 }, { \"goodsId\": 11, \"name\": \"Saucony 圣康尼 RSP 男 休闲跑步鞋 KINETA RELAY S2524465\", \"price\": 479 }, { \"goodsId\": 12, \"name\": \"Mustang 男 帆布鞋休闲运动 4058-305（亚马逊进口直采,德国品牌）\", \"price\": 324 }, { \"goodsId\": 13, \"name\": \"Clarks 男 Tri Spark生活休闲鞋26135655\", \"price\": 123425 }, { \"goodsId\": 14, \"name\": \"New Balance 574系列 男 休闲跑步鞋 ML574EG-D\", \"price\": 324 } ], \"totalPages\": 3, \"totalElements\": 20, \"pageNumber\": 2, \"numberOfElements\": 7 } } ",
+  "wordCount" : "411",
+  "inLanguage": "en",
+  "datePublished": "2019-02-02T17:15:00Z",
+  "dateModified": "2019-02-02T17:15:00Z",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://zjxjwxk.github.io/posts/spring-boot/spring-boot-%E7%AE%80%E5%8C%96%E5%88%86%E9%A1%B5%E6%9F%A5%E8%AF%A2page%E6%8E%A5%E5%8F%A3%E7%9A%84json%E5%93%8D%E5%BA%94/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Xinkang's Blog",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://zjxjwxk.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://zjxjwxk.github.io/" accesskey="h" title="Xinkang&#39;s Blog (Alt + H)">Xinkang&#39;s Blog</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://zjxjwxk.github.io/archives/" title="Archives">
+                    <span>Archives</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://zjxjwxk.github.io/categories/" title="Categories">
+                    <span>Categories</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://zjxjwxk.github.io/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://zjxjwxk.github.io/search/" title="Search (Alt &#43; /)" accesskey=/>
+                    <span>Search</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <div id="content-container">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      Spring Boot 简化分页查询Page接口的JSON响应
+    </h1>
+    <div class="post-meta"><span title='2019-02-02 17:15:00 +0000 UTC'>February 2, 2019</span>
+
+</div>
+  </header> 
+  <div class="post-content"><h3 id="多余的分页信息">多余的分页信息<a hidden class="anchor" aria-hidden="true" href="#多余的分页信息">#</a></h3>
+<p>Spring Data 的 Page 接口进行数据分页返回了很多很多垃圾信息：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;status&#34;</span>: <span style="color:#ae81ff">0</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;data&#34;</span>: {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;content&#34;</span>: [
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;goodsId&#34;</span>: <span style="color:#ae81ff">1</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;producerId&#34;</span>: <span style="color:#ae81ff">1</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;categoryId&#34;</span>: <span style="color:#ae81ff">4</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;耐克sb滑板鞋&#34;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;price&#34;</span>: <span style="color:#ae81ff">500</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;stock&#34;</span>: <span style="color:#ae81ff">500</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;status&#34;</span>: <span style="color:#e6db74">&#34;正常&#34;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;createTime&#34;</span>: <span style="color:#e6db74">&#34;2019-02-02T03:48:33.000+0000&#34;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;updateTime&#34;</span>: <span style="color:#66d9ef">null</span>
+</span></span><span style="display:flex;"><span>            },
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;goodsId&#34;</span>: <span style="color:#ae81ff">2</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;producerId&#34;</span>: <span style="color:#ae81ff">1</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;categoryId&#34;</span>: <span style="color:#ae81ff">4</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;阿迪达斯小白鞋&#34;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;price&#34;</span>: <span style="color:#ae81ff">500</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;stock&#34;</span>: <span style="color:#ae81ff">300</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;status&#34;</span>: <span style="color:#e6db74">&#34;正常&#34;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;createTime&#34;</span>: <span style="color:#e6db74">&#34;2019-02-02T03:48:59.000+0000&#34;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;updateTime&#34;</span>: <span style="color:#66d9ef">null</span>
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        ],
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;pageable&#34;</span>: {
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;sort&#34;</span>: {
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;sorted&#34;</span>: <span style="color:#66d9ef">false</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;unsorted&#34;</span>: <span style="color:#66d9ef">true</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;empty&#34;</span>: <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>            },
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;offset&#34;</span>: <span style="color:#ae81ff">0</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;pageSize&#34;</span>: <span style="color:#ae81ff">10</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;pageNumber&#34;</span>: <span style="color:#ae81ff">0</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;paged&#34;</span>: <span style="color:#66d9ef">true</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;unpaged&#34;</span>: <span style="color:#66d9ef">false</span>
+</span></span><span style="display:flex;"><span>        },
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;last&#34;</span>: <span style="color:#66d9ef">true</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;totalPages&#34;</span>: <span style="color:#ae81ff">1</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;totalElements&#34;</span>: <span style="color:#ae81ff">2</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;size&#34;</span>: <span style="color:#ae81ff">10</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;number&#34;</span>: <span style="color:#ae81ff">0</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;numberOfElements&#34;</span>: <span style="color:#ae81ff">2</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;sort&#34;</span>: {
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;sorted&#34;</span>: <span style="color:#66d9ef">false</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;unsorted&#34;</span>: <span style="color:#66d9ef">true</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;empty&#34;</span>: <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>        },
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;first&#34;</span>: <span style="color:#66d9ef">true</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;empty&#34;</span>: <span style="color:#66d9ef">false</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="实际需要的分页信息">实际需要的分页信息<a hidden class="anchor" aria-hidden="true" href="#实际需要的分页信息">#</a></h3>
+<p>实际上我只需要下面这些分页信息：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span><span style="color:#e6db74">&#34;totalPages&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">3</span><span style="color:#960050;background-color:#1e0010">,</span>
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;totalElements&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">20</span><span style="color:#960050;background-color:#1e0010">,</span>
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;pageNumber&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">2</span><span style="color:#960050;background-color:#1e0010">,</span>
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;numberOfElements&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#ae81ff">7</span>
+</span></span></code></pre></div><h3 id="创建-pagechunk-类进行封装">创建 PageChunk 类进行封装<a hidden class="anchor" aria-hidden="true" href="#创建-pagechunk-类进行封装">#</a></h3>
+<p>我的 GoodsRepository 接口为：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>Page<span style="color:#f92672">&lt;</span>Goods<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">findByCategoryId</span>(Integer categoryId, Pageable pageable);
+</span></span></code></pre></div><p>我们看到返回了很多多余的，重复的数据。为了解决这个问题，创建一个Pagination DTO(<code>PageChunk</code>)来包装一下分页数据。这个类的作用很简单就是包含每一次分页的内容和分页元数据（<strong>总页数</strong>，<strong>搜索结果总数</strong>，<strong>当前页号</strong>， <strong>当前页包含多少项</strong>）。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">import</span> lombok.Data;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.util.List;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * @author zjxjwxk
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> */</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@Data</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">PageChunk</span><span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> List<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> content;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">int</span> totalPages;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">long</span> totalElements;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">int</span> pageNumber;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">int</span> numberOfElements;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>同时，我根据业务需求对商品信息进行了DTO的包装，（只需要商品id，名称和价格即可）。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">import</span> lombok.Data;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * @author zjxjwxk
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> */</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@Data</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">GoodsDTO</span> {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> Integer goodsId;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> String name;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> Integer price;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="用-pagechunk-替代-page">用 PageChunk 替代 Page<a hidden class="anchor" aria-hidden="true" href="#用-pagechunk-替代-page">#</a></h3>
+<p>编写以下 getPageChunk 方法用于将 Page<!-- raw HTML omitted --> 对象转化为 PageChunk<!-- raw HTML omitted --> 对象，仅仅提取 Page 对象中所需要的Content 和一些分页信息，将 PageChunk 对象封装并返回。编写 getGoodsDTO 方法用于简化商品信息。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#a6e22e">@Service</span>(<span style="color:#e6db74">&#34;GoodsService&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">GoodsServiceImpl</span> <span style="color:#66d9ef">implements</span> GoodsService {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">final</span> GoodsRepository goodsRepository;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Autowired</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">GoodsServiceImpl</span>(GoodsRepository goodsRepository) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">goodsRepository</span> <span style="color:#f92672">=</span> goodsRepository;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Override</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> ServerResponse <span style="color:#a6e22e">getList</span>(String keyword, Integer categoryId,
+</span></span><span style="display:flex;"><span>                                               Integer pageNum, Integer pageSize,
+</span></span><span style="display:flex;"><span>                                               String orderBy) {
+</span></span><span style="display:flex;"><span>        PageRequest pageRequest <span style="color:#f92672">=</span> PageRequest.<span style="color:#a6e22e">of</span>(pageNum <span style="color:#f92672">-</span> 1, pageSize);
+</span></span><span style="display:flex;"><span>        Page<span style="color:#f92672">&lt;</span>Goods<span style="color:#f92672">&gt;</span> goodsPage <span style="color:#f92672">=</span> goodsRepository.<span style="color:#a6e22e">findByCategoryId</span>(categoryId, pageRequest);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ServerResponse.<span style="color:#a6e22e">createBySuccess</span>(getPageChunk(goodsPage));
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> PageChunk<span style="color:#f92672">&lt;</span>GoodsDTO<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">getPageChunk</span>(Page<span style="color:#f92672">&lt;</span>Goods<span style="color:#f92672">&gt;</span> goodsPage) {
+</span></span><span style="display:flex;"><span>        PageChunk<span style="color:#f92672">&lt;</span>GoodsDTO<span style="color:#f92672">&gt;</span> pageChunk <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> PageChunk<span style="color:#f92672">&lt;&gt;</span>();
+</span></span><span style="display:flex;"><span>        pageChunk.<span style="color:#a6e22e">setContent</span>(getGoodsDTO(goodsPage.<span style="color:#a6e22e">getContent</span>()));
+</span></span><span style="display:flex;"><span>        pageChunk.<span style="color:#a6e22e">setTotalPages</span>(goodsPage.<span style="color:#a6e22e">getTotalPages</span>());
+</span></span><span style="display:flex;"><span>        pageChunk.<span style="color:#a6e22e">setTotalElements</span>(goodsPage.<span style="color:#a6e22e">getTotalElements</span>());
+</span></span><span style="display:flex;"><span>        pageChunk.<span style="color:#a6e22e">setPageNumber</span>(goodsPage.<span style="color:#a6e22e">getPageable</span>().<span style="color:#a6e22e">getPageNumber</span>() <span style="color:#f92672">+</span> 1);
+</span></span><span style="display:flex;"><span>        pageChunk.<span style="color:#a6e22e">setNumberOfElements</span>(goodsPage.<span style="color:#a6e22e">getNumberOfElements</span>());
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> pageChunk;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> List<span style="color:#f92672">&lt;</span>GoodsDTO<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">getGoodsDTO</span>(List<span style="color:#f92672">&lt;</span>Goods<span style="color:#f92672">&gt;</span> goodsList) {
+</span></span><span style="display:flex;"><span>        List<span style="color:#f92672">&lt;</span>GoodsDTO<span style="color:#f92672">&gt;</span> goodsDTOList <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ArrayList<span style="color:#f92672">&lt;&gt;</span>();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> (Goods goods :
+</span></span><span style="display:flex;"><span>                goodsList) {
+</span></span><span style="display:flex;"><span>            GoodsDTO goodsDTO <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> GoodsDTO();
+</span></span><span style="display:flex;"><span>            goodsDTO.<span style="color:#a6e22e">setGoodsId</span>(goods.<span style="color:#a6e22e">getGoodsId</span>());
+</span></span><span style="display:flex;"><span>            goodsDTO.<span style="color:#a6e22e">setName</span>(goods.<span style="color:#a6e22e">getName</span>());
+</span></span><span style="display:flex;"><span>            goodsDTO.<span style="color:#a6e22e">setPrice</span>(goods.<span style="color:#a6e22e">getPrice</span>());
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            goodsDTOList.<span style="color:#a6e22e">add</span>(goodsDTO);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> goodsDTOList;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><blockquote>
+<p>为了返回 JSON 数据，我自定义了一个 ServerResponse 服务响应对象，它的作用是让我们返回的 JSON 有一个通用的格式</p>
+</blockquote>
+<h3 id="简化后的结果">简化后的结果<a hidden class="anchor" aria-hidden="true" href="#简化后的结果">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;status&#34;</span>: <span style="color:#ae81ff">0</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;data&#34;</span>: {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;content&#34;</span>: [
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;goodsId&#34;</span>: <span style="color:#ae81ff">8</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;Clarks 男 Tri Spark生活休闲鞋26135668&#34;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;price&#34;</span>: <span style="color:#ae81ff">459</span>
+</span></span><span style="display:flex;"><span>            },
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;goodsId&#34;</span>: <span style="color:#ae81ff">9</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;Adidas三叶草 男 休闲跑步鞋 STAN SMITH M20324&#34;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;price&#34;</span>: <span style="color:#ae81ff">415</span>
+</span></span><span style="display:flex;"><span>            },
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;goodsId&#34;</span>: <span style="color:#ae81ff">10</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;Skechers 斯凯奇 SKECHERS SPORT系列 男 绑带运动鞋 999732-NVOR&#34;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;price&#34;</span>: <span style="color:#ae81ff">355</span>
+</span></span><span style="display:flex;"><span>            },
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;goodsId&#34;</span>: <span style="color:#ae81ff">11</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;Saucony 圣康尼 RSP 男 休闲跑步鞋 KINETA RELAY S2524465&#34;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;price&#34;</span>: <span style="color:#ae81ff">479</span>
+</span></span><span style="display:flex;"><span>            },
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;goodsId&#34;</span>: <span style="color:#ae81ff">12</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;Mustang 男 帆布鞋休闲运动 4058-305（亚马逊进口直采,德国品牌）&#34;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;price&#34;</span>: <span style="color:#ae81ff">324</span>
+</span></span><span style="display:flex;"><span>            },
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;goodsId&#34;</span>: <span style="color:#ae81ff">13</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;Clarks 男 Tri Spark生活休闲鞋26135655&#34;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;price&#34;</span>: <span style="color:#ae81ff">123425</span>
+</span></span><span style="display:flex;"><span>            },
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;goodsId&#34;</span>: <span style="color:#ae81ff">14</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;New Balance 574系列 男 休闲跑步鞋 ML574EG-D&#34;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&#34;price&#34;</span>: <span style="color:#ae81ff">324</span>
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        ],
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;totalPages&#34;</span>: <span style="color:#ae81ff">3</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;totalElements&#34;</span>: <span style="color:#ae81ff">20</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;pageNumber&#34;</span>: <span style="color:#ae81ff">2</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;numberOfElements&#34;</span>: <span style="color:#ae81ff">7</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://zjxjwxk.github.io/tags/java/">Java</a></li>
+      <li><a href="https://zjxjwxk.github.io/tags/spring-boot/">Spring Boot</a></li>
+    </ul>
+  </footer>
+</article>
+
+<script>
+  window.onload = function() {
+      var contentContainer = document.getElementById("content-container");
+      if ("" !== "") {
+          var password = prompt("Enter password:");
+          if (password === "") {
+              contentContainer.style.display = "block";
+          } else {
+              alert("Incorrect password");
+          }
+      } else {
+          contentContainer.style.display = "block";
+      }
+  };
+</script>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2024 <a href="https://zjxjwxk.github.io/">Xinkang&#39;s Blog</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

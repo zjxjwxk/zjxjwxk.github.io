@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>期末复习 on Xinkang&#39;s Blog</title>
+    <link>https://zjxjwxk.github.io/tags/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/</link>
+    <description>Recent content in 期末复习 on Xinkang&#39;s Blog</description>
+    <generator>Hugo -- 0.138.0</generator>
+    <language>en</language>
+    <lastBuildDate>Fri, 21 Jun 2019 16:22:00 +0000</lastBuildDate>
+    <atom:link href="https://zjxjwxk.github.io/tags/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Outsourcing</title>
+      <link>https://zjxjwxk.github.io/posts/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/outsourcing/</link>
+      <pubDate>Fri, 21 Jun 2019 16:22:00 +0000</pubDate>
+      <guid>https://zjxjwxk.github.io/posts/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/outsourcing/</guid>
+      <description>&lt;h1 id=&#34;what-is-gse&#34;&gt;What is GSE?&lt;/h1&gt;
+&lt;p&gt;GSE is a complex phenomenon that unites many different collaboration models and project organization models.&lt;/p&gt;
+&lt;h1 id=&#34;reason-for-gse&#34;&gt;Reason for GSE?&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;Reduce overheads, free up resources&lt;/li&gt;
+&lt;li&gt;Improve efficiency&lt;/li&gt;
+&lt;li&gt;Offload non-core functions&lt;/li&gt;
+&lt;li&gt;Get access to specialized skills&lt;/li&gt;
+&lt;li&gt;Get access to a specific market&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;differences-between-co-located-team-and-global-team&#34;&gt;Differences between co-located team and global team&lt;/h1&gt;
+&lt;p&gt;&lt;img alt=&#34;Differences between co-located team and global team&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/outsourcing/images/image-20190623152437638.png&#34;&gt;&lt;/p&gt;
+&lt;h1 id=&#34;according-to-what-when-where-to-determine-whether-the-supplier-is-suitable&#34;&gt;According to What, When, Where to determine whether the supplier is suitable&lt;/h1&gt;
+&lt;p&gt;&lt;img alt=&#34;Each combination is unique&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/outsourcing/images/image-20190622103720847.png&#34;&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Applied Software Project Management</title>
+      <link>https://zjxjwxk.github.io/posts/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/applied-software-project-management/</link>
+      <pubDate>Sun, 20 Jan 2019 23:05:00 +0000</pubDate>
+      <guid>https://zjxjwxk.github.io/posts/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/applied-software-project-management/</guid>
+      <description>&lt;h1 id=&#34;general-characteristics-of-a-project&#34;&gt;General characteristics of a project&lt;/h1&gt;
+&lt;p&gt;A project is a temporary endeavour undertaken to create a unique product or service. It is specific, timely, usually multidisciplinary, and always conflict ridden. Projects are parts of overall programs and may be broken down into tasks, subtasks, and further if desired.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Vary in size&lt;/li&gt;
+&lt;li&gt;Vary in type&lt;/li&gt;
+&lt;li&gt;Have desired completion dates&lt;/li&gt;
+&lt;li&gt;Requires various kinds of knowledge&lt;/li&gt;
+&lt;li&gt;Requires domain knowledge&lt;/li&gt;
+&lt;li&gt;Requires team work&lt;/li&gt;
+&lt;li&gt;Requires responsibilities and authorities&lt;/li&gt;
+&lt;li&gt;Do not exist in isolation&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;general-management-vs-project-management&#34;&gt;General management vs. Project management&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;General management
+&lt;ul&gt;
+&lt;li&gt;Organizational management&lt;/li&gt;
+&lt;li&gt;Portfolio management&lt;/li&gt;
+&lt;li&gt;Program management&lt;/li&gt;
+&lt;li&gt;Not time limited?&lt;/li&gt;
+&lt;li&gt;No completion dates?&lt;/li&gt;
+&lt;li&gt;No managerial hierarchy?&lt;/li&gt;
+&lt;li&gt;Routine activities&lt;/li&gt;
+&lt;li&gt;Annual budgeting&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Project management
+&lt;ul&gt;
+&lt;li&gt;Project management is the application of knowledge, skills, tools, and techniques to project activities to meet the project requirements&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;five-categories-of-activities&#34;&gt;Five categories of activities&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;Initiating&lt;/li&gt;
+&lt;li&gt;Planning&lt;/li&gt;
+&lt;li&gt;Executing&lt;/li&gt;
+&lt;li&gt;Monitoring and Controlling&lt;/li&gt;
+&lt;li&gt;Closing&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;how-does-the-world-look-like&#34;&gt;How does the world look like?&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;Uncertainty&lt;/li&gt;
+&lt;li&gt;Plans go awry&lt;/li&gt;
+&lt;li&gt;Even the closest future is unpredictable&lt;/li&gt;
+&lt;li&gt;Chance events occur frequently&lt;/li&gt;
+&lt;li&gt;The life is a rough road&lt;/li&gt;
+&lt;li&gt;We need to do trade-offs every day&lt;/li&gt;
+&lt;li&gt;We constantly negotiate&lt;/li&gt;
+&lt;li&gt;We need flexibility&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;risk-management&#34;&gt;Risk management&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;“Project management is risk management”&lt;/li&gt;
+&lt;li&gt;Identify potential problems before they occur&lt;/li&gt;
+&lt;li&gt;Put preventive actions in place before unrecoverable harm occurs&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;risks&#34;&gt;Risks&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;possible events that may affect the project negatively&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;problems&#34;&gt;Problems&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;events that have or will affect the project negatively&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;stages-in-risk-management&#34;&gt;Stages in risk management:&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Risk identification; project, product and business risks&lt;/li&gt;
+&lt;li&gt;Risk analysis; probability and consequences, triggers&lt;/li&gt;
+&lt;li&gt;Risk planning; how to address risks – eliminate, reduce, ignore&lt;/li&gt;
+&lt;li&gt;Risk monitoring; controlling and updating the risks&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img alt=&#34;Risk reporting Matrix&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/applied-software-project-management/images/1548175505399.png&#34;&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Software Architecture and Quality</title>
+      <link>https://zjxjwxk.github.io/posts/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/software-architecture-and-quality/</link>
+      <pubDate>Sat, 19 Jan 2019 22:01:00 +0000</pubDate>
+      <guid>https://zjxjwxk.github.io/posts/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/software-architecture-and-quality/</guid>
+      <description>&lt;h1 id=&#34;ch-1-what-is-software-architecture&#34;&gt;CH 1. What is software architecture?&lt;/h1&gt;
+&lt;h2 id=&#34;what-is-software-architecture&#34;&gt;What is software architecture&lt;/h2&gt;
+&lt;p&gt;The software architecture of a system is the set of structures needed to reason about the system, which comprise software elements, relations among them, and properties of both.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;To find out what users of the system think about the system. ×&lt;/li&gt;
+&lt;li&gt;To assist in marketing activities. ×&lt;/li&gt;
+&lt;li&gt;To make estimate for projects planning purposes. √&lt;/li&gt;
+&lt;li&gt;To use as input for dividing up the work into tasks. √&lt;/li&gt;
+&lt;li&gt;To analyze and predict characteristics of the implemented system. √&lt;/li&gt;
+&lt;li&gt;To present the future development of the product. ×&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;categories-of-structures&#34;&gt;Categories of structures&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;First, some structures partition systems into implementation units called &lt;strong&gt;modules&lt;/strong&gt;.&lt;/li&gt;
+&lt;li&gt;Other structures are dynamic, meaning that they focus on the way the elements interact with each other at runtime to carry out the system’s functions. we will call runtime structures &lt;strong&gt;component-and-connector (C&amp;amp;C) structures&lt;/strong&gt;.&lt;/li&gt;
+&lt;li&gt;A third kind of structure describes the mapping from software structures to the system’s organizational, developmental, installation, and execution environments. These mappings are called &lt;strong&gt;allocation structures&lt;/strong&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;three-kinds-of-structures&#34;&gt;Three Kinds of Structures&lt;/h2&gt;
+&lt;h3 id=&#34;module-structures&#34;&gt;&lt;strong&gt;Module structures&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;embody decisions as to how the system is to be structured as a set of code or data units that have to be constructed or procured.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Team Collaboration and Career Development</title>
+      <link>https://zjxjwxk.github.io/posts/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/team-collaboration-and-career-development/</link>
+      <pubDate>Sat, 19 Jan 2019 22:01:00 +0000</pubDate>
+      <guid>https://zjxjwxk.github.io/posts/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/team-collaboration-and-career-development/</guid>
+      <description>&lt;h1 id=&#34;career-decision-making-cycle&#34;&gt;Career decision making cycle&lt;/h1&gt;
+&lt;p&gt;&lt;img alt=&#34;Career decision making cycle&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/team-collaboration-and-career-development/images/1547727641728.png&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;know-the-elements&#34;&gt;Know the elements&lt;/h2&gt;
+&lt;p&gt;Communication, Analysis, Synthesis, Valuing, Execution&lt;/p&gt;
+&lt;h2 id=&#34;know-the-definition&#34;&gt;Know the definition&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Communication&lt;/strong&gt;: Identifying the gap
+&lt;strong&gt;Analysis&lt;/strong&gt;: Thinking about alternatives
+&lt;strong&gt;Synthesis&lt;/strong&gt;: Creating likely alternatives
+&lt;strong&gt;Valuing&lt;/strong&gt;: Prioritizing alternatives
+&lt;strong&gt;Execution&lt;/strong&gt;: Taking action to narrow the gap&lt;/p&gt;
+&lt;h2 id=&#34;be-able-to-elaborate-the-elements&#34;&gt;Be able to elaborate the elements&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Communication&lt;/strong&gt;:
+• Become aware of the gap
+• Discomfort, not so much fear of change
+• Seek assistance if needed
+• Emotions
+&lt;strong&gt;Analysis&lt;/strong&gt;:
+• Clarify your knowledge
+• Clarify gap
+• Understand how you make decisions
+• Understand what influences you
+• What do you want?
+• What have you learned?
+• What are your values, interests and skills?
+• Do you want to take responsibility?
+• Self-awareness
+&lt;strong&gt;Synthesis&lt;/strong&gt;:
+• Solve the gap
+• Avoid missing alternatives
+• Reduce to a manageable amount of options.
+• Brainstorm and reduce.
+&lt;strong&gt;Valuing&lt;/strong&gt;:
+• Judge the benefit (and cost)
+• Rank
+• What´s the best choice?
+• Select an option
+&lt;strong&gt;Execution&lt;/strong&gt;:
+• Convert decisions into action
+• Formulate a goal and a plan
+• Execute the plan
+• Plan, try, evaluate&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Team Collaboration and Career Development for Exam</title>
+      <link>https://zjxjwxk.github.io/posts/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/team-collaboration-and-career-development-for-exam/</link>
+      <pubDate>Sat, 19 Jan 2019 22:01:00 +0000</pubDate>
+      <guid>https://zjxjwxk.github.io/posts/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/team-collaboration-and-career-development-for-exam/</guid>
+      <description>&lt;h3 id=&#34;during-the-lectures-we-defined-three-different-areas-important-for-every-individual-values-interests-and-skills-these-should-be-described-regarding-your-internal-focus-in-a-resume&#34;&gt;During the lectures we defined three different areas important for every individual: Values, Interests and Skills. These should be described regarding your internal focus in a resume.&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;a. Describe, explain, these three areas, including at least two examples from each area. (15)&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Values&lt;/strong&gt; are what is important for you, what you really care about, and which give you a sense of purpose. &lt;strong&gt;Example&lt;/strong&gt;: High Income, Helping others.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Interests&lt;/strong&gt; are what is fun for you, what enjoys you, and those work activities which hold your attention and fire your enthusiasm. &lt;strong&gt;Example&lt;/strong&gt;: Technical, Scientific.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Skills&lt;/strong&gt; are things you can do well, things you have learned, special talent and special abilities. &lt;strong&gt;Example&lt;/strong&gt;: Technical skills, Leadership.
+&lt;strong&gt;b. What is a GAP? Give at least one example of a possible GAP relating to your own experiences, one example from each area. (6)&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;A GAP is where you are and where you want to be.&lt;/li&gt;
+&lt;li&gt;The GAP for me: I hope that I can enter a big company like Alibaba to work as a Java developer. The GAP for me is that my understanding of the Java virtual machine is not deep enough, I don&amp;rsquo;t have enough knowledge of multithreading, don&amp;rsquo;t know enough about the principle and implementation of the database, and don&amp;rsquo;t know much about the distributed architecture.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;2-name-the-5-elements-of-the-career-development-cycle-draw-the-model-of-the-cycle-describe-shortly-1-2-sentences-every-action-in-the-cycle-12&#34;&gt;2. Name the 5 elements of the Career Development Cycle. Draw the model of the cycle. Describe shortly, 1-2 sentences, every action in the cycle. (12)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Communication, Analysis, Synthesis, Valuing, Execution
+&lt;img loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/team-collaboration-and-career-development-for-exam/images/1547730517318.png&#34;&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Communication&lt;/strong&gt;: Become aware of the gap and feel discomfort about the gap. Seek assistance if needed.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Analysis&lt;/strong&gt;: Clarify your knowledge, what do you want, what are your values, interests and skills and so on.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Synthesis&lt;/strong&gt;: Solve the gap, avoid missing alternatives and reduce to a manageable amount of options.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Valuing&lt;/strong&gt;: Judge the benefit (and cost) and rank them to find the best choice. Select an option.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Execution&lt;/strong&gt;: Convert decisions into action, formulate a goal and a plan, and execute the plan.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Communication&lt;/strong&gt;: Review the state and think has the gap been closed. It is an on-going process.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;3-brown-talks-about-four-general-role-categories-of-people-in-teams-name-these-roles-and-describe-them-shortly-12&#34;&gt;3. Brown talks about four general role categories of people in teams. Name these roles and describe them shortly? (12)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Designers&lt;/strong&gt;: People responsible for generating and documenting ideas about how the product works, looks, or behaves.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Managers&lt;/strong&gt;: People responsible for ensuring the project team delivers on its obligations, creates plans to do so, and successfully executes against those plans.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Subject Matter Experts&lt;/strong&gt;: People responsible for contributing information to the design process.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Stakeholders&lt;/strong&gt;: People ultimately accountable for the success of the project.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;4-consider-the-following-questions-among-individuals-where-we-have-different-characteristics-select-three-of-them-describe-how-people-individuals-can-have-different-characteristics-describe-pros-and-cons-and-possible-consequences-to-a-characteristic-comments-if-the-characteristics-you-choose-are-good-characteristics-or-not&#34;&gt;4. Consider the following questions among individuals where we have different characteristics. Select three of them. Describe how people (individuals), can have different characteristics. Describe pros and cons, and possible consequences to a characteristic. Comments if the characteristics you choose are good characteristics or not.&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;a. Can I interrupt you?&lt;/strong&gt;
+&lt;strong&gt;b. Do you attend agreed meetings?&lt;/strong&gt;
+&lt;strong&gt;c. Are you late to meetings?&lt;/strong&gt;
+&lt;strong&gt;d. Are you focusing on details or the big-picture?&lt;/strong&gt;
+&lt;strong&gt;e. Which tasks do you prefer to commit to?&lt;/strong&gt;
+&lt;strong&gt;f. How quickly do you respond to e-mail?&lt;/strong&gt;
+&lt;strong&gt;g. Do you treat others how you would like to be treated yourself?&lt;/strong&gt;
+&lt;strong&gt;h. Can she/he say no? Can you say no?&lt;/strong&gt;
+&lt;strong&gt;i. Does she/he usually say no/yes?&lt;/strong&gt;
+&lt;strong&gt;(12)&lt;/strong&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>The Design and Analysis of Algorithms for Exam</title>
+      <link>https://zjxjwxk.github.io/posts/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/the-design-and-analysis-of-algorithms/</link>
+      <pubDate>Sat, 19 Jan 2019 22:01:00 +0000</pubDate>
+      <guid>https://zjxjwxk.github.io/posts/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/the-design-and-analysis-of-algorithms/</guid>
+      <description>&lt;h1 id=&#34;this-question-tests-your-knowledge-on-algorithms-and-algorithm-construction&#34;&gt;This question tests your knowledge on algorithms and algorithm construction:&lt;/h1&gt;
+&lt;p&gt;&lt;strong&gt;(a) A function that is defined in terms of itself is called a recursive function. Describe the purpose of a base case in a recursive function.(3p)&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;A base case is an (input) value for which the function can be calculated without recursion.&lt;/p&gt;
+&lt;p&gt;There needs to be at least one base case, which can be solved without recursion.&lt;/p&gt;
+&lt;p&gt;For the cases that are solved using recursion, the recursive calls must progress towards a base case.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

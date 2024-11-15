@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>J2EE on Xinkang&#39;s Blog</title>
+    <link>https://zjxjwxk.github.io/tags/j2ee/</link>
+    <description>Recent content in J2EE on Xinkang&#39;s Blog</description>
+    <generator>Hugo -- 0.138.0</generator>
+    <language>en</language>
+    <lastBuildDate>Fri, 04 Jan 2019 12:54:00 +0000</lastBuildDate>
+    <atom:link href="https://zjxjwxk.github.io/tags/j2ee/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>J2EE基础知识</title>
+      <link>https://zjxjwxk.github.io/posts/java/j2ee/</link>
+      <pubDate>Fri, 04 Jan 2019 12:54:00 +0000</pubDate>
+      <guid>https://zjxjwxk.github.io/posts/java/j2ee/</guid>
+      <description>&lt;h2 id=&#34;servlet总结&#34;&gt;Servlet总结&lt;/h2&gt;
+&lt;p&gt;在Java Web程序中，&lt;strong&gt;Servlet&lt;/strong&gt;主要负责接收用户请求&lt;strong&gt;HttpServletRequest&lt;/strong&gt;,在&lt;strong&gt;doGet()&lt;/strong&gt;,&lt;strong&gt;doPost()中做相应的处理，并将回应HttpServletResponse&lt;/strong&gt;反馈给用户。Servlet可以设置初始化参数，供Servlet内部使用。一个Servlet类只会有一个实例，在它初始化时调用&lt;strong&gt;init()方法&lt;/strong&gt;，销毁时调用&lt;strong&gt;destroy()方法&lt;/strong&gt;。&lt;strong&gt;Servlet需要在web.xml中配置&lt;/strong&gt;（MyEclipse中创建Servlet会自动配置），&lt;strong&gt;一个Servlet可以设置多个URL访问&lt;/strong&gt;。&lt;strong&gt;Servlet不是线程安全&lt;/strong&gt;，因此要谨慎使用类变量。&lt;/p&gt;
+&lt;h2 id=&#34;阐述servlet和cgi的区别&#34;&gt;阐述Servlet和CGI的区别?&lt;/h2&gt;
+&lt;h3 id=&#34;cgi的不足之处&#34;&gt;CGI的不足之处:&lt;/h3&gt;
+&lt;p&gt;1，需要为每个请求启动一个操作CGI程序的系统进程。如果请求频繁，这将会带来很大的开销。&lt;/p&gt;
+&lt;p&gt;2，需要为每个请求加载和运行一个CGI程序，这将带来很大的开销&lt;/p&gt;
+&lt;p&gt;3，需要重复编写处理网络协议的代码以及编码，这些工作都是非常耗时的。&lt;/p&gt;
+&lt;h3 id=&#34;servlet的优点&#34;&gt;Servlet的优点:&lt;/h3&gt;
+&lt;p&gt;1，只需要启动一个操作系统进程以及加载一个JVM，大大降低了系统的开销&lt;/p&gt;
+&lt;p&gt;2，如果多个请求需要做同样处理的时候，这时候只需要加载一个类，这也大大降低了开销&lt;/p&gt;
+&lt;p&gt;3，所有动态加载的类可以实现对网络协议以及请求解码的共享，大大降低了工作量。&lt;/p&gt;
+&lt;p&gt;4，Servlet能直接和Web服务器交互，而普通的CGI程序不能。Servlet还能在各个程序之间共享数据，使数据库连接池之类的功能很容易实现。&lt;/p&gt;
+&lt;p&gt;补充：Sun Microsystems公司在1996年发布Servlet技术就是为了和CGI进行竞争，Servlet是一个特殊的Java程序，一个基于Java的Web应用通常包含一个或多个Servlet类。Servlet不能够自行创建并执行，它是在Servlet容器中运行的，容器将用户的请求传递给Servlet程序，并将Servlet的响应回传给用户。通常一个Servlet会关联一个或多个JSP页面。以前CGI经常因为性能开销上的问题被诟病，然而Fast CGI早就已经解决了CGI效率上的问题，所以面试的时候大可不必信口开河的诟病CGI，事实上有很多你熟悉的网站都使用了CGI技术。&lt;/p&gt;
+&lt;p&gt;参考：《javaweb整合开发王者归来》P7&lt;/p&gt;
+&lt;h2 id=&#34;servlet接口中有哪些方法及servlet生命周期探秘&#34;&gt;Servlet接口中有哪些方法及Servlet生命周期探秘&lt;/h2&gt;
+&lt;p&gt;Servlet接口定义了5个方法，其中&lt;strong&gt;前三个方法与Servlet生命周期相关&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;void init(ServletConfig config) throws ServletException&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;void service(ServletRequest req, ServletResponse resp) throws ServletException, java.io.IOException&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;void destory()&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;java.lang.String getServletInfo()&lt;/li&gt;
+&lt;li&gt;ServletConfig getServletConfig()&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;生命周期：&lt;/strong&gt; &lt;strong&gt;Web容器加载Servlet并将其实例化后，Servlet生命周期开始&lt;/strong&gt;，容器运行其&lt;strong&gt;init()方法&lt;/strong&gt;进行Servlet的初始化；请求到达时调用Servlet的&lt;strong&gt;service()方法&lt;/strong&gt;，service()方法会根据需要调用与请求对应的&lt;strong&gt;doGet或doPost&lt;/strong&gt;等方法；当服务器关闭或项目被卸载时服务器会将Servlet实例销毁，此时会调用Servlet的&lt;strong&gt;destroy()方法&lt;/strong&gt;。&lt;strong&gt;init方法和destory方法只会执行一次，service方法客户端每次请求Servlet都会执行&lt;/strong&gt;。Servlet中有时会用到一些需要初始化与销毁的资源，因此可以把初始化资源的代码放入init方法中，销毁资源的代码放入destroy方法中，这样就不需要每次处理客户端的请求都要初始化与销毁资源。&lt;/p&gt;
+&lt;p&gt;参考：《javaweb整合开发王者归来》P81&lt;/p&gt;
+&lt;h2 id=&#34;get和post请求的区别&#34;&gt;get和post请求的区别&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;网上也有文章说：get和post请求实际上是没有区别，大家可以自行查询相关文章！我下面给出的只是一种常见的答案。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;①get请求用来从服务器上获得资源，而post是用来向服务器提交数据；&lt;/p&gt;
+&lt;p&gt;②get将表单中数据按照name=value的形式，添加到action 所指向的URL 后面，并且两者使用&amp;quot;?&amp;ldquo;连接，而各个变量之间使用&amp;rdquo;&amp;amp;&amp;ldquo;连接；post是将表单中的数据放在HTTP协议的请求头或消息体中，传递到action所指向URL；&lt;/p&gt;
+&lt;p&gt;③get传输的数据要受到URL长度限制（1024字节即256个字符）；而post可以传输大量的数据，上传文件通常要使用post方式；&lt;/p&gt;
+&lt;p&gt;④使用get时参数会显示在地址栏上，如果这些数据不是敏感数据，那么可以使用get；对于敏感数据还是应用使用post；&lt;/p&gt;
+&lt;p&gt;⑤get使用MIME类型application/x-www-form-urlencoded的URL编码（也叫百分号编码）文本的格式传递参数，保证被传送的参数由遵循规范的文本组成，例如一个空格的编码是&amp;rdquo;%20&amp;quot;。&lt;/p&gt;
+&lt;p&gt;补充：GET方式提交表单的典型应用是搜索引擎。GET方式就是被设计为查询用的。&lt;/p&gt;
+&lt;p&gt;还有另外一种回答。推荐大家看一下：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.zhihu.com/question/28586791&#34;&gt;https://www.zhihu.com/question/28586791&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s?__biz=MzI3NzIzMzg3Mw==&amp;amp;mid=100000054&amp;amp;idx=1&amp;amp;sn=71f6c214f3833d9ca20b9f7dcd9d33e4#rd&#34;&gt;https://mp.weixin.qq.com/s?__biz=MzI3NzIzMzg3Mw==&amp;amp;mid=100000054&amp;amp;idx=1&amp;amp;sn=71f6c214f3833d9ca20b9f7dcd9d33e4#rd&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;什么情况下调用doget和dopost&#34;&gt;什么情况下调用doGet()和doPost()&lt;/h2&gt;
+&lt;p&gt;Form标签里的method的属性为get时调用doGet()，为post时调用doPost()。&lt;/p&gt;
+&lt;h2 id=&#34;转发forward和重定向redirect的区别&#34;&gt;转发(Forward)和重定向(Redirect)的区别&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;转发是服务器行为，重定向是客户端行为。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;转发（Forword）&lt;/strong&gt; 通过RequestDispatcher对象的forward（HttpServletRequest request,HttpServletResponse response）方法实现的。RequestDispatcher可以通过HttpServletRequest 的getRequestDispatcher()方法获得。例如下面的代码就是跳转到login_success.jsp页面。&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;     request.getRequestDispatcher(&amp;#34;login_success.jsp&amp;#34;).forward(request, response);
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;重定向（Redirect）&lt;/strong&gt; 是利用服务器返回的状态吗来实现的。客户端浏览器请求服务器的时候，服务器会返回一个状态码。服务器通过HttpServletRequestResponse的setStatus(int status)方法设置状态码。如果服务器返回301或者302，则浏览器会到新的网址重新请求该资源。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;从地址栏显示来说&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;forward是服务器请求资源,服务器直接访问目标地址的URL,把那个URL的响应内容读取过来,然后把这些内容再发给浏览器.浏览器根本不知道服务器发送的内容从哪里来的,所以它的地址栏还是原来的地址. redirect是服务端根据逻辑,发送一个状态码,告诉浏览器重新去请求那个地址.所以地址栏显示的是新的URL.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Dubbo微服务影院系列（9）：Dubbo服务开发（支付模块开发） | Xinkang&#39;s Blog</title>
+<meta name="keywords" content="Dubbo, 微服务架构">
+<meta name="description" content="章节概要
+
+完成支付模块业务开发
+Dubbo 特性学习：隐式参数、参数验证等
+
+Dubbo 本地存根
+
+本地存根类似于 Dubbo 的静态代理
+Dubbo 会在客户端生成一个代理，处理部分业务
+Stub 必须有可传入 Proxy 的构造函数
+
+
+官方文档：https://dubbo.apache.org/zh-cn/docs/user/demos/local-stub.html
+
+远程服务后，客户端通常只剩下接口，而实现全在服务器端，但提供方有些时候想在客户端也执行部分逻辑，比如：做 ThreadLocal 缓存，提前验证参数，调用失败后伪造容错数据等等，此时就需要在 API 中带上 Stub，客户端生成 Proxy 实例，会把 Proxy 通过构造函数传给 Stub，然后把 Stub 暴露给用户，Stub 可以决定要不要去调 Proxy。
+
+在 spring 配置文件中按以下方式配置：
+&lt;dubbo:service interface=&#34;com.foo.BarService&#34; stub=&#34;true&#34; /&gt;
+或
+&lt;dubbo:service interface=&#34;com.foo.BarService&#34; stub=&#34;com.foo.BarServiceStub&#34; /&gt;
+提供 Stub 的实现：
+package com.foo;
+public class BarServiceStub implements BarService {
+    private final BarService barService;
+    
+    // 构造函数传入真正的远程代理对象
+    public BarServiceStub(BarService barService){
+        this.barService = barService;
+    }
+ 
+    public String sayHello(String name) {
+        // 此代码在客户端执行, 你可以在客户端做ThreadLocal本地缓存，或预先验证参数是否合法，等等
+        try {
+            return barService.sayHello(name);
+        } catch (Exception e) {
+            // 你可以容错，可以做任何AOP拦截事项
+            return &#34;容错数据&#34;;
+        }
+    }
+}
+
+Stub 必须有可传入 Proxy 的构造函数。
+在 interface 旁边放一个 Stub 实现，它实现 BarService 接口，并有一个传入远程 BarService 实例的构造函数
+
+Dubbo 本地伪装
+
+本地伪装是本地存根的一个子集
+通常会使用本地伪装处理服务降级
+建议本地伪装在客户端实现
+
+
+官方文档：https://dubbo.apache.org/zh-cn/docs/user/demos/local-mock.html">
+<meta name="author" content="">
+<link rel="canonical" href="https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/9.dubbo%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91%E6%94%AF%E4%BB%98%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.d6fcd20a4fb86efa4dfac8ec95da60244cc8871042183da1ef28e3a762ad79c8.css" integrity="sha256-1vzSCk&#43;4bvpN&#43;sjsldpgJEzIhxBCGD2h7yjjp2Ktecg=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://zjxjwxk.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://zjxjwxk.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://zjxjwxk.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://zjxjwxk.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://zjxjwxk.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/9.dubbo%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91%E6%94%AF%E4%BB%98%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><meta property="og:url" content="https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/9.dubbo%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91%E6%94%AF%E4%BB%98%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/">
+  <meta property="og:site_name" content="Xinkang&#39;s Blog">
+  <meta property="og:title" content="Dubbo微服务影院系列（9）：Dubbo服务开发（支付模块开发）">
+  <meta property="og:description" content="章节概要 完成支付模块业务开发 Dubbo 特性学习：隐式参数、参数验证等 Dubbo 本地存根 本地存根类似于 Dubbo 的静态代理 Dubbo 会在客户端生成一个代理，处理部分业务 Stub 必须有可传入 Proxy 的构造函数 官方文档：https://dubbo.apache.org/zh-cn/docs/user/demos/local-stub.html
+远程服务后，客户端通常只剩下接口，而实现全在服务器端，但提供方有些时候想在客户端也执行部分逻辑，比如：做 ThreadLocal 缓存，提前验证参数，调用失败后伪造容错数据等等，此时就需要在 API 中带上 Stub，客户端生成 Proxy 实例，会把 Proxy 通过构造函数传给 Stub，然后把 Stub 暴露给用户，Stub 可以决定要不要去调 Proxy。
+在 spring 配置文件中按以下方式配置：
+&lt;dubbo:service interface=&#34;com.foo.BarService&#34; stub=&#34;true&#34; /&gt; 或
+&lt;dubbo:service interface=&#34;com.foo.BarService&#34; stub=&#34;com.foo.BarServiceStub&#34; /&gt; 提供 Stub 的实现：
+package com.foo; public class BarServiceStub implements BarService { private final BarService barService; // 构造函数传入真正的远程代理对象 public BarServiceStub(BarService barService){ this.barService = barService; } public String sayHello(String name) { // 此代码在客户端执行, 你可以在客户端做ThreadLocal本地缓存，或预先验证参数是否合法，等等 try { return barService.sayHello(name); } catch (Exception e) { // 你可以容错，可以做任何AOP拦截事项 return &#34;容错数据&#34;; } } } Stub 必须有可传入 Proxy 的构造函数。 在 interface 旁边放一个 Stub 实现，它实现 BarService 接口，并有一个传入远程 BarService 实例的构造函数 Dubbo 本地伪装 本地伪装是本地存根的一个子集 通常会使用本地伪装处理服务降级 建议本地伪装在客户端实现 官方文档：https://dubbo.apache.org/zh-cn/docs/user/demos/local-mock.html">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2020-04-11T20:14:00+00:00">
+    <meta property="article:modified_time" content="2020-04-11T20:14:00+00:00">
+    <meta property="article:tag" content="Dubbo">
+    <meta property="article:tag" content="微服务架构">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Dubbo微服务影院系列（9）：Dubbo服务开发（支付模块开发）">
+<meta name="twitter:description" content="章节概要
+
+完成支付模块业务开发
+Dubbo 特性学习：隐式参数、参数验证等
+
+Dubbo 本地存根
+
+本地存根类似于 Dubbo 的静态代理
+Dubbo 会在客户端生成一个代理，处理部分业务
+Stub 必须有可传入 Proxy 的构造函数
+
+
+官方文档：https://dubbo.apache.org/zh-cn/docs/user/demos/local-stub.html
+
+远程服务后，客户端通常只剩下接口，而实现全在服务器端，但提供方有些时候想在客户端也执行部分逻辑，比如：做 ThreadLocal 缓存，提前验证参数，调用失败后伪造容错数据等等，此时就需要在 API 中带上 Stub，客户端生成 Proxy 实例，会把 Proxy 通过构造函数传给 Stub，然后把 Stub 暴露给用户，Stub 可以决定要不要去调 Proxy。
+
+在 spring 配置文件中按以下方式配置：
+&lt;dubbo:service interface=&#34;com.foo.BarService&#34; stub=&#34;true&#34; /&gt;
+或
+&lt;dubbo:service interface=&#34;com.foo.BarService&#34; stub=&#34;com.foo.BarServiceStub&#34; /&gt;
+提供 Stub 的实现：
+package com.foo;
+public class BarServiceStub implements BarService {
+    private final BarService barService;
+    
+    // 构造函数传入真正的远程代理对象
+    public BarServiceStub(BarService barService){
+        this.barService = barService;
+    }
+ 
+    public String sayHello(String name) {
+        // 此代码在客户端执行, 你可以在客户端做ThreadLocal本地缓存，或预先验证参数是否合法，等等
+        try {
+            return barService.sayHello(name);
+        } catch (Exception e) {
+            // 你可以容错，可以做任何AOP拦截事项
+            return &#34;容错数据&#34;;
+        }
+    }
+}
+
+Stub 必须有可传入 Proxy 的构造函数。
+在 interface 旁边放一个 Stub 实现，它实现 BarService 接口，并有一个传入远程 BarService 实例的构造函数
+
+Dubbo 本地伪装
+
+本地伪装是本地存根的一个子集
+通常会使用本地伪装处理服务降级
+建议本地伪装在客户端实现
+
+
+官方文档：https://dubbo.apache.org/zh-cn/docs/user/demos/local-mock.html">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://zjxjwxk.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Dubbo微服务影院系列（9）：Dubbo服务开发（支付模块开发）",
+      "item": "https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/9.dubbo%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91%E6%94%AF%E4%BB%98%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Dubbo微服务影院系列（9）：Dubbo服务开发（支付模块开发）",
+  "name": "Dubbo微服务影院系列（9）：Dubbo服务开发（支付模块开发）",
+  "description": "章节概要 完成支付模块业务开发 Dubbo 特性学习：隐式参数、参数验证等 Dubbo 本地存根 本地存根类似于 Dubbo 的静态代理 Dubbo 会在客户端生成一个代理，处理部分业务 Stub 必须有可传入 Proxy 的构造函数 官方文档：https://dubbo.apache.org/zh-cn/docs/user/demos/local-stub.html\n远程服务后，客户端通常只剩下接口，而实现全在服务器端，但提供方有些时候想在客户端也执行部分逻辑，比如：做 ThreadLocal 缓存，提前验证参数，调用失败后伪造容错数据等等，此时就需要在 API 中带上 Stub，客户端生成 Proxy 实例，会把 Proxy 通过构造函数传给 Stub，然后把 Stub 暴露给用户，Stub 可以决定要不要去调 Proxy。\n在 spring 配置文件中按以下方式配置：\n\u0026lt;dubbo:service interface=\u0026#34;com.foo.BarService\u0026#34; stub=\u0026#34;true\u0026#34; /\u0026gt; 或\n\u0026lt;dubbo:service interface=\u0026#34;com.foo.BarService\u0026#34; stub=\u0026#34;com.foo.BarServiceStub\u0026#34; /\u0026gt; 提供 Stub 的实现：\npackage com.foo; public class BarServiceStub implements BarService { private final BarService barService; // 构造函数传入真正的远程代理对象 public BarServiceStub(BarService barService){ this.barService = barService; } public String sayHello(String name) { // 此代码在客户端执行, 你可以在客户端做ThreadLocal本地缓存，或预先验证参数是否合法，等等 try { return barService.sayHello(name); } catch (Exception e) { // 你可以容错，可以做任何AOP拦截事项 return \u0026#34;容错数据\u0026#34;; } } } Stub 必须有可传入 Proxy 的构造函数。 在 interface 旁边放一个 Stub 实现，它实现 BarService 接口，并有一个传入远程 BarService 实例的构造函数 Dubbo 本地伪装 本地伪装是本地存根的一个子集 通常会使用本地伪装处理服务降级 建议本地伪装在客户端实现 官方文档：https://dubbo.apache.org/zh-cn/docs/user/demos/local-mock.html\n",
+  "keywords": [
+    "Dubbo", "微服务架构"
+  ],
+  "articleBody": "章节概要 完成支付模块业务开发 Dubbo 特性学习：隐式参数、参数验证等 Dubbo 本地存根 本地存根类似于 Dubbo 的静态代理 Dubbo 会在客户端生成一个代理，处理部分业务 Stub 必须有可传入 Proxy 的构造函数 官方文档：https://dubbo.apache.org/zh-cn/docs/user/demos/local-stub.html\n远程服务后，客户端通常只剩下接口，而实现全在服务器端，但提供方有些时候想在客户端也执行部分逻辑，比如：做 ThreadLocal 缓存，提前验证参数，调用失败后伪造容错数据等等，此时就需要在 API 中带上 Stub，客户端生成 Proxy 实例，会把 Proxy 通过构造函数传给 Stub，然后把 Stub 暴露给用户，Stub 可以决定要不要去调 Proxy。\n在 spring 配置文件中按以下方式配置：\n",
+  "wordCount" : "377",
+  "inLanguage": "en",
+  "datePublished": "2020-04-11T20:14:00Z",
+  "dateModified": "2020-04-11T20:14:00Z",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/9.dubbo%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91%E6%94%AF%E4%BB%98%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Xinkang's Blog",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://zjxjwxk.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://zjxjwxk.github.io/" accesskey="h" title="Xinkang&#39;s Blog (Alt + H)">Xinkang&#39;s Blog</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://zjxjwxk.github.io/archives/" title="Archives">
+                    <span>Archives</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://zjxjwxk.github.io/categories/" title="Categories">
+                    <span>Categories</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://zjxjwxk.github.io/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://zjxjwxk.github.io/search/" title="Search (Alt &#43; /)" accesskey=/>
+                    <span>Search</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <div id="content-container">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      Dubbo微服务影院系列（9）：Dubbo服务开发（支付模块开发）
+    </h1>
+    <div class="post-meta"><span title='2020-04-11 20:14:00 +0000 UTC'>April 11, 2020</span>
+
+</div>
+  </header> 
+  <div class="post-content"><h1 id="章节概要">章节概要<a hidden class="anchor" aria-hidden="true" href="#章节概要">#</a></h1>
+<ul>
+<li>完成支付模块业务开发</li>
+<li>Dubbo 特性学习：隐式参数、参数验证等</li>
+</ul>
+<h1 id="dubbo-本地存根">Dubbo 本地存根<a hidden class="anchor" aria-hidden="true" href="#dubbo-本地存根">#</a></h1>
+<ul>
+<li>本地存根类似于 Dubbo 的静态代理</li>
+<li>Dubbo 会在客户端生成一个代理，处理部分业务</li>
+<li>Stub 必须有可传入 Proxy 的构造函数</li>
+</ul>
+<blockquote>
+<p>官方文档：https://dubbo.apache.org/zh-cn/docs/user/demos/local-stub.html</p>
+</blockquote>
+<p>远程服务后，客户端通常只剩下接口，而实现全在服务器端，但提供方有些时候想在客户端也执行部分逻辑，比如：做 ThreadLocal 缓存，提前验证参数，调用失败后伪造容错数据等等，此时就需要在 API 中带上 Stub，客户端生成 Proxy 实例，会把 Proxy 通过构造函数传给 Stub，然后把 Stub 暴露给用户，Stub 可以决定要不要去调 Proxy。</p>
+<p><img alt="Dubbo本地存根" loading="lazy" src="/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/9.dubbo%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91%E6%94%AF%E4%BB%98%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/images/stub.jpg"></p>
+<p>在 spring 配置文件中按以下方式配置：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;dubbo:service</span> <span style="color:#a6e22e">interface=</span><span style="color:#e6db74">&#34;com.foo.BarService&#34;</span> <span style="color:#a6e22e">stub=</span><span style="color:#e6db74">&#34;true&#34;</span> <span style="color:#f92672">/&gt;</span>
+</span></span></code></pre></div><p>或</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;dubbo:service</span> <span style="color:#a6e22e">interface=</span><span style="color:#e6db74">&#34;com.foo.BarService&#34;</span> <span style="color:#a6e22e">stub=</span><span style="color:#e6db74">&#34;com.foo.BarServiceStub&#34;</span> <span style="color:#f92672">/&gt;</span>
+</span></span></code></pre></div><p>提供 Stub 的实现：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">package</span> com.foo;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">BarServiceStub</span> <span style="color:#66d9ef">implements</span> BarService {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">final</span> BarService barService;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 构造函数传入真正的远程代理对象</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">BarServiceStub</span>(BarService barService){
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">barService</span> <span style="color:#f92672">=</span> barService;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> String <span style="color:#a6e22e">sayHello</span>(String name) {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 此代码在客户端执行, 你可以在客户端做ThreadLocal本地缓存，或预先验证参数是否合法，等等</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> barService.<span style="color:#a6e22e">sayHello</span>(name);
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">catch</span> (Exception e) {
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// 你可以容错，可以做任何AOP拦截事项</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;容错数据&#34;</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ol>
+<li>Stub 必须有可传入 Proxy 的构造函数。</li>
+<li>在 interface 旁边放一个 Stub 实现，它实现 BarService 接口，并有一个传入远程 BarService 实例的构造函数</li>
+</ol>
+<h1 id="dubbo-本地伪装">Dubbo 本地伪装<a hidden class="anchor" aria-hidden="true" href="#dubbo-本地伪装">#</a></h1>
+<ul>
+<li>本地伪装是本地存根的一个子集</li>
+<li>通常会使用本地伪装处理服务降级</li>
+<li>建议本地伪装在客户端实现</li>
+</ul>
+<blockquote>
+<p>官方文档：https://dubbo.apache.org/zh-cn/docs/user/demos/local-mock.html</p>
+</blockquote>
+<p>本地伪装通常用于服务降级，比如某验权服务，当服务提供方全部挂掉后，客户端不抛出异常，而是通过 Mock 数据返回授权失败。</p>
+<p>在 spring 配置文件中按以下方式配置：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;dubbo:reference</span> <span style="color:#a6e22e">interface=</span><span style="color:#e6db74">&#34;com.foo.BarService&#34;</span> <span style="color:#a6e22e">mock=</span><span style="color:#e6db74">&#34;true&#34;</span> <span style="color:#f92672">/&gt;</span>
+</span></span></code></pre></div><p>或</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;dubbo:reference</span> <span style="color:#a6e22e">interface=</span><span style="color:#e6db74">&#34;com.foo.BarService&#34;</span> <span style="color:#a6e22e">mock=</span><span style="color:#e6db74">&#34;com.foo.BarServiceMock&#34;</span> <span style="color:#f92672">/&gt;</span>
+</span></span></code></pre></div><p>在工程中提供 Mock 实现：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">package</span> com.foo;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">BarServiceMock</span> <span style="color:#66d9ef">implements</span> BarService {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> String <span style="color:#a6e22e">sayHello</span>(String name) {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 你可以伪造容错数据，此方法只在出现RpcException时被执行</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;容错数据&#34;</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>如果服务的消费方经常需要 try-catch 捕获异常，如：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>Offer offer <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>    offer <span style="color:#f92672">=</span> offerService.<span style="color:#a6e22e">findOffer</span>(offerId);
+</span></span><span style="display:flex;"><span>} <span style="color:#66d9ef">catch</span> (RpcException e) {
+</span></span><span style="display:flex;"><span>   logger.<span style="color:#a6e22e">error</span>(e);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>请考虑改为 Mock 实现，并在 Mock 实现中 return null。如果只是想简单的忽略异常，在 <code>2.0.11</code> 以上版本可用：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;dubbo:reference</span> <span style="color:#a6e22e">interface=</span><span style="color:#e6db74">&#34;com.foo.BarService&#34;</span> <span style="color:#a6e22e">mock=</span><span style="color:#e6db74">&#34;return null&#34;</span> <span style="color:#f92672">/&gt;</span>
+</span></span></code></pre></div><h2 id="进阶用法">进阶用法<a hidden class="anchor" aria-hidden="true" href="#进阶用法">#</a></h2>
+<h3 id="return">return<a hidden class="anchor" aria-hidden="true" href="#return">#</a></h3>
+<p>使用 <code>return</code> 来返回一个字符串表示的对象，作为 Mock 的返回值。合法的字符串可以是：</p>
+<ul>
+<li><em>empty</em>: 代表空，基本类型的默认值，或者集合类的空值</li>
+<li><em>null</em>: <code>null</code></li>
+<li><em>true</em>: <code>true</code></li>
+<li><em>false</em>: <code>false</code></li>
+<li><em>JSON 格式</em>: 反序列化 JSON 所得到的对象</li>
+</ul>
+<h3 id="throw">throw<a hidden class="anchor" aria-hidden="true" href="#throw">#</a></h3>
+<p>使用 <code>throw</code> 来返回一个 Exception 对象，作为 Mock 的返回值。</p>
+<p>当调用出错时，抛出一个默认的 RPCException:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;dubbo:reference</span> <span style="color:#a6e22e">interface=</span><span style="color:#e6db74">&#34;com.foo.BarService&#34;</span> <span style="color:#a6e22e">mock=</span><span style="color:#e6db74">&#34;throw&#34;</span> <span style="color:#f92672">/&gt;</span>
+</span></span></code></pre></div><p>当调用出错时，抛出指定的 Exception：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;dubbo:reference</span> <span style="color:#a6e22e">interface=</span><span style="color:#e6db74">&#34;com.foo.BarService&#34;</span> <span style="color:#a6e22e">mock=</span><span style="color:#e6db74">&#34;throw com.foo.MockException&#34;</span> <span style="color:#f92672">/&gt;</span>
+</span></span></code></pre></div><h3 id="force-和-fail">force 和 fail<a hidden class="anchor" aria-hidden="true" href="#force-和-fail">#</a></h3>
+<p>在 <code>2.6.6</code> 以上的版本，可以开始在 Spring XML 配置文件中使用 <code>fail:</code> 和 <code>force:</code>。<code>force:</code> 代表强制使用 Mock 行为，在这种情况下不会走远程调用。<code>fail:</code> 与默认行为一致，只有当远程调用发生错误时才使用 Mock 行为。<code>force:</code> 和 <code>fail:</code> 都支持与 <code>throw</code> 或者 <code>return</code> 组合使用。</p>
+<p>强制返回指定值：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;dubbo:reference</span> <span style="color:#a6e22e">interface=</span><span style="color:#e6db74">&#34;com.foo.BarService&#34;</span> <span style="color:#a6e22e">mock=</span><span style="color:#e6db74">&#34;force:return fake&#34;</span> <span style="color:#f92672">/&gt;</span>
+</span></span></code></pre></div><p>强制抛出指定异常：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;dubbo:reference</span> <span style="color:#a6e22e">interface=</span><span style="color:#e6db74">&#34;com.foo.BarService&#34;</span> <span style="color:#a6e22e">mock=</span><span style="color:#e6db74">&#34;force:throw com.foo.MockException&#34;</span> <span style="color:#f92672">/&gt;</span>
+</span></span></code></pre></div><h3 id="在方法级别配置-mock">在方法级别配置 Mock<a hidden class="anchor" aria-hidden="true" href="#在方法级别配置-mock">#</a></h3>
+<p>Mock 可以在方法级别上指定，假定 <code>com.foo.BarService</code> 上有好几个方法，我们可以单独为 <code>sayHello()</code> 方法指定 Mock 行为。具体配置如下所示，在本例中，只要 <code>sayHello()</code> 被调用到时，强制返回 &ldquo;fake&rdquo;:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;dubbo:reference</span> <span style="color:#a6e22e">id=</span><span style="color:#e6db74">&#34;demoService&#34;</span> <span style="color:#a6e22e">check=</span><span style="color:#e6db74">&#34;false&#34;</span> <span style="color:#a6e22e">interface=</span><span style="color:#e6db74">&#34;com.foo.BarService&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;dubbo:parameter</span> <span style="color:#a6e22e">key=</span><span style="color:#e6db74">&#34;sayHello.mock&#34;</span> <span style="color:#a6e22e">value=</span><span style="color:#e6db74">&#34;force:return fake&#34;</span><span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/dubbo:reference&gt;</span>
+</span></span></code></pre></div><ol>
+<li>Mock 是 Stub 的一个子集，便于服务提供方在客户端执行容错逻辑，因经常需要在出现 RpcException (比如网络失败，超时等)时进行容错，而在出现业务异常(比如登录用户名密码错误)时不需要容错，如果用 Stub，可能就需要捕获并依赖 RpcException 类，而用 Mock 就可以不依赖 RpcException，因为它的约定就是只有出现 RpcException 时才执行。</li>
+<li>在 interface 旁放一个 Mock 实现，它实现 BarService 接口，并有一个无参构造函数。</li>
+</ol>
+<p>在使用 SpringBoot + Dubbo 的项目中，优先使用 Hystrix 提供的熔断降级，因为 <strong>Mock 只能捕获 RpcException (比如网络失败，超时等)</strong>，而不能捕获 Java 异常。</p>
+<h1 id="dubbo-隐式参数">Dubbo 隐式参数<a hidden class="anchor" aria-hidden="true" href="#dubbo-隐式参数">#</a></h1>
+<ul>
+<li>Dubbo 提供了参数的隐式传递</li>
+<li>Dubbo 的隐式参数仅单次调用可用</li>
+<li>注意隐式参数的保留字段</li>
+</ul>
+<blockquote>
+<p>官方文档：https://dubbo.apache.org/zh-cn/docs/user/demos/attachment.html</p>
+</blockquote>
+<p>可以通过 <code>RpcContext</code> 上的 <code>setAttachment</code> 和 <code>getAttachment</code> 在服务消费方和提供方之间进行参数的隐式传递。</p>
+<p><img alt="/user-guide/images/context.png" loading="lazy" src="/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/9.dubbo%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91%E6%94%AF%E4%BB%98%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/images/context.png"></p>
+<h2 id="在服务消费方端设置隐式参数">在服务消费方端设置隐式参数<a hidden class="anchor" aria-hidden="true" href="#在服务消费方端设置隐式参数">#</a></h2>
+<p><code>setAttachment</code> 设置的 KV 对，在完成下面一次远程调用会被清空，即多次远程调用要多次设置。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span>RpcContext.getContext().setAttachment(&#34;index&#34;, &#34;1&#34;); // 隐式传参，后面的远程调用都会隐式将这些参数发送到服务器端，类似cookie，用于框架集成，不建议常规业务使用
+</span></span><span style="display:flex;"><span>xxxService.xxx(); // 远程调用
+</span></span><span style="display:flex;"><span>// ...
+</span></span></code></pre></div><h2 id="在服务提供方端获取隐式参数">在服务提供方端获取隐式参数<a hidden class="anchor" aria-hidden="true" href="#在服务提供方端获取隐式参数">#</a></h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">XxxServiceImpl</span> <span style="color:#66d9ef">implements</span> XxxService {
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">xxx</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 获取客户端隐式传入的参数，用于框架集成，不建议常规业务使用</span>
+</span></span><span style="display:flex;"><span>        String index <span style="color:#f92672">=</span> RpcContext.<span style="color:#a6e22e">getContext</span>().<span style="color:#a6e22e">getAttachment</span>(<span style="color:#e6db74">&#34;index&#34;</span>); 
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ol>
+<li>注意：path, group, version, dubbo, token, timeout 几个 key 是保留字段，请使用其它值。</li>
+</ol>
+<h1 id="总结">总结<a hidden class="anchor" aria-hidden="true" href="#总结">#</a></h1>
+<ul>
+<li>Dubbo 特性之隐式参数</li>
+<li>Dubbo 特性之本地存根和本地伪装（更常用）</li>
+<li>支付宝当面付功能对接</li>
+</ul>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://zjxjwxk.github.io/tags/dubbo/">Dubbo</a></li>
+      <li><a href="https://zjxjwxk.github.io/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/">微服务架构</a></li>
+    </ul>
+  </footer>
+</article>
+
+<script>
+  window.onload = function() {
+      var contentContainer = document.getElementById("content-container");
+      if ("" !== "") {
+          var password = prompt("Enter password:");
+          if (password === "") {
+              contentContainer.style.display = "block";
+          } else {
+              alert("Incorrect password");
+          }
+      } else {
+          contentContainer.style.display = "block";
+      }
+  };
+</script>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2024 <a href="https://zjxjwxk.github.io/">Xinkang&#39;s Blog</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

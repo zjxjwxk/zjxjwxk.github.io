@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>JVM on Xinkang&#39;s Blog</title>
+    <link>https://zjxjwxk.github.io/tags/jvm/</link>
+    <description>Recent content in JVM on Xinkang&#39;s Blog</description>
+    <generator>Hugo -- 0.138.0</generator>
+    <language>en</language>
+    <lastBuildDate>Thu, 16 Jul 2020 11:01:00 +0000</lastBuildDate>
+    <atom:link href="https://zjxjwxk.github.io/tags/jvm/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>自己编译OpenJDK 8</title>
+      <link>https://zjxjwxk.github.io/posts/java/jvm/%E8%87%AA%E5%B7%B1%E7%BC%96%E8%AF%91openjdk-8/</link>
+      <pubDate>Thu, 16 Jul 2020 11:01:00 +0000</pubDate>
+      <guid>https://zjxjwxk.github.io/posts/java/jvm/%E8%87%AA%E5%B7%B1%E7%BC%96%E8%AF%91openjdk-8/</guid>
+      <description>&lt;p&gt;想要一探 JDK 内部的实现机制，最便捷的捷径之一就是自己编译一套 JDK，通过阅读和跟踪调试 JDK 源码去了解 Java 技术体系的原理。本人选择了 OpenJDK 进行编译。&lt;/p&gt;
+&lt;p&gt;由于在编译 OpenJDK 7 时出现了如下不知如何解决的问题：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;llvm-gcc -m64   -m64  -L&lt;span style=&#34;color:#e6db74&#34;&gt;`&lt;/span&gt;pwd&lt;span style=&#34;color:#e6db74&#34;&gt;`&lt;/span&gt;  -framework CoreFoundation  -o gamma launcher/java_md.o launcher/java.o launcher/jli_util.o launcher/wildcard.o -ljvm -lm -pthread
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Undefined symbols &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; architecture x86_64:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;_JNI_CreateJavaVM&amp;#34;&lt;/span&gt;, referenced from:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      _LoadJavaVM in java_md.o
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;_JNI_GetDefaultJavaVMInitArgs&amp;#34;&lt;/span&gt;, referenced from:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      _LoadJavaVM in java_md.o
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ld: symbol&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;s&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; not found &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; architecture x86_64
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;clang: error: linker command failed with exit code &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;use -v to see invocation&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;make&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;8&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;: *** &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;gamma&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; Error &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;make&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;7&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;: *** &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;the_vm&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; Error &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;make&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;6&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;: *** &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;product&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; Error &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;make&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;5&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;: *** &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;generic_build2&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; Error &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;make&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;4&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;: *** &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;product&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; Error &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;make&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;3&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;: *** &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;all_product_universal&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; Error &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;make&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;2&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;: *** &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;universal_product&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; Error &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;make&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;1&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;: *** &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;hotspot-build&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; Error &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;make: *** &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;build_product_image&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; Error &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;个人猜想是由于我 Mac OS 系统版本太高的问题（Catalina 10.15.5），XCode 版本也是最新的 11.6。&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

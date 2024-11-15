@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Dubbo微服务影院系列（8）：Dubbo服务开发（订单模块开发） | Xinkang&#39;s Blog</title>
+<meta name="keywords" content="Dubbo, 微服务架构">
+<meta name="description" content="章节概要
+
+完成订单模块业务开发
+完成限流和熔断、降级相关内容
+Dubbo 特性之分组、聚合和版本控制
+
+订单模块问题
+
+订单模块的横向和纵向分表如何解决？
+服务限流如何处理？
+服务熔断和降级？
+如何保证多版本的蓝绿上线？
+
+横向拆分和纵向拆分
+
+Dubbo 服务分组
+
+官方文档：https://dubbo.apache.org/zh-cn/docs/user/demos/service-group.html
+
+当一个接口有多种实现时，可以用 group 区分。
+服务
+&lt;dubbo:service group=&#34;feedback&#34; interface=&#34;com.xxx.IndexService&#34; /&gt;
+&lt;dubbo:service group=&#34;member&#34; interface=&#34;com.xxx.IndexService&#34; /&gt;
+引用
+&lt;dubbo:reference id=&#34;feedbackIndexService&#34; group=&#34;feedback&#34; interface=&#34;com.xxx.IndexService&#34; /&gt;
+&lt;dubbo:reference id=&#34;memberIndexService&#34; group=&#34;member&#34; interface=&#34;com.xxx.IndexService&#34; /&gt;
+任意组：
+&lt;dubbo:reference id=&#34;barService&#34; interface=&#34;com.foo.BarService&#34; group=&#34;*&#34; /&gt;
+Dubbo 分组聚合
+
+https://dubbo.apache.org/zh-cn/docs/user/demos/group-merger.html
+
+按组合并返回结果，比如菜单服务，接口一样，但有多种实现，用 group 区分，现在消费方需从每种 group 中调用一次返回结果，合并结果返回，这样就可以实现聚合菜单项。
+配置
+搜索所有分组
+&lt;dubbo:reference interface=&#34;com.xxx.MenuService&#34; group=&#34;*&#34; merger=&#34;true&#34; /&gt;
+合并指定分组
+&lt;dubbo:reference interface=&#34;com.xxx.MenuService&#34; group=&#34;aaa,bbb&#34; merger=&#34;true&#34; /&gt;
+指定方法合并结果，其它未指定的方法，将只调用一个 Group
+&lt;dubbo:reference interface=&#34;com.xxx.MenuService&#34; group=&#34;*&#34;&gt;
+    &lt;dubbo:method name=&#34;getMenuItems&#34; merger=&#34;true&#34; /&gt;
+&lt;/dubbo:reference&gt;
+某个方法不合并结果，其它都合并结果
+&lt;dubbo:reference interface=&#34;com.xxx.MenuService&#34; group=&#34;*&#34; merger=&#34;true&#34;&gt;
+    &lt;dubbo:method name=&#34;getMenuItems&#34; merger=&#34;false&#34; /&gt;
+&lt;/dubbo:reference&gt;
+指定合并策略，缺省根据返回值类型自动匹配，如果同一类型有两个合并器时，需指定合并器的名称
+&lt;dubbo:reference interface=&#34;com.xxx.MenuService&#34; group=&#34;*&#34;&gt;
+    &lt;dubbo:method name=&#34;getMenuItems&#34; merger=&#34;mymerge&#34; /&gt;
+&lt;/dubbo:reference&gt;
+指定合并方法，将调用返回结果的指定方法进行合并，合并方法的参数类型必须是返回结果类型本身
+&lt;dubbo:reference interface=&#34;com.xxx.MenuService&#34; group=&#34;*&#34;&gt;
+    &lt;dubbo:method name=&#34;getMenuItems&#34; merger=&#34;.addAll&#34; /&gt;
+&lt;/dubbo:reference&gt;
+Dubbo 多版本
+当一个接口实现，出现不兼容升级时，可以用版本号过渡，版本号不同的服务相互间不引用。
+可以按照以下的步骤进行版本迁移：
+
+在低压力时间段，先升级一半提供者为新版本
+再将所有消费者升级为新版本
+然后将剩下的一半提供者升级为新版本
+
+配置
+老版本服务提供者配置：
+&lt;dubbo:service interface=&#34;com.foo.BarService&#34; version=&#34;1.0.0&#34; /&gt;
+新版本服务提供者配置：
+&lt;dubbo:service interface=&#34;com.foo.BarService&#34; version=&#34;2.0.0&#34; /&gt;
+老版本服务消费者配置：
+&lt;dubbo:reference id=&#34;barService&#34; interface=&#34;com.foo.BarService&#34; version=&#34;1.0.0&#34; /&gt;
+新版本服务消费者配置：">
+<meta name="author" content="">
+<link rel="canonical" href="https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/8.dubbo%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91%E8%AE%A2%E5%8D%95%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.d6fcd20a4fb86efa4dfac8ec95da60244cc8871042183da1ef28e3a762ad79c8.css" integrity="sha256-1vzSCk&#43;4bvpN&#43;sjsldpgJEzIhxBCGD2h7yjjp2Ktecg=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://zjxjwxk.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://zjxjwxk.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://zjxjwxk.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://zjxjwxk.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://zjxjwxk.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/8.dubbo%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91%E8%AE%A2%E5%8D%95%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><meta property="og:url" content="https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/8.dubbo%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91%E8%AE%A2%E5%8D%95%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/">
+  <meta property="og:site_name" content="Xinkang&#39;s Blog">
+  <meta property="og:title" content="Dubbo微服务影院系列（8）：Dubbo服务开发（订单模块开发）">
+  <meta property="og:description" content="章节概要 完成订单模块业务开发 完成限流和熔断、降级相关内容 Dubbo 特性之分组、聚合和版本控制 订单模块问题 订单模块的横向和纵向分表如何解决？ 服务限流如何处理？ 服务熔断和降级？ 如何保证多版本的蓝绿上线？ 横向拆分和纵向拆分 Dubbo 服务分组 官方文档：https://dubbo.apache.org/zh-cn/docs/user/demos/service-group.html
+当一个接口有多种实现时，可以用 group 区分。
+服务 &lt;dubbo:service group=&#34;feedback&#34; interface=&#34;com.xxx.IndexService&#34; /&gt; &lt;dubbo:service group=&#34;member&#34; interface=&#34;com.xxx.IndexService&#34; /&gt; 引用 &lt;dubbo:reference id=&#34;feedbackIndexService&#34; group=&#34;feedback&#34; interface=&#34;com.xxx.IndexService&#34; /&gt; &lt;dubbo:reference id=&#34;memberIndexService&#34; group=&#34;member&#34; interface=&#34;com.xxx.IndexService&#34; /&gt; 任意组：
+&lt;dubbo:reference id=&#34;barService&#34; interface=&#34;com.foo.BarService&#34; group=&#34;*&#34; /&gt; Dubbo 分组聚合 https://dubbo.apache.org/zh-cn/docs/user/demos/group-merger.html
+按组合并返回结果，比如菜单服务，接口一样，但有多种实现，用 group 区分，现在消费方需从每种 group 中调用一次返回结果，合并结果返回，这样就可以实现聚合菜单项。
+配置 搜索所有分组
+&lt;dubbo:reference interface=&#34;com.xxx.MenuService&#34; group=&#34;*&#34; merger=&#34;true&#34; /&gt; 合并指定分组
+&lt;dubbo:reference interface=&#34;com.xxx.MenuService&#34; group=&#34;aaa,bbb&#34; merger=&#34;true&#34; /&gt; 指定方法合并结果，其它未指定的方法，将只调用一个 Group
+&lt;dubbo:reference interface=&#34;com.xxx.MenuService&#34; group=&#34;*&#34;&gt; &lt;dubbo:method name=&#34;getMenuItems&#34; merger=&#34;true&#34; /&gt; &lt;/dubbo:reference&gt; 某个方法不合并结果，其它都合并结果
+&lt;dubbo:reference interface=&#34;com.xxx.MenuService&#34; group=&#34;*&#34; merger=&#34;true&#34;&gt; &lt;dubbo:method name=&#34;getMenuItems&#34; merger=&#34;false&#34; /&gt; &lt;/dubbo:reference&gt; 指定合并策略，缺省根据返回值类型自动匹配，如果同一类型有两个合并器时，需指定合并器的名称
+&lt;dubbo:reference interface=&#34;com.xxx.MenuService&#34; group=&#34;*&#34;&gt; &lt;dubbo:method name=&#34;getMenuItems&#34; merger=&#34;mymerge&#34; /&gt; &lt;/dubbo:reference&gt; 指定合并方法，将调用返回结果的指定方法进行合并，合并方法的参数类型必须是返回结果类型本身
+&lt;dubbo:reference interface=&#34;com.xxx.MenuService&#34; group=&#34;*&#34;&gt; &lt;dubbo:method name=&#34;getMenuItems&#34; merger=&#34;.addAll&#34; /&gt; &lt;/dubbo:reference&gt; Dubbo 多版本 当一个接口实现，出现不兼容升级时，可以用版本号过渡，版本号不同的服务相互间不引用。
+可以按照以下的步骤进行版本迁移：
+在低压力时间段，先升级一半提供者为新版本 再将所有消费者升级为新版本 然后将剩下的一半提供者升级为新版本 配置 老版本服务提供者配置：
+&lt;dubbo:service interface=&#34;com.foo.BarService&#34; version=&#34;1.0.0&#34; /&gt; 新版本服务提供者配置：
+&lt;dubbo:service interface=&#34;com.foo.BarService&#34; version=&#34;2.0.0&#34; /&gt; 老版本服务消费者配置：
+&lt;dubbo:reference id=&#34;barService&#34; interface=&#34;com.foo.BarService&#34; version=&#34;1.0.0&#34; /&gt; 新版本服务消费者配置：">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2020-04-05T19:30:00+00:00">
+    <meta property="article:modified_time" content="2020-04-05T19:30:00+00:00">
+    <meta property="article:tag" content="Dubbo">
+    <meta property="article:tag" content="微服务架构">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Dubbo微服务影院系列（8）：Dubbo服务开发（订单模块开发）">
+<meta name="twitter:description" content="章节概要
+
+完成订单模块业务开发
+完成限流和熔断、降级相关内容
+Dubbo 特性之分组、聚合和版本控制
+
+订单模块问题
+
+订单模块的横向和纵向分表如何解决？
+服务限流如何处理？
+服务熔断和降级？
+如何保证多版本的蓝绿上线？
+
+横向拆分和纵向拆分
+
+Dubbo 服务分组
+
+官方文档：https://dubbo.apache.org/zh-cn/docs/user/demos/service-group.html
+
+当一个接口有多种实现时，可以用 group 区分。
+服务
+&lt;dubbo:service group=&#34;feedback&#34; interface=&#34;com.xxx.IndexService&#34; /&gt;
+&lt;dubbo:service group=&#34;member&#34; interface=&#34;com.xxx.IndexService&#34; /&gt;
+引用
+&lt;dubbo:reference id=&#34;feedbackIndexService&#34; group=&#34;feedback&#34; interface=&#34;com.xxx.IndexService&#34; /&gt;
+&lt;dubbo:reference id=&#34;memberIndexService&#34; group=&#34;member&#34; interface=&#34;com.xxx.IndexService&#34; /&gt;
+任意组：
+&lt;dubbo:reference id=&#34;barService&#34; interface=&#34;com.foo.BarService&#34; group=&#34;*&#34; /&gt;
+Dubbo 分组聚合
+
+https://dubbo.apache.org/zh-cn/docs/user/demos/group-merger.html
+
+按组合并返回结果，比如菜单服务，接口一样，但有多种实现，用 group 区分，现在消费方需从每种 group 中调用一次返回结果，合并结果返回，这样就可以实现聚合菜单项。
+配置
+搜索所有分组
+&lt;dubbo:reference interface=&#34;com.xxx.MenuService&#34; group=&#34;*&#34; merger=&#34;true&#34; /&gt;
+合并指定分组
+&lt;dubbo:reference interface=&#34;com.xxx.MenuService&#34; group=&#34;aaa,bbb&#34; merger=&#34;true&#34; /&gt;
+指定方法合并结果，其它未指定的方法，将只调用一个 Group
+&lt;dubbo:reference interface=&#34;com.xxx.MenuService&#34; group=&#34;*&#34;&gt;
+    &lt;dubbo:method name=&#34;getMenuItems&#34; merger=&#34;true&#34; /&gt;
+&lt;/dubbo:reference&gt;
+某个方法不合并结果，其它都合并结果
+&lt;dubbo:reference interface=&#34;com.xxx.MenuService&#34; group=&#34;*&#34; merger=&#34;true&#34;&gt;
+    &lt;dubbo:method name=&#34;getMenuItems&#34; merger=&#34;false&#34; /&gt;
+&lt;/dubbo:reference&gt;
+指定合并策略，缺省根据返回值类型自动匹配，如果同一类型有两个合并器时，需指定合并器的名称
+&lt;dubbo:reference interface=&#34;com.xxx.MenuService&#34; group=&#34;*&#34;&gt;
+    &lt;dubbo:method name=&#34;getMenuItems&#34; merger=&#34;mymerge&#34; /&gt;
+&lt;/dubbo:reference&gt;
+指定合并方法，将调用返回结果的指定方法进行合并，合并方法的参数类型必须是返回结果类型本身
+&lt;dubbo:reference interface=&#34;com.xxx.MenuService&#34; group=&#34;*&#34;&gt;
+    &lt;dubbo:method name=&#34;getMenuItems&#34; merger=&#34;.addAll&#34; /&gt;
+&lt;/dubbo:reference&gt;
+Dubbo 多版本
+当一个接口实现，出现不兼容升级时，可以用版本号过渡，版本号不同的服务相互间不引用。
+可以按照以下的步骤进行版本迁移：
+
+在低压力时间段，先升级一半提供者为新版本
+再将所有消费者升级为新版本
+然后将剩下的一半提供者升级为新版本
+
+配置
+老版本服务提供者配置：
+&lt;dubbo:service interface=&#34;com.foo.BarService&#34; version=&#34;1.0.0&#34; /&gt;
+新版本服务提供者配置：
+&lt;dubbo:service interface=&#34;com.foo.BarService&#34; version=&#34;2.0.0&#34; /&gt;
+老版本服务消费者配置：
+&lt;dubbo:reference id=&#34;barService&#34; interface=&#34;com.foo.BarService&#34; version=&#34;1.0.0&#34; /&gt;
+新版本服务消费者配置：">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://zjxjwxk.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Dubbo微服务影院系列（8）：Dubbo服务开发（订单模块开发）",
+      "item": "https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/8.dubbo%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91%E8%AE%A2%E5%8D%95%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Dubbo微服务影院系列（8）：Dubbo服务开发（订单模块开发）",
+  "name": "Dubbo微服务影院系列（8）：Dubbo服务开发（订单模块开发）",
+  "description": "章节概要 完成订单模块业务开发 完成限流和熔断、降级相关内容 Dubbo 特性之分组、聚合和版本控制 订单模块问题 订单模块的横向和纵向分表如何解决？ 服务限流如何处理？ 服务熔断和降级？ 如何保证多版本的蓝绿上线？ 横向拆分和纵向拆分 Dubbo 服务分组 官方文档：https://dubbo.apache.org/zh-cn/docs/user/demos/service-group.html\n当一个接口有多种实现时，可以用 group 区分。\n服务 \u0026lt;dubbo:service group=\u0026#34;feedback\u0026#34; interface=\u0026#34;com.xxx.IndexService\u0026#34; /\u0026gt; \u0026lt;dubbo:service group=\u0026#34;member\u0026#34; interface=\u0026#34;com.xxx.IndexService\u0026#34; /\u0026gt; 引用 \u0026lt;dubbo:reference id=\u0026#34;feedbackIndexService\u0026#34; group=\u0026#34;feedback\u0026#34; interface=\u0026#34;com.xxx.IndexService\u0026#34; /\u0026gt; \u0026lt;dubbo:reference id=\u0026#34;memberIndexService\u0026#34; group=\u0026#34;member\u0026#34; interface=\u0026#34;com.xxx.IndexService\u0026#34; /\u0026gt; 任意组：\n\u0026lt;dubbo:reference id=\u0026#34;barService\u0026#34; interface=\u0026#34;com.foo.BarService\u0026#34; group=\u0026#34;*\u0026#34; /\u0026gt; Dubbo 分组聚合 https://dubbo.apache.org/zh-cn/docs/user/demos/group-merger.html\n按组合并返回结果，比如菜单服务，接口一样，但有多种实现，用 group 区分，现在消费方需从每种 group 中调用一次返回结果，合并结果返回，这样就可以实现聚合菜单项。\n配置 搜索所有分组\n\u0026lt;dubbo:reference interface=\u0026#34;com.xxx.MenuService\u0026#34; group=\u0026#34;*\u0026#34; merger=\u0026#34;true\u0026#34; /\u0026gt; 合并指定分组\n\u0026lt;dubbo:reference interface=\u0026#34;com.xxx.MenuService\u0026#34; group=\u0026#34;aaa,bbb\u0026#34; merger=\u0026#34;true\u0026#34; /\u0026gt; 指定方法合并结果，其它未指定的方法，将只调用一个 Group\n\u0026lt;dubbo:reference interface=\u0026#34;com.xxx.MenuService\u0026#34; group=\u0026#34;*\u0026#34;\u0026gt; \u0026lt;dubbo:method name=\u0026#34;getMenuItems\u0026#34; merger=\u0026#34;true\u0026#34; /\u0026gt; \u0026lt;/dubbo:reference\u0026gt; 某个方法不合并结果，其它都合并结果\n\u0026lt;dubbo:reference interface=\u0026#34;com.xxx.MenuService\u0026#34; group=\u0026#34;*\u0026#34; merger=\u0026#34;true\u0026#34;\u0026gt; \u0026lt;dubbo:method name=\u0026#34;getMenuItems\u0026#34; merger=\u0026#34;false\u0026#34; /\u0026gt; \u0026lt;/dubbo:reference\u0026gt; 指定合并策略，缺省根据返回值类型自动匹配，如果同一类型有两个合并器时，需指定合并器的名称\n\u0026lt;dubbo:reference interface=\u0026#34;com.xxx.MenuService\u0026#34; group=\u0026#34;*\u0026#34;\u0026gt; \u0026lt;dubbo:method name=\u0026#34;getMenuItems\u0026#34; merger=\u0026#34;mymerge\u0026#34; /\u0026gt; \u0026lt;/dubbo:reference\u0026gt; 指定合并方法，将调用返回结果的指定方法进行合并，合并方法的参数类型必须是返回结果类型本身\n\u0026lt;dubbo:reference interface=\u0026#34;com.xxx.MenuService\u0026#34; group=\u0026#34;*\u0026#34;\u0026gt; \u0026lt;dubbo:method name=\u0026#34;getMenuItems\u0026#34; merger=\u0026#34;.addAll\u0026#34; /\u0026gt; \u0026lt;/dubbo:reference\u0026gt; Dubbo 多版本 当一个接口实现，出现不兼容升级时，可以用版本号过渡，版本号不同的服务相互间不引用。\n可以按照以下的步骤进行版本迁移：\n在低压力时间段，先升级一半提供者为新版本 再将所有消费者升级为新版本 然后将剩下的一半提供者升级为新版本 配置 老版本服务提供者配置：\n\u0026lt;dubbo:service interface=\u0026#34;com.foo.BarService\u0026#34; version=\u0026#34;1.0.0\u0026#34; /\u0026gt; 新版本服务提供者配置：\n\u0026lt;dubbo:service interface=\u0026#34;com.foo.BarService\u0026#34; version=\u0026#34;2.0.0\u0026#34; /\u0026gt; 老版本服务消费者配置：\n\u0026lt;dubbo:reference id=\u0026#34;barService\u0026#34; interface=\u0026#34;com.foo.BarService\u0026#34; version=\u0026#34;1.0.0\u0026#34; /\u0026gt; 新版本服务消费者配置：\n",
+  "keywords": [
+    "Dubbo", "微服务架构"
+  ],
+  "articleBody": "章节概要 完成订单模块业务开发 完成限流和熔断、降级相关内容 Dubbo 特性之分组、聚合和版本控制 订单模块问题 订单模块的横向和纵向分表如何解决？ 服务限流如何处理？ 服务熔断和降级？ 如何保证多版本的蓝绿上线？ 横向拆分和纵向拆分 Dubbo 服务分组 官方文档：https://dubbo.apache.org/zh-cn/docs/user/demos/service-group.html\n当一个接口有多种实现时，可以用 group 区分。\n服务 ",
+  "wordCount" : "374",
+  "inLanguage": "en",
+  "datePublished": "2020-04-05T19:30:00Z",
+  "dateModified": "2020-04-05T19:30:00Z",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/8.dubbo%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91%E8%AE%A2%E5%8D%95%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Xinkang's Blog",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://zjxjwxk.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://zjxjwxk.github.io/" accesskey="h" title="Xinkang&#39;s Blog (Alt + H)">Xinkang&#39;s Blog</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://zjxjwxk.github.io/archives/" title="Archives">
+                    <span>Archives</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://zjxjwxk.github.io/categories/" title="Categories">
+                    <span>Categories</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://zjxjwxk.github.io/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://zjxjwxk.github.io/search/" title="Search (Alt &#43; /)" accesskey=/>
+                    <span>Search</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <div id="content-container">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      Dubbo微服务影院系列（8）：Dubbo服务开发（订单模块开发）
+    </h1>
+    <div class="post-meta"><span title='2020-04-05 19:30:00 +0000 UTC'>April 5, 2020</span>
+
+</div>
+  </header> 
+  <div class="post-content"><h1 id="章节概要">章节概要<a hidden class="anchor" aria-hidden="true" href="#章节概要">#</a></h1>
+<ul>
+<li>完成订单模块业务开发</li>
+<li>完成限流和熔断、降级相关内容</li>
+<li>Dubbo 特性之分组、聚合和版本控制</li>
+</ul>
+<h1 id="订单模块问题">订单模块问题<a hidden class="anchor" aria-hidden="true" href="#订单模块问题">#</a></h1>
+<ul>
+<li>订单模块的横向和纵向分表如何解决？</li>
+<li>服务限流如何处理？</li>
+<li>服务熔断和降级？</li>
+<li>如何保证多版本的蓝绿上线？</li>
+</ul>
+<h1 id="横向拆分和纵向拆分">横向拆分和纵向拆分<a hidden class="anchor" aria-hidden="true" href="#横向拆分和纵向拆分">#</a></h1>
+<p><img alt="横向拆分和纵向拆分" loading="lazy" src="/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/8.dubbo%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91%E8%AE%A2%E5%8D%95%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/images/image-20200408000355380.png"></p>
+<h1 id="dubbo-服务分组">Dubbo 服务分组<a hidden class="anchor" aria-hidden="true" href="#dubbo-服务分组">#</a></h1>
+<blockquote>
+<p>官方文档：https://dubbo.apache.org/zh-cn/docs/user/demos/service-group.html</p>
+</blockquote>
+<p>当一个接口有多种实现时，可以用 group 区分。</p>
+<h2 id="服务">服务<a hidden class="anchor" aria-hidden="true" href="#服务">#</a></h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;dubbo:service</span> <span style="color:#a6e22e">group=</span><span style="color:#e6db74">&#34;feedback&#34;</span> <span style="color:#a6e22e">interface=</span><span style="color:#e6db74">&#34;com.xxx.IndexService&#34;</span> <span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;dubbo:service</span> <span style="color:#a6e22e">group=</span><span style="color:#e6db74">&#34;member&#34;</span> <span style="color:#a6e22e">interface=</span><span style="color:#e6db74">&#34;com.xxx.IndexService&#34;</span> <span style="color:#f92672">/&gt;</span>
+</span></span></code></pre></div><h2 id="引用">引用<a hidden class="anchor" aria-hidden="true" href="#引用">#</a></h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;dubbo:reference</span> <span style="color:#a6e22e">id=</span><span style="color:#e6db74">&#34;feedbackIndexService&#34;</span> <span style="color:#a6e22e">group=</span><span style="color:#e6db74">&#34;feedback&#34;</span> <span style="color:#a6e22e">interface=</span><span style="color:#e6db74">&#34;com.xxx.IndexService&#34;</span> <span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;dubbo:reference</span> <span style="color:#a6e22e">id=</span><span style="color:#e6db74">&#34;memberIndexService&#34;</span> <span style="color:#a6e22e">group=</span><span style="color:#e6db74">&#34;member&#34;</span> <span style="color:#a6e22e">interface=</span><span style="color:#e6db74">&#34;com.xxx.IndexService&#34;</span> <span style="color:#f92672">/&gt;</span>
+</span></span></code></pre></div><p>任意组：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;dubbo:reference</span> <span style="color:#a6e22e">id=</span><span style="color:#e6db74">&#34;barService&#34;</span> <span style="color:#a6e22e">interface=</span><span style="color:#e6db74">&#34;com.foo.BarService&#34;</span> <span style="color:#a6e22e">group=</span><span style="color:#e6db74">&#34;*&#34;</span> <span style="color:#f92672">/&gt;</span>
+</span></span></code></pre></div><h1 id="dubbo-分组聚合">Dubbo 分组聚合<a hidden class="anchor" aria-hidden="true" href="#dubbo-分组聚合">#</a></h1>
+<blockquote>
+<p><a href="https://dubbo.apache.org/zh-cn/docs/user/demos/group-merger.html">https://dubbo.apache.org/zh-cn/docs/user/demos/group-merger.html</a></p>
+</blockquote>
+<p>按组合并返回结果，比如菜单服务，接口一样，但有多种实现，用 group 区分，现在消费方需从每种 group 中调用一次返回结果，合并结果返回，这样就可以实现聚合菜单项。</p>
+<h2 id="配置">配置<a hidden class="anchor" aria-hidden="true" href="#配置">#</a></h2>
+<p>搜索所有分组</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;dubbo:reference</span> <span style="color:#a6e22e">interface=</span><span style="color:#e6db74">&#34;com.xxx.MenuService&#34;</span> <span style="color:#a6e22e">group=</span><span style="color:#e6db74">&#34;*&#34;</span> <span style="color:#a6e22e">merger=</span><span style="color:#e6db74">&#34;true&#34;</span> <span style="color:#f92672">/&gt;</span>
+</span></span></code></pre></div><p>合并指定分组</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;dubbo:reference</span> <span style="color:#a6e22e">interface=</span><span style="color:#e6db74">&#34;com.xxx.MenuService&#34;</span> <span style="color:#a6e22e">group=</span><span style="color:#e6db74">&#34;aaa,bbb&#34;</span> <span style="color:#a6e22e">merger=</span><span style="color:#e6db74">&#34;true&#34;</span> <span style="color:#f92672">/&gt;</span>
+</span></span></code></pre></div><p>指定方法合并结果，其它未指定的方法，将只调用一个 Group</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;dubbo:reference</span> <span style="color:#a6e22e">interface=</span><span style="color:#e6db74">&#34;com.xxx.MenuService&#34;</span> <span style="color:#a6e22e">group=</span><span style="color:#e6db74">&#34;*&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;dubbo:method</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;getMenuItems&#34;</span> <span style="color:#a6e22e">merger=</span><span style="color:#e6db74">&#34;true&#34;</span> <span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/dubbo:reference&gt;</span>
+</span></span></code></pre></div><p>某个方法不合并结果，其它都合并结果</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;dubbo:reference</span> <span style="color:#a6e22e">interface=</span><span style="color:#e6db74">&#34;com.xxx.MenuService&#34;</span> <span style="color:#a6e22e">group=</span><span style="color:#e6db74">&#34;*&#34;</span> <span style="color:#a6e22e">merger=</span><span style="color:#e6db74">&#34;true&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;dubbo:method</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;getMenuItems&#34;</span> <span style="color:#a6e22e">merger=</span><span style="color:#e6db74">&#34;false&#34;</span> <span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/dubbo:reference&gt;</span>
+</span></span></code></pre></div><p>指定合并策略，缺省根据返回值类型自动匹配，如果同一类型有两个合并器时，需指定合并器的名称</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;dubbo:reference</span> <span style="color:#a6e22e">interface=</span><span style="color:#e6db74">&#34;com.xxx.MenuService&#34;</span> <span style="color:#a6e22e">group=</span><span style="color:#e6db74">&#34;*&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;dubbo:method</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;getMenuItems&#34;</span> <span style="color:#a6e22e">merger=</span><span style="color:#e6db74">&#34;mymerge&#34;</span> <span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/dubbo:reference&gt;</span>
+</span></span></code></pre></div><p>指定合并方法，将调用返回结果的指定方法进行合并，合并方法的参数类型必须是返回结果类型本身</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;dubbo:reference</span> <span style="color:#a6e22e">interface=</span><span style="color:#e6db74">&#34;com.xxx.MenuService&#34;</span> <span style="color:#a6e22e">group=</span><span style="color:#e6db74">&#34;*&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;dubbo:method</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;getMenuItems&#34;</span> <span style="color:#a6e22e">merger=</span><span style="color:#e6db74">&#34;.addAll&#34;</span> <span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/dubbo:reference&gt;</span>
+</span></span></code></pre></div><h1 id="dubbo-多版本">Dubbo 多版本<a hidden class="anchor" aria-hidden="true" href="#dubbo-多版本">#</a></h1>
+<p>当一个接口实现，出现不兼容升级时，可以用版本号过渡，版本号不同的服务相互间不引用。</p>
+<p>可以按照以下的步骤进行版本迁移：</p>
+<ol>
+<li>在低压力时间段，先升级一半提供者为新版本</li>
+<li>再将所有消费者升级为新版本</li>
+<li>然后将剩下的一半提供者升级为新版本</li>
+</ol>
+<h2 id="配置-1">配置<a hidden class="anchor" aria-hidden="true" href="#配置-1">#</a></h2>
+<p>老版本服务提供者配置：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;dubbo:service</span> <span style="color:#a6e22e">interface=</span><span style="color:#e6db74">&#34;com.foo.BarService&#34;</span> <span style="color:#a6e22e">version=</span><span style="color:#e6db74">&#34;1.0.0&#34;</span> <span style="color:#f92672">/&gt;</span>
+</span></span></code></pre></div><p>新版本服务提供者配置：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;dubbo:service</span> <span style="color:#a6e22e">interface=</span><span style="color:#e6db74">&#34;com.foo.BarService&#34;</span> <span style="color:#a6e22e">version=</span><span style="color:#e6db74">&#34;2.0.0&#34;</span> <span style="color:#f92672">/&gt;</span>
+</span></span></code></pre></div><p>老版本服务消费者配置：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;dubbo:reference</span> <span style="color:#a6e22e">id=</span><span style="color:#e6db74">&#34;barService&#34;</span> <span style="color:#a6e22e">interface=</span><span style="color:#e6db74">&#34;com.foo.BarService&#34;</span> <span style="color:#a6e22e">version=</span><span style="color:#e6db74">&#34;1.0.0&#34;</span> <span style="color:#f92672">/&gt;</span>
+</span></span></code></pre></div><p>新版本服务消费者配置：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;dubbo:reference</span> <span style="color:#a6e22e">id=</span><span style="color:#e6db74">&#34;barService&#34;</span> <span style="color:#a6e22e">interface=</span><span style="color:#e6db74">&#34;com.foo.BarService&#34;</span> <span style="color:#a6e22e">version=</span><span style="color:#e6db74">&#34;2.0.0&#34;</span> <span style="color:#f92672">/&gt;</span>
+</span></span></code></pre></div><p>如果不需要区分版本，可以按照以下的方式配置：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;dubbo:reference</span> <span style="color:#a6e22e">id=</span><span style="color:#e6db74">&#34;barService&#34;</span> <span style="color:#a6e22e">interface=</span><span style="color:#e6db74">&#34;com.foo.BarService&#34;</span> <span style="color:#a6e22e">version=</span><span style="color:#e6db74">&#34;*&#34;</span> <span style="color:#f92672">/&gt;</span>
+</span></span></code></pre></div><h1 id="限流思路">限流思路<a hidden class="anchor" aria-hidden="true" href="#限流思路">#</a></h1>
+<ul>
+<li>限流措施是系统高可用的一种手段</li>
+<li>使用并发与连接控制进行限流</li>
+<li>使用**漏桶算法（Leaky Bucket）<strong>和</strong>令牌桶算法（Token Bucket）**算法进行限流</li>
+</ul>
+<h2 id="漏桶算法leaky-bucket">漏桶算法（Leaky Bucket）<a hidden class="anchor" aria-hidden="true" href="#漏桶算法leaky-bucket">#</a></h2>
+<p><img alt="漏桶法" loading="lazy" src="/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/8.dubbo%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91%E8%AE%A2%E5%8D%95%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/images/rate-limit1.png"></p>
+<h2 id="令牌桶算法token-bucket">令牌桶算法（Token Bucket）<a hidden class="anchor" aria-hidden="true" href="#令牌桶算法token-bucket">#</a></h2>
+<p><img alt="令牌桶" loading="lazy" src="/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/8.dubbo%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91%E8%AE%A2%E5%8D%95%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/images/token_bucket.JPG"></p>
+<h2 id="区别">区别<a hidden class="anchor" aria-hidden="true" href="#区别">#</a></h2>
+<ul>
+<li>漏桶算法以均匀的速度处理请求，不需要承载较高的访问峰值</li>
+<li>令牌桶算法则可能在短时间内处理大量请求，所以需要可以承载较高的访问峰值</li>
+</ul>
+<h2 id="令牌桶算法实现">令牌桶算法实现<a hidden class="anchor" aria-hidden="true" href="#令牌桶算法实现">#</a></h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">TokenBucket</span> {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * 桶的容量
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">int</span> bucketNums <span style="color:#f92672">=</span> 100;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * 流入速度
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">int</span> rate <span style="color:#f92672">=</span> 1;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * 当前令牌数
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">int</span> nowTokens;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * 上次刷新当前令牌数的时间
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">long</span> lastTime <span style="color:#f92672">=</span> getNowTime();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">long</span> <span style="color:#a6e22e">getNowTime</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> System.<span style="color:#a6e22e">currentTimeMillis</span>();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">getToken</span>() {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 记录当前时间</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">long</span> nowTime <span style="color:#f92672">=</span> getNowTime();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 刷新令牌</span>
+</span></span><span style="display:flex;"><span>        nowTokens <span style="color:#f92672">+=</span> (nowTime <span style="color:#f92672">-</span> lastTime) <span style="color:#f92672">*</span> rate;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 若令牌数比桶容量大，则改为桶容量</span>
+</span></span><span style="display:flex;"><span>        nowTokens <span style="color:#f92672">=</span> Math.<span style="color:#a6e22e">min</span>(bucketNums, nowTokens);
+</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;当前令牌数：&#34;</span> <span style="color:#f92672">+</span> nowTokens);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 修改上次刷新令牌数的时间为当前时间</span>
+</span></span><span style="display:flex;"><span>        lastTime <span style="color:#f92672">=</span> nowTime;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 判断令牌是否足够</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (nowTokens <span style="color:#f92672">&gt;</span> 0) {
+</span></span><span style="display:flex;"><span>            nowTokens<span style="color:#f92672">--</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span>;
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h1 id="hystrix-熔断降级">Hystrix 熔断降级<a hidden class="anchor" aria-hidden="true" href="#hystrix-熔断降级">#</a></h1>
+<p><img alt="Hystrix 熔断降级" loading="lazy" src="/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/8.dubbo%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91%E8%AE%A2%E5%8D%95%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/images/hystrix-command-flow-chart.png"></p>
+<p>网关模块添加依赖：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span>        <span style="color:#f92672">&lt;dependency&gt;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&lt;groupId&gt;</span>org.springframework.cloud<span style="color:#f92672">&lt;/groupId&gt;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&lt;artifactId&gt;</span>spring-cloud-starter-netflix-hystrix<span style="color:#f92672">&lt;/artifactId&gt;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&lt;version&gt;</span>2.0.0.RELEASE<span style="color:#f92672">&lt;/version&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;/dependency&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;dependency&gt;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&lt;groupId&gt;</span>org.springframework.boot<span style="color:#f92672">&lt;/groupId&gt;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&lt;artifactId&gt;</span>spring-boot-starter-actuator<span style="color:#f92672">&lt;/artifactId&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;/dependency&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;dependency&gt;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&lt;groupId&gt;</span>org.springframework.cloud<span style="color:#f92672">&lt;/groupId&gt;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&lt;artifactId&gt;</span>spring-cloud-starter-netflix-hystrix-dashboard<span style="color:#f92672">&lt;/artifactId&gt;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&lt;version&gt;</span>2.0.0.RELEASE<span style="color:#f92672">&lt;/version&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;/dependency&gt;</span>
+</span></span></code></pre></div><p>GatewayApplication 添加注解：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#a6e22e">@EnableHystrixDashboard</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@EnableCircuitBreaker</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@EnableHystrix</span>
+</span></span></code></pre></div><p>给需要熔断器的控制器方法添加注解：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#a6e22e">@HystrixCommand</span>(fallbackMethod <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;error&#34;</span>,
+</span></span><span style="display:flex;"><span>            commandProperties <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">@HystrixProperty</span>(name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;execution.isolation.strategy&#34;</span>, value <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;THREAD&#34;</span>),
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">@HystrixProperty</span>(name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;execution.isolation.thread.timeoutInMilliseconds&#34;</span>, value <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;4000&#34;</span>),
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">@HystrixProperty</span>(name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;circuitBreaker.requestVolumeThreshold&#34;</span>, value <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;10&#34;</span>),
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">@HystrixProperty</span>(name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;circuitBreaker.errorThresholdPercentage&#34;</span>, value <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;50&#34;</span>)
+</span></span><span style="display:flex;"><span>            },
+</span></span><span style="display:flex;"><span>            threadPoolProperties <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>                    <span style="color:#a6e22e">@HystrixProperty</span>(name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;coreSize&#34;</span>, value <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;1&#34;</span>),
+</span></span><span style="display:flex;"><span>                    <span style="color:#a6e22e">@HystrixProperty</span>(name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;maxQueueSize&#34;</span>, value <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;10&#34;</span>),
+</span></span><span style="display:flex;"><span>                    <span style="color:#a6e22e">@HystrixProperty</span>(name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;keepAliveTimeMinutes&#34;</span>, value <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;1000&#34;</span>),
+</span></span><span style="display:flex;"><span>                    <span style="color:#a6e22e">@HystrixProperty</span>(name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;queueSizeRejectionThreshold&#34;</span>, value <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;8&#34;</span>),
+</span></span><span style="display:flex;"><span>                    <span style="color:#a6e22e">@HystrixProperty</span>(name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;metrics.rollingStats.numBuckets&#34;</span>, value <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;12&#34;</span>),
+</span></span><span style="display:flex;"><span>                    <span style="color:#a6e22e">@HystrixProperty</span>(name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;metrics.rollingStats.timeInMilliseconds&#34;</span>, value <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;1500&#34;</span>)
+</span></span><span style="display:flex;"><span>            })
+</span></span></code></pre></div><p>定义 fallbackMethod 方法，用于服务降级：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> ResponseVO <span style="color:#a6e22e">error</span>(Integer fieldId, String soldSeats, String seatsName) {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> ResponseVO.<span style="color:#a6e22e">serviceFail</span>(<span style="color:#e6db74">&#34;抱歉，下单的人太多了，请稍后重试&#34;</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h1 id="总结">总结<a hidden class="anchor" aria-hidden="true" href="#总结">#</a></h1>
+<ul>
+<li>学习了限流措施以及实现方法（在真实业务环境中，可能会根据请求的字节数大小分配 TokenBucket）</li>
+<li>掌握了 Dubbo 的分组聚合、版本控制</li>
+<li>留下一个思考，如何处理事务？假如，下订单时，将 1. 验证所购买的票是否为真和 2. 检查所购买的票是否已售出，这两个 service 接口改为异步调用（因为要连接 FTP 和读取文件，速度较慢），那么可能还没有调用结束，就已经生成了订单&hellip;&hellip;但是如果异步调用的验证结果不为真，该怎么办？这时候就需要事务来保证 ACID 了。那么应该如何处理分布式事务呢？且看下回分解。</li>
+</ul>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://zjxjwxk.github.io/tags/dubbo/">Dubbo</a></li>
+      <li><a href="https://zjxjwxk.github.io/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/">微服务架构</a></li>
+    </ul>
+  </footer>
+</article>
+
+<script>
+  window.onload = function() {
+      var contentContainer = document.getElementById("content-container");
+      if ("" !== "") {
+          var password = prompt("Enter password:");
+          if (password === "") {
+              contentContainer.style.display = "block";
+          } else {
+              alert("Incorrect password");
+          }
+      } else {
+          contentContainer.style.display = "block";
+      }
+  };
+</script>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2024 <a href="https://zjxjwxk.github.io/">Xinkang&#39;s Blog</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

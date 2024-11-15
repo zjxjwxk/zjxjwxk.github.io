@@ -1,0 +1,462 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>算法 on Xinkang&#39;s Blog</title>
+    <link>https://zjxjwxk.github.io/categories/%E7%AE%97%E6%B3%95/</link>
+    <description>Recent content in 算法 on Xinkang&#39;s Blog</description>
+    <generator>Hugo -- 0.138.0</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 15 Apr 2020 21:39:00 +0000</lastBuildDate>
+    <atom:link href="https://zjxjwxk.github.io/categories/%E7%AE%97%E6%B3%95/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>PAT甲级 1108 Finding Average (20分)</title>
+      <link>https://zjxjwxk.github.io/posts/pat/advanced_level/a1108/</link>
+      <pubDate>Wed, 15 Apr 2020 21:39:00 +0000</pubDate>
+      <guid>https://zjxjwxk.github.io/posts/pat/advanced_level/a1108/</guid>
+      <description>&lt;p&gt;The basic task is simple: given &lt;em&gt;N&lt;/em&gt; real numbers, you are supposed to calculate their average. But what makes it complicated is that some of the input numbers might not be legal. A &lt;strong&gt;legal&lt;/strong&gt; input is a real number in [−1000,1000] and is accurate up to no more than 2 decimal places. When you calculate the average, those illegal numbers must not be counted in.&lt;/p&gt;
+&lt;h1 id=&#34;input-specification&#34;&gt;Input Specification:&lt;/h1&gt;
+&lt;p&gt;Each input file contains one test case. For each case, the first line gives a positive integer &lt;em&gt;N&lt;/em&gt; (≤100). Then &lt;em&gt;N&lt;/em&gt; numbers are given in the next line, separated by one space.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>PAT甲级 1072 Gas Station (30分)</title>
+      <link>https://zjxjwxk.github.io/posts/pat/advanced_level/a1072/</link>
+      <pubDate>Mon, 13 Apr 2020 00:11:00 +0000</pubDate>
+      <guid>https://zjxjwxk.github.io/posts/pat/advanced_level/a1072/</guid>
+      <description>&lt;p&gt;A gas station has to be built at such a location that the minimum distance between the station and any of the residential housing is as far away as possible. However it must guarantee that all the houses are in its service range.&lt;/p&gt;
+&lt;p&gt;Now given the map of the city and several candidate locations for the gas station, you are supposed to give the best recommendation. If there are more than one solution, output the one with the smallest average distance to all the houses. If such a solution is still not unique, output the one with the smallest index number.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>PAT甲级 1018 Public Bike Management (30分)</title>
+      <link>https://zjxjwxk.github.io/posts/pat/advanced_level/a1018/</link>
+      <pubDate>Sun, 12 Apr 2020 15:52:00 +0000</pubDate>
+      <guid>https://zjxjwxk.github.io/posts/pat/advanced_level/a1018/</guid>
+      <description>&lt;p&gt;There is a public bike service in Hangzhou City which provides great convenience to the tourists from all over the world. One may rent a bike at any station and return it to any other stations in the city.&lt;/p&gt;
+&lt;p&gt;The Public Bike Management Center (PBMC) keeps monitoring the real-time capacity of all the stations. A station is said to be in &lt;strong&gt;perfect&lt;/strong&gt; condition if it is exactly half-full. If a station is full or empty, PBMC will collect or send bikes to adjust the condition of that station to perfect. And more, all the stations on the way will be adjusted as well.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>PAT甲级 1021 Deepest Root (25分)</title>
+      <link>https://zjxjwxk.github.io/posts/pat/advanced_level/a1021/</link>
+      <pubDate>Fri, 10 Apr 2020 17:55:00 +0000</pubDate>
+      <guid>https://zjxjwxk.github.io/posts/pat/advanced_level/a1021/</guid>
+      <description>&lt;p&gt;A graph which is connected and acyclic can be considered a tree. The height of the tree depends on the selected root. Now you are supposed to find the root that results in a highest tree. Such a root is called &lt;strong&gt;the deepest root&lt;/strong&gt;.&lt;/p&gt;
+&lt;h1 id=&#34;input-specification&#34;&gt;Input Specification:&lt;/h1&gt;
+&lt;p&gt;Each input file contains one test case. For each case, the first line contains a positive integer &lt;em&gt;N&lt;/em&gt; (≤10^4) which is the number of nodes, and hence the nodes are numbered from 1 to &lt;em&gt;N&lt;/em&gt;. Then &lt;em&gt;N&lt;/em&gt;−1 lines follow, each describes an edge by given the two adjacent nodes&amp;rsquo; numbers.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>PAT甲级 1013 Battle Over Cities (25分)</title>
+      <link>https://zjxjwxk.github.io/posts/pat/advanced_level/a1013/</link>
+      <pubDate>Thu, 09 Apr 2020 19:57:00 +0000</pubDate>
+      <guid>https://zjxjwxk.github.io/posts/pat/advanced_level/a1013/</guid>
+      <description>&lt;p&gt;It is vitally important to have all the cities connected by highways in a war. If a city is occupied by the enemy, all the highways from/toward that city are closed. We must know immediately if we need to repair any other highways to keep the rest of the cities connected. Given the map of cities which have all the remaining highways marked, you are supposed to tell the number of highways need to be repaired, quickly.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>PAT甲级 1032 Sharing (25分)</title>
+      <link>https://zjxjwxk.github.io/posts/pat/advanced_level/a1032/</link>
+      <pubDate>Tue, 07 Apr 2020 16:34:00 +0000</pubDate>
+      <guid>https://zjxjwxk.github.io/posts/pat/advanced_level/a1032/</guid>
+      <description>&lt;p&gt;To store English words, one method is to use linked lists and store a word letter by letter. To save some space, we may let the words share the same sublist if they share the same suffix. For example, &lt;code&gt;loading&lt;/code&gt; and &lt;code&gt;being&lt;/code&gt; are stored as showed in Figure 1.&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;Figure 1&#34; loading=&#34;lazy&#34; src=&#34;../images/image-A1032.jpg&#34;&gt;&lt;/p&gt;
+&lt;p&gt;You are supposed to find the starting position of the common suffix (e.g. the position of &lt;code&gt;i&lt;/code&gt; in Figure 1).&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>PAT甲级 1056 Mice and Rice (25分)</title>
+      <link>https://zjxjwxk.github.io/posts/pat/advanced_level/a1056/</link>
+      <pubDate>Mon, 06 Apr 2020 19:04:00 +0000</pubDate>
+      <guid>https://zjxjwxk.github.io/posts/pat/advanced_level/a1056/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;Mice and Rice&lt;/strong&gt; is the name of a programming contest in which each programmer must write a piece of code to control the movements of a mouse in a given map. The goal of each mouse is to eat as much rice as possible in order to become a FatMouse.&lt;/p&gt;
+&lt;p&gt;First the playing order is randomly decided for N &lt;!-- raw HTML omitted --&gt;P&lt;!-- raw HTML omitted --&gt; programmers. Then every N &lt;!-- raw HTML omitted --&gt;G&lt;!-- raw HTML omitted --&gt; programmers are grouped in a match. The fattest mouse in a group wins and enters the next turn. All the losers in this turn are ranked the same. Every N &lt;!-- raw HTML omitted --&gt;G&lt;!-- raw HTML omitted --&gt; winners are then grouped in the next match until a final winner is determined.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>PAT甲级 1100 Mars Numbers (20分)</title>
+      <link>https://zjxjwxk.github.io/posts/pat/advanced_level/a1100/</link>
+      <pubDate>Mon, 06 Apr 2020 15:17:00 +0000</pubDate>
+      <guid>https://zjxjwxk.github.io/posts/pat/advanced_level/a1100/</guid>
+      <description>&lt;p&gt;People on Mars count their numbers with base 13:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Zero on Earth is called &amp;ldquo;tret&amp;rdquo; on Mars.&lt;/li&gt;
+&lt;li&gt;The numbers 1 to 12 on Earth is called &amp;ldquo;jan, feb, mar, apr, may, jun, jly, aug, sep, oct, nov, dec&amp;rdquo; on Mars, respectively.&lt;/li&gt;
+&lt;li&gt;For the next higher digit, Mars people name the 12 numbers as &amp;ldquo;tam, hel, maa, huh, tou, kes, hei, elo, syy, lok, mer, jou&amp;rdquo;, respectively.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;For examples, the number 29 on Earth is called &amp;ldquo;hel mar&amp;rdquo; on Mars; and &amp;ldquo;elo nov&amp;rdquo; on Mars corresponds to 115 on Earth. In order to help communication between people from these two planets, you are supposed to write a program for mutual translation between Earth and Mars number systems.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>PAT甲级 1060 Are They Equal (25分)</title>
+      <link>https://zjxjwxk.github.io/posts/pat/advanced_level/a1060/</link>
+      <pubDate>Sat, 04 Apr 2020 22:28:00 +0000</pubDate>
+      <guid>https://zjxjwxk.github.io/posts/pat/advanced_level/a1060/</guid>
+      <description>&lt;p&gt;If a machine can save only 3 significant digits, the float numbers 12300 and 12358.9 are considered equal since they are both saved as 0.123×105 with simple chopping. Now given the number of significant digits on a machine and two float numbers, you are supposed to tell if they are treated equal in that machine.&lt;/p&gt;
+&lt;h1 id=&#34;input-specification&#34;&gt;Input Specification:&lt;/h1&gt;
+&lt;p&gt;Each input file contains one test case which gives three numbers &lt;em&gt;N&lt;/em&gt;, &lt;em&gt;A&lt;/em&gt; and &lt;em&gt;B&lt;/em&gt;, where &lt;em&gt;N&lt;/em&gt; (&amp;lt;100) is the number of significant digits, and &lt;em&gt;A&lt;/em&gt; and &lt;em&gt;B&lt;/em&gt; are the two float numbers to be compared. Each float number is non-negative, no greater than 10100, and that its total digit number is less than 100.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>PAT甲级 1039 Course List for Student (25分)</title>
+      <link>https://zjxjwxk.github.io/posts/pat/advanced_level/a1039/</link>
+      <pubDate>Fri, 03 Apr 2020 15:33:00 +0000</pubDate>
+      <guid>https://zjxjwxk.github.io/posts/pat/advanced_level/a1039/</guid>
+      <description>&lt;p&gt;Zhejiang University has 40000 students and provides 2500 courses. Now given the student name lists of all the courses, you are supposed to output the registered course list for each student who comes for a query.&lt;/p&gt;
+&lt;h1 id=&#34;input-specification&#34;&gt;Input Specification:&lt;/h1&gt;
+&lt;p&gt;Each input file contains one test case. For each case, the first line contains 2 positive integers: &lt;em&gt;N&lt;/em&gt; (≤40,000), the number of students who look for their course lists, and &lt;em&gt;K&lt;/em&gt; (≤2,500), the total number of courses. Then the student name lists are given for the courses (numbered from 1 to &lt;em&gt;K&lt;/em&gt;) in the following format: for each course &lt;em&gt;i&lt;/em&gt;, first the course index &lt;em&gt;i&lt;/em&gt; and the number of registered students N &lt;!-- raw HTML omitted --&gt;i&lt;!-- raw HTML omitted --&gt; (≤200) are given in a line. Then in the next line, N &lt;!-- raw HTML omitted --&gt;i&lt;!-- raw HTML omitted --&gt; student names are given. A student name consists of 3 capital English letters plus a one-digit number. Finally the last line contains the &lt;em&gt;N&lt;/em&gt; names of students who come for a query. All the names and numbers in a line are separated by a space.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>PAT甲级 1096 Consecutive Factors (20分)</title>
+      <link>https://zjxjwxk.github.io/posts/pat/advanced_level/a1096/</link>
+      <pubDate>Thu, 02 Apr 2020 20:53:00 +0000</pubDate>
+      <guid>https://zjxjwxk.github.io/posts/pat/advanced_level/a1096/</guid>
+      <description>&lt;p&gt;Among all the factors of a positive integer N, there may exist several consecutive numbers. For example, 630 can be factored as 3×5×6×7, where 5, 6, and 7 are the three consecutive numbers. Now given any positive N, you are supposed to find the maximum number of consecutive factors, and list the smallest sequence of the consecutive factors.&lt;/p&gt;
+&lt;h1 id=&#34;input-specification&#34;&gt;Input Specification:&lt;/h1&gt;
+&lt;p&gt;Each input file contains one test case, which gives the integer N (1&amp;lt;N&amp;lt;2^{31}).&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>PAT甲级 1078 Hashing (25分)</title>
+      <link>https://zjxjwxk.github.io/posts/pat/advanced_level/a1078/</link>
+      <pubDate>Thu, 02 Apr 2020 17:04:00 +0000</pubDate>
+      <guid>https://zjxjwxk.github.io/posts/pat/advanced_level/a1078/</guid>
+      <description>&lt;p&gt;The task of this problem is simple: insert a sequence of distinct positive integers into a hash table, and output the positions of the input numbers. The hash function is defined to be H(key)=key%TSize where TSize is the maximum size of the hash table. Quadratic probing (with positive increments only) is used to solve the collisions.&lt;/p&gt;
+&lt;p&gt;Note that the table size is better to be prime. If the maximum size given by the user is not prime, you must re-define the table size to be the smallest prime number which is larger than the size given by the user.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>PAT甲级 1081 Rational Sum (20分)</title>
+      <link>https://zjxjwxk.github.io/posts/pat/advanced_level/a1081/</link>
+      <pubDate>Wed, 01 Apr 2020 16:29:00 +0000</pubDate>
+      <guid>https://zjxjwxk.github.io/posts/pat/advanced_level/a1081/</guid>
+      <description>&lt;p&gt;Given &lt;em&gt;N&lt;/em&gt; rational numbers in the form &lt;code&gt;numerator/denominator&lt;/code&gt;, you are supposed to calculate their sum.&lt;/p&gt;
+&lt;h1 id=&#34;input-specification&#34;&gt;Input Specification:&lt;/h1&gt;
+&lt;p&gt;Each input file contains one test case. Each case starts with a positive integer &lt;em&gt;N&lt;/em&gt; (≤100), followed in the next line &lt;em&gt;N&lt;/em&gt; rational numbers &lt;code&gt;a1/b1 a2/b2 ...&lt;/code&gt; where all the numerators and denominators are in the range of &lt;strong&gt;long int&lt;/strong&gt;. If there is a negative number, then the sign must appear in front of the numerator.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>PAT乙级 1008 数组元素循环右移问题 (20分)</title>
+      <link>https://zjxjwxk.github.io/posts/pat/basic_level/b1008/</link>
+      <pubDate>Tue, 31 Mar 2020 16:04:00 +0000</pubDate>
+      <guid>https://zjxjwxk.github.io/posts/pat/basic_level/b1008/</guid>
+      <description>&lt;p&gt;一个数组&lt;em&gt;A&lt;/em&gt;中存有&lt;em&gt;N&lt;/em&gt;（&amp;gt;0）个整数，在不允许使用另外数组的前提下，将每个整数循环向右移&lt;em&gt;M&lt;/em&gt;（≥0）个位置，即将&lt;em&gt;A&lt;/em&gt;中的数据由（A&lt;!-- raw HTML omitted --&gt;0&lt;!-- raw HTML omitted --&gt; A&lt;!-- raw HTML omitted --&gt;1&lt;!-- raw HTML omitted --&gt; ⋯A &lt;!-- raw HTML omitted --&gt;N−1&lt;!-- raw HTML omitted --&gt; ）变换为（A &lt;!-- raw HTML omitted --&gt;N−M&lt;!-- raw HTML omitted --&gt; ⋯A &lt;!-- raw HTML omitted --&gt;N−1&lt;!-- raw HTML omitted --&gt; A &lt;!-- raw HTML omitted --&gt;0&lt;!-- raw HTML omitted --&gt; A &lt;!-- raw HTML omitted --&gt;1&lt;!-- raw HTML omitted --&gt;⋯A  &lt;!-- raw HTML omitted --&gt;N−M−1&lt;!-- raw HTML omitted --&gt; ）（最后&lt;em&gt;M&lt;/em&gt;个数循环移至最前面的&lt;em&gt;M&lt;/em&gt;个位置）。如果需要考虑程序移动数据的次数尽量少，要如何设计移动的方法？&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>PAT甲级 1049 Counting Ones (30分)</title>
+      <link>https://zjxjwxk.github.io/posts/pat/advanced_level/a1049/</link>
+      <pubDate>Mon, 30 Mar 2020 21:12:00 +0000</pubDate>
+      <guid>https://zjxjwxk.github.io/posts/pat/advanced_level/a1049/</guid>
+      <description>&lt;p&gt;The task is simple: given any positive integer &lt;em&gt;N&lt;/em&gt;, you are supposed to count the total number of 1&amp;rsquo;s in the decimal form of the integers from 1 to &lt;em&gt;N&lt;/em&gt;. For example, given &lt;em&gt;N&lt;/em&gt; being 12, there are five 1&amp;rsquo;s in 1, 10, 11, and 12.&lt;/p&gt;
+&lt;h1 id=&#34;input-specification&#34;&gt;Input Specification:&lt;/h1&gt;
+&lt;p&gt;Each input file contains one test case which gives the positive &lt;em&gt;N&lt;/em&gt; (≤230).&lt;/p&gt;
+&lt;h1 id=&#34;output-specification&#34;&gt;Output Specification:&lt;/h1&gt;
+&lt;p&gt;For each test case, print the number of 1&amp;rsquo;s in one line.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>PAT乙级 1003 我要通过！ (20分)</title>
+      <link>https://zjxjwxk.github.io/posts/pat/basic_level/b1003/</link>
+      <pubDate>Mon, 30 Mar 2020 16:26:00 +0000</pubDate>
+      <guid>https://zjxjwxk.github.io/posts/pat/basic_level/b1003/</guid>
+      <description>&lt;p&gt;“&lt;strong&gt;答案正确&lt;/strong&gt;”是自动判题系统给出的最令人欢喜的回复。本题属于 PAT 的“&lt;strong&gt;答案正确&lt;/strong&gt;”大派送 —— 只要读入的字符串满足下列条件，系统就输出“&lt;strong&gt;答案正确&lt;/strong&gt;”，否则输出“&lt;strong&gt;答案错误&lt;/strong&gt;”。&lt;/p&gt;
+&lt;p&gt;得到“&lt;strong&gt;答案正确&lt;/strong&gt;”的条件是：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;字符串中必须仅有 &lt;code&gt;P&lt;/code&gt;、 &lt;code&gt;A&lt;/code&gt;、 &lt;code&gt;T&lt;/code&gt;这三种字符，不可以包含其它字符；&lt;/li&gt;
+&lt;li&gt;任意形如 &lt;code&gt;xPATx&lt;/code&gt; 的字符串都可以获得“&lt;strong&gt;答案正确&lt;/strong&gt;”，其中 &lt;code&gt;x&lt;/code&gt; 或者是空字符串，或者是仅由字母 &lt;code&gt;A&lt;/code&gt; 组成的字符串；&lt;/li&gt;
+&lt;li&gt;如果 &lt;code&gt;aPbTc&lt;/code&gt; 是正确的，那么 &lt;code&gt;aPbATca&lt;/code&gt; 也是正确的，其中 &lt;code&gt;a&lt;/code&gt;、 &lt;code&gt;b&lt;/code&gt;、 &lt;code&gt;c&lt;/code&gt; 均或者是空字符串，或者是仅由字母 &lt;code&gt;A&lt;/code&gt; 组成的字符串。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;现在就请你为 PAT 写一个自动裁判程序，判定哪些字符串是可以获得“&lt;strong&gt;答案正确&lt;/strong&gt;”的。&lt;/p&gt;
+&lt;h1 id=&#34;输入格式&#34;&gt;输入格式：&lt;/h1&gt;
+&lt;p&gt;每个测试输入包含 1 个测试用例。第 1 行给出一个正整数 &lt;em&gt;n&lt;/em&gt; (&amp;lt;10)，是需要检测的字符串个数。接下来每个字符串占一行，字符串长度不超过 100，且不包含空格。&lt;/p&gt;
+&lt;h1 id=&#34;输出格式&#34;&gt;输出格式：&lt;/h1&gt;
+&lt;p&gt;每个字符串的检测结果占一行，如果该字符串可以获得“&lt;strong&gt;答案正确&lt;/strong&gt;”，则输出 &lt;code&gt;YES&lt;/code&gt;，否则输出 &lt;code&gt;NO&lt;/code&gt;。&lt;/p&gt;
+&lt;h1 id=&#34;输入样例&#34;&gt;输入样例：&lt;/h1&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-in&#34; data-lang=&#34;in&#34;&gt;8
+PAT
+PAAT
+AAPATAA
+AAPAATAAAA
+xPATx
+PT
+Whatever
+APAAATAA
+&lt;/code&gt;&lt;/pre&gt;&lt;h1 id=&#34;输出样例&#34;&gt;输出样例：&lt;/h1&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-out&#34; data-lang=&#34;out&#34;&gt;YES
+YES
+YES
+YES
+NO
+NO
+NO
+NO
+&lt;/code&gt;&lt;/pre&gt;&lt;h1 id=&#34;思路&#34;&gt;思路&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;可以找到这样的规律：正确的字符串应该遵循 P 左侧的 A 个数乘 P 与 T 中间的 A 个数等于 T 右侧的 A 个数。且 P 和 T 的个数必须为1，中间 A 的个数不能为 0，除了 P，A，T 的其他的字符个数必须为 0。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#include&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;&amp;lt;cstdio&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#include&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;&amp;lt;cstring&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; maxn &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;101&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;main&lt;/span&gt;() {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; n, len;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    scanf(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;%d&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt;n);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;char&lt;/span&gt; str[maxn];
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; (&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;; i &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; n; i&lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        scanf(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;%s&amp;#34;&lt;/span&gt;, str);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        len &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; strlen(str);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; PNum &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, TNum &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, otherNum &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, PIndex, TIndex;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; (&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; j &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;; j &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; len; j&lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (str[j] &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;P&amp;#39;&lt;/span&gt;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                PNum&lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                PIndex &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; j;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            } &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (str[j] &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;T&amp;#39;&lt;/span&gt;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                TNum&lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                TIndex &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; j;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            } &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (str[j] &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;A&amp;#39;&lt;/span&gt;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                otherNum&lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (PNum &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;||&lt;/span&gt; TNum &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;||&lt;/span&gt; otherNum &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;||&lt;/span&gt; (TIndex &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; PIndex) &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            printf(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;NO&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#66d9ef&#34;&gt;continue&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; leftA &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; PIndex, midA &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; TIndex &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; PIndex &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, rightA &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; len &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; TIndex &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (leftA &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; midA &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; rightA) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            printf(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;YES&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        } &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            printf(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;NO&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+    </item>
+    <item>
+      <title>PAT甲级 1104 Sum of Number Segments (20分)</title>
+      <link>https://zjxjwxk.github.io/posts/pat/advanced_level/a1104/</link>
+      <pubDate>Mon, 30 Mar 2020 16:26:00 +0000</pubDate>
+      <guid>https://zjxjwxk.github.io/posts/pat/advanced_level/a1104/</guid>
+      <description>&lt;p&gt;Given a sequence of positive numbers, a segment is defined to be a consecutive subsequence. For example, given the sequence { 0.1, 0.2, 0.3, 0.4 }, we have 10 segments: (0.1) (0.1, 0.2) (0.1, 0.2, 0.3) (0.1, 0.2, 0.3, 0.4) (0.2) (0.2, 0.3) (0.2, 0.3, 0.4) (0.3) (0.3, 0.4) and (0.4).&lt;/p&gt;
+&lt;p&gt;Now given a sequence, you are supposed to find the sum of all the numbers in all the segments. For the previous example, the sum of all the 10 segments is 0.1 + 0.3 + 0.6 + 1.0 + 0.2 + 0.5 + 0.9 + 0.3 + 0.7 + 0.4 = 5.0.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>PAT甲级 1101 Quick Sort (25分)</title>
+      <link>https://zjxjwxk.github.io/posts/pat/advanced_level/a1101/</link>
+      <pubDate>Sun, 29 Mar 2020 17:27:00 +0000</pubDate>
+      <guid>https://zjxjwxk.github.io/posts/pat/advanced_level/a1101/</guid>
+      <description>&lt;p&gt;There is a classical process named &lt;strong&gt;partition&lt;/strong&gt; in the famous quick sort algorithm. In this process we typically choose one element as the pivot. Then the elements less than the pivot are moved to its left and those larger than the pivot to its right. Given &lt;em&gt;N&lt;/em&gt; distinct positive integers after a run of partition, could you tell how many elements could be the selected pivot for this partition?&lt;/p&gt;
+&lt;p&gt;For example, given &lt;em&gt;N&lt;/em&gt;=5 and the numbers 1, 3, 2, 4, and 5. We have:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>PAT甲级 1010 Radix (25分)</title>
+      <link>https://zjxjwxk.github.io/posts/pat/advanced_level/a1010/</link>
+      <pubDate>Sun, 29 Mar 2020 14:48:00 +0000</pubDate>
+      <guid>https://zjxjwxk.github.io/posts/pat/advanced_level/a1010/</guid>
+      <description>&lt;p&gt;Given a pair of positive integers, for example, 6 and 110, can this equation 6 = 110 be true? The answer is &lt;code&gt;yes&lt;/code&gt;, if 6 is a decimal number and 110 is a binary number.&lt;/p&gt;
+&lt;p&gt;Now for any pair of positive integers &lt;em&gt;N&lt;/em&gt;1 and &lt;em&gt;N&lt;/em&gt;2, your task is to find the radix of one number while that of the other is given.&lt;/p&gt;
+&lt;h1 id=&#34;input-specification&#34;&gt;Input Specification:&lt;/h1&gt;
+&lt;p&gt;Each input file contains one test case. Each case occupies a line which contains 4 positive integers:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>PAT甲级 1085 Perfect Sequence (25分)</title>
+      <link>https://zjxjwxk.github.io/posts/pat/advanced_level/a1085/</link>
+      <pubDate>Sat, 28 Mar 2020 16:38:00 +0000</pubDate>
+      <guid>https://zjxjwxk.github.io/posts/pat/advanced_level/a1085/</guid>
+      <description>&lt;p&gt;Given a sequence of positive integers and another positive integer &lt;em&gt;p&lt;/em&gt;. The sequence is said to be a &lt;strong&gt;perfect sequence&lt;/strong&gt; if &lt;em&gt;M&lt;/em&gt;≤&lt;em&gt;m&lt;/em&gt;×&lt;em&gt;p&lt;/em&gt; where &lt;em&gt;M&lt;/em&gt; and &lt;em&gt;m&lt;/em&gt; are the maximum and minimum numbers in the sequence, respectively.&lt;/p&gt;
+&lt;p&gt;Now given a sequence and a parameter &lt;em&gt;p&lt;/em&gt;, you are supposed to find from the sequence as many numbers as possible to form a perfect subsequence.&lt;/p&gt;
+&lt;h1 id=&#34;input-specification&#34;&gt;Input Specification:&lt;/h1&gt;
+&lt;p&gt;Each input file contains one test case. For each case, the first line contains two positive integers &lt;em&gt;N&lt;/em&gt; and &lt;em&gt;p&lt;/em&gt;, where &lt;em&gt;N&lt;/em&gt; (≤10^5) is the number of integers in the sequence, and &lt;em&gt;p&lt;/em&gt; (≤ 10^9 ) is the parameter. In the second line there are &lt;em&gt;N&lt;/em&gt; positive integers, each is no greater than 10^9.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>PAT甲级 1038 Recover the Smallest Number (30分)</title>
+      <link>https://zjxjwxk.github.io/posts/pat/advanced_level/a1038/</link>
+      <pubDate>Sat, 28 Mar 2020 16:34:00 +0000</pubDate>
+      <guid>https://zjxjwxk.github.io/posts/pat/advanced_level/a1038/</guid>
+      <description>&lt;p&gt;Given a collection of number segments, you are supposed to recover the smallest number from them. For example, given { 32, 321, 3214, 0229, 87 }, we can recover many numbers such like 32-321-3214-0229-87 or 0229-32-87-321-3214 with respect to different orders of combinations of these segments, and the smallest number is 0229-321-3214-32-87.&lt;/p&gt;
+&lt;h1 id=&#34;input-specification&#34;&gt;Input Specification:&lt;/h1&gt;
+&lt;p&gt;Each input file contains one test case. Each case gives a positive integer &lt;em&gt;N&lt;/em&gt; (≤10^4) followed by &lt;em&gt;N&lt;/em&gt; number segments. Each segment contains a non-negative integer of no more than 8 digits. All the numbers in a line are separated by a space.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>PAT甲级 1067 Sort with Swap(0, i) (25分)</title>
+      <link>https://zjxjwxk.github.io/posts/pat/advanced_level/a1067/</link>
+      <pubDate>Fri, 27 Mar 2020 20:06:00 +0000</pubDate>
+      <guid>https://zjxjwxk.github.io/posts/pat/advanced_level/a1067/</guid>
+      <description>&lt;p&gt;Given any permutation of the numbers {0, 1, 2,&amp;hellip;, &lt;em&gt;N&lt;/em&gt;−1}, it is easy to sort them in increasing order. But what if &lt;code&gt;Swap(0, *)&lt;/code&gt; is the ONLY operation that is allowed to use? For example, to sort {4, 0, 2, 1, 3} we may apply the swap operations in the following way:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;Swap(0, 1) =&amp;gt; {4, 1, 2, 0, 3}
+Swap(0, 3) =&amp;gt; {4, 1, 2, 3, 0}
+Swap(0, 4) =&amp;gt; {0, 1, 2, 3, 4}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Now you are asked to find the minimum number of swaps need to sort the given permutation of the first &lt;em&gt;N&lt;/em&gt; nonnegative integers.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>PAT乙级 1033 旧键盘打字 (20分)</title>
+      <link>https://zjxjwxk.github.io/posts/pat/basic_level/b1033/</link>
+      <pubDate>Thu, 26 Mar 2020 15:21:00 +0000</pubDate>
+      <guid>https://zjxjwxk.github.io/posts/pat/basic_level/b1033/</guid>
+      <description>&lt;p&gt;旧键盘上坏了几个键，于是在敲一段文字的时候，对应的字符就不会出现。现在给出应该输入的一段文字、以及坏掉的那些键，打出的结果文字会是怎样？&lt;/p&gt;
+&lt;h1 id=&#34;输入格式&#34;&gt;输入格式：&lt;/h1&gt;
+&lt;p&gt;输入在 2 行中分别给出坏掉的那些键、以及应该输入的文字。其中对应英文字母的坏键以大写给出；每段文字是不超过 10^5 个字符的串。可用的字符包括字母 [&lt;code&gt;a&lt;/code&gt;-&lt;code&gt;z&lt;/code&gt;, &lt;code&gt;A&lt;/code&gt;-&lt;code&gt;Z&lt;/code&gt;]、数字 &lt;code&gt;0&lt;/code&gt;-&lt;code&gt;9&lt;/code&gt;、以及下划线 &lt;code&gt;_&lt;/code&gt;（代表空格）、&lt;code&gt;,&lt;/code&gt;、&lt;code&gt;.&lt;/code&gt;、&lt;code&gt;-&lt;/code&gt;、&lt;code&gt;+&lt;/code&gt;（代表上档键）。题目保证第 2 行输入的文字串非空。&lt;/p&gt;
+&lt;p&gt;注意：如果上档键坏掉了，那么大写的英文字母无法被打出。&lt;/p&gt;
+&lt;h1 id=&#34;输出格式&#34;&gt;输出格式：&lt;/h1&gt;
+&lt;p&gt;在一行中输出能够被打出的结果文字。如果没有一个字符能被打出，则输出空行。&lt;/p&gt;
+&lt;h1 id=&#34;输入样例&#34;&gt;输入样例：&lt;/h1&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-in&#34; data-lang=&#34;in&#34;&gt;7+IE.
+7_This_is_a_test.
+&lt;/code&gt;&lt;/pre&gt;&lt;h1 id=&#34;输出样例&#34;&gt;输出样例：&lt;/h1&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-out&#34; data-lang=&#34;out&#34;&gt;_hs_s_a_tst
+&lt;/code&gt;&lt;/pre&gt;&lt;h1 id=&#34;注意点&#34;&gt;注意点&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;读入失效键位的时候要注意，可能没有失效的键位，即第一行为空行的情况。这时候不能用 scanf 输入，而要用 cin.getline(str, maxn) 输入字符串。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#include&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;&amp;lt;iostream&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#include&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;&amp;lt;cstring&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;using&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;namespace&lt;/span&gt; std;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; maxn &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;100001&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;main&lt;/span&gt;() {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; hash_table[&lt;span style=&#34;color:#ae81ff&#34;&gt;256&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; {&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;};
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;char&lt;/span&gt; wrong[&lt;span style=&#34;color:#ae81ff&#34;&gt;257&lt;/span&gt;], input[maxn];
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    cin.getline(wrong, &lt;span style=&#34;color:#ae81ff&#34;&gt;257&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; len &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; strlen(wrong);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; (&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;; i &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; len; i&lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (wrong[i] &lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;A&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; wrong[i] &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Z&amp;#39;&lt;/span&gt;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            wrong[i] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; wrong[i] &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;A&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;a&amp;#39;&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        hash_table[wrong[i]] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    scanf(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;%s&amp;#34;&lt;/span&gt;, input);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    len &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; strlen(input);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; (&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;; i &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; len; i&lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (input[i] &lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;A&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; input[i] &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Z&amp;#39;&lt;/span&gt;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; low &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; input[i] &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;A&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;a&amp;#39;&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (hash_table[low] &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; hash_table[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;+&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                printf(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;%c&amp;#34;&lt;/span&gt;, input[i]);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        } &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (hash_table[input[i]] &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            printf(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;%c&amp;#34;&lt;/span&gt;, input[i]);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    printf(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+    </item>
+    <item>
+      <title>PAT甲级 1033 To Fill or Not to Fill (25分)</title>
+      <link>https://zjxjwxk.github.io/posts/pat/advanced_level/a1033/</link>
+      <pubDate>Sun, 22 Mar 2020 17:24:00 +0000</pubDate>
+      <guid>https://zjxjwxk.github.io/posts/pat/advanced_level/a1033/</guid>
+      <description>&lt;p&gt;With highways available, driving a car from Hangzhou to any other city is easy. But since the tank capacity of a car is limited, we have to find gas stations on the way from time to time. Different gas station may give different price. You are asked to carefully design the cheapest route to go.&lt;/p&gt;
+&lt;h1 id=&#34;input-specification&#34;&gt;Input Specification:&lt;/h1&gt;
+&lt;p&gt;Each input file contains one test case. For each case, the first line contains 4 positive numbers: &lt;em&gt;Cmax&lt;/em&gt; (≤ 100), the maximum capacity of the tank; &lt;em&gt;D&lt;/em&gt; (≤30000), the distance between Hangzhou and the destination city; &lt;em&gt;Davg&lt;/em&gt; (≤20), the average distance per unit gas that the car can run; and &lt;em&gt;N&lt;/em&gt; (≤ 500), the total number of gas stations. Then &lt;em&gt;N&lt;/em&gt; lines follow, each contains a pair of non-negative numbers: &lt;em&gt;Pi&lt;/em&gt;, the unit gas price, and &lt;em&gt;Di&lt;/em&gt; (≤&lt;em&gt;D&lt;/em&gt;), the distance between this station and Hangzhou, for &lt;em&gt;i&lt;/em&gt;=1,⋯,&lt;em&gt;N&lt;/em&gt;. All the numbers in a line are separated by a space.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>PAT甲级 1095 Cars on Campus (30分)</title>
+      <link>https://zjxjwxk.github.io/posts/pat/advanced_level/a1095/</link>
+      <pubDate>Sun, 22 Mar 2020 17:24:00 +0000</pubDate>
+      <guid>https://zjxjwxk.github.io/posts/pat/advanced_level/a1095/</guid>
+      <description>&lt;p&gt;Zhejiang University has 8 campuses and a lot of gates. From each gate we can collect the in/out times and the plate numbers of the cars crossing the gate. Now with all the information available, you are supposed to tell, at any specific time point, the number of cars parking on campus, and at the end of the day find the cars that have parked for the longest time period.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>PAT甲级 1016 Phone Bills (25分)</title>
+      <link>https://zjxjwxk.github.io/posts/pat/advanced_level/a1016/</link>
+      <pubDate>Fri, 20 Mar 2020 22:29:00 +0000</pubDate>
+      <guid>https://zjxjwxk.github.io/posts/pat/advanced_level/a1016/</guid>
+      <description>&lt;p&gt;A long-distance telephone company charges its customers by the following rules:&lt;/p&gt;
+&lt;p&gt;Making a long-distance call costs a certain amount per minute, depending on the time of day when the call is made. When a customer starts connecting a long-distance call, the time will be recorded, and so will be the time when the customer hangs up the phone. Every calendar month, a bill is sent to the customer for each minute called (at a rate determined by the time of day). Your job is to prepare the bills for each month, given a set of phone call records.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>PAT甲级 1012 The Best Rank (25分)</title>
+      <link>https://zjxjwxk.github.io/posts/pat/advanced_level/a1012/</link>
+      <pubDate>Fri, 20 Mar 2020 16:05:00 +0000</pubDate>
+      <guid>https://zjxjwxk.github.io/posts/pat/advanced_level/a1012/</guid>
+      <description>&lt;p&gt;To evaluate the performance of our first year CS majored students, we consider their grades of three courses only: &lt;code&gt;C&lt;/code&gt; - C Programming Language, &lt;code&gt;M&lt;/code&gt; - Mathematics (Calculus or Linear Algrbra), and &lt;code&gt;E&lt;/code&gt; - English. At the mean time, we encourage students by emphasizing on their best ranks &amp;ndash; that is, among the four ranks with respect to the three courses and the average grade, we print the best rank for each student.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>PAT甲级 1082 Read Number in Chinese (25分)</title>
+      <link>https://zjxjwxk.github.io/posts/pat/advanced_level/a1082/</link>
+      <pubDate>Thu, 19 Mar 2020 17:34:00 +0000</pubDate>
+      <guid>https://zjxjwxk.github.io/posts/pat/advanced_level/a1082/</guid>
+      <description>&lt;p&gt;Given an integer with no more than 9 digits, you are supposed to read it in the traditional Chinese way. Output &lt;code&gt;Fu&lt;/code&gt; first if it is negative. For example, -123456789 is read as &lt;code&gt;Fu yi Yi er Qian san Bai si Shi wu Wan liu Qian qi Bai ba Shi jiu&lt;/code&gt;. Note: zero (&lt;code&gt;ling&lt;/code&gt;) must be handled correctly according to the Chinese tradition. For example, 100800 is &lt;code&gt;yi Shi Wan ling ba Bai&lt;/code&gt;.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>PAT甲级 1061 Dating (20分)</title>
+      <link>https://zjxjwxk.github.io/posts/pat/advanced_level/a1061/</link>
+      <pubDate>Wed, 18 Mar 2020 21:25:00 +0000</pubDate>
+      <guid>https://zjxjwxk.github.io/posts/pat/advanced_level/a1061/</guid>
+      <description>&lt;p&gt;Sherlock Holmes received a note with some strange strings: &lt;code&gt;Let&#39;s date! 3485djDkxh4hhGE 2984akDfkkkkggEdsb s&amp;amp;hgsfdk d&amp;amp;Hyscvnm&lt;/code&gt;. It took him only a minute to figure out that those strange strings are actually referring to the coded time &lt;code&gt;Thursday 14:04&lt;/code&gt; &amp;ndash; since the first common capital English letter (case sensitive) shared by the first two strings is the 4th capital letter &lt;code&gt;D&lt;/code&gt;, representing the 4th day in a week; the second common character is the 5th capital letter &lt;code&gt;E&lt;/code&gt;, representing the 14th hour (hence the hours from 0 to 23 in a day are represented by the numbers from 0 to 9 and the capital letters from &lt;code&gt;A&lt;/code&gt; to &lt;code&gt;N&lt;/code&gt;, respectively); and the English letter shared by the last two strings is &lt;code&gt;s&lt;/code&gt; at the 4th position, representing the 4th minute. Now given two pairs of strings, you are supposed to help Sherlock decode the dating time.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>PAT乙级 1010 一元多项式求导 (25分)</title>
+      <link>https://zjxjwxk.github.io/posts/pat/basic_level/b1010/</link>
+      <pubDate>Tue, 17 Mar 2020 15:11:00 +0000</pubDate>
+      <guid>https://zjxjwxk.github.io/posts/pat/basic_level/b1010/</guid>
+      <description>&lt;p&gt;设计函数求一元多项式的导数。（注：x^n（&lt;em&gt;n&lt;/em&gt;为整数）的一阶导数为nx^{n−1}。）&lt;/p&gt;
+&lt;h1 id=&#34;输入格式&#34;&gt;输入格式:&lt;/h1&gt;
+&lt;p&gt;以指数递降方式输入多项式非零项系数和指数（绝对值均为不超过 1000 的整数）。数字间以空格分隔。&lt;/p&gt;
+&lt;h1 id=&#34;输出格式&#34;&gt;输出格式:&lt;/h1&gt;
+&lt;p&gt;以与输入相同的格式输出导数多项式非零项的系数和指数。数字间以空格分隔，但结尾不能有多余空格。注意“零多项式”的指数和系数都是 0，但是表示为 &lt;code&gt;0 0&lt;/code&gt;。&lt;/p&gt;
+&lt;h1 id=&#34;输入样例&#34;&gt;输入样例:&lt;/h1&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-in&#34; data-lang=&#34;in&#34;&gt;3 4 -5 2 6 1 -2 0
+&lt;/code&gt;&lt;/pre&gt;&lt;h1 id=&#34;输出样例&#34;&gt;输出样例:&lt;/h1&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-out&#34; data-lang=&#34;out&#34;&gt;12 3 -10 1 6 0
+&lt;/code&gt;&lt;/pre&gt;&lt;h1 id=&#34;注意点&#34;&gt;注意点&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;用 while……EOF 的格式来读入系数和指数（黑框中触发 EOF 要按 &lt;code&gt;ctrl + Z&lt;/code&gt;，并回车）&lt;/li&gt;
+&lt;li&gt;经测试，该题的指数都是非负整数&lt;/li&gt;
+&lt;li&gt;求导必须从低次项枚举到高次项，否则结果可能为出错&lt;/li&gt;
+&lt;li&gt;在求导后，当前系数必须清空为0，否则当前无法被后面覆盖&lt;/li&gt;
+&lt;li&gt;如果求导之后没有任何非零项，需要输出 &lt;code&gt;0 0&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#include&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;&amp;lt;cstdio&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; maxn &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1001&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;main&lt;/span&gt;() {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; n[maxn] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; {&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;}, c, e, cnt &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; (scanf(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;%d%d&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt;c, &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt;e) &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; EOF) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        n[e] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; c;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    n[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; (&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;; i &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; maxn; i&lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        n[i &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; n[i];
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        n[i] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (n[i &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            cnt&lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (cnt &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        printf(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;0 0&amp;#34;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    } &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; (&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; maxn &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;; i &lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;; i&lt;span style=&#34;color:#f92672&#34;&gt;--&lt;/span&gt;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (n[i] &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                printf(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;%d %d&amp;#34;&lt;/span&gt;, n[i], i);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                cnt&lt;span style=&#34;color:#f92672&#34;&gt;--&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (cnt &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                    printf(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34; &amp;#34;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                } &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                    &lt;span style=&#34;color:#66d9ef&#34;&gt;break&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+    </item>
+    <item>
+      <title>PAT甲级 1065 A&#43;B and C (64bit) (20分)</title>
+      <link>https://zjxjwxk.github.io/posts/pat/advanced_level/a1065/</link>
+      <pubDate>Sun, 15 Mar 2020 18:04:00 +0000</pubDate>
+      <guid>https://zjxjwxk.github.io/posts/pat/advanced_level/a1065/</guid>
+      <description>&lt;p&gt;Given three integers &lt;em&gt;A&lt;/em&gt;, &lt;em&gt;B&lt;/em&gt; and &lt;em&gt;C&lt;/em&gt; in [−2^63,2^63], you are supposed to tell whether &lt;em&gt;A&lt;/em&gt;+&lt;em&gt;B&lt;/em&gt;&amp;gt;&lt;em&gt;C&lt;/em&gt;.&lt;/p&gt;
+&lt;h1 id=&#34;input-specification&#34;&gt;Input Specification:&lt;/h1&gt;
+&lt;p&gt;The first line of the input gives the positive number of test cases, &lt;em&gt;T&lt;/em&gt; (≤10). Then &lt;em&gt;T&lt;/em&gt; test cases follow, each consists of a single line containing three integers &lt;em&gt;A&lt;/em&gt;, &lt;em&gt;B&lt;/em&gt; and &lt;em&gt;C&lt;/em&gt;, separated by single spaces.&lt;/p&gt;
+&lt;h1 id=&#34;output-specification&#34;&gt;Output Specification:&lt;/h1&gt;
+&lt;p&gt;For each test case, output in one line &lt;code&gt;Case #X: true&lt;/code&gt; if &lt;em&gt;A&lt;/em&gt;+&lt;em&gt;B&lt;/em&gt;&amp;gt;&lt;em&gt;C&lt;/em&gt;, or &lt;code&gt;Case #X: false&lt;/code&gt; otherwise, where &lt;em&gt;X&lt;/em&gt; is the case number (starting from 1).&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>PAT甲级 1014 Waiting in Line (30分)</title>
+      <link>https://zjxjwxk.github.io/posts/pat/advanced_level/a1014/</link>
+      <pubDate>Sun, 08 Mar 2020 17:18:00 +0000</pubDate>
+      <guid>https://zjxjwxk.github.io/posts/pat/advanced_level/a1014/</guid>
+      <description>&lt;p&gt;Suppose a bank has N windows open for service. There is a yellow line in front of the windows which devides the waiting area into two parts. The rules for the customers to wait in line are:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The space inside the yellow line in front of each window is enough to contain a line with M customers. Hence when all the N lines are full, all the customers after (and including) the (NM+1)st one will have to wait in a line behind the yellow line.&lt;/li&gt;
+&lt;li&gt;Each customer will choose the shortest line to wait in when crossing the yellow line. If there are two or more lines with the same length, the customer will always choose the window with the smallest number.&lt;/li&gt;
+&lt;li&gt;Customer[i] will take T[i] minutes to have his/her transaction processed.&lt;/li&gt;
+&lt;li&gt;The first N customers are assumed to be served at 8:00am.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Now given the processing time of each customer, you are supposed to tell the exact time at which a customer has his/her business done.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

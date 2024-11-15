@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Auth on Xinkang&#39;s Blog</title>
+    <link>https://zjxjwxk.github.io/tags/auth/</link>
+    <description>Recent content in Auth on Xinkang&#39;s Blog</description>
+    <generator>Hugo -- 0.138.0</generator>
+    <language>en</language>
+    <lastBuildDate>Fri, 19 Mar 2021 21:15:00 +0000</lastBuildDate>
+    <atom:link href="https://zjxjwxk.github.io/tags/auth/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Shiro入门</title>
+      <link>https://zjxjwxk.github.io/posts/shiro/</link>
+      <pubDate>Fri, 19 Mar 2021 21:15:00 +0000</pubDate>
+      <guid>https://zjxjwxk.github.io/posts/shiro/</guid>
+      <description>&lt;h1 id=&#34;学习目标&#34;&gt;学习目标&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;认识 Shiro 的整体架构，各组件的概念&lt;/li&gt;
+&lt;li&gt;Shiro 认证，授权的过程&lt;/li&gt;
+&lt;li&gt;Shiro 自定义的 Realm，Filter&lt;/li&gt;
+&lt;li&gt;Shiro Session 管理&lt;/li&gt;
+&lt;li&gt;Shiro 缓存管理&lt;/li&gt;
+&lt;li&gt;Shiro 集成 Spring&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;shiro-简介&#34;&gt;Shiro 简介&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;Apache 的强大灵活的开源安全框架&lt;/li&gt;
+&lt;li&gt;认证、授权、企业会话管理、安全加密&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;shiro-与-spring-security-比较&#34;&gt;Shiro 与 Spring Security 比较&lt;/h1&gt;
+&lt;h2 id=&#34;shiro&#34;&gt;Shiro&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;简单、灵活&lt;/li&gt;
+&lt;li&gt;可脱离 Spring&lt;/li&gt;
+&lt;li&gt;粒度较粗&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;spring-security&#34;&gt;Spring Security&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;复杂、笨重&lt;/li&gt;
+&lt;li&gt;不可脱离 Spring&lt;/li&gt;
+&lt;li&gt;粒度更细&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;shiro-整体架构&#34;&gt;Shiro 整体架构&lt;/h1&gt;
+&lt;p&gt;&lt;img alt=&#34;Shiro 整体架构&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/shiro/images/ShiroArchitecture-20210319212652355.png&#34;&gt;&lt;/p&gt;
+&lt;h1 id=&#34;shiro-认证和授权&#34;&gt;Shiro 认证和授权&lt;/h1&gt;
+&lt;h2 id=&#34;认证过程&#34;&gt;认证过程&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;创建 SecurityManager -&amp;gt; 主体提交认证 -&amp;gt; SecurityManager 认证 -&amp;gt; Authenticator 认证 -&amp;gt; Realm 验证&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;授权过程&#34;&gt;授权过程&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;创建 SecurityManager -&amp;gt; 主体提交授权 -&amp;gt; SecurityManager 授权 -&amp;gt; Authorizer 授权 -&amp;gt; Realm 获取角色权限数据&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;测试代码如下（这里先使用 SimpleAccountRealm 作为 Realm）：&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Spring Boot 中的 JWT 跨域问题</title>
+      <link>https://zjxjwxk.github.io/posts/spring-boot/spring-boot-%E4%B8%AD%E7%9A%84-jwt-%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98/</link>
+      <pubDate>Fri, 05 Jun 2020 21:02:00 +0000</pubDate>
+      <guid>https://zjxjwxk.github.io/posts/spring-boot/spring-boot-%E4%B8%AD%E7%9A%84-jwt-%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98/</guid>
+      <description>&lt;h1 id=&#34;主要问题&#34;&gt;主要问题&lt;/h1&gt;
+&lt;p&gt;前后端分离后，前端使用 Ajax 进行请求，存在一些跨域的问题。&lt;/p&gt;
+&lt;p&gt;基于 Spring Boot 的后端通过给 Controlle类或其中的方法添加 &lt;code&gt;@CrossOrigin&lt;/code&gt; 注解来解决跨域问题：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;@CrossOrigin&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;@RequestMapping&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;/user/&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;UserController&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	...
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;添加该注解之后，可以通过匿名访问的接口都没有跨域问题了，而需要通过 JWT 验证的接口仍然存在跨域问题。&lt;/p&gt;
+&lt;p&gt;其中，&lt;strong&gt;解决问题的关键&lt;/strong&gt;在于，浏览器会在发送 Ajax 请求之前发送一个预请求，确认当前的接口是不是有效的接口，此时的请求方式是 OPTIONS 的请求方式。&lt;/p&gt;
+&lt;p&gt;因此，JWT 的过滤器需要先判断该请求是否为预请求，如果是则需要给返回的响应头中添加跨域相关的信息；如果不是，则按照一般接口进行 JWT 验证。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;AuthFilter&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;extends&lt;/span&gt; OncePerRequestFilter {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  	......
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;@Override&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;protected&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;doFilterInternal&lt;/span&gt;(HttpServletRequest request, HttpServletResponse response, FilterChain chain) &lt;span style=&#34;color:#66d9ef&#34;&gt;throws&lt;/span&gt; IOException, ServletException {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#75715e&#34;&gt;// 处理浏览器的预请求&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (request.&lt;span style=&#34;color:#a6e22e&#34;&gt;getMethod&lt;/span&gt;().&lt;span style=&#34;color:#a6e22e&#34;&gt;equals&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;OPTIONS&amp;#34;&lt;/span&gt;)) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            response.&lt;span style=&#34;color:#a6e22e&#34;&gt;setHeader&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Access-Control-Allow-Origin&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;*&amp;#34;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            response.&lt;span style=&#34;color:#a6e22e&#34;&gt;setHeader&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Access-Control-Allow-Methods&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;POST,GET,PUT,OPTIONS,DELETE&amp;#34;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            response.&lt;span style=&#34;color:#a6e22e&#34;&gt;setHeader&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Access-Control-Max-Age&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;3600&amp;#34;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            response.&lt;span style=&#34;color:#a6e22e&#34;&gt;setHeader&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Access-Control-Allow-Headers&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Origin,X-Requested-With,Content-Type,Accept,Authorization,token&amp;#34;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#75715e&#34;&gt;// 验证 JWT&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        ......
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+    </item>
+  </channel>
+</rss>

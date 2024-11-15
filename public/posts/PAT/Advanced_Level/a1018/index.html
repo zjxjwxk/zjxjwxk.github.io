@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>PAT甲级 1018 Public Bike Management (30分) | Xinkang&#39;s Blog</title>
+<meta name="keywords" content="PAT, 最短路径">
+<meta name="description" content="There is a public bike service in Hangzhou City which provides great convenience to the tourists from all over the world. One may rent a bike at any station and return it to any other stations in the city.
+The Public Bike Management Center (PBMC) keeps monitoring the real-time capacity of all the stations. A station is said to be in perfect condition if it is exactly half-full. If a station is full or empty, PBMC will collect or send bikes to adjust the condition of that station to perfect. And more, all the stations on the way will be adjusted as well.">
+<meta name="author" content="">
+<link rel="canonical" href="https://zjxjwxk.github.io/posts/pat/advanced_level/a1018/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.d6fcd20a4fb86efa4dfac8ec95da60244cc8871042183da1ef28e3a762ad79c8.css" integrity="sha256-1vzSCk&#43;4bvpN&#43;sjsldpgJEzIhxBCGD2h7yjjp2Ktecg=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://zjxjwxk.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://zjxjwxk.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://zjxjwxk.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://zjxjwxk.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://zjxjwxk.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://zjxjwxk.github.io/posts/pat/advanced_level/a1018/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><meta property="og:url" content="https://zjxjwxk.github.io/posts/pat/advanced_level/a1018/">
+  <meta property="og:site_name" content="Xinkang&#39;s Blog">
+  <meta property="og:title" content="PAT甲级 1018 Public Bike Management (30分)">
+  <meta property="og:description" content="There is a public bike service in Hangzhou City which provides great convenience to the tourists from all over the world. One may rent a bike at any station and return it to any other stations in the city.
+The Public Bike Management Center (PBMC) keeps monitoring the real-time capacity of all the stations. A station is said to be in perfect condition if it is exactly half-full. If a station is full or empty, PBMC will collect or send bikes to adjust the condition of that station to perfect. And more, all the stations on the way will be adjusted as well.">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2020-04-12T15:52:00+00:00">
+    <meta property="article:modified_time" content="2020-04-12T15:52:00+00:00">
+    <meta property="article:tag" content="PAT">
+    <meta property="article:tag" content="最短路径">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="PAT甲级 1018 Public Bike Management (30分)">
+<meta name="twitter:description" content="There is a public bike service in Hangzhou City which provides great convenience to the tourists from all over the world. One may rent a bike at any station and return it to any other stations in the city.
+The Public Bike Management Center (PBMC) keeps monitoring the real-time capacity of all the stations. A station is said to be in perfect condition if it is exactly half-full. If a station is full or empty, PBMC will collect or send bikes to adjust the condition of that station to perfect. And more, all the stations on the way will be adjusted as well.">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://zjxjwxk.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "PAT甲级 1018 Public Bike Management (30分)",
+      "item": "https://zjxjwxk.github.io/posts/pat/advanced_level/a1018/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "PAT甲级 1018 Public Bike Management (30分)",
+  "name": "PAT甲级 1018 Public Bike Management (30分)",
+  "description": "There is a public bike service in Hangzhou City which provides great convenience to the tourists from all over the world. One may rent a bike at any station and return it to any other stations in the city.\nThe Public Bike Management Center (PBMC) keeps monitoring the real-time capacity of all the stations. A station is said to be in perfect condition if it is exactly half-full. If a station is full or empty, PBMC will collect or send bikes to adjust the condition of that station to perfect. And more, all the stations on the way will be adjusted as well.\n",
+  "keywords": [
+    "PAT", "最短路径"
+  ],
+  "articleBody": "There is a public bike service in Hangzhou City which provides great convenience to the tourists from all over the world. One may rent a bike at any station and return it to any other stations in the city.\nThe Public Bike Management Center (PBMC) keeps monitoring the real-time capacity of all the stations. A station is said to be in perfect condition if it is exactly half-full. If a station is full or empty, PBMC will collect or send bikes to adjust the condition of that station to perfect. And more, all the stations on the way will be adjusted as well.\nWhen a problem station is reported, PBMC will always choose the shortest path to reach that station. If there are more than one shortest path, the one that requires the least number of bikes sent from PBMC will be chosen.\nThe above figure illustrates an example. The stations are represented by vertices and the roads correspond to the edges. The number on an edge is the time taken to reach one end station from another. The number written inside a vertex S is the current number of bikes stored at S. Given that the maximum capacity of each station is 10. To solve the problem at S3, we have 2 different shortest paths:\nPBMC -\u003e S1 -\u003e S3. In this case, 4 bikes must be sent from PBMC, because we can collect 1 bike from S1 and then take 5 bikes to S3, so that both stations will be in perfect conditions. PBMC -\u003e S2 -\u003e S3. This path requires the same time as path 1, but only 3 bikes sent from PBMC and hence is the one that will be chosen. Input Specification: Each input file contains one test case. For each case, the first line contains 4 numbers: Cmax (≤100), always an even number, is the maximum capacity of each station; N (≤500), the total number of stations; Sp, the index of the problem station (the stations are numbered from 1 to N, and PBMC is represented by the vertex 0); and M, the number of roads. The second line contains N non-negative numbers Ci (i=1,⋯,N) where each Ci is the current number of bikes at Si respectively. Then M lines follow, each contains 3 numbers: Si, Sj, and Tij which describe the time Tij taken to move betwen stations Si and Sj. All the numbers in a line are separated by a space.\nOutput Specification: For each test case, print your results in one line. First output the number of bikes that PBMC must send. Then after one space, output the path in the format: 0−\u003eS1−\u003e⋯−\u003eSp. Finally after another space, output the number of bikes that we must take back to PBMC after the condition of Sp is adjusted to perfect.\nNote that if such a path is not unique, output the one that requires minimum number of bikes that we must take back to PBMC. The judge’s data guarantee that such a path is unique.\nSample Input: 10 3 3 5 6 7 0 0 1 1 0 2 1 0 3 3 1 3 1 2 3 1 Sample Output: 3 0-\u003e2-\u003e3 0 注意点 在更新 minNeed 的时候，别忘了更新相应的 minBack #include #include #include using namespace std; const int maxn = 501, INF = 1000000000; int cmax, n, sp, m, c[maxn], G[maxn][maxn], t[maxn], minNeed = INF, minBack = INF; vector\u003cint\u003e path[maxn], temp, ans; bool vis[maxn] = {false}; void Dijkstra() { fill(t, t + maxn, INF); t[0] = 0; for (int i = 0; i \u003c= n; i++) { int u = -1, min = INF; for (int j = 0; j \u003c n; j++) { if (vis[j] == false \u0026\u0026 t[j] \u003c min) { min = t[j]; u = j; } } if (u == -1) { return; } vis[u] = true; for (int v = 0; v \u003c= n; v++) { if (vis[v] == false \u0026\u0026 G[u][v] != INF) { if (t[u] + G[u][v] \u003c t[v]) { t[v] = t[u] + G[u][v]; path[v].clear(); path[v].push_back(u); } else if (t[u] + G[u][v] == t[v]) { path[v].push_back(u); } } } } } void DFS(int root) { temp.push_back(root); if (root == 0) { int now = 0, need = 0; for (int i = temp.size() - 2; i \u003e= 0; i--) { if (c[temp[i]] \u003c cmax / 2) { if (now \u003e= (cmax / 2 - c[temp[i]])) { now -= cmax / 2 - c[temp[i]]; } else { need += cmax / 2 - c[temp[i]] - now; now = 0; } } else { now += c[temp[i]] - cmax / 2; } } if (need \u003c minNeed) { minNeed = need; minBack = now; ans = temp; } else if (need == minNeed) { if (now \u003c minBack) { minBack = now; ans = temp; } } temp.pop_back(); return; } for (int i = 0; i \u003c path[root].size(); i++) { DFS(path[root][i]); } temp.pop_back(); } int main() { scanf(\"%d %d %d %d\", \u0026cmax, \u0026n, \u0026sp, \u0026m); fill(G[0], G[0] + maxn * maxn, INF); for (int i = 1; i \u003c= n; i++) { scanf(\"%d\", \u0026c[i]); } int s1, s2, t; for (int i = 0; i \u003c m; i++) { scanf(\"%d %d %d\", \u0026s1, \u0026s2, \u0026t); G[s1][s2] = G[s2][s1] = t; } Dijkstra(); DFS(sp); printf(\"%d \", minNeed); for (int i = ans.size() - 1; i \u003e= 0; i--) { printf(\"%d\", ans[i]); if (i != 0) { printf(\"-\u003e\"); } } printf(\" %d\", minBack); return 0; } ",
+  "wordCount" : "909",
+  "inLanguage": "en",
+  "datePublished": "2020-04-12T15:52:00Z",
+  "dateModified": "2020-04-12T15:52:00Z",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://zjxjwxk.github.io/posts/pat/advanced_level/a1018/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Xinkang's Blog",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://zjxjwxk.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://zjxjwxk.github.io/" accesskey="h" title="Xinkang&#39;s Blog (Alt + H)">Xinkang&#39;s Blog</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://zjxjwxk.github.io/archives/" title="Archives">
+                    <span>Archives</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://zjxjwxk.github.io/categories/" title="Categories">
+                    <span>Categories</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://zjxjwxk.github.io/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://zjxjwxk.github.io/search/" title="Search (Alt &#43; /)" accesskey=/>
+                    <span>Search</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <div id="content-container">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      PAT甲级 1018 Public Bike Management (30分)
+    </h1>
+    <div class="post-meta"><span title='2020-04-12 15:52:00 +0000 UTC'>April 12, 2020</span>
+
+</div>
+  </header> 
+  <div class="post-content"><p>There is a public bike service in Hangzhou City which provides great convenience to the tourists from all over the world. One may rent a bike at any station and return it to any other stations in the city.</p>
+<p>The Public Bike Management Center (PBMC) keeps monitoring the real-time capacity of all the stations. A station is said to be in <strong>perfect</strong> condition if it is exactly half-full. If a station is full or empty, PBMC will collect or send bikes to adjust the condition of that station to perfect. And more, all the stations on the way will be adjusted as well.</p>
+<p>When a problem station is reported, PBMC will always choose the shortest path to reach that station. If there are more than one shortest path, the one that requires the least number of bikes sent from PBMC will be chosen.</p>
+<p><img alt="Graph" loading="lazy" src="../images/image-A1018.jpeg"></p>
+<p>The above figure illustrates an example. The stations are represented by vertices and the roads correspond to the edges. The number on an edge is the time taken to reach one end station from another. The number written inside a vertex <em>S</em> is the current number of bikes stored at <em>S</em>. Given that the maximum capacity of each station is 10. To solve the problem at <em>S</em>3, we have 2 different shortest paths:</p>
+<ol>
+<li>PBMC -&gt; <em>S</em>1 -&gt; <em>S</em>3. In this case, 4 bikes must be sent from PBMC, because we can collect 1 bike from <em>S</em>1 and then take 5 bikes to <em>S</em>3, so that both stations will be in perfect conditions.</li>
+<li>PBMC -&gt; <em>S</em>2 -&gt; <em>S</em>3. This path requires the same time as path 1, but only 3 bikes sent from PBMC and hence is the one that will be chosen.</li>
+</ol>
+<h1 id="input-specification">Input Specification:<a hidden class="anchor" aria-hidden="true" href="#input-specification">#</a></h1>
+<p>Each input file contains one test case. For each case, the first line contains 4 numbers: Cmax (≤100), always an even number, is the maximum capacity of each station; N (≤500), the total number of stations; Sp, the index of the problem station (the stations are numbered from 1 to N, and PBMC is represented by the vertex 0); and M, the number of roads. The second line contains N non-negative numbers Ci (i=1,⋯,N) where each Ci is the current number of bikes at Si respectively. Then M lines follow, each contains 3 numbers: Si, Sj, and Tij which describe the time Tij taken to move betwen stations Si and Sj. All the numbers in a line are separated by a space.</p>
+<h1 id="output-specification">Output Specification:<a hidden class="anchor" aria-hidden="true" href="#output-specification">#</a></h1>
+<p>For each test case, print your results in one line. First output the number of bikes that PBMC must send. Then after one space, output the path in the format: 0−&gt;S1−&gt;⋯−&gt;Sp. Finally after another space, output the number of bikes that we must take back to PBMC after the condition of Sp is adjusted to perfect.</p>
+<p>Note that if such a path is not unique, output the one that requires minimum number of bikes that we must take back to PBMC. The judge&rsquo;s data guarantee that such a path is unique.</p>
+<h1 id="sample-input">Sample Input:<a hidden class="anchor" aria-hidden="true" href="#sample-input">#</a></h1>
+<pre tabindex="0"><code class="language-in" data-lang="in">10 3 3 5
+6 7 0
+0 1 1
+0 2 1
+0 3 3
+1 3 1
+2 3 1
+</code></pre><h1 id="sample-output">Sample Output:<a hidden class="anchor" aria-hidden="true" href="#sample-output">#</a></h1>
+<pre tabindex="0"><code class="language-out" data-lang="out">3 0-&gt;2-&gt;3 0
+</code></pre><h1 id="注意点">注意点<a hidden class="anchor" aria-hidden="true" href="#注意点">#</a></h1>
+<ul>
+<li>在更新 minNeed 的时候，别忘了更新相应的 minBack</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;cstdio&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;algorithm&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;vector&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#66d9ef">int</span> maxn <span style="color:#f92672">=</span> <span style="color:#ae81ff">501</span>, INF <span style="color:#f92672">=</span> <span style="color:#ae81ff">1000000000</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> cmax, n, sp, m, c[maxn], G[maxn][maxn], t[maxn], minNeed <span style="color:#f92672">=</span> INF, minBack <span style="color:#f92672">=</span> INF;
+</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> path[maxn], temp, ans;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> vis[maxn] <span style="color:#f92672">=</span> {false};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">Dijkstra</span>() {
+</span></span><span style="display:flex;"><span>	fill(t, t <span style="color:#f92672">+</span> maxn, INF);
+</span></span><span style="display:flex;"><span>	t[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;=</span> n; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">int</span> u <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, min <span style="color:#f92672">=</span> INF;
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> n; j<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">if</span> (vis[j] <span style="color:#f92672">==</span> false <span style="color:#f92672">&amp;&amp;</span> t[j] <span style="color:#f92672">&lt;</span> min) {
+</span></span><span style="display:flex;"><span>				min <span style="color:#f92672">=</span> t[j];
+</span></span><span style="display:flex;"><span>				u <span style="color:#f92672">=</span> j;
+</span></span><span style="display:flex;"><span>			}
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">if</span> (u <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) {
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>		vis[u] <span style="color:#f92672">=</span> true;
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> v <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; v <span style="color:#f92672">&lt;=</span> n; v<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">if</span> (vis[v] <span style="color:#f92672">==</span> false <span style="color:#f92672">&amp;&amp;</span> G[u][v] <span style="color:#f92672">!=</span> INF) {
+</span></span><span style="display:flex;"><span>				<span style="color:#66d9ef">if</span> (t[u] <span style="color:#f92672">+</span> G[u][v] <span style="color:#f92672">&lt;</span> t[v]) {
+</span></span><span style="display:flex;"><span>					t[v] <span style="color:#f92672">=</span> t[u] <span style="color:#f92672">+</span> G[u][v];
+</span></span><span style="display:flex;"><span>					path[v].clear();
+</span></span><span style="display:flex;"><span>					path[v].push_back(u);
+</span></span><span style="display:flex;"><span>				} <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (t[u] <span style="color:#f92672">+</span> G[u][v] <span style="color:#f92672">==</span> t[v]) {
+</span></span><span style="display:flex;"><span>					path[v].push_back(u);
+</span></span><span style="display:flex;"><span>				}
+</span></span><span style="display:flex;"><span>			}
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">DFS</span>(<span style="color:#66d9ef">int</span> root) {
+</span></span><span style="display:flex;"><span>	temp.push_back(root);
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> (root <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) {
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">int</span> now <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, need <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> temp.size() <span style="color:#f92672">-</span> <span style="color:#ae81ff">2</span>; i <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span>; i<span style="color:#f92672">--</span>) {
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">if</span> (c[temp[i]] <span style="color:#f92672">&lt;</span> cmax <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span>) {
+</span></span><span style="display:flex;"><span>				<span style="color:#66d9ef">if</span> (now <span style="color:#f92672">&gt;=</span> (cmax <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">-</span> c[temp[i]])) {
+</span></span><span style="display:flex;"><span>					now <span style="color:#f92672">-=</span> cmax <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">-</span> c[temp[i]];
+</span></span><span style="display:flex;"><span>				} <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>					need <span style="color:#f92672">+=</span> cmax <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">-</span> c[temp[i]] <span style="color:#f92672">-</span> now;
+</span></span><span style="display:flex;"><span>					now <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>				}
+</span></span><span style="display:flex;"><span>			} <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>				now <span style="color:#f92672">+=</span> c[temp[i]] <span style="color:#f92672">-</span> cmax <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span>;
+</span></span><span style="display:flex;"><span>			}
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">if</span> (need <span style="color:#f92672">&lt;</span> minNeed) {
+</span></span><span style="display:flex;"><span>			minNeed <span style="color:#f92672">=</span> need;
+</span></span><span style="display:flex;"><span>			minBack <span style="color:#f92672">=</span> now;
+</span></span><span style="display:flex;"><span>			ans <span style="color:#f92672">=</span> temp;
+</span></span><span style="display:flex;"><span>		} <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (need <span style="color:#f92672">==</span> minNeed) {
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">if</span> (now <span style="color:#f92672">&lt;</span> minBack) {
+</span></span><span style="display:flex;"><span>				minBack <span style="color:#f92672">=</span> now;
+</span></span><span style="display:flex;"><span>				ans <span style="color:#f92672">=</span> temp;
+</span></span><span style="display:flex;"><span>			}
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>		temp.pop_back();
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> path[root].size(); i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>		DFS(path[root][i]);
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	temp.pop_back();
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>	scanf(<span style="color:#e6db74">&#34;%d %d %d %d&#34;</span>, <span style="color:#f92672">&amp;</span>cmax, <span style="color:#f92672">&amp;</span>n, <span style="color:#f92672">&amp;</span>sp, <span style="color:#f92672">&amp;</span>m);
+</span></span><span style="display:flex;"><span>	fill(G[<span style="color:#ae81ff">0</span>], G[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">+</span> maxn <span style="color:#f92672">*</span> maxn, INF);
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;=</span> n; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>		scanf(<span style="color:#e6db74">&#34;%d&#34;</span>, <span style="color:#f92672">&amp;</span>c[i]);
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">int</span> s1, s2, t;
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> m; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>		scanf(<span style="color:#e6db74">&#34;%d %d %d&#34;</span>, <span style="color:#f92672">&amp;</span>s1, <span style="color:#f92672">&amp;</span>s2, <span style="color:#f92672">&amp;</span>t);
+</span></span><span style="display:flex;"><span>		G[s1][s2] <span style="color:#f92672">=</span> G[s2][s1] <span style="color:#f92672">=</span> t;
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	Dijkstra();
+</span></span><span style="display:flex;"><span>	DFS(sp);
+</span></span><span style="display:flex;"><span>	printf(<span style="color:#e6db74">&#34;%d &#34;</span>, minNeed);
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> ans.size() <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span>; i<span style="color:#f92672">--</span>) {
+</span></span><span style="display:flex;"><span>		printf(<span style="color:#e6db74">&#34;%d&#34;</span>, ans[i]);
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">if</span> (i <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span>) {
+</span></span><span style="display:flex;"><span>			printf(<span style="color:#e6db74">&#34;-&gt;&#34;</span>);
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	printf(<span style="color:#e6db74">&#34; %d&#34;</span>, minBack);
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://zjxjwxk.github.io/tags/pat/">PAT</a></li>
+      <li><a href="https://zjxjwxk.github.io/tags/%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84/">最短路径</a></li>
+    </ul>
+  </footer>
+</article>
+
+<script>
+  window.onload = function() {
+      var contentContainer = document.getElementById("content-container");
+      if ("" !== "") {
+          var password = prompt("Enter password:");
+          if (password === "") {
+              contentContainer.style.display = "block";
+          } else {
+              alert("Incorrect password");
+          }
+      } else {
+          contentContainer.style.display = "block";
+      }
+  };
+</script>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2024 <a href="https://zjxjwxk.github.io/">Xinkang&#39;s Blog</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

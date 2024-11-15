@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Private on Xinkang&#39;s Blog</title>
+    <link>https://zjxjwxk.github.io/categories/private/</link>
+    <description>Recent content in Private on Xinkang&#39;s Blog</description>
+    <generator>Hugo -- 0.138.0</generator>
+    <language>en</language>
+    <lastBuildDate>Fri, 15 May 2020 16:00:00 +0000</lastBuildDate>
+    <atom:link href="https://zjxjwxk.github.io/categories/private/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Interview Question</title>
+      <link>https://zjxjwxk.github.io/posts/private/%E8%80%83%E7%A0%94%E5%A4%8D%E8%AF%95%E9%97%AE%E9%A2%98/</link>
+      <pubDate>Fri, 15 May 2020 16:00:00 +0000</pubDate>
+      <guid>https://zjxjwxk.github.io/posts/private/%E8%80%83%E7%A0%94%E5%A4%8D%E8%AF%95%E9%97%AE%E9%A2%98/</guid>
+      <description>&lt;h1 id=&#34;为什么针对我这个系统要用微服务架构&#34;&gt;为什么针对我这个系统要用微服务架构？&lt;/h1&gt;
+&lt;h1 id=&#34;为什么选用-zookeeper-作为注册中心还有其他的选择吗&#34;&gt;为什么选用 Zookeeper 作为注册中心，还有其他的选择吗？&lt;/h1&gt;
+&lt;h1 id=&#34;ip-地址的最小表示粒度同一台主机的不同进程怎么区分&#34;&gt;IP 地址的最小表示粒度？同一台主机的不同进程怎么区分？&lt;/h1&gt;
+&lt;h1 id=&#34;ipv4-和-ipv6-的区别&#34;&gt;IPv4 和 IPv6 的区别？&lt;/h1&gt;
+&lt;h1 id=&#34;dns-中-ipv4-和-ipv6-的区别&#34;&gt;DNS 中 IPv4 和 IPv6 的区别？&lt;/h1&gt;
+&lt;h1 id=&#34;sql-缩写代表什么扩写是什么为什么叫这个&#34;&gt;SQL 缩写代表什么？扩写是什么？为什么叫这个？&lt;/h1&gt;
+&lt;h1 id=&#34;程序中用什么连接数据库程序和-dbms-的接口统一叫什么&#34;&gt;程序中用什么连接数据库？程序和 DBMS 的接口统一叫什么？&lt;/h1&gt;</description>
+    </item>
+    <item>
+      <title>Interview Prepare</title>
+      <link>https://zjxjwxk.github.io/posts/private/%E8%80%83%E7%A0%94%E5%A4%8D%E8%AF%95%E5%87%86%E5%A4%87/</link>
+      <pubDate>Tue, 05 May 2020 14:48:00 +0000</pubDate>
+      <guid>https://zjxjwxk.github.io/posts/private/%E8%80%83%E7%A0%94%E5%A4%8D%E8%AF%95%E5%87%86%E5%A4%87/</guid>
+      <description>&lt;h1 id=&#34;英文部分&#34;&gt;英文部分&lt;/h1&gt;
+&lt;h2 id=&#34;自我介绍12分钟&#34;&gt;自我介绍（1～2分钟）&lt;/h2&gt;
+&lt;p&gt;&lt;img alt=&#34;自我介绍思维导图&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/private/%E8%80%83%E7%A0%94%E5%A4%8D%E8%AF%95%E5%87%86%E5%A4%87/images/v2-d7296a912e10a648ca7609bdc6bad5cd_r.jpg&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Good morning everyone,&lt;/p&gt;
+&lt;p&gt;Thank you for giving me this opportunity. It&amp;rsquo;s my pleasure to introduce myself. My name is Wu Xinkang, born and raised in Taizhou, Zhejiang. Currently, I am pursuing my bachelor&amp;rsquo;s degree in Software Engineering at the Zhejiang University of Technology.&lt;/p&gt;
+&lt;p&gt;During college, I studied hard. My GPA was over 3.4, ranking in the top 30% of this major. I passed CET-6, participated in some competitions (such as e-commerce competition), and got school level scholarships for several times. I love and enjoy coding. I have done some small projects outside of class, mainly based on Java backend technologies. I learned how a complete project is developed and how team members work together in practice. I also built my own personal blog to record and share some knowledge with others.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Java on Xinkang&#39;s Blog</title>
+    <link>https://zjxjwxk.github.io/tags/java/</link>
+    <description>Recent content in Java on Xinkang&#39;s Blog</description>
+    <generator>Hugo -- 0.138.0</generator>
+    <language>en</language>
+    <lastBuildDate>Thu, 16 Jul 2020 11:01:00 +0000</lastBuildDate>
+    <atom:link href="https://zjxjwxk.github.io/tags/java/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>自己编译OpenJDK 8</title>
+      <link>https://zjxjwxk.github.io/posts/java/jvm/%E8%87%AA%E5%B7%B1%E7%BC%96%E8%AF%91openjdk-8/</link>
+      <pubDate>Thu, 16 Jul 2020 11:01:00 +0000</pubDate>
+      <guid>https://zjxjwxk.github.io/posts/java/jvm/%E8%87%AA%E5%B7%B1%E7%BC%96%E8%AF%91openjdk-8/</guid>
+      <description>&lt;p&gt;想要一探 JDK 内部的实现机制，最便捷的捷径之一就是自己编译一套 JDK，通过阅读和跟踪调试 JDK 源码去了解 Java 技术体系的原理。本人选择了 OpenJDK 进行编译。&lt;/p&gt;
+&lt;p&gt;由于在编译 OpenJDK 7 时出现了如下不知如何解决的问题：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;llvm-gcc -m64   -m64  -L&lt;span style=&#34;color:#e6db74&#34;&gt;`&lt;/span&gt;pwd&lt;span style=&#34;color:#e6db74&#34;&gt;`&lt;/span&gt;  -framework CoreFoundation  -o gamma launcher/java_md.o launcher/java.o launcher/jli_util.o launcher/wildcard.o -ljvm -lm -pthread
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Undefined symbols &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; architecture x86_64:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;_JNI_CreateJavaVM&amp;#34;&lt;/span&gt;, referenced from:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      _LoadJavaVM in java_md.o
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;_JNI_GetDefaultJavaVMInitArgs&amp;#34;&lt;/span&gt;, referenced from:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      _LoadJavaVM in java_md.o
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ld: symbol&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;s&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; not found &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; architecture x86_64
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;clang: error: linker command failed with exit code &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;use -v to see invocation&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;make&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;8&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;: *** &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;gamma&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; Error &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;make&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;7&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;: *** &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;the_vm&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; Error &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;make&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;6&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;: *** &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;product&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; Error &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;make&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;5&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;: *** &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;generic_build2&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; Error &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;make&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;4&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;: *** &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;product&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; Error &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;make&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;3&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;: *** &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;all_product_universal&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; Error &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;make&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;2&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;: *** &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;universal_product&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; Error &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;make&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;1&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;: *** &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;hotspot-build&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; Error &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;make: *** &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;build_product_image&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; Error &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;个人猜想是由于我 Mac OS 系统版本太高的问题（Catalina 10.15.5），XCode 版本也是最新的 11.6。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Spring Boot 简化分页查询Page接口的JSON响应</title>
+      <link>https://zjxjwxk.github.io/posts/spring-boot/spring-boot-%E7%AE%80%E5%8C%96%E5%88%86%E9%A1%B5%E6%9F%A5%E8%AF%A2page%E6%8E%A5%E5%8F%A3%E7%9A%84json%E5%93%8D%E5%BA%94/</link>
+      <pubDate>Sat, 02 Feb 2019 17:15:00 +0000</pubDate>
+      <guid>https://zjxjwxk.github.io/posts/spring-boot/spring-boot-%E7%AE%80%E5%8C%96%E5%88%86%E9%A1%B5%E6%9F%A5%E8%AF%A2page%E6%8E%A5%E5%8F%A3%E7%9A%84json%E5%93%8D%E5%BA%94/</guid>
+      <description>&lt;h3 id=&#34;多余的分页信息&#34;&gt;多余的分页信息&lt;/h3&gt;
+&lt;p&gt;Spring Data 的 Page 接口进行数据分页返回了很多很多垃圾信息：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;status&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;data&amp;#34;&lt;/span&gt;: {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;content&amp;#34;&lt;/span&gt;: [
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;goodsId&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;producerId&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;categoryId&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;name&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;耐克sb滑板鞋&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;price&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;500&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;stock&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;500&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;status&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;正常&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;createTime&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;2019-02-02T03:48:33.000+0000&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;updateTime&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#66d9ef&#34;&gt;null&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            },
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;goodsId&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;producerId&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;categoryId&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;name&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;阿迪达斯小白鞋&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;price&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;500&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;stock&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;300&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;status&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;正常&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;createTime&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;2019-02-02T03:48:59.000+0000&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;updateTime&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#66d9ef&#34;&gt;null&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        ],
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;pageable&amp;#34;&lt;/span&gt;: {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;sort&amp;#34;&lt;/span&gt;: {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;sorted&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#66d9ef&#34;&gt;false&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;unsorted&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#66d9ef&#34;&gt;true&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;empty&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#66d9ef&#34;&gt;true&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            },
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;offset&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;pageSize&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;pageNumber&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;paged&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#66d9ef&#34;&gt;true&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;unpaged&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#66d9ef&#34;&gt;false&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        },
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;last&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#66d9ef&#34;&gt;true&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;totalPages&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;totalElements&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;size&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;number&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;numberOfElements&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;sort&amp;#34;&lt;/span&gt;: {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;sorted&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#66d9ef&#34;&gt;false&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;unsorted&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#66d9ef&#34;&gt;true&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;empty&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#66d9ef&#34;&gt;true&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        },
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;first&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#66d9ef&#34;&gt;true&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#34;empty&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#66d9ef&#34;&gt;false&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;实际需要的分页信息&#34;&gt;实际需要的分页信息&lt;/h3&gt;
+&lt;p&gt;实际上我只需要下面这些分页信息：&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Spring Cloud Eureka</title>
+      <link>https://zjxjwxk.github.io/posts/spring-cloud/%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%8E%E5%8F%91%E7%8E%B0/</link>
+      <pubDate>Thu, 31 Jan 2019 20:18:00 +0000</pubDate>
+      <guid>https://zjxjwxk.github.io/posts/spring-cloud/%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%8E%E5%8F%91%E7%8E%B0/</guid>
+      <description>&lt;h1 id=&#34;spring-cloud-eureka&#34;&gt;Spring Cloud Eureka&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;基于 Netflix Eureka 做了二次封装&lt;/li&gt;
+&lt;li&gt;两个组件组成：
+&lt;ul&gt;
+&lt;li&gt;Eureka Server 注册中心
+&lt;ul&gt;
+&lt;li&gt;作为具有服务注册功能的服务器，是服务注册中心，系统中的其他微服务使用 Eureka Client 连接到Eureka Server ，并维持心跳连接以监控各个微服务是否正常运行。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Eureka Client 服务注册
+&lt;ul&gt;
+&lt;li&gt;用于简化与服务器的交互，作为轮询负载均衡器，并提供服务的故障切换支持。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;启动-eureka-server&#34;&gt;启动 Eureka Server&lt;/h1&gt;
+&lt;h2 id=&#34;1-创建spring项目&#34;&gt;1. 创建Spring项目&lt;/h2&gt;
+&lt;p&gt;&lt;img alt=&#34;创建Spring项目&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/spring-cloud/%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%8E%E5%8F%91%E7%8E%B0/images/image-20190131155138441.png&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;2-填充项目信息&#34;&gt;2. 填充项目信息&lt;/h2&gt;
+&lt;p&gt;&lt;img alt=&#34;填充项目信息&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/spring-cloud/%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%8E%E5%8F%91%E7%8E%B0/images/image-20190131155241197.png&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;3-选择项目类型为-cloud-discovery-中的-eureka-server&#34;&gt;3. 选择项目类型为 Cloud Discovery 中的 Eureka Server&lt;/h2&gt;
+&lt;p&gt;&lt;img alt=&#34;选择Eureka Server&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/spring-cloud/%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%8E%E5%8F%91%E7%8E%B0/images/image-20190131155453826.png&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;4-完成创建&#34;&gt;4. 完成创建&lt;/h2&gt;
+&lt;p&gt;&lt;img alt=&#34;完成创建&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/spring-cloud/%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%8E%E5%8F%91%E7%8E%B0/images/image-20190131160337079.png&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;5-添加注解-enableeurekaserver&#34;&gt;5. 添加注解 @EnableEurekaServer&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;@SpringBootApplication&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;@EnableEurekaServer&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;EurekaApplication&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;static&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;main&lt;/span&gt;(String&lt;span style=&#34;color:#f92672&#34;&gt;[]&lt;/span&gt; args) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        SpringApplication.&lt;span style=&#34;color:#a6e22e&#34;&gt;run&lt;/span&gt;(EurekaApplication.&lt;span style=&#34;color:#a6e22e&#34;&gt;class&lt;/span&gt;, args);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;6-配置-applicationyml&#34;&gt;6. 配置 application.yml&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yml&#34; data-lang=&#34;yml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;eureka&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;client&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;service-url&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;defaultZone&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;http://localhost:8761/eureka/&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;register-with-eureka&lt;/span&gt;: &lt;span style=&#34;color:#66d9ef&#34;&gt;false&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;spring&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;application&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;eureka&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;server&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;port&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;8761&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;7-启动-eureka-server&#34;&gt;7. 启动 Eureka Server&lt;/h2&gt;
+&lt;p&gt;&lt;img alt=&#34;Eureka Server信息&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/spring-cloud/%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%8E%E5%8F%91%E7%8E%B0/images/image-20190131172458551.png&#34;&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>微服务简介</title>
+      <link>https://zjxjwxk.github.io/posts/spring-cloud/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/</link>
+      <pubDate>Thu, 31 Jan 2019 20:16:00 +0000</pubDate>
+      <guid>https://zjxjwxk.github.io/posts/spring-cloud/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/</guid>
+      <description>&lt;h1 id=&#34;images&#34;&gt;images&lt;/h1&gt;
+&lt;h2 id=&#34;定义&#34;&gt;定义&lt;/h2&gt;
+&lt;p&gt;The microservice architectural style is an approach to developing a single application running as &lt;strong&gt;a suite of small services&lt;/strong&gt;, each &lt;strong&gt;running its own process&lt;/strong&gt; and communicating with lightweight mechanisms, often an HTTP resource API. These services are &lt;strong&gt;built around business capabilities&lt;/strong&gt; and &lt;strong&gt;independently deployable&lt;/strong&gt; by fully automated deployment machinery. There is &lt;strong&gt;a bare minimum of centralized management of these services&lt;/strong&gt;, which may be written in different programming languages and use different data storage technologies.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>CentOS jar包后台运行</title>
+      <link>https://zjxjwxk.github.io/posts/linux/centos/centos-jar%E5%8C%85%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C/</link>
+      <pubDate>Wed, 30 Jan 2019 00:54:00 +0000</pubDate>
+      <guid>https://zjxjwxk.github.io/posts/linux/centos/centos-jar%E5%8C%85%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C/</guid>
+      <description>&lt;h1 id=&#34;运行jar包命令&#34;&gt;运行jar包命令&lt;/h1&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;java -jar application.jar
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;当前ssh窗口被锁定，可按CTRL + C打断程序运行，或直接关闭窗口让程序退出。&lt;/p&gt;
+&lt;p&gt;那如何让窗口不被锁定？&lt;/p&gt;
+&lt;h1 id=&#34;方法一&#34;&gt;方法一&lt;/h1&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;java -jar application.jar &amp;amp;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&amp;amp;代表在后台运行。&lt;/p&gt;
+&lt;p&gt;当前ssh窗口不被锁定，但是当窗口关闭时，程序中止运行。&lt;/p&gt;
+&lt;p&gt;继续改进，如何让窗口关闭时，程序仍然运行？&lt;/p&gt;
+&lt;h1 id=&#34;方法二&#34;&gt;方法二&lt;/h1&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;nohup java -jar application.jar &amp;amp;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;nohup 意思是不挂断运行命令,当账户退出或终端关闭时,程序仍然运行。&lt;/p&gt;
+&lt;p&gt;那怎么不打印该程序输出的内容，而写入某个文件中呢？&lt;/p&gt;
+&lt;h1 id=&#34;方法四&#34;&gt;方法四&lt;/h1&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;nohup java -jar application.jar &amp;gt;out.txt &amp;amp;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;当用 nohup 命令执行作业时，缺省情况下该作业的所有输出被重定向到nohup.out的文件中，除非另外指定了输出文件，如 out.txt。&lt;/p&gt;
+&lt;p&gt;command &amp;gt;out.txt是将command的输出重定向到out.txt文件，即输出内容不打印到屏幕上，而是输出到out.txt文件中。&lt;/p&gt;
+&lt;h3 id=&#34;通过jobs命令查看后台运行任务&#34;&gt;通过jobs命令查看后台运行任务&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;jobs
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;那么就会列出所有后台执行的作业，并且每个作业前面都有个编号。&lt;/p&gt;
+&lt;h3 id=&#34;如果想将某个作业调回前台控制只需要-fg--编号即可&#34;&gt;如果想将某个作业调回前台控制，只需要 fg + 编号即可。&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;fg &lt;span style=&#34;color:#ae81ff&#34;&gt;23&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;查看某端口占用的线程的pid&#34;&gt;查看某端口占用的线程的pid&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;netstat -nlp |grep :9181
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+    </item>
+    <item>
+      <title>J2EE基础知识</title>
+      <link>https://zjxjwxk.github.io/posts/java/j2ee/</link>
+      <pubDate>Fri, 04 Jan 2019 12:54:00 +0000</pubDate>
+      <guid>https://zjxjwxk.github.io/posts/java/j2ee/</guid>
+      <description>&lt;h2 id=&#34;servlet总结&#34;&gt;Servlet总结&lt;/h2&gt;
+&lt;p&gt;在Java Web程序中，&lt;strong&gt;Servlet&lt;/strong&gt;主要负责接收用户请求&lt;strong&gt;HttpServletRequest&lt;/strong&gt;,在&lt;strong&gt;doGet()&lt;/strong&gt;,&lt;strong&gt;doPost()中做相应的处理，并将回应HttpServletResponse&lt;/strong&gt;反馈给用户。Servlet可以设置初始化参数，供Servlet内部使用。一个Servlet类只会有一个实例，在它初始化时调用&lt;strong&gt;init()方法&lt;/strong&gt;，销毁时调用&lt;strong&gt;destroy()方法&lt;/strong&gt;。&lt;strong&gt;Servlet需要在web.xml中配置&lt;/strong&gt;（MyEclipse中创建Servlet会自动配置），&lt;strong&gt;一个Servlet可以设置多个URL访问&lt;/strong&gt;。&lt;strong&gt;Servlet不是线程安全&lt;/strong&gt;，因此要谨慎使用类变量。&lt;/p&gt;
+&lt;h2 id=&#34;阐述servlet和cgi的区别&#34;&gt;阐述Servlet和CGI的区别?&lt;/h2&gt;
+&lt;h3 id=&#34;cgi的不足之处&#34;&gt;CGI的不足之处:&lt;/h3&gt;
+&lt;p&gt;1，需要为每个请求启动一个操作CGI程序的系统进程。如果请求频繁，这将会带来很大的开销。&lt;/p&gt;
+&lt;p&gt;2，需要为每个请求加载和运行一个CGI程序，这将带来很大的开销&lt;/p&gt;
+&lt;p&gt;3，需要重复编写处理网络协议的代码以及编码，这些工作都是非常耗时的。&lt;/p&gt;
+&lt;h3 id=&#34;servlet的优点&#34;&gt;Servlet的优点:&lt;/h3&gt;
+&lt;p&gt;1，只需要启动一个操作系统进程以及加载一个JVM，大大降低了系统的开销&lt;/p&gt;
+&lt;p&gt;2，如果多个请求需要做同样处理的时候，这时候只需要加载一个类，这也大大降低了开销&lt;/p&gt;
+&lt;p&gt;3，所有动态加载的类可以实现对网络协议以及请求解码的共享，大大降低了工作量。&lt;/p&gt;
+&lt;p&gt;4，Servlet能直接和Web服务器交互，而普通的CGI程序不能。Servlet还能在各个程序之间共享数据，使数据库连接池之类的功能很容易实现。&lt;/p&gt;
+&lt;p&gt;补充：Sun Microsystems公司在1996年发布Servlet技术就是为了和CGI进行竞争，Servlet是一个特殊的Java程序，一个基于Java的Web应用通常包含一个或多个Servlet类。Servlet不能够自行创建并执行，它是在Servlet容器中运行的，容器将用户的请求传递给Servlet程序，并将Servlet的响应回传给用户。通常一个Servlet会关联一个或多个JSP页面。以前CGI经常因为性能开销上的问题被诟病，然而Fast CGI早就已经解决了CGI效率上的问题，所以面试的时候大可不必信口开河的诟病CGI，事实上有很多你熟悉的网站都使用了CGI技术。&lt;/p&gt;
+&lt;p&gt;参考：《javaweb整合开发王者归来》P7&lt;/p&gt;
+&lt;h2 id=&#34;servlet接口中有哪些方法及servlet生命周期探秘&#34;&gt;Servlet接口中有哪些方法及Servlet生命周期探秘&lt;/h2&gt;
+&lt;p&gt;Servlet接口定义了5个方法，其中&lt;strong&gt;前三个方法与Servlet生命周期相关&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;void init(ServletConfig config) throws ServletException&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;void service(ServletRequest req, ServletResponse resp) throws ServletException, java.io.IOException&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;void destory()&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;java.lang.String getServletInfo()&lt;/li&gt;
+&lt;li&gt;ServletConfig getServletConfig()&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;生命周期：&lt;/strong&gt; &lt;strong&gt;Web容器加载Servlet并将其实例化后，Servlet生命周期开始&lt;/strong&gt;，容器运行其&lt;strong&gt;init()方法&lt;/strong&gt;进行Servlet的初始化；请求到达时调用Servlet的&lt;strong&gt;service()方法&lt;/strong&gt;，service()方法会根据需要调用与请求对应的&lt;strong&gt;doGet或doPost&lt;/strong&gt;等方法；当服务器关闭或项目被卸载时服务器会将Servlet实例销毁，此时会调用Servlet的&lt;strong&gt;destroy()方法&lt;/strong&gt;。&lt;strong&gt;init方法和destory方法只会执行一次，service方法客户端每次请求Servlet都会执行&lt;/strong&gt;。Servlet中有时会用到一些需要初始化与销毁的资源，因此可以把初始化资源的代码放入init方法中，销毁资源的代码放入destroy方法中，这样就不需要每次处理客户端的请求都要初始化与销毁资源。&lt;/p&gt;
+&lt;p&gt;参考：《javaweb整合开发王者归来》P81&lt;/p&gt;
+&lt;h2 id=&#34;get和post请求的区别&#34;&gt;get和post请求的区别&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;网上也有文章说：get和post请求实际上是没有区别，大家可以自行查询相关文章！我下面给出的只是一种常见的答案。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;①get请求用来从服务器上获得资源，而post是用来向服务器提交数据；&lt;/p&gt;
+&lt;p&gt;②get将表单中数据按照name=value的形式，添加到action 所指向的URL 后面，并且两者使用&amp;quot;?&amp;ldquo;连接，而各个变量之间使用&amp;rdquo;&amp;amp;&amp;ldquo;连接；post是将表单中的数据放在HTTP协议的请求头或消息体中，传递到action所指向URL；&lt;/p&gt;
+&lt;p&gt;③get传输的数据要受到URL长度限制（1024字节即256个字符）；而post可以传输大量的数据，上传文件通常要使用post方式；&lt;/p&gt;
+&lt;p&gt;④使用get时参数会显示在地址栏上，如果这些数据不是敏感数据，那么可以使用get；对于敏感数据还是应用使用post；&lt;/p&gt;
+&lt;p&gt;⑤get使用MIME类型application/x-www-form-urlencoded的URL编码（也叫百分号编码）文本的格式传递参数，保证被传送的参数由遵循规范的文本组成，例如一个空格的编码是&amp;rdquo;%20&amp;quot;。&lt;/p&gt;
+&lt;p&gt;补充：GET方式提交表单的典型应用是搜索引擎。GET方式就是被设计为查询用的。&lt;/p&gt;
+&lt;p&gt;还有另外一种回答。推荐大家看一下：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.zhihu.com/question/28586791&#34;&gt;https://www.zhihu.com/question/28586791&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://mp.weixin.qq.com/s?__biz=MzI3NzIzMzg3Mw==&amp;amp;mid=100000054&amp;amp;idx=1&amp;amp;sn=71f6c214f3833d9ca20b9f7dcd9d33e4#rd&#34;&gt;https://mp.weixin.qq.com/s?__biz=MzI3NzIzMzg3Mw==&amp;amp;mid=100000054&amp;amp;idx=1&amp;amp;sn=71f6c214f3833d9ca20b9f7dcd9d33e4#rd&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;什么情况下调用doget和dopost&#34;&gt;什么情况下调用doGet()和doPost()&lt;/h2&gt;
+&lt;p&gt;Form标签里的method的属性为get时调用doGet()，为post时调用doPost()。&lt;/p&gt;
+&lt;h2 id=&#34;转发forward和重定向redirect的区别&#34;&gt;转发(Forward)和重定向(Redirect)的区别&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;转发是服务器行为，重定向是客户端行为。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;转发（Forword）&lt;/strong&gt; 通过RequestDispatcher对象的forward（HttpServletRequest request,HttpServletResponse response）方法实现的。RequestDispatcher可以通过HttpServletRequest 的getRequestDispatcher()方法获得。例如下面的代码就是跳转到login_success.jsp页面。&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;     request.getRequestDispatcher(&amp;#34;login_success.jsp&amp;#34;).forward(request, response);
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;重定向（Redirect）&lt;/strong&gt; 是利用服务器返回的状态吗来实现的。客户端浏览器请求服务器的时候，服务器会返回一个状态码。服务器通过HttpServletRequestResponse的setStatus(int status)方法设置状态码。如果服务器返回301或者302，则浏览器会到新的网址重新请求该资源。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;从地址栏显示来说&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;forward是服务器请求资源,服务器直接访问目标地址的URL,把那个URL的响应内容读取过来,然后把这些内容再发给浏览器.浏览器根本不知道服务器发送的内容从哪里来的,所以它的地址栏还是原来的地址. redirect是服务端根据逻辑,发送一个状态码,告诉浏览器重新去请求那个地址.所以地址栏显示的是新的URL.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Java基础知识</title>
+      <link>https://zjxjwxk.github.io/posts/java/java%E6%A0%B8%E5%BF%83/</link>
+      <pubDate>Thu, 03 Jan 2019 22:44:22 +0000</pubDate>
+      <guid>https://zjxjwxk.github.io/posts/java/java%E6%A0%B8%E5%BF%83/</guid>
+      <description>&lt;h2 id=&#34;1-面向对象和面向过程的区别&#34;&gt;1. 面向对象和面向过程的区别&lt;/h2&gt;
+&lt;h3 id=&#34;面向过程&#34;&gt;面向过程&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;优点：&lt;/strong&gt; 性能比面向对象高，因为类调用时需要实例化，开销比较大，比较消耗资源;比如单片机、嵌入式开发、Linux/Unix等一般采用面向过程开发，性能是最重要的因素。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;缺点：&lt;/strong&gt; 没有面向对象易维护、易复用、易扩展&lt;/p&gt;
+&lt;h3 id=&#34;面向对象&#34;&gt;面向对象&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;优点：&lt;/strong&gt; 易维护、易复用、易扩展，由于面向对象有封装、继承、多态性的特性，可以设计出低耦合的系统，使系统更加灵活、更加易于维护&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;缺点：&lt;/strong&gt; 性能比面向过程低&lt;/p&gt;
+&lt;h2 id=&#34;2-java-语言有哪些特点&#34;&gt;2. Java 语言有哪些特点&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;简单易学；&lt;/li&gt;
+&lt;li&gt;面向对象（封装，继承，多态）；&lt;/li&gt;
+&lt;li&gt;平台无关性（ Java 虚拟机实现平台无关性）；&lt;/li&gt;
+&lt;li&gt;可靠性；&lt;/li&gt;
+&lt;li&gt;安全性；&lt;/li&gt;
+&lt;li&gt;支持多线程（ C++ 语言没有内置的多线程机制，因此必须调用操作系统的多线程功能来进行多线程程序设计，而 Java 语言却提供了多线程支持）；&lt;/li&gt;
+&lt;li&gt;支持网络编程并且很方便（ Java 语言诞生本身就是为简化网络编程设计的，因此 Java 语言不仅支持网络编程而且很方便）；&lt;/li&gt;
+&lt;li&gt;编译与解释并存；&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;3-什么是-jdk-什么是-jre-什么是-jvm-三者之间的联系与区别&#34;&gt;3. 什么是 JDK 什么是 JRE 什么是 JVM 三者之间的联系与区别&lt;/h2&gt;
+&lt;p&gt;这几个是Java中很基本很基本的东西，但是我相信一定还有很多人搞不清楚！为什么呢？因为我们大多数时候在使用现成的编译工具以及环境的时候，并没有去考虑这些东西。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;JDK:&lt;/strong&gt; JDK（Java Development Kit）顾名思义它是给开发者提供的开发工具箱,是给程序开发者用的。它除了包括完整的JRE（Java Runtime Environment），Java运行环境，还包含了其他供开发者使用的工具包。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;JRE:&lt;/strong&gt; 普通用户而只需要安装 JRE（Java Runtime Environment）来运行 Java 程序。而程序开发者必须安装JDK来编译、调试程序。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;JVM：&lt;/strong&gt; 当我们运行一个程序时，JVM 负责将字节码转换为特定机器代码，JVM 提供了内存管理/垃圾回收和安全机制等。这种独立于硬件和操作系统，正是 java 程序可以一次编写多处执行的原因。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;区别与联系：&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;JDK 用于开发，JRE 用于运行java程序 ；&lt;/li&gt;
+&lt;li&gt;JDK 和 JRE 中都包含 JVM ；&lt;/li&gt;
+&lt;li&gt;JVM 是 java 编程语言的核心并且具有平台独立性。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;4-什么是字节码-采用字节码的最大好处是什么&#34;&gt;4. 什么是字节码 采用字节码的最大好处是什么&lt;/h2&gt;
+&lt;h3 id=&#34;先看下-java-中的编译器和解释器&#34;&gt;先看下 java 中的编译器和解释器： 　　&lt;/h3&gt;
+&lt;p&gt;Java 中引入了虚拟机的概念，即在机器和编译程序之间加入了一层抽象的虚拟的机器。这台虚拟的机器在任何平台上都提供给编译程序一个的共同的接口。&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

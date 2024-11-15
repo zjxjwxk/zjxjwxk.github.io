@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Software Architecture and Quality | Xinkang&#39;s Blog</title>
+<meta name="keywords" content="BTH, 期末复习">
+<meta name="description" content="CH 1. What is software architecture?
+What is software architecture
+The software architecture of a system is the set of structures needed to reason about the system, which comprise software elements, relations among them, and properties of both.
+
+To find out what users of the system think about the system. ×
+To assist in marketing activities. ×
+To make estimate for projects planning purposes. √
+To use as input for dividing up the work into tasks. √
+To analyze and predict characteristics of the implemented system. √
+To present the future development of the product. ×
+
+Categories of structures
+
+First, some structures partition systems into implementation units called modules.
+Other structures are dynamic, meaning that they focus on the way the elements interact with each other at runtime to carry out the system’s functions. we will call runtime structures component-and-connector (C&amp;C) structures.
+A third kind of structure describes the mapping from software structures to the system’s organizational, developmental, installation, and execution environments. These mappings are called allocation structures.
+
+Three Kinds of Structures
+Module structures
+embody decisions as to how the system is to be structured as a set of code or data units that have to be constructed or procured.">
+<meta name="author" content="">
+<link rel="canonical" href="https://zjxjwxk.github.io/posts/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/software-architecture-and-quality/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.d6fcd20a4fb86efa4dfac8ec95da60244cc8871042183da1ef28e3a762ad79c8.css" integrity="sha256-1vzSCk&#43;4bvpN&#43;sjsldpgJEzIhxBCGD2h7yjjp2Ktecg=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://zjxjwxk.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://zjxjwxk.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://zjxjwxk.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://zjxjwxk.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://zjxjwxk.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://zjxjwxk.github.io/posts/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/software-architecture-and-quality/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><meta property="og:url" content="https://zjxjwxk.github.io/posts/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/software-architecture-and-quality/">
+  <meta property="og:site_name" content="Xinkang&#39;s Blog">
+  <meta property="og:title" content="Software Architecture and Quality">
+  <meta property="og:description" content="CH 1. What is software architecture? What is software architecture The software architecture of a system is the set of structures needed to reason about the system, which comprise software elements, relations among them, and properties of both.
+To find out what users of the system think about the system. × To assist in marketing activities. × To make estimate for projects planning purposes. √ To use as input for dividing up the work into tasks. √ To analyze and predict characteristics of the implemented system. √ To present the future development of the product. × Categories of structures First, some structures partition systems into implementation units called modules. Other structures are dynamic, meaning that they focus on the way the elements interact with each other at runtime to carry out the system’s functions. we will call runtime structures component-and-connector (C&amp;C) structures. A third kind of structure describes the mapping from software structures to the system’s organizational, developmental, installation, and execution environments. These mappings are called allocation structures. Three Kinds of Structures Module structures embody decisions as to how the system is to be structured as a set of code or data units that have to be constructed or procured.">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2019-01-19T22:01:00+00:00">
+    <meta property="article:modified_time" content="2019-01-19T22:01:00+00:00">
+    <meta property="article:tag" content="BTH">
+    <meta property="article:tag" content="期末复习">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Software Architecture and Quality">
+<meta name="twitter:description" content="CH 1. What is software architecture?
+What is software architecture
+The software architecture of a system is the set of structures needed to reason about the system, which comprise software elements, relations among them, and properties of both.
+
+To find out what users of the system think about the system. ×
+To assist in marketing activities. ×
+To make estimate for projects planning purposes. √
+To use as input for dividing up the work into tasks. √
+To analyze and predict characteristics of the implemented system. √
+To present the future development of the product. ×
+
+Categories of structures
+
+First, some structures partition systems into implementation units called modules.
+Other structures are dynamic, meaning that they focus on the way the elements interact with each other at runtime to carry out the system’s functions. we will call runtime structures component-and-connector (C&amp;C) structures.
+A third kind of structure describes the mapping from software structures to the system’s organizational, developmental, installation, and execution environments. These mappings are called allocation structures.
+
+Three Kinds of Structures
+Module structures
+embody decisions as to how the system is to be structured as a set of code or data units that have to be constructed or procured.">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://zjxjwxk.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Software Architecture and Quality",
+      "item": "https://zjxjwxk.github.io/posts/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/software-architecture-and-quality/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Software Architecture and Quality",
+  "name": "Software Architecture and Quality",
+  "description": "CH 1. What is software architecture? What is software architecture The software architecture of a system is the set of structures needed to reason about the system, which comprise software elements, relations among them, and properties of both.\nTo find out what users of the system think about the system. × To assist in marketing activities. × To make estimate for projects planning purposes. √ To use as input for dividing up the work into tasks. √ To analyze and predict characteristics of the implemented system. √ To present the future development of the product. × Categories of structures First, some structures partition systems into implementation units called modules. Other structures are dynamic, meaning that they focus on the way the elements interact with each other at runtime to carry out the system’s functions. we will call runtime structures component-and-connector (C\u0026amp;C) structures. A third kind of structure describes the mapping from software structures to the system’s organizational, developmental, installation, and execution environments. These mappings are called allocation structures. Three Kinds of Structures Module structures embody decisions as to how the system is to be structured as a set of code or data units that have to be constructed or procured.\n",
+  "keywords": [
+    "BTH", "期末复习"
+  ],
+  "articleBody": "CH 1. What is software architecture? What is software architecture The software architecture of a system is the set of structures needed to reason about the system, which comprise software elements, relations among them, and properties of both.\nTo find out what users of the system think about the system. × To assist in marketing activities. × To make estimate for projects planning purposes. √ To use as input for dividing up the work into tasks. √ To analyze and predict characteristics of the implemented system. √ To present the future development of the product. × Categories of structures First, some structures partition systems into implementation units called modules. Other structures are dynamic, meaning that they focus on the way the elements interact with each other at runtime to carry out the system’s functions. we will call runtime structures component-and-connector (C\u0026C) structures. A third kind of structure describes the mapping from software structures to the system’s organizational, developmental, installation, and execution environments. These mappings are called allocation structures. Three Kinds of Structures Module structures embody decisions as to how the system is to be structured as a set of code or data units that have to be constructed or procured.\nDecomposition structure. The units are modules that are related to each other by the is-a-submodule-of relation, showing how modules are decomposed into smaller modules recursively until the modules are small enough to be easily understood. Uses structure. The units are related by the uses relation, a specialized form of dependency. Layer structure. The modules in this structure are called layers. A layer is an abstract “virtual machine” that provides a cohesive set of services through a managed interface. Component-and-connector structures embody decisions as to how the system is to be structured as a set of elements that have runtime behavior (components) and interactions (connectors).\nService structure. The units here are services that interoperate with each other by service coordination mechanisms. Concurrency structure. This component-and-connector structure allows the architect to determine opportunities for parallelism and the locations where resource contention may occur. Allocation structures embody decisions as to how the system will relate to nonsoftware structures in its environment (such as CPUs, file systems, networks, development teams, etc.).\nDeployment structure. The deployment structure shows how software is assigned to hardware processing and communication elements. Implementation structure. This structure shows how software elements (usually modules) are mapped to the file structure(s) in the system’s development, integration, or configuration control environments. Work assignment structure. This structure assigns responsibility for implementing and integrating the modules to the teams who will carry it out. CH 4. Understanding Quality Attributes System requirements can be categorized as Functional requirements. These requirements state what the system must do, and how it must behave or react to run-time stimuli.\nQuality attribute requirements. These requirements annotate (qualify) functional requirements. Qualification might be how fast the function must be performed, how resilient it must be to erroneous input, how easy the function is to learn, etc.\nConstraints. A constraint is a design decision with zero degrees of freedom. That is, it’s a design decision that has already been made for you.\nQuality Attribute Requirements six parts Source of stimulus. This is some entity (a human, a computer system, or any other actuator) that generated the stimulus. Stimulus. The stimulus is a condition that requires a response when it arrives at a system. Environment. The stimulus occurs under certain conditions. The system may be in an overload condition or in normal operation, or some other relevant state. For many systems, “normal” operation can refer to one of a number of modes. For these kinds of systems, the environment should specify in which mode the system is executing. Artifact. Some artifact is stimulated. This may be a collection of systems, the whole system, or some piece or pieces of it. Response. The response is the activity undertaken as the result of the arrival of the stimulus. Response measure. When the response occurs, it should be measurable in some fashion so that the requirement can be tested. Guiding Quality Design Decisions Architecture design is a systematic approach to making design decisions. We categorize the design decisions that an architect needs to make as follows: Allocation of responsibilities Coordination model Data model Management of resources Mapping among architectural elements Binding time decisions Choice of technology Coordination model Software works by having elements interact with each other through designed mechanisms. These mechanisms are collectively referred to as a coordination model. Decisions about the coordination model include these: Identifying the elements of the system that must coordinate, or are prohibited from coordinating. Determining the properties of the coordination, such as timeliness, currency, completeness, correctness, and consistency. Choosing the communication mechanisms (between systems, between our system and external entities, between elements of our system) that realize those properties. Important properties of the communication mechanisms include stateful versus stateless, synchronous versus asynchronous, guaranteed versus nonguaranteed delivery, and performance-related properties such as throughput and latency. Example: Both asynchronous communication and synchronous communication can be used in the same system Asynchronous communication does not block the program thread until a response is ready Asynchronous communication guarantees when a response is returned Data model Every system must represent artifacts of system-wide interest—data—in some internal fashion. The collection of those representations and how to interpret them is referred to as the data model. Decisions about the data model include the following: Choosing the major data abstractions, their operations, and their properties. This includes determining how the data items are created, initialized, accessed, persisted, manipulated, translated, and destroyed. Compiling metadata needed for consistent interpretation of the data. Organizing the data. This includes determining whether the data is going to be kept in a relational database, a collection of objects, or both. If both, then the mapping between the two different locations of the data must be determined. Example: Choosing the major data abstractions, their operations, and their properties. Compiling metadata needed for consistent interpretation of the data. Organizing the data. Binding time decisions Binding time decisions introduce allowable ranges of variation. This variation can be bound at different times in the software life cycle by different entities— from design time by a developer to runtime by an end user. A binding time decision establishes the scope, the point in the life cycle, and the mechanism for achieving the variation. The decisions in the other six categories have an associated binding time decision. Examples of such binding time decisions include the following: For allocation of responsibilities, you can have build-time selection of modules via a parameterized makefile. For choice of coordination model, you can design runtime negotiation of protocols. For resource management, you can design a system to accept new peripheral devices plugged in at runtime, after which the system recognizes them and downloads and installs the right drivers automatically. For choice of technology, you can build an app store for a smartphone that automatically downloads the version of the app appropriate for the phone of the customer buying the app. Example: Setting the hostname of the server in a configuration file Using the user input to set the destination of a message Using inheritance in the code to execute the different subclass implementations depending on program state Quality attributes Availability Interoperability Modifiability Performance Security Testability Usability Development time qualities Modifiability Testability CH5. Availability Terms Fault A failure’s cause is called a fault. A fault can be either internal or external to the system under consideration. Intermediate states between the occurrence of a fault and the occurrence of a failure are called errors. Failure A failure is the deviation of the system from its specification, where the deviation is externally visible. Fault and failure Fault Internal or external deviation of correct function Failure When the system cannot provide its intended service Caused by faults that could not be handled/repaired Resilient Faults can be prevented, tolerated, removed, or forecast. In this way a system becomes “resilient” to faults. Degraded operation mode we are often concerned with the level of capability that remains when a failure has occurred—a degraded operating mode. MTBF mean time between failures MTTR mean time to repair Formula $$ MTBF\\over(MTBF+MTTR)\u0013 $$\nService Level Agreement, SLA The availability provided by a computer system or hosting service is frequently expressed as a service-level agreement. This SLA specifies the availability level that is guaranteed and, usually, the penalties that the computer system or hosting service will suffer if the SLA is violated. Tactic Detect Faults Heart-beat Heartbeat is a fault detection mechanism that employs a periodic message exchange between a system monitor and a process being monitored. Ping/Echo Ping/echo refers to an asynchronous request/response message pair exchanged between nodes, used to determine reachability and the round-trip delay through the associated network path. Heart-beat tactic vs. Ping/Echo- tactic The big difference between heartbeat and ping/echo is who holds the responsibility for initiating the health check—the monitor or the component itself. Recover from Faults Active Redundancy Active redundancy (hot spare). This refers to a configuration where all of the nodes (active or redundant spare) in a protection group receive and process identical inputs in parallel, allowing the redundant spare(s) to maintain synchronous state with the active node(s). Passive Redundancy Passive redundancy (warm spare). This refers to a configuration where only the active members of the protection group process input traffic; one of their duties is to provide the redundant spare(s) with periodic state updates. Spare Spare (cold spare). Cold sparing refers to a configuration where the redundant spares of a protection group remain out of service until a fail-over occurs, at which point a power-on-reset procedure is initiated on the redundant spare prior to its being placed in service. Rollback Rollback. This tactic permits the system to revert to a previous known good state, referred to as the “rollback line”—rolling back time—upon the detection of a failure. Fault tree Fault tree analysis is an analytical technique that specifies a state of the system that negatively impacts safety or reliability, and then analyzes the system’s context and operation to find all the ways that the undesired state could occur.\nCH7. Modifiability What is Modifiability？ Modifiability is about change and our interest in it is in the cost and risk of making change To plan for modifiability, an architect has to consider four questions: What can change? A change can occur to any aspect of a system: the functions that the system computes, the platform (the hardware, operating system, middleware), the environment in which the system operates (the systems with which it must interoperate, the protocols it uses to communicate with the rest of the world), the qualities the system exhibits (its performance, its reliability, and even its future modifications), and its capacity (number of users supported, number of simultaneous operations). What is the likelihood of the change? One cannot plan a system for all potential changes—the system would never be done, or if it was done it would be far too expensive and would likely suffer quality attribute problems in other dimensions. Although anything might change, the architect has to make the tough decisions about which changes are likely, and hence which changes are to be supported, and which are not. When is the change made and who makes it? Most commonly in the past, a change was made to source code. Changes can be made to the implementation (by modifying the source code), during compile (using compile-time switches), during build (by choice of libraries), during configuration setup (by a range of techniques, including parameter setting), or during execution (by parameter settings, plugins, etc.). A change can also be made by a developer, an end user, or a system administrator. What is the cost of the change? Making a system more modifiable involves two types of cost: The cost of introducing the mechanism(s) to make the system more modifiable The cost of making the modification using the mechanism(s) CH8. Performance Performance General Scenario Portion of Scenario Possible Values Source Internal or external to the system Stimulus Arrival of a periodic, sporadic, or stochastic event Artifact System or one or more components in the system Environment Operational mode: normal, emergency, peak load, overload Response Process events, change level of service Response Measure Latency, deadline, throughput, jitter, miss rate Tactics for Performance Control Resource Demand Manage sampling rate. If it is possible to reduce the sampling frequency at which a stream of environmental data is captured, then demand can be reduced, typically with some attendant loss of fidelity. Limit event response. Process events only up to a set maximum rate, thereby ensuring more predictable processing when the events are actually processed. Prioritize events. If not all events are equally important, you can impose a priority scheme that ranks events according to how important it is to service them. Manage Resources Increase resources. Faster processors, additional processors, additional memory, and faster networks all have the potential for reducing latency. Introduce concurrency. Concurrency can be introduced by processing different streams of events on different threads or by creating additional threads to process different sets of activities. Maintain multiple copies of computations. Reduce the contention that would occur if all computations took place on a single server. CH13. Patterns and Tactics What is a Pattern? An architectural pattern\nis a package of design decisions that is found repeatedly in practice, has known properties that permit reuse, and describes a class of architectures. Architectural Pattern A context. A recuSrring, common situation in the world that gives rise to a problem. A problem. The problem, appropriately generalized, that arises in the given context. A solution. A successful architectural resolution to the problem, appropriately abstracted. The solution for a pattern is determined and described by: A set of element types (for example, data repositories, processes, and objects) A set of interaction mechanisms or connectors (for example, method calls, events, or message bus) A topological layout of the components A set of semantic constraints covering topology, element behavior, and interaction mechanisms CH18. Architecture Document View consistency A view is consistent with its definition when: All elements that fulfills the selection criterion is in the view All relations that fulfills the selection criterion is in the view That all properties that fulfills the selection criterion is in the view THAT NO additional elements, relation or properties that does not meet the selection is in the view Elements All elements in the view must have a corresponding part in the view definition.\nRelation Only relations that meet the selection criteria must be in the view.\nProperties Properties must have values in the view.\nCriteria Selection criteria can exclude certain elements or relations from the view.\n4+1 view model Logical, Process, Development, Physical + Use Cases\n",
+  "wordCount" : "2445",
+  "inLanguage": "en",
+  "datePublished": "2019-01-19T22:01:00Z",
+  "dateModified": "2019-01-19T22:01:00Z",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://zjxjwxk.github.io/posts/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/software-architecture-and-quality/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Xinkang's Blog",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://zjxjwxk.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://zjxjwxk.github.io/" accesskey="h" title="Xinkang&#39;s Blog (Alt + H)">Xinkang&#39;s Blog</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://zjxjwxk.github.io/archives/" title="Archives">
+                    <span>Archives</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://zjxjwxk.github.io/categories/" title="Categories">
+                    <span>Categories</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://zjxjwxk.github.io/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://zjxjwxk.github.io/search/" title="Search (Alt &#43; /)" accesskey=/>
+                    <span>Search</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <div id="content-container">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      Software Architecture and Quality
+    </h1>
+    <div class="post-meta"><span title='2019-01-19 22:01:00 +0000 UTC'>January 19, 2019</span>
+
+</div>
+  </header> 
+  <div class="post-content"><h1 id="ch-1-what-is-software-architecture">CH 1. What is software architecture?<a hidden class="anchor" aria-hidden="true" href="#ch-1-what-is-software-architecture">#</a></h1>
+<h2 id="what-is-software-architecture">What is software architecture<a hidden class="anchor" aria-hidden="true" href="#what-is-software-architecture">#</a></h2>
+<p>The software architecture of a system is the set of structures needed to reason about the system, which comprise software elements, relations among them, and properties of both.</p>
+<ol>
+<li>To find out what users of the system think about the system. ×</li>
+<li>To assist in marketing activities. ×</li>
+<li>To make estimate for projects planning purposes. √</li>
+<li>To use as input for dividing up the work into tasks. √</li>
+<li>To analyze and predict characteristics of the implemented system. √</li>
+<li>To present the future development of the product. ×</li>
+</ol>
+<h2 id="categories-of-structures">Categories of structures<a hidden class="anchor" aria-hidden="true" href="#categories-of-structures">#</a></h2>
+<ul>
+<li>First, some structures partition systems into implementation units called <strong>modules</strong>.</li>
+<li>Other structures are dynamic, meaning that they focus on the way the elements interact with each other at runtime to carry out the system’s functions. we will call runtime structures <strong>component-and-connector (C&amp;C) structures</strong>.</li>
+<li>A third kind of structure describes the mapping from software structures to the system’s organizational, developmental, installation, and execution environments. These mappings are called <strong>allocation structures</strong>.</li>
+</ul>
+<h2 id="three-kinds-of-structures">Three Kinds of Structures<a hidden class="anchor" aria-hidden="true" href="#three-kinds-of-structures">#</a></h2>
+<h3 id="module-structures"><strong>Module structures</strong><a hidden class="anchor" aria-hidden="true" href="#module-structures">#</a></h3>
+<p>embody decisions as to how the system is to be structured as a set of code or data units that have to be constructed or procured.</p>
+<ul>
+<li><strong>Decomposition structure</strong>. The units are modules that are related to each other by the is-a-submodule-of relation, showing how modules are decomposed into smaller modules recursively until the modules are small enough to be easily understood.</li>
+<li><strong>Uses structure</strong>. The units are related by the uses relation, a specialized form of dependency.</li>
+<li><strong>Layer structure</strong>. The modules in this structure are called layers. A layer is an abstract “virtual machine” that provides a cohesive set of services through a managed interface.</li>
+</ul>
+<h3 id="component-and-connector"><strong>Component-and-connector</strong><a hidden class="anchor" aria-hidden="true" href="#component-and-connector">#</a></h3>
+<p>structures embody decisions as to how the system is to be structured as a set of elements that have runtime behavior (components) and interactions (connectors).</p>
+<ul>
+<li><strong>Service structure</strong>. The units here are services that interoperate with each other by service coordination mechanisms.</li>
+<li><strong>Concurrency structure</strong>. This component-and-connector structure allows the architect to determine opportunities for parallelism and the locations where resource contention may occur.</li>
+</ul>
+<h3 id="allocation-structures"><strong>Allocation structures</strong><a hidden class="anchor" aria-hidden="true" href="#allocation-structures">#</a></h3>
+<p>embody decisions as to how the system will relate to nonsoftware structures in its environment (such as CPUs, file systems, networks, development teams, etc.).</p>
+<ul>
+<li><strong>Deployment structure</strong>. The deployment structure shows how software is assigned to hardware processing and communication elements.</li>
+<li><strong>Implementation structure</strong>. This structure shows how software elements (usually modules) are mapped to the file structure(s) in the system’s development, integration, or configuration control environments.</li>
+<li><strong>Work assignment structure</strong>. This structure assigns responsibility for implementing and integrating the modules to the teams who will carry it out.</li>
+</ul>
+<h1 id="ch-4-understanding-quality-attributes">CH 4. Understanding Quality Attributes<a hidden class="anchor" aria-hidden="true" href="#ch-4-understanding-quality-attributes">#</a></h1>
+<h2 id="system-requirements-can-be-categorized-as">System requirements can be categorized as<a hidden class="anchor" aria-hidden="true" href="#system-requirements-can-be-categorized-as">#</a></h2>
+<p><strong>Functional requirements</strong>. These requirements state what the system must do, and how it must behave or react to run-time stimuli.</p>
+<p><strong>Quality attribute requirements</strong>. These requirements annotate (qualify) functional requirements. Qualification might be how fast the function must be performed, how resilient it must be to erroneous input, how easy the function is to learn, etc.</p>
+<p><strong>Constraints</strong>. A constraint is a design decision with zero degrees of freedom. That is, it&rsquo;s a design decision that has already been made for you.</p>
+<h2 id="quality-attribute-requirements-six-parts">Quality Attribute Requirements six parts<a hidden class="anchor" aria-hidden="true" href="#quality-attribute-requirements-six-parts">#</a></h2>
+<ol>
+<li><strong>Source of stimulus</strong>. This is some entity (a human, a computer system, or any other actuator) that generated the stimulus.</li>
+<li><strong>Stimulus</strong>. The stimulus is a condition that requires a response when it arrives at a system.</li>
+<li><strong>Environment</strong>. The stimulus occurs under certain conditions. The system may be in an overload condition or in normal operation, or some other relevant state. For many systems, “normal” operation can refer to one of a number of modes. For these kinds of systems, the environment should specify in which mode the system is executing.</li>
+<li><strong>Artifact</strong>. Some artifact is stimulated. This may be a collection of systems, the whole system, or some piece or pieces of it.</li>
+<li><strong>Response</strong>. The response is the activity undertaken as the result of the arrival of the stimulus.</li>
+<li><strong>Response measure</strong>. When the response occurs, it should be measurable in some fashion so that the requirement can be tested.</li>
+</ol>
+<p><img loading="lazy" src="/posts/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/software-architecture-and-quality/images/1547890359658.png"></p>
+<h2 id="guiding-quality-design-decisions">Guiding Quality Design Decisions<a hidden class="anchor" aria-hidden="true" href="#guiding-quality-design-decisions">#</a></h2>
+<ul>
+<li>Architecture design is a systematic approach to making design decisions.</li>
+</ul>
+<h3 id="we-categorize-the-design-decisions-that-an-architect-needs-to-make-as-follows">We categorize the design decisions that an architect needs to make as follows:<a hidden class="anchor" aria-hidden="true" href="#we-categorize-the-design-decisions-that-an-architect-needs-to-make-as-follows">#</a></h3>
+<ul>
+<li>Allocation of responsibilities</li>
+<li><strong>Coordination model</strong></li>
+<li><strong>Data model</strong></li>
+<li>Management of resources</li>
+<li>Mapping among architectural elements</li>
+<li><strong>Binding time decisions</strong></li>
+<li>Choice of technology</li>
+</ul>
+<h2 id="coordination-model"><strong>Coordination model</strong><a hidden class="anchor" aria-hidden="true" href="#coordination-model">#</a></h2>
+<h3 id="software-works-by-having-elements-interact-with-each-other-through-designed-mechanisms-these-mechanisms-are-collectively-referred-to-as-a-coordination-model-decisions-about-the-coordination--model-include-these">Software works by having elements interact with each other through designed mechanisms. These mechanisms are collectively referred to as a coordination model. Decisions about the coordination  model include these:<a hidden class="anchor" aria-hidden="true" href="#software-works-by-having-elements-interact-with-each-other-through-designed-mechanisms-these-mechanisms-are-collectively-referred-to-as-a-coordination-model-decisions-about-the-coordination--model-include-these">#</a></h3>
+<ul>
+<li>Identifying the elements of the system that must coordinate, or are prohibited from coordinating.</li>
+<li>Determining the <strong>properties of the coordination</strong>, such as <strong>timeliness, currency, completeness, correctness, and consistency</strong>.</li>
+<li>Choosing the <strong>communication mechanisms</strong> (between systems, between our system and external entities, between elements of our system) that realize those properties. Important properties of the communication mechanisms include <strong>stateful versus stateless</strong>, <strong>synchronous versus asynchronous</strong>, <strong>guaranteed versus nonguaranteed delivery</strong>, and performance-related properties such as <strong>throughput and latency</strong>.</li>
+</ul>
+<h3 id="example">Example:<a hidden class="anchor" aria-hidden="true" href="#example">#</a></h3>
+<ul>
+<li>Both asynchronous communication and synchronous  communication can be used in the same system</li>
+<li>Asynchronous communication does not block the program thread until a response is ready</li>
+<li>Asynchronous communication guarantees when a response is returned</li>
+</ul>
+<h2 id="data-model"><strong>Data model</strong><a hidden class="anchor" aria-hidden="true" href="#data-model">#</a></h2>
+<h3 id="every-system-must-represent-artifacts-of-system-wide-interestdatain-some-internal-fashion-the-collection-of-those-representations-and-how-to-interpret-them-is-referred-to-as-the-data-model-decisions-about-the-data-model-include-the-following">Every system must represent artifacts of system-wide interest—data—in some internal fashion. The collection of those representations and how to interpret them is referred to as the data model. Decisions about the data model include the following:<a hidden class="anchor" aria-hidden="true" href="#every-system-must-represent-artifacts-of-system-wide-interestdatain-some-internal-fashion-the-collection-of-those-representations-and-how-to-interpret-them-is-referred-to-as-the-data-model-decisions-about-the-data-model-include-the-following">#</a></h3>
+<ul>
+<li>Choosing the major <strong>data abstractions</strong>, their operations, and their properties. This includes determining how the data items are created, initialized, accessed, persisted, manipulated, translated, and destroyed.</li>
+</ul>
+<ol>
+<li><strong>Compiling metadata</strong> needed for consistent interpretation of the data.</li>
+<li><strong>Organizing the data</strong>. This includes determining whether the data is going to be kept in a relational database, a collection of objects, or both. If both, then the mapping between the two different locations of the data must be determined.</li>
+</ol>
+<h3 id="example-1">Example:<a hidden class="anchor" aria-hidden="true" href="#example-1">#</a></h3>
+<ul>
+<li>Choosing the major data abstractions, their operations, and their  properties.</li>
+<li>Compiling metadata needed for consistent interpretation of the data.</li>
+<li>Organizing the data.</li>
+</ul>
+<h2 id="binding-time-decisions"><strong>Binding time decisions</strong><a hidden class="anchor" aria-hidden="true" href="#binding-time-decisions">#</a></h2>
+<ul>
+<li>Binding time decisions introduce allowable ranges of variation. This variation can be bound at different times in the software life cycle by different entities— from design time by a developer to runtime by an end user. A binding time decision establishes the scope, the point in the life cycle, and the mechanism for achieving the variation.
+The decisions in the other six categories have an associated binding time decision. Examples of such binding time decisions include the following:</li>
+<li>For allocation of responsibilities, you can have <strong>build-time selection of modules</strong> via a parameterized makefile.</li>
+<li>For choice of coordination model, you can design <strong>runtime negotiation of protocols</strong>.</li>
+<li>For resource management, you can design a system to <strong>accept new peripheral devices plugged in at runtime</strong>, after which the system recognizes them and <strong>downloads and installs the right drivers automatically</strong>.</li>
+<li>For choice of technology, you can build an app store for a smartphone that <strong>automatically downloads the version of the app</strong> appropriate for the phone of the customer buying the app.</li>
+</ul>
+<h3 id="example-2">Example:<a hidden class="anchor" aria-hidden="true" href="#example-2">#</a></h3>
+<ul>
+<li>Setting the hostname of the server in a configuration file</li>
+<li>Using the user input to set the destination of a message</li>
+<li>Using inheritance in the code to execute the different subclass implementations depending on program state</li>
+</ul>
+<h2 id="quality-attributes">Quality attributes<a hidden class="anchor" aria-hidden="true" href="#quality-attributes">#</a></h2>
+<ol>
+<li><strong>Availability</strong></li>
+<li>Interoperability</li>
+<li><strong>Modifiability</strong></li>
+<li><strong>Performance</strong></li>
+<li><strong>Security</strong></li>
+<li><strong>Testability</strong></li>
+<li>Usability</li>
+</ol>
+<h2 id="development-time-qualities">Development time qualities<a hidden class="anchor" aria-hidden="true" href="#development-time-qualities">#</a></h2>
+<ul>
+<li>Modifiability</li>
+<li>Testability</li>
+</ul>
+<h1 id="ch5-availability">CH5. Availability<a hidden class="anchor" aria-hidden="true" href="#ch5-availability">#</a></h1>
+<h2 id="terms">Terms<a hidden class="anchor" aria-hidden="true" href="#terms">#</a></h2>
+<h3 id="fault"><strong>Fault</strong><a hidden class="anchor" aria-hidden="true" href="#fault">#</a></h3>
+<ul>
+<li>A failure’s cause is called a <strong>fault</strong>. A fault can be either internal or  external to the system under consideration. Intermediate states between the occurrence of a fault and the occurrence of a failure are called <strong>errors</strong>.</li>
+</ul>
+<h3 id="failure"><strong>Failure</strong><a hidden class="anchor" aria-hidden="true" href="#failure">#</a></h3>
+<ul>
+<li>A <strong>failure</strong> is the deviation of the system from its specification, where the deviation is externally visible.</li>
+</ul>
+<h3 id="fault-and-failure"><strong>Fault and failure</strong><a hidden class="anchor" aria-hidden="true" href="#fault-and-failure">#</a></h3>
+<h4 id="fault-1"><strong>Fault</strong><a hidden class="anchor" aria-hidden="true" href="#fault-1">#</a></h4>
+<ul>
+<li>Internal or external deviation of correct function</li>
+</ul>
+<h4 id="failure-1"><strong>Failure</strong><a hidden class="anchor" aria-hidden="true" href="#failure-1">#</a></h4>
+<ul>
+<li>When the system cannot provide its intended service</li>
+<li>Caused by faults that could not be handled/repaired</li>
+</ul>
+<h3 id="resilient"><strong>Resilient</strong><a hidden class="anchor" aria-hidden="true" href="#resilient">#</a></h3>
+<ul>
+<li>Faults can be prevented, tolerated, removed, or forecast. In this way a system becomes “<strong>resilient</strong>” to faults.</li>
+</ul>
+<h3 id="degraded-operation-mode"><strong>Degraded operation mode</strong><a hidden class="anchor" aria-hidden="true" href="#degraded-operation-mode">#</a></h3>
+<ul>
+<li>we are often concerned with the level of capability that remains when a failure has occurred—a degraded operating mode.</li>
+</ul>
+<h3 id="mtbf"><strong>MTBF</strong><a hidden class="anchor" aria-hidden="true" href="#mtbf">#</a></h3>
+<ul>
+<li>mean time between failures</li>
+</ul>
+<h3 id="mttr"><strong>MTTR</strong><a hidden class="anchor" aria-hidden="true" href="#mttr">#</a></h3>
+<ul>
+<li>mean time to repair</li>
+</ul>
+<h3 id="formula"><strong>Formula</strong><a hidden class="anchor" aria-hidden="true" href="#formula">#</a></h3>
+<p>$$
+MTBF\over(MTBF+MTTR)
+$$</p>
+<h2 id="service-level-agreement-sla"><strong>Service Level Agreement, SLA</strong><a hidden class="anchor" aria-hidden="true" href="#service-level-agreement-sla">#</a></h2>
+<ul>
+<li>The availability provided by a computer system or hosting service is frequently expressed as a <strong>service-level agreement</strong>. This SLA specifies the availability level that is guaranteed and, usually, the penalties that the computer system or hosting service will suffer if the SLA is violated.</li>
+</ul>
+<h2 id="tactic">Tactic<a hidden class="anchor" aria-hidden="true" href="#tactic">#</a></h2>
+<p><img loading="lazy" src="/posts/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/software-architecture-and-quality/images/1547958287611.png"></p>
+<h3 id="detect-faults">Detect Faults<a hidden class="anchor" aria-hidden="true" href="#detect-faults">#</a></h3>
+<h4 id="heart-beat"><strong>Heart-beat</strong><a hidden class="anchor" aria-hidden="true" href="#heart-beat">#</a></h4>
+<ul>
+<li>Heartbeat is a fault detection mechanism that employs a periodic message exchange between a system monitor and a process being monitored.</li>
+</ul>
+<h4 id="pingecho"><strong>Ping/Echo</strong><a hidden class="anchor" aria-hidden="true" href="#pingecho">#</a></h4>
+<ul>
+<li>Ping/echo refers to an asynchronous request/response message pair exchanged between nodes, used to determine reachability and the round-trip delay through the associated network path.</li>
+</ul>
+<h4 id="heart-beat-tactic-vs-pingecho--tactic"><strong>Heart-beat tactic</strong> vs. <strong>Ping/Echo- tactic</strong><a hidden class="anchor" aria-hidden="true" href="#heart-beat-tactic-vs-pingecho--tactic">#</a></h4>
+<ul>
+<li>The big difference between heartbeat and ping/echo is who holds the responsibility for initiating the health check—the monitor or the component itself.</li>
+</ul>
+<h3 id="recover-from-faults">Recover from Faults<a hidden class="anchor" aria-hidden="true" href="#recover-from-faults">#</a></h3>
+<h4 id="active-redundancy"><strong>Active Redundancy</strong><a hidden class="anchor" aria-hidden="true" href="#active-redundancy">#</a></h4>
+<ul>
+<li>Active redundancy (hot spare). This refers to a configuration where all of the nodes (active or redundant spare) in a protection group receive and process identical inputs in parallel, allowing the redundant spare(s) to maintain synchronous state with the active node(s).</li>
+</ul>
+<h4 id="passive-redundancy"><strong>Passive Redundancy</strong><a hidden class="anchor" aria-hidden="true" href="#passive-redundancy">#</a></h4>
+<ul>
+<li>Passive redundancy (warm spare). This refers to a configuration where only the active members of the protection group process input traffic; one of their duties is to provide the redundant spare(s) with periodic state updates.</li>
+</ul>
+<h4 id="spare"><strong>Spare</strong><a hidden class="anchor" aria-hidden="true" href="#spare">#</a></h4>
+<ul>
+<li>Spare (cold spare). Cold sparing refers to a configuration where the redundant spares of a protection group remain out of service until a fail-over occurs, at which point a power-on-reset procedure is initiated on the redundant spare prior to its being placed in service.</li>
+</ul>
+<h4 id="rollback"><strong>Rollback</strong><a hidden class="anchor" aria-hidden="true" href="#rollback">#</a></h4>
+<ul>
+<li>Rollback. This tactic permits the system to revert to a previous known good state, referred to as the “rollback line”—rolling back time—upon the detection of a failure.</li>
+</ul>
+<h2 id="fault-tree">Fault tree<a hidden class="anchor" aria-hidden="true" href="#fault-tree">#</a></h2>
+<p>Fault tree analysis is an analytical technique that specifies a state of the system that negatively impacts safety or reliability, and then analyzes the system’s context and operation to find all the ways that the undesired state could occur.</p>
+<p><img alt="A simple fault tree. D fails if A fails and either B or C fails." loading="lazy" src="/posts/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/software-architecture-and-quality/images/1547915772754.png"></p>
+<p><img alt="Fault tree gate symbols" loading="lazy" src="/posts/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/software-architecture-and-quality/images/1547915852136.png"></p>
+<h1 id="ch7-modifiability">CH7. Modifiability<a hidden class="anchor" aria-hidden="true" href="#ch7-modifiability">#</a></h1>
+<h2 id="what-is-modifiability">What is Modifiability？<a hidden class="anchor" aria-hidden="true" href="#what-is-modifiability">#</a></h2>
+<ul>
+<li>Modifiability is about change and our interest in it is in the cost and risk of making change</li>
+<li>To plan for modifiability, an architect has to consider <strong>four questions</strong>:</li>
+</ul>
+<ol>
+<li><strong>What can change?</strong>
+A change can occur to any aspect of a system: the <strong>functions</strong> that the system computes, the <strong>platform</strong> (the hardware, operating system, middleware), the <strong>environment</strong> in which the system operates (the systems with which it must interoperate, the <strong>protocols</strong> it uses to communicate with the rest of the world), the <strong>qualities</strong> the system exhibits (its performance, its reliability, and even its future modifications), and its <strong>capacity</strong> (number of users supported, number of simultaneous operations).</li>
+<li><strong>What is the likelihood of the change?</strong>
+One cannot plan a system for all potential changes—the system would never be done, or if it was done it would be far too expensive and would likely suffer quality attribute problems in other dimensions. Although anything might change, <strong>the architect has to make the tough decisions about which changes are likely, and hence which changes are to be supported, and which are not.</strong></li>
+<li><strong>When is the change made and who makes it?</strong>
+Most commonly in the past, a change was made to source code. Changes can be made to the <strong>implementation</strong> (by modifying the source code), during <strong>compile</strong> (using compile-time switches), during <strong>build</strong> (by choice of libraries), during <strong>configuration setup</strong> (by a range of techniques, including parameter setting), or during <strong>execution</strong> (by parameter settings, plugins, etc.). A change can also be made by a <strong>developer</strong>, an <strong>end user</strong>, or a <strong>system administrator</strong>.</li>
+<li><strong>What is the cost of the change?</strong>
+Making a system more modifiable involves two types of cost:</li>
+</ol>
+<ul>
+<li>The cost of introducing the mechanism(s) to make the system more modifiable</li>
+<li>The cost of making the modification using the mechanism(s)</li>
+</ul>
+<h1 id="ch8-performance">CH8. Performance<a hidden class="anchor" aria-hidden="true" href="#ch8-performance">#</a></h1>
+<h2 id="performance-general-scenario">Performance General Scenario<a hidden class="anchor" aria-hidden="true" href="#performance-general-scenario">#</a></h2>
+<table>
+  <thead>
+      <tr>
+          <th>Portion of Scenario</th>
+          <th>Possible Values</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Source</td>
+          <td>Internal or external to the system</td>
+      </tr>
+      <tr>
+          <td>Stimulus</td>
+          <td>Arrival of a periodic, sporadic, or stochastic event</td>
+      </tr>
+      <tr>
+          <td>Artifact</td>
+          <td>System or one or more components in the system</td>
+      </tr>
+      <tr>
+          <td>Environment</td>
+          <td>Operational mode: normal, emergency, peak load, overload</td>
+      </tr>
+      <tr>
+          <td>Response</td>
+          <td>Process events, change level of service</td>
+      </tr>
+      <tr>
+          <td>Response Measure</td>
+          <td>Latency, deadline, throughput, jitter, miss rate</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="tactics-for-performance">Tactics for Performance<a hidden class="anchor" aria-hidden="true" href="#tactics-for-performance">#</a></h2>
+<p><img alt="Performance tactics" loading="lazy" src="/posts/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/software-architecture-and-quality/images/1547962999199.png"></p>
+<h3 id="control-resource-demand"><strong>Control Resource Demand</strong><a hidden class="anchor" aria-hidden="true" href="#control-resource-demand">#</a></h3>
+<ul>
+<li><strong>Manage sampling rate</strong>. If it is possible to reduce the sampling frequency at which a stream of environmental data is captured, then demand can be reduced, typically with some attendant loss of fidelity.</li>
+<li><strong>Limit event response</strong>. Process events only up to a set maximum rate, thereby ensuring more predictable processing when the events are actually processed.</li>
+<li><strong>Prioritize events</strong>. If not all events are equally important, you can impose a priority scheme that ranks events according to how important it is to service them.</li>
+</ul>
+<h3 id="manage-resources"><strong>Manage Resources</strong><a hidden class="anchor" aria-hidden="true" href="#manage-resources">#</a></h3>
+<ul>
+<li><strong>Increase resources</strong>. Faster processors, additional processors, additional memory, and faster networks all have the potential for reducing latency.</li>
+<li><strong>Introduce concurrency</strong>. Concurrency can be introduced by processing different streams of events on different threads or by creating additional threads to process different sets of activities.</li>
+<li><strong>Maintain multiple copies of computations</strong>. Reduce the contention that would occur if all computations took place on a single server.</li>
+</ul>
+<h1 id="ch13-patterns-and-tactics">CH13. Patterns and Tactics<a hidden class="anchor" aria-hidden="true" href="#ch13-patterns-and-tactics">#</a></h1>
+<h2 id="what-is-a-pattern">What is a Pattern?<a hidden class="anchor" aria-hidden="true" href="#what-is-a-pattern">#</a></h2>
+<p>An architectural pattern</p>
+<ul>
+<li>is a package of design decisions that is found repeatedly in practice,</li>
+<li>has known properties that permit reuse, and</li>
+<li>describes a class of architectures.</li>
+</ul>
+<h2 id="architectural-pattern">Architectural Pattern<a hidden class="anchor" aria-hidden="true" href="#architectural-pattern">#</a></h2>
+<ul>
+<li><strong>A context</strong>. A recuSrring, common situation in the world that gives rise to a problem.</li>
+<li><strong>A problem</strong>. The problem, appropriately generalized, that arises in the given context.</li>
+<li><strong>A solution</strong>. A successful architectural resolution to the problem, appropriately abstracted. The solution for a pattern is determined and described by:
+<ul>
+<li>A set of element types (for example, data repositories, processes, and objects)</li>
+<li>A set of interaction mechanisms or connectors (for example, method calls, events, or message bus)</li>
+<li>A topological layout of the components</li>
+<li>A set of semantic constraints covering topology, element behavior, and interaction mechanisms</li>
+</ul>
+</li>
+</ul>
+<h1 id="ch18-architecture-document">CH18. Architecture Document<a hidden class="anchor" aria-hidden="true" href="#ch18-architecture-document">#</a></h1>
+<h2 id="view-consistency">View consistency<a hidden class="anchor" aria-hidden="true" href="#view-consistency">#</a></h2>
+<h3 id="a-view-is-consistent-with-its-definition-when">A view is consistent with its definition when:<a hidden class="anchor" aria-hidden="true" href="#a-view-is-consistent-with-its-definition-when">#</a></h3>
+<ul>
+<li>All <strong>elements</strong> that fulfills the selection criterion is in the view</li>
+<li>All <strong>relations</strong> that fulfills the selection criterion is in the view</li>
+<li>That all <strong>properties</strong> that fulfills the selection criterion is in the view</li>
+<li>THAT <strong>NO additional</strong> elements, relation or properties that does not meet the selection is in the view</li>
+</ul>
+<h4 id="elements">Elements<a hidden class="anchor" aria-hidden="true" href="#elements">#</a></h4>
+<p>All elements in the view must have a corresponding part in the view definition.</p>
+<h4 id="relation">Relation<a hidden class="anchor" aria-hidden="true" href="#relation">#</a></h4>
+<p>Only relations that meet the selection criteria must be in the view.</p>
+<h4 id="properties">Properties<a hidden class="anchor" aria-hidden="true" href="#properties">#</a></h4>
+<p>Properties must have values in the view.</p>
+<h4 id="criteria">Criteria<a hidden class="anchor" aria-hidden="true" href="#criteria">#</a></h4>
+<p>Selection criteria can exclude certain elements or relations from the view.</p>
+<h2 id="41-view-model">4+1 view model<a hidden class="anchor" aria-hidden="true" href="#41-view-model">#</a></h2>
+<p>Logical, Process, Development, Physical + Use Cases</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://zjxjwxk.github.io/tags/bth/">BTH</a></li>
+      <li><a href="https://zjxjwxk.github.io/tags/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/">期末复习</a></li>
+    </ul>
+  </footer>
+</article>
+
+<script>
+  window.onload = function() {
+      var contentContainer = document.getElementById("content-container");
+      if ("" !== "") {
+          var password = prompt("Enter password:");
+          if (password === "") {
+              contentContainer.style.display = "block";
+          } else {
+              alert("Incorrect password");
+          }
+      } else {
+          contentContainer.style.display = "block";
+      }
+  };
+</script>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2024 <a href="https://zjxjwxk.github.io/">Xinkang&#39;s Blog</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

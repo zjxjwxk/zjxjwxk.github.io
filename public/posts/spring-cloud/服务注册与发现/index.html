@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Spring Cloud Eureka | Xinkang&#39;s Blog</title>
+<meta name="keywords" content="Java, Spring Cloud, 微服务架构">
+<meta name="description" content="Spring Cloud Eureka
+
+基于 Netflix Eureka 做了二次封装
+两个组件组成：
+
+Eureka Server 注册中心
+
+作为具有服务注册功能的服务器，是服务注册中心，系统中的其他微服务使用 Eureka Client 连接到Eureka Server ，并维持心跳连接以监控各个微服务是否正常运行。
+
+
+Eureka Client 服务注册
+
+用于简化与服务器的交互，作为轮询负载均衡器，并提供服务的故障切换支持。
+
+
+
+
+
+启动 Eureka Server
+1. 创建Spring项目
+
+2. 填充项目信息
+
+3. 选择项目类型为 Cloud Discovery 中的 Eureka Server
+
+4. 完成创建
+
+5. 添加注解 @EnableEurekaServer
+@SpringBootApplication
+@EnableEurekaServer
+public class EurekaApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(EurekaApplication.class, args);
+    }
+
+}
+6. 配置 application.yml
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+    register-with-eureka: false
+spring:
+  application:
+    name: eureka
+server:
+  port: 8761
+7. 启动 Eureka Server
+">
+<meta name="author" content="">
+<link rel="canonical" href="https://zjxjwxk.github.io/posts/spring-cloud/%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%8E%E5%8F%91%E7%8E%B0/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.d6fcd20a4fb86efa4dfac8ec95da60244cc8871042183da1ef28e3a762ad79c8.css" integrity="sha256-1vzSCk&#43;4bvpN&#43;sjsldpgJEzIhxBCGD2h7yjjp2Ktecg=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://zjxjwxk.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://zjxjwxk.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://zjxjwxk.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://zjxjwxk.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://zjxjwxk.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://zjxjwxk.github.io/posts/spring-cloud/%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%8E%E5%8F%91%E7%8E%B0/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><meta property="og:url" content="https://zjxjwxk.github.io/posts/spring-cloud/%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%8E%E5%8F%91%E7%8E%B0/">
+  <meta property="og:site_name" content="Xinkang&#39;s Blog">
+  <meta property="og:title" content="Spring Cloud Eureka">
+  <meta property="og:description" content="Spring Cloud Eureka 基于 Netflix Eureka 做了二次封装 两个组件组成： Eureka Server 注册中心 作为具有服务注册功能的服务器，是服务注册中心，系统中的其他微服务使用 Eureka Client 连接到Eureka Server ，并维持心跳连接以监控各个微服务是否正常运行。 Eureka Client 服务注册 用于简化与服务器的交互，作为轮询负载均衡器，并提供服务的故障切换支持。 启动 Eureka Server 1. 创建Spring项目 2. 填充项目信息 3. 选择项目类型为 Cloud Discovery 中的 Eureka Server 4. 完成创建 5. 添加注解 @EnableEurekaServer @SpringBootApplication @EnableEurekaServer public class EurekaApplication { public static void main(String[] args) { SpringApplication.run(EurekaApplication.class, args); } } 6. 配置 application.yml eureka: client: service-url: defaultZone: http://localhost:8761/eureka/ register-with-eureka: false spring: application: name: eureka server: port: 8761 7. 启动 Eureka Server ">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2019-01-31T20:18:00+00:00">
+    <meta property="article:modified_time" content="2019-01-31T20:18:00+00:00">
+    <meta property="article:tag" content="Java">
+    <meta property="article:tag" content="Spring Cloud">
+    <meta property="article:tag" content="微服务架构">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Spring Cloud Eureka">
+<meta name="twitter:description" content="Spring Cloud Eureka
+
+基于 Netflix Eureka 做了二次封装
+两个组件组成：
+
+Eureka Server 注册中心
+
+作为具有服务注册功能的服务器，是服务注册中心，系统中的其他微服务使用 Eureka Client 连接到Eureka Server ，并维持心跳连接以监控各个微服务是否正常运行。
+
+
+Eureka Client 服务注册
+
+用于简化与服务器的交互，作为轮询负载均衡器，并提供服务的故障切换支持。
+
+
+
+
+
+启动 Eureka Server
+1. 创建Spring项目
+
+2. 填充项目信息
+
+3. 选择项目类型为 Cloud Discovery 中的 Eureka Server
+
+4. 完成创建
+
+5. 添加注解 @EnableEurekaServer
+@SpringBootApplication
+@EnableEurekaServer
+public class EurekaApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(EurekaApplication.class, args);
+    }
+
+}
+6. 配置 application.yml
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+    register-with-eureka: false
+spring:
+  application:
+    name: eureka
+server:
+  port: 8761
+7. 启动 Eureka Server
+">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://zjxjwxk.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Spring Cloud Eureka",
+      "item": "https://zjxjwxk.github.io/posts/spring-cloud/%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%8E%E5%8F%91%E7%8E%B0/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Spring Cloud Eureka",
+  "name": "Spring Cloud Eureka",
+  "description": "Spring Cloud Eureka 基于 Netflix Eureka 做了二次封装 两个组件组成： Eureka Server 注册中心 作为具有服务注册功能的服务器，是服务注册中心，系统中的其他微服务使用 Eureka Client 连接到Eureka Server ，并维持心跳连接以监控各个微服务是否正常运行。 Eureka Client 服务注册 用于简化与服务器的交互，作为轮询负载均衡器，并提供服务的故障切换支持。 启动 Eureka Server 1. 创建Spring项目 2. 填充项目信息 3. 选择项目类型为 Cloud Discovery 中的 Eureka Server 4. 完成创建 5. 添加注解 @EnableEurekaServer @SpringBootApplication @EnableEurekaServer public class EurekaApplication { public static void main(String[] args) { SpringApplication.run(EurekaApplication.class, args); } } 6. 配置 application.yml eureka: client: service-url: defaultZone: http://localhost:8761/eureka/ register-with-eureka: false spring: application: name: eureka server: port: 8761 7. 启动 Eureka Server ",
+  "keywords": [
+    "Java", "Spring Cloud", "微服务架构"
+  ],
+  "articleBody": "Spring Cloud Eureka 基于 Netflix Eureka 做了二次封装 两个组件组成： Eureka Server 注册中心 作为具有服务注册功能的服务器，是服务注册中心，系统中的其他微服务使用 Eureka Client 连接到Eureka Server ，并维持心跳连接以监控各个微服务是否正常运行。 Eureka Client 服务注册 用于简化与服务器的交互，作为轮询负载均衡器，并提供服务的故障切换支持。 启动 Eureka Server 1. 创建Spring项目 2. 填充项目信息 3. 选择项目类型为 Cloud Discovery 中的 Eureka Server 4. 完成创建 5. 添加注解 @EnableEurekaServer @SpringBootApplication @EnableEurekaServer public class EurekaApplication { public static void main(String[] args) { SpringApplication.run(EurekaApplication.class, args); } } 6. 配置 application.yml eureka: client: service-url: defaultZone: http://localhost:8761/eureka/ register-with-eureka: false spring: application: name: eureka server: port: 8761 7. 启动 Eureka Server 这样，一个简单的Eureka Server就启动完成了。\n",
+  "wordCount" : "79",
+  "inLanguage": "en",
+  "datePublished": "2019-01-31T20:18:00Z",
+  "dateModified": "2019-01-31T20:18:00Z",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://zjxjwxk.github.io/posts/spring-cloud/%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%8E%E5%8F%91%E7%8E%B0/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Xinkang's Blog",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://zjxjwxk.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://zjxjwxk.github.io/" accesskey="h" title="Xinkang&#39;s Blog (Alt + H)">Xinkang&#39;s Blog</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://zjxjwxk.github.io/archives/" title="Archives">
+                    <span>Archives</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://zjxjwxk.github.io/categories/" title="Categories">
+                    <span>Categories</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://zjxjwxk.github.io/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://zjxjwxk.github.io/search/" title="Search (Alt &#43; /)" accesskey=/>
+                    <span>Search</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <div id="content-container">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      Spring Cloud Eureka
+    </h1>
+    <div class="post-meta"><span title='2019-01-31 20:18:00 +0000 UTC'>January 31, 2019</span>
+
+</div>
+  </header> 
+  <div class="post-content"><h1 id="spring-cloud-eureka">Spring Cloud Eureka<a hidden class="anchor" aria-hidden="true" href="#spring-cloud-eureka">#</a></h1>
+<ul>
+<li>基于 Netflix Eureka 做了二次封装</li>
+<li>两个组件组成：
+<ul>
+<li>Eureka Server 注册中心
+<ul>
+<li>作为具有服务注册功能的服务器，是服务注册中心，系统中的其他微服务使用 Eureka Client 连接到Eureka Server ，并维持心跳连接以监控各个微服务是否正常运行。</li>
+</ul>
+</li>
+<li>Eureka Client 服务注册
+<ul>
+<li>用于简化与服务器的交互，作为轮询负载均衡器，并提供服务的故障切换支持。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="启动-eureka-server">启动 Eureka Server<a hidden class="anchor" aria-hidden="true" href="#启动-eureka-server">#</a></h1>
+<h2 id="1-创建spring项目">1. 创建Spring项目<a hidden class="anchor" aria-hidden="true" href="#1-创建spring项目">#</a></h2>
+<p><img alt="创建Spring项目" loading="lazy" src="/posts/spring-cloud/%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%8E%E5%8F%91%E7%8E%B0/images/image-20190131155138441.png"></p>
+<h2 id="2-填充项目信息">2. 填充项目信息<a hidden class="anchor" aria-hidden="true" href="#2-填充项目信息">#</a></h2>
+<p><img alt="填充项目信息" loading="lazy" src="/posts/spring-cloud/%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%8E%E5%8F%91%E7%8E%B0/images/image-20190131155241197.png"></p>
+<h2 id="3-选择项目类型为-cloud-discovery-中的-eureka-server">3. 选择项目类型为 Cloud Discovery 中的 Eureka Server<a hidden class="anchor" aria-hidden="true" href="#3-选择项目类型为-cloud-discovery-中的-eureka-server">#</a></h2>
+<p><img alt="选择Eureka Server" loading="lazy" src="/posts/spring-cloud/%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%8E%E5%8F%91%E7%8E%B0/images/image-20190131155453826.png"></p>
+<h2 id="4-完成创建">4. 完成创建<a hidden class="anchor" aria-hidden="true" href="#4-完成创建">#</a></h2>
+<p><img alt="完成创建" loading="lazy" src="/posts/spring-cloud/%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%8E%E5%8F%91%E7%8E%B0/images/image-20190131160337079.png"></p>
+<h2 id="5-添加注解-enableeurekaserver">5. 添加注解 @EnableEurekaServer<a hidden class="anchor" aria-hidden="true" href="#5-添加注解-enableeurekaserver">#</a></h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#a6e22e">@SpringBootApplication</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@EnableEurekaServer</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">EurekaApplication</span> {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>(String<span style="color:#f92672">[]</span> args) {
+</span></span><span style="display:flex;"><span>        SpringApplication.<span style="color:#a6e22e">run</span>(EurekaApplication.<span style="color:#a6e22e">class</span>, args);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="6-配置-applicationyml">6. 配置 application.yml<a hidden class="anchor" aria-hidden="true" href="#6-配置-applicationyml">#</a></h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yml" data-lang="yml"><span style="display:flex;"><span><span style="color:#f92672">eureka</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">client</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">service-url</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">defaultZone</span>: <span style="color:#ae81ff">http://localhost:8761/eureka/</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">register-with-eureka</span>: <span style="color:#66d9ef">false</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">spring</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">application</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">name</span>: <span style="color:#ae81ff">eureka</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">server</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">port</span>: <span style="color:#ae81ff">8761</span>
+</span></span></code></pre></div><h2 id="7-启动-eureka-server">7. 启动 Eureka Server<a hidden class="anchor" aria-hidden="true" href="#7-启动-eureka-server">#</a></h2>
+<p><img alt="Eureka Server信息" loading="lazy" src="/posts/spring-cloud/%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%8E%E5%8F%91%E7%8E%B0/images/image-20190131172458551.png"></p>
+<p>这样，一个简单的Eureka Server就启动完成了。</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://zjxjwxk.github.io/tags/java/">Java</a></li>
+      <li><a href="https://zjxjwxk.github.io/tags/spring-cloud/">Spring Cloud</a></li>
+      <li><a href="https://zjxjwxk.github.io/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/">微服务架构</a></li>
+    </ul>
+  </footer>
+</article>
+
+<script>
+  window.onload = function() {
+      var contentContainer = document.getElementById("content-container");
+      if ("" !== "") {
+          var password = prompt("Enter password:");
+          if (password === "") {
+              contentContainer.style.display = "block";
+          } else {
+              alert("Incorrect password");
+          }
+      } else {
+          contentContainer.style.display = "block";
+      }
+  };
+</script>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2024 <a href="https://zjxjwxk.github.io/">Xinkang&#39;s Blog</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

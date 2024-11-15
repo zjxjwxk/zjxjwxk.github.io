@@ -1,0 +1,680 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Dubbo on Xinkang&#39;s Blog</title>
+    <link>https://zjxjwxk.github.io/categories/dubbo/</link>
+    <description>Recent content in Dubbo on Xinkang&#39;s Blog</description>
+    <generator>Hugo -- 0.138.0</generator>
+    <language>en</language>
+    <lastBuildDate>Sun, 03 May 2020 22:34:00 +0000</lastBuildDate>
+    <atom:link href="https://zjxjwxk.github.io/categories/dubbo/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Dubbo微服务影院系列（12）：系统部署</title>
+      <link>https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/12.%E7%B3%BB%E7%BB%9F%E9%83%A8%E7%BD%B2/</link>
+      <pubDate>Sun, 03 May 2020 22:34:00 +0000</pubDate>
+      <guid>https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/12.%E7%B3%BB%E7%BB%9F%E9%83%A8%E7%BD%B2/</guid>
+      <description>&lt;h1 id=&#34;运行环境&#34;&gt;运行环境&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;CentOS 6&lt;/li&gt;
+&lt;li&gt;云服务器&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;创建用户&#34;&gt;创建用户&lt;/h1&gt;
+&lt;p&gt;创建一个 cinema 用户：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;root@huawei ~&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# useradd cinema&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;root@huawei ~&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# passwd cinema&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Changing password &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; user cinema.
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;New password: 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;BAD PASSWORD: it does not contain enough DIFFERENT characters
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Retype new password: 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;passwd: all authentication tokens updated successfully.
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;给予其权限，首先需要赋予当前用户对 /etc/sudoers 的写权限，然后在 sudoers 文件中的 root ALL = (ALL) ALL 下增加一行，赋予其在任何地方执行任何命令的权限：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;chmod u+w /etc/sudoers
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;vim sudoers
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;## Allow root to run any commands anywhere &lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;root    ALL&lt;span style=&#34;color:#f92672&#34;&gt;=(&lt;/span&gt;ALL&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;       ALL
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cinema  ALL&lt;span style=&#34;color:#f92672&#34;&gt;=(&lt;/span&gt;ALL&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;       ALL
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;最后，取消当前用户的写权限：&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Dubbo微服务影院系列（11）：服务监控</title>
+      <link>https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/11.%E6%9C%8D%E5%8A%A1%E7%9B%91%E6%8E%A7/</link>
+      <pubDate>Fri, 24 Apr 2020 23:11:00 +0000</pubDate>
+      <guid>https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/11.%E6%9C%8D%E5%8A%A1%E7%9B%91%E6%8E%A7/</guid>
+      <description>&lt;h1 id=&#34;章节概要&#34;&gt;章节概要&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;了解 Dubbo 监控相关内容&lt;/li&gt;
+&lt;li&gt;熟练掌握 Dubbo-admin 使用&lt;/li&gt;
+&lt;li&gt;熟练掌握链路监控&lt;/li&gt;
+&lt;li&gt;完成业务系统部署&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;dubbo-monitor&#34;&gt;Dubbo-monitor&lt;/h1&gt;
+&lt;p&gt;&lt;img alt=&#34;Dubbo架构&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/11.%E6%9C%8D%E5%8A%A1%E7%9B%91%E6%8E%A7/images/image-20200424231550404.png&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;源码下载和打包&#34;&gt;源码下载和打包&lt;/h2&gt;
+&lt;p&gt;目前，还可以从当当网的项目 Dubbox 中获取（很久没有维护了）：https://github.com/dangdangdotcom/dubbox ，在项目中执行以下命令打包并拷贝到本地仓库（跳过单元测试）：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;mvn package -Dmaven.test.skip&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;true  
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;其中，可能会遇到 Missing artifact com.alibaba:dubbo:jar:2.8.4 的坑，需要在根项目的 pom.xml 文件中添加以下 maven 插件：&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;添加插件依赖&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/11.%E6%9C%8D%E5%8A%A1%E7%9B%91%E6%8E%A7/images/image-20200425004851922.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;这样在本地仓库就有了 ~/.m2/repository/com/alibaba/dubbo-monitor-simple/2.8.4/dubbo-monitor-simple-2.8.4-assembly.tar.gz 这个 tar.gz 包，解压它可以得到以下文件：&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;Dubbo-Monitor文件目录&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/11.%E6%9C%8D%E5%8A%A1%E7%9B%91%E6%8E%A7/images/image-20200425004950736.png&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;启动服务监控&#34;&gt;启动服务监控&lt;/h2&gt;
+&lt;p&gt;在 conf 文件夹下，编辑 dubbo.properties，将相关参数配置如下：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-properties&#34; data-lang=&#34;properties&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;dubbo.container&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;log4j,spring,registry,jetty&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;dubbo.application.name&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;simple-monitor&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;dubbo.application.owner&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#dubbo.registry.address=multicast://224.5.6.7:1234&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;dubbo.registry.address&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;zookeeper://127.0.0.1:2181&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#dubbo.registry.address=redis://127.0.0.1:6379&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#dubbo.registry.address=dubbo://127.0.0.1:9090&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;dubbo.protocol.port&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;7070&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;dubbo.jetty.port&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;8090&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;dubbo.jetty.directory&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;monitor&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;dubbo.charts.directory&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;monitor/charts&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;dubbo.statistics.directory&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;monitor/statistics&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;dubbo.log4j.file&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;monitor/dubbo-monitor-simple.log&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;dubbo.log4j.level&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;WARN&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;然后，进入 bin 目录，运行 start.sh 就可以启动 Dubbo-Monitor 了，运行在配置好的 8090 端口（需要先打开 Zookeeper）。&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;Dubbo-Monitor界面&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/11.%E6%9C%8D%E5%8A%A1%E7%9B%91%E6%8E%A7/images/image-20200425005304792.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;启动服务提供者和消费者后，可以在 Applications 中看到如下信息：&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;服务提供者和消费者&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/11.%E6%9C%8D%E5%8A%A1%E7%9B%91%E6%8E%A7/images/image-20200425010612712.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;同时，可以点击 Providers 查看服务某一服务提供者的详细信息，并且可以将其取消注册：&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Dubbo微服务影院系列（10）：分布式事务</title>
+      <link>https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/10.%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/</link>
+      <pubDate>Fri, 17 Apr 2020 20:14:00 +0000</pubDate>
+      <guid>https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/10.%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/</guid>
+      <description>&lt;h1 id=&#34;章节概要&#34;&gt;章节概要&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;事务简介&lt;/li&gt;
+&lt;li&gt;分布式事务的前世今生&lt;/li&gt;
+&lt;li&gt;分布式事务解决方案&lt;/li&gt;
+&lt;li&gt;主流分布式事务框架介绍&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;事务简介&#34;&gt;事务简介&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;事务是用来保证一组&lt;strong&gt;数据操作&lt;/strong&gt;的完整性和一致性的&lt;/li&gt;
+&lt;li&gt;事务必须满足 ACID 的四大特性&lt;/li&gt;
+&lt;li&gt;事务具有四种隔离级别&lt;/li&gt;
+&lt;li&gt;事务具有七种传播行为&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;事务属性&#34;&gt;事务属性&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;原子性（Atomicity）&lt;/li&gt;
+&lt;li&gt;一致性（Consistency）&lt;/li&gt;
+&lt;li&gt;隔离型（Isolation）&lt;/li&gt;
+&lt;li&gt;持久性（Durability）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;分布式事务&#34;&gt;分布式事务&lt;/h1&gt;
+&lt;h2 id=&#34;概念&#34;&gt;概念&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;分布式事务就是将多个节点的事务看成一个整体处理&lt;/li&gt;
+&lt;li&gt;分布式事务由事务参与者、资源服务器、事务管理器等组成&lt;/li&gt;
+&lt;li&gt;常见的分布式事务的例子：支付、下订单等&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;实现思路&#34;&gt;实现思路&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;两段式事务和三段式事务&lt;/li&gt;
+&lt;li&gt;基于 XA 的分布式事务&lt;/li&gt;
+&lt;li&gt;基于消息的最终一致性方案&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;TCC 编程式补偿性事务&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;分布式事务类型&#34;&gt;分布式事务类型&lt;/h1&gt;
+&lt;h2 id=&#34;两段式和三段式事务&#34;&gt;两段式和三段式事务&lt;/h2&gt;
+&lt;h3 id=&#34;两段式事务&#34;&gt;两段式事务&lt;/h3&gt;
+&lt;p&gt;&lt;img alt=&#34;两段式事务&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/10.%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/images/63d3220513cf709f84fdcd06457c3b65.png&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;三段式事务&#34;&gt;三段式事务&lt;/h3&gt;
+&lt;p&gt;&lt;img alt=&#34;三段式事务&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/10.%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/images/image-20200416213159506.png&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;基于-xa-的分布式事务&#34;&gt;基于 XA 的分布式事务&lt;/h2&gt;
+&lt;p&gt;&lt;img alt=&#34;基于XA的分布式事务&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/10.%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/images/image-20200416213551917.png&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;基于消息的一致性方案&#34;&gt;基于消息的一致性方案&lt;/h2&gt;
+&lt;p&gt;&lt;img alt=&#34;基于消息的一致性方案&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/10.%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/images/image-20200416215409588.png&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;tcc-补偿性事务&#34;&gt;TCC 补偿性事务&lt;/h2&gt;
+&lt;p&gt;&lt;img alt=&#34;TCC补偿性事务&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/10.%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/images/image-20200416220735799.png&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;基于消息的一致性方案和-tcc-补偿性事务的区别&#34;&gt;基于消息的一致性方案和 TCC 补偿性事务的区别&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;基于消息的事务是强一致性事务，会存在浪费&lt;/li&gt;
+&lt;li&gt;TCC 事务是柔性事务，在 try 阶段要对资源做预留&lt;/li&gt;
+&lt;li&gt;TCC 事务在确认或取消阶段释放资源&lt;/li&gt;
+&lt;li&gt;与基于消息的事务对比，TCC 的时效性更好&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;分布式事务框架&#34;&gt;分布式事务框架&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;全局事务服务（Global Transaction Service，简称 GTS）&lt;/li&gt;
+&lt;li&gt;蚂蚁金服分布式事务（Distributed Transaction-eXtended，简称 DTX）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;开源 TCC 框架（TCC-Transaction）&lt;/strong&gt;（https://github.com/changmingxie/tcc-transaction）&lt;/li&gt;
+&lt;li&gt;开源 TCC 框架（ByteTCC）（https://github.com/liuyangming/ByteTCC）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;tcc-transaction-分布式事务框架&#34;&gt;TCC-Transaction 分布式事务框架&lt;/h1&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Github 仓库：https://github.com/changmingxie/tcc-transaction&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Dubbo微服务影院系列（9）：Dubbo服务开发（支付模块开发）</title>
+      <link>https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/9.dubbo%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91%E6%94%AF%E4%BB%98%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/</link>
+      <pubDate>Sat, 11 Apr 2020 20:14:00 +0000</pubDate>
+      <guid>https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/9.dubbo%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91%E6%94%AF%E4%BB%98%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/</guid>
+      <description>&lt;h1 id=&#34;章节概要&#34;&gt;章节概要&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;完成支付模块业务开发&lt;/li&gt;
+&lt;li&gt;Dubbo 特性学习：隐式参数、参数验证等&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;dubbo-本地存根&#34;&gt;Dubbo 本地存根&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;本地存根类似于 Dubbo 的静态代理&lt;/li&gt;
+&lt;li&gt;Dubbo 会在客户端生成一个代理，处理部分业务&lt;/li&gt;
+&lt;li&gt;Stub 必须有可传入 Proxy 的构造函数&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;官方文档：https://dubbo.apache.org/zh-cn/docs/user/demos/local-stub.html&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;远程服务后，客户端通常只剩下接口，而实现全在服务器端，但提供方有些时候想在客户端也执行部分逻辑，比如：做 ThreadLocal 缓存，提前验证参数，调用失败后伪造容错数据等等，此时就需要在 API 中带上 Stub，客户端生成 Proxy 实例，会把 Proxy 通过构造函数传给 Stub，然后把 Stub 暴露给用户，Stub 可以决定要不要去调 Proxy。&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;Dubbo本地存根&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/9.dubbo%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91%E6%94%AF%E4%BB%98%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/images/stub.jpg&#34;&gt;&lt;/p&gt;
+&lt;p&gt;在 spring 配置文件中按以下方式配置：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;dubbo:service&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;interface=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;com.foo.BarService&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;stub=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;true&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;/&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;或&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;dubbo:service&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;interface=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;com.foo.BarService&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;stub=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;com.foo.BarServiceStub&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;/&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;提供 Stub 的实现：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;package&lt;/span&gt; com.foo;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;BarServiceStub&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;implements&lt;/span&gt; BarService {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;private&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;final&lt;/span&gt; BarService barService;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;// 构造函数传入真正的远程代理对象&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;BarServiceStub&lt;/span&gt;(BarService barService){
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;barService&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; barService;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; String &lt;span style=&#34;color:#a6e22e&#34;&gt;sayHello&lt;/span&gt;(String name) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#75715e&#34;&gt;// 此代码在客户端执行, 你可以在客户端做ThreadLocal本地缓存，或预先验证参数是否合法，等等&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;try&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; barService.&lt;span style=&#34;color:#a6e22e&#34;&gt;sayHello&lt;/span&gt;(name);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        } &lt;span style=&#34;color:#66d9ef&#34;&gt;catch&lt;/span&gt; (Exception e) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#75715e&#34;&gt;// 你可以容错，可以做任何AOP拦截事项&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;容错数据&amp;#34;&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol&gt;
+&lt;li&gt;Stub 必须有可传入 Proxy 的构造函数。&lt;/li&gt;
+&lt;li&gt;在 interface 旁边放一个 Stub 实现，它实现 BarService 接口，并有一个传入远程 BarService 实例的构造函数&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id=&#34;dubbo-本地伪装&#34;&gt;Dubbo 本地伪装&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;本地伪装是本地存根的一个子集&lt;/li&gt;
+&lt;li&gt;通常会使用本地伪装处理服务降级&lt;/li&gt;
+&lt;li&gt;建议本地伪装在客户端实现&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;官方文档：https://dubbo.apache.org/zh-cn/docs/user/demos/local-mock.html&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Dubbo微服务影院系列（8）：Dubbo服务开发（订单模块开发）</title>
+      <link>https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/8.dubbo%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91%E8%AE%A2%E5%8D%95%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/</link>
+      <pubDate>Sun, 05 Apr 2020 19:30:00 +0000</pubDate>
+      <guid>https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/8.dubbo%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91%E8%AE%A2%E5%8D%95%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/</guid>
+      <description>&lt;h1 id=&#34;章节概要&#34;&gt;章节概要&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;完成订单模块业务开发&lt;/li&gt;
+&lt;li&gt;完成限流和熔断、降级相关内容&lt;/li&gt;
+&lt;li&gt;Dubbo 特性之分组、聚合和版本控制&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;订单模块问题&#34;&gt;订单模块问题&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;订单模块的横向和纵向分表如何解决？&lt;/li&gt;
+&lt;li&gt;服务限流如何处理？&lt;/li&gt;
+&lt;li&gt;服务熔断和降级？&lt;/li&gt;
+&lt;li&gt;如何保证多版本的蓝绿上线？&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;横向拆分和纵向拆分&#34;&gt;横向拆分和纵向拆分&lt;/h1&gt;
+&lt;p&gt;&lt;img alt=&#34;横向拆分和纵向拆分&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/8.dubbo%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91%E8%AE%A2%E5%8D%95%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/images/image-20200408000355380.png&#34;&gt;&lt;/p&gt;
+&lt;h1 id=&#34;dubbo-服务分组&#34;&gt;Dubbo 服务分组&lt;/h1&gt;
+&lt;blockquote&gt;
+&lt;p&gt;官方文档：https://dubbo.apache.org/zh-cn/docs/user/demos/service-group.html&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;当一个接口有多种实现时，可以用 group 区分。&lt;/p&gt;
+&lt;h2 id=&#34;服务&#34;&gt;服务&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;dubbo:service&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;group=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;feedback&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;interface=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;com.xxx.IndexService&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;/&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;dubbo:service&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;group=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;member&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;interface=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;com.xxx.IndexService&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;/&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;引用&#34;&gt;引用&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;dubbo:reference&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;id=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;feedbackIndexService&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;group=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;feedback&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;interface=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;com.xxx.IndexService&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;/&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;dubbo:reference&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;id=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;memberIndexService&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;group=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;member&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;interface=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;com.xxx.IndexService&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;/&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;任意组：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;dubbo:reference&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;id=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;barService&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;interface=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;com.foo.BarService&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;group=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;*&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;/&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;dubbo-分组聚合&#34;&gt;Dubbo 分组聚合&lt;/h1&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&#34;https://dubbo.apache.org/zh-cn/docs/user/demos/group-merger.html&#34;&gt;https://dubbo.apache.org/zh-cn/docs/user/demos/group-merger.html&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;按组合并返回结果，比如菜单服务，接口一样，但有多种实现，用 group 区分，现在消费方需从每种 group 中调用一次返回结果，合并结果返回，这样就可以实现聚合菜单项。&lt;/p&gt;
+&lt;h2 id=&#34;配置&#34;&gt;配置&lt;/h2&gt;
+&lt;p&gt;搜索所有分组&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;dubbo:reference&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;interface=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;com.xxx.MenuService&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;group=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;*&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;merger=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;true&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;/&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;合并指定分组&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;dubbo:reference&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;interface=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;com.xxx.MenuService&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;group=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;aaa,bbb&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;merger=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;true&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;/&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;指定方法合并结果，其它未指定的方法，将只调用一个 Group&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;dubbo:reference&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;interface=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;com.xxx.MenuService&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;group=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;*&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;dubbo:method&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;name=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;getMenuItems&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;merger=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;true&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;/&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/dubbo:reference&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;某个方法不合并结果，其它都合并结果&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;dubbo:reference&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;interface=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;com.xxx.MenuService&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;group=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;*&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;merger=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;true&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;dubbo:method&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;name=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;getMenuItems&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;merger=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;false&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;/&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/dubbo:reference&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;指定合并策略，缺省根据返回值类型自动匹配，如果同一类型有两个合并器时，需指定合并器的名称&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;dubbo:reference&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;interface=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;com.xxx.MenuService&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;group=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;*&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;dubbo:method&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;name=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;getMenuItems&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;merger=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;mymerge&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;/&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/dubbo:reference&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;指定合并方法，将调用返回结果的指定方法进行合并，合并方法的参数类型必须是返回结果类型本身&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;dubbo:reference&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;interface=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;com.xxx.MenuService&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;group=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;*&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;dubbo:method&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;name=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;getMenuItems&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;merger=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;.addAll&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;/&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/dubbo:reference&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;dubbo-多版本&#34;&gt;Dubbo 多版本&lt;/h1&gt;
+&lt;p&gt;当一个接口实现，出现不兼容升级时，可以用版本号过渡，版本号不同的服务相互间不引用。&lt;/p&gt;
+&lt;p&gt;可以按照以下的步骤进行版本迁移：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;在低压力时间段，先升级一半提供者为新版本&lt;/li&gt;
+&lt;li&gt;再将所有消费者升级为新版本&lt;/li&gt;
+&lt;li&gt;然后将剩下的一半提供者升级为新版本&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;配置-1&#34;&gt;配置&lt;/h2&gt;
+&lt;p&gt;老版本服务提供者配置：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;dubbo:service&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;interface=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;com.foo.BarService&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;version=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;1.0.0&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;/&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;新版本服务提供者配置：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;dubbo:service&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;interface=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;com.foo.BarService&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;version=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;2.0.0&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;/&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;老版本服务消费者配置：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;dubbo:reference&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;id=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;barService&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;interface=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;com.foo.BarService&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;version=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;1.0.0&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;/&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;新版本服务消费者配置：&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Dubbo微服务影院系列（7）：Dubbo服务开发（影院模块开发）</title>
+      <link>https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/7.dubbo%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91%E5%BD%B1%E9%99%A2%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/</link>
+      <pubDate>Mon, 30 Mar 2020 21:21:00 +0000</pubDate>
+      <guid>https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/7.dubbo%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91%E5%BD%B1%E9%99%A2%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/</guid>
+      <description>&lt;h1 id=&#34;章节概要&#34;&gt;章节概要&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;完成影院模块业务开发&lt;/li&gt;
+&lt;li&gt;修改全局异常返回&lt;/li&gt;
+&lt;li&gt;学习 Dubbo 特性：结果缓存，连接和并发控制&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;dubbo-结果缓存&#34;&gt;Dubbo 结果缓存&lt;/h1&gt;
+&lt;blockquote&gt;
+&lt;p&gt;官方文档：https://dubbo.apache.org/zh-cn/docs/user/demos/result-cache.html&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;用于加速热门数据的访问速度，Dubbo 提供声明式缓存，以减少用户加缓存的工作量。&lt;/p&gt;
+&lt;h2 id=&#34;缓存类型&#34;&gt;缓存类型&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;lru&lt;/code&gt; 基于最近最少使用原则删除多余缓存，保持最热的数据被缓存。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;threadlocal&lt;/code&gt; 当前线程缓存，比如一个页面渲染，用到很多 portal，每个 portal 都要去查用户信息，通过线程缓存，可以减少这种多余访问。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;配置&#34;&gt;配置&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;dubbo:reference&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;interface=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;com.foo.BarService&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;cache=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;lru&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;/&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;或：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;dubbo:reference&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;interface=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;com.foo.BarService&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;dubbo:method&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;name=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;findBar&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;cache=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;lru&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;/&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/dubbo:reference&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;了解 Dubbo 结果缓存与 Redis 缓存等的区别：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Dubbo 结果缓存是本地缓存，保存在当前 JVM 中，多台机器存储多份缓存。适合数据量小的数据，存储在本地占用资源少，而且速度较快。&lt;/li&gt;
+&lt;li&gt;Redis 缓存则是分布式缓存，多台机器共享缓存。&lt;/li&gt;
+&lt;li&gt;小数据量的可以放在 Dubbo 结果缓存中，需要计算和共享的缓存数据可以放在 Redis 中。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;dubbo-连接并发控制&#34;&gt;Dubbo 连接、并发控制&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;Dubbo 可以对连接、并发数量进行控制&lt;/li&gt;
+&lt;li&gt;超出部分以错误形式返回&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;dubbo-连接控制&#34;&gt;Dubbo 连接控制&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;官方文档：https://dubbo.apache.org/zh-cn/docs/user/demos/config-connections.html&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;服务端连接控制&#34;&gt;服务端连接控制&lt;/h3&gt;
+&lt;p&gt;限制服务器端接受的连接不能超过 10 个：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;dubbo:provider&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;protocol=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;dubbo&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;accepts=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;10&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;/&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;或&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;dubbo:protocol&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;name=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;dubbo&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;accepts=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;10&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;/&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;客户端连接控制&#34;&gt;客户端连接控制&lt;/h3&gt;
+&lt;p&gt;限制客户端服务使用连接不能超过 10 个（如果是长连接，比如 Dubbo 协议，connections 表示该服务对每个提供者建立的长连接数）：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;dubbo:reference&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;interface=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;com.foo.BarService&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;connections=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;10&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;/&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;或&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;dubbo:service&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;interface=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;com.foo.BarService&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;connections=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;10&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;/&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;如果 dubbo:service 和 dubbo:reference 都配了 connections，dubbo:reference 优先。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Dubbo微服务影院系列（6）：Dubbo服务开发（影片模块开发）</title>
+      <link>https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/6.dubbo%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91%E5%BD%B1%E7%89%87%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/</link>
+      <pubDate>Sun, 22 Mar 2020 19:47:00 +0000</pubDate>
+      <guid>https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/6.dubbo%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91%E5%BD%B1%E7%89%87%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/</guid>
+      <description>&lt;h1 id=&#34;章节概要&#34;&gt;章节概要&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;掌握 API 网关服务聚合功能的实现&lt;/li&gt;
+&lt;li&gt;掌握 Mybatis-plus 自定义 SQL 实现&lt;/li&gt;
+&lt;li&gt;掌握 Dubbo 异步调用&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;服务聚合&#34;&gt;服务聚合&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;服务聚合就是将多个服务调用封装&lt;/li&gt;
+&lt;li&gt;服务聚合可以简化前端调用方式&lt;/li&gt;
+&lt;li&gt;服务聚合提供更好的安全性、可扩展性&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;业务功能开发流程&#34;&gt;业务功能开发流程&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;根据接口文档思考功能列表&lt;/li&gt;
+&lt;li&gt;实现 API 接口和实体&lt;/li&gt;
+&lt;li&gt;服务提供者实现&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;影片模块创建&#34;&gt;影片模块创建&lt;/h1&gt;
+&lt;p&gt;从 guns-user 拷贝一份重命名为 guns-film，修改相关配置&lt;/p&gt;
+&lt;h1 id=&#34;api-网关功能聚合&#34;&gt;API 网关功能聚合&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;优点
+&lt;ol&gt;
+&lt;li&gt;六个接口，一次请求，同一时刻节省了5次HTTP请求&lt;/li&gt;
+&lt;li&gt;同一个接口对外暴露，降低了前后端分离开发的难度和复杂度&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;缺点：
+&lt;ol&gt;
+&lt;li&gt;一次获取数据过多，容易出现问题&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;如 gateway 中的影片模块的获取首页信息接口，将 filmServiceApi 的多个方法所获得的对象聚合为 FilmIndexVO 对象返回给前端，将原本需要的多个接口聚合为一个 /film/getIndex 接口，避免了前端对不同接口的多次调用。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;@RequestMapping&lt;/span&gt;(value &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;getIndex&amp;#34;&lt;/span&gt;, method &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; RequestMethod.&lt;span style=&#34;color:#a6e22e&#34;&gt;GET&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; ResponseVO &lt;span style=&#34;color:#a6e22e&#34;&gt;getIndex&lt;/span&gt;() {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        FilmIndexVO filmIndexVO &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;new&lt;/span&gt; FilmIndexVO();
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#75715e&#34;&gt;// 获取banner信息&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        filmIndexVO.&lt;span style=&#34;color:#a6e22e&#34;&gt;setBanners&lt;/span&gt;(filmServiceApi.&lt;span style=&#34;color:#a6e22e&#34;&gt;getBanners&lt;/span&gt;());
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#75715e&#34;&gt;// 获取热映的影片&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        filmIndexVO.&lt;span style=&#34;color:#a6e22e&#34;&gt;setHotFilms&lt;/span&gt;(filmServiceApi.&lt;span style=&#34;color:#a6e22e&#34;&gt;getHotFilms&lt;/span&gt;(&lt;span style=&#34;color:#66d9ef&#34;&gt;true&lt;/span&gt;, 99, 99, 99, 99, 1, 8));
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#75715e&#34;&gt;// 获取即将上映的影片&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        filmIndexVO.&lt;span style=&#34;color:#a6e22e&#34;&gt;setSoonFilms&lt;/span&gt;(filmServiceApi.&lt;span style=&#34;color:#a6e22e&#34;&gt;getSoonFilms&lt;/span&gt;(&lt;span style=&#34;color:#66d9ef&#34;&gt;true&lt;/span&gt;, 99, 99, 99, 99, 1, 8));
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#75715e&#34;&gt;// 获取票房排行榜&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        filmIndexVO.&lt;span style=&#34;color:#a6e22e&#34;&gt;setBoxRanking&lt;/span&gt;(filmServiceApi.&lt;span style=&#34;color:#a6e22e&#34;&gt;getBoxRanking&lt;/span&gt;());
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#75715e&#34;&gt;// 获取人气榜单&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        filmIndexVO.&lt;span style=&#34;color:#a6e22e&#34;&gt;setExpectRanking&lt;/span&gt;(filmServiceApi.&lt;span style=&#34;color:#a6e22e&#34;&gt;getExpectRanking&lt;/span&gt;());
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#75715e&#34;&gt;// 获取排行前100影片&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        filmIndexVO.&lt;span style=&#34;color:#a6e22e&#34;&gt;setTop100&lt;/span&gt;(filmServiceApi.&lt;span style=&#34;color:#a6e22e&#34;&gt;getTop&lt;/span&gt;());
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; ResponseVO.&lt;span style=&#34;color:#a6e22e&#34;&gt;success&lt;/span&gt;(IMG_PRE, filmIndexVO);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;mybatis-plus-自定义-sql-实现&#34;&gt;Mybatis-plus 自定义 SQL 实现&lt;/h1&gt;
+&lt;p&gt;在相应的 Mapper 接口中添加方法&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Dubbo微服务影院系列（5）：Dubbo基本特性（用户模块开发）</title>
+      <link>https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/5.dubbo%E5%9F%BA%E6%9C%AC%E7%89%B9%E6%80%A7%E7%94%A8%E6%88%B7%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/</link>
+      <pubDate>Wed, 11 Mar 2020 23:45:00 +0000</pubDate>
+      <guid>https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/5.dubbo%E5%9F%BA%E6%9C%AC%E7%89%B9%E6%80%A7%E7%94%A8%E6%88%B7%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/</guid>
+      <description>&lt;h1 id=&#34;章节概要&#34;&gt;章节概要&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;学会 API 网关权限验证和其他服务交互&lt;/li&gt;
+&lt;li&gt;学会开发 SpringBoot 的自定义配置&lt;/li&gt;
+&lt;li&gt;学会 Dubbo 负载均衡策略选择和使用&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;修改-guns-中的-jwt-模块&#34;&gt;修改 Guns 中的 JWT 模块&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;增加忽略验证 URL 配置&lt;/li&gt;
+&lt;li&gt;修改返回内容匹配业务&lt;/li&gt;
+&lt;li&gt;增加 Threadlocal 的用户信息保存&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;业务功能开发&#34;&gt;业务功能开发&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;增加用户服务并提供接口&lt;/li&gt;
+&lt;li&gt;初步了解 API 网关与服务之间交互的过程&lt;/li&gt;
+&lt;li&gt;根据接口文档开发用户接口&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;创建用户表&#34;&gt;创建用户表&lt;/h1&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;DROP&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;TABLE&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;IF&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;EXISTS&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;user&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;CREATE&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;TABLE&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;user&lt;/span&gt;(
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   UUID INT &lt;span style=&#34;color:#66d9ef&#34;&gt;PRIMARY&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;KEY&lt;/span&gt; AUTO_INCREMENT &lt;span style=&#34;color:#66d9ef&#34;&gt;COMMENT&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;主键编号&amp;#39;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   user_name VARCHAR(&lt;span style=&#34;color:#ae81ff&#34;&gt;50&lt;/span&gt;) &lt;span style=&#34;color:#66d9ef&#34;&gt;COMMENT&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;用户账号&amp;#39;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   user_pwd VARCHAR(&lt;span style=&#34;color:#ae81ff&#34;&gt;50&lt;/span&gt;) &lt;span style=&#34;color:#66d9ef&#34;&gt;COMMENT&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;用户密码&amp;#39;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   nick_name VARCHAR(&lt;span style=&#34;color:#ae81ff&#34;&gt;50&lt;/span&gt;) &lt;span style=&#34;color:#66d9ef&#34;&gt;COMMENT&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;用户昵称&amp;#39;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   user_sex INT &lt;span style=&#34;color:#66d9ef&#34;&gt;COMMENT&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;用户性别 0-男，1-女&amp;#39;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   birthday VARCHAR(&lt;span style=&#34;color:#ae81ff&#34;&gt;50&lt;/span&gt;) &lt;span style=&#34;color:#66d9ef&#34;&gt;COMMENT&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;出生日期&amp;#39;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   email VARCHAR(&lt;span style=&#34;color:#ae81ff&#34;&gt;50&lt;/span&gt;) &lt;span style=&#34;color:#66d9ef&#34;&gt;COMMENT&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;用户邮箱&amp;#39;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   user_phone VARCHAR(&lt;span style=&#34;color:#ae81ff&#34;&gt;50&lt;/span&gt;) &lt;span style=&#34;color:#66d9ef&#34;&gt;COMMENT&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;用户手机号&amp;#39;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   address VARCHAR(&lt;span style=&#34;color:#ae81ff&#34;&gt;50&lt;/span&gt;) &lt;span style=&#34;color:#66d9ef&#34;&gt;COMMENT&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;用户住址&amp;#39;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   head_url VARCHAR(&lt;span style=&#34;color:#ae81ff&#34;&gt;50&lt;/span&gt;) &lt;span style=&#34;color:#66d9ef&#34;&gt;COMMENT&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;头像URL&amp;#39;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   biography VARCHAR(&lt;span style=&#34;color:#ae81ff&#34;&gt;200&lt;/span&gt;) &lt;span style=&#34;color:#66d9ef&#34;&gt;COMMENT&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;个人介绍&amp;#39;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   life_state INT &lt;span style=&#34;color:#66d9ef&#34;&gt;COMMENT&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;生活状态 0-单身，1-热恋中，2-已婚，3-为人父母&amp;#39;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   begin_time &lt;span style=&#34;color:#66d9ef&#34;&gt;TIMESTAMP&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;DEFAULT&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;CURRENT_TIMESTAMP&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;COMMENT&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;创建时间&amp;#39;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   update_time &lt;span style=&#34;color:#66d9ef&#34;&gt;TIMESTAMP&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;DEFAULT&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;CURRENT_TIMESTAMP&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;ON&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;UPDATE&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;CURRENT_TIMESTAMP&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;COMMENT&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;修改时间&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;) &lt;span style=&#34;color:#66d9ef&#34;&gt;COMMENT&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;用户表&amp;#39;&lt;/span&gt; ENGINE &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; INNODB AUTO_INCREMENT &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt; CHARACTER &lt;span style=&#34;color:#66d9ef&#34;&gt;SET&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; utf8 &lt;span style=&#34;color:#66d9ef&#34;&gt;COLLATE&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; utf8_general_ci ROW_FORMAT &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;DYNAMIC&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;insert&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;into&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;user&lt;/span&gt;(user_name,user_pwd,nick_name,user_sex,birthday,email,user_phone,address,head_url,life_state,biography) &lt;span style=&#34;color:#66d9ef&#34;&gt;values&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;admin&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;0192023a7bbd73250516f069df18b500&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;管理员&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;2018-07-31&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;admin@gmail.com&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;13888888888&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;浙江省杭州市西湖区某路某号&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;cinema/img/head-img.jpg&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;我是苦逼的管理员&amp;#39;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;insert&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;into&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;user&lt;/span&gt;(user_name,user_pwd,nick_name,user_sex,birthday,email,user_phone,address,head_url,life_state,biography) &lt;span style=&#34;color:#66d9ef&#34;&gt;values&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;test&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;5e2de6bd1c9b50f6e27d4e55da43b917&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;测试用户&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;2018-08-20&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;test@gmail.com&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;13866666666&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;测试地址&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;cinema/img/head-img.jpg&amp;#39;&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;我是测试用户&amp;#39;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;用户服务与网关交互&#34;&gt;用户服务与网关交互&lt;/h1&gt;
+&lt;p&gt;在 guns 项目中复制一份 guns-gateway 模块并重命名为 guns-user（修改相应子模块和主模块的 pom.xml 等），并在 application.yml 中将其鉴权机制等关闭（网关才需要）&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Dubbo微服务影院系列（4）：业务基础环境构建</title>
+      <link>https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/4.%E4%B8%9A%E5%8A%A1%E5%9F%BA%E7%A1%80%E7%8E%AF%E5%A2%83%E6%9E%84%E5%BB%BA/</link>
+      <pubDate>Mon, 09 Mar 2020 22:25:00 +0000</pubDate>
+      <guid>https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/4.%E4%B8%9A%E5%8A%A1%E5%9F%BA%E7%A1%80%E7%8E%AF%E5%A2%83%E6%9E%84%E5%BB%BA/</guid>
+      <description>&lt;h1 id=&#34;章节概要&#34;&gt;章节概要&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;构建基于 Guns + SpringBoot + Dubbo 的框架&lt;/li&gt;
+&lt;li&gt;学会抽离业务接口&lt;/li&gt;
+&lt;li&gt;学会 API 网关变形应用&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;api-网关介绍&#34;&gt;API 网关介绍&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;API 网关有点类似于设计模式中的 Facade 模式&lt;/li&gt;
+&lt;li&gt;API 网关一般都是微服务系统中的门面&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;API  网关是微服务的重要组成部分&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img alt=&#34;API网关示意图&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/4.%E4%B8%9A%E5%8A%A1%E5%9F%BA%E7%A1%80%E7%8E%AF%E5%A2%83%E6%9E%84%E5%BB%BA/images/image-20200309195624129.png&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;api-网关的常见作用&#34;&gt;API 网关的常见作用&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;身份验证和安全&lt;/li&gt;
+&lt;li&gt;审查和检测&lt;/li&gt;
+&lt;li&gt;动态路由&lt;/li&gt;
+&lt;li&gt;压力测试&lt;/li&gt;
+&lt;li&gt;负载均衡（Dubbo 自带）&lt;/li&gt;
+&lt;li&gt;静态相应处理&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img alt=&#34;API网关作用&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/4.%E4%B8%9A%E5%8A%A1%E5%9F%BA%E7%A1%80%E7%8E%AF%E5%A2%83%E6%9E%84%E5%BB%BA/images/image-20200309200432132.png&#34;&gt;&lt;/p&gt;
+&lt;h1 id=&#34;guns-环境构建&#34;&gt;Guns 环境构建&lt;/h1&gt;
+&lt;h2 id=&#34;导入-guns-项目&#34;&gt;导入 guns 项目&lt;/h2&gt;
+&lt;p&gt;&lt;img alt=&#34;guns项目结构&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/4.%E4%B8%9A%E5%8A%A1%E5%9F%BA%E7%A1%80%E7%8E%AF%E5%A2%83%E6%9E%84%E5%BB%BA/images/image-20200309203515871.png&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;创建-guns_rest-数据库&#34;&gt;创建 guns_rest 数据库&lt;/h2&gt;
+&lt;p&gt;&lt;img alt=&#34;guns_rest数据库&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/4.%E4%B8%9A%E5%8A%A1%E5%9F%BA%E7%A1%80%E7%8E%AF%E5%A2%83%E6%9E%84%E5%BB%BA/images/image-20200309203649262.png&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;创建-user-表&#34;&gt;创建 user 表&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;-- ----------------------------
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;-- Table structure for user
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;-- ----------------------------
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;DROP&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;TABLE&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;IF&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;EXISTS&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;`&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;user&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;`&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;CREATE&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;TABLE&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;`&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;user&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;`&lt;/span&gt;  (
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;`&lt;/span&gt;id&lt;span style=&#34;color:#f92672&#34;&gt;`&lt;/span&gt; bigint(&lt;span style=&#34;color:#ae81ff&#34;&gt;20&lt;/span&gt;) &lt;span style=&#34;color:#66d9ef&#34;&gt;NOT&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;NULL&lt;/span&gt; AUTO_INCREMENT,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;`&lt;/span&gt;userName&lt;span style=&#34;color:#f92672&#34;&gt;`&lt;/span&gt; varchar(&lt;span style=&#34;color:#ae81ff&#34;&gt;255&lt;/span&gt;) CHARACTER &lt;span style=&#34;color:#66d9ef&#34;&gt;SET&lt;/span&gt; utf8 &lt;span style=&#34;color:#66d9ef&#34;&gt;COLLATE&lt;/span&gt; utf8_general_ci &lt;span style=&#34;color:#66d9ef&#34;&gt;DEFAULT&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;NULL&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#66d9ef&#34;&gt;PRIMARY&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;KEY&lt;/span&gt; (&lt;span style=&#34;color:#f92672&#34;&gt;`&lt;/span&gt;id&lt;span style=&#34;color:#f92672&#34;&gt;`&lt;/span&gt;) &lt;span style=&#34;color:#66d9ef&#34;&gt;USING&lt;/span&gt; BTREE
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;) ENGINE &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; InnoDB AUTO_INCREMENT &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt; CHARACTER &lt;span style=&#34;color:#66d9ef&#34;&gt;SET&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; utf8 &lt;span style=&#34;color:#66d9ef&#34;&gt;COLLATE&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; utf8_general_ci ROW_FORMAT &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;Dynamic&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;-- ----------------------------
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;-- Records of user
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;-- ----------------------------
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;INSERT&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;INTO&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;`&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;user&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;`&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;VALUES&lt;/span&gt; (&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;admin&amp;#39;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;SET&lt;/span&gt; FOREIGN_KEY_CHECKS &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;添加-log4j-依赖&#34;&gt;添加 log4j 依赖&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;dependency&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;log4j&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;log4j&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;1.2.17&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/dependency&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;修改-datasource-的-url&#34;&gt;修改 datasource 的 url&lt;/h2&gt;
+&lt;p&gt;修改 application.yml 中 spring 的 datasource 的 url 为&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Dubbo微服务影院系列（3）：环境搭建</title>
+      <link>https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/3.%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</link>
+      <pubDate>Sun, 08 Mar 2020 23:14:00 +0000</pubDate>
+      <guid>https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/3.%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</guid>
+      <description>&lt;h1 id=&#34;基础环境搭建&#34;&gt;基础环境搭建&lt;/h1&gt;
+&lt;h2 id=&#34;基于guns--springboot--dubbo构建影院平台&#34;&gt;基于Guns + SpringBoot + Dubbo构建影院平台&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Spring + Dubbo&lt;/li&gt;
+&lt;li&gt;SpringBoot + Dubbo&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;微服务基本概念&#34;&gt;微服务基本概念&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Provider：服务提供者&lt;/li&gt;
+&lt;li&gt;Consumer：服务调用者，调用 Provider 提供的服务实现&lt;/li&gt;
+&lt;li&gt;同一个服务可以即是 Provider，又是 Consumer&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;以下可以选用 Spring 或 SpringBoot&lt;/p&gt;
+&lt;h2 id=&#34;spring基础环境构建&#34;&gt;Spring基础环境构建&lt;/h2&gt;
+&lt;h3 id=&#34;项目结构&#34;&gt;项目结构&lt;/h3&gt;
+&lt;p&gt;&lt;img alt=&#34;Spring基础环境项目结构&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/3.%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/images/image-20200306232618900.png&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;主模块spring-dubbo-demo&#34;&gt;主模块（Spring-Dubbo-Demo）&lt;/h3&gt;
+&lt;p&gt;在 pom.xml 中添加 dependencies&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;dependencies&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;dependency&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;com.101tec&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;zkclient&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;0.9&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/dependency&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;dependency&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;org.apache.zookeeper&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;zookeeper&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;3.4.9&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;type&amp;gt;&lt;/span&gt;pom&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/type&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/dependency&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;dependency&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;com.alibaba&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;dubbo&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;2.5.3&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/dependency&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;dependency&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;io.netty&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;netty-all&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;4.1.6.Final&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/dependency&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;dependency&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;commons-logging&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;commons-logging&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;1.2&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/dependency&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;dependency&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;org.javassist&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;javassist&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;3.21.0-GA&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/dependency&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;dependency&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;log4j&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;log4j&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;1.2.17&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/dependency&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;&amp;lt;!-- spring相关jar --&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;dependency&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;org.springframework&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;spring-context&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;4.3.3.RELEASE&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/dependency&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;dependency&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;org.springframework&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;spring-context-support&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;4.3.3.RELEASE&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/dependency&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;dependency&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;org.springframework&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;spring-core&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;4.3.3.RELEASE&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/dependency&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;dependency&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;org.springframework&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;spring-beans&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;4.3.3.RELEASE&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/dependency&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;dependency&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;org.springframework&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;spring-aop&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;4.3.3.RELEASE&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/dependency&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;dependency&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;org.springframework&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;spring-aspects&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;4.3.3.RELEASE&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/dependency&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;dependency&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;org.springframework&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;spring-expression&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;4.3.3.RELEASE&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/dependency&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;dependency&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;junit&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;junit&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;4.12&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;scope&amp;gt;&lt;/span&gt;test&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/scope&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/dependency&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;/dependencies&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;子模块providerconsumer&#34;&gt;子模块（provider、consumer）&lt;/h3&gt;
+&lt;p&gt;在 resources 中添加 applicationContext.xml（可更改后缀）&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Dubbo微服务影院系列（2）：微服务入门</title>
+      <link>https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/2.%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%85%A5%E9%97%A8/</link>
+      <pubDate>Fri, 06 Mar 2020 23:14:00 +0000</pubDate>
+      <guid>https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/2.%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%85%A5%E9%97%A8/</guid>
+      <description>&lt;h1 id=&#34;传统业务应用&#34;&gt;传统业务应用&lt;/h1&gt;
+&lt;p&gt;&lt;img alt=&#34;传统业务应用&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/2.%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%85%A5%E9%97%A8/images/image-20200306231434458.png&#34;&gt;&lt;/p&gt;
+&lt;h1 id=&#34;传统应用带来的问题&#34;&gt;传统应用带来的问题&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;单一业务开发和迭代困难&lt;/li&gt;
+&lt;li&gt;扩容困难&lt;/li&gt;
+&lt;li&gt;部署和回滚困难&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;微服务发展历程&#34;&gt;微服务发展历程&lt;/h1&gt;
+&lt;h2 id=&#34;面向服务开发---soa&#34;&gt;面向服务开发 - SOA&lt;/h2&gt;
+&lt;p&gt;&lt;img alt=&#34;SOA&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/2.%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%85%A5%E9%97%A8/images/image-20200306231555431.png&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;微服务开发&#34;&gt;微服务开发&lt;/h2&gt;
+&lt;h1 id=&#34;微服务概述&#34;&gt;微服务概述&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;微服务是一种将业务系统进一步拆分的架构风格&lt;/li&gt;
+&lt;li&gt;微服务强调每个单一业务都独立运行&lt;/li&gt;
+&lt;li&gt;每个单一服务都应该使用更轻量的机制保持通信&lt;/li&gt;
+&lt;li&gt;服务不强调环境，可以不同语言或数据源&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;微服务选择&#34;&gt;微服务选择&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;Dubbo&lt;/li&gt;
+&lt;li&gt;Spring Cloud&lt;/li&gt;
+&lt;li&gt;Zero ICE&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
+    <item>
+      <title>Dubbo微服务影院系列（1）：课程导学</title>
+      <link>https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/1.%E8%AF%BE%E7%A8%8B%E5%AF%BC%E5%AD%A6/</link>
+      <pubDate>Fri, 06 Mar 2020 18:39:00 +0000</pubDate>
+      <guid>https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/1.%E8%AF%BE%E7%A8%8B%E5%AF%BC%E5%AD%A6/</guid>
+      <description>&lt;h1 id=&#34;为什么使用dubbo&#34;&gt;为什么使用Dubbo&lt;/h1&gt;
+&lt;h2 id=&#34;dubbo-是基于-rpc-通信协议速度更快&#34;&gt;Dubbo 是基于 RPC 通信协议，速度更快&lt;/h2&gt;
+&lt;p&gt;&lt;img alt=&#34;千万次调用&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/1.%E8%AF%BE%E7%A8%8B%E5%AF%BC%E5%AD%A6/images/image-20200306225758803.png&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;dubbo-的多中心配置更灵活&#34;&gt;Dubbo 的多中心配置更灵活&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;ZooKeeper&lt;/li&gt;
+&lt;li&gt;Redis&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;dubbo-可以按需集成其他组件完成微服务生态环境构建&#34;&gt;Dubbo 可以按需集成其他组件，完成微服务生态环境构建&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Hystrix&lt;/li&gt;
+&lt;li&gt;Zipkin&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;包括阿里小米京东等多家互联网公司都有使用&#34;&gt;包括阿里、小米、京东等多家互联网公司都有使用&lt;/h2&gt;
+&lt;h1 id=&#34;学习目标&#34;&gt;学习目标&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;构建业务完整的商业化项目&lt;/li&gt;
+&lt;li&gt;掌握以 Dubbo 为底的各项微服务套件的应用&lt;/li&gt;
+&lt;li&gt;掌握基于 Dubbo 的微服务常见面试问题&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;业务结构图&#34;&gt;业务结构图&lt;/h1&gt;
+&lt;p&gt;&lt;img alt=&#34;业务结构图&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/1.%E8%AF%BE%E7%A8%8B%E5%AF%BC%E5%AD%A6/images/image-20200306230144862.png&#34;&gt;&lt;/p&gt;
+&lt;h1 id=&#34;核心功能&#34;&gt;核心功能&lt;/h1&gt;
+&lt;p&gt;&lt;img alt=&#34;核心功能&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/1.%E8%AF%BE%E7%A8%8B%E5%AF%BC%E5%AD%A6/images/image-20200306230227966.png&#34;&gt;&lt;/p&gt;
+&lt;h1 id=&#34;主要知识点&#34;&gt;主要知识点&lt;/h1&gt;
+&lt;p&gt;&lt;img alt=&#34;主要知识点&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/1.%E8%AF%BE%E7%A8%8B%E5%AF%BC%E5%AD%A6/images/image-20200306230255648.png&#34;&gt;&lt;/p&gt;
+&lt;h1 id=&#34;技术架构图&#34;&gt;技术架构图&lt;/h1&gt;
+&lt;p&gt;&lt;img alt=&#34;技术架构图&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/1.%E8%AF%BE%E7%A8%8B%E5%AF%BC%E5%AD%A6/images/image-20200306230335981.png&#34;&gt;&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

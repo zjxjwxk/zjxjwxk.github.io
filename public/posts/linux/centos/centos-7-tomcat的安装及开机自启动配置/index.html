@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>CentOS 7 Tomcat开机自启动配置 | Xinkang&#39;s Blog</title>
+<meta name="keywords" content="Linux, CentOS, Tomcat">
+<meta name="description" content="CentOS 7 Tomcat开机自启动配置
+配置开机运行
+Tomcat增加启动参数
+Tomcat需要增加一个pid文件，在 $CATALINA_HOME/bin 目录下面，增加 setenv.sh 配置，catalina.sh启动的时候会调用，同时配置Java内存参数。添加如下命令：
+[root@vps bin]# vim setenv.sh
+#Tomcat startup pid
+
+#set Java runtime environment variable 
+export JAVA_HOME=/usr/java/jdk1.8.0_191-amd64
+export PATH=$PATH:$JAVA_HOME/bin
+export CATALINA_HOME=/developer/apache-tomcat-7.0.91
+export CATALINA_BASE=/developer/apache-tomcat-7.0.91
+
+#add Tomcat pid
+CATALINA_PID=&#34;$CATALINA_BASE/tomcat.pid&#34;
+
+#add Java opts
+JAVA_OPTS=&#34;-server -XX:PermSize=256M -XX:MaxPermSize=1024m -Xms512M -Xmx1024M -XX:MaxNewSize=256m&#34;
+注意: 配置开机运行时,需要再次添加 JAVA_HOME
+增加 tomcat.service
+在/usr/lib/systemd/system目录下增加tomcat.service，目录必须是绝对目录，添加如下命令：
+[root@vps bin]# vim /usr/lib/systemd/system/tomcat.service
+# conf service desc ,set do this after network started
+[Unit]
+Description=tomcat 
+After=syslog.target network.target remote-fs.target nss-lookup.target
+
+# conf service pid, start,stop and restart
+[Service]
+Type=forking
+PIDFile=/developer/apache-tomcat-7.0.91/tomcat.pid
+ExecStart=/developer/apache-tomcat-7.0.91/bin/startup.sh
+ExecStop=/bin/kill -s QUIT $MAINPID
+ExecReload=/bin/kill -s HUP $MAINPID
+PrivateTmp=true
+
+# conf user 
+[Install]
+WantedBy=multi-user.target
+[unit]: 配置了服务的描述，规定了在network启动之后执行，">
+<meta name="author" content="">
+<link rel="canonical" href="https://zjxjwxk.github.io/posts/linux/centos/centos-7-tomcat%E7%9A%84%E5%AE%89%E8%A3%85%E5%8F%8A%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF%E5%8A%A8%E9%85%8D%E7%BD%AE/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.d6fcd20a4fb86efa4dfac8ec95da60244cc8871042183da1ef28e3a762ad79c8.css" integrity="sha256-1vzSCk&#43;4bvpN&#43;sjsldpgJEzIhxBCGD2h7yjjp2Ktecg=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://zjxjwxk.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://zjxjwxk.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://zjxjwxk.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://zjxjwxk.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://zjxjwxk.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://zjxjwxk.github.io/posts/linux/centos/centos-7-tomcat%E7%9A%84%E5%AE%89%E8%A3%85%E5%8F%8A%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF%E5%8A%A8%E9%85%8D%E7%BD%AE/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><meta property="og:url" content="https://zjxjwxk.github.io/posts/linux/centos/centos-7-tomcat%E7%9A%84%E5%AE%89%E8%A3%85%E5%8F%8A%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF%E5%8A%A8%E9%85%8D%E7%BD%AE/">
+  <meta property="og:site_name" content="Xinkang&#39;s Blog">
+  <meta property="og:title" content="CentOS 7 Tomcat开机自启动配置">
+  <meta property="og:description" content="CentOS 7 Tomcat开机自启动配置 配置开机运行 Tomcat增加启动参数 Tomcat需要增加一个pid文件，在 $CATALINA_HOME/bin 目录下面，增加 setenv.sh 配置，catalina.sh启动的时候会调用，同时配置Java内存参数。添加如下命令： [root@vps bin]# vim setenv.sh
+#Tomcat startup pid #set Java runtime environment variable export JAVA_HOME=/usr/java/jdk1.8.0_191-amd64 export PATH=$PATH:$JAVA_HOME/bin export CATALINA_HOME=/developer/apache-tomcat-7.0.91 export CATALINA_BASE=/developer/apache-tomcat-7.0.91 #add Tomcat pid CATALINA_PID=&#34;$CATALINA_BASE/tomcat.pid&#34; #add Java opts JAVA_OPTS=&#34;-server -XX:PermSize=256M -XX:MaxPermSize=1024m -Xms512M -Xmx1024M -XX:MaxNewSize=256m&#34; 注意: 配置开机运行时,需要再次添加 JAVA_HOME
+增加 tomcat.service 在/usr/lib/systemd/system目录下增加tomcat.service，目录必须是绝对目录，添加如下命令： [root@vps bin]# vim /usr/lib/systemd/system/tomcat.service
+# conf service desc ,set do this after network started [Unit] Description=tomcat After=syslog.target network.target remote-fs.target nss-lookup.target # conf service pid, start,stop and restart [Service] Type=forking PIDFile=/developer/apache-tomcat-7.0.91/tomcat.pid ExecStart=/developer/apache-tomcat-7.0.91/bin/startup.sh ExecStop=/bin/kill -s QUIT $MAINPID ExecReload=/bin/kill -s HUP $MAINPID PrivateTmp=true # conf user [Install] WantedBy=multi-user.target [unit]: 配置了服务的描述，规定了在network启动之后执行，">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2019-01-13T00:04:00+00:00">
+    <meta property="article:modified_time" content="2019-01-13T00:04:00+00:00">
+    <meta property="article:tag" content="Linux">
+    <meta property="article:tag" content="CentOS">
+    <meta property="article:tag" content="Tomcat">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CentOS 7 Tomcat开机自启动配置">
+<meta name="twitter:description" content="CentOS 7 Tomcat开机自启动配置
+配置开机运行
+Tomcat增加启动参数
+Tomcat需要增加一个pid文件，在 $CATALINA_HOME/bin 目录下面，增加 setenv.sh 配置，catalina.sh启动的时候会调用，同时配置Java内存参数。添加如下命令：
+[root@vps bin]# vim setenv.sh
+#Tomcat startup pid
+
+#set Java runtime environment variable 
+export JAVA_HOME=/usr/java/jdk1.8.0_191-amd64
+export PATH=$PATH:$JAVA_HOME/bin
+export CATALINA_HOME=/developer/apache-tomcat-7.0.91
+export CATALINA_BASE=/developer/apache-tomcat-7.0.91
+
+#add Tomcat pid
+CATALINA_PID=&#34;$CATALINA_BASE/tomcat.pid&#34;
+
+#add Java opts
+JAVA_OPTS=&#34;-server -XX:PermSize=256M -XX:MaxPermSize=1024m -Xms512M -Xmx1024M -XX:MaxNewSize=256m&#34;
+注意: 配置开机运行时,需要再次添加 JAVA_HOME
+增加 tomcat.service
+在/usr/lib/systemd/system目录下增加tomcat.service，目录必须是绝对目录，添加如下命令：
+[root@vps bin]# vim /usr/lib/systemd/system/tomcat.service
+# conf service desc ,set do this after network started
+[Unit]
+Description=tomcat 
+After=syslog.target network.target remote-fs.target nss-lookup.target
+
+# conf service pid, start,stop and restart
+[Service]
+Type=forking
+PIDFile=/developer/apache-tomcat-7.0.91/tomcat.pid
+ExecStart=/developer/apache-tomcat-7.0.91/bin/startup.sh
+ExecStop=/bin/kill -s QUIT $MAINPID
+ExecReload=/bin/kill -s HUP $MAINPID
+PrivateTmp=true
+
+# conf user 
+[Install]
+WantedBy=multi-user.target
+[unit]: 配置了服务的描述，规定了在network启动之后执行，">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://zjxjwxk.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "CentOS 7 Tomcat开机自启动配置",
+      "item": "https://zjxjwxk.github.io/posts/linux/centos/centos-7-tomcat%E7%9A%84%E5%AE%89%E8%A3%85%E5%8F%8A%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF%E5%8A%A8%E9%85%8D%E7%BD%AE/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "CentOS 7 Tomcat开机自启动配置",
+  "name": "CentOS 7 Tomcat开机自启动配置",
+  "description": "CentOS 7 Tomcat开机自启动配置 配置开机运行 Tomcat增加启动参数 Tomcat需要增加一个pid文件，在 $CATALINA_HOME/bin 目录下面，增加 setenv.sh 配置，catalina.sh启动的时候会调用，同时配置Java内存参数。添加如下命令： [root@vps bin]# vim setenv.sh\n#Tomcat startup pid #set Java runtime environment variable export JAVA_HOME=/usr/java/jdk1.8.0_191-amd64 export PATH=$PATH:$JAVA_HOME/bin export CATALINA_HOME=/developer/apache-tomcat-7.0.91 export CATALINA_BASE=/developer/apache-tomcat-7.0.91 #add Tomcat pid CATALINA_PID=\u0026#34;$CATALINA_BASE/tomcat.pid\u0026#34; #add Java opts JAVA_OPTS=\u0026#34;-server -XX:PermSize=256M -XX:MaxPermSize=1024m -Xms512M -Xmx1024M -XX:MaxNewSize=256m\u0026#34; 注意: 配置开机运行时,需要再次添加 JAVA_HOME\n增加 tomcat.service 在/usr/lib/systemd/system目录下增加tomcat.service，目录必须是绝对目录，添加如下命令： [root@vps bin]# vim /usr/lib/systemd/system/tomcat.service\n# conf service desc ,set do this after network started [Unit] Description=tomcat After=syslog.target network.target remote-fs.target nss-lookup.target # conf service pid, start,stop and restart [Service] Type=forking PIDFile=/developer/apache-tomcat-7.0.91/tomcat.pid ExecStart=/developer/apache-tomcat-7.0.91/bin/startup.sh ExecStop=/bin/kill -s QUIT $MAINPID ExecReload=/bin/kill -s HUP $MAINPID PrivateTmp=true # conf user [Install] WantedBy=multi-user.target [unit]: 配置了服务的描述，规定了在network启动之后执行，\n",
+  "keywords": [
+    "Linux", "CentOS", "Tomcat"
+  ],
+  "articleBody": "CentOS 7 Tomcat开机自启动配置 配置开机运行 Tomcat增加启动参数 Tomcat需要增加一个pid文件，在 $CATALINA_HOME/bin 目录下面，增加 setenv.sh 配置，catalina.sh启动的时候会调用，同时配置Java内存参数。添加如下命令： [root@vps bin]# vim setenv.sh\n#Tomcat startup pid #set Java runtime environment variable export JAVA_HOME=/usr/java/jdk1.8.0_191-amd64 export PATH=$PATH:$JAVA_HOME/bin export CATALINA_HOME=/developer/apache-tomcat-7.0.91 export CATALINA_BASE=/developer/apache-tomcat-7.0.91 #add Tomcat pid CATALINA_PID=\"$CATALINA_BASE/tomcat.pid\" #add Java opts JAVA_OPTS=\"-server -XX:PermSize=256M -XX:MaxPermSize=1024m -Xms512M -Xmx1024M -XX:MaxNewSize=256m\" 注意: 配置开机运行时,需要再次添加 JAVA_HOME\n增加 tomcat.service 在/usr/lib/systemd/system目录下增加tomcat.service，目录必须是绝对目录，添加如下命令： [root@vps bin]# vim /usr/lib/systemd/system/tomcat.service\n# conf service desc ,set do this after network started [Unit] Description=tomcat After=syslog.target network.target remote-fs.target nss-lookup.target # conf service pid, start,stop and restart [Service] Type=forking PIDFile=/developer/apache-tomcat-7.0.91/tomcat.pid ExecStart=/developer/apache-tomcat-7.0.91/bin/startup.sh ExecStop=/bin/kill -s QUIT $MAINPID ExecReload=/bin/kill -s HUP $MAINPID PrivateTmp=true # conf user [Install] WantedBy=multi-user.target [unit]: 配置了服务的描述，规定了在network启动之后执行，\n[service]: 配置服务的pid，服务的启动，停止，重启\n[install]: 配置了使用用户\n使用tomcat.service centos7使用systemctl替换了service命令，如需设置其他服务，替换此处的tomcat即可，如:systemctl start vsftp.service\n启动服务 systemctl start tomcat.service 停止服务 systemctl stop tomcat.service 重启服务 systemctl restart tomcat.service 增加开机启动 systemctl enable tomcat.service 删除开机启动 systemctl disable tomcat.service 因为配置pid，在启动的时候会在Tomcat的根目录下生产tomcat.pid文件,服务停止后删除。 同时Tomcat在启动时，执行start不会启动两个Tomcat，保证始终只有一个Tomcat服务在运行。多个Tomcat可以配置在多个目录下，互不影响。\n查看效果 重启服务器后,通过wget访问，终端输出如下所示，配置tomcat开机自启动成功！\n[root@vps ~]# wget 35.234.8.23:8080 --2019-01-12 16:02:41-- http://35.234.8.23:8080/ Connecting to 35.234.8.23:8080... connected. HTTP request sent, awaiting response... 200 OK Length: 909 [text/html] Saving to: ‘index.html’ 100%[===========================================================\u003e] 909 --.-K/s in 0s 2019-01-12 16:02:41 (157 MB/s) - ‘index.html’ saved [909/909] 同时,客户端浏览器也能成功访问。\n",
+  "wordCount" : "166",
+  "inLanguage": "en",
+  "datePublished": "2019-01-13T00:04:00Z",
+  "dateModified": "2019-01-13T00:04:00Z",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://zjxjwxk.github.io/posts/linux/centos/centos-7-tomcat%E7%9A%84%E5%AE%89%E8%A3%85%E5%8F%8A%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF%E5%8A%A8%E9%85%8D%E7%BD%AE/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Xinkang's Blog",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://zjxjwxk.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://zjxjwxk.github.io/" accesskey="h" title="Xinkang&#39;s Blog (Alt + H)">Xinkang&#39;s Blog</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://zjxjwxk.github.io/archives/" title="Archives">
+                    <span>Archives</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://zjxjwxk.github.io/categories/" title="Categories">
+                    <span>Categories</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://zjxjwxk.github.io/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://zjxjwxk.github.io/search/" title="Search (Alt &#43; /)" accesskey=/>
+                    <span>Search</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <div id="content-container">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      CentOS 7 Tomcat开机自启动配置
+    </h1>
+    <div class="post-meta"><span title='2019-01-13 00:04:00 +0000 UTC'>January 13, 2019</span>
+
+</div>
+  </header> 
+  <div class="post-content"><h1 id="centos-7-tomcat开机自启动配置">CentOS 7 Tomcat开机自启动配置<a hidden class="anchor" aria-hidden="true" href="#centos-7-tomcat开机自启动配置">#</a></h1>
+<h2 id="配置开机运行">配置开机运行<a hidden class="anchor" aria-hidden="true" href="#配置开机运行">#</a></h2>
+<h3 id="tomcat增加启动参数">Tomcat增加启动参数<a hidden class="anchor" aria-hidden="true" href="#tomcat增加启动参数">#</a></h3>
+<p>Tomcat需要增加一个pid文件，在 <code>$CATALINA_HOME/bin</code> 目录下面，增加 <code>setenv.sh</code> 配置，<code>catalina.sh</code>启动的时候会调用，同时配置Java内存参数。添加如下命令：
+<code>[root@vps bin]# vim setenv.sh</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e">#Tomcat startup pid</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#set Java runtime environment variable </span>
+</span></span><span style="display:flex;"><span>export JAVA_HOME<span style="color:#f92672">=</span>/usr/java/jdk1.8.0_191-amd64
+</span></span><span style="display:flex;"><span>export PATH<span style="color:#f92672">=</span>$PATH:$JAVA_HOME/bin
+</span></span><span style="display:flex;"><span>export CATALINA_HOME<span style="color:#f92672">=</span>/developer/apache-tomcat-7.0.91
+</span></span><span style="display:flex;"><span>export CATALINA_BASE<span style="color:#f92672">=</span>/developer/apache-tomcat-7.0.91
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#add Tomcat pid</span>
+</span></span><span style="display:flex;"><span>CATALINA_PID<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$CATALINA_BASE<span style="color:#e6db74">/tomcat.pid&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#add Java opts</span>
+</span></span><span style="display:flex;"><span>JAVA_OPTS<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;-server -XX:PermSize=256M -XX:MaxPermSize=1024m -Xms512M -Xmx1024M -XX:MaxNewSize=256m&#34;</span>
+</span></span></code></pre></div><p><strong>注意:</strong> 配置开机运行时,需要再次添加 JAVA_HOME</p>
+<h3 id="增加-tomcatservice">增加 tomcat.service<a hidden class="anchor" aria-hidden="true" href="#增加-tomcatservice">#</a></h3>
+<p>在/usr/lib/systemd/system目录下增加tomcat.service，目录必须是绝对目录，添加如下命令：
+<code>[root@vps bin]# vim /usr/lib/systemd/system/tomcat.service</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># conf service desc ,set do this after network started</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>Unit<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>Description<span style="color:#f92672">=</span>tomcat 
+</span></span><span style="display:flex;"><span>After<span style="color:#f92672">=</span>syslog.target network.target remote-fs.target nss-lookup.target
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># conf service pid, start,stop and restart</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>Service<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>Type<span style="color:#f92672">=</span>forking
+</span></span><span style="display:flex;"><span>PIDFile<span style="color:#f92672">=</span>/developer/apache-tomcat-7.0.91/tomcat.pid
+</span></span><span style="display:flex;"><span>ExecStart<span style="color:#f92672">=</span>/developer/apache-tomcat-7.0.91/bin/startup.sh
+</span></span><span style="display:flex;"><span>ExecStop<span style="color:#f92672">=</span>/bin/kill -s QUIT $MAINPID
+</span></span><span style="display:flex;"><span>ExecReload<span style="color:#f92672">=</span>/bin/kill -s HUP $MAINPID
+</span></span><span style="display:flex;"><span>PrivateTmp<span style="color:#f92672">=</span>true
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># conf user </span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>Install<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>WantedBy<span style="color:#f92672">=</span>multi-user.target
+</span></span></code></pre></div><p><em>[unit]:</em> 配置了服务的描述，规定了在network启动之后执行，</p>
+<p><em>[service]:</em> 配置服务的pid，服务的启动，停止，重启</p>
+<p><em>[install]:</em> 配置了使用用户</p>
+<h3 id="使用tomcatservice">使用tomcat.service<a hidden class="anchor" aria-hidden="true" href="#使用tomcatservice">#</a></h3>
+<p>centos7使用systemctl替换了service命令，如需设置其他服务，替换此处的tomcat即可，如:<code>systemctl start vsftp.service</code></p>
+<ul>
+<li>启动服务
+systemctl start tomcat.service</li>
+<li>停止服务
+systemctl stop tomcat.service</li>
+<li>重启服务
+systemctl restart tomcat.service</li>
+<li>增加开机启动
+systemctl enable tomcat.service</li>
+<li>删除开机启动
+systemctl disable tomcat.service</li>
+</ul>
+<p>因为配置pid，在启动的时候会在Tomcat的根目录下生产tomcat.pid文件,服务停止后删除。
+同时Tomcat在启动时，执行start不会启动两个Tomcat，保证始终只有一个Tomcat服务在运行。多个Tomcat可以配置在多个目录下，互不影响。</p>
+<h2 id="查看效果">查看效果<a hidden class="anchor" aria-hidden="true" href="#查看效果">#</a></h2>
+<p>重启服务器后,通过wget访问，终端输出如下所示，配置tomcat开机自启动成功！</p>
+<pre tabindex="0"><code class="language-shellell" data-lang="shellell">[root@vps ~]# wget 35.234.8.23:8080
+--2019-01-12 16:02:41--  http://35.234.8.23:8080/
+Connecting to 35.234.8.23:8080... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 909 [text/html]
+Saving to: ‘index.html’
+
+100%[===========================================================&gt;] 909         --.-K/s   in 0s      
+
+2019-01-12 16:02:41 (157 MB/s) - ‘index.html’ saved [909/909]
+</code></pre><p>同时,客户端浏览器也能成功访问。</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://zjxjwxk.github.io/tags/linux/">Linux</a></li>
+      <li><a href="https://zjxjwxk.github.io/tags/centos/">CentOS</a></li>
+      <li><a href="https://zjxjwxk.github.io/tags/tomcat/">Tomcat</a></li>
+    </ul>
+  </footer>
+</article>
+
+<script>
+  window.onload = function() {
+      var contentContainer = document.getElementById("content-container");
+      if ("" !== "") {
+          var password = prompt("Enter password:");
+          if (password === "") {
+              contentContainer.style.display = "block";
+          } else {
+              alert("Incorrect password");
+          }
+      } else {
+          contentContainer.style.display = "block";
+      }
+  };
+</script>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2024 <a href="https://zjxjwxk.github.io/">Xinkang&#39;s Blog</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

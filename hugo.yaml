@@ -1,0 +1,45 @@
+baseURL: https://zjxjwxk.github.io/
+title: Xinkang's Blog
+theme: ["PaperMod"]
+
+params:
+  # defaultTheme: light
+  # defaultTheme: dark
+  defaultTheme: auto # to switch between dark or light according to browser theme
+
+  homeInfoParams:
+    Title: Xinkang's Blog
+    Content: Software Engineer
+  
+  socialIcons: # optional
+    - name: "GitHub"
+      url: "https://github.com/zjxjwxk"
+    - name: "Linkedin"
+      url: "https://www.linkedin.com/in/xinkangwu"
+
+menu:
+  main:
+    - identifier: Archives
+      name: Archives
+      url: /archives/
+      weight: 10
+    - identifier: Categories
+      name: Categories
+      url: /categories/
+      weight: 20
+    - identifier: Tags
+      name: Tags
+      url: /tags/
+      weight: 30
+    - identifier: Search
+      name: Search
+      url: /search/
+      weight: 40
+    
+
+outputs:
+  home:
+    - HTML
+    - RSS
+    - JSON # necessary for search
+

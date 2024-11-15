@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>MacOS on Xinkang&#39;s Blog</title>
+    <link>https://zjxjwxk.github.io/tags/macos/</link>
+    <description>Recent content in MacOS on Xinkang&#39;s Blog</description>
+    <generator>Hugo -- 0.138.0</generator>
+    <language>en</language>
+    <lastBuildDate>Mon, 27 Apr 2020 23:11:00 +0000</lastBuildDate>
+    <atom:link href="https://zjxjwxk.github.io/tags/macos/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Terminal 终端代理加速</title>
+      <link>https://zjxjwxk.github.io/posts/linux/macos/</link>
+      <pubDate>Mon, 27 Apr 2020 23:11:00 +0000</pubDate>
+      <guid>https://zjxjwxk.github.io/posts/linux/macos/</guid>
+      <description>&lt;h1 id=&#34;方法1暂时&#34;&gt;方法1（暂时）:&lt;/h1&gt;
+&lt;p&gt;在终端中直接运行命令&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;export http_proxy&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;http://proxyAddres.s:port
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这个办法的好处是简单直接，并且影响面很小（只对当前终端有效，退出就不行了）。&lt;/p&gt;
+&lt;p&gt;如果你用的是 s.s 代理，在当前终端运行以下命令，那么&lt;code&gt;wget&lt;/code&gt; &lt;code&gt;curl&lt;/code&gt; 这类网络命令都会经过 s.s 代理，port 端口号可以从 s.s 高级设置中查看，我的是1086。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;export ALL_PROXY&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;socks5://127.0.0.1:1086
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img alt=&#34;s.s端口&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/linux/macos/images/image-20200426235228770.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;安装完软件以后，我们再执行以下命令取消终端代理&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;unset ALL_PROXY
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;方法2永久&#34;&gt;方法2（永久）:&lt;/h1&gt;
+&lt;p&gt;把代理服务器地址写入 shell 配置文件&lt;code&gt;.bashrc&lt;/code&gt;或者&lt;code&gt;.zshrc&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;直接在&lt;code&gt;.bashrc&lt;/code&gt;或者&lt;code&gt;.zshrc&lt;/code&gt;添加下面内容&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;export http_proxy&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;http://localhost:port&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;export https_proxy&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;http://localhost:port&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;以使用 s.s 代理为例，s.s 的代理端口为&lt;code&gt;1086&lt;/code&gt;,那么应该设置为&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;export http_proxy&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;socks5://127.0.0.1:1086&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;export https_proxy&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;socks5://127.0.0.1:1086&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;或者直接设置 ALL_PROXY&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;export ALL_PROXY&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;socks5://127.0.0.1:1086
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;code&gt;localhost&lt;/code&gt;就是一个域名，域名默认指向 &lt;code&gt;127.0.0.1&lt;/code&gt;，两者是一样的。&lt;/p&gt;
+&lt;p&gt;然后&lt;code&gt;ESC&lt;/code&gt;后&lt;code&gt;:wq&lt;/code&gt;保存文件，接着在终端中执行&lt;code&gt;source ~/.bashrc&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;这个办法的好处是把代理服务器永久保存了，下次就可以直接用了。&lt;/p&gt;
+&lt;p&gt;或者通过设置 alias 简写来简化操作，每次要用的时候输入&lt;code&gt;setproxy&lt;/code&gt;，不用了就&lt;code&gt;unsetproxy&lt;/code&gt;。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;alias setproxy&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;export ALL_PROXY=socks5://127.0.0.1:1086&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;alias unsetproxy&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;unset ALL_PROXY&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;git-代理&#34;&gt;Git 代理&lt;/h1&gt;
+&lt;p&gt;git 设置全局代理：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git config --global http.proxy &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;socks5://127.0.0.1:1086&amp;#39;&lt;/span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git config --global https.proxy &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;socks5://127.0.0.1:1086&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;git 仅针对 GitHub 的单独配置：&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
