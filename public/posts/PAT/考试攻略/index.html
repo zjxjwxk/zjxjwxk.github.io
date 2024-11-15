@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" dir="auto">
 
-<head><meta charset="utf-8">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="index, follow">
+<meta name="robots" content="noindex, nofollow">
 <title>PAT考场 Dev C&#43;&#43; 5.10 配置 | Xinkang&#39;s Blog</title>
 <meta name="keywords" content="PAT">
 <meta name="description" content="根据往年 (2019) 年浙大软件学院的考研复试公告，如果今年 (2020) 是线下复试，且考场没有变化的话，机试应该还是在 浙大紫金港校区（如下图）。
@@ -29,16 +29,16 @@ PAT 考点联盟：https://www.patest.cn/location
 方法一（推荐）
 在 “工具(Tools)” -&gt; “编译选项(Compiler Options)&quot; 中，“代码生成/优化(Settings)” 选项卡下的 “代码生成(Code Generation)” 选项卡中，将 “语言标准(Language Standard)(-std)” 设置为 ISO C&#43;&#43;11 即可。">
 <meta name="author" content="">
-<link rel="canonical" href="https://zjxjwxk.github.io/posts/pat/%E8%80%83%E8%AF%95%E6%94%BB%E7%95%A5/">
+<link rel="canonical" href="http://localhost:1313/posts/pat/%E8%80%83%E8%AF%95%E6%94%BB%E7%95%A5/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.d6fcd20a4fb86efa4dfac8ec95da60244cc8871042183da1ef28e3a762ad79c8.css" integrity="sha256-1vzSCk&#43;4bvpN&#43;sjsldpgJEzIhxBCGD2h7yjjp2Ktecg=" rel="preload stylesheet" as="style">
-<link rel="icon" href="https://zjxjwxk.github.io/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="https://zjxjwxk.github.io/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="https://zjxjwxk.github.io/favicon-32x32.png">
-<link rel="apple-touch-icon" href="https://zjxjwxk.github.io/apple-touch-icon.png">
-<link rel="mask-icon" href="https://zjxjwxk.github.io/safari-pinned-tab.svg">
+<link rel="icon" href="http://localhost:1313/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" hreflang="en" href="https://zjxjwxk.github.io/posts/pat/%E8%80%83%E8%AF%95%E6%94%BB%E7%95%A5/">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/posts/pat/%E8%80%83%E8%AF%95%E6%94%BB%E7%95%A5/">
 <noscript>
     <style>
         #theme-toggle,
@@ -75,99 +75,7 @@ PAT 考点联盟：https://www.patest.cn/location
         }
 
     </style>
-</noscript><meta property="og:url" content="https://zjxjwxk.github.io/posts/pat/%E8%80%83%E8%AF%95%E6%94%BB%E7%95%A5/">
-  <meta property="og:site_name" content="Xinkang&#39;s Blog">
-  <meta property="og:title" content="PAT考场 Dev C&#43;&#43; 5.10 配置">
-  <meta property="og:description" content="根据往年 (2019) 年浙大软件学院的考研复试公告，如果今年 (2020) 是线下复试，且考场没有变化的话，机试应该还是在 浙大紫金港校区（如下图）。
-浙大软院招生通知：http://www.cst.zju.edu.cn/2019/0307/c36207a1478348/page.htm
-从 PAT 官网可以找到紫金港的机房配置：
-PAT 考点联盟：https://www.patest.cn/location
-我本人选择使用 Dev C&#43;&#43; 5.10 版本，考试那天在考场需要先对其作以下配置（当然也许已经配置好了）：
-打开产生调试信息 在 “工具(Tools)” -&gt; “编译选项(Compiler Options)&#34; 中：
-点击 “代码生成/优化(Settings)” 选项卡中的 &#34;连接器(Linker)&#34; 选项卡，将 &#34;产生调试信息(Generate debugging information)&#34; 选项改为 “Yes”。
-这样，就可以愉快的 Debug 了～
-添加 C&#43;&#43; 11 支持 由于 PAT 的 OJ 是支持 C&#43;&#43; 11 的，故最好打开 C&#43;&#43; 11 支持。
-方法一（推荐） 在 “工具(Tools)” -&gt; “编译选项(Compiler Options)&#34; 中，“代码生成/优化(Settings)” 选项卡下的 “代码生成(Code Generation)” 选项卡中，将 “语言标准(Language Standard)(-std)” 设置为 ISO C&#43;&#43;11 即可。">
-  <meta property="og:locale" content="en">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2020-04-11T16:17:00+00:00">
-    <meta property="article:modified_time" content="2020-04-11T16:17:00+00:00">
-    <meta property="article:tag" content="PAT">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="PAT考场 Dev C&#43;&#43; 5.10 配置">
-<meta name="twitter:description" content="根据往年 (2019) 年浙大软件学院的考研复试公告，如果今年 (2020) 是线下复试，且考场没有变化的话，机试应该还是在 浙大紫金港校区（如下图）。
-
-浙大软院招生通知：http://www.cst.zju.edu.cn/2019/0307/c36207a1478348/page.htm
-
-
-从 PAT 官网可以找到紫金港的机房配置：
-
-PAT 考点联盟：https://www.patest.cn/location
-
-
-我本人选择使用 Dev C&#43;&#43; 5.10 版本，考试那天在考场需要先对其作以下配置（当然也许已经配置好了）：
-打开产生调试信息
-在 “工具(Tools)” -&gt; “编译选项(Compiler Options)&quot; 中：
-
-点击 “代码生成/优化(Settings)” 选项卡中的 &quot;连接器(Linker)&quot; 选项卡，将 &quot;产生调试信息(Generate debugging information)&quot; 选项改为 “Yes”。
-
-这样，就可以愉快的 Debug 了～
-添加 C&#43;&#43; 11 支持
-由于 PAT 的 OJ 是支持 C&#43;&#43; 11 的，故最好打开 C&#43;&#43; 11 支持。
-方法一（推荐）
-在 “工具(Tools)” -&gt; “编译选项(Compiler Options)&quot; 中，“代码生成/优化(Settings)” 选项卡下的 “代码生成(Code Generation)” 选项卡中，将 “语言标准(Language Standard)(-std)” 设置为 ISO C&#43;&#43;11 即可。">
-
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position":  1 ,
-      "name": "Posts",
-      "item": "https://zjxjwxk.github.io/posts/"
-    }, 
-    {
-      "@type": "ListItem",
-      "position":  2 ,
-      "name": "PAT考场 Dev C++ 5.10 配置",
-      "item": "https://zjxjwxk.github.io/posts/pat/%E8%80%83%E8%AF%95%E6%94%BB%E7%95%A5/"
-    }
-  ]
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": "PAT考场 Dev C++ 5.10 配置",
-  "name": "PAT考场 Dev C\u002b\u002b 5.10 配置",
-  "description": "根据往年 (2019) 年浙大软件学院的考研复试公告，如果今年 (2020) 是线下复试，且考场没有变化的话，机试应该还是在 浙大紫金港校区（如下图）。\n浙大软院招生通知：http://www.cst.zju.edu.cn/2019/0307/c36207a1478348/page.htm\n从 PAT 官网可以找到紫金港的机房配置：\nPAT 考点联盟：https://www.patest.cn/location\n我本人选择使用 Dev C++ 5.10 版本，考试那天在考场需要先对其作以下配置（当然也许已经配置好了）：\n打开产生调试信息 在 “工具(Tools)” -\u0026gt; “编译选项(Compiler Options)\u0026quot; 中：\n点击 “代码生成/优化(Settings)” 选项卡中的 \u0026quot;连接器(Linker)\u0026quot; 选项卡，将 \u0026quot;产生调试信息(Generate debugging information)\u0026quot; 选项改为 “Yes”。\n这样，就可以愉快的 Debug 了～\n添加 C++ 11 支持 由于 PAT 的 OJ 是支持 C++ 11 的，故最好打开 C++ 11 支持。\n方法一（推荐） 在 “工具(Tools)” -\u0026gt; “编译选项(Compiler Options)\u0026quot; 中，“代码生成/优化(Settings)” 选项卡下的 “代码生成(Code Generation)” 选项卡中，将 “语言标准(Language Standard)(-std)” 设置为 ISO C++11 即可。\n",
-  "keywords": [
-    "PAT"
-  ],
-  "articleBody": "根据往年 (2019) 年浙大软件学院的考研复试公告，如果今年 (2020) 是线下复试，且考场没有变化的话，机试应该还是在 浙大紫金港校区（如下图）。\n浙大软院招生通知：http://www.cst.zju.edu.cn/2019/0307/c36207a1478348/page.htm\n从 PAT 官网可以找到紫金港的机房配置：\nPAT 考点联盟：https://www.patest.cn/location\n我本人选择使用 Dev C++ 5.10 版本，考试那天在考场需要先对其作以下配置（当然也许已经配置好了）：\n打开产生调试信息 在 “工具(Tools)” -\u003e “编译选项(Compiler Options)\" 中：\n点击 “代码生成/优化(Settings)” 选项卡中的 \"连接器(Linker)\" 选项卡，将 \"产生调试信息(Generate debugging information)\" 选项改为 “Yes”。\n这样，就可以愉快的 Debug 了～\n添加 C++ 11 支持 由于 PAT 的 OJ 是支持 C++ 11 的，故最好打开 C++ 11 支持。\n方法一（推荐） 在 “工具(Tools)” -\u003e “编译选项(Compiler Options)\" 中，“代码生成/优化(Settings)” 选项卡下的 “代码生成(Code Generation)” 选项卡中，将 “语言标准(Language Standard)(-std)” 设置为 ISO C++11 即可。\n方法二 同样，也可以在“工具(Tools)” -\u003e “编译选项(Compiler Options)\"中，在\"编译器(General)\"选项卡中，勾选\"编译时加入以下命令：(Add the following commands when calling the compiler:)\"，并在下方加入 -std=c++11。\n字体大小 由于默认字体是 10，实在太小了不能接受，可以在 “工具(Tools)” -\u003e “编译器选项(Editor Options)\" 中的\"显示(Fonts)\"选项卡，修改字体大小(Size)。或者通过 Ctrl + 滚轮 修改字体大小（更方便）。\n代码补全 打开代码补全 Dev C++ 是有一定的代码补全功能的，在“工具(Tools)” -\u003e “编译器选项(Editor Options)\"中，在 “代码补全(Completion)” 选项卡下的 Code Completion 选项卡中，将所有勾勾上即可。\n快捷键 同时，可以通过“工具(Tools)” -\u003e “快捷键选项(Configure Shortcuts)” 来配置 Show Code Completion 的快捷键以唤出代码补全（默认为 Ctrl + Space）：\n然后，就可以愉快地考试了～\n",
-  "wordCount" : "121",
-  "inLanguage": "en",
-  "datePublished": "2020-04-11T16:17:00Z",
-  "dateModified": "2020-04-11T16:17:00Z",
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https://zjxjwxk.github.io/posts/pat/%E8%80%83%E8%AF%95%E6%94%BB%E7%95%A5/"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "Xinkang's Blog",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://zjxjwxk.github.io/favicon.ico"
-    }
-  }
-}
-</script>
+</noscript>
 </head>
 
 <body class="" id="top">
@@ -185,7 +93,7 @@ PAT 考点联盟：https://www.patest.cn/location
 <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="https://zjxjwxk.github.io/" accesskey="h" title="Xinkang&#39;s Blog (Alt + H)">Xinkang&#39;s Blog</a>
+            <a href="http://localhost:1313/" accesskey="h" title="Xinkang&#39;s Blog (Alt + H)">Xinkang&#39;s Blog</a>
             <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
@@ -211,22 +119,22 @@ PAT 考点联盟：https://www.patest.cn/location
         </div>
         <ul id="menu">
             <li>
-                <a href="https://zjxjwxk.github.io/archives/" title="Archives">
+                <a href="http://localhost:1313/archives/" title="Archives">
                     <span>Archives</span>
                 </a>
             </li>
             <li>
-                <a href="https://zjxjwxk.github.io/categories/" title="Categories">
+                <a href="http://localhost:1313/categories/" title="Categories">
                     <span>Categories</span>
                 </a>
             </li>
             <li>
-                <a href="https://zjxjwxk.github.io/tags/" title="Tags">
+                <a href="http://localhost:1313/tags/" title="Tags">
                     <span>Tags</span>
                 </a>
             </li>
             <li>
-                <a href="https://zjxjwxk.github.io/search/" title="Search (Alt &#43; /)" accesskey=/>
+                <a href="http://localhost:1313/search/" title="Search (Alt &#43; /)" accesskey=/>
                     <span>Search</span>
                 </a>
             </li>
@@ -236,7 +144,6 @@ PAT 考点联盟：https://www.patest.cn/location
 <main class="main">
 
 <article class="post-single">
-  <div id="content-container">
   <header class="post-header">
     
     <h1 class="post-title entry-hint-parent">
@@ -290,30 +197,14 @@ PAT 考点联盟：https://www.patest.cn/location
 
   <footer class="post-footer">
     <ul class="post-tags">
-      <li><a href="https://zjxjwxk.github.io/tags/pat/">PAT</a></li>
+      <li><a href="http://localhost:1313/tags/pat/">PAT</a></li>
     </ul>
   </footer>
 </article>
-
-<script>
-  window.onload = function() {
-      var contentContainer = document.getElementById("content-container");
-      if ("" !== "") {
-          var password = prompt("Enter password:");
-          if (password === "") {
-              contentContainer.style.display = "block";
-          } else {
-              alert("Incorrect password");
-          }
-      } else {
-          contentContainer.style.display = "block";
-      }
-  };
-</script>
     </main>
     
 <footer class="footer">
-        <span>&copy; 2024 <a href="https://zjxjwxk.github.io/">Xinkang&#39;s Blog</a></span> · 
+        <span>&copy; 2024 <a href="http://localhost:1313/">Xinkang&#39;s Blog</a></span> · 
 
     <span>
         Powered by

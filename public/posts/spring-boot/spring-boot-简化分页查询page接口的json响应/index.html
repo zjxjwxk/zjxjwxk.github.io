@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" dir="auto">
 
-<head><meta charset="utf-8">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="index, follow">
+<meta name="robots" content="noindex, nofollow">
 <title>Spring Boot 简化分页查询Page接口的JSON响应 | Xinkang&#39;s Blog</title>
 <meta name="keywords" content="Java, Spring Boot">
 <meta name="description" content="多余的分页信息
@@ -66,16 +66,16 @@ Spring Data 的 Page 接口进行数据分页返回了很多很多垃圾信息�
 实际需要的分页信息
 实际上我只需要下面这些分页信息：">
 <meta name="author" content="">
-<link rel="canonical" href="https://zjxjwxk.github.io/posts/spring-boot/spring-boot-%E7%AE%80%E5%8C%96%E5%88%86%E9%A1%B5%E6%9F%A5%E8%AF%A2page%E6%8E%A5%E5%8F%A3%E7%9A%84json%E5%93%8D%E5%BA%94/">
+<link rel="canonical" href="http://localhost:1313/posts/spring-boot/spring-boot-%E7%AE%80%E5%8C%96%E5%88%86%E9%A1%B5%E6%9F%A5%E8%AF%A2page%E6%8E%A5%E5%8F%A3%E7%9A%84json%E5%93%8D%E5%BA%94/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.d6fcd20a4fb86efa4dfac8ec95da60244cc8871042183da1ef28e3a762ad79c8.css" integrity="sha256-1vzSCk&#43;4bvpN&#43;sjsldpgJEzIhxBCGD2h7yjjp2Ktecg=" rel="preload stylesheet" as="style">
-<link rel="icon" href="https://zjxjwxk.github.io/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="https://zjxjwxk.github.io/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="https://zjxjwxk.github.io/favicon-32x32.png">
-<link rel="apple-touch-icon" href="https://zjxjwxk.github.io/apple-touch-icon.png">
-<link rel="mask-icon" href="https://zjxjwxk.github.io/safari-pinned-tab.svg">
+<link rel="icon" href="http://localhost:1313/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" hreflang="en" href="https://zjxjwxk.github.io/posts/spring-boot/spring-boot-%E7%AE%80%E5%8C%96%E5%88%86%E9%A1%B5%E6%9F%A5%E8%AF%A2page%E6%8E%A5%E5%8F%A3%E7%9A%84json%E5%93%8D%E5%BA%94/">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/posts/spring-boot/spring-boot-%E7%AE%80%E5%8C%96%E5%88%86%E9%A1%B5%E6%9F%A5%E8%AF%A2page%E6%8E%A5%E5%8F%A3%E7%9A%84json%E5%93%8D%E5%BA%94/">
 <noscript>
     <style>
         #theme-toggle,
@@ -112,129 +112,7 @@ Spring Data 的 Page 接口进行数据分页返回了很多很多垃圾信息�
         }
 
     </style>
-</noscript><meta property="og:url" content="https://zjxjwxk.github.io/posts/spring-boot/spring-boot-%E7%AE%80%E5%8C%96%E5%88%86%E9%A1%B5%E6%9F%A5%E8%AF%A2page%E6%8E%A5%E5%8F%A3%E7%9A%84json%E5%93%8D%E5%BA%94/">
-  <meta property="og:site_name" content="Xinkang&#39;s Blog">
-  <meta property="og:title" content="Spring Boot 简化分页查询Page接口的JSON响应">
-  <meta property="og:description" content="多余的分页信息 Spring Data 的 Page 接口进行数据分页返回了很多很多垃圾信息：
-{ &#34;status&#34;: 0, &#34;data&#34;: { &#34;content&#34;: [ { &#34;goodsId&#34;: 1, &#34;producerId&#34;: 1, &#34;categoryId&#34;: 4, &#34;name&#34;: &#34;耐克sb滑板鞋&#34;, &#34;price&#34;: 500, &#34;stock&#34;: 500, &#34;status&#34;: &#34;正常&#34;, &#34;createTime&#34;: &#34;2019-02-02T03:48:33.000&#43;0000&#34;, &#34;updateTime&#34;: null }, { &#34;goodsId&#34;: 2, &#34;producerId&#34;: 1, &#34;categoryId&#34;: 4, &#34;name&#34;: &#34;阿迪达斯小白鞋&#34;, &#34;price&#34;: 500, &#34;stock&#34;: 300, &#34;status&#34;: &#34;正常&#34;, &#34;createTime&#34;: &#34;2019-02-02T03:48:59.000&#43;0000&#34;, &#34;updateTime&#34;: null } ], &#34;pageable&#34;: { &#34;sort&#34;: { &#34;sorted&#34;: false, &#34;unsorted&#34;: true, &#34;empty&#34;: true }, &#34;offset&#34;: 0, &#34;pageSize&#34;: 10, &#34;pageNumber&#34;: 0, &#34;paged&#34;: true, &#34;unpaged&#34;: false }, &#34;last&#34;: true, &#34;totalPages&#34;: 1, &#34;totalElements&#34;: 2, &#34;size&#34;: 10, &#34;number&#34;: 0, &#34;numberOfElements&#34;: 2, &#34;sort&#34;: { &#34;sorted&#34;: false, &#34;unsorted&#34;: true, &#34;empty&#34;: true }, &#34;first&#34;: true, &#34;empty&#34;: false } } 实际需要的分页信息 实际上我只需要下面这些分页信息：">
-  <meta property="og:locale" content="en">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2019-02-02T17:15:00+00:00">
-    <meta property="article:modified_time" content="2019-02-02T17:15:00+00:00">
-    <meta property="article:tag" content="Java">
-    <meta property="article:tag" content="Spring Boot">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Spring Boot 简化分页查询Page接口的JSON响应">
-<meta name="twitter:description" content="多余的分页信息
-Spring Data 的 Page 接口进行数据分页返回了很多很多垃圾信息：
-{
-    &#34;status&#34;: 0,
-    &#34;data&#34;: {
-        &#34;content&#34;: [
-            {
-                &#34;goodsId&#34;: 1,
-                &#34;producerId&#34;: 1,
-                &#34;categoryId&#34;: 4,
-                &#34;name&#34;: &#34;耐克sb滑板鞋&#34;,
-                &#34;price&#34;: 500,
-                &#34;stock&#34;: 500,
-                &#34;status&#34;: &#34;正常&#34;,
-                &#34;createTime&#34;: &#34;2019-02-02T03:48:33.000&#43;0000&#34;,
-                &#34;updateTime&#34;: null
-            },
-            {
-                &#34;goodsId&#34;: 2,
-                &#34;producerId&#34;: 1,
-                &#34;categoryId&#34;: 4,
-                &#34;name&#34;: &#34;阿迪达斯小白鞋&#34;,
-                &#34;price&#34;: 500,
-                &#34;stock&#34;: 300,
-                &#34;status&#34;: &#34;正常&#34;,
-                &#34;createTime&#34;: &#34;2019-02-02T03:48:59.000&#43;0000&#34;,
-                &#34;updateTime&#34;: null
-            }
-        ],
-        &#34;pageable&#34;: {
-            &#34;sort&#34;: {
-                &#34;sorted&#34;: false,
-                &#34;unsorted&#34;: true,
-                &#34;empty&#34;: true
-            },
-            &#34;offset&#34;: 0,
-            &#34;pageSize&#34;: 10,
-            &#34;pageNumber&#34;: 0,
-            &#34;paged&#34;: true,
-            &#34;unpaged&#34;: false
-        },
-        &#34;last&#34;: true,
-        &#34;totalPages&#34;: 1,
-        &#34;totalElements&#34;: 2,
-        &#34;size&#34;: 10,
-        &#34;number&#34;: 0,
-        &#34;numberOfElements&#34;: 2,
-        &#34;sort&#34;: {
-            &#34;sorted&#34;: false,
-            &#34;unsorted&#34;: true,
-            &#34;empty&#34;: true
-        },
-        &#34;first&#34;: true,
-        &#34;empty&#34;: false
-    }
-}
-实际需要的分页信息
-实际上我只需要下面这些分页信息：">
-
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position":  1 ,
-      "name": "Posts",
-      "item": "https://zjxjwxk.github.io/posts/"
-    }, 
-    {
-      "@type": "ListItem",
-      "position":  2 ,
-      "name": "Spring Boot 简化分页查询Page接口的JSON响应",
-      "item": "https://zjxjwxk.github.io/posts/spring-boot/spring-boot-%E7%AE%80%E5%8C%96%E5%88%86%E9%A1%B5%E6%9F%A5%E8%AF%A2page%E6%8E%A5%E5%8F%A3%E7%9A%84json%E5%93%8D%E5%BA%94/"
-    }
-  ]
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": "Spring Boot 简化分页查询Page接口的JSON响应",
-  "name": "Spring Boot 简化分页查询Page接口的JSON响应",
-  "description": "多余的分页信息 Spring Data 的 Page 接口进行数据分页返回了很多很多垃圾信息：\n{ \u0026#34;status\u0026#34;: 0, \u0026#34;data\u0026#34;: { \u0026#34;content\u0026#34;: [ { \u0026#34;goodsId\u0026#34;: 1, \u0026#34;producerId\u0026#34;: 1, \u0026#34;categoryId\u0026#34;: 4, \u0026#34;name\u0026#34;: \u0026#34;耐克sb滑板鞋\u0026#34;, \u0026#34;price\u0026#34;: 500, \u0026#34;stock\u0026#34;: 500, \u0026#34;status\u0026#34;: \u0026#34;正常\u0026#34;, \u0026#34;createTime\u0026#34;: \u0026#34;2019-02-02T03:48:33.000+0000\u0026#34;, \u0026#34;updateTime\u0026#34;: null }, { \u0026#34;goodsId\u0026#34;: 2, \u0026#34;producerId\u0026#34;: 1, \u0026#34;categoryId\u0026#34;: 4, \u0026#34;name\u0026#34;: \u0026#34;阿迪达斯小白鞋\u0026#34;, \u0026#34;price\u0026#34;: 500, \u0026#34;stock\u0026#34;: 300, \u0026#34;status\u0026#34;: \u0026#34;正常\u0026#34;, \u0026#34;createTime\u0026#34;: \u0026#34;2019-02-02T03:48:59.000+0000\u0026#34;, \u0026#34;updateTime\u0026#34;: null } ], \u0026#34;pageable\u0026#34;: { \u0026#34;sort\u0026#34;: { \u0026#34;sorted\u0026#34;: false, \u0026#34;unsorted\u0026#34;: true, \u0026#34;empty\u0026#34;: true }, \u0026#34;offset\u0026#34;: 0, \u0026#34;pageSize\u0026#34;: 10, \u0026#34;pageNumber\u0026#34;: 0, \u0026#34;paged\u0026#34;: true, \u0026#34;unpaged\u0026#34;: false }, \u0026#34;last\u0026#34;: true, \u0026#34;totalPages\u0026#34;: 1, \u0026#34;totalElements\u0026#34;: 2, \u0026#34;size\u0026#34;: 10, \u0026#34;number\u0026#34;: 0, \u0026#34;numberOfElements\u0026#34;: 2, \u0026#34;sort\u0026#34;: { \u0026#34;sorted\u0026#34;: false, \u0026#34;unsorted\u0026#34;: true, \u0026#34;empty\u0026#34;: true }, \u0026#34;first\u0026#34;: true, \u0026#34;empty\u0026#34;: false } } 实际需要的分页信息 实际上我只需要下面这些分页信息：\n",
-  "keywords": [
-    "Java", "Spring Boot"
-  ],
-  "articleBody": "多余的分页信息 Spring Data 的 Page 接口进行数据分页返回了很多很多垃圾信息：\n{ \"status\": 0, \"data\": { \"content\": [ { \"goodsId\": 1, \"producerId\": 1, \"categoryId\": 4, \"name\": \"耐克sb滑板鞋\", \"price\": 500, \"stock\": 500, \"status\": \"正常\", \"createTime\": \"2019-02-02T03:48:33.000+0000\", \"updateTime\": null }, { \"goodsId\": 2, \"producerId\": 1, \"categoryId\": 4, \"name\": \"阿迪达斯小白鞋\", \"price\": 500, \"stock\": 300, \"status\": \"正常\", \"createTime\": \"2019-02-02T03:48:59.000+0000\", \"updateTime\": null } ], \"pageable\": { \"sort\": { \"sorted\": false, \"unsorted\": true, \"empty\": true }, \"offset\": 0, \"pageSize\": 10, \"pageNumber\": 0, \"paged\": true, \"unpaged\": false }, \"last\": true, \"totalPages\": 1, \"totalElements\": 2, \"size\": 10, \"number\": 0, \"numberOfElements\": 2, \"sort\": { \"sorted\": false, \"unsorted\": true, \"empty\": true }, \"first\": true, \"empty\": false } } 实际需要的分页信息 实际上我只需要下面这些分页信息：\n\"totalPages\": 3, \"totalElements\": 20, \"pageNumber\": 2, \"numberOfElements\": 7 创建 PageChunk 类进行封装 我的 GoodsRepository 接口为：\nPage\u003cGoods\u003e findByCategoryId(Integer categoryId, Pageable pageable); 我们看到返回了很多多余的，重复的数据。为了解决这个问题，创建一个Pagination DTO(PageChunk)来包装一下分页数据。这个类的作用很简单就是包含每一次分页的内容和分页元数据（总页数，搜索结果总数，当前页号， 当前页包含多少项）。\nimport lombok.Data; import java.util.List; /** * @author zjxjwxk */ @Data public class PageChunk\u003cT\u003e { private List\u003cT\u003e content; private int totalPages; private long totalElements; private int pageNumber; private int numberOfElements; } 同时，我根据业务需求对商品信息进行了DTO的包装，（只需要商品id，名称和价格即可）。\nimport lombok.Data; /** * @author zjxjwxk */ @Data public class GoodsDTO { private Integer goodsId; private String name; private Integer price; } 用 PageChunk 替代 Page 编写以下 getPageChunk 方法用于将 Page 对象转化为 PageChunk 对象，仅仅提取 Page 对象中所需要的Content 和一些分页信息，将 PageChunk 对象封装并返回。编写 getGoodsDTO 方法用于简化商品信息。\n@Service(\"GoodsService\") public class GoodsServiceImpl implements GoodsService { private final GoodsRepository goodsRepository; @Autowired public GoodsServiceImpl(GoodsRepository goodsRepository) { this.goodsRepository = goodsRepository; } @Override public ServerResponse getList(String keyword, Integer categoryId, Integer pageNum, Integer pageSize, String orderBy) { PageRequest pageRequest = PageRequest.of(pageNum - 1, pageSize); Page\u003cGoods\u003e goodsPage = goodsRepository.findByCategoryId(categoryId, pageRequest); return ServerResponse.createBySuccess(getPageChunk(goodsPage)); } private PageChunk\u003cGoodsDTO\u003e getPageChunk(Page\u003cGoods\u003e goodsPage) { PageChunk\u003cGoodsDTO\u003e pageChunk = new PageChunk\u003c\u003e(); pageChunk.setContent(getGoodsDTO(goodsPage.getContent())); pageChunk.setTotalPages(goodsPage.getTotalPages()); pageChunk.setTotalElements(goodsPage.getTotalElements()); pageChunk.setPageNumber(goodsPage.getPageable().getPageNumber() + 1); pageChunk.setNumberOfElements(goodsPage.getNumberOfElements()); return pageChunk; } private List\u003cGoodsDTO\u003e getGoodsDTO(List\u003cGoods\u003e goodsList) { List\u003cGoodsDTO\u003e goodsDTOList = new ArrayList\u003c\u003e(); for (Goods goods : goodsList) { GoodsDTO goodsDTO = new GoodsDTO(); goodsDTO.setGoodsId(goods.getGoodsId()); goodsDTO.setName(goods.getName()); goodsDTO.setPrice(goods.getPrice()); goodsDTOList.add(goodsDTO); } return goodsDTOList; } } 为了返回 JSON 数据，我自定义了一个 ServerResponse 服务响应对象，它的作用是让我们返回的 JSON 有一个通用的格式\n简化后的结果 { \"status\": 0, \"data\": { \"content\": [ { \"goodsId\": 8, \"name\": \"Clarks 男 Tri Spark生活休闲鞋26135668\", \"price\": 459 }, { \"goodsId\": 9, \"name\": \"Adidas三叶草 男 休闲跑步鞋 STAN SMITH M20324\", \"price\": 415 }, { \"goodsId\": 10, \"name\": \"Skechers 斯凯奇 SKECHERS SPORT系列 男 绑带运动鞋 999732-NVOR\", \"price\": 355 }, { \"goodsId\": 11, \"name\": \"Saucony 圣康尼 RSP 男 休闲跑步鞋 KINETA RELAY S2524465\", \"price\": 479 }, { \"goodsId\": 12, \"name\": \"Mustang 男 帆布鞋休闲运动 4058-305（亚马逊进口直采,德国品牌）\", \"price\": 324 }, { \"goodsId\": 13, \"name\": \"Clarks 男 Tri Spark生活休闲鞋26135655\", \"price\": 123425 }, { \"goodsId\": 14, \"name\": \"New Balance 574系列 男 休闲跑步鞋 ML574EG-D\", \"price\": 324 } ], \"totalPages\": 3, \"totalElements\": 20, \"pageNumber\": 2, \"numberOfElements\": 7 } } ",
-  "wordCount" : "411",
-  "inLanguage": "en",
-  "datePublished": "2019-02-02T17:15:00Z",
-  "dateModified": "2019-02-02T17:15:00Z",
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https://zjxjwxk.github.io/posts/spring-boot/spring-boot-%E7%AE%80%E5%8C%96%E5%88%86%E9%A1%B5%E6%9F%A5%E8%AF%A2page%E6%8E%A5%E5%8F%A3%E7%9A%84json%E5%93%8D%E5%BA%94/"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "Xinkang's Blog",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://zjxjwxk.github.io/favicon.ico"
-    }
-  }
-}
-</script>
+</noscript>
 </head>
 
 <body class="" id="top">
@@ -252,7 +130,7 @@ Spring Data 的 Page 接口进行数据分页返回了很多很多垃圾信息�
 <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="https://zjxjwxk.github.io/" accesskey="h" title="Xinkang&#39;s Blog (Alt + H)">Xinkang&#39;s Blog</a>
+            <a href="http://localhost:1313/" accesskey="h" title="Xinkang&#39;s Blog (Alt + H)">Xinkang&#39;s Blog</a>
             <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
@@ -278,22 +156,22 @@ Spring Data 的 Page 接口进行数据分页返回了很多很多垃圾信息�
         </div>
         <ul id="menu">
             <li>
-                <a href="https://zjxjwxk.github.io/archives/" title="Archives">
+                <a href="http://localhost:1313/archives/" title="Archives">
                     <span>Archives</span>
                 </a>
             </li>
             <li>
-                <a href="https://zjxjwxk.github.io/categories/" title="Categories">
+                <a href="http://localhost:1313/categories/" title="Categories">
                     <span>Categories</span>
                 </a>
             </li>
             <li>
-                <a href="https://zjxjwxk.github.io/tags/" title="Tags">
+                <a href="http://localhost:1313/tags/" title="Tags">
                     <span>Tags</span>
                 </a>
             </li>
             <li>
-                <a href="https://zjxjwxk.github.io/search/" title="Search (Alt &#43; /)" accesskey=/>
+                <a href="http://localhost:1313/search/" title="Search (Alt &#43; /)" accesskey=/>
                     <span>Search</span>
                 </a>
             </li>
@@ -303,7 +181,6 @@ Spring Data 的 Page 接口进行数据分页返回了很多很多垃圾信息�
 <main class="main">
 
 <article class="post-single">
-  <div id="content-container">
   <header class="post-header">
     
     <h1 class="post-title entry-hint-parent">
@@ -510,31 +387,15 @@ Spring Data 的 Page 接口进行数据分页返回了很多很多垃圾信息�
 
   <footer class="post-footer">
     <ul class="post-tags">
-      <li><a href="https://zjxjwxk.github.io/tags/java/">Java</a></li>
-      <li><a href="https://zjxjwxk.github.io/tags/spring-boot/">Spring Boot</a></li>
+      <li><a href="http://localhost:1313/tags/java/">Java</a></li>
+      <li><a href="http://localhost:1313/tags/spring-boot/">Spring Boot</a></li>
     </ul>
   </footer>
 </article>
-
-<script>
-  window.onload = function() {
-      var contentContainer = document.getElementById("content-container");
-      if ("" !== "") {
-          var password = prompt("Enter password:");
-          if (password === "") {
-              contentContainer.style.display = "block";
-          } else {
-              alert("Incorrect password");
-          }
-      } else {
-          contentContainer.style.display = "block";
-      }
-  };
-</script>
     </main>
     
 <footer class="footer">
-        <span>&copy; 2024 <a href="https://zjxjwxk.github.io/">Xinkang&#39;s Blog</a></span> · 
+        <span>&copy; 2024 <a href="http://localhost:1313/">Xinkang&#39;s Blog</a></span> · 
 
     <span>
         Powered by

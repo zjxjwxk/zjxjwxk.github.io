@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" dir="auto">
 
-<head><meta charset="utf-8">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="index, follow">
+<meta name="robots" content="noindex, nofollow">
 <title>Dubbo微服务影院系列（9）：Dubbo服务开发（支付模块开发） | Xinkang&#39;s Blog</title>
 <meta name="keywords" content="Dubbo, 微服务架构">
 <meta name="description" content="章节概要
@@ -60,16 +60,16 @@ Dubbo 本地伪装
 
 官方文档：https://dubbo.apache.org/zh-cn/docs/user/demos/local-mock.html">
 <meta name="author" content="">
-<link rel="canonical" href="https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/9.dubbo%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91%E6%94%AF%E4%BB%98%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/">
+<link rel="canonical" href="http://localhost:1313/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/9.dubbo%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91%E6%94%AF%E4%BB%98%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.d6fcd20a4fb86efa4dfac8ec95da60244cc8871042183da1ef28e3a762ad79c8.css" integrity="sha256-1vzSCk&#43;4bvpN&#43;sjsldpgJEzIhxBCGD2h7yjjp2Ktecg=" rel="preload stylesheet" as="style">
-<link rel="icon" href="https://zjxjwxk.github.io/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="https://zjxjwxk.github.io/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="https://zjxjwxk.github.io/favicon-32x32.png">
-<link rel="apple-touch-icon" href="https://zjxjwxk.github.io/apple-touch-icon.png">
-<link rel="mask-icon" href="https://zjxjwxk.github.io/safari-pinned-tab.svg">
+<link rel="icon" href="http://localhost:1313/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" hreflang="en" href="https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/9.dubbo%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91%E6%94%AF%E4%BB%98%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/9.dubbo%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91%E6%94%AF%E4%BB%98%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/">
 <noscript>
     <style>
         #theme-toggle,
@@ -106,127 +106,7 @@ Dubbo 本地伪装
         }
 
     </style>
-</noscript><meta property="og:url" content="https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/9.dubbo%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91%E6%94%AF%E4%BB%98%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/">
-  <meta property="og:site_name" content="Xinkang&#39;s Blog">
-  <meta property="og:title" content="Dubbo微服务影院系列（9）：Dubbo服务开发（支付模块开发）">
-  <meta property="og:description" content="章节概要 完成支付模块业务开发 Dubbo 特性学习：隐式参数、参数验证等 Dubbo 本地存根 本地存根类似于 Dubbo 的静态代理 Dubbo 会在客户端生成一个代理，处理部分业务 Stub 必须有可传入 Proxy 的构造函数 官方文档：https://dubbo.apache.org/zh-cn/docs/user/demos/local-stub.html
-远程服务后，客户端通常只剩下接口，而实现全在服务器端，但提供方有些时候想在客户端也执行部分逻辑，比如：做 ThreadLocal 缓存，提前验证参数，调用失败后伪造容错数据等等，此时就需要在 API 中带上 Stub，客户端生成 Proxy 实例，会把 Proxy 通过构造函数传给 Stub，然后把 Stub 暴露给用户，Stub 可以决定要不要去调 Proxy。
-在 spring 配置文件中按以下方式配置：
-&lt;dubbo:service interface=&#34;com.foo.BarService&#34; stub=&#34;true&#34; /&gt; 或
-&lt;dubbo:service interface=&#34;com.foo.BarService&#34; stub=&#34;com.foo.BarServiceStub&#34; /&gt; 提供 Stub 的实现：
-package com.foo; public class BarServiceStub implements BarService { private final BarService barService; // 构造函数传入真正的远程代理对象 public BarServiceStub(BarService barService){ this.barService = barService; } public String sayHello(String name) { // 此代码在客户端执行, 你可以在客户端做ThreadLocal本地缓存，或预先验证参数是否合法，等等 try { return barService.sayHello(name); } catch (Exception e) { // 你可以容错，可以做任何AOP拦截事项 return &#34;容错数据&#34;; } } } Stub 必须有可传入 Proxy 的构造函数。 在 interface 旁边放一个 Stub 实现，它实现 BarService 接口，并有一个传入远程 BarService 实例的构造函数 Dubbo 本地伪装 本地伪装是本地存根的一个子集 通常会使用本地伪装处理服务降级 建议本地伪装在客户端实现 官方文档：https://dubbo.apache.org/zh-cn/docs/user/demos/local-mock.html">
-  <meta property="og:locale" content="en">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2020-04-11T20:14:00+00:00">
-    <meta property="article:modified_time" content="2020-04-11T20:14:00+00:00">
-    <meta property="article:tag" content="Dubbo">
-    <meta property="article:tag" content="微服务架构">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Dubbo微服务影院系列（9）：Dubbo服务开发（支付模块开发）">
-<meta name="twitter:description" content="章节概要
-
-完成支付模块业务开发
-Dubbo 特性学习：隐式参数、参数验证等
-
-Dubbo 本地存根
-
-本地存根类似于 Dubbo 的静态代理
-Dubbo 会在客户端生成一个代理，处理部分业务
-Stub 必须有可传入 Proxy 的构造函数
-
-
-官方文档：https://dubbo.apache.org/zh-cn/docs/user/demos/local-stub.html
-
-远程服务后，客户端通常只剩下接口，而实现全在服务器端，但提供方有些时候想在客户端也执行部分逻辑，比如：做 ThreadLocal 缓存，提前验证参数，调用失败后伪造容错数据等等，此时就需要在 API 中带上 Stub，客户端生成 Proxy 实例，会把 Proxy 通过构造函数传给 Stub，然后把 Stub 暴露给用户，Stub 可以决定要不要去调 Proxy。
-
-在 spring 配置文件中按以下方式配置：
-&lt;dubbo:service interface=&#34;com.foo.BarService&#34; stub=&#34;true&#34; /&gt;
-或
-&lt;dubbo:service interface=&#34;com.foo.BarService&#34; stub=&#34;com.foo.BarServiceStub&#34; /&gt;
-提供 Stub 的实现：
-package com.foo;
-public class BarServiceStub implements BarService {
-    private final BarService barService;
-    
-    // 构造函数传入真正的远程代理对象
-    public BarServiceStub(BarService barService){
-        this.barService = barService;
-    }
- 
-    public String sayHello(String name) {
-        // 此代码在客户端执行, 你可以在客户端做ThreadLocal本地缓存，或预先验证参数是否合法，等等
-        try {
-            return barService.sayHello(name);
-        } catch (Exception e) {
-            // 你可以容错，可以做任何AOP拦截事项
-            return &#34;容错数据&#34;;
-        }
-    }
-}
-
-Stub 必须有可传入 Proxy 的构造函数。
-在 interface 旁边放一个 Stub 实现，它实现 BarService 接口，并有一个传入远程 BarService 实例的构造函数
-
-Dubbo 本地伪装
-
-本地伪装是本地存根的一个子集
-通常会使用本地伪装处理服务降级
-建议本地伪装在客户端实现
-
-
-官方文档：https://dubbo.apache.org/zh-cn/docs/user/demos/local-mock.html">
-
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position":  1 ,
-      "name": "Posts",
-      "item": "https://zjxjwxk.github.io/posts/"
-    }, 
-    {
-      "@type": "ListItem",
-      "position":  2 ,
-      "name": "Dubbo微服务影院系列（9）：Dubbo服务开发（支付模块开发）",
-      "item": "https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/9.dubbo%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91%E6%94%AF%E4%BB%98%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/"
-    }
-  ]
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": "Dubbo微服务影院系列（9）：Dubbo服务开发（支付模块开发）",
-  "name": "Dubbo微服务影院系列（9）：Dubbo服务开发（支付模块开发）",
-  "description": "章节概要 完成支付模块业务开发 Dubbo 特性学习：隐式参数、参数验证等 Dubbo 本地存根 本地存根类似于 Dubbo 的静态代理 Dubbo 会在客户端生成一个代理，处理部分业务 Stub 必须有可传入 Proxy 的构造函数 官方文档：https://dubbo.apache.org/zh-cn/docs/user/demos/local-stub.html\n远程服务后，客户端通常只剩下接口，而实现全在服务器端，但提供方有些时候想在客户端也执行部分逻辑，比如：做 ThreadLocal 缓存，提前验证参数，调用失败后伪造容错数据等等，此时就需要在 API 中带上 Stub，客户端生成 Proxy 实例，会把 Proxy 通过构造函数传给 Stub，然后把 Stub 暴露给用户，Stub 可以决定要不要去调 Proxy。\n在 spring 配置文件中按以下方式配置：\n\u0026lt;dubbo:service interface=\u0026#34;com.foo.BarService\u0026#34; stub=\u0026#34;true\u0026#34; /\u0026gt; 或\n\u0026lt;dubbo:service interface=\u0026#34;com.foo.BarService\u0026#34; stub=\u0026#34;com.foo.BarServiceStub\u0026#34; /\u0026gt; 提供 Stub 的实现：\npackage com.foo; public class BarServiceStub implements BarService { private final BarService barService; // 构造函数传入真正的远程代理对象 public BarServiceStub(BarService barService){ this.barService = barService; } public String sayHello(String name) { // 此代码在客户端执行, 你可以在客户端做ThreadLocal本地缓存，或预先验证参数是否合法，等等 try { return barService.sayHello(name); } catch (Exception e) { // 你可以容错，可以做任何AOP拦截事项 return \u0026#34;容错数据\u0026#34;; } } } Stub 必须有可传入 Proxy 的构造函数。 在 interface 旁边放一个 Stub 实现，它实现 BarService 接口，并有一个传入远程 BarService 实例的构造函数 Dubbo 本地伪装 本地伪装是本地存根的一个子集 通常会使用本地伪装处理服务降级 建议本地伪装在客户端实现 官方文档：https://dubbo.apache.org/zh-cn/docs/user/demos/local-mock.html\n",
-  "keywords": [
-    "Dubbo", "微服务架构"
-  ],
-  "articleBody": "章节概要 完成支付模块业务开发 Dubbo 特性学习：隐式参数、参数验证等 Dubbo 本地存根 本地存根类似于 Dubbo 的静态代理 Dubbo 会在客户端生成一个代理，处理部分业务 Stub 必须有可传入 Proxy 的构造函数 官方文档：https://dubbo.apache.org/zh-cn/docs/user/demos/local-stub.html\n远程服务后，客户端通常只剩下接口，而实现全在服务器端，但提供方有些时候想在客户端也执行部分逻辑，比如：做 ThreadLocal 缓存，提前验证参数，调用失败后伪造容错数据等等，此时就需要在 API 中带上 Stub，客户端生成 Proxy 实例，会把 Proxy 通过构造函数传给 Stub，然后把 Stub 暴露给用户，Stub 可以决定要不要去调 Proxy。\n在 spring 配置文件中按以下方式配置：\n",
-  "wordCount" : "377",
-  "inLanguage": "en",
-  "datePublished": "2020-04-11T20:14:00Z",
-  "dateModified": "2020-04-11T20:14:00Z",
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/9.dubbo%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91%E6%94%AF%E4%BB%98%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "Xinkang's Blog",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://zjxjwxk.github.io/favicon.ico"
-    }
-  }
-}
-</script>
+</noscript>
 </head>
 
 <body class="" id="top">
@@ -244,7 +124,7 @@ Dubbo 本地伪装
 <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="https://zjxjwxk.github.io/" accesskey="h" title="Xinkang&#39;s Blog (Alt + H)">Xinkang&#39;s Blog</a>
+            <a href="http://localhost:1313/" accesskey="h" title="Xinkang&#39;s Blog (Alt + H)">Xinkang&#39;s Blog</a>
             <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
@@ -270,22 +150,22 @@ Dubbo 本地伪装
         </div>
         <ul id="menu">
             <li>
-                <a href="https://zjxjwxk.github.io/archives/" title="Archives">
+                <a href="http://localhost:1313/archives/" title="Archives">
                     <span>Archives</span>
                 </a>
             </li>
             <li>
-                <a href="https://zjxjwxk.github.io/categories/" title="Categories">
+                <a href="http://localhost:1313/categories/" title="Categories">
                     <span>Categories</span>
                 </a>
             </li>
             <li>
-                <a href="https://zjxjwxk.github.io/tags/" title="Tags">
+                <a href="http://localhost:1313/tags/" title="Tags">
                     <span>Tags</span>
                 </a>
             </li>
             <li>
-                <a href="https://zjxjwxk.github.io/search/" title="Search (Alt &#43; /)" accesskey=/>
+                <a href="http://localhost:1313/search/" title="Search (Alt &#43; /)" accesskey=/>
                     <span>Search</span>
                 </a>
             </li>
@@ -295,7 +175,6 @@ Dubbo 本地伪装
 <main class="main">
 
 <article class="post-single">
-  <div id="content-container">
   <header class="post-header">
     
     <h1 class="post-title entry-hint-parent">
@@ -451,31 +330,15 @@ Dubbo 本地伪装
 
   <footer class="post-footer">
     <ul class="post-tags">
-      <li><a href="https://zjxjwxk.github.io/tags/dubbo/">Dubbo</a></li>
-      <li><a href="https://zjxjwxk.github.io/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/">微服务架构</a></li>
+      <li><a href="http://localhost:1313/tags/dubbo/">Dubbo</a></li>
+      <li><a href="http://localhost:1313/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/">微服务架构</a></li>
     </ul>
   </footer>
 </article>
-
-<script>
-  window.onload = function() {
-      var contentContainer = document.getElementById("content-container");
-      if ("" !== "") {
-          var password = prompt("Enter password:");
-          if (password === "") {
-              contentContainer.style.display = "block";
-          } else {
-              alert("Incorrect password");
-          }
-      } else {
-          contentContainer.style.display = "block";
-      }
-  };
-</script>
     </main>
     
 <footer class="footer">
-        <span>&copy; 2024 <a href="https://zjxjwxk.github.io/">Xinkang&#39;s Blog</a></span> · 
+        <span>&copy; 2024 <a href="http://localhost:1313/">Xinkang&#39;s Blog</a></span> · 
 
     <span>
         Powered by

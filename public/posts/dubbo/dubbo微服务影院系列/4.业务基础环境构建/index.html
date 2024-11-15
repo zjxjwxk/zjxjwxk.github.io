@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" dir="auto">
 
-<head><meta charset="utf-8">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="index, follow">
+<meta name="robots" content="noindex, nofollow">
 <title>Dubbo微服务影院系列（4）：业务基础环境构建 | Xinkang&#39;s Blog</title>
 <meta name="keywords" content="Dubbo, 微服务架构">
 <meta name="description" content="章节概要
@@ -61,16 +61,16 @@ SET FOREIGN_KEY_CHECKS = 1;
 修改 datasource 的 url
 修改 application.yml 中 spring 的 datasource 的 url 为">
 <meta name="author" content="">
-<link rel="canonical" href="https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/4.%E4%B8%9A%E5%8A%A1%E5%9F%BA%E7%A1%80%E7%8E%AF%E5%A2%83%E6%9E%84%E5%BB%BA/">
+<link rel="canonical" href="http://localhost:1313/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/4.%E4%B8%9A%E5%8A%A1%E5%9F%BA%E7%A1%80%E7%8E%AF%E5%A2%83%E6%9E%84%E5%BB%BA/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.d6fcd20a4fb86efa4dfac8ec95da60244cc8871042183da1ef28e3a762ad79c8.css" integrity="sha256-1vzSCk&#43;4bvpN&#43;sjsldpgJEzIhxBCGD2h7yjjp2Ktecg=" rel="preload stylesheet" as="style">
-<link rel="icon" href="https://zjxjwxk.github.io/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="https://zjxjwxk.github.io/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="https://zjxjwxk.github.io/favicon-32x32.png">
-<link rel="apple-touch-icon" href="https://zjxjwxk.github.io/apple-touch-icon.png">
-<link rel="mask-icon" href="https://zjxjwxk.github.io/safari-pinned-tab.svg">
+<link rel="icon" href="http://localhost:1313/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" hreflang="en" href="https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/4.%E4%B8%9A%E5%8A%A1%E5%9F%BA%E7%A1%80%E7%8E%AF%E5%A2%83%E6%9E%84%E5%BB%BA/">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/4.%E4%B8%9A%E5%8A%A1%E5%9F%BA%E7%A1%80%E7%8E%AF%E5%A2%83%E6%9E%84%E5%BB%BA/">
 <noscript>
     <style>
         #theme-toggle,
@@ -107,123 +107,7 @@ SET FOREIGN_KEY_CHECKS = 1;
         }
 
     </style>
-</noscript><meta property="og:url" content="https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/4.%E4%B8%9A%E5%8A%A1%E5%9F%BA%E7%A1%80%E7%8E%AF%E5%A2%83%E6%9E%84%E5%BB%BA/">
-  <meta property="og:site_name" content="Xinkang&#39;s Blog">
-  <meta property="og:title" content="Dubbo微服务影院系列（4）：业务基础环境构建">
-  <meta property="og:description" content="章节概要 构建基于 Guns &#43; SpringBoot &#43; Dubbo 的框架 学会抽离业务接口 学会 API 网关变形应用 API 网关介绍 API 网关有点类似于设计模式中的 Facade 模式 API 网关一般都是微服务系统中的门面 API 网关是微服务的重要组成部分 API 网关的常见作用 身份验证和安全 审查和检测 动态路由 压力测试 负载均衡（Dubbo 自带） 静态相应处理 Guns 环境构建 导入 guns 项目 创建 guns_rest 数据库 创建 user 表 -- ---------------------------- -- Table structure for user -- ---------------------------- DROP TABLE IF EXISTS `user`; CREATE TABLE `user` ( `id` bigint(20) NOT NULL AUTO_INCREMENT, `userName` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL, PRIMARY KEY (`id`) USING BTREE ) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic; -- ---------------------------- -- Records of user -- ---------------------------- INSERT INTO `user` VALUES (1, &#39;admin&#39;); SET FOREIGN_KEY_CHECKS = 1; 添加 log4j 依赖 &lt;dependency&gt; &lt;groupId&gt;log4j&lt;/groupId&gt; &lt;artifactId&gt;log4j&lt;/artifactId&gt; &lt;version&gt;1.2.17&lt;/version&gt; &lt;/dependency&gt; 修改 datasource 的 url 修改 application.yml 中 spring 的 datasource 的 url 为">
-  <meta property="og:locale" content="en">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2020-03-09T22:25:00+00:00">
-    <meta property="article:modified_time" content="2020-03-09T22:25:00+00:00">
-    <meta property="article:tag" content="Dubbo">
-    <meta property="article:tag" content="微服务架构">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Dubbo微服务影院系列（4）：业务基础环境构建">
-<meta name="twitter:description" content="章节概要
-
-构建基于 Guns &#43; SpringBoot &#43; Dubbo 的框架
-学会抽离业务接口
-学会 API 网关变形应用
-
-API 网关介绍
-
-API 网关有点类似于设计模式中的 Facade 模式
-API 网关一般都是微服务系统中的门面
-API  网关是微服务的重要组成部分
-
-
-API 网关的常见作用
-
-身份验证和安全
-审查和检测
-动态路由
-压力测试
-负载均衡（Dubbo 自带）
-静态相应处理
-
-
-Guns 环境构建
-导入 guns 项目
-
-创建 guns_rest 数据库
-
-创建 user 表
--- ----------------------------
--- Table structure for user
--- ----------------------------
-DROP TABLE IF EXISTS `user`;
-CREATE TABLE `user`  (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `userName` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of user
--- ----------------------------
-INSERT INTO `user` VALUES (1, &#39;admin&#39;);
-
-SET FOREIGN_KEY_CHECKS = 1;
-添加 log4j 依赖
-&lt;dependency&gt;
-  &lt;groupId&gt;log4j&lt;/groupId&gt;
-  &lt;artifactId&gt;log4j&lt;/artifactId&gt;
-  &lt;version&gt;1.2.17&lt;/version&gt;
-&lt;/dependency&gt;
-修改 datasource 的 url
-修改 application.yml 中 spring 的 datasource 的 url 为">
-
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position":  1 ,
-      "name": "Posts",
-      "item": "https://zjxjwxk.github.io/posts/"
-    }, 
-    {
-      "@type": "ListItem",
-      "position":  2 ,
-      "name": "Dubbo微服务影院系列（4）：业务基础环境构建",
-      "item": "https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/4.%E4%B8%9A%E5%8A%A1%E5%9F%BA%E7%A1%80%E7%8E%AF%E5%A2%83%E6%9E%84%E5%BB%BA/"
-    }
-  ]
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": "Dubbo微服务影院系列（4）：业务基础环境构建",
-  "name": "Dubbo微服务影院系列（4）：业务基础环境构建",
-  "description": "章节概要 构建基于 Guns + SpringBoot + Dubbo 的框架 学会抽离业务接口 学会 API 网关变形应用 API 网关介绍 API 网关有点类似于设计模式中的 Facade 模式 API 网关一般都是微服务系统中的门面 API 网关是微服务的重要组成部分 API 网关的常见作用 身份验证和安全 审查和检测 动态路由 压力测试 负载均衡（Dubbo 自带） 静态相应处理 Guns 环境构建 导入 guns 项目 创建 guns_rest 数据库 创建 user 表 -- ---------------------------- -- Table structure for user -- ---------------------------- DROP TABLE IF EXISTS `user`; CREATE TABLE `user` ( `id` bigint(20) NOT NULL AUTO_INCREMENT, `userName` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL, PRIMARY KEY (`id`) USING BTREE ) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic; -- ---------------------------- -- Records of user -- ---------------------------- INSERT INTO `user` VALUES (1, \u0026#39;admin\u0026#39;); SET FOREIGN_KEY_CHECKS = 1; 添加 log4j 依赖 \u0026lt;dependency\u0026gt; \u0026lt;groupId\u0026gt;log4j\u0026lt;/groupId\u0026gt; \u0026lt;artifactId\u0026gt;log4j\u0026lt;/artifactId\u0026gt; \u0026lt;version\u0026gt;1.2.17\u0026lt;/version\u0026gt; \u0026lt;/dependency\u0026gt; 修改 datasource 的 url 修改 application.yml 中 spring 的 datasource 的 url 为\n",
-  "keywords": [
-    "Dubbo", "微服务架构"
-  ],
-  "articleBody": "章节概要 构建基于 Guns + SpringBoot + Dubbo 的框架 学会抽离业务接口 学会 API 网关变形应用 API 网关介绍 API 网关有点类似于设计模式中的 Facade 模式 API 网关一般都是微服务系统中的门面 API 网关是微服务的重要组成部分 API 网关的常见作用 身份验证和安全 审查和检测 动态路由 压力测试 负载均衡（Dubbo 自带） 静态相应处理 Guns 环境构建 导入 guns 项目 创建 guns_rest 数据库 创建 user 表 -- ---------------------------- -- Table structure for user -- ---------------------------- DROP TABLE IF EXISTS `user`; CREATE TABLE `user` ( `id` bigint(20) NOT NULL AUTO_INCREMENT, `userName` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL, PRIMARY KEY (`id`) USING BTREE ) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic; -- ---------------------------- -- Records of user -- ---------------------------- INSERT INTO `user` VALUES (1, 'admin'); SET FOREIGN_KEY_CHECKS = 1; 添加 log4j 依赖 log4j log4j 1.2.17 修改 datasource 的 url 修改 application.yml 中 spring 的 datasource 的 url 为\nurl: jdbc:mysql://127.0.0.1:3306/guns_rest?autoReconnect=true\u0026useUnicode=true\u0026characterEncoding=utf8\u0026serverTimezone=GMT%2B8 验证环境 启动 GunsRestApplication，访问 url http://localhost/auth?userName=admin\u0026password=admin，若返回如下 token 则环境搭建成功。\n{ \"randomKey\": \"zd8rb8\", \"token\": \"eyJhbGciOiJIUzUxMiJ9.eyJyYW5kb21LZXkiOiJ6ZDhyYjgiLCJzdWIiOiJhZG1pbiIsImV4cCI6MTU4NDM2MjkxOCwiaWF0IjoxNTgzNzU4MTE4fQ.mR7Elro8oK8T2Rx6FE02FWTvORJnUAcFfPka4-KbQYsSpoMQQl5iUgd-wd9wYIw_5wbXpn3TFoii72suPn0b4A\" } API 网关模块构建测试 在 guns 项目中复制一份 guns-rest 模块并重命名为 guns-gateway，在主模块 pom.xml 中添加 guns-gateway\nguns-admin guns-core guns-rest guns-generator guns-gateway 修改其 pom.xml 中有关名称为 guns-gateway，并在 Project Structure 中将该模块重命名为 guns-gateway，同时删除原来 guns-rest 中多余的 Content Root（从 guns-gateway 加入的）\n这样 guns-gateway 就构建好了（测试同 guns-rest）。\nAPI 网关集成 Dubbo 在 guns-gateway 项目的 pom.xml 文件中添加 Dubbo 和 ZooKeeper 的依赖\ncom.alibaba.spring.boot dubbo-spring-boot-starter 2.0.0 com.101tec zkclient 0.10 在 application.yml 中添加\nspring: application: name: cinema-gateway dubbo: server: true registry: zookeeper://localhost:2181 在 Application 类上添加注解 @EnableDubboConfiguration 在 Service 实现类上添加注解 @Component 和 @Service(interfaceClass = UserAPI.class)，其中 @Service 来自Dubbo 抽离业务 API 在 guns 项目中复制一份 guns-core 模块并重命名为 guns-api 修改其 pom.xml 中各名称后，删除其所有依赖 删除所有 java 下所有包，创建 api 包，其中可创建公用接口类 使用 Maven 的 install 指令将其放入库中 在主模块的 pom.xml 中添加依赖 com.stylefeng guns-api ${guns.version} 在 guns-gateway 的 pom.xml 中添加依赖 com.stylefeng guns-api 之后，就可以在 guns-gateway 模块中，引入 guns-api 中的接口来使用了。这样接口类只需要在 guns-api 中写一份就够了，避免了冗余，达到了抽离业务 API 的效果。\n",
-  "wordCount" : "281",
-  "inLanguage": "en",
-  "datePublished": "2020-03-09T22:25:00Z",
-  "dateModified": "2020-03-09T22:25:00Z",
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/4.%E4%B8%9A%E5%8A%A1%E5%9F%BA%E7%A1%80%E7%8E%AF%E5%A2%83%E6%9E%84%E5%BB%BA/"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "Xinkang's Blog",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://zjxjwxk.github.io/favicon.ico"
-    }
-  }
-}
-</script>
+</noscript>
 </head>
 
 <body class="" id="top">
@@ -241,7 +125,7 @@ SET FOREIGN_KEY_CHECKS = 1;
 <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="https://zjxjwxk.github.io/" accesskey="h" title="Xinkang&#39;s Blog (Alt + H)">Xinkang&#39;s Blog</a>
+            <a href="http://localhost:1313/" accesskey="h" title="Xinkang&#39;s Blog (Alt + H)">Xinkang&#39;s Blog</a>
             <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
@@ -267,22 +151,22 @@ SET FOREIGN_KEY_CHECKS = 1;
         </div>
         <ul id="menu">
             <li>
-                <a href="https://zjxjwxk.github.io/archives/" title="Archives">
+                <a href="http://localhost:1313/archives/" title="Archives">
                     <span>Archives</span>
                 </a>
             </li>
             <li>
-                <a href="https://zjxjwxk.github.io/categories/" title="Categories">
+                <a href="http://localhost:1313/categories/" title="Categories">
                     <span>Categories</span>
                 </a>
             </li>
             <li>
-                <a href="https://zjxjwxk.github.io/tags/" title="Tags">
+                <a href="http://localhost:1313/tags/" title="Tags">
                     <span>Tags</span>
                 </a>
             </li>
             <li>
-                <a href="https://zjxjwxk.github.io/search/" title="Search (Alt &#43; /)" accesskey=/>
+                <a href="http://localhost:1313/search/" title="Search (Alt &#43; /)" accesskey=/>
                     <span>Search</span>
                 </a>
             </li>
@@ -292,7 +176,6 @@ SET FOREIGN_KEY_CHECKS = 1;
 <main class="main">
 
 <article class="post-single">
-  <div id="content-container">
   <header class="post-header">
     
     <h1 class="post-title entry-hint-parent">
@@ -427,31 +310,15 @@ SET FOREIGN_KEY_CHECKS = 1;
 
   <footer class="post-footer">
     <ul class="post-tags">
-      <li><a href="https://zjxjwxk.github.io/tags/dubbo/">Dubbo</a></li>
-      <li><a href="https://zjxjwxk.github.io/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/">微服务架构</a></li>
+      <li><a href="http://localhost:1313/tags/dubbo/">Dubbo</a></li>
+      <li><a href="http://localhost:1313/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/">微服务架构</a></li>
     </ul>
   </footer>
 </article>
-
-<script>
-  window.onload = function() {
-      var contentContainer = document.getElementById("content-container");
-      if ("" !== "") {
-          var password = prompt("Enter password:");
-          if (password === "") {
-              contentContainer.style.display = "block";
-          } else {
-              alert("Incorrect password");
-          }
-      } else {
-          contentContainer.style.display = "block";
-      }
-  };
-</script>
     </main>
     
 <footer class="footer">
-        <span>&copy; 2024 <a href="https://zjxjwxk.github.io/">Xinkang&#39;s Blog</a></span> · 
+        <span>&copy; 2024 <a href="http://localhost:1313/">Xinkang&#39;s Blog</a></span> · 
 
     <span>
         Powered by

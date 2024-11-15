@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" dir="auto">
 
-<head><meta charset="utf-8">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="index, follow">
+<meta name="robots" content="noindex, nofollow">
 <title>Dubbo微服务影院系列（6）：Dubbo服务开发（影片模块开发） | Xinkang&#39;s Blog</title>
 <meta name="keywords" content="Dubbo, 微服务架构">
 <meta name="description" content="章节概要
@@ -63,16 +63,16 @@ API 网关功能聚合
 Mybatis-plus 自定义 SQL 实现
 在相应的 Mapper 接口中添加方法">
 <meta name="author" content="">
-<link rel="canonical" href="https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/6.dubbo%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91%E5%BD%B1%E7%89%87%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/">
+<link rel="canonical" href="http://localhost:1313/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/6.dubbo%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91%E5%BD%B1%E7%89%87%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.d6fcd20a4fb86efa4dfac8ec95da60244cc8871042183da1ef28e3a762ad79c8.css" integrity="sha256-1vzSCk&#43;4bvpN&#43;sjsldpgJEzIhxBCGD2h7yjjp2Ktecg=" rel="preload stylesheet" as="style">
-<link rel="icon" href="https://zjxjwxk.github.io/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="https://zjxjwxk.github.io/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="https://zjxjwxk.github.io/favicon-32x32.png">
-<link rel="apple-touch-icon" href="https://zjxjwxk.github.io/apple-touch-icon.png">
-<link rel="mask-icon" href="https://zjxjwxk.github.io/safari-pinned-tab.svg">
+<link rel="icon" href="http://localhost:1313/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" hreflang="en" href="https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/6.dubbo%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91%E5%BD%B1%E7%89%87%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/6.dubbo%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91%E5%BD%B1%E7%89%87%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/">
 <noscript>
     <style>
         #theme-toggle,
@@ -109,127 +109,7 @@ Mybatis-plus 自定义 SQL 实现
         }
 
     </style>
-</noscript><meta property="og:url" content="https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/6.dubbo%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91%E5%BD%B1%E7%89%87%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/">
-  <meta property="og:site_name" content="Xinkang&#39;s Blog">
-  <meta property="og:title" content="Dubbo微服务影院系列（6）：Dubbo服务开发（影片模块开发）">
-  <meta property="og:description" content="章节概要 掌握 API 网关服务聚合功能的实现 掌握 Mybatis-plus 自定义 SQL 实现 掌握 Dubbo 异步调用 服务聚合 服务聚合就是将多个服务调用封装 服务聚合可以简化前端调用方式 服务聚合提供更好的安全性、可扩展性 业务功能开发流程 根据接口文档思考功能列表 实现 API 接口和实体 服务提供者实现 影片模块创建 从 guns-user 拷贝一份重命名为 guns-film，修改相关配置
-API 网关功能聚合 优点 六个接口，一次请求，同一时刻节省了5次HTTP请求 同一个接口对外暴露，降低了前后端分离开发的难度和复杂度 缺点： 一次获取数据过多，容易出现问题 如 gateway 中的影片模块的获取首页信息接口，将 filmServiceApi 的多个方法所获得的对象聚合为 FilmIndexVO 对象返回给前端，将原本需要的多个接口聚合为一个 /film/getIndex 接口，避免了前端对不同接口的多次调用。
-@RequestMapping(value = &#34;getIndex&#34;, method = RequestMethod.GET) public ResponseVO getIndex() { FilmIndexVO filmIndexVO = new FilmIndexVO(); // 获取banner信息 filmIndexVO.setBanners(filmServiceApi.getBanners()); // 获取热映的影片 filmIndexVO.setHotFilms(filmServiceApi.getHotFilms(true, 99, 99, 99, 99, 1, 8)); // 获取即将上映的影片 filmIndexVO.setSoonFilms(filmServiceApi.getSoonFilms(true, 99, 99, 99, 99, 1, 8)); // 获取票房排行榜 filmIndexVO.setBoxRanking(filmServiceApi.getBoxRanking()); // 获取人气榜单 filmIndexVO.setExpectRanking(filmServiceApi.getExpectRanking()); // 获取排行前100影片 filmIndexVO.setTop100(filmServiceApi.getTop()); return ResponseVO.success(IMG_PRE, filmIndexVO); } Mybatis-plus 自定义 SQL 实现 在相应的 Mapper 接口中添加方法">
-  <meta property="og:locale" content="en">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2020-03-22T19:47:00+00:00">
-    <meta property="article:modified_time" content="2020-03-22T19:47:00+00:00">
-    <meta property="article:tag" content="Dubbo">
-    <meta property="article:tag" content="微服务架构">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Dubbo微服务影院系列（6）：Dubbo服务开发（影片模块开发）">
-<meta name="twitter:description" content="章节概要
-
-掌握 API 网关服务聚合功能的实现
-掌握 Mybatis-plus 自定义 SQL 实现
-掌握 Dubbo 异步调用
-
-服务聚合
-
-服务聚合就是将多个服务调用封装
-服务聚合可以简化前端调用方式
-服务聚合提供更好的安全性、可扩展性
-
-业务功能开发流程
-
-根据接口文档思考功能列表
-实现 API 接口和实体
-服务提供者实现
-
-影片模块创建
-从 guns-user 拷贝一份重命名为 guns-film，修改相关配置
-API 网关功能聚合
-
-优点
-
-六个接口，一次请求，同一时刻节省了5次HTTP请求
-同一个接口对外暴露，降低了前后端分离开发的难度和复杂度
-
-
-缺点：
-
-一次获取数据过多，容易出现问题
-
-
-
-如 gateway 中的影片模块的获取首页信息接口，将 filmServiceApi 的多个方法所获得的对象聚合为 FilmIndexVO 对象返回给前端，将原本需要的多个接口聚合为一个 /film/getIndex 接口，避免了前端对不同接口的多次调用。
-@RequestMapping(value = &#34;getIndex&#34;, method = RequestMethod.GET)
-    public ResponseVO getIndex() {
-
-        FilmIndexVO filmIndexVO = new FilmIndexVO();
-        // 获取banner信息
-        filmIndexVO.setBanners(filmServiceApi.getBanners());
-        // 获取热映的影片
-        filmIndexVO.setHotFilms(filmServiceApi.getHotFilms(true, 99, 99, 99, 99, 1, 8));
-        // 获取即将上映的影片
-        filmIndexVO.setSoonFilms(filmServiceApi.getSoonFilms(true, 99, 99, 99, 99, 1, 8));
-        // 获取票房排行榜
-        filmIndexVO.setBoxRanking(filmServiceApi.getBoxRanking());
-        // 获取人气榜单
-        filmIndexVO.setExpectRanking(filmServiceApi.getExpectRanking());
-        // 获取排行前100影片
-        filmIndexVO.setTop100(filmServiceApi.getTop());
-        return ResponseVO.success(IMG_PRE, filmIndexVO);
-    }
-Mybatis-plus 自定义 SQL 实现
-在相应的 Mapper 接口中添加方法">
-
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position":  1 ,
-      "name": "Posts",
-      "item": "https://zjxjwxk.github.io/posts/"
-    }, 
-    {
-      "@type": "ListItem",
-      "position":  2 ,
-      "name": "Dubbo微服务影院系列（6）：Dubbo服务开发（影片模块开发）",
-      "item": "https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/6.dubbo%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91%E5%BD%B1%E7%89%87%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/"
-    }
-  ]
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": "Dubbo微服务影院系列（6）：Dubbo服务开发（影片模块开发）",
-  "name": "Dubbo微服务影院系列（6）：Dubbo服务开发（影片模块开发）",
-  "description": "章节概要 掌握 API 网关服务聚合功能的实现 掌握 Mybatis-plus 自定义 SQL 实现 掌握 Dubbo 异步调用 服务聚合 服务聚合就是将多个服务调用封装 服务聚合可以简化前端调用方式 服务聚合提供更好的安全性、可扩展性 业务功能开发流程 根据接口文档思考功能列表 实现 API 接口和实体 服务提供者实现 影片模块创建 从 guns-user 拷贝一份重命名为 guns-film，修改相关配置\nAPI 网关功能聚合 优点 六个接口，一次请求，同一时刻节省了5次HTTP请求 同一个接口对外暴露，降低了前后端分离开发的难度和复杂度 缺点： 一次获取数据过多，容易出现问题 如 gateway 中的影片模块的获取首页信息接口，将 filmServiceApi 的多个方法所获得的对象聚合为 FilmIndexVO 对象返回给前端，将原本需要的多个接口聚合为一个 /film/getIndex 接口，避免了前端对不同接口的多次调用。\n@RequestMapping(value = \u0026#34;getIndex\u0026#34;, method = RequestMethod.GET) public ResponseVO getIndex() { FilmIndexVO filmIndexVO = new FilmIndexVO(); // 获取banner信息 filmIndexVO.setBanners(filmServiceApi.getBanners()); // 获取热映的影片 filmIndexVO.setHotFilms(filmServiceApi.getHotFilms(true, 99, 99, 99, 99, 1, 8)); // 获取即将上映的影片 filmIndexVO.setSoonFilms(filmServiceApi.getSoonFilms(true, 99, 99, 99, 99, 1, 8)); // 获取票房排行榜 filmIndexVO.setBoxRanking(filmServiceApi.getBoxRanking()); // 获取人气榜单 filmIndexVO.setExpectRanking(filmServiceApi.getExpectRanking()); // 获取排行前100影片 filmIndexVO.setTop100(filmServiceApi.getTop()); return ResponseVO.success(IMG_PRE, filmIndexVO); } Mybatis-plus 自定义 SQL 实现 在相应的 Mapper 接口中添加方法\n",
-  "keywords": [
-    "Dubbo", "微服务架构"
-  ],
-  "articleBody": "章节概要 掌握 API 网关服务聚合功能的实现 掌握 Mybatis-plus 自定义 SQL 实现 掌握 Dubbo 异步调用 服务聚合 服务聚合就是将多个服务调用封装 服务聚合可以简化前端调用方式 服务聚合提供更好的安全性、可扩展性 业务功能开发流程 根据接口文档思考功能列表 实现 API 接口和实体 服务提供者实现 影片模块创建 从 guns-user 拷贝一份重命名为 guns-film，修改相关配置\nAPI 网关功能聚合 优点 六个接口，一次请求，同一时刻节省了5次HTTP请求 同一个接口对外暴露，降低了前后端分离开发的难度和复杂度 缺点： 一次获取数据过多，容易出现问题 如 gateway 中的影片模块的获取首页信息接口，将 filmServiceApi 的多个方法所获得的对象聚合为 FilmIndexVO 对象返回给前端，将原本需要的多个接口聚合为一个 /film/getIndex 接口，避免了前端对不同接口的多次调用。\n@RequestMapping(value = \"getIndex\", method = RequestMethod.GET) public ResponseVO getIndex() { FilmIndexVO filmIndexVO = new FilmIndexVO(); // 获取banner信息 filmIndexVO.setBanners(filmServiceApi.getBanners()); // 获取热映的影片 filmIndexVO.setHotFilms(filmServiceApi.getHotFilms(true, 99, 99, 99, 99, 1, 8)); // 获取即将上映的影片 filmIndexVO.setSoonFilms(filmServiceApi.getSoonFilms(true, 99, 99, 99, 99, 1, 8)); // 获取票房排行榜 filmIndexVO.setBoxRanking(filmServiceApi.getBoxRanking()); // 获取人气榜单 filmIndexVO.setExpectRanking(filmServiceApi.getExpectRanking()); // 获取排行前100影片 filmIndexVO.setTop100(filmServiceApi.getTop()); return ResponseVO.success(IMG_PRE, filmIndexVO); } Mybatis-plus 自定义 SQL 实现 在相应的 Mapper 接口中添加方法\npublic interface ActorTMapper extends BaseMapper\u003cActorT\u003e { List\u003cActorVO\u003e getActors(@Param(\"filmId\") String filmId); } 在相应的 Mapper xml 配置文件中添加 select 语句\n\u003cmapper namespace=\"com.stylefeng.guns.rest.common.persistence.dao.ActorTMapper\"\u003e \u003cresultMap id=\"BaseResultMap\" type=\"com.stylefeng.guns.rest.common.persistence.model.ActorT\"\u003e \u003cid column=\"UUID\" property=\"uuid\" /\u003e \u003cresult column=\"actor_name\" property=\"actorName\" /\u003e \u003cresult column=\"actor_img\" property=\"actorImg\" /\u003e \u003c/resultMap\u003e \u003cselect id=\"getActors\" parameterType=\"java.lang.String\" resultType=\"com.stylefeng.guns.api.film.vo.ActorVO\"\u003e SELECT actor_img AS imgAddress, actor_name AS directorName, role_name AS roleName FROM actor_t, film_actor_t WHERE actor_t.UUID = film_actor_t.actor_id AND film_actor_t.film_id = ${filmId} \u003c/select\u003e \u003c/mapper\u003e 这样，就能执行自定义 SQL 语句了，其实就是普通版 Mybatis 的正常使用而已…\nDubbo 异步调用 官方文档：https://dubbo.apache.org/zh-cn/docs/user/demos/async-call.html\n异步调用 异步调用利用 NIO 的非阻塞特性实现服务调用并行。\n使用RpcContext 配置（Spring） 服务端服务级别 ",
-  "wordCount" : "429",
-  "inLanguage": "en",
-  "datePublished": "2020-03-22T19:47:00Z",
-  "dateModified": "2020-03-22T19:47:00Z",
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/6.dubbo%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91%E5%BD%B1%E7%89%87%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "Xinkang's Blog",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://zjxjwxk.github.io/favicon.ico"
-    }
-  }
-}
-</script>
+</noscript>
 </head>
 
 <body class="" id="top">
@@ -247,7 +127,7 @@ Mybatis-plus 自定义 SQL 实现
 <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="https://zjxjwxk.github.io/" accesskey="h" title="Xinkang&#39;s Blog (Alt + H)">Xinkang&#39;s Blog</a>
+            <a href="http://localhost:1313/" accesskey="h" title="Xinkang&#39;s Blog (Alt + H)">Xinkang&#39;s Blog</a>
             <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
@@ -273,22 +153,22 @@ Mybatis-plus 自定义 SQL 实现
         </div>
         <ul id="menu">
             <li>
-                <a href="https://zjxjwxk.github.io/archives/" title="Archives">
+                <a href="http://localhost:1313/archives/" title="Archives">
                     <span>Archives</span>
                 </a>
             </li>
             <li>
-                <a href="https://zjxjwxk.github.io/categories/" title="Categories">
+                <a href="http://localhost:1313/categories/" title="Categories">
                     <span>Categories</span>
                 </a>
             </li>
             <li>
-                <a href="https://zjxjwxk.github.io/tags/" title="Tags">
+                <a href="http://localhost:1313/tags/" title="Tags">
                     <span>Tags</span>
                 </a>
             </li>
             <li>
-                <a href="https://zjxjwxk.github.io/search/" title="Search (Alt &#43; /)" accesskey=/>
+                <a href="http://localhost:1313/search/" title="Search (Alt &#43; /)" accesskey=/>
                     <span>Search</span>
                 </a>
             </li>
@@ -298,7 +178,6 @@ Mybatis-plus 自定义 SQL 实现
 <main class="main">
 
 <article class="post-single">
-  <div id="content-container">
   <header class="post-header">
     
     <h1 class="post-title entry-hint-parent">
@@ -515,31 +394,15 @@ Mybatis-plus 自定义 SQL 实现
 
   <footer class="post-footer">
     <ul class="post-tags">
-      <li><a href="https://zjxjwxk.github.io/tags/dubbo/">Dubbo</a></li>
-      <li><a href="https://zjxjwxk.github.io/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/">微服务架构</a></li>
+      <li><a href="http://localhost:1313/tags/dubbo/">Dubbo</a></li>
+      <li><a href="http://localhost:1313/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/">微服务架构</a></li>
     </ul>
   </footer>
 </article>
-
-<script>
-  window.onload = function() {
-      var contentContainer = document.getElementById("content-container");
-      if ("" !== "") {
-          var password = prompt("Enter password:");
-          if (password === "") {
-              contentContainer.style.display = "block";
-          } else {
-              alert("Incorrect password");
-          }
-      } else {
-          contentContainer.style.display = "block";
-      }
-  };
-</script>
     </main>
     
 <footer class="footer">
-        <span>&copy; 2024 <a href="https://zjxjwxk.github.io/">Xinkang&#39;s Blog</a></span> · 
+        <span>&copy; 2024 <a href="http://localhost:1313/">Xinkang&#39;s Blog</a></span> · 
 
     <span>
         Powered by

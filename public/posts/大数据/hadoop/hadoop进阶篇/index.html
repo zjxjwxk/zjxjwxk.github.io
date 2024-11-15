@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" dir="auto">
 
-<head><meta charset="utf-8">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="index, follow">
+<meta name="robots" content="noindex, nofollow">
 <title>Hadoop 进阶篇 | Xinkang&#39;s Blog</title>
 <meta name="keywords" content="Hadoop, 大数据">
 <meta name="description" content="概要
@@ -29,16 +29,16 @@ WordCount 实例回顾
 
 MapReduce 作业是一种大规模数据集的并行计算的编程模型。我们可以将 HDFS 中存放的海量数据，通过 MapReduce 作业进行计算，得到目标数据。">
 <meta name="author" content="">
-<link rel="canonical" href="https://zjxjwxk.github.io/posts/%E5%A4%A7%E6%95%B0%E6%8D%AE/hadoop/hadoop%E8%BF%9B%E9%98%B6%E7%AF%87/">
+<link rel="canonical" href="http://localhost:1313/posts/%E5%A4%A7%E6%95%B0%E6%8D%AE/hadoop/hadoop%E8%BF%9B%E9%98%B6%E7%AF%87/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.d6fcd20a4fb86efa4dfac8ec95da60244cc8871042183da1ef28e3a762ad79c8.css" integrity="sha256-1vzSCk&#43;4bvpN&#43;sjsldpgJEzIhxBCGD2h7yjjp2Ktecg=" rel="preload stylesheet" as="style">
-<link rel="icon" href="https://zjxjwxk.github.io/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="https://zjxjwxk.github.io/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="https://zjxjwxk.github.io/favicon-32x32.png">
-<link rel="apple-touch-icon" href="https://zjxjwxk.github.io/apple-touch-icon.png">
-<link rel="mask-icon" href="https://zjxjwxk.github.io/safari-pinned-tab.svg">
+<link rel="icon" href="http://localhost:1313/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" hreflang="en" href="https://zjxjwxk.github.io/posts/%E5%A4%A7%E6%95%B0%E6%8D%AE/hadoop/hadoop%E8%BF%9B%E9%98%B6%E7%AF%87/">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/posts/%E5%A4%A7%E6%95%B0%E6%8D%AE/hadoop/hadoop%E8%BF%9B%E9%98%B6%E7%AF%87/">
 <noscript>
     <style>
         #theme-toggle,
@@ -75,94 +75,7 @@ MapReduce 作业是一种大规模数据集的并行计算的编程模型。我�
         }
 
     </style>
-</noscript><meta property="og:url" content="https://zjxjwxk.github.io/posts/%E5%A4%A7%E6%95%B0%E6%8D%AE/hadoop/hadoop%E8%BF%9B%E9%98%B6%E7%AF%87/">
-  <meta property="og:site_name" content="Xinkang&#39;s Blog">
-  <meta property="og:title" content="Hadoop 进阶篇">
-  <meta property="og:description" content="概要 概述 深入探索 MapReduce 过程 Hadoop 的分布式缓存 Hadoop 应用——推荐算法 HDFS HDFS 是 Hadoop 分布式文件系统的简称，由若干台计算机组成，用于存放 PB、TB 数量级以上的文件，每份文件可以有多个副本，所以 HDFS 是一个具有高冗余、高容错的文件系统。
-Hadoop Hadoop 1.x Hadoop 2.x Hadoop 1.0 到 2.0 的变化：Hadoop 2.0 以后的版本移除了原有的 JobTracker 和 TaskTracker，改由 Yarn 平台的 ResourceManager 负责集群中所有资源的统一管理和分配，NodeManager 管理 Hadoop 集群中单个计算节点。
-YARN 的设计减小了 JobTracker 的资源消耗，减少了 Hadoop 1.0 中发生单点故障的风险。我们还可以在 YARN 平台上运行 Spark 和 Storm 作业，充分利用资源。
-深入探索 MapReduce WordCount 实例回顾 MapReduce 作业是一种大规模数据集的并行计算的编程模型。我们可以将 HDFS 中存放的海量数据，通过 MapReduce 作业进行计算，得到目标数据。">
-  <meta property="og:locale" content="en">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2020-05-08T16:36:00+00:00">
-    <meta property="article:modified_time" content="2020-05-08T16:36:00+00:00">
-    <meta property="article:tag" content="Hadoop">
-    <meta property="article:tag" content="大数据">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hadoop 进阶篇">
-<meta name="twitter:description" content="概要
-
-概述
-深入探索 MapReduce 过程
-Hadoop 的分布式缓存
-Hadoop 应用——推荐算法
-
-HDFS
-HDFS 是 Hadoop 分布式文件系统的简称，由若干台计算机组成，用于存放 PB、TB 数量级以上的文件，每份文件可以有多个副本，所以 HDFS 是一个具有高冗余、高容错的文件系统。
-
-Hadoop
-Hadoop 1.x
-
-Hadoop 2.x
-Hadoop 1.0 到 2.0 的变化：Hadoop 2.0 以后的版本移除了原有的 JobTracker 和 TaskTracker，改由 Yarn 平台的 ResourceManager 负责集群中所有资源的统一管理和分配，NodeManager 管理 Hadoop 集群中单个计算节点。
-YARN 的设计减小了 JobTracker 的资源消耗，减少了 Hadoop 1.0 中发生单点故障的风险。我们还可以在 YARN 平台上运行 Spark 和 Storm 作业，充分利用资源。
-
-深入探索 MapReduce
-WordCount 实例回顾
-
-MapReduce 作业是一种大规模数据集的并行计算的编程模型。我们可以将 HDFS 中存放的海量数据，通过 MapReduce 作业进行计算，得到目标数据。">
-
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position":  1 ,
-      "name": "Posts",
-      "item": "https://zjxjwxk.github.io/posts/"
-    }, 
-    {
-      "@type": "ListItem",
-      "position":  2 ,
-      "name": "Hadoop 进阶篇",
-      "item": "https://zjxjwxk.github.io/posts/%E5%A4%A7%E6%95%B0%E6%8D%AE/hadoop/hadoop%E8%BF%9B%E9%98%B6%E7%AF%87/"
-    }
-  ]
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": "Hadoop 进阶篇",
-  "name": "Hadoop 进阶篇",
-  "description": "概要 概述 深入探索 MapReduce 过程 Hadoop 的分布式缓存 Hadoop 应用——推荐算法 HDFS HDFS 是 Hadoop 分布式文件系统的简称，由若干台计算机组成，用于存放 PB、TB 数量级以上的文件，每份文件可以有多个副本，所以 HDFS 是一个具有高冗余、高容错的文件系统。\nHadoop Hadoop 1.x Hadoop 2.x Hadoop 1.0 到 2.0 的变化：Hadoop 2.0 以后的版本移除了原有的 JobTracker 和 TaskTracker，改由 Yarn 平台的 ResourceManager 负责集群中所有资源的统一管理和分配，NodeManager 管理 Hadoop 集群中单个计算节点。\nYARN 的设计减小了 JobTracker 的资源消耗，减少了 Hadoop 1.0 中发生单点故障的风险。我们还可以在 YARN 平台上运行 Spark 和 Storm 作业，充分利用资源。\n深入探索 MapReduce WordCount 实例回顾 MapReduce 作业是一种大规模数据集的并行计算的编程模型。我们可以将 HDFS 中存放的海量数据，通过 MapReduce 作业进行计算，得到目标数据。\n",
-  "keywords": [
-    "Hadoop", "大数据"
-  ],
-  "articleBody": "概要 概述 深入探索 MapReduce 过程 Hadoop 的分布式缓存 Hadoop 应用——推荐算法 HDFS HDFS 是 Hadoop 分布式文件系统的简称，由若干台计算机组成，用于存放 PB、TB 数量级以上的文件，每份文件可以有多个副本，所以 HDFS 是一个具有高冗余、高容错的文件系统。\nHadoop Hadoop 1.x Hadoop 2.x Hadoop 1.0 到 2.0 的变化：Hadoop 2.0 以后的版本移除了原有的 JobTracker 和 TaskTracker，改由 Yarn 平台的 ResourceManager 负责集群中所有资源的统一管理和分配，NodeManager 管理 Hadoop 集群中单个计算节点。\nYARN 的设计减小了 JobTracker 的资源消耗，减少了 Hadoop 1.0 中发生单点故障的风险。我们还可以在 YARN 平台上运行 Spark 和 Storm 作业，充分利用资源。\n深入探索 MapReduce WordCount 实例回顾 MapReduce 作业是一种大规模数据集的并行计算的编程模型。我们可以将 HDFS 中存放的海量数据，通过 MapReduce 作业进行计算，得到目标数据。\n四个阶段 Split 阶段 Map 阶段（需要编码） Shuffle 阶段 Reduce 阶段（需要编码） Split 阶段 Split 分片（设置文件输入类型为 CombineFileInputFormat ，将文件合并后再分片）：\n分片结果，分别作为 Map 阶段的输入。\nMap 阶段（需要编码） Shuffle 阶段 Shuffle 阶段过程比较复杂，可以理解为 Map 输出到 Reduce 输入的过程，而且涉及到网络传输。\nReduce 阶段（需要编码） 总过程 从分片输入到 Map 输入文件 文件保存在 DataNode 的 block 块中：\nHadoop 1.x 默认的 block 大小：64MB Hadoop 2.x 默认的 block 大小：128MB 可以在 hdfs-site.xml 中设置参数：dfs.block.size\n分片输入（Split） 理想的输入文件：由于 NameNode 内存有限，大量的小文件会给 HDFS 带来性能上的问题。故 HDFS 适合存放大文件，对于大量小文件，可以采用压缩、合并小文件的优化策略。例如，设置文件输入类型为 CombineFileInputFormat 格式。\n节点 Map 任务的个数 在实际情况下，Map 任务的个数是受到多个条件的制约，一般一个 DataNode 的 Map 任务数量控制在 10 到 100 比较合适。\n控制 Map 任务数量的方法：\n增加 Map 个数，可增大 mapred.map.tasks 减少 Map 个数，可增大 mapred.min.split.size 如果要减少 Map 个数，但有很多小文件，可将小文件合并成大文件，再使用准则 2 ",
-  "wordCount" : "153",
-  "inLanguage": "en",
-  "datePublished": "2020-05-08T16:36:00Z",
-  "dateModified": "2020-05-08T16:36:00Z",
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https://zjxjwxk.github.io/posts/%E5%A4%A7%E6%95%B0%E6%8D%AE/hadoop/hadoop%E8%BF%9B%E9%98%B6%E7%AF%87/"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "Xinkang's Blog",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://zjxjwxk.github.io/favicon.ico"
-    }
-  }
-}
-</script>
+</noscript>
 </head>
 
 <body class="" id="top">
@@ -180,7 +93,7 @@ MapReduce 作业是一种大规模数据集的并行计算的编程模型。我�
 <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="https://zjxjwxk.github.io/" accesskey="h" title="Xinkang&#39;s Blog (Alt + H)">Xinkang&#39;s Blog</a>
+            <a href="http://localhost:1313/" accesskey="h" title="Xinkang&#39;s Blog (Alt + H)">Xinkang&#39;s Blog</a>
             <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
@@ -206,22 +119,22 @@ MapReduce 作业是一种大规模数据集的并行计算的编程模型。我�
         </div>
         <ul id="menu">
             <li>
-                <a href="https://zjxjwxk.github.io/archives/" title="Archives">
+                <a href="http://localhost:1313/archives/" title="Archives">
                     <span>Archives</span>
                 </a>
             </li>
             <li>
-                <a href="https://zjxjwxk.github.io/categories/" title="Categories">
+                <a href="http://localhost:1313/categories/" title="Categories">
                     <span>Categories</span>
                 </a>
             </li>
             <li>
-                <a href="https://zjxjwxk.github.io/tags/" title="Tags">
+                <a href="http://localhost:1313/tags/" title="Tags">
                     <span>Tags</span>
                 </a>
             </li>
             <li>
-                <a href="https://zjxjwxk.github.io/search/" title="Search (Alt &#43; /)" accesskey=/>
+                <a href="http://localhost:1313/search/" title="Search (Alt &#43; /)" accesskey=/>
                     <span>Search</span>
                 </a>
             </li>
@@ -231,7 +144,6 @@ MapReduce 作业是一种大规模数据集的并行计算的编程模型。我�
 <main class="main">
 
 <article class="post-single">
-  <div id="content-container">
   <header class="post-header">
     
     <h1 class="post-title entry-hint-parent">
@@ -309,31 +221,15 @@ MapReduce 作业是一种大规模数据集的并行计算的编程模型。我�
 
   <footer class="post-footer">
     <ul class="post-tags">
-      <li><a href="https://zjxjwxk.github.io/tags/hadoop/">Hadoop</a></li>
-      <li><a href="https://zjxjwxk.github.io/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/">大数据</a></li>
+      <li><a href="http://localhost:1313/tags/hadoop/">Hadoop</a></li>
+      <li><a href="http://localhost:1313/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/">大数据</a></li>
     </ul>
   </footer>
 </article>
-
-<script>
-  window.onload = function() {
-      var contentContainer = document.getElementById("content-container");
-      if ("" !== "") {
-          var password = prompt("Enter password:");
-          if (password === "") {
-              contentContainer.style.display = "block";
-          } else {
-              alert("Incorrect password");
-          }
-      } else {
-          contentContainer.style.display = "block";
-      }
-  };
-</script>
     </main>
     
 <footer class="footer">
-        <span>&copy; 2024 <a href="https://zjxjwxk.github.io/">Xinkang&#39;s Blog</a></span> · 
+        <span>&copy; 2024 <a href="http://localhost:1313/">Xinkang&#39;s Blog</a></span> · 
 
     <span>
         Powered by

@@ -1,25 +1,25 @@
 <!DOCTYPE html>
 <html lang="en" dir="auto">
 
-<head><meta charset="utf-8">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="index, follow">
+<meta name="robots" content="noindex, nofollow">
 <title>PAT甲级 1104 Sum of Number Segments (20分) | Xinkang&#39;s Blog</title>
 <meta name="keywords" content="PAT, 数学问题">
 <meta name="description" content="Given a sequence of positive numbers, a segment is defined to be a consecutive subsequence. For example, given the sequence { 0.1, 0.2, 0.3, 0.4 }, we have 10 segments: (0.1) (0.1, 0.2) (0.1, 0.2, 0.3) (0.1, 0.2, 0.3, 0.4) (0.2) (0.2, 0.3) (0.2, 0.3, 0.4) (0.3) (0.3, 0.4) and (0.4).
 Now given a sequence, you are supposed to find the sum of all the numbers in all the segments. For the previous example, the sum of all the 10 segments is 0.1 &#43; 0.3 &#43; 0.6 &#43; 1.0 &#43; 0.2 &#43; 0.5 &#43; 0.9 &#43; 0.3 &#43; 0.7 &#43; 0.4 = 5.0.">
 <meta name="author" content="">
-<link rel="canonical" href="https://zjxjwxk.github.io/posts/pat/advanced_level/a1104/">
+<link rel="canonical" href="http://localhost:1313/posts/pat/advanced_level/a1104/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.d6fcd20a4fb86efa4dfac8ec95da60244cc8871042183da1ef28e3a762ad79c8.css" integrity="sha256-1vzSCk&#43;4bvpN&#43;sjsldpgJEzIhxBCGD2h7yjjp2Ktecg=" rel="preload stylesheet" as="style">
-<link rel="icon" href="https://zjxjwxk.github.io/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="https://zjxjwxk.github.io/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="https://zjxjwxk.github.io/favicon-32x32.png">
-<link rel="apple-touch-icon" href="https://zjxjwxk.github.io/apple-touch-icon.png">
-<link rel="mask-icon" href="https://zjxjwxk.github.io/safari-pinned-tab.svg">
+<link rel="icon" href="http://localhost:1313/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" hreflang="en" href="https://zjxjwxk.github.io/posts/pat/advanced_level/a1104/">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/posts/pat/advanced_level/a1104/">
 <noscript>
     <style>
         #theme-toggle,
@@ -56,73 +56,7 @@ Now given a sequence, you are supposed to find the sum of all the numbers in all
         }
 
     </style>
-</noscript><meta property="og:url" content="https://zjxjwxk.github.io/posts/pat/advanced_level/a1104/">
-  <meta property="og:site_name" content="Xinkang&#39;s Blog">
-  <meta property="og:title" content="PAT甲级 1104 Sum of Number Segments (20分)">
-  <meta property="og:description" content="Given a sequence of positive numbers, a segment is defined to be a consecutive subsequence. For example, given the sequence { 0.1, 0.2, 0.3, 0.4 }, we have 10 segments: (0.1) (0.1, 0.2) (0.1, 0.2, 0.3) (0.1, 0.2, 0.3, 0.4) (0.2) (0.2, 0.3) (0.2, 0.3, 0.4) (0.3) (0.3, 0.4) and (0.4).
-Now given a sequence, you are supposed to find the sum of all the numbers in all the segments. For the previous example, the sum of all the 10 segments is 0.1 &#43; 0.3 &#43; 0.6 &#43; 1.0 &#43; 0.2 &#43; 0.5 &#43; 0.9 &#43; 0.3 &#43; 0.7 &#43; 0.4 = 5.0.">
-  <meta property="og:locale" content="en">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2020-03-30T16:26:00+00:00">
-    <meta property="article:modified_time" content="2020-03-30T16:26:00+00:00">
-    <meta property="article:tag" content="PAT">
-    <meta property="article:tag" content="数学问题">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="PAT甲级 1104 Sum of Number Segments (20分)">
-<meta name="twitter:description" content="Given a sequence of positive numbers, a segment is defined to be a consecutive subsequence. For example, given the sequence { 0.1, 0.2, 0.3, 0.4 }, we have 10 segments: (0.1) (0.1, 0.2) (0.1, 0.2, 0.3) (0.1, 0.2, 0.3, 0.4) (0.2) (0.2, 0.3) (0.2, 0.3, 0.4) (0.3) (0.3, 0.4) and (0.4).
-Now given a sequence, you are supposed to find the sum of all the numbers in all the segments. For the previous example, the sum of all the 10 segments is 0.1 &#43; 0.3 &#43; 0.6 &#43; 1.0 &#43; 0.2 &#43; 0.5 &#43; 0.9 &#43; 0.3 &#43; 0.7 &#43; 0.4 = 5.0.">
-
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position":  1 ,
-      "name": "Posts",
-      "item": "https://zjxjwxk.github.io/posts/"
-    }, 
-    {
-      "@type": "ListItem",
-      "position":  2 ,
-      "name": "PAT甲级 1104 Sum of Number Segments (20分)",
-      "item": "https://zjxjwxk.github.io/posts/pat/advanced_level/a1104/"
-    }
-  ]
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": "PAT甲级 1104 Sum of Number Segments (20分)",
-  "name": "PAT甲级 1104 Sum of Number Segments (20分)",
-  "description": "Given a sequence of positive numbers, a segment is defined to be a consecutive subsequence. For example, given the sequence { 0.1, 0.2, 0.3, 0.4 }, we have 10 segments: (0.1) (0.1, 0.2) (0.1, 0.2, 0.3) (0.1, 0.2, 0.3, 0.4) (0.2) (0.2, 0.3) (0.2, 0.3, 0.4) (0.3) (0.3, 0.4) and (0.4).\nNow given a sequence, you are supposed to find the sum of all the numbers in all the segments. For the previous example, the sum of all the 10 segments is 0.1 + 0.3 + 0.6 + 1.0 + 0.2 + 0.5 + 0.9 + 0.3 + 0.7 + 0.4 = 5.0.\n",
-  "keywords": [
-    "PAT", "数学问题"
-  ],
-  "articleBody": "Given a sequence of positive numbers, a segment is defined to be a consecutive subsequence. For example, given the sequence { 0.1, 0.2, 0.3, 0.4 }, we have 10 segments: (0.1) (0.1, 0.2) (0.1, 0.2, 0.3) (0.1, 0.2, 0.3, 0.4) (0.2) (0.2, 0.3) (0.2, 0.3, 0.4) (0.3) (0.3, 0.4) and (0.4).\nNow given a sequence, you are supposed to find the sum of all the numbers in all the segments. For the previous example, the sum of all the 10 segments is 0.1 + 0.3 + 0.6 + 1.0 + 0.2 + 0.5 + 0.9 + 0.3 + 0.7 + 0.4 = 5.0.\nInput Specification: Each input file contains one test case. For each case, the first line gives a positive integer N, the size of the sequence which is no more than 10^5. The next line contains N positive numbers in the sequence, each no more than 1.0, separated by a space.\nOutput Specification: For each test case, print in one line the sum of all the numbers in all the segments, accurate up to 2 decimal places.\nSample Input: 4 0.1 0.2 0.3 0.4 Sample Output: 5.00 思路 包含第 i 个数的片段，其首指针有 i 中选择：1, 2, 3, … i，其尾指针有 n - i + 1 中选择：i, i + 1, … n。所以包含第 i 个数的片段有 i * (n - i + 1) 种。将 i 从 1 到 n 遍历，将包含每个数的片段数相加即可。 #include const int maxn = 100000; int main() { int n; scanf(\"%d\", \u0026n); double temp, ans = 0; for (int i = 1; i \u003c= n; i++) { scanf(\"%lf\", \u0026temp); ans += temp * i * (n - i + 1); } printf(\"%.2f\", ans); return 0; } ",
-  "wordCount" : "274",
-  "inLanguage": "en",
-  "datePublished": "2020-03-30T16:26:00Z",
-  "dateModified": "2020-03-30T16:26:00Z",
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https://zjxjwxk.github.io/posts/pat/advanced_level/a1104/"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "Xinkang's Blog",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://zjxjwxk.github.io/favicon.ico"
-    }
-  }
-}
-</script>
+</noscript>
 </head>
 
 <body class="" id="top">
@@ -140,7 +74,7 @@ Now given a sequence, you are supposed to find the sum of all the numbers in all
 <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="https://zjxjwxk.github.io/" accesskey="h" title="Xinkang&#39;s Blog (Alt + H)">Xinkang&#39;s Blog</a>
+            <a href="http://localhost:1313/" accesskey="h" title="Xinkang&#39;s Blog (Alt + H)">Xinkang&#39;s Blog</a>
             <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
@@ -166,22 +100,22 @@ Now given a sequence, you are supposed to find the sum of all the numbers in all
         </div>
         <ul id="menu">
             <li>
-                <a href="https://zjxjwxk.github.io/archives/" title="Archives">
+                <a href="http://localhost:1313/archives/" title="Archives">
                     <span>Archives</span>
                 </a>
             </li>
             <li>
-                <a href="https://zjxjwxk.github.io/categories/" title="Categories">
+                <a href="http://localhost:1313/categories/" title="Categories">
                     <span>Categories</span>
                 </a>
             </li>
             <li>
-                <a href="https://zjxjwxk.github.io/tags/" title="Tags">
+                <a href="http://localhost:1313/tags/" title="Tags">
                     <span>Tags</span>
                 </a>
             </li>
             <li>
-                <a href="https://zjxjwxk.github.io/search/" title="Search (Alt &#43; /)" accesskey=/>
+                <a href="http://localhost:1313/search/" title="Search (Alt &#43; /)" accesskey=/>
                     <span>Search</span>
                 </a>
             </li>
@@ -191,7 +125,6 @@ Now given a sequence, you are supposed to find the sum of all the numbers in all
 <main class="main">
 
 <article class="post-single">
-  <div id="content-container">
   <header class="post-header">
     
     <h1 class="post-title entry-hint-parent">
@@ -237,31 +170,15 @@ Now given a sequence, you are supposed to find the sum of all the numbers in all
 
   <footer class="post-footer">
     <ul class="post-tags">
-      <li><a href="https://zjxjwxk.github.io/tags/pat/">PAT</a></li>
-      <li><a href="https://zjxjwxk.github.io/tags/%E6%95%B0%E5%AD%A6%E9%97%AE%E9%A2%98/">数学问题</a></li>
+      <li><a href="http://localhost:1313/tags/pat/">PAT</a></li>
+      <li><a href="http://localhost:1313/tags/%E6%95%B0%E5%AD%A6%E9%97%AE%E9%A2%98/">数学问题</a></li>
     </ul>
   </footer>
 </article>
-
-<script>
-  window.onload = function() {
-      var contentContainer = document.getElementById("content-container");
-      if ("" !== "") {
-          var password = prompt("Enter password:");
-          if (password === "") {
-              contentContainer.style.display = "block";
-          } else {
-              alert("Incorrect password");
-          }
-      } else {
-          contentContainer.style.display = "block";
-      }
-  };
-</script>
     </main>
     
 <footer class="footer">
-        <span>&copy; 2024 <a href="https://zjxjwxk.github.io/">Xinkang&#39;s Blog</a></span> · 
+        <span>&copy; 2024 <a href="http://localhost:1313/">Xinkang&#39;s Blog</a></span> · 
 
     <span>
         Powered by

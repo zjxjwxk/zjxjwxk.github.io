@@ -2,255 +2,262 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Tags on Xinkang&#39;s Blog</title>
-    <link>https://zjxjwxk.github.io/tags/</link>
+    <link>http://localhost:1313/tags/</link>
     <description>Recent content in Tags on Xinkang&#39;s Blog</description>
     <generator>Hugo -- 0.138.0</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 19 Mar 2021 21:15:00 +0000</lastBuildDate>
-    <atom:link href="https://zjxjwxk.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 16 Nov 2024 01:27:59 +0800</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Kafka</title>
+      <link>http://localhost:1313/tags/kafka/</link>
+      <pubDate>Sat, 16 Nov 2024 01:27:59 +0800</pubDate>
+      <guid>http://localhost:1313/tags/kafka/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>MQ</title>
+      <link>http://localhost:1313/tags/mq/</link>
+      <pubDate>Sat, 16 Nov 2024 01:27:59 +0800</pubDate>
+      <guid>http://localhost:1313/tags/mq/</guid>
+      <description></description>
+    </item>
     <item>
       <title>Auth</title>
-      <link>https://zjxjwxk.github.io/tags/auth/</link>
+      <link>http://localhost:1313/tags/auth/</link>
       <pubDate>Fri, 19 Mar 2021 21:15:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/tags/auth/</guid>
+      <guid>http://localhost:1313/tags/auth/</guid>
       <description></description>
     </item>
     <item>
       <title>Security</title>
-      <link>https://zjxjwxk.github.io/tags/security/</link>
+      <link>http://localhost:1313/tags/security/</link>
       <pubDate>Fri, 19 Mar 2021 21:15:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/tags/security/</guid>
+      <guid>http://localhost:1313/tags/security/</guid>
       <description></description>
     </item>
     <item>
       <title>Shiro</title>
-      <link>https://zjxjwxk.github.io/tags/shiro/</link>
+      <link>http://localhost:1313/tags/shiro/</link>
       <pubDate>Fri, 19 Mar 2021 21:15:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/tags/shiro/</guid>
+      <guid>http://localhost:1313/tags/shiro/</guid>
       <description></description>
     </item>
     <item>
       <title>Blockchain</title>
-      <link>https://zjxjwxk.github.io/tags/blockchain/</link>
+      <link>http://localhost:1313/tags/blockchain/</link>
       <pubDate>Tue, 03 Nov 2020 12:40:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/tags/blockchain/</guid>
+      <guid>http://localhost:1313/tags/blockchain/</guid>
       <description></description>
     </item>
     <item>
       <title>Ethereum</title>
-      <link>https://zjxjwxk.github.io/tags/ethereum/</link>
+      <link>http://localhost:1313/tags/ethereum/</link>
       <pubDate>Tue, 03 Nov 2020 12:40:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/tags/ethereum/</guid>
+      <guid>http://localhost:1313/tags/ethereum/</guid>
       <description></description>
     </item>
     <item>
       <title>Java</title>
-      <link>https://zjxjwxk.github.io/tags/java/</link>
+      <link>http://localhost:1313/tags/java/</link>
       <pubDate>Thu, 16 Jul 2020 11:01:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/tags/java/</guid>
+      <guid>http://localhost:1313/tags/java/</guid>
       <description></description>
     </item>
     <item>
       <title>JVM</title>
-      <link>https://zjxjwxk.github.io/tags/jvm/</link>
+      <link>http://localhost:1313/tags/jvm/</link>
       <pubDate>Thu, 16 Jul 2020 11:01:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/tags/jvm/</guid>
+      <guid>http://localhost:1313/tags/jvm/</guid>
       <description></description>
     </item>
     <item>
       <title>Spring Boot</title>
-      <link>https://zjxjwxk.github.io/tags/spring-boot/</link>
+      <link>http://localhost:1313/tags/spring-boot/</link>
       <pubDate>Fri, 05 Jun 2020 21:02:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/tags/spring-boot/</guid>
+      <guid>http://localhost:1313/tags/spring-boot/</guid>
       <description></description>
     </item>
     <item>
       <title>Docker</title>
-      <link>https://zjxjwxk.github.io/tags/docker/</link>
+      <link>http://localhost:1313/tags/docker/</link>
       <pubDate>Thu, 04 Jun 2020 23:15:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/tags/docker/</guid>
+      <guid>http://localhost:1313/tags/docker/</guid>
       <description></description>
     </item>
     <item>
       <title>微服务架构</title>
-      <link>https://zjxjwxk.github.io/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/</link>
+      <link>http://localhost:1313/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/</link>
       <pubDate>Thu, 04 Jun 2020 23:15:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Private</title>
-      <link>https://zjxjwxk.github.io/tags/private/</link>
-      <pubDate>Fri, 15 May 2020 16:00:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/tags/private/</guid>
+      <guid>http://localhost:1313/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/</guid>
       <description></description>
     </item>
     <item>
       <title>Hadoop</title>
-      <link>https://zjxjwxk.github.io/tags/hadoop/</link>
+      <link>http://localhost:1313/tags/hadoop/</link>
       <pubDate>Fri, 08 May 2020 16:36:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/tags/hadoop/</guid>
+      <guid>http://localhost:1313/tags/hadoop/</guid>
       <description></description>
     </item>
     <item>
       <title>大数据</title>
-      <link>https://zjxjwxk.github.io/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/</link>
+      <link>http://localhost:1313/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/</link>
       <pubDate>Fri, 08 May 2020 16:36:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/</guid>
+      <guid>http://localhost:1313/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/</guid>
       <description></description>
     </item>
     <item>
       <title>Dubbo</title>
-      <link>https://zjxjwxk.github.io/tags/dubbo/</link>
+      <link>http://localhost:1313/tags/dubbo/</link>
       <pubDate>Sun, 03 May 2020 22:34:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/tags/dubbo/</guid>
+      <guid>http://localhost:1313/tags/dubbo/</guid>
       <description></description>
     </item>
     <item>
       <title>Linux</title>
-      <link>https://zjxjwxk.github.io/tags/linux/</link>
+      <link>http://localhost:1313/tags/linux/</link>
       <pubDate>Mon, 27 Apr 2020 23:11:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/tags/linux/</guid>
+      <guid>http://localhost:1313/tags/linux/</guid>
       <description></description>
     </item>
     <item>
       <title>MacOS</title>
-      <link>https://zjxjwxk.github.io/tags/macos/</link>
+      <link>http://localhost:1313/tags/macos/</link>
       <pubDate>Mon, 27 Apr 2020 23:11:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/tags/macos/</guid>
+      <guid>http://localhost:1313/tags/macos/</guid>
       <description></description>
     </item>
     <item>
       <title>PAT</title>
-      <link>https://zjxjwxk.github.io/tags/pat/</link>
+      <link>http://localhost:1313/tags/pat/</link>
       <pubDate>Wed, 15 Apr 2020 21:39:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/tags/pat/</guid>
+      <guid>http://localhost:1313/tags/pat/</guid>
       <description></description>
     </item>
     <item>
       <title>字符串</title>
-      <link>https://zjxjwxk.github.io/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/</link>
+      <link>http://localhost:1313/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/</link>
       <pubDate>Wed, 15 Apr 2020 21:39:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/</guid>
+      <guid>http://localhost:1313/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/</guid>
       <description></description>
     </item>
     <item>
       <title>最短路径</title>
-      <link>https://zjxjwxk.github.io/tags/%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84/</link>
+      <link>http://localhost:1313/tags/%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84/</link>
       <pubDate>Mon, 13 Apr 2020 00:11:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/tags/%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84/</guid>
+      <guid>http://localhost:1313/tags/%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84/</guid>
       <description></description>
     </item>
     <item>
       <title>图</title>
-      <link>https://zjxjwxk.github.io/tags/%E5%9B%BE/</link>
+      <link>http://localhost:1313/tags/%E5%9B%BE/</link>
       <pubDate>Fri, 10 Apr 2020 17:55:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/tags/%E5%9B%BE/</guid>
+      <guid>http://localhost:1313/tags/%E5%9B%BE/</guid>
       <description></description>
     </item>
     <item>
       <title>链表</title>
-      <link>https://zjxjwxk.github.io/tags/%E9%93%BE%E8%A1%A8/</link>
+      <link>http://localhost:1313/tags/%E9%93%BE%E8%A1%A8/</link>
       <pubDate>Tue, 07 Apr 2020 16:34:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/tags/%E9%93%BE%E8%A1%A8/</guid>
+      <guid>http://localhost:1313/tags/%E9%93%BE%E8%A1%A8/</guid>
       <description></description>
     </item>
     <item>
       <title>队列</title>
-      <link>https://zjxjwxk.github.io/tags/%E9%98%9F%E5%88%97/</link>
+      <link>http://localhost:1313/tags/%E9%98%9F%E5%88%97/</link>
       <pubDate>Mon, 06 Apr 2020 19:04:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/tags/%E9%98%9F%E5%88%97/</guid>
+      <guid>http://localhost:1313/tags/%E9%98%9F%E5%88%97/</guid>
       <description></description>
     </item>
     <item>
       <title>STL</title>
-      <link>https://zjxjwxk.github.io/tags/stl/</link>
+      <link>http://localhost:1313/tags/stl/</link>
       <pubDate>Mon, 06 Apr 2020 15:17:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/tags/stl/</guid>
+      <guid>http://localhost:1313/tags/stl/</guid>
       <description></description>
     </item>
     <item>
       <title>数学问题</title>
-      <link>https://zjxjwxk.github.io/tags/%E6%95%B0%E5%AD%A6%E9%97%AE%E9%A2%98/</link>
+      <link>http://localhost:1313/tags/%E6%95%B0%E5%AD%A6%E9%97%AE%E9%A2%98/</link>
       <pubDate>Thu, 02 Apr 2020 20:53:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/tags/%E6%95%B0%E5%AD%A6%E9%97%AE%E9%A2%98/</guid>
+      <guid>http://localhost:1313/tags/%E6%95%B0%E5%AD%A6%E9%97%AE%E9%A2%98/</guid>
       <description></description>
     </item>
     <item>
       <title>二分</title>
-      <link>https://zjxjwxk.github.io/tags/%E4%BA%8C%E5%88%86/</link>
+      <link>http://localhost:1313/tags/%E4%BA%8C%E5%88%86/</link>
       <pubDate>Sun, 29 Mar 2020 14:48:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/tags/%E4%BA%8C%E5%88%86/</guid>
+      <guid>http://localhost:1313/tags/%E4%BA%8C%E5%88%86/</guid>
       <description></description>
     </item>
     <item>
       <title>贪心</title>
-      <link>https://zjxjwxk.github.io/tags/%E8%B4%AA%E5%BF%83/</link>
+      <link>http://localhost:1313/tags/%E8%B4%AA%E5%BF%83/</link>
       <pubDate>Sat, 28 Mar 2020 16:34:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/tags/%E8%B4%AA%E5%BF%83/</guid>
+      <guid>http://localhost:1313/tags/%E8%B4%AA%E5%BF%83/</guid>
       <description></description>
     </item>
     <item>
       <title>哈希</title>
-      <link>https://zjxjwxk.github.io/tags/%E5%93%88%E5%B8%8C/</link>
+      <link>http://localhost:1313/tags/%E5%93%88%E5%B8%8C/</link>
       <pubDate>Thu, 26 Mar 2020 15:21:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/tags/%E5%93%88%E5%B8%8C/</guid>
+      <guid>http://localhost:1313/tags/%E5%93%88%E5%B8%8C/</guid>
       <description></description>
     </item>
     <item>
       <title>排序</title>
-      <link>https://zjxjwxk.github.io/tags/%E6%8E%92%E5%BA%8F/</link>
+      <link>http://localhost:1313/tags/%E6%8E%92%E5%BA%8F/</link>
       <pubDate>Sun, 22 Mar 2020 17:24:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/tags/%E6%8E%92%E5%BA%8F/</guid>
+      <guid>http://localhost:1313/tags/%E6%8E%92%E5%BA%8F/</guid>
       <description></description>
     </item>
     <item>
       <title>模拟</title>
-      <link>https://zjxjwxk.github.io/tags/%E6%A8%A1%E6%8B%9F/</link>
+      <link>http://localhost:1313/tags/%E6%A8%A1%E6%8B%9F/</link>
       <pubDate>Tue, 17 Mar 2020 15:11:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/tags/%E6%A8%A1%E6%8B%9F/</guid>
+      <guid>http://localhost:1313/tags/%E6%A8%A1%E6%8B%9F/</guid>
       <description></description>
     </item>
     <item>
       <title>BTH</title>
-      <link>https://zjxjwxk.github.io/tags/bth/</link>
+      <link>http://localhost:1313/tags/bth/</link>
       <pubDate>Fri, 21 Jun 2019 16:22:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/tags/bth/</guid>
+      <guid>http://localhost:1313/tags/bth/</guid>
       <description></description>
     </item>
     <item>
       <title>期末复习</title>
-      <link>https://zjxjwxk.github.io/tags/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/</link>
+      <link>http://localhost:1313/tags/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/</link>
       <pubDate>Fri, 21 Jun 2019 16:22:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/tags/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/</guid>
+      <guid>http://localhost:1313/tags/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/</guid>
       <description></description>
     </item>
     <item>
       <title>Spring Cloud</title>
-      <link>https://zjxjwxk.github.io/tags/spring-cloud/</link>
+      <link>http://localhost:1313/tags/spring-cloud/</link>
       <pubDate>Thu, 31 Jan 2019 20:18:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/tags/spring-cloud/</guid>
+      <guid>http://localhost:1313/tags/spring-cloud/</guid>
       <description></description>
     </item>
     <item>
       <title>CentOS</title>
-      <link>https://zjxjwxk.github.io/tags/centos/</link>
+      <link>http://localhost:1313/tags/centos/</link>
       <pubDate>Wed, 30 Jan 2019 00:54:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/tags/centos/</guid>
+      <guid>http://localhost:1313/tags/centos/</guid>
       <description></description>
     </item>
     <item>
       <title>Tomcat</title>
-      <link>https://zjxjwxk.github.io/tags/tomcat/</link>
+      <link>http://localhost:1313/tags/tomcat/</link>
       <pubDate>Sun, 13 Jan 2019 00:04:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/tags/tomcat/</guid>
+      <guid>http://localhost:1313/tags/tomcat/</guid>
       <description></description>
     </item>
     <item>
       <title>J2EE</title>
-      <link>https://zjxjwxk.github.io/tags/j2ee/</link>
+      <link>http://localhost:1313/tags/j2ee/</link>
       <pubDate>Fri, 04 Jan 2019 12:54:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/tags/j2ee/</guid>
+      <guid>http://localhost:1313/tags/j2ee/</guid>
       <description></description>
     </item>
   </channel>

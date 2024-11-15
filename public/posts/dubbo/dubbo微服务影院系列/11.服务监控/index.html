@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" dir="auto">
 
-<head><meta charset="utf-8">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="index, follow">
+<meta name="robots" content="noindex, nofollow">
 <title>Dubbo微服务影院系列（11）：服务监控 | Xinkang&#39;s Blog</title>
 <meta name="keywords" content="Dubbo, 微服务架构">
 <meta name="description" content="章节概要
@@ -45,16 +45,16 @@ dubbo.log4j.level=WARN
 
 同时，可以点击 Providers 查看服务某一服务提供者的详细信息，并且可以将其取消注册：">
 <meta name="author" content="">
-<link rel="canonical" href="https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/11.%E6%9C%8D%E5%8A%A1%E7%9B%91%E6%8E%A7/">
+<link rel="canonical" href="http://localhost:1313/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/11.%E6%9C%8D%E5%8A%A1%E7%9B%91%E6%8E%A7/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.d6fcd20a4fb86efa4dfac8ec95da60244cc8871042183da1ef28e3a762ad79c8.css" integrity="sha256-1vzSCk&#43;4bvpN&#43;sjsldpgJEzIhxBCGD2h7yjjp2Ktecg=" rel="preload stylesheet" as="style">
-<link rel="icon" href="https://zjxjwxk.github.io/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="https://zjxjwxk.github.io/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="https://zjxjwxk.github.io/favicon-32x32.png">
-<link rel="apple-touch-icon" href="https://zjxjwxk.github.io/apple-touch-icon.png">
-<link rel="mask-icon" href="https://zjxjwxk.github.io/safari-pinned-tab.svg">
+<link rel="icon" href="http://localhost:1313/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" hreflang="en" href="https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/11.%E6%9C%8D%E5%8A%A1%E7%9B%91%E6%8E%A7/">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/11.%E6%9C%8D%E5%8A%A1%E7%9B%91%E6%8E%A7/">
 <noscript>
     <style>
         #theme-toggle,
@@ -91,113 +91,7 @@ dubbo.log4j.level=WARN
         }
 
     </style>
-</noscript><meta property="og:url" content="https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/11.%E6%9C%8D%E5%8A%A1%E7%9B%91%E6%8E%A7/">
-  <meta property="og:site_name" content="Xinkang&#39;s Blog">
-  <meta property="og:title" content="Dubbo微服务影院系列（11）：服务监控">
-  <meta property="og:description" content="章节概要 了解 Dubbo 监控相关内容 熟练掌握 Dubbo-admin 使用 熟练掌握链路监控 完成业务系统部署 Dubbo-monitor 源码下载和打包 目前，还可以从当当网的项目 Dubbox 中获取（很久没有维护了）：https://github.com/dangdangdotcom/dubbox ，在项目中执行以下命令打包并拷贝到本地仓库（跳过单元测试）：
-mvn package -Dmaven.test.skip=true 其中，可能会遇到 Missing artifact com.alibaba:dubbo:jar:2.8.4 的坑，需要在根项目的 pom.xml 文件中添加以下 maven 插件：
-这样在本地仓库就有了 ~/.m2/repository/com/alibaba/dubbo-monitor-simple/2.8.4/dubbo-monitor-simple-2.8.4-assembly.tar.gz 这个 tar.gz 包，解压它可以得到以下文件：
-启动服务监控 在 conf 文件夹下，编辑 dubbo.properties，将相关参数配置如下：
-dubbo.container=log4j,spring,registry,jetty dubbo.application.name=simple-monitor dubbo.application.owner= #dubbo.registry.address=multicast://224.5.6.7:1234 dubbo.registry.address=zookeeper://127.0.0.1:2181 #dubbo.registry.address=redis://127.0.0.1:6379 #dubbo.registry.address=dubbo://127.0.0.1:9090 dubbo.protocol.port=7070 dubbo.jetty.port=8090 dubbo.jetty.directory=monitor dubbo.charts.directory=monitor/charts dubbo.statistics.directory=monitor/statistics dubbo.log4j.file=monitor/dubbo-monitor-simple.log dubbo.log4j.level=WARN 然后，进入 bin 目录，运行 start.sh 就可以启动 Dubbo-Monitor 了，运行在配置好的 8090 端口（需要先打开 Zookeeper）。
-启动服务提供者和消费者后，可以在 Applications 中看到如下信息：
-同时，可以点击 Providers 查看服务某一服务提供者的详细信息，并且可以将其取消注册：">
-  <meta property="og:locale" content="en">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2020-04-24T23:11:00+00:00">
-    <meta property="article:modified_time" content="2020-04-24T23:11:00+00:00">
-    <meta property="article:tag" content="Dubbo">
-    <meta property="article:tag" content="微服务架构">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Dubbo微服务影院系列（11）：服务监控">
-<meta name="twitter:description" content="章节概要
-
-了解 Dubbo 监控相关内容
-熟练掌握 Dubbo-admin 使用
-熟练掌握链路监控
-完成业务系统部署
-
-Dubbo-monitor
-
-源码下载和打包
-目前，还可以从当当网的项目 Dubbox 中获取（很久没有维护了）：https://github.com/dangdangdotcom/dubbox ，在项目中执行以下命令打包并拷贝到本地仓库（跳过单元测试）：
-mvn package -Dmaven.test.skip=true  
-其中，可能会遇到 Missing artifact com.alibaba:dubbo:jar:2.8.4 的坑，需要在根项目的 pom.xml 文件中添加以下 maven 插件：
-
-这样在本地仓库就有了 ~/.m2/repository/com/alibaba/dubbo-monitor-simple/2.8.4/dubbo-monitor-simple-2.8.4-assembly.tar.gz 这个 tar.gz 包，解压它可以得到以下文件：
-
-启动服务监控
-在 conf 文件夹下，编辑 dubbo.properties，将相关参数配置如下：
-dubbo.container=log4j,spring,registry,jetty
-dubbo.application.name=simple-monitor
-dubbo.application.owner=
-#dubbo.registry.address=multicast://224.5.6.7:1234
-dubbo.registry.address=zookeeper://127.0.0.1:2181
-#dubbo.registry.address=redis://127.0.0.1:6379
-#dubbo.registry.address=dubbo://127.0.0.1:9090
-dubbo.protocol.port=7070
-dubbo.jetty.port=8090
-dubbo.jetty.directory=monitor
-dubbo.charts.directory=monitor/charts
-dubbo.statistics.directory=monitor/statistics
-dubbo.log4j.file=monitor/dubbo-monitor-simple.log
-dubbo.log4j.level=WARN
-然后，进入 bin 目录，运行 start.sh 就可以启动 Dubbo-Monitor 了，运行在配置好的 8090 端口（需要先打开 Zookeeper）。
-
-启动服务提供者和消费者后，可以在 Applications 中看到如下信息：
-
-同时，可以点击 Providers 查看服务某一服务提供者的详细信息，并且可以将其取消注册：">
-
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position":  1 ,
-      "name": "Posts",
-      "item": "https://zjxjwxk.github.io/posts/"
-    }, 
-    {
-      "@type": "ListItem",
-      "position":  2 ,
-      "name": "Dubbo微服务影院系列（11）：服务监控",
-      "item": "https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/11.%E6%9C%8D%E5%8A%A1%E7%9B%91%E6%8E%A7/"
-    }
-  ]
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": "Dubbo微服务影院系列（11）：服务监控",
-  "name": "Dubbo微服务影院系列（11）：服务监控",
-  "description": "章节概要 了解 Dubbo 监控相关内容 熟练掌握 Dubbo-admin 使用 熟练掌握链路监控 完成业务系统部署 Dubbo-monitor 源码下载和打包 目前，还可以从当当网的项目 Dubbox 中获取（很久没有维护了）：https://github.com/dangdangdotcom/dubbox ，在项目中执行以下命令打包并拷贝到本地仓库（跳过单元测试）：\nmvn package -Dmaven.test.skip=true 其中，可能会遇到 Missing artifact com.alibaba:dubbo:jar:2.8.4 的坑，需要在根项目的 pom.xml 文件中添加以下 maven 插件：\n这样在本地仓库就有了 ~/.m2/repository/com/alibaba/dubbo-monitor-simple/2.8.4/dubbo-monitor-simple-2.8.4-assembly.tar.gz 这个 tar.gz 包，解压它可以得到以下文件：\n启动服务监控 在 conf 文件夹下，编辑 dubbo.properties，将相关参数配置如下：\ndubbo.container=log4j,spring,registry,jetty dubbo.application.name=simple-monitor dubbo.application.owner= #dubbo.registry.address=multicast://224.5.6.7:1234 dubbo.registry.address=zookeeper://127.0.0.1:2181 #dubbo.registry.address=redis://127.0.0.1:6379 #dubbo.registry.address=dubbo://127.0.0.1:9090 dubbo.protocol.port=7070 dubbo.jetty.port=8090 dubbo.jetty.directory=monitor dubbo.charts.directory=monitor/charts dubbo.statistics.directory=monitor/statistics dubbo.log4j.file=monitor/dubbo-monitor-simple.log dubbo.log4j.level=WARN 然后，进入 bin 目录，运行 start.sh 就可以启动 Dubbo-Monitor 了，运行在配置好的 8090 端口（需要先打开 Zookeeper）。\n启动服务提供者和消费者后，可以在 Applications 中看到如下信息：\n同时，可以点击 Providers 查看服务某一服务提供者的详细信息，并且可以将其取消注册：\n",
-  "keywords": [
-    "Dubbo", "微服务架构"
-  ],
-  "articleBody": "章节概要 了解 Dubbo 监控相关内容 熟练掌握 Dubbo-admin 使用 熟练掌握链路监控 完成业务系统部署 Dubbo-monitor 源码下载和打包 目前，还可以从当当网的项目 Dubbox 中获取（很久没有维护了）：https://github.com/dangdangdotcom/dubbox ，在项目中执行以下命令打包并拷贝到本地仓库（跳过单元测试）：\nmvn package -Dmaven.test.skip=true 其中，可能会遇到 Missing artifact com.alibaba:dubbo:jar:2.8.4 的坑，需要在根项目的 pom.xml 文件中添加以下 maven 插件：\n这样在本地仓库就有了 ~/.m2/repository/com/alibaba/dubbo-monitor-simple/2.8.4/dubbo-monitor-simple-2.8.4-assembly.tar.gz 这个 tar.gz 包，解压它可以得到以下文件：\n启动服务监控 在 conf 文件夹下，编辑 dubbo.properties，将相关参数配置如下：\ndubbo.container=log4j,spring,registry,jetty dubbo.application.name=simple-monitor dubbo.application.owner= #dubbo.registry.address=multicast://224.5.6.7:1234 dubbo.registry.address=zookeeper://127.0.0.1:2181 #dubbo.registry.address=redis://127.0.0.1:6379 #dubbo.registry.address=dubbo://127.0.0.1:9090 dubbo.protocol.port=7070 dubbo.jetty.port=8090 dubbo.jetty.directory=monitor dubbo.charts.directory=monitor/charts dubbo.statistics.directory=monitor/statistics dubbo.log4j.file=monitor/dubbo-monitor-simple.log dubbo.log4j.level=WARN 然后，进入 bin 目录，运行 start.sh 就可以启动 Dubbo-Monitor 了，运行在配置好的 8090 端口（需要先打开 Zookeeper）。\n启动服务提供者和消费者后，可以在 Applications 中看到如下信息：\n同时，可以点击 Providers 查看服务某一服务提供者的详细信息，并且可以将其取消注册：\n取消注册后，服务消费者将不能够调用该提供者的服务：\nDubbo-admin 现在有两种版本：\nDubbo 原生的 admin 工程 Apache 修正版 Apache 修正版 官方文档：https://dubbo.apache.org/zh-cn/docs/admin/introduction.html\nMaven方式部署 安装 git clone https://github.com/apache/dubbo-admin.git cd dubbo-admin mvn clean package cd dubbo-admin-distribution/target java -jar dubbo-admin-0.1.jar 访问 http://localhost:8080 Dubbo 原生 现在很少能找到，但目前还能在当当网的 dubbox 项目中找到，打包当当网的 dubbox 项目后，可以在 dubbo-admin 模块下找到其 war 包。\n将其放到 tomcat 目录的 webapps 下，启动 tomcat 即可在默认的 8080 端口访问到 Dubbo-admin 的界面，http://localhost:8080/dubbo-admin ，dubbo-admin 为 war 包名称。默认 root 的登录密码为 root，可以在 WEB-INF 中的 dubbo.properties 中配置。\n可以在服务治理的服务中查看所有服务，点击服务名可以查看该服务的提供者、消费者等详细信息。\n服务提供者 可以对其提供者进行权重修改（用于 Dubbo 的负载均衡特性），权重越高越容易被调用。也可以禁用某一台机器的服务，消费者将不会对其进行调用。\n服务消费者 可以对服务消费者进行静止、屏蔽和容错。\n若禁止某一台消费者，则该消费者调用时将会抛出异常。 若屏蔽某一台消费者，则该消费者将不会进行远程调用，并且直接返回空对象。 若对某一台消费者开启容错，则报任何错误时都会返回一个空对象。 应用 可以查看所有应用，包括提供者和消费者。\n路由规则 路由规则在发起一次RPC调用前起到过滤目标服务器地址的作用，过滤后的地址列表，将作为消费端最终发起RPC调用的备选地址。\n官方文档：https://dubbo.apache.org/zh-cn/docs/user/demos/routing-rule.html\n根据官方文档的配置说明，可以在 Dubbo Admin 的服务治理的路由规则中新增配置：\n动态配置 覆盖规则是Dubbo设计的在无需重启应用的情况下，动态调整RPC调用行为的一种能力。2.7.0版本开始，支持从服务和应用两个粒度来调整动态配置。\n官方文档：https://dubbo.apache.org/zh-cn/docs/user/demos/config-rule.html\n链路监控 首先，我们需要先熟悉一下 Dubbo-Filter 拦截器：\nDubbo-Filter 官方文档：http://dubbo.apache.org/zh-cn/docs/dev/impls/filter.html\nDubbo 支持 Filter 机制 Dubbo 诸多工作都是通过 Filter 实现 常见自定义 Filter：例子记录、trace 功能等 拦截器简介 Dubbo-Filter 使用 Spring XML 配置：\n",
-  "wordCount" : "601",
-  "inLanguage": "en",
-  "datePublished": "2020-04-24T23:11:00Z",
-  "dateModified": "2020-04-24T23:11:00Z",
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/11.%E6%9C%8D%E5%8A%A1%E7%9B%91%E6%8E%A7/"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "Xinkang's Blog",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://zjxjwxk.github.io/favicon.ico"
-    }
-  }
-}
-</script>
+</noscript>
 </head>
 
 <body class="" id="top">
@@ -215,7 +109,7 @@ dubbo.log4j.level=WARN
 <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="https://zjxjwxk.github.io/" accesskey="h" title="Xinkang&#39;s Blog (Alt + H)">Xinkang&#39;s Blog</a>
+            <a href="http://localhost:1313/" accesskey="h" title="Xinkang&#39;s Blog (Alt + H)">Xinkang&#39;s Blog</a>
             <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
@@ -241,22 +135,22 @@ dubbo.log4j.level=WARN
         </div>
         <ul id="menu">
             <li>
-                <a href="https://zjxjwxk.github.io/archives/" title="Archives">
+                <a href="http://localhost:1313/archives/" title="Archives">
                     <span>Archives</span>
                 </a>
             </li>
             <li>
-                <a href="https://zjxjwxk.github.io/categories/" title="Categories">
+                <a href="http://localhost:1313/categories/" title="Categories">
                     <span>Categories</span>
                 </a>
             </li>
             <li>
-                <a href="https://zjxjwxk.github.io/tags/" title="Tags">
+                <a href="http://localhost:1313/tags/" title="Tags">
                     <span>Tags</span>
                 </a>
             </li>
             <li>
-                <a href="https://zjxjwxk.github.io/search/" title="Search (Alt &#43; /)" accesskey=/>
+                <a href="http://localhost:1313/search/" title="Search (Alt &#43; /)" accesskey=/>
                     <span>Search</span>
                 </a>
             </li>
@@ -266,7 +160,6 @@ dubbo.log4j.level=WARN
 <main class="main">
 
 <article class="post-single">
-  <div id="content-container">
   <header class="post-header">
     
     <h1 class="post-title entry-hint-parent">
@@ -631,31 +524,15 @@ quickstart-provider-message=Hello World!
 
   <footer class="post-footer">
     <ul class="post-tags">
-      <li><a href="https://zjxjwxk.github.io/tags/dubbo/">Dubbo</a></li>
-      <li><a href="https://zjxjwxk.github.io/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/">微服务架构</a></li>
+      <li><a href="http://localhost:1313/tags/dubbo/">Dubbo</a></li>
+      <li><a href="http://localhost:1313/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/">微服务架构</a></li>
     </ul>
   </footer>
 </article>
-
-<script>
-  window.onload = function() {
-      var contentContainer = document.getElementById("content-container");
-      if ("" !== "") {
-          var password = prompt("Enter password:");
-          if (password === "") {
-              contentContainer.style.display = "block";
-          } else {
-              alert("Incorrect password");
-          }
-      } else {
-          contentContainer.style.display = "block";
-      }
-  };
-</script>
     </main>
     
 <footer class="footer">
-        <span>&copy; 2024 <a href="https://zjxjwxk.github.io/">Xinkang&#39;s Blog</a></span> · 
+        <span>&copy; 2024 <a href="http://localhost:1313/">Xinkang&#39;s Blog</a></span> · 
 
     <span>
         Powered by

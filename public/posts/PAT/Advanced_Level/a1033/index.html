@@ -1,26 +1,26 @@
 <!DOCTYPE html>
 <html lang="en" dir="auto">
 
-<head><meta charset="utf-8">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="index, follow">
+<meta name="robots" content="noindex, nofollow">
 <title>PAT甲级 1033 To Fill or Not to Fill (25分) | Xinkang&#39;s Blog</title>
 <meta name="keywords" content="PAT, 贪心">
 <meta name="description" content="With highways available, driving a car from Hangzhou to any other city is easy. But since the tank capacity of a car is limited, we have to find gas stations on the way from time to time. Different gas station may give different price. You are asked to carefully design the cheapest route to go.
 Input Specification:
 Each input file contains one test case. For each case, the first line contains 4 positive numbers: Cmax (≤ 100), the maximum capacity of the tank; D (≤30000), the distance between Hangzhou and the destination city; Davg (≤20), the average distance per unit gas that the car can run; and N (≤ 500), the total number of gas stations. Then N lines follow, each contains a pair of non-negative numbers: Pi, the unit gas price, and Di (≤D), the distance between this station and Hangzhou, for i=1,⋯,N. All the numbers in a line are separated by a space.">
 <meta name="author" content="">
-<link rel="canonical" href="https://zjxjwxk.github.io/posts/pat/advanced_level/a1033/">
+<link rel="canonical" href="http://localhost:1313/posts/pat/advanced_level/a1033/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.d6fcd20a4fb86efa4dfac8ec95da60244cc8871042183da1ef28e3a762ad79c8.css" integrity="sha256-1vzSCk&#43;4bvpN&#43;sjsldpgJEzIhxBCGD2h7yjjp2Ktecg=" rel="preload stylesheet" as="style">
-<link rel="icon" href="https://zjxjwxk.github.io/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="https://zjxjwxk.github.io/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="https://zjxjwxk.github.io/favicon-32x32.png">
-<link rel="apple-touch-icon" href="https://zjxjwxk.github.io/apple-touch-icon.png">
-<link rel="mask-icon" href="https://zjxjwxk.github.io/safari-pinned-tab.svg">
+<link rel="icon" href="http://localhost:1313/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" hreflang="en" href="https://zjxjwxk.github.io/posts/pat/advanced_level/a1033/">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/posts/pat/advanced_level/a1033/">
 <noscript>
     <style>
         #theme-toggle,
@@ -57,74 +57,7 @@ Each input file contains one test case. For each case, the first line contains 4
         }
 
     </style>
-</noscript><meta property="og:url" content="https://zjxjwxk.github.io/posts/pat/advanced_level/a1033/">
-  <meta property="og:site_name" content="Xinkang&#39;s Blog">
-  <meta property="og:title" content="PAT甲级 1033 To Fill or Not to Fill (25分)">
-  <meta property="og:description" content="With highways available, driving a car from Hangzhou to any other city is easy. But since the tank capacity of a car is limited, we have to find gas stations on the way from time to time. Different gas station may give different price. You are asked to carefully design the cheapest route to go.
-Input Specification: Each input file contains one test case. For each case, the first line contains 4 positive numbers: Cmax (≤ 100), the maximum capacity of the tank; D (≤30000), the distance between Hangzhou and the destination city; Davg (≤20), the average distance per unit gas that the car can run; and N (≤ 500), the total number of gas stations. Then N lines follow, each contains a pair of non-negative numbers: Pi, the unit gas price, and Di (≤D), the distance between this station and Hangzhou, for i=1,⋯,N. All the numbers in a line are separated by a space.">
-  <meta property="og:locale" content="en">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2020-03-22T17:24:00+00:00">
-    <meta property="article:modified_time" content="2020-03-22T17:24:00+00:00">
-    <meta property="article:tag" content="PAT">
-    <meta property="article:tag" content="贪心">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="PAT甲级 1033 To Fill or Not to Fill (25分)">
-<meta name="twitter:description" content="With highways available, driving a car from Hangzhou to any other city is easy. But since the tank capacity of a car is limited, we have to find gas stations on the way from time to time. Different gas station may give different price. You are asked to carefully design the cheapest route to go.
-Input Specification:
-Each input file contains one test case. For each case, the first line contains 4 positive numbers: Cmax (≤ 100), the maximum capacity of the tank; D (≤30000), the distance between Hangzhou and the destination city; Davg (≤20), the average distance per unit gas that the car can run; and N (≤ 500), the total number of gas stations. Then N lines follow, each contains a pair of non-negative numbers: Pi, the unit gas price, and Di (≤D), the distance between this station and Hangzhou, for i=1,⋯,N. All the numbers in a line are separated by a space.">
-
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position":  1 ,
-      "name": "Posts",
-      "item": "https://zjxjwxk.github.io/posts/"
-    }, 
-    {
-      "@type": "ListItem",
-      "position":  2 ,
-      "name": "PAT甲级 1033 To Fill or Not to Fill (25分)",
-      "item": "https://zjxjwxk.github.io/posts/pat/advanced_level/a1033/"
-    }
-  ]
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": "PAT甲级 1033 To Fill or Not to Fill (25分)",
-  "name": "PAT甲级 1033 To Fill or Not to Fill (25分)",
-  "description": "With highways available, driving a car from Hangzhou to any other city is easy. But since the tank capacity of a car is limited, we have to find gas stations on the way from time to time. Different gas station may give different price. You are asked to carefully design the cheapest route to go.\nInput Specification: Each input file contains one test case. For each case, the first line contains 4 positive numbers: Cmax (≤ 100), the maximum capacity of the tank; D (≤30000), the distance between Hangzhou and the destination city; Davg (≤20), the average distance per unit gas that the car can run; and N (≤ 500), the total number of gas stations. Then N lines follow, each contains a pair of non-negative numbers: Pi, the unit gas price, and Di (≤D), the distance between this station and Hangzhou, for i=1,⋯,N. All the numbers in a line are separated by a space.\n",
-  "keywords": [
-    "PAT", "贪心"
-  ],
-  "articleBody": "With highways available, driving a car from Hangzhou to any other city is easy. But since the tank capacity of a car is limited, we have to find gas stations on the way from time to time. Different gas station may give different price. You are asked to carefully design the cheapest route to go.\nInput Specification: Each input file contains one test case. For each case, the first line contains 4 positive numbers: Cmax (≤ 100), the maximum capacity of the tank; D (≤30000), the distance between Hangzhou and the destination city; Davg (≤20), the average distance per unit gas that the car can run; and N (≤ 500), the total number of gas stations. Then N lines follow, each contains a pair of non-negative numbers: Pi, the unit gas price, and Di (≤D), the distance between this station and Hangzhou, for i=1,⋯,N. All the numbers in a line are separated by a space.\nOutput Specification: For each test case, print the cheapest price in a line, accurate up to 2 decimal places. It is assumed that the tank is empty at the beginning. If it is impossible to reach the destination, print The maximum travel distance = X where X is the maximum possible distance the car can run, accurate up to 2 decimal places.\nSample Input 1: 50 1300 12 8 6.00 1250 7.00 600 7.00 150 7.10 0 7.20 200 7.50 400 7.30 1000 6.85 300 Sample Output 1: 749.17 Sample Input 2: 50 1300 12 2 7.10 0 7.00 600 Sample Output 2: The maximum travel distance = 1200.00 思路 把终点视为单位油价为0，离起点距离为 destD 的加油站（以便在最后选择下一站时，能够直接选到终点） 贪心：寻找距离当前加油站最近的油价低于当前油价的加油站，加恰好能够到达该加油站的油，然后前往该加油站；如果找不到油价低于当前油价的加油站，则寻找油价最低的加油站，在当前加油站加满油，然后前往该加油站 注意点 在距离为0处必须有加油站，否则无法出发，一定无法到达终点 #include #include using namespace std; const int maxn = 501; struct Station { double P; double D; } stations[maxn]; int cmp(Station s1, Station s2) { return s1.D \u003c s2.D; } int main() { double capacity, destD, avgD, nowC = 0, nowD = 0, cost = 0; int n, nowIndex = 0; scanf(\"%lf %lf %lf %d\", \u0026capacity, \u0026destD, \u0026avgD, \u0026n); for (int i = 0; i \u003c n; i++) { scanf(\"%lf %lf\", \u0026stations[i].P, \u0026stations[i].D); } stations[n].P = 0; stations[n].D = destD; sort(stations, stations + n, cmp); if (stations[0].D != 0) { printf(\"The maximum travel distance = 0.00\"); } else { while (nowD \u003c destD) { if (nowIndex == n - 1 \u0026\u0026 (capacity * avgD \u003c (destD - nowD)) || (nowIndex \u003c n - 1) \u0026\u0026 (capacity * avgD \u003c (stations[nowIndex + 1].D - nowD))) { nowD += capacity * avgD; break; } double minP = stations[nowIndex].P, secondP = stations[nowIndex + 1].P; int minIndex = -1, secondIndex = nowIndex + 1; for (int i = nowIndex + 1; i \u003c= n; i++) { if (capacity * avgD \u003e= (stations[i].D - nowD)) { if (stations[i].P \u003c minP) { minP = stations[i].P; minIndex = i; break; } else if (stations[i].P \u003c secondP) { secondP = stations[i].P; secondIndex = i; } } else { break; } } if (minIndex != -1) { if (nowC * avgD \u003c (stations[minIndex].D - nowD)) { cost += ((stations[minIndex].D - nowD) / avgD - nowC) * stations[nowIndex].P; nowC = 0; } else { nowC -= (stations[minIndex].D - nowD) / avgD; } nowD = stations[minIndex].D; nowIndex = minIndex; } else { cost += (capacity - nowC) * stations[nowIndex].P; nowC = capacity - (stations[secondIndex].D - nowD) / avgD; nowD = stations[secondIndex].D; nowIndex = secondIndex; } } if (nowD \u003c destD) { printf(\"The maximum travel distance = %.2f\", nowD); } else { printf(\"%.2f\", cost); } } return 0; } ",
-  "wordCount" : "580",
-  "inLanguage": "en",
-  "datePublished": "2020-03-22T17:24:00Z",
-  "dateModified": "2020-03-22T17:24:00Z",
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https://zjxjwxk.github.io/posts/pat/advanced_level/a1033/"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "Xinkang's Blog",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://zjxjwxk.github.io/favicon.ico"
-    }
-  }
-}
-</script>
+</noscript>
 </head>
 
 <body class="" id="top">
@@ -142,7 +75,7 @@ Each input file contains one test case. For each case, the first line contains 4
 <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="https://zjxjwxk.github.io/" accesskey="h" title="Xinkang&#39;s Blog (Alt + H)">Xinkang&#39;s Blog</a>
+            <a href="http://localhost:1313/" accesskey="h" title="Xinkang&#39;s Blog (Alt + H)">Xinkang&#39;s Blog</a>
             <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
@@ -168,22 +101,22 @@ Each input file contains one test case. For each case, the first line contains 4
         </div>
         <ul id="menu">
             <li>
-                <a href="https://zjxjwxk.github.io/archives/" title="Archives">
+                <a href="http://localhost:1313/archives/" title="Archives">
                     <span>Archives</span>
                 </a>
             </li>
             <li>
-                <a href="https://zjxjwxk.github.io/categories/" title="Categories">
+                <a href="http://localhost:1313/categories/" title="Categories">
                     <span>Categories</span>
                 </a>
             </li>
             <li>
-                <a href="https://zjxjwxk.github.io/tags/" title="Tags">
+                <a href="http://localhost:1313/tags/" title="Tags">
                     <span>Tags</span>
                 </a>
             </li>
             <li>
-                <a href="https://zjxjwxk.github.io/search/" title="Search (Alt &#43; /)" accesskey=/>
+                <a href="http://localhost:1313/search/" title="Search (Alt &#43; /)" accesskey=/>
                     <span>Search</span>
                 </a>
             </li>
@@ -193,7 +126,6 @@ Each input file contains one test case. For each case, the first line contains 4
 <main class="main">
 
 <article class="post-single">
-  <div id="content-container">
   <header class="post-header">
     
     <h1 class="post-title entry-hint-parent">
@@ -314,31 +246,15 @@ Each input file contains one test case. For each case, the first line contains 4
 
   <footer class="post-footer">
     <ul class="post-tags">
-      <li><a href="https://zjxjwxk.github.io/tags/pat/">PAT</a></li>
-      <li><a href="https://zjxjwxk.github.io/tags/%E8%B4%AA%E5%BF%83/">贪心</a></li>
+      <li><a href="http://localhost:1313/tags/pat/">PAT</a></li>
+      <li><a href="http://localhost:1313/tags/%E8%B4%AA%E5%BF%83/">贪心</a></li>
     </ul>
   </footer>
 </article>
-
-<script>
-  window.onload = function() {
-      var contentContainer = document.getElementById("content-container");
-      if ("" !== "") {
-          var password = prompt("Enter password:");
-          if (password === "") {
-              contentContainer.style.display = "block";
-          } else {
-              alert("Incorrect password");
-          }
-      } else {
-          contentContainer.style.display = "block";
-      }
-  };
-</script>
     </main>
     
 <footer class="footer">
-        <span>&copy; 2024 <a href="https://zjxjwxk.github.io/">Xinkang&#39;s Blog</a></span> · 
+        <span>&copy; 2024 <a href="http://localhost:1313/">Xinkang&#39;s Blog</a></span> · 
 
     <span>
         Powered by
