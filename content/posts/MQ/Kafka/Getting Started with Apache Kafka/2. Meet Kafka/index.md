@@ -580,7 +580,7 @@ If we restart the stopped broker, Kafka willl self heal:
 docker compose up -d
 ```
 
-We can see that for partition 0 and 1, the broker 2 is in_sync` again. And for partition 2, the `leader` 2 is elected again.
+We can see that for partition 0 and 1, the broker 2 is `in_sync` again. And for partition 2, the `leader` 2 is elected again.
 
 ```json
 {
