@@ -334,7 +334,7 @@ Summary:
 - Topics can be partitioned.
 - The partitioner uses the message key to redirect messages to partitions.
 - Consumers read them from partitions and have an offset.
-- Therefore, more partitions enable more consumers, therefore more scalability.
+- Therefore, more partitions enable more consumers, which makes it more scalable.
 
 ## Topic Replication
 
@@ -342,7 +342,7 @@ Each topic has a number called the replication factor, which replicates each par
 
 ![image-20241116161303122](images/image-20241116161303122.png)
 
-Each partition is on a different broker, therefore a single topic is scaled.
+Each partition is on a different broker. Therefore, a single topic is scaled.
 
 ## Interaction with Kafka via the REST Proxy
 
@@ -368,13 +368,13 @@ Then, add an environment for variables like baseUrl and use the environment.
 
 ### Create Topic
 
-Create a topic `myorders` with 1 replication and 3 partisions:
+Create a topic `myorders` with one replication and three partitions:
 
 ```
 kafka-topics.sh --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 3 --topic myorders
 ```
 
-The created topic can be displayed by calling `{{baseUrl}}/topics/:topicName` via the Postman. The path variable `:topicName` should be `myorders`. The response will be like:
+The created topic can be displayed by calling `{{baseUrl}}/topics/:topicName` via Postman. The path variable `:topicName` should be `myorders`. The response will be like:
 
 ```
 {
@@ -440,7 +440,7 @@ Reassign partitions with the json file:
 kafka-reassign-partitions.sh --bootstrap-server localhost:9092 --reassignment-json-file increase_replication.json --execute
 ```
 
-Then we can see the replication of partition 0 and 1 are increased and a leader is elected for each replica.
+Then, we can see the replication of partition 0 and 1 are increased, and a leader is elected for each replica.
 
 ```json
 {
@@ -502,7 +502,7 @@ Stop the broker 2 to test the system resilience.
 docker stop broker-2
 ```
 
-We can see that for partition 0 and 1, the broker 2 is not `in_sync`. And for partition 2, the `leader` is -1, which means there is no leader and cannot take any new message.
+We can see that for partitions 0 and 1, the broker 2 is not `in_sync`. For partition 2, the `leader` is -1, which means there is no leader and cannot take any new message.
 
 ```json
 {
@@ -574,13 +574,15 @@ kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic myorders --f
 
 We will find there is no response returned. The topic will be offline if one partition doesn't have any replica online.
 
-If we restart the stopped broker, Kafka willl self heal:
+### Restart the Broker
+
+If we restart the stopped broker, Kafka will self-heal:
 
 ```bash
 docker compose up -d
 ```
 
-We can see that for partition 0 and 1, the broker 2 is `in_sync` again. And for partition 2, the `leader` 2 is elected again.
+We can see that for partitions 0 and 1, broker 2 is `in_sync` again. And for partition 2, the `leader` 2 is elected again.
 
 ```json
 {
