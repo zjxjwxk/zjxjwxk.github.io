@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>STL on Xinkang&#39;s Blog</title>
-    <link>http://localhost:1313/tags/stl/</link>
+    <link>https://zjxjwxk.github.io/tags/stl/</link>
     <description>Recent content in STL on Xinkang&#39;s Blog</description>
     <generator>Hugo -- 0.138.0</generator>
     <language>en</language>
     <lastBuildDate>Mon, 06 Apr 2020 15:17:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/stl/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://zjxjwxk.github.io/tags/stl/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>PAT甲级 1100 Mars Numbers (20分)</title>
-      <link>http://localhost:1313/posts/pat/advanced_level/a1100/</link>
+      <link>https://zjxjwxk.github.io/posts/pat/advanced_level/a1100/</link>
       <pubDate>Mon, 06 Apr 2020 15:17:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/pat/advanced_level/a1100/</guid>
+      <guid>https://zjxjwxk.github.io/posts/pat/advanced_level/a1100/</guid>
       <description>&lt;p&gt;People on Mars count their numbers with base 13:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Zero on Earth is called &amp;ldquo;tret&amp;rdquo; on Mars.&lt;/li&gt;
@@ -23,18 +23,18 @@
     </item>
     <item>
       <title>PAT甲级 1060 Are They Equal (25分)</title>
-      <link>http://localhost:1313/posts/pat/advanced_level/a1060/</link>
+      <link>https://zjxjwxk.github.io/posts/pat/advanced_level/a1060/</link>
       <pubDate>Sat, 04 Apr 2020 22:28:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/pat/advanced_level/a1060/</guid>
+      <guid>https://zjxjwxk.github.io/posts/pat/advanced_level/a1060/</guid>
       <description>&lt;p&gt;If a machine can save only 3 significant digits, the float numbers 12300 and 12358.9 are considered equal since they are both saved as 0.123×105 with simple chopping. Now given the number of significant digits on a machine and two float numbers, you are supposed to tell if they are treated equal in that machine.&lt;/p&gt;
 &lt;h1 id=&#34;input-specification&#34;&gt;Input Specification:&lt;/h1&gt;
 &lt;p&gt;Each input file contains one test case which gives three numbers &lt;em&gt;N&lt;/em&gt;, &lt;em&gt;A&lt;/em&gt; and &lt;em&gt;B&lt;/em&gt;, where &lt;em&gt;N&lt;/em&gt; (&amp;lt;100) is the number of significant digits, and &lt;em&gt;A&lt;/em&gt; and &lt;em&gt;B&lt;/em&gt; are the two float numbers to be compared. Each float number is non-negative, no greater than 10100, and that its total digit number is less than 100.&lt;/p&gt;</description>
     </item>
     <item>
       <title>PAT甲级 1039 Course List for Student (25分)</title>
-      <link>http://localhost:1313/posts/pat/advanced_level/a1039/</link>
+      <link>https://zjxjwxk.github.io/posts/pat/advanced_level/a1039/</link>
       <pubDate>Fri, 03 Apr 2020 15:33:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/pat/advanced_level/a1039/</guid>
+      <guid>https://zjxjwxk.github.io/posts/pat/advanced_level/a1039/</guid>
       <description>&lt;p&gt;Zhejiang University has 40000 students and provides 2500 courses. Now given the student name lists of all the courses, you are supposed to output the registered course list for each student who comes for a query.&lt;/p&gt;
 &lt;h1 id=&#34;input-specification&#34;&gt;Input Specification:&lt;/h1&gt;
 &lt;p&gt;Each input file contains one test case. For each case, the first line contains 2 positive integers: &lt;em&gt;N&lt;/em&gt; (≤40,000), the number of students who look for their course lists, and &lt;em&gt;K&lt;/em&gt; (≤2,500), the total number of courses. Then the student name lists are given for the courses (numbered from 1 to &lt;em&gt;K&lt;/em&gt;) in the following format: for each course &lt;em&gt;i&lt;/em&gt;, first the course index &lt;em&gt;i&lt;/em&gt; and the number of registered students N &lt;!-- raw HTML omitted --&gt;i&lt;!-- raw HTML omitted --&gt; (≤200) are given in a line. Then in the next line, N &lt;!-- raw HTML omitted --&gt;i&lt;!-- raw HTML omitted --&gt; student names are given. A student name consists of 3 capital English letters plus a one-digit number. Finally the last line contains the &lt;em&gt;N&lt;/em&gt; names of students who come for a query. All the names and numbers in a line are separated by a space.&lt;/p&gt;</description>

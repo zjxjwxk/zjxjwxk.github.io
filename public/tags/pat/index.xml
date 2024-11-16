@@ -2,58 +2,58 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>PAT on Xinkang&#39;s Blog</title>
-    <link>http://localhost:1313/tags/pat/</link>
+    <link>https://zjxjwxk.github.io/tags/pat/</link>
     <description>Recent content in PAT on Xinkang&#39;s Blog</description>
     <generator>Hugo -- 0.138.0</generator>
     <language>en</language>
     <lastBuildDate>Wed, 15 Apr 2020 21:39:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/pat/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://zjxjwxk.github.io/tags/pat/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>PAT甲级 1108 Finding Average (20分)</title>
-      <link>http://localhost:1313/posts/pat/advanced_level/a1108/</link>
+      <link>https://zjxjwxk.github.io/posts/pat/advanced_level/a1108/</link>
       <pubDate>Wed, 15 Apr 2020 21:39:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/pat/advanced_level/a1108/</guid>
+      <guid>https://zjxjwxk.github.io/posts/pat/advanced_level/a1108/</guid>
       <description>&lt;p&gt;The basic task is simple: given &lt;em&gt;N&lt;/em&gt; real numbers, you are supposed to calculate their average. But what makes it complicated is that some of the input numbers might not be legal. A &lt;strong&gt;legal&lt;/strong&gt; input is a real number in [−1000,1000] and is accurate up to no more than 2 decimal places. When you calculate the average, those illegal numbers must not be counted in.&lt;/p&gt;
 &lt;h1 id=&#34;input-specification&#34;&gt;Input Specification:&lt;/h1&gt;
 &lt;p&gt;Each input file contains one test case. For each case, the first line gives a positive integer &lt;em&gt;N&lt;/em&gt; (≤100). Then &lt;em&gt;N&lt;/em&gt; numbers are given in the next line, separated by one space.&lt;/p&gt;</description>
     </item>
     <item>
       <title>PAT甲级 1072 Gas Station (30分)</title>
-      <link>http://localhost:1313/posts/pat/advanced_level/a1072/</link>
+      <link>https://zjxjwxk.github.io/posts/pat/advanced_level/a1072/</link>
       <pubDate>Mon, 13 Apr 2020 00:11:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/pat/advanced_level/a1072/</guid>
+      <guid>https://zjxjwxk.github.io/posts/pat/advanced_level/a1072/</guid>
       <description>&lt;p&gt;A gas station has to be built at such a location that the minimum distance between the station and any of the residential housing is as far away as possible. However it must guarantee that all the houses are in its service range.&lt;/p&gt;
 &lt;p&gt;Now given the map of the city and several candidate locations for the gas station, you are supposed to give the best recommendation. If there are more than one solution, output the one with the smallest average distance to all the houses. If such a solution is still not unique, output the one with the smallest index number.&lt;/p&gt;</description>
     </item>
     <item>
       <title>PAT甲级 1018 Public Bike Management (30分)</title>
-      <link>http://localhost:1313/posts/pat/advanced_level/a1018/</link>
+      <link>https://zjxjwxk.github.io/posts/pat/advanced_level/a1018/</link>
       <pubDate>Sun, 12 Apr 2020 15:52:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/pat/advanced_level/a1018/</guid>
+      <guid>https://zjxjwxk.github.io/posts/pat/advanced_level/a1018/</guid>
       <description>&lt;p&gt;There is a public bike service in Hangzhou City which provides great convenience to the tourists from all over the world. One may rent a bike at any station and return it to any other stations in the city.&lt;/p&gt;
 &lt;p&gt;The Public Bike Management Center (PBMC) keeps monitoring the real-time capacity of all the stations. A station is said to be in &lt;strong&gt;perfect&lt;/strong&gt; condition if it is exactly half-full. If a station is full or empty, PBMC will collect or send bikes to adjust the condition of that station to perfect. And more, all the stations on the way will be adjusted as well.&lt;/p&gt;</description>
     </item>
     <item>
       <title>PAT考场 Dev C&#43;&#43; 5.10 配置</title>
-      <link>http://localhost:1313/posts/pat/%E8%80%83%E8%AF%95%E6%94%BB%E7%95%A5/</link>
+      <link>https://zjxjwxk.github.io/posts/pat/%E8%80%83%E8%AF%95%E6%94%BB%E7%95%A5/</link>
       <pubDate>Sat, 11 Apr 2020 16:17:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/pat/%E8%80%83%E8%AF%95%E6%94%BB%E7%95%A5/</guid>
+      <guid>https://zjxjwxk.github.io/posts/pat/%E8%80%83%E8%AF%95%E6%94%BB%E7%95%A5/</guid>
       <description>&lt;p&gt;根据往年 (2019) 年浙大软件学院的考研复试公告，如果今年 (2020) 是线下复试，且考场没有变化的话，机试应该还是在 &lt;code&gt;浙大紫金港校区&lt;/code&gt;（如下图）。&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;浙大软院招生通知：http://www.cst.zju.edu.cn/2019/0307/c36207a1478348/page.htm&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;&lt;img alt=&#34;软件学院2019年统考研究生招生复试安排&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/pat/%E8%80%83%E8%AF%95%E6%94%BB%E7%95%A5/images/image-20200411162644696.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;软件学院2019年统考研究生招生复试安排&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/pat/%E8%80%83%E8%AF%95%E6%94%BB%E7%95%A5/images/image-20200411162644696.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;从 PAT 官网可以找到紫金港的机房配置：&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;PAT 考点联盟：https://www.patest.cn/location&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;&lt;img alt=&#34;PAT紫金港配置.png&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/pat/%E8%80%83%E8%AF%95%E6%94%BB%E7%95%A5/images/PAT%E7%B4%AB%E9%87%91%E6%B8%AF%E9%85%8D%E7%BD%AE.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;PAT紫金港配置.png&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/pat/%E8%80%83%E8%AF%95%E6%94%BB%E7%95%A5/images/PAT%E7%B4%AB%E9%87%91%E6%B8%AF%E9%85%8D%E7%BD%AE.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;我本人选择使用 &lt;code&gt;Dev C++ 5.10&lt;/code&gt; 版本，考试那天在考场需要先对其作以下配置（当然也许已经配置好了）：&lt;/p&gt;
 &lt;h1 id=&#34;打开产生调试信息&#34;&gt;打开产生调试信息&lt;/h1&gt;
 &lt;p&gt;在 &lt;code&gt;“工具(Tools)”&lt;/code&gt; -&amp;gt; &lt;code&gt;“编译选项(Compiler Options)&amp;quot;&lt;/code&gt; 中：&lt;/p&gt;
-&lt;p&gt;&lt;img alt=&#34;编译选项&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/pat/%E8%80%83%E8%AF%95%E6%94%BB%E7%95%A5/images/image-20200411163457056.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;编译选项&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/pat/%E8%80%83%E8%AF%95%E6%94%BB%E7%95%A5/images/image-20200411163457056.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;点击 &lt;code&gt;“代码生成/优化(Settings)”&lt;/code&gt; 选项卡中的 &lt;code&gt;&amp;quot;连接器(Linker)&amp;quot;&lt;/code&gt; 选项卡，将 &lt;code&gt;&amp;quot;产生调试信息(Generate debugging information)&amp;quot;&lt;/code&gt; 选项改为 &lt;code&gt;“Yes”&lt;/code&gt;。&lt;/p&gt;
-&lt;p&gt;&lt;img alt=&#34;产生调试信息&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/pat/%E8%80%83%E8%AF%95%E6%94%BB%E7%95%A5/images/image-20200411163800036.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;产生调试信息&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/pat/%E8%80%83%E8%AF%95%E6%94%BB%E7%95%A5/images/image-20200411163800036.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;这样，就可以愉快的 Debug 了～&lt;/p&gt;
 &lt;h1 id=&#34;添加-c-11-支持&#34;&gt;添加 C++ 11 支持&lt;/h1&gt;
 &lt;p&gt;由于 PAT 的 OJ 是支持 C++ 11 的，故最好打开 C++ 11 支持。&lt;/p&gt;
@@ -62,42 +62,42 @@
     </item>
     <item>
       <title>PAT甲级 1021 Deepest Root (25分)</title>
-      <link>http://localhost:1313/posts/pat/advanced_level/a1021/</link>
+      <link>https://zjxjwxk.github.io/posts/pat/advanced_level/a1021/</link>
       <pubDate>Fri, 10 Apr 2020 17:55:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/pat/advanced_level/a1021/</guid>
+      <guid>https://zjxjwxk.github.io/posts/pat/advanced_level/a1021/</guid>
       <description>&lt;p&gt;A graph which is connected and acyclic can be considered a tree. The height of the tree depends on the selected root. Now you are supposed to find the root that results in a highest tree. Such a root is called &lt;strong&gt;the deepest root&lt;/strong&gt;.&lt;/p&gt;
 &lt;h1 id=&#34;input-specification&#34;&gt;Input Specification:&lt;/h1&gt;
 &lt;p&gt;Each input file contains one test case. For each case, the first line contains a positive integer &lt;em&gt;N&lt;/em&gt; (≤10^4) which is the number of nodes, and hence the nodes are numbered from 1 to &lt;em&gt;N&lt;/em&gt;. Then &lt;em&gt;N&lt;/em&gt;−1 lines follow, each describes an edge by given the two adjacent nodes&amp;rsquo; numbers.&lt;/p&gt;</description>
     </item>
     <item>
       <title>PAT甲级 1013 Battle Over Cities (25分)</title>
-      <link>http://localhost:1313/posts/pat/advanced_level/a1013/</link>
+      <link>https://zjxjwxk.github.io/posts/pat/advanced_level/a1013/</link>
       <pubDate>Thu, 09 Apr 2020 19:57:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/pat/advanced_level/a1013/</guid>
+      <guid>https://zjxjwxk.github.io/posts/pat/advanced_level/a1013/</guid>
       <description>&lt;p&gt;It is vitally important to have all the cities connected by highways in a war. If a city is occupied by the enemy, all the highways from/toward that city are closed. We must know immediately if we need to repair any other highways to keep the rest of the cities connected. Given the map of cities which have all the remaining highways marked, you are supposed to tell the number of highways need to be repaired, quickly.&lt;/p&gt;</description>
     </item>
     <item>
       <title>PAT甲级 1032 Sharing (25分)</title>
-      <link>http://localhost:1313/posts/pat/advanced_level/a1032/</link>
+      <link>https://zjxjwxk.github.io/posts/pat/advanced_level/a1032/</link>
       <pubDate>Tue, 07 Apr 2020 16:34:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/pat/advanced_level/a1032/</guid>
+      <guid>https://zjxjwxk.github.io/posts/pat/advanced_level/a1032/</guid>
       <description>&lt;p&gt;To store English words, one method is to use linked lists and store a word letter by letter. To save some space, we may let the words share the same sublist if they share the same suffix. For example, &lt;code&gt;loading&lt;/code&gt; and &lt;code&gt;being&lt;/code&gt; are stored as showed in Figure 1.&lt;/p&gt;
 &lt;p&gt;&lt;img alt=&#34;Figure 1&#34; loading=&#34;lazy&#34; src=&#34;../images/image-A1032.jpg&#34;&gt;&lt;/p&gt;
 &lt;p&gt;You are supposed to find the starting position of the common suffix (e.g. the position of &lt;code&gt;i&lt;/code&gt; in Figure 1).&lt;/p&gt;</description>
     </item>
     <item>
       <title>PAT甲级 1056 Mice and Rice (25分)</title>
-      <link>http://localhost:1313/posts/pat/advanced_level/a1056/</link>
+      <link>https://zjxjwxk.github.io/posts/pat/advanced_level/a1056/</link>
       <pubDate>Mon, 06 Apr 2020 19:04:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/pat/advanced_level/a1056/</guid>
+      <guid>https://zjxjwxk.github.io/posts/pat/advanced_level/a1056/</guid>
       <description>&lt;p&gt;&lt;strong&gt;Mice and Rice&lt;/strong&gt; is the name of a programming contest in which each programmer must write a piece of code to control the movements of a mouse in a given map. The goal of each mouse is to eat as much rice as possible in order to become a FatMouse.&lt;/p&gt;
 &lt;p&gt;First the playing order is randomly decided for N &lt;!-- raw HTML omitted --&gt;P&lt;!-- raw HTML omitted --&gt; programmers. Then every N &lt;!-- raw HTML omitted --&gt;G&lt;!-- raw HTML omitted --&gt; programmers are grouped in a match. The fattest mouse in a group wins and enters the next turn. All the losers in this turn are ranked the same. Every N &lt;!-- raw HTML omitted --&gt;G&lt;!-- raw HTML omitted --&gt; winners are then grouped in the next match until a final winner is determined.&lt;/p&gt;</description>
     </item>
     <item>
       <title>PAT甲级 1100 Mars Numbers (20分)</title>
-      <link>http://localhost:1313/posts/pat/advanced_level/a1100/</link>
+      <link>https://zjxjwxk.github.io/posts/pat/advanced_level/a1100/</link>
       <pubDate>Mon, 06 Apr 2020 15:17:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/pat/advanced_level/a1100/</guid>
+      <guid>https://zjxjwxk.github.io/posts/pat/advanced_level/a1100/</guid>
       <description>&lt;p&gt;People on Mars count their numbers with base 13:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Zero on Earth is called &amp;ldquo;tret&amp;rdquo; on Mars.&lt;/li&gt;
@@ -108,60 +108,60 @@
     </item>
     <item>
       <title>PAT甲级 1060 Are They Equal (25分)</title>
-      <link>http://localhost:1313/posts/pat/advanced_level/a1060/</link>
+      <link>https://zjxjwxk.github.io/posts/pat/advanced_level/a1060/</link>
       <pubDate>Sat, 04 Apr 2020 22:28:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/pat/advanced_level/a1060/</guid>
+      <guid>https://zjxjwxk.github.io/posts/pat/advanced_level/a1060/</guid>
       <description>&lt;p&gt;If a machine can save only 3 significant digits, the float numbers 12300 and 12358.9 are considered equal since they are both saved as 0.123×105 with simple chopping. Now given the number of significant digits on a machine and two float numbers, you are supposed to tell if they are treated equal in that machine.&lt;/p&gt;
 &lt;h1 id=&#34;input-specification&#34;&gt;Input Specification:&lt;/h1&gt;
 &lt;p&gt;Each input file contains one test case which gives three numbers &lt;em&gt;N&lt;/em&gt;, &lt;em&gt;A&lt;/em&gt; and &lt;em&gt;B&lt;/em&gt;, where &lt;em&gt;N&lt;/em&gt; (&amp;lt;100) is the number of significant digits, and &lt;em&gt;A&lt;/em&gt; and &lt;em&gt;B&lt;/em&gt; are the two float numbers to be compared. Each float number is non-negative, no greater than 10100, and that its total digit number is less than 100.&lt;/p&gt;</description>
     </item>
     <item>
       <title>PAT甲级 1039 Course List for Student (25分)</title>
-      <link>http://localhost:1313/posts/pat/advanced_level/a1039/</link>
+      <link>https://zjxjwxk.github.io/posts/pat/advanced_level/a1039/</link>
       <pubDate>Fri, 03 Apr 2020 15:33:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/pat/advanced_level/a1039/</guid>
+      <guid>https://zjxjwxk.github.io/posts/pat/advanced_level/a1039/</guid>
       <description>&lt;p&gt;Zhejiang University has 40000 students and provides 2500 courses. Now given the student name lists of all the courses, you are supposed to output the registered course list for each student who comes for a query.&lt;/p&gt;
 &lt;h1 id=&#34;input-specification&#34;&gt;Input Specification:&lt;/h1&gt;
 &lt;p&gt;Each input file contains one test case. For each case, the first line contains 2 positive integers: &lt;em&gt;N&lt;/em&gt; (≤40,000), the number of students who look for their course lists, and &lt;em&gt;K&lt;/em&gt; (≤2,500), the total number of courses. Then the student name lists are given for the courses (numbered from 1 to &lt;em&gt;K&lt;/em&gt;) in the following format: for each course &lt;em&gt;i&lt;/em&gt;, first the course index &lt;em&gt;i&lt;/em&gt; and the number of registered students N &lt;!-- raw HTML omitted --&gt;i&lt;!-- raw HTML omitted --&gt; (≤200) are given in a line. Then in the next line, N &lt;!-- raw HTML omitted --&gt;i&lt;!-- raw HTML omitted --&gt; student names are given. A student name consists of 3 capital English letters plus a one-digit number. Finally the last line contains the &lt;em&gt;N&lt;/em&gt; names of students who come for a query. All the names and numbers in a line are separated by a space.&lt;/p&gt;</description>
     </item>
     <item>
       <title>PAT甲级 1096 Consecutive Factors (20分)</title>
-      <link>http://localhost:1313/posts/pat/advanced_level/a1096/</link>
+      <link>https://zjxjwxk.github.io/posts/pat/advanced_level/a1096/</link>
       <pubDate>Thu, 02 Apr 2020 20:53:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/pat/advanced_level/a1096/</guid>
+      <guid>https://zjxjwxk.github.io/posts/pat/advanced_level/a1096/</guid>
       <description>&lt;p&gt;Among all the factors of a positive integer N, there may exist several consecutive numbers. For example, 630 can be factored as 3×5×6×7, where 5, 6, and 7 are the three consecutive numbers. Now given any positive N, you are supposed to find the maximum number of consecutive factors, and list the smallest sequence of the consecutive factors.&lt;/p&gt;
 &lt;h1 id=&#34;input-specification&#34;&gt;Input Specification:&lt;/h1&gt;
 &lt;p&gt;Each input file contains one test case, which gives the integer N (1&amp;lt;N&amp;lt;2^{31}).&lt;/p&gt;</description>
     </item>
     <item>
       <title>PAT甲级 1078 Hashing (25分)</title>
-      <link>http://localhost:1313/posts/pat/advanced_level/a1078/</link>
+      <link>https://zjxjwxk.github.io/posts/pat/advanced_level/a1078/</link>
       <pubDate>Thu, 02 Apr 2020 17:04:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/pat/advanced_level/a1078/</guid>
+      <guid>https://zjxjwxk.github.io/posts/pat/advanced_level/a1078/</guid>
       <description>&lt;p&gt;The task of this problem is simple: insert a sequence of distinct positive integers into a hash table, and output the positions of the input numbers. The hash function is defined to be H(key)=key%TSize where TSize is the maximum size of the hash table. Quadratic probing (with positive increments only) is used to solve the collisions.&lt;/p&gt;
 &lt;p&gt;Note that the table size is better to be prime. If the maximum size given by the user is not prime, you must re-define the table size to be the smallest prime number which is larger than the size given by the user.&lt;/p&gt;</description>
     </item>
     <item>
       <title>PAT甲级 1081 Rational Sum (20分)</title>
-      <link>http://localhost:1313/posts/pat/advanced_level/a1081/</link>
+      <link>https://zjxjwxk.github.io/posts/pat/advanced_level/a1081/</link>
       <pubDate>Wed, 01 Apr 2020 16:29:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/pat/advanced_level/a1081/</guid>
+      <guid>https://zjxjwxk.github.io/posts/pat/advanced_level/a1081/</guid>
       <description>&lt;p&gt;Given &lt;em&gt;N&lt;/em&gt; rational numbers in the form &lt;code&gt;numerator/denominator&lt;/code&gt;, you are supposed to calculate their sum.&lt;/p&gt;
 &lt;h1 id=&#34;input-specification&#34;&gt;Input Specification:&lt;/h1&gt;
 &lt;p&gt;Each input file contains one test case. Each case starts with a positive integer &lt;em&gt;N&lt;/em&gt; (≤100), followed in the next line &lt;em&gt;N&lt;/em&gt; rational numbers &lt;code&gt;a1/b1 a2/b2 ...&lt;/code&gt; where all the numerators and denominators are in the range of &lt;strong&gt;long int&lt;/strong&gt;. If there is a negative number, then the sign must appear in front of the numerator.&lt;/p&gt;</description>
     </item>
     <item>
       <title>PAT乙级 1008 数组元素循环右移问题 (20分)</title>
-      <link>http://localhost:1313/posts/pat/basic_level/b1008/</link>
+      <link>https://zjxjwxk.github.io/posts/pat/basic_level/b1008/</link>
       <pubDate>Tue, 31 Mar 2020 16:04:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/pat/basic_level/b1008/</guid>
+      <guid>https://zjxjwxk.github.io/posts/pat/basic_level/b1008/</guid>
       <description>&lt;p&gt;一个数组&lt;em&gt;A&lt;/em&gt;中存有&lt;em&gt;N&lt;/em&gt;（&amp;gt;0）个整数，在不允许使用另外数组的前提下，将每个整数循环向右移&lt;em&gt;M&lt;/em&gt;（≥0）个位置，即将&lt;em&gt;A&lt;/em&gt;中的数据由（A&lt;!-- raw HTML omitted --&gt;0&lt;!-- raw HTML omitted --&gt; A&lt;!-- raw HTML omitted --&gt;1&lt;!-- raw HTML omitted --&gt; ⋯A &lt;!-- raw HTML omitted --&gt;N−1&lt;!-- raw HTML omitted --&gt; ）变换为（A &lt;!-- raw HTML omitted --&gt;N−M&lt;!-- raw HTML omitted --&gt; ⋯A &lt;!-- raw HTML omitted --&gt;N−1&lt;!-- raw HTML omitted --&gt; A &lt;!-- raw HTML omitted --&gt;0&lt;!-- raw HTML omitted --&gt; A &lt;!-- raw HTML omitted --&gt;1&lt;!-- raw HTML omitted --&gt;⋯A  &lt;!-- raw HTML omitted --&gt;N−M−1&lt;!-- raw HTML omitted --&gt; ）（最后&lt;em&gt;M&lt;/em&gt;个数循环移至最前面的&lt;em&gt;M&lt;/em&gt;个位置）。如果需要考虑程序移动数据的次数尽量少，要如何设计移动的方法？&lt;/p&gt;</description>
     </item>
     <item>
       <title>PAT甲级 1049 Counting Ones (30分)</title>
-      <link>http://localhost:1313/posts/pat/advanced_level/a1049/</link>
+      <link>https://zjxjwxk.github.io/posts/pat/advanced_level/a1049/</link>
       <pubDate>Mon, 30 Mar 2020 21:12:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/pat/advanced_level/a1049/</guid>
+      <guid>https://zjxjwxk.github.io/posts/pat/advanced_level/a1049/</guid>
       <description>&lt;p&gt;The task is simple: given any positive integer &lt;em&gt;N&lt;/em&gt;, you are supposed to count the total number of 1&amp;rsquo;s in the decimal form of the integers from 1 to &lt;em&gt;N&lt;/em&gt;. For example, given &lt;em&gt;N&lt;/em&gt; being 12, there are five 1&amp;rsquo;s in 1, 10, 11, and 12.&lt;/p&gt;
 &lt;h1 id=&#34;input-specification&#34;&gt;Input Specification:&lt;/h1&gt;
 &lt;p&gt;Each input file contains one test case which gives the positive &lt;em&gt;N&lt;/em&gt; (≤230).&lt;/p&gt;
@@ -170,9 +170,9 @@
     </item>
     <item>
       <title>PAT乙级 1003 我要通过！ (20分)</title>
-      <link>http://localhost:1313/posts/pat/basic_level/b1003/</link>
+      <link>https://zjxjwxk.github.io/posts/pat/basic_level/b1003/</link>
       <pubDate>Mon, 30 Mar 2020 16:26:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/pat/basic_level/b1003/</guid>
+      <guid>https://zjxjwxk.github.io/posts/pat/basic_level/b1003/</guid>
       <description>&lt;p&gt;“&lt;strong&gt;答案正确&lt;/strong&gt;”是自动判题系统给出的最令人欢喜的回复。本题属于 PAT 的“&lt;strong&gt;答案正确&lt;/strong&gt;”大派送 —— 只要读入的字符串满足下列条件，系统就输出“&lt;strong&gt;答案正确&lt;/strong&gt;”，否则输出“&lt;strong&gt;答案错误&lt;/strong&gt;”。&lt;/p&gt;
 &lt;p&gt;得到“&lt;strong&gt;答案正确&lt;/strong&gt;”的条件是：&lt;/p&gt;
 &lt;ol&gt;
@@ -249,25 +249,25 @@ NO
     </item>
     <item>
       <title>PAT甲级 1104 Sum of Number Segments (20分)</title>
-      <link>http://localhost:1313/posts/pat/advanced_level/a1104/</link>
+      <link>https://zjxjwxk.github.io/posts/pat/advanced_level/a1104/</link>
       <pubDate>Mon, 30 Mar 2020 16:26:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/pat/advanced_level/a1104/</guid>
+      <guid>https://zjxjwxk.github.io/posts/pat/advanced_level/a1104/</guid>
       <description>&lt;p&gt;Given a sequence of positive numbers, a segment is defined to be a consecutive subsequence. For example, given the sequence { 0.1, 0.2, 0.3, 0.4 }, we have 10 segments: (0.1) (0.1, 0.2) (0.1, 0.2, 0.3) (0.1, 0.2, 0.3, 0.4) (0.2) (0.2, 0.3) (0.2, 0.3, 0.4) (0.3) (0.3, 0.4) and (0.4).&lt;/p&gt;
 &lt;p&gt;Now given a sequence, you are supposed to find the sum of all the numbers in all the segments. For the previous example, the sum of all the 10 segments is 0.1 + 0.3 + 0.6 + 1.0 + 0.2 + 0.5 + 0.9 + 0.3 + 0.7 + 0.4 = 5.0.&lt;/p&gt;</description>
     </item>
     <item>
       <title>PAT甲级 1101 Quick Sort (25分)</title>
-      <link>http://localhost:1313/posts/pat/advanced_level/a1101/</link>
+      <link>https://zjxjwxk.github.io/posts/pat/advanced_level/a1101/</link>
       <pubDate>Sun, 29 Mar 2020 17:27:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/pat/advanced_level/a1101/</guid>
+      <guid>https://zjxjwxk.github.io/posts/pat/advanced_level/a1101/</guid>
       <description>&lt;p&gt;There is a classical process named &lt;strong&gt;partition&lt;/strong&gt; in the famous quick sort algorithm. In this process we typically choose one element as the pivot. Then the elements less than the pivot are moved to its left and those larger than the pivot to its right. Given &lt;em&gt;N&lt;/em&gt; distinct positive integers after a run of partition, could you tell how many elements could be the selected pivot for this partition?&lt;/p&gt;
 &lt;p&gt;For example, given &lt;em&gt;N&lt;/em&gt;=5 and the numbers 1, 3, 2, 4, and 5. We have:&lt;/p&gt;</description>
     </item>
     <item>
       <title>PAT甲级 1010 Radix (25分)</title>
-      <link>http://localhost:1313/posts/pat/advanced_level/a1010/</link>
+      <link>https://zjxjwxk.github.io/posts/pat/advanced_level/a1010/</link>
       <pubDate>Sun, 29 Mar 2020 14:48:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/pat/advanced_level/a1010/</guid>
+      <guid>https://zjxjwxk.github.io/posts/pat/advanced_level/a1010/</guid>
       <description>&lt;p&gt;Given a pair of positive integers, for example, 6 and 110, can this equation 6 = 110 be true? The answer is &lt;code&gt;yes&lt;/code&gt;, if 6 is a decimal number and 110 is a binary number.&lt;/p&gt;
 &lt;p&gt;Now for any pair of positive integers &lt;em&gt;N&lt;/em&gt;1 and &lt;em&gt;N&lt;/em&gt;2, your task is to find the radix of one number while that of the other is given.&lt;/p&gt;
 &lt;h1 id=&#34;input-specification&#34;&gt;Input Specification:&lt;/h1&gt;
@@ -275,9 +275,9 @@ NO
     </item>
     <item>
       <title>PAT甲级 1085 Perfect Sequence (25分)</title>
-      <link>http://localhost:1313/posts/pat/advanced_level/a1085/</link>
+      <link>https://zjxjwxk.github.io/posts/pat/advanced_level/a1085/</link>
       <pubDate>Sat, 28 Mar 2020 16:38:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/pat/advanced_level/a1085/</guid>
+      <guid>https://zjxjwxk.github.io/posts/pat/advanced_level/a1085/</guid>
       <description>&lt;p&gt;Given a sequence of positive integers and another positive integer &lt;em&gt;p&lt;/em&gt;. The sequence is said to be a &lt;strong&gt;perfect sequence&lt;/strong&gt; if &lt;em&gt;M&lt;/em&gt;≤&lt;em&gt;m&lt;/em&gt;×&lt;em&gt;p&lt;/em&gt; where &lt;em&gt;M&lt;/em&gt; and &lt;em&gt;m&lt;/em&gt; are the maximum and minimum numbers in the sequence, respectively.&lt;/p&gt;
 &lt;p&gt;Now given a sequence and a parameter &lt;em&gt;p&lt;/em&gt;, you are supposed to find from the sequence as many numbers as possible to form a perfect subsequence.&lt;/p&gt;
 &lt;h1 id=&#34;input-specification&#34;&gt;Input Specification:&lt;/h1&gt;
@@ -285,18 +285,18 @@ NO
     </item>
     <item>
       <title>PAT甲级 1038 Recover the Smallest Number (30分)</title>
-      <link>http://localhost:1313/posts/pat/advanced_level/a1038/</link>
+      <link>https://zjxjwxk.github.io/posts/pat/advanced_level/a1038/</link>
       <pubDate>Sat, 28 Mar 2020 16:34:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/pat/advanced_level/a1038/</guid>
+      <guid>https://zjxjwxk.github.io/posts/pat/advanced_level/a1038/</guid>
       <description>&lt;p&gt;Given a collection of number segments, you are supposed to recover the smallest number from them. For example, given { 32, 321, 3214, 0229, 87 }, we can recover many numbers such like 32-321-3214-0229-87 or 0229-32-87-321-3214 with respect to different orders of combinations of these segments, and the smallest number is 0229-321-3214-32-87.&lt;/p&gt;
 &lt;h1 id=&#34;input-specification&#34;&gt;Input Specification:&lt;/h1&gt;
 &lt;p&gt;Each input file contains one test case. Each case gives a positive integer &lt;em&gt;N&lt;/em&gt; (≤10^4) followed by &lt;em&gt;N&lt;/em&gt; number segments. Each segment contains a non-negative integer of no more than 8 digits. All the numbers in a line are separated by a space.&lt;/p&gt;</description>
     </item>
     <item>
       <title>PAT甲级 1067 Sort with Swap(0, i) (25分)</title>
-      <link>http://localhost:1313/posts/pat/advanced_level/a1067/</link>
+      <link>https://zjxjwxk.github.io/posts/pat/advanced_level/a1067/</link>
       <pubDate>Fri, 27 Mar 2020 20:06:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/pat/advanced_level/a1067/</guid>
+      <guid>https://zjxjwxk.github.io/posts/pat/advanced_level/a1067/</guid>
       <description>&lt;p&gt;Given any permutation of the numbers {0, 1, 2,&amp;hellip;, &lt;em&gt;N&lt;/em&gt;−1}, it is easy to sort them in increasing order. But what if &lt;code&gt;Swap(0, *)&lt;/code&gt; is the ONLY operation that is allowed to use? For example, to sort {4, 0, 2, 1, 3} we may apply the swap operations in the following way:&lt;/p&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;Swap(0, 1) =&amp;gt; {4, 1, 2, 0, 3}
 Swap(0, 3) =&amp;gt; {4, 1, 2, 3, 0}
@@ -305,9 +305,9 @@ Swap(0, 4) =&amp;gt; {0, 1, 2, 3, 4}
     </item>
     <item>
       <title>PAT乙级 1033 旧键盘打字 (20分)</title>
-      <link>http://localhost:1313/posts/pat/basic_level/b1033/</link>
+      <link>https://zjxjwxk.github.io/posts/pat/basic_level/b1033/</link>
       <pubDate>Thu, 26 Mar 2020 15:21:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/pat/basic_level/b1033/</guid>
+      <guid>https://zjxjwxk.github.io/posts/pat/basic_level/b1033/</guid>
       <description>&lt;p&gt;旧键盘上坏了几个键，于是在敲一段文字的时候，对应的字符就不会出现。现在给出应该输入的一段文字、以及坏掉的那些键，打出的结果文字会是怎样？&lt;/p&gt;
 &lt;h1 id=&#34;输入格式&#34;&gt;输入格式：&lt;/h1&gt;
 &lt;p&gt;输入在 2 行中分别给出坏掉的那些键、以及应该输入的文字。其中对应英文字母的坏键以大写给出；每段文字是不超过 10^5 个字符的串。可用的字符包括字母 [&lt;code&gt;a&lt;/code&gt;-&lt;code&gt;z&lt;/code&gt;, &lt;code&gt;A&lt;/code&gt;-&lt;code&gt;Z&lt;/code&gt;]、数字 &lt;code&gt;0&lt;/code&gt;-&lt;code&gt;9&lt;/code&gt;、以及下划线 &lt;code&gt;_&lt;/code&gt;（代表空格）、&lt;code&gt;,&lt;/code&gt;、&lt;code&gt;.&lt;/code&gt;、&lt;code&gt;-&lt;/code&gt;、&lt;code&gt;+&lt;/code&gt;（代表上档键）。题目保证第 2 行输入的文字串非空。&lt;/p&gt;
@@ -359,54 +359,54 @@ Swap(0, 4) =&amp;gt; {0, 1, 2, 3, 4}
     </item>
     <item>
       <title>PAT甲级 1033 To Fill or Not to Fill (25分)</title>
-      <link>http://localhost:1313/posts/pat/advanced_level/a1033/</link>
+      <link>https://zjxjwxk.github.io/posts/pat/advanced_level/a1033/</link>
       <pubDate>Sun, 22 Mar 2020 17:24:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/pat/advanced_level/a1033/</guid>
+      <guid>https://zjxjwxk.github.io/posts/pat/advanced_level/a1033/</guid>
       <description>&lt;p&gt;With highways available, driving a car from Hangzhou to any other city is easy. But since the tank capacity of a car is limited, we have to find gas stations on the way from time to time. Different gas station may give different price. You are asked to carefully design the cheapest route to go.&lt;/p&gt;
 &lt;h1 id=&#34;input-specification&#34;&gt;Input Specification:&lt;/h1&gt;
 &lt;p&gt;Each input file contains one test case. For each case, the first line contains 4 positive numbers: &lt;em&gt;Cmax&lt;/em&gt; (≤ 100), the maximum capacity of the tank; &lt;em&gt;D&lt;/em&gt; (≤30000), the distance between Hangzhou and the destination city; &lt;em&gt;Davg&lt;/em&gt; (≤20), the average distance per unit gas that the car can run; and &lt;em&gt;N&lt;/em&gt; (≤ 500), the total number of gas stations. Then &lt;em&gt;N&lt;/em&gt; lines follow, each contains a pair of non-negative numbers: &lt;em&gt;Pi&lt;/em&gt;, the unit gas price, and &lt;em&gt;Di&lt;/em&gt; (≤&lt;em&gt;D&lt;/em&gt;), the distance between this station and Hangzhou, for &lt;em&gt;i&lt;/em&gt;=1,⋯,&lt;em&gt;N&lt;/em&gt;. All the numbers in a line are separated by a space.&lt;/p&gt;</description>
     </item>
     <item>
       <title>PAT甲级 1095 Cars on Campus (30分)</title>
-      <link>http://localhost:1313/posts/pat/advanced_level/a1095/</link>
+      <link>https://zjxjwxk.github.io/posts/pat/advanced_level/a1095/</link>
       <pubDate>Sun, 22 Mar 2020 17:24:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/pat/advanced_level/a1095/</guid>
+      <guid>https://zjxjwxk.github.io/posts/pat/advanced_level/a1095/</guid>
       <description>&lt;p&gt;Zhejiang University has 8 campuses and a lot of gates. From each gate we can collect the in/out times and the plate numbers of the cars crossing the gate. Now with all the information available, you are supposed to tell, at any specific time point, the number of cars parking on campus, and at the end of the day find the cars that have parked for the longest time period.&lt;/p&gt;</description>
     </item>
     <item>
       <title>PAT甲级 1016 Phone Bills (25分)</title>
-      <link>http://localhost:1313/posts/pat/advanced_level/a1016/</link>
+      <link>https://zjxjwxk.github.io/posts/pat/advanced_level/a1016/</link>
       <pubDate>Fri, 20 Mar 2020 22:29:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/pat/advanced_level/a1016/</guid>
+      <guid>https://zjxjwxk.github.io/posts/pat/advanced_level/a1016/</guid>
       <description>&lt;p&gt;A long-distance telephone company charges its customers by the following rules:&lt;/p&gt;
 &lt;p&gt;Making a long-distance call costs a certain amount per minute, depending on the time of day when the call is made. When a customer starts connecting a long-distance call, the time will be recorded, and so will be the time when the customer hangs up the phone. Every calendar month, a bill is sent to the customer for each minute called (at a rate determined by the time of day). Your job is to prepare the bills for each month, given a set of phone call records.&lt;/p&gt;</description>
     </item>
     <item>
       <title>PAT甲级 1012 The Best Rank (25分)</title>
-      <link>http://localhost:1313/posts/pat/advanced_level/a1012/</link>
+      <link>https://zjxjwxk.github.io/posts/pat/advanced_level/a1012/</link>
       <pubDate>Fri, 20 Mar 2020 16:05:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/pat/advanced_level/a1012/</guid>
+      <guid>https://zjxjwxk.github.io/posts/pat/advanced_level/a1012/</guid>
       <description>&lt;p&gt;To evaluate the performance of our first year CS majored students, we consider their grades of three courses only: &lt;code&gt;C&lt;/code&gt; - C Programming Language, &lt;code&gt;M&lt;/code&gt; - Mathematics (Calculus or Linear Algrbra), and &lt;code&gt;E&lt;/code&gt; - English. At the mean time, we encourage students by emphasizing on their best ranks &amp;ndash; that is, among the four ranks with respect to the three courses and the average grade, we print the best rank for each student.&lt;/p&gt;</description>
     </item>
     <item>
       <title>PAT甲级 1082 Read Number in Chinese (25分)</title>
-      <link>http://localhost:1313/posts/pat/advanced_level/a1082/</link>
+      <link>https://zjxjwxk.github.io/posts/pat/advanced_level/a1082/</link>
       <pubDate>Thu, 19 Mar 2020 17:34:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/pat/advanced_level/a1082/</guid>
+      <guid>https://zjxjwxk.github.io/posts/pat/advanced_level/a1082/</guid>
       <description>&lt;p&gt;Given an integer with no more than 9 digits, you are supposed to read it in the traditional Chinese way. Output &lt;code&gt;Fu&lt;/code&gt; first if it is negative. For example, -123456789 is read as &lt;code&gt;Fu yi Yi er Qian san Bai si Shi wu Wan liu Qian qi Bai ba Shi jiu&lt;/code&gt;. Note: zero (&lt;code&gt;ling&lt;/code&gt;) must be handled correctly according to the Chinese tradition. For example, 100800 is &lt;code&gt;yi Shi Wan ling ba Bai&lt;/code&gt;.&lt;/p&gt;</description>
     </item>
     <item>
       <title>PAT甲级 1061 Dating (20分)</title>
-      <link>http://localhost:1313/posts/pat/advanced_level/a1061/</link>
+      <link>https://zjxjwxk.github.io/posts/pat/advanced_level/a1061/</link>
       <pubDate>Wed, 18 Mar 2020 21:25:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/pat/advanced_level/a1061/</guid>
+      <guid>https://zjxjwxk.github.io/posts/pat/advanced_level/a1061/</guid>
       <description>&lt;p&gt;Sherlock Holmes received a note with some strange strings: &lt;code&gt;Let&#39;s date! 3485djDkxh4hhGE 2984akDfkkkkggEdsb s&amp;amp;hgsfdk d&amp;amp;Hyscvnm&lt;/code&gt;. It took him only a minute to figure out that those strange strings are actually referring to the coded time &lt;code&gt;Thursday 14:04&lt;/code&gt; &amp;ndash; since the first common capital English letter (case sensitive) shared by the first two strings is the 4th capital letter &lt;code&gt;D&lt;/code&gt;, representing the 4th day in a week; the second common character is the 5th capital letter &lt;code&gt;E&lt;/code&gt;, representing the 14th hour (hence the hours from 0 to 23 in a day are represented by the numbers from 0 to 9 and the capital letters from &lt;code&gt;A&lt;/code&gt; to &lt;code&gt;N&lt;/code&gt;, respectively); and the English letter shared by the last two strings is &lt;code&gt;s&lt;/code&gt; at the 4th position, representing the 4th minute. Now given two pairs of strings, you are supposed to help Sherlock decode the dating time.&lt;/p&gt;</description>
     </item>
     <item>
       <title>PAT乙级 1010 一元多项式求导 (25分)</title>
-      <link>http://localhost:1313/posts/pat/basic_level/b1010/</link>
+      <link>https://zjxjwxk.github.io/posts/pat/basic_level/b1010/</link>
       <pubDate>Tue, 17 Mar 2020 15:11:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/pat/basic_level/b1010/</guid>
+      <guid>https://zjxjwxk.github.io/posts/pat/basic_level/b1010/</guid>
       <description>&lt;p&gt;设计函数求一元多项式的导数。（注：x^n（&lt;em&gt;n&lt;/em&gt;为整数）的一阶导数为nx^{n−1}。）&lt;/p&gt;
 &lt;h1 id=&#34;输入格式&#34;&gt;输入格式:&lt;/h1&gt;
 &lt;p&gt;以指数递降方式输入多项式非零项系数和指数（绝对值均为不超过 1000 的整数）。数字间以空格分隔。&lt;/p&gt;
@@ -462,9 +462,9 @@ Swap(0, 4) =&amp;gt; {0, 1, 2, 3, 4}
     </item>
     <item>
       <title>PAT甲级 1065 A&#43;B and C (64bit) (20分)</title>
-      <link>http://localhost:1313/posts/pat/advanced_level/a1065/</link>
+      <link>https://zjxjwxk.github.io/posts/pat/advanced_level/a1065/</link>
       <pubDate>Sun, 15 Mar 2020 18:04:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/pat/advanced_level/a1065/</guid>
+      <guid>https://zjxjwxk.github.io/posts/pat/advanced_level/a1065/</guid>
       <description>&lt;p&gt;Given three integers &lt;em&gt;A&lt;/em&gt;, &lt;em&gt;B&lt;/em&gt; and &lt;em&gt;C&lt;/em&gt; in [−2^63,2^63], you are supposed to tell whether &lt;em&gt;A&lt;/em&gt;+&lt;em&gt;B&lt;/em&gt;&amp;gt;&lt;em&gt;C&lt;/em&gt;.&lt;/p&gt;
 &lt;h1 id=&#34;input-specification&#34;&gt;Input Specification:&lt;/h1&gt;
 &lt;p&gt;The first line of the input gives the positive number of test cases, &lt;em&gt;T&lt;/em&gt; (≤10). Then &lt;em&gt;T&lt;/em&gt; test cases follow, each consists of a single line containing three integers &lt;em&gt;A&lt;/em&gt;, &lt;em&gt;B&lt;/em&gt; and &lt;em&gt;C&lt;/em&gt;, separated by single spaces.&lt;/p&gt;
@@ -473,9 +473,9 @@ Swap(0, 4) =&amp;gt; {0, 1, 2, 3, 4}
     </item>
     <item>
       <title>PAT甲级 1014 Waiting in Line (30分)</title>
-      <link>http://localhost:1313/posts/pat/advanced_level/a1014/</link>
+      <link>https://zjxjwxk.github.io/posts/pat/advanced_level/a1014/</link>
       <pubDate>Sun, 08 Mar 2020 17:18:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/pat/advanced_level/a1014/</guid>
+      <guid>https://zjxjwxk.github.io/posts/pat/advanced_level/a1014/</guid>
       <description>&lt;p&gt;Suppose a bank has N windows open for service. There is a yellow line in front of the windows which devides the waiting area into two parts. The rules for the customers to wait in line are:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;The space inside the yellow line in front of each window is enough to contain a line with M customers. Hence when all the N lines are full, all the customers after (and including) the (NM+1)st one will have to wait in a line behind the yellow line.&lt;/li&gt;

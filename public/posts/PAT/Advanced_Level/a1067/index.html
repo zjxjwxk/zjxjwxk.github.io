@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" dir="auto">
 
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<head><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="noindex, nofollow">
+<meta name="robots" content="index, follow">
 <title>PAT甲级 1067 Sort with Swap(0, i) (25分) | Xinkang&#39;s Blog</title>
 <meta name="keywords" content="PAT, 贪心">
 <meta name="description" content="Given any permutation of the numbers {0, 1, 2,&hellip;, N−1}, it is easy to sort them in increasing order. But what if Swap(0, *) is the ONLY operation that is allowed to use? For example, to sort {4, 0, 2, 1, 3} we may apply the swap operations in the following way:
@@ -13,16 +13,16 @@ Swap(0, 3) =&gt; {4, 1, 2, 3, 0}
 Swap(0, 4) =&gt; {0, 1, 2, 3, 4}
 Now you are asked to find the minimum number of swaps need to sort the given permutation of the first N nonnegative integers.">
 <meta name="author" content="">
-<link rel="canonical" href="http://localhost:1313/posts/pat/advanced_level/a1067/">
+<link rel="canonical" href="https://zjxjwxk.github.io/posts/pat/advanced_level/a1067/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.d6fcd20a4fb86efa4dfac8ec95da60244cc8871042183da1ef28e3a762ad79c8.css" integrity="sha256-1vzSCk&#43;4bvpN&#43;sjsldpgJEzIhxBCGD2h7yjjp2Ktecg=" rel="preload stylesheet" as="style">
-<link rel="icon" href="http://localhost:1313/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
-<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
-<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
+<link rel="icon" href="https://zjxjwxk.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://zjxjwxk.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://zjxjwxk.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://zjxjwxk.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://zjxjwxk.github.io/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" hreflang="en" href="http://localhost:1313/posts/pat/advanced_level/a1067/">
+<link rel="alternate" hreflang="en" href="https://zjxjwxk.github.io/posts/pat/advanced_level/a1067/">
 <noscript>
     <style>
         #theme-toggle,
@@ -59,7 +59,76 @@ Now you are asked to find the minimum number of swaps need to sort the given per
         }
 
     </style>
-</noscript>
+</noscript><meta property="og:url" content="https://zjxjwxk.github.io/posts/pat/advanced_level/a1067/">
+  <meta property="og:site_name" content="Xinkang&#39;s Blog">
+  <meta property="og:title" content="PAT甲级 1067 Sort with Swap(0, i) (25分)">
+  <meta property="og:description" content="Given any permutation of the numbers {0, 1, 2,…, N−1}, it is easy to sort them in increasing order. But what if Swap(0, *) is the ONLY operation that is allowed to use? For example, to sort {4, 0, 2, 1, 3} we may apply the swap operations in the following way:
+Swap(0, 1) =&gt; {4, 1, 2, 0, 3} Swap(0, 3) =&gt; {4, 1, 2, 3, 0} Swap(0, 4) =&gt; {0, 1, 2, 3, 4} Now you are asked to find the minimum number of swaps need to sort the given permutation of the first N nonnegative integers.">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2020-03-27T20:06:00+00:00">
+    <meta property="article:modified_time" content="2020-03-27T20:06:00+00:00">
+    <meta property="article:tag" content="PAT">
+    <meta property="article:tag" content="贪心">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="PAT甲级 1067 Sort with Swap(0, i) (25分)">
+<meta name="twitter:description" content="Given any permutation of the numbers {0, 1, 2,&hellip;, N−1}, it is easy to sort them in increasing order. But what if Swap(0, *) is the ONLY operation that is allowed to use? For example, to sort {4, 0, 2, 1, 3} we may apply the swap operations in the following way:
+Swap(0, 1) =&gt; {4, 1, 2, 0, 3}
+Swap(0, 3) =&gt; {4, 1, 2, 3, 0}
+Swap(0, 4) =&gt; {0, 1, 2, 3, 4}
+Now you are asked to find the minimum number of swaps need to sort the given permutation of the first N nonnegative integers.">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://zjxjwxk.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "PAT甲级 1067 Sort with Swap(0, i) (25分)",
+      "item": "https://zjxjwxk.github.io/posts/pat/advanced_level/a1067/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "PAT甲级 1067 Sort with Swap(0, i) (25分)",
+  "name": "PAT甲级 1067 Sort with Swap(0, i) (25分)",
+  "description": "Given any permutation of the numbers {0, 1, 2,\u0026hellip;, N−1}, it is easy to sort them in increasing order. But what if Swap(0, *) is the ONLY operation that is allowed to use? For example, to sort {4, 0, 2, 1, 3} we may apply the swap operations in the following way:\nSwap(0, 1) =\u0026gt; {4, 1, 2, 0, 3} Swap(0, 3) =\u0026gt; {4, 1, 2, 3, 0} Swap(0, 4) =\u0026gt; {0, 1, 2, 3, 4} Now you are asked to find the minimum number of swaps need to sort the given permutation of the first N nonnegative integers.\n",
+  "keywords": [
+    "PAT", "贪心"
+  ],
+  "articleBody": "Given any permutation of the numbers {0, 1, 2,…, N−1}, it is easy to sort them in increasing order. But what if Swap(0, *) is the ONLY operation that is allowed to use? For example, to sort {4, 0, 2, 1, 3} we may apply the swap operations in the following way:\nSwap(0, 1) =\u003e {4, 1, 2, 0, 3} Swap(0, 3) =\u003e {4, 1, 2, 3, 0} Swap(0, 4) =\u003e {0, 1, 2, 3, 4} Now you are asked to find the minimum number of swaps need to sort the given permutation of the first N nonnegative integers.\nInput Specification: Each input file contains one test case, which gives a positive N (≤10^5) followed by a permutation sequence of {0, 1, …, N−1}. All the numbers in a line are separated by a space.\nOutput Specification: For each case, simply print in a line the minimum number of swaps need to sort the given permutation.\nSample Input: 10 3 5 7 2 6 4 9 0 8 1 Sample Output: 9 思路 如果在交换过程中出现数字0在0号位的情况，就随意选择一个还没有回到“本位”的数字，让其与数字0交换位置 注意点 在循环中寻找一个不在本位上的数时，如果每次都从头开始遍历序列中的数，则会有两组数据超时（因为复杂度是二次方级别的）。合适的做法是从整体上定义一个变量 k，用来保存目前序列中不在本位上的最小数（初试为1），当交换过程中出现0回归本位的情况时，总是从当前的 k 开始继续增大寻找不在本位上的数，这样能保证复杂度从整体上是线性级别（k 从 1 增长到 n） 该题用一个 index[] 数组表示下标值所在的位置即可，无需原始数组 #include #include using namespace std; const int maxn = 100000; int main() { int n, index[maxn], num, k = 1, ans = 0, cnt = 0; scanf(\"%d\", \u0026n); for (int i = 0; i \u003c n; i++) { scanf(\"%d\", \u0026num); index[num] = i; if (index[num] != num \u0026\u0026 num != 0) { cnt++; } } while (cnt != 0) { if (index[0] == 0) { for (; k \u003c n; k++) { if (index[k] != k) { break; } } swap(index[0], index[k]); } else { swap(index[0], index[index[0]]); cnt--; } ans++; } printf(\"%d\", ans); return 0; } ",
+  "wordCount" : "284",
+  "inLanguage": "en",
+  "datePublished": "2020-03-27T20:06:00Z",
+  "dateModified": "2020-03-27T20:06:00Z",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://zjxjwxk.github.io/posts/pat/advanced_level/a1067/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Xinkang's Blog",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://zjxjwxk.github.io/favicon.ico"
+    }
+  }
+}
+</script>
 </head>
 
 <body class="" id="top">
@@ -77,7 +146,7 @@ Now you are asked to find the minimum number of swaps need to sort the given per
 <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="http://localhost:1313/" accesskey="h" title="Xinkang&#39;s Blog (Alt + H)">Xinkang&#39;s Blog</a>
+            <a href="https://zjxjwxk.github.io/" accesskey="h" title="Xinkang&#39;s Blog (Alt + H)">Xinkang&#39;s Blog</a>
             <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
@@ -103,22 +172,22 @@ Now you are asked to find the minimum number of swaps need to sort the given per
         </div>
         <ul id="menu">
             <li>
-                <a href="http://localhost:1313/archives/" title="Archives">
+                <a href="https://zjxjwxk.github.io/archives/" title="Archives">
                     <span>Archives</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/categories/" title="Categories">
+                <a href="https://zjxjwxk.github.io/categories/" title="Categories">
                     <span>Categories</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/tags/" title="Tags">
+                <a href="https://zjxjwxk.github.io/tags/" title="Tags">
                     <span>Tags</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/search/" title="Search (Alt &#43; /)" accesskey=/>
+                <a href="https://zjxjwxk.github.io/search/" title="Search (Alt &#43; /)" accesskey=/>
                     <span>Search</span>
                 </a>
             </li>
@@ -199,15 +268,15 @@ Swap(0, 4) =&gt; {0, 1, 2, 3, 4}
 
   <footer class="post-footer">
     <ul class="post-tags">
-      <li><a href="http://localhost:1313/tags/pat/">PAT</a></li>
-      <li><a href="http://localhost:1313/tags/%E8%B4%AA%E5%BF%83/">贪心</a></li>
+      <li><a href="https://zjxjwxk.github.io/tags/pat/">PAT</a></li>
+      <li><a href="https://zjxjwxk.github.io/tags/%E8%B4%AA%E5%BF%83/">贪心</a></li>
     </ul>
   </footer>
 </article>
     </main>
     
 <footer class="footer">
-        <span>&copy; 2024 <a href="http://localhost:1313/">Xinkang&#39;s Blog</a></span> · 
+        <span>&copy; 2024 <a href="https://zjxjwxk.github.io/">Xinkang&#39;s Blog</a></span> · 
 
     <span>
         Powered by

@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" dir="auto">
 
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<head><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="noindex, nofollow">
+<meta name="robots" content="index, follow">
 <title>Dubbo微服务影院系列（12）：系统部署 | Xinkang&#39;s Blog</title>
 <meta name="keywords" content="Dubbo, 微服务架构">
 <meta name="description" content="运行环境
@@ -29,16 +29,16 @@ root    ALL=(ALL)       ALL
 cinema  ALL=(ALL)       ALL
 最后，取消当前用户的写权限：">
 <meta name="author" content="">
-<link rel="canonical" href="http://localhost:1313/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/12.%E7%B3%BB%E7%BB%9F%E9%83%A8%E7%BD%B2/">
+<link rel="canonical" href="https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/12.%E7%B3%BB%E7%BB%9F%E9%83%A8%E7%BD%B2/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.d6fcd20a4fb86efa4dfac8ec95da60244cc8871042183da1ef28e3a762ad79c8.css" integrity="sha256-1vzSCk&#43;4bvpN&#43;sjsldpgJEzIhxBCGD2h7yjjp2Ktecg=" rel="preload stylesheet" as="style">
-<link rel="icon" href="http://localhost:1313/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
-<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
-<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
+<link rel="icon" href="https://zjxjwxk.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://zjxjwxk.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://zjxjwxk.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://zjxjwxk.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://zjxjwxk.github.io/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" hreflang="en" href="http://localhost:1313/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/12.%E7%B3%BB%E7%BB%9F%E9%83%A8%E7%BD%B2/">
+<link rel="alternate" hreflang="en" href="https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/12.%E7%B3%BB%E7%BB%9F%E9%83%A8%E7%BD%B2/">
 <noscript>
     <style>
         #theme-toggle,
@@ -75,7 +75,93 @@ cinema  ALL=(ALL)       ALL
         }
 
     </style>
-</noscript>
+</noscript><meta property="og:url" content="https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/12.%E7%B3%BB%E7%BB%9F%E9%83%A8%E7%BD%B2/">
+  <meta property="og:site_name" content="Xinkang&#39;s Blog">
+  <meta property="og:title" content="Dubbo微服务影院系列（12）：系统部署">
+  <meta property="og:description" content="运行环境 CentOS 6 云服务器 创建用户 创建一个 cinema 用户：
+[root@huawei ~]# useradd cinema [root@huawei ~]# passwd cinema Changing password for user cinema. New password: BAD PASSWORD: it does not contain enough DIFFERENT characters Retype new password: passwd: all authentication tokens updated successfully. 给予其权限，首先需要赋予当前用户对 /etc/sudoers 的写权限，然后在 sudoers 文件中的 root ALL = (ALL) ALL 下增加一行，赋予其在任何地方执行任何命令的权限：
+chmod u&#43;w /etc/sudoers vim sudoers ## Allow root to run any commands anywhere root ALL=(ALL) ALL cinema ALL=(ALL) ALL 最后，取消当前用户的写权限：">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2020-05-03T22:34:00+00:00">
+    <meta property="article:modified_time" content="2020-05-03T22:34:00+00:00">
+    <meta property="article:tag" content="Dubbo">
+    <meta property="article:tag" content="微服务架构">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Dubbo微服务影院系列（12）：系统部署">
+<meta name="twitter:description" content="运行环境
+
+CentOS 6
+云服务器
+
+创建用户
+创建一个 cinema 用户：
+[root@huawei ~]# useradd cinema
+[root@huawei ~]# passwd cinema
+Changing password for user cinema.
+New password: 
+BAD PASSWORD: it does not contain enough DIFFERENT characters
+Retype new password: 
+passwd: all authentication tokens updated successfully.
+给予其权限，首先需要赋予当前用户对 /etc/sudoers 的写权限，然后在 sudoers 文件中的 root ALL = (ALL) ALL 下增加一行，赋予其在任何地方执行任何命令的权限：
+chmod u&#43;w /etc/sudoers
+vim sudoers
+## Allow root to run any commands anywhere 
+root    ALL=(ALL)       ALL
+cinema  ALL=(ALL)       ALL
+最后，取消当前用户的写权限：">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://zjxjwxk.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Dubbo微服务影院系列（12）：系统部署",
+      "item": "https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/12.%E7%B3%BB%E7%BB%9F%E9%83%A8%E7%BD%B2/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Dubbo微服务影院系列（12）：系统部署",
+  "name": "Dubbo微服务影院系列（12）：系统部署",
+  "description": "运行环境 CentOS 6 云服务器 创建用户 创建一个 cinema 用户：\n[root@huawei ~]# useradd cinema [root@huawei ~]# passwd cinema Changing password for user cinema. New password: BAD PASSWORD: it does not contain enough DIFFERENT characters Retype new password: passwd: all authentication tokens updated successfully. 给予其权限，首先需要赋予当前用户对 /etc/sudoers 的写权限，然后在 sudoers 文件中的 root ALL = (ALL) ALL 下增加一行，赋予其在任何地方执行任何命令的权限：\nchmod u+w /etc/sudoers vim sudoers ## Allow root to run any commands anywhere root ALL=(ALL) ALL cinema ALL=(ALL) ALL 最后，取消当前用户的写权限：\n",
+  "keywords": [
+    "Dubbo", "微服务架构"
+  ],
+  "articleBody": "运行环境 CentOS 6 云服务器 创建用户 创建一个 cinema 用户：\n[root@huawei ~]# useradd cinema [root@huawei ~]# passwd cinema Changing password for user cinema. New password: BAD PASSWORD: it does not contain enough DIFFERENT characters Retype new password: passwd: all authentication tokens updated successfully. 给予其权限，首先需要赋予当前用户对 /etc/sudoers 的写权限，然后在 sudoers 文件中的 root ALL = (ALL) ALL 下增加一行，赋予其在任何地方执行任何命令的权限：\nchmod u+w /etc/sudoers vim sudoers ## Allow root to run any commands anywhere root ALL=(ALL) ALL cinema ALL=(ALL) ALL 最后，取消当前用户的写权限：\nchmod u-w /etc/sudoers 关闭 iptables 防火墙 我们只需要使用云服务器提供的防火墙就够了\nservice iptables stop 并且关闭开机启动\nchkconfig iptables off 安装数据库 下载并安装 MySQL Yum Repository（MySQL 镜像源）：\nwget https://dev.mysql.com/get/mysql80-community-release-el6-3.noarch.rpm sudo yum install mysql80-community-release-el6-3.noarch.rpm 验证安装是否成功：\nls /etc/yum.repos.d/ 若存在 mysql-community.repo 和 mysql-community-source.repo，则表示 MySQL Yum Repository 安装成功。\n查看所有 MySQL 版本：\nyum repolist all | grep mysql 禁用最新版，使用 5.7 版本：\nsudo yum-config-manager --disable mysql80-community sudo yum-config-manager --enable mysql57-community 安装 MySQL：\nsudo yum install mysql-community-server 开启 MySQL 服务：\nsudo service mysqld start 查看 MySQL 初始密码：\nsudo grep \"password\" /var/log/mysqld.log 利用初始密码登录数据库：\nmysql -uroot -p 修改初始密码：\nset password for 'root'@'localhost' = password('Zjxjwxk19981018_'); 查看当前有哪些用户：\nmysql\u003e select host, user from mysql.user; +---------+---------------+ | host | user | +-------- +---------------+ | localhost | mysql.session | | localhost | mysql.sys | | localhost | root | +-----------+-------------+ 修改 root 用户访问权限，使得其可以被远程访问：\nUPDATE mysql.user SET host = '%' WHERE user = 'root' and host = 'localhost'; 修改后重启 MySQL：\nsudo service mysqld restart 安装 vsftpd 阿里云文档：https://help.aliyun.com/knowledge_detail/60152.html\n安装 JDK 和 Zookeeper 安装 JDK 在本地上，从 Oracle 官网下载 jdk 的 tar.gz 包 https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html ，并上传到服务器上：\nsudo scp jdk-8u251-linux-x64.tar.gz cinema@34.80.107.207:~/install/ 如果 scp 出现 Permission denied (publickey,gssapi-keyex,gssapi-with-mic). ，则可能需要在服务器上设置密码登录为 yes：\nsudo vim /etc/ssh/sshd_config 将 PasswordAuthentication no 中的 “no” 改为 “yes”。\n在服务器解压：\ntar -zxvf jdk-8u251-linux-x64.tar.gz 添加 JAVA_HOME 环境变量：\nvim /etc/profile 添加以下几行：\n## JAVA_HOME export JAVA_HOME=/developer/jdk1.8.0_251 export PATH=$PATH:$JAVA_HOME/bin 生效环境变量：\nsource /etc/profile 安装 Zookeeper 从 Apache Zookeeper 官网获取 tar.gz 包：\nwget https://mirror.bit.edu.cn/apache/zookeeper/zookeeper-3.4.14/zookeeper-3.4.14.tar.gz 同样，解压之：\ntar -zxvf zookeeper-3.4.14.tar.gz 重命名 zoo_sample.cfg 为 zoo.cfg：\nmv zookeeper-3.4.14/conf/zoo_sample.cfg zoo.cfg 启动 Zookeeper：\nsh zookeeper-3.4.14/bin/zkServer.sh start 查看服务进程：\nps -ef | grep zookeeper 数据初始化、工程打包和部署 将各个模块的 application.yml 配置为线上环境，包括数据库和 FTP 服务器的地址、用户名和密码等。然后直接对父模块使用 maven clean 和 package 打包各个模块为 jar 包，发送到服务器上部署运行即可（jar 包后台运行和日志输出重定向见 [CentOS jar包后台运行](https://zjxjwxk.com/2019/01/30/Linux/CentOS/CentOS jar包后台运行/)）。当然，这里是一种比较 low 的部署方式，可以通过 Jenkins，k8s 等进行持续集成。\n可以通过以下命令查看是否启动成功：\nps -ef | grep xxx 或者 jobs 安装 OpenResty 安装前的准备 您必须将这些库 perl 5.6.1+, libpcre, libssl安装在您的电脑之中。 对于 Linux来说, 您需要确认使用 ldconfig 命令，让其在您的系统环境路径中能找到它们。\nFedora 和 RedHat 用户 推荐您使用yum安装以下的开发库:\nyum install pcre-devel openssl-devel gcc curl 构建 OpenResty 下载 从下载页 Download下载最新的 OpenResty® 源码包，并且像下面的示例一样将其解压:\ntar -xzvf openresty-VERSION.tar.gz VERSION 的地方替换成您下载的源码包的版本号，比如说 0.8.54.6。\n./configure 然后在进入 openresty-VERSION/ 目录, 然后输入以下命令配置:\n./configure 默认, --prefix=/usr/local/openresty 程序会被安装到/usr/local/openresty目录。\n您可以指定各种选项，比如\n./configure --prefix=/developer/openresty \\ --with-luajit \\ --without-http_redis2_module \\ --with-http_iconv_module 试着使用 ./configure --help 查看更多的选项。\n配置文件（./configure script）运行出错可以到 build/nginx-VERSION/objs/autoconf.err 找到。 VERSION 的地方必须与OpenResty版本号相对应, 比如 0.8.54.6。\n需要额外安装 postersql-devel\nsudo yum install -y postgresql-devel make 您可以使用下面的命令来编译：\nmake 如果您的电脑支持多核 make 工作的特性, 您可以这样编译:\nmake -j2 假设您是的机器是双核。\nmake install 如果前面的步骤都没有问题的话,您可以使用下面的命令安装 OpenResty 到您的系统中：\nmake install 在 Linux 上，通常需要使用 sudo 来获取 root 权限来完成安装。\n如果在 prefix 目录有了 openresty 目录，这代表安装完成。\n配置 Nginx 编辑 Nginx 的 nginx.conf\nvim openresty/nginx/conf/nginx.conf 在其中启用（去掉注释） error_log, pid, http 中的 log_format 和 access_log。\n在 http 的 server 中，去掉 access_log 的注释（全局也有一个 access_log，局部优先），并给 server_name 添加域名，将 location / 中修改为 proxy_pass http://127.0.0.1:8081 （此处为我的 gateway 网关模块运行端口），即代理访问 gateway 服务。FTP 服务器代理则为 root /ftpfile/ 。\n#user nobody; worker_processes 1; error_log logs/error.log; #error_log logs/error.log notice; #error_log logs/error.log info; pid logs/nginx.pid; events { worker_connections 1024; } http { include mime.types; default_type application/octet-stream; log_format main '$remote_addr - $remote_user [$time_local] \"$request\" ' '$status $body_bytes_sent \"$http_referer\" ' '\"$http_user_agent\" \"$http_x_forwarded_for\"'; access_log logs/access.log main; sendfile on; #tcp_nopush on; #keepalive_timeout 0; keepalive_timeout 65; #gzip on; server { listen 80; server_name localhost www.cinema.zjxjwxk.com cinema.zjxjwxk.com #charset koi8-r; access_log logs/host.access.log main; location / { proxy_pass http://127.0.0.1:8081 } #error_page 404 /404.html; # redirect server error pages to the static page /50x.html # error_page 500 502 503 504 /50x.html; location = /50x.html { root html; } # proxy the PHP scripts to Apache listening on 127.0.0.1:80 # #location ~ \\.php$ { # proxy_pass http://127.0.0.1; #} # pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000 # #location ~ \\.php$ { # root html; # fastcgi_pass 127.0.0.1:9000; # fastcgi_index index.php; # fastcgi_param SCRIPT_FILENAME /scripts$fastcgi_script_name; # include fastcgi_params; #} # deny access to .htaccess files, if Apache's document root # concurs with nginx's one # #location ~ /\\.ht { # deny all; #} } # another virtual host using mix of IP-, name-, and port-based configuration # # vsftpd FTP server #server { # listen 80; # server_name localhost img-cinema.zjxjwxk.com; # location / { # root /ftpfile/; # } #} # HTTPS server # #server { # listen 443 ssl; # server_name localhost; # ssl_certificate cert.pem; # ssl_certificate_key cert.key; # ssl_session_cache shared:SSL:1m; # ssl_session_timeout 5m; # ssl_ciphers HIGH:!aNULL:!MD5; # ssl_prefer_server_ciphers on; # location / { # root html; # index index.html index.htm; # } #} } 在 sbin 中执行以下命令查看配置是否合法\nsudo ./nginx -t 运行 nginx\n./nginx 验证是否运行成功\nnetstat -nlp | grep \"nginx\" ",
+  "wordCount" : "749",
+  "inLanguage": "en",
+  "datePublished": "2020-05-03T22:34:00Z",
+  "dateModified": "2020-05-03T22:34:00Z",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/12.%E7%B3%BB%E7%BB%9F%E9%83%A8%E7%BD%B2/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Xinkang's Blog",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://zjxjwxk.github.io/favicon.ico"
+    }
+  }
+}
+</script>
 </head>
 
 <body class="" id="top">
@@ -93,7 +179,7 @@ cinema  ALL=(ALL)       ALL
 <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="http://localhost:1313/" accesskey="h" title="Xinkang&#39;s Blog (Alt + H)">Xinkang&#39;s Blog</a>
+            <a href="https://zjxjwxk.github.io/" accesskey="h" title="Xinkang&#39;s Blog (Alt + H)">Xinkang&#39;s Blog</a>
             <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
@@ -119,22 +205,22 @@ cinema  ALL=(ALL)       ALL
         </div>
         <ul id="menu">
             <li>
-                <a href="http://localhost:1313/archives/" title="Archives">
+                <a href="https://zjxjwxk.github.io/archives/" title="Archives">
                     <span>Archives</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/categories/" title="Categories">
+                <a href="https://zjxjwxk.github.io/categories/" title="Categories">
                     <span>Categories</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/tags/" title="Tags">
+                <a href="https://zjxjwxk.github.io/tags/" title="Tags">
                     <span>Tags</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/search/" title="Search (Alt &#43; /)" accesskey=/>
+                <a href="https://zjxjwxk.github.io/search/" title="Search (Alt &#43; /)" accesskey=/>
                     <span>Search</span>
                 </a>
             </li>
@@ -422,15 +508,15 @@ cinema  ALL=(ALL)       ALL
 
   <footer class="post-footer">
     <ul class="post-tags">
-      <li><a href="http://localhost:1313/tags/dubbo/">Dubbo</a></li>
-      <li><a href="http://localhost:1313/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/">微服务架构</a></li>
+      <li><a href="https://zjxjwxk.github.io/tags/dubbo/">Dubbo</a></li>
+      <li><a href="https://zjxjwxk.github.io/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/">微服务架构</a></li>
     </ul>
   </footer>
 </article>
     </main>
     
 <footer class="footer">
-        <span>&copy; 2024 <a href="http://localhost:1313/">Xinkang&#39;s Blog</a></span> · 
+        <span>&copy; 2024 <a href="https://zjxjwxk.github.io/">Xinkang&#39;s Blog</a></span> · 
 
     <span>
         Powered by

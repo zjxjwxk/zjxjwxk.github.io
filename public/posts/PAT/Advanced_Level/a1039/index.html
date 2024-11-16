@@ -1,26 +1,26 @@
 <!DOCTYPE html>
 <html lang="en" dir="auto">
 
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<head><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="noindex, nofollow">
+<meta name="robots" content="index, follow">
 <title>PAT甲级 1039 Course List for Student (25分) | Xinkang&#39;s Blog</title>
 <meta name="keywords" content="PAT, STL">
 <meta name="description" content="Zhejiang University has 40000 students and provides 2500 courses. Now given the student name lists of all the courses, you are supposed to output the registered course list for each student who comes for a query.
 Input Specification:
 Each input file contains one test case. For each case, the first line contains 2 positive integers: N (≤40,000), the number of students who look for their course lists, and K (≤2,500), the total number of courses. Then the student name lists are given for the courses (numbered from 1 to K) in the following format: for each course i, first the course index i and the number of registered students N i (≤200) are given in a line. Then in the next line, N i student names are given. A student name consists of 3 capital English letters plus a one-digit number. Finally the last line contains the N names of students who come for a query. All the names and numbers in a line are separated by a space.">
 <meta name="author" content="">
-<link rel="canonical" href="http://localhost:1313/posts/pat/advanced_level/a1039/">
+<link rel="canonical" href="https://zjxjwxk.github.io/posts/pat/advanced_level/a1039/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.d6fcd20a4fb86efa4dfac8ec95da60244cc8871042183da1ef28e3a762ad79c8.css" integrity="sha256-1vzSCk&#43;4bvpN&#43;sjsldpgJEzIhxBCGD2h7yjjp2Ktecg=" rel="preload stylesheet" as="style">
-<link rel="icon" href="http://localhost:1313/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
-<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
-<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
+<link rel="icon" href="https://zjxjwxk.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://zjxjwxk.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://zjxjwxk.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://zjxjwxk.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://zjxjwxk.github.io/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" hreflang="en" href="http://localhost:1313/posts/pat/advanced_level/a1039/">
+<link rel="alternate" hreflang="en" href="https://zjxjwxk.github.io/posts/pat/advanced_level/a1039/">
 <noscript>
     <style>
         #theme-toggle,
@@ -57,7 +57,74 @@ Each input file contains one test case. For each case, the first line contains 2
         }
 
     </style>
-</noscript>
+</noscript><meta property="og:url" content="https://zjxjwxk.github.io/posts/pat/advanced_level/a1039/">
+  <meta property="og:site_name" content="Xinkang&#39;s Blog">
+  <meta property="og:title" content="PAT甲级 1039 Course List for Student (25分)">
+  <meta property="og:description" content="Zhejiang University has 40000 students and provides 2500 courses. Now given the student name lists of all the courses, you are supposed to output the registered course list for each student who comes for a query.
+Input Specification: Each input file contains one test case. For each case, the first line contains 2 positive integers: N (≤40,000), the number of students who look for their course lists, and K (≤2,500), the total number of courses. Then the student name lists are given for the courses (numbered from 1 to K) in the following format: for each course i, first the course index i and the number of registered students N i (≤200) are given in a line. Then in the next line, N i student names are given. A student name consists of 3 capital English letters plus a one-digit number. Finally the last line contains the N names of students who come for a query. All the names and numbers in a line are separated by a space.">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2020-04-03T15:33:00+00:00">
+    <meta property="article:modified_time" content="2020-04-03T15:33:00+00:00">
+    <meta property="article:tag" content="PAT">
+    <meta property="article:tag" content="STL">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="PAT甲级 1039 Course List for Student (25分)">
+<meta name="twitter:description" content="Zhejiang University has 40000 students and provides 2500 courses. Now given the student name lists of all the courses, you are supposed to output the registered course list for each student who comes for a query.
+Input Specification:
+Each input file contains one test case. For each case, the first line contains 2 positive integers: N (≤40,000), the number of students who look for their course lists, and K (≤2,500), the total number of courses. Then the student name lists are given for the courses (numbered from 1 to K) in the following format: for each course i, first the course index i and the number of registered students N i (≤200) are given in a line. Then in the next line, N i student names are given. A student name consists of 3 capital English letters plus a one-digit number. Finally the last line contains the N names of students who come for a query. All the names and numbers in a line are separated by a space.">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://zjxjwxk.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "PAT甲级 1039 Course List for Student (25分)",
+      "item": "https://zjxjwxk.github.io/posts/pat/advanced_level/a1039/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "PAT甲级 1039 Course List for Student (25分)",
+  "name": "PAT甲级 1039 Course List for Student (25分)",
+  "description": "Zhejiang University has 40000 students and provides 2500 courses. Now given the student name lists of all the courses, you are supposed to output the registered course list for each student who comes for a query.\nInput Specification: Each input file contains one test case. For each case, the first line contains 2 positive integers: N (≤40,000), the number of students who look for their course lists, and K (≤2,500), the total number of courses. Then the student name lists are given for the courses (numbered from 1 to K) in the following format: for each course i, first the course index i and the number of registered students N i (≤200) are given in a line. Then in the next line, N i student names are given. A student name consists of 3 capital English letters plus a one-digit number. Finally the last line contains the N names of students who come for a query. All the names and numbers in a line are separated by a space.\n",
+  "keywords": [
+    "PAT", "STL"
+  ],
+  "articleBody": "Zhejiang University has 40000 students and provides 2500 courses. Now given the student name lists of all the courses, you are supposed to output the registered course list for each student who comes for a query.\nInput Specification: Each input file contains one test case. For each case, the first line contains 2 positive integers: N (≤40,000), the number of students who look for their course lists, and K (≤2,500), the total number of courses. Then the student name lists are given for the courses (numbered from 1 to K) in the following format: for each course i, first the course index i and the number of registered students N i (≤200) are given in a line. Then in the next line, N i student names are given. A student name consists of 3 capital English letters plus a one-digit number. Finally the last line contains the N names of students who come for a query. All the names and numbers in a line are separated by a space.\nOutput Specification: For each test case, print your results in N lines. Each line corresponds to one student, in the following format: first print the student’s name, then the total number of registered courses of that student, and finally the indices of the courses in increasing order. The query results must be printed in the same order as input. All the data in a line must be separated by a space, with no extra space at the end of the line.\nSample Input: 11 5 4 7 BOB5 DON2 FRA8 JAY9 KAT3 LOR6 ZOE1 1 4 ANN0 BOB5 JAY9 LOR6 2 7 ANN0 BOB5 FRA8 JAY9 JOE4 KAT3 LOR6 3 1 BOB5 5 9 AMY7 ANN0 BOB5 DON2 FRA8 JAY9 KAT3 LOR6 ZOE1 ZOE1 ANN0 BOB5 JOE4 JAY9 FRA8 DON2 AMY7 KAT3 LOR6 NON9 Sample Output: ZOE1 2 4 5 ANN0 3 1 2 5 BOB5 5 1 2 3 4 5 JOE4 1 2 JAY9 4 1 2 4 5 FRA8 3 2 4 5 DON2 2 4 5 AMY7 1 5 KAT3 3 2 4 5 LOR6 4 1 2 4 5 NON9 0 注意点 本题最后一个测试点数据量比较大，使用 map, string 会导致超时，因此只能使用字符串 hash 进行求解，使用 vector 数组或 set 数组（自动排序课程号）。 #include #include using namespace std; const int maxn = 26 * 26 * 26 * 10; set\u003cint\u003e course[maxn]; int getID(char name[]) { int id = 0; for (int i = 0; i \u003c 3; i++) { id = id * 26 + (name[i] - 'A'); } id = id * 10 + (name[3] - '0'); return id; } int main() { int n, k, index, num; scanf(\"%d %d\", \u0026n, \u0026k); char name[5]; for (int i = 0; i \u003c k; i++) { scanf(\"%d %d\", \u0026index, \u0026num); for (int j = 0; j \u003c num; j++) { scanf(\"%s\", name); course[getID(name)].insert(index); } } for (int i = 0; i \u003c n; i++) { scanf(\"%s\", name); int id = getID(name); printf(\"%s %d\", name, course[id].size()); for (auto it = course[id].begin(); it != course[id].end(); it++) { printf(\"% d\", *it); } printf(\"\\n\"); } return 0; } ",
+  "wordCount" : "508",
+  "inLanguage": "en",
+  "datePublished": "2020-04-03T15:33:00Z",
+  "dateModified": "2020-04-03T15:33:00Z",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://zjxjwxk.github.io/posts/pat/advanced_level/a1039/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Xinkang's Blog",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://zjxjwxk.github.io/favicon.ico"
+    }
+  }
+}
+</script>
 </head>
 
 <body class="" id="top">
@@ -75,7 +142,7 @@ Each input file contains one test case. For each case, the first line contains 2
 <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="http://localhost:1313/" accesskey="h" title="Xinkang&#39;s Blog (Alt + H)">Xinkang&#39;s Blog</a>
+            <a href="https://zjxjwxk.github.io/" accesskey="h" title="Xinkang&#39;s Blog (Alt + H)">Xinkang&#39;s Blog</a>
             <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
@@ -101,22 +168,22 @@ Each input file contains one test case. For each case, the first line contains 2
         </div>
         <ul id="menu">
             <li>
-                <a href="http://localhost:1313/archives/" title="Archives">
+                <a href="https://zjxjwxk.github.io/archives/" title="Archives">
                     <span>Archives</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/categories/" title="Categories">
+                <a href="https://zjxjwxk.github.io/categories/" title="Categories">
                     <span>Categories</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/tags/" title="Tags">
+                <a href="https://zjxjwxk.github.io/tags/" title="Tags">
                     <span>Tags</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/search/" title="Search (Alt &#43; /)" accesskey=/>
+                <a href="https://zjxjwxk.github.io/search/" title="Search (Alt &#43; /)" accesskey=/>
                     <span>Search</span>
                 </a>
             </li>
@@ -214,15 +281,15 @@ NON9 0
 
   <footer class="post-footer">
     <ul class="post-tags">
-      <li><a href="http://localhost:1313/tags/pat/">PAT</a></li>
-      <li><a href="http://localhost:1313/tags/stl/">STL</a></li>
+      <li><a href="https://zjxjwxk.github.io/tags/pat/">PAT</a></li>
+      <li><a href="https://zjxjwxk.github.io/tags/stl/">STL</a></li>
     </ul>
   </footer>
 </article>
     </main>
     
 <footer class="footer">
-        <span>&copy; 2024 <a href="http://localhost:1313/">Xinkang&#39;s Blog</a></span> · 
+        <span>&copy; 2024 <a href="https://zjxjwxk.github.io/">Xinkang&#39;s Blog</a></span> · 
 
     <span>
         Powered by

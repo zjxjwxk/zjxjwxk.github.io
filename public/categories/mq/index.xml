@@ -2,27 +2,157 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>MQ on Xinkang&#39;s Blog</title>
-    <link>http://localhost:1313/categories/mq/</link>
+    <link>https://zjxjwxk.github.io/categories/mq/</link>
     <description>Recent content in MQ on Xinkang&#39;s Blog</description>
     <generator>Hugo -- 0.138.0</generator>
     <language>en</language>
     <lastBuildDate>Sat, 16 Nov 2024 01:47:59 +0800</lastBuildDate>
-    <atom:link href="http://localhost:1313/categories/mq/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://zjxjwxk.github.io/categories/mq/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Meet Kafka</title>
-      <link>http://localhost:1313/posts/mq/kafka/getting-started-with-apache-kafka/2.-meet-kafka/</link>
+      <link>https://zjxjwxk.github.io/posts/mq/kafka/getting-started-with-apache-kafka/2.-meet-kafka/</link>
       <pubDate>Sat, 16 Nov 2024 01:47:59 +0800</pubDate>
-      <guid>http://localhost:1313/posts/mq/kafka/getting-started-with-apache-kafka/2.-meet-kafka/</guid>
+      <guid>https://zjxjwxk.github.io/posts/mq/kafka/getting-started-with-apache-kafka/2.-meet-kafka/</guid>
       <description>&lt;h2 id=&#34;kafka-architecture&#34;&gt;Kafka Architecture&lt;/h2&gt;
-&lt;p&gt;&lt;img alt=&#34;image-20241116015015788&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/mq/kafka/getting-started-with-apache-kafka/2.-meet-kafka/images/image-20241116015015788.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;image-20241116015015788&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/mq/kafka/getting-started-with-apache-kafka/2.-meet-kafka/images/image-20241116015015788.png&#34;&gt;&lt;/p&gt;
 &lt;h2 id=&#34;kafka-message&#34;&gt;Kafka Message&lt;/h2&gt;
-&lt;p&gt;&lt;img alt=&#34;image-20241116015252987&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/mq/kafka/getting-started-with-apache-kafka/2.-meet-kafka/images/image-20241116015252987.png&#34;&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;img alt=&#34;image-20241116015252987&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/mq/kafka/getting-started-with-apache-kafka/2.-meet-kafka/images/image-20241116015252987.png&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;deploy-kafka&#34;&gt;Deploy Kafka&lt;/h2&gt;
+&lt;p&gt;Create a docker-compose file &lt;code&gt;docker-compose.yaml&lt;/code&gt; containing 3 Zookeepers, 3 Kafka Brokers, and 1 Kafka REST Proxy:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;---
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;version&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;3&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;services&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;zookeeper-1&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;image&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;confluentinc/cp-zookeeper:7.4.1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;hostname&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;zookeeper-1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;container_name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;zookeeper-1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;volumes&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      - &lt;span style=&#34;color:#ae81ff&#34;&gt;./zookeeper-1_data:/var/lib/zookeeper/data&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      - &lt;span style=&#34;color:#ae81ff&#34;&gt;./zookeeper-1_log:/var/lib/zookeeper/log&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;environment&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;ZOOKEEPER_CLIENT_PORT&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;2181&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;ZOOKEEPER_TICK_TIME&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;2000&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;ZOO_MY_ID&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;ZOO_SERVERS&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;server.1=zookeeper-1:2888:3888;2181 server.2=zookeeper-2:2888:3888;2181 server.3=zookeeper-3:2888:3888;2181&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;zookeeper-2&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;image&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;confluentinc/cp-zookeeper:7.4.1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;hostname&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;zookeeper-2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;container_name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;zookeeper-2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;volumes&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      - &lt;span style=&#34;color:#ae81ff&#34;&gt;./zookeeper-2_data:/var/lib/zookeeper/data&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      - &lt;span style=&#34;color:#ae81ff&#34;&gt;./zookeeper-2_log:/var/lib/zookeeper/log&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;environment&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;ZOOKEEPER_CLIENT_PORT&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;2181&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;ZOOKEEPER_TICK_TIME&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;2000&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;ZOO_MY_ID&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;ZOO_SERVERS&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;server.1=zookeeper-1:2888:3888;2181 server.2=zookeeper-2:2888:3888;2181 server.3=zookeeper-3:2888:3888;2181&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;zookeeper-3&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;image&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;confluentinc/cp-zookeeper:7.4.1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;hostname&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;zookeeper-3&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;container_name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;zookeeper-3&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;volumes&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      - &lt;span style=&#34;color:#ae81ff&#34;&gt;./zookeeper-3_data:/var/lib/zookeeper/data&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      - &lt;span style=&#34;color:#ae81ff&#34;&gt;./zookeeper-3_log:/var/lib/zookeeper/log&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;environment&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;ZOOKEEPER_CLIENT_PORT&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;2181&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;ZOOKEEPER_TICK_TIME&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;2000&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;ZOO_MY_ID&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;ZOO_SERVERS&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;server.1=zookeeper-1:2888:3888;2181 server.2=zookeeper-2:2888:3888;2181 server.3=zookeeper-3:2888:3888;2181&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;broker-1&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;image&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;confluentinc/cp-kafka:7.4.1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;hostname&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;broker-1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;container_name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;broker-1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;volumes&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      - &lt;span style=&#34;color:#ae81ff&#34;&gt;./broker-1-data:/var/lib/kafka/data&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;depends_on&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      - &lt;span style=&#34;color:#ae81ff&#34;&gt;zookeeper-1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      - &lt;span style=&#34;color:#ae81ff&#34;&gt;zookeeper-2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      - &lt;span style=&#34;color:#ae81ff&#34;&gt;zookeeper-3&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;ports&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      - &lt;span style=&#34;color:#ae81ff&#34;&gt;9092&lt;/span&gt;:&lt;span style=&#34;color:#ae81ff&#34;&gt;9092&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      - &lt;span style=&#34;color:#ae81ff&#34;&gt;29092&lt;/span&gt;:&lt;span style=&#34;color:#ae81ff&#34;&gt;29092&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;environment&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;KAFKA_BROKER_ID&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;KAFKA_ZOOKEEPER_CONNECT&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;zookeeper-1:2181&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;KAFKA_ADVERTISED_LISTENERS&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;HOST://localhost:9092,INTERNAL://broker-1:29092&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;KAFKA_LISTENER_SECURITY_PROTOCOL_MAP&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;HOST:PLAINTEXT,INTERNAL:PLAINTEXT&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;KAFKA_INTER_BROKER_LISTENER_NAME&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;INTERNAL&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;KAFKA_SNAPSHOT_TRUST_EMPTY&lt;/span&gt;: &lt;span style=&#34;color:#66d9ef&#34;&gt;true&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;broker-2&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;image&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;confluentinc/cp-kafka:7.4.1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;hostname&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;broker-2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;container_name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;broker-2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;volumes&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      - &lt;span style=&#34;color:#ae81ff&#34;&gt;./broker-2-data:/var/lib/kafka/data&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;depends_on&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      - &lt;span style=&#34;color:#ae81ff&#34;&gt;zookeeper-1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      - &lt;span style=&#34;color:#ae81ff&#34;&gt;zookeeper-2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      - &lt;span style=&#34;color:#ae81ff&#34;&gt;zookeeper-3&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      - &lt;span style=&#34;color:#ae81ff&#34;&gt;broker-1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;ports&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      - &lt;span style=&#34;color:#ae81ff&#34;&gt;9093&lt;/span&gt;:&lt;span style=&#34;color:#ae81ff&#34;&gt;9093&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      - &lt;span style=&#34;color:#ae81ff&#34;&gt;29093&lt;/span&gt;:&lt;span style=&#34;color:#ae81ff&#34;&gt;29093&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;environment&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;KAFKA_BROKER_ID&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;KAFKA_ZOOKEEPER_CONNECT&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;zookeeper-1:2181&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;KAFKA_ADVERTISED_LISTENERS&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;HOST://localhost:9093,INTERNAL://broker-2:29093&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;KAFKA_LISTENER_SECURITY_PROTOCOL_MAP&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;HOST:PLAINTEXT,INTERNAL:PLAINTEXT&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;KAFKA_INTER_BROKER_LISTENER_NAME&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;INTERNAL&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;KAFKA_SNAPSHOT_TRUST_EMPTY&lt;/span&gt;: &lt;span style=&#34;color:#66d9ef&#34;&gt;true&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;broker-3&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;image&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;confluentinc/cp-kafka:7.4.1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;hostname&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;broker-3&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;container_name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;broker-3&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;volumes&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      - &lt;span style=&#34;color:#ae81ff&#34;&gt;./broker-3-data:/var/lib/kafka/data&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;depends_on&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      - &lt;span style=&#34;color:#ae81ff&#34;&gt;zookeeper-1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      - &lt;span style=&#34;color:#ae81ff&#34;&gt;zookeeper-2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      - &lt;span style=&#34;color:#ae81ff&#34;&gt;zookeeper-3&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      - &lt;span style=&#34;color:#ae81ff&#34;&gt;broker-1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      - &lt;span style=&#34;color:#ae81ff&#34;&gt;broker-2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;ports&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      - &lt;span style=&#34;color:#ae81ff&#34;&gt;9094&lt;/span&gt;:&lt;span style=&#34;color:#ae81ff&#34;&gt;9094&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      - &lt;span style=&#34;color:#ae81ff&#34;&gt;29094&lt;/span&gt;:&lt;span style=&#34;color:#ae81ff&#34;&gt;29094&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;environment&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;KAFKA_BROKER_ID&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;KAFKA_ZOOKEEPER_CONNECT&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;zookeeper-1:2181&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;KAFKA_ADVERTISED_LISTENERS&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;HOST://localhost:9094,INTERNAL://broker-3:29094&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;KAFKA_LISTENER_SECURITY_PROTOCOL_MAP&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;HOST:PLAINTEXT,INTERNAL:PLAINTEXT&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;KAFKA_INTER_BROKER_LISTENER_NAME&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;INTERNAL&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;KAFKA_SNAPSHOT_TRUST_EMPTY&lt;/span&gt;: &lt;span style=&#34;color:#66d9ef&#34;&gt;true&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;rest-proxy&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;image&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;confluentinc/cp-kafka-rest:7.4.1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;ports&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      - &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;8082:8082&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;depends_on&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      - &lt;span style=&#34;color:#ae81ff&#34;&gt;zookeeper-1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      - &lt;span style=&#34;color:#ae81ff&#34;&gt;zookeeper-2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      - &lt;span style=&#34;color:#ae81ff&#34;&gt;zookeeper-3&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      - &lt;span style=&#34;color:#ae81ff&#34;&gt;broker-1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      - &lt;span style=&#34;color:#ae81ff&#34;&gt;broker-2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      - &lt;span style=&#34;color:#ae81ff&#34;&gt;broker-3&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;hostname&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;rest-proxy&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;container_name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;rest-proxy&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;environment&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;KAFKA_REST_HOST_NAME&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;rest-proxy&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;KAFKA_REST_BOOTSTRAP_SERVERS&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;broker-1:29092,broker-2:29093,broker-3:29094&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;KAFKA_REST_LISTENERS&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;http://0.0.0.0:8082&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Pull all images and run all composed containers:&lt;/p&gt;</description>
     </item>
     <item>
       <title>Pub-sub System</title>
-      <link>http://localhost:1313/posts/mq/kafka/getting-started-with-apache-kafka/1.-pub-sub-system/</link>
+      <link>https://zjxjwxk.github.io/posts/mq/kafka/getting-started-with-apache-kafka/1.-pub-sub-system/</link>
       <pubDate>Sat, 16 Nov 2024 01:27:59 +0800</pubDate>
-      <guid>http://localhost:1313/posts/mq/kafka/getting-started-with-apache-kafka/1.-pub-sub-system/</guid>
+      <guid>https://zjxjwxk.github.io/posts/mq/kafka/getting-started-with-apache-kafka/1.-pub-sub-system/</guid>
       <description>&lt;h2 id=&#34;we-call&#34;&gt;We Call&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;The entity/app creates a message, a publisher, or a producer.&lt;/li&gt;
@@ -37,7 +167,7 @@
 &lt;li&gt;And has exactly one processing when you only process a message once ensuring it wasn&amp;rsquo;t lost. Of course, this is the holy grail.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;we-had-a-ton-of-other-pubsub-systems-before&#34;&gt;We Had a Ton of Other Pub/Sub Systems Before&lt;/h2&gt;
-&lt;p&gt;&lt;img alt=&#34;image-20241116003710435&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/mq/kafka/getting-started-with-apache-kafka/1.-pub-sub-system/images/image-20241116003710435.png&#34;&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;img alt=&#34;image-20241116003710435&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/mq/kafka/getting-started-with-apache-kafka/1.-pub-sub-system/images/image-20241116003710435.png&#34;&gt;&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

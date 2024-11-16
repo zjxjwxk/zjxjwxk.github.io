@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" dir="auto">
 
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<head><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="noindex, nofollow">
+<meta name="robots" content="index, follow">
 <title>Shiro入门 | Xinkang&#39;s Blog</title>
 <meta name="keywords" content="Security, Auth, Shiro">
 <meta name="description" content="学习目标
@@ -47,16 +47,16 @@ Shiro 认证和授权
 
 测试代码如下（这里先使用 SimpleAccountRealm 作为 Realm）：">
 <meta name="author" content="">
-<link rel="canonical" href="http://localhost:1313/posts/shiro/">
+<link rel="canonical" href="https://zjxjwxk.github.io/posts/shiro/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.d6fcd20a4fb86efa4dfac8ec95da60244cc8871042183da1ef28e3a762ad79c8.css" integrity="sha256-1vzSCk&#43;4bvpN&#43;sjsldpgJEzIhxBCGD2h7yjjp2Ktecg=" rel="preload stylesheet" as="style">
-<link rel="icon" href="http://localhost:1313/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
-<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
-<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
+<link rel="icon" href="https://zjxjwxk.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://zjxjwxk.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://zjxjwxk.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://zjxjwxk.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://zjxjwxk.github.io/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" hreflang="en" href="http://localhost:1313/posts/shiro/">
+<link rel="alternate" hreflang="en" href="https://zjxjwxk.github.io/posts/shiro/">
 <noscript>
     <style>
         #theme-toggle,
@@ -93,7 +93,110 @@ Shiro 认证和授权
         }
 
     </style>
-</noscript>
+</noscript><meta property="og:url" content="https://zjxjwxk.github.io/posts/shiro/">
+  <meta property="og:site_name" content="Xinkang&#39;s Blog">
+  <meta property="og:title" content="Shiro入门">
+  <meta property="og:description" content="学习目标 认识 Shiro 的整体架构，各组件的概念 Shiro 认证，授权的过程 Shiro 自定义的 Realm，Filter Shiro Session 管理 Shiro 缓存管理 Shiro 集成 Spring Shiro 简介 Apache 的强大灵活的开源安全框架 认证、授权、企业会话管理、安全加密 Shiro 与 Spring Security 比较 Shiro 简单、灵活 可脱离 Spring 粒度较粗 Spring Security 复杂、笨重 不可脱离 Spring 粒度更细 Shiro 整体架构 Shiro 认证和授权 认证过程 创建 SecurityManager -&gt; 主体提交认证 -&gt; SecurityManager 认证 -&gt; Authenticator 认证 -&gt; Realm 验证 授权过程 创建 SecurityManager -&gt; 主体提交授权 -&gt; SecurityManager 授权 -&gt; Authorizer 授权 -&gt; Realm 获取角色权限数据 测试代码如下（这里先使用 SimpleAccountRealm 作为 Realm）：">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2021-03-19T21:15:00+00:00">
+    <meta property="article:modified_time" content="2021-03-19T21:15:00+00:00">
+    <meta property="article:tag" content="Security">
+    <meta property="article:tag" content="Auth">
+    <meta property="article:tag" content="Shiro">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Shiro入门">
+<meta name="twitter:description" content="学习目标
+
+认识 Shiro 的整体架构，各组件的概念
+Shiro 认证，授权的过程
+Shiro 自定义的 Realm，Filter
+Shiro Session 管理
+Shiro 缓存管理
+Shiro 集成 Spring
+
+Shiro 简介
+
+Apache 的强大灵活的开源安全框架
+认证、授权、企业会话管理、安全加密
+
+Shiro 与 Spring Security 比较
+Shiro
+
+简单、灵活
+可脱离 Spring
+粒度较粗
+
+Spring Security
+
+复杂、笨重
+不可脱离 Spring
+粒度更细
+
+Shiro 整体架构
+
+Shiro 认证和授权
+认证过程
+
+创建 SecurityManager -&gt; 主体提交认证 -&gt; SecurityManager 认证 -&gt; Authenticator 认证 -&gt; Realm 验证
+
+授权过程
+
+创建 SecurityManager -&gt; 主体提交授权 -&gt; SecurityManager 授权 -&gt; Authorizer 授权 -&gt; Realm 获取角色权限数据
+
+测试代码如下（这里先使用 SimpleAccountRealm 作为 Realm）：">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://zjxjwxk.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Shiro入门",
+      "item": "https://zjxjwxk.github.io/posts/shiro/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Shiro入门",
+  "name": "Shiro入门",
+  "description": "学习目标 认识 Shiro 的整体架构，各组件的概念 Shiro 认证，授权的过程 Shiro 自定义的 Realm，Filter Shiro Session 管理 Shiro 缓存管理 Shiro 集成 Spring Shiro 简介 Apache 的强大灵活的开源安全框架 认证、授权、企业会话管理、安全加密 Shiro 与 Spring Security 比较 Shiro 简单、灵活 可脱离 Spring 粒度较粗 Spring Security 复杂、笨重 不可脱离 Spring 粒度更细 Shiro 整体架构 Shiro 认证和授权 认证过程 创建 SecurityManager -\u0026gt; 主体提交认证 -\u0026gt; SecurityManager 认证 -\u0026gt; Authenticator 认证 -\u0026gt; Realm 验证 授权过程 创建 SecurityManager -\u0026gt; 主体提交授权 -\u0026gt; SecurityManager 授权 -\u0026gt; Authorizer 授权 -\u0026gt; Realm 获取角色权限数据 测试代码如下（这里先使用 SimpleAccountRealm 作为 Realm）：\n",
+  "keywords": [
+    "Security", "Auth", "Shiro"
+  ],
+  "articleBody": "学习目标 认识 Shiro 的整体架构，各组件的概念 Shiro 认证，授权的过程 Shiro 自定义的 Realm，Filter Shiro Session 管理 Shiro 缓存管理 Shiro 集成 Spring Shiro 简介 Apache 的强大灵活的开源安全框架 认证、授权、企业会话管理、安全加密 Shiro 与 Spring Security 比较 Shiro 简单、灵活 可脱离 Spring 粒度较粗 Spring Security 复杂、笨重 不可脱离 Spring 粒度更细 Shiro 整体架构 Shiro 认证和授权 认证过程 创建 SecurityManager -\u003e 主体提交认证 -\u003e SecurityManager 认证 -\u003e Authenticator 认证 -\u003e Realm 验证 授权过程 创建 SecurityManager -\u003e 主体提交授权 -\u003e SecurityManager 授权 -\u003e Authorizer 授权 -\u003e Realm 获取角色权限数据 测试代码如下（这里先使用 SimpleAccountRealm 作为 Realm）：\npublic class AuthenticationTest { private final SimpleAccountRealm simpleAccountRealm = new SimpleAccountRealm(); @Before public void addUser() { simpleAccountRealm.addAccount(\"Wxk\", \"123456\", \"admin\", \"user\"); } @Test public void testAuthentication() { // 1. 构建SecurityManager环境 DefaultSecurityManager defaultSecurityManager = new DefaultSecurityManager(); // 2. 给SecurityManager设置Realm defaultSecurityManager.setRealm(simpleAccountRealm); // 3. 给SecurityUtils设置SecurityManager SecurityUtils.setSecurityManager(defaultSecurityManager); // 4. 获取Subject Subject subject = SecurityUtils.getSubject(); // 5. Subject提交认证请求 UsernamePasswordToken token = new UsernamePasswordToken(\"Wxk\", \"123456\"); subject.login(token); /* 认证 */ System.out.println(\"isAuthenticated: \" + subject.isAuthenticated()); /* 授权 */ subject.checkRoles(\"admin\", \"user\"); } } Realm 内置 Realm IniRealm JdbcRealm 自定义 Realm IniRealm 在 resources 下创建一个 user.ini 文件： [users] Wxk=123456,admin [roles] admin=user:delete 使用 IniRealm 作为 Realm 测试代码如下：\npublic class IniRealmTest { private final IniRealm iniRealm = new IniRealm(\"classpath:user.ini\"); @Test public void testAuthentication() { // 1. 构建SecurityManager环境 DefaultSecurityManager defaultSecurityManager = new DefaultSecurityManager(); // 2. 给SecurityManager设置Realm defaultSecurityManager.setRealm(iniRealm); // 3. 给SecurityUtils设置SecurityManager SecurityUtils.setSecurityManager(defaultSecurityManager); // 4. 获取Subject Subject subject = SecurityUtils.getSubject(); // 5. Subject提交认证请求 UsernamePasswordToken token = new UsernamePasswordToken(\"Wxk\", \"123456\"); subject.login(token); /* 认证 */ System.out.println(\"isAuthenticated: \" + subject.isAuthenticated()); /* 授权 */ // 检查角色授权 subject.checkRole(\"admin\"); // 检查权限授权 subject.checkPermission(\"user:delete\"); } } JdbcRealm 分别创建数据库表：用户表 test_user, 用户角色表 test_user_roles, 用户权限表 test_users_permissions。 给 JdbcRealm 设置数据源 打开权限查询开关 给 JdbcRealm 自定义认证、角色和权限SQL查询语句 使用 JdbcRealm 作为 Realm 数据库表如下：\n测试代码如下：\npublic class JdbcRealmTest { private final DruidDataSource dataSource = new DruidDataSource(); private final JdbcRealm jdbcRealm = new JdbcRealm(); @Test public void testAuthentication() { // 设置数据源 dataSource.setUrl(\"jdbc:mysql://localhost:3306/test\"); dataSource.setUsername(\"root\"); dataSource.setPassword(\"123456\"); jdbcRealm.setDataSource(dataSource); // 打开权限查询开关 jdbcRealm.setPermissionsLookupEnabled(true); // 自定义认证查询SQL String AuthenticationSQL = \"SELECT password FROM test_user WHERE username = ?\"; jdbcRealm.setAuthenticationQuery(AuthenticationSQL); // 自定义角色查询SQL String rolesSQL = \"SELECT role_name FROM test_user_roles WHERE username = ?\"; jdbcRealm.setUserRolesQuery(rolesSQL); // 自定义权限查询SQL String permissionsSQL = \"SELECT permission FROM test_roles_permissions WHERE role_name = ?\"; jdbcRealm.setPermissionsQuery(permissionsSQL); // 1. 构建SecurityManager环境 DefaultSecurityManager defaultSecurityManager = new DefaultSecurityManager(); // 2. 给SecurityManager设置Realm defaultSecurityManager.setRealm(jdbcRealm); // 3. 给SecurityUtils设置SecurityManager SecurityUtils.setSecurityManager(defaultSecurityManager); // 4. 获取Subject Subject subject = SecurityUtils.getSubject(); // 5. Subject提交认证请求 UsernamePasswordToken token = new UsernamePasswordToken(\"Wxk\", \"123456\"); subject.login(token); /* 认证 */ System.out.println(\"isAuthenticated: \" + subject.isAuthenticated()); /* 授权 */ // 检查角色授权 subject.checkRoles(\"admin\", \"user\"); // 检查权限授权 subject.checkPermission(\"user:delete\"); } } 自定义 Realm 自定义 MyRealm 类继承自 AuthorizingRealm，重写 doGetAuthenticationInfo 和 doGetAuthorizationInfo 方法来返回认证和授权验证信息： public class MyRealm extends AuthorizingRealm { /** * 模拟数据库或缓存 */ Map\u003cString, String\u003e userMap = new HashMap\u003cString, String\u003e(16){{ put(\"Wxk\", \"123456\"); }}; { // 设置Realm名称 super.setName(\"myRealm\"); } @Override protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) { // 1. 获得用户名 String username = (String) principals.getPrimaryPrincipal(); // 2. 通过用户名到数据库或缓存中获取角色集合和权限集合 Set\u003cString\u003e roles = getRolesByUsername(username); Set\u003cString\u003e permissions = getPermissionsByUsername(username); // 3. 给AuthorizationInfo设置角色集合和权限结合 SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo(); simpleAuthorizationInfo.setRoles(roles); simpleAuthorizationInfo.setStringPermissions(permissions); // 4. 返回AuthorizationInfo return simpleAuthorizationInfo; } @Override protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException { // 1. 从Subject传来的认证信息中获得用户名 String username = (String) token.getPrincipal(); // 2. 通过用户名到数据库中获取凭证 String password = getPasswordByUsername(username); if (password == null) { return null; } // 3. 返回AuthenticationInfo（将会和token进行匹配） return new SimpleAuthenticationInfo(username, password, getName()); } /** * 模拟数据库查询密码 * @param username 用户名 * @return 密码 */ private String getPasswordByUsername(String username) { return userMap.get(username); } /** * 模拟数据库或缓存查询角色集合 * @param username 用户名 * @return 角色集合 */ private Set\u003cString\u003e getRolesByUsername(String username) { Set\u003cString\u003e roles = new HashSet\u003cString\u003e(); roles.add(\"admin\"); roles.add(\"user\"); return roles; } /** * 模拟数据库或缓存查询权限集合 * @param username 用户名 * @return 权限集合 */ private Set\u003cString\u003e getPermissionsByUsername(String username) { Set\u003cString\u003e permissions = new HashSet\u003cString\u003e(); permissions.add(\"user:delete\"); return permissions; } } 测试代码： public class MyRealmTest { private final MyRealm myRealm = new MyRealm(); @Test public void testAuthentication() { // 1. 构建SecurityManager环境 DefaultSecurityManager defaultSecurityManager = new DefaultSecurityManager(); // 2. 给SecurityManager设置Realm defaultSecurityManager.setRealm(myRealm); // 3. 给SecurityUtils设置SecurityManager SecurityUtils.setSecurityManager(defaultSecurityManager); // 4. 获取Subject Subject subject = SecurityUtils.getSubject(); // 5. Subject提交认证请求 UsernamePasswordToken token = new UsernamePasswordToken(\"Wxk\", \"123456\"); subject.login(token); /* 认证 */ System.out.println(\"isAuthenticated: \" + subject.isAuthenticated()); /* 授权 */ // 检查角色授权 subject.checkRoles(\"admin\", \"user\"); // 检查权限授权 subject.checkPermission(\"user:delete\"); } } Shiro 加密 Shiro 散列配置 HashedCredentialsMatcher 自定义 Realm 中使用散列 盐的使用 数据库中的密码加盐后 md5 哈希加密。 在 Realm 返回 AuthenticationInfo 前给其设置盐值： SimpleAuthenticationInfo simpleAuthenticationInfo = new SimpleAuthenticationInfo(username, password, getName()); // 设置盐值 simpleAuthenticationInfo.setCredentialsSalt(ByteSource.Util.bytes(\"salt\")); return simpleAuthenticationInfo; 进行认证时，给 Realm 设置 HashedCredentialsMatcher。 // 给Realm设置HashedCredentialsMatcher HashedCredentialsMatcher matcher = new HashedCredentialsMatcher(); // 哈希算法 matcher.setHashAlgorithmName(\"md5\"); // 哈希次数 matcher.setHashIterations(1); myRealm.setCredentialsMatcher(matcher); 完整 MyRealm 代码：\npublic class MyRealm extends AuthorizingRealm { /** * 模拟数据库或缓存 */ Map\u003cString, String\u003e userMap = new HashMap\u003cString, String\u003e(16){{ put(\"Wxk\", \"f51703256a38e6bab3d9410a070c32ea\"); }}; { // 设置Realm名称 super.setName(\"myRealm\"); } @Override protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) { // 1. 获得用户名 String username = (String) principals.getPrimaryPrincipal(); // 2. 通过用户名到数据库或缓存中获取角色集合和权限集合 Set\u003cString\u003e roles = getRolesByUsername(username); Set\u003cString\u003e permissions = getPermissionsByUsername(username); // 3. 给AuthorizationInfo设置角色集合和权限结合 SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo(); simpleAuthorizationInfo.setRoles(roles); simpleAuthorizationInfo.setStringPermissions(permissions); // 4. 返回AuthorizationInfo return simpleAuthorizationInfo; } @Override protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException { // 1. 从Subject传来的认证信息中获得用户名 String username = (String) token.getPrincipal(); // 2. 通过用户名到数据库中获取凭证 String password = getPasswordByUsername(username); if (password == null) { return null; } // 3. 返回AuthenticationInfo（将会和token进行匹配） SimpleAuthenticationInfo simpleAuthenticationInfo = new SimpleAuthenticationInfo(username, password, getName()); // 设置盐值 simpleAuthenticationInfo.setCredentialsSalt(ByteSource.Util.bytes(\"salt\")); return simpleAuthenticationInfo; } /** * 模拟数据库查询密码 * @param username 用户名 * @return 密码 */ private String getPasswordByUsername(String username) { return userMap.get(username); } /** * 模拟数据库或缓存查询角色集合 * @param username 用户名 * @return 角色集合 */ private Set\u003cString\u003e getRolesByUsername(String username) { Set\u003cString\u003e roles = new HashSet\u003cString\u003e(); roles.add(\"admin\"); roles.add(\"user\"); return roles; } /** * 模拟数据库或缓存查询权限集合 * @param username 用户名 * @return 权限集合 */ private Set\u003cString\u003e getPermissionsByUsername(String username) { Set\u003cString\u003e permissions = new HashSet\u003cString\u003e(); permissions.add(\"user:delete\"); return permissions; } public static void main(String[] args) { Md5Hash md5Hash = new Md5Hash(\"123456\", \"salt\"); System.out.println(md5Hash); } } 完整测试代码：\npublic class MyRealmTest { private final MyRealm myRealm = new MyRealm(); @Test public void testAuthentication() { // 1. 构建SecurityManager环境 DefaultSecurityManager defaultSecurityManager = new DefaultSecurityManager(); // 2. 给SecurityManager设置Realm defaultSecurityManager.setRealm(myRealm); // 给Realm设置HashedCredentialsMatcher HashedCredentialsMatcher matcher = new HashedCredentialsMatcher(); // 哈希算法 matcher.setHashAlgorithmName(\"md5\"); // 哈希次数 matcher.setHashIterations(1); myRealm.setCredentialsMatcher(matcher); // 3. 给SecurityUtils设置SecurityManager SecurityUtils.setSecurityManager(defaultSecurityManager); // 4. 获取Subject Subject subject = SecurityUtils.getSubject(); // 5. Subject提交认证请求 UsernamePasswordToken token = new UsernamePasswordToken(\"Wxk\", \"123456\"); subject.login(token); /* 认证 */ System.out.println(\"isAuthenticated: \" + subject.isAuthenticated()); /* 授权 */ // 检查角色授权 subject.checkRoles(\"admin\", \"user\"); // 检查权限授权 subject.checkPermission(\"user:delete\"); } } Shiro 过滤器 anon, authBasic, authc, user, logout perms, roles, ssl, port 自定义 Filter 如创建 RolesOrFilter 继承自 AuthorizationFilter，过滤条件为满足 roles 集合其中任何一个即可：：\npublic class RolesOrFilter extends AuthorizationFilter { @Override protected boolean isAccessAllowed(javax.servlet.ServletRequest servletRequest, javax.servlet.ServletResponse servletResponse, Object o) throws Exception { Subject subject = getSubject(servletRequest, servletResponse); String[] roles = (String[]) o; if (roles == null || roles.length == 0) { return true; } for (String role : roles) { if (subject.hasRole(role)) { return true; } } return false; } } Shiro 会话管理 SessionManager、SessionDAO Redis 实现 Session 共享 1. SessionDAO 实现自定义的 SessionDao 继承自 AbstractSessionDAO：\npublic class RedisSessionDao extends AbstractSessionDAO { @Resource private JedisUtil jedisUtil; private final static String SHIRO_SESSION_PREFIX = \"session:\"; private byte[] getKey(String key) { return (SHIRO_SESSION_PREFIX + key).getBytes(); } private void saveSession(Session session) { if (session != null \u0026\u0026 session.getId() != null) { byte[] key = getKey(session.getId().toString()); byte[] value = SerializationUtils.serialize(session); jedisUtil.set(key, value); jedisUtil.expire(key, 600); } } @Override protected Serializable doCreate(Session session) { Serializable sessionId = generateSessionId(session); assignSessionId(session, sessionId); saveSession(session); return sessionId; } @Override protected Session doReadSession(Serializable sessionId) { if (sessionId == null) { return null; } byte[] key = getKey(sessionId.toString()); byte[] value = jedisUtil.get(key); return (Session) SerializationUtils.deserialize(value); } @Override public void update(Session session) throws UnknownSessionException { saveSession(session); } @Override public void delete(Session session) { if (session == null || session.getId() == null) { return; } byte[] key = getKey(session.getId().toString()); jedisUtil.del(key); } @Override public Collection\u003cSession\u003e getActiveSessions() { Set\u003cbyte[]\u003e keys = jedisUtil.keys(SHIRO_SESSION_PREFIX); Set\u003cSession\u003e sessions = new HashSet\u003c\u003e(); if (CollectionUtils.isEmpty(keys)) { return sessions; } for (byte[] key : keys) { Session session = (Session) SerializationUtils.deserialize(jedisUtil.get(key)); sessions.add(session); } return sessions; } } 2. SessionManager 实现自定义的 SessionManager 继承自 DefaultSessionManager：\npublic class MySessionManager extends DefaultWebSessionManager { @Override protected Session retrieveSession(SessionKey sessionKey) throws UnknownSessionException { Serializable sessionId = getSessionId(sessionKey); if (sessionId == null) { return null; } ServletRequest request = null; if (sessionKey instanceof WebSessionKey) { request = ((WebSessionKey) sessionKey).getServletRequest(); } Session session = null; if (request != null) { // 先尝试从request中获取，以减少从redis中获取的次数 session = (Session) request.getAttribute(sessionId.toString()); // 若从request获取不到，再按照自己重写的readSession()方法的方式获取，并存入request if (session == null) { session = super.retrieveSession(sessionKey); request.setAttribute(sessionId.toString(), session); } } if (session == null) { String msg = \"Could not find session with ID [\" + sessionId + \"]\"; throw new UnknownSessionException(msg); } return session; } } 给 securityManager 设置 sessionManager。 Shiro 缓存管理 CacheManager、Cache Redis 实现 CacheManager 1. RedisCache 自定义 RedisCache 继承自 Cache：\npublic class RedisCache\u003cK, V\u003e implements Cache\u003cK, V\u003e { @Resource private JedisUtil jedisUtil; private final static String CACHE_PREFIX = \"cache:\"; private byte[] getKey(K k) { if (k instanceof String) { return (CACHE_PREFIX + k).getBytes(); } return SerializationUtils.serialize(k); } @Override public V get(K k) throws CacheException { byte[] value = jedisUtil.get(getKey(k)); if (value != null) { return (V) SerializationUtils.deserialize(value); } return null; } @Override public V put(K k, V v) throws CacheException { byte[] key = getKey(k); byte[] value = SerializationUtils.serialize(v); jedisUtil.set(key, value); jedisUtil.expire(key, 600); return v; } @Override public V remove(K k) throws CacheException { byte[] key = getKey(k); byte[] value = jedisUtil.get(key); jedisUtil.del(key); if (value != null) { return (V) SerializationUtils.deserialize(value); } return null; } @Override public void clear() throws CacheException { } @Override public int size() { return 0; } @Override public Set\u003cK\u003e keys() { return null; } @Override public Collection\u003cV\u003e values() { return null; } } 2. RedisCacheManager 自定义 RedisCacheManager 继承自 CacheManager：\npublic class RedisCacheManager implements CacheManager { @Resource private RedisCache redisCache; @Override public \u003cK, V\u003e Cache\u003cK, V\u003e getCache(String s) throws CacheException { return redisCache; } } 给 securityManager 设置 cacheManager。 Shiro RememberMe 配置 Bean：CookieRememberMeManager 和 SimpleCookie。 设置 CookieRememberMeManager 的 cookie 为 SimpleCookie。 给 securityManager 设置 rememberMeManager。 提交认证前，设置 rememberMe。 token.setRememberMe(true); subject.login(token); ",
+  "wordCount" : "1546",
+  "inLanguage": "en",
+  "datePublished": "2021-03-19T21:15:00Z",
+  "dateModified": "2021-03-19T21:15:00Z",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://zjxjwxk.github.io/posts/shiro/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Xinkang's Blog",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://zjxjwxk.github.io/favicon.ico"
+    }
+  }
+}
+</script>
 </head>
 
 <body class="" id="top">
@@ -111,7 +214,7 @@ Shiro 认证和授权
 <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="http://localhost:1313/" accesskey="h" title="Xinkang&#39;s Blog (Alt + H)">Xinkang&#39;s Blog</a>
+            <a href="https://zjxjwxk.github.io/" accesskey="h" title="Xinkang&#39;s Blog (Alt + H)">Xinkang&#39;s Blog</a>
             <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
@@ -137,22 +240,22 @@ Shiro 认证和授权
         </div>
         <ul id="menu">
             <li>
-                <a href="http://localhost:1313/archives/" title="Archives">
+                <a href="https://zjxjwxk.github.io/archives/" title="Archives">
                     <span>Archives</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/categories/" title="Categories">
+                <a href="https://zjxjwxk.github.io/categories/" title="Categories">
                     <span>Categories</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/tags/" title="Tags">
+                <a href="https://zjxjwxk.github.io/tags/" title="Tags">
                     <span>Tags</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/search/" title="Search (Alt &#43; /)" accesskey=/>
+                <a href="https://zjxjwxk.github.io/search/" title="Search (Alt &#43; /)" accesskey=/>
                     <span>Search</span>
                 </a>
             </li>
@@ -860,16 +963,16 @@ Shiro 认证和授权
 
   <footer class="post-footer">
     <ul class="post-tags">
-      <li><a href="http://localhost:1313/tags/security/">Security</a></li>
-      <li><a href="http://localhost:1313/tags/auth/">Auth</a></li>
-      <li><a href="http://localhost:1313/tags/shiro/">Shiro</a></li>
+      <li><a href="https://zjxjwxk.github.io/tags/security/">Security</a></li>
+      <li><a href="https://zjxjwxk.github.io/tags/auth/">Auth</a></li>
+      <li><a href="https://zjxjwxk.github.io/tags/shiro/">Shiro</a></li>
     </ul>
   </footer>
 </article>
     </main>
     
 <footer class="footer">
-        <span>&copy; 2024 <a href="http://localhost:1313/">Xinkang&#39;s Blog</a></span> · 
+        <span>&copy; 2024 <a href="https://zjxjwxk.github.io/">Xinkang&#39;s Blog</a></span> · 
 
     <span>
         Powered by

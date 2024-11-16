@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" dir="auto">
 
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<head><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="noindex, nofollow">
+<meta name="robots" content="index, follow">
 <title>微服务容器化系列（1）：服务编排前奏 | Xinkang&#39;s Blog</title>
 <meta name="keywords" content="微服务架构, Docker">
 <meta name="description" content="服务 Docker 化
@@ -34,16 +34,16 @@ docker build -t user:latest .
 编写 build 脚本
 在和 Dockerfile 同一目录下，创建一个 build.sh 脚本，用于打包和构建 Docker 镜像：">
 <meta name="author" content="">
-<link rel="canonical" href="http://localhost:1313/posts/docker/docker-&#43;-k8s-%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%AE%B9%E5%99%A8%E5%8C%96/1.-%E6%9C%8D%E5%8A%A1%E7%BC%96%E6%8E%92%E5%89%8D%E5%A5%8F/">
+<link rel="canonical" href="https://zjxjwxk.github.io/posts/docker/docker-&#43;-k8s-%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%AE%B9%E5%99%A8%E5%8C%96/1.-%E6%9C%8D%E5%8A%A1%E7%BC%96%E6%8E%92%E5%89%8D%E5%A5%8F/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.d6fcd20a4fb86efa4dfac8ec95da60244cc8871042183da1ef28e3a762ad79c8.css" integrity="sha256-1vzSCk&#43;4bvpN&#43;sjsldpgJEzIhxBCGD2h7yjjp2Ktecg=" rel="preload stylesheet" as="style">
-<link rel="icon" href="http://localhost:1313/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
-<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
-<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
+<link rel="icon" href="https://zjxjwxk.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://zjxjwxk.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://zjxjwxk.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://zjxjwxk.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://zjxjwxk.github.io/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" hreflang="en" href="http://localhost:1313/posts/docker/docker-&#43;-k8s-%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%AE%B9%E5%99%A8%E5%8C%96/1.-%E6%9C%8D%E5%8A%A1%E7%BC%96%E6%8E%92%E5%89%8D%E5%A5%8F/">
+<link rel="alternate" hreflang="en" href="https://zjxjwxk.github.io/posts/docker/docker-&#43;-k8s-%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%AE%B9%E5%99%A8%E5%8C%96/1.-%E6%9C%8D%E5%8A%A1%E7%BC%96%E6%8E%92%E5%89%8D%E5%A5%8F/">
 <noscript>
     <style>
         #theme-toggle,
@@ -80,7 +80,100 @@ docker build -t user:latest .
         }
 
     </style>
-</noscript>
+</noscript><meta property="og:url" content="https://zjxjwxk.github.io/posts/docker/docker-&#43;-k8s-%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%AE%B9%E5%99%A8%E5%8C%96/1.-%E6%9C%8D%E5%8A%A1%E7%BC%96%E6%8E%92%E5%89%8D%E5%A5%8F/">
+  <meta property="og:site_name" content="Xinkang&#39;s Blog">
+  <meta property="og:title" content="微服务容器化系列（1）：服务编排前奏">
+  <meta property="og:description" content="服务 Docker 化 修改项目配置 由于镜像运行时 MySQL 数据库所在的主机地址是动态的，所以将项目中的 MySQL 数据库地址和 Zookeeper 注册中心地址配置为动态变量：
+spring: dubbo: registry: zookeeper://${zk.address}:2181 datasource: url: jdbc:mysql://{mysql.address}:3306/cinema?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=utf8&amp;serverTimezone=GMT%2B8 获取 Java 镜像 docker pull openjdk:8-jre 打包 Maven 项目 在项目根目录下，执行 Maven 的清除和打包命令（跳过测试）：
+mvn clean &amp;&amp; mvn package -Dmaven.test.skip=true 这样就会在 target 目录下生成 jar 包（Spring Boot 项目）。
+编写 Dockerfile 在 user 子模块的根目录下，创建 Dockerfile 文件，并编辑如下，Dockerfile 文件用于构建 Docker 镜像：
+FROM openjdk:8-jre MAINTAINER zjxjwxk zjxjwxk@gmail.com COPY target/user.jar /user.jar ENTRYPOINT [&#34;java&#34;, &#34;-jar&#34;, &#34;/user.jar&#34;] 构建项目 Docker 镜像 docker build -t user:latest . 编写 build 脚本 在和 Dockerfile 同一目录下，创建一个 build.sh 脚本，用于打包和构建 Docker 镜像：">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2020-06-04T23:15:00+00:00">
+    <meta property="article:modified_time" content="2020-06-04T23:15:00+00:00">
+    <meta property="article:tag" content="微服务架构">
+    <meta property="article:tag" content="Docker">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="微服务容器化系列（1）：服务编排前奏">
+<meta name="twitter:description" content="服务 Docker 化
+修改项目配置
+由于镜像运行时 MySQL 数据库所在的主机地址是动态的，所以将项目中的 MySQL 数据库地址和 Zookeeper 注册中心地址配置为动态变量：
+spring: 
+	dubbo:
+		registry: zookeeper://${zk.address}:2181
+	datasource:
+		url: jdbc:mysql://{mysql.address}:3306/cinema?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=utf8&amp;serverTimezone=GMT%2B8
+获取 Java 镜像
+docker pull openjdk:8-jre
+打包 Maven 项目
+在项目根目录下，执行 Maven 的清除和打包命令（跳过测试）：
+mvn clean &amp;&amp; mvn package -Dmaven.test.skip=true
+这样就会在 target 目录下生成 jar 包（Spring Boot 项目）。
+编写 Dockerfile
+在 user 子模块的根目录下，创建 Dockerfile 文件，并编辑如下，Dockerfile 文件用于构建 Docker 镜像：
+FROM openjdk:8-jre
+MAINTAINER zjxjwxk zjxjwxk@gmail.com
+
+COPY target/user.jar /user.jar
+
+ENTRYPOINT [&#34;java&#34;, &#34;-jar&#34;, &#34;/user.jar&#34;]
+构建项目 Docker 镜像
+docker build -t user:latest .
+编写 build 脚本
+在和 Dockerfile 同一目录下，创建一个 build.sh 脚本，用于打包和构建 Docker 镜像：">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://zjxjwxk.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "微服务容器化系列（1）：服务编排前奏",
+      "item": "https://zjxjwxk.github.io/posts/docker/docker-+-k8s-%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%AE%B9%E5%99%A8%E5%8C%96/1.-%E6%9C%8D%E5%8A%A1%E7%BC%96%E6%8E%92%E5%89%8D%E5%A5%8F/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "微服务容器化系列（1）：服务编排前奏",
+  "name": "微服务容器化系列（1）：服务编排前奏",
+  "description": "服务 Docker 化 修改项目配置 由于镜像运行时 MySQL 数据库所在的主机地址是动态的，所以将项目中的 MySQL 数据库地址和 Zookeeper 注册中心地址配置为动态变量：\nspring: dubbo: registry: zookeeper://${zk.address}:2181 datasource: url: jdbc:mysql://{mysql.address}:3306/cinema?autoReconnect=true\u0026amp;useUnicode=true\u0026amp;characterEncoding=utf8\u0026amp;serverTimezone=GMT%2B8 获取 Java 镜像 docker pull openjdk:8-jre 打包 Maven 项目 在项目根目录下，执行 Maven 的清除和打包命令（跳过测试）：\nmvn clean \u0026amp;\u0026amp; mvn package -Dmaven.test.skip=true 这样就会在 target 目录下生成 jar 包（Spring Boot 项目）。\n编写 Dockerfile 在 user 子模块的根目录下，创建 Dockerfile 文件，并编辑如下，Dockerfile 文件用于构建 Docker 镜像：\nFROM openjdk:8-jre MAINTAINER zjxjwxk zjxjwxk@gmail.com COPY target/user.jar /user.jar ENTRYPOINT [\u0026#34;java\u0026#34;, \u0026#34;-jar\u0026#34;, \u0026#34;/user.jar\u0026#34;] 构建项目 Docker 镜像 docker build -t user:latest . 编写 build 脚本 在和 Dockerfile 同一目录下，创建一个 build.sh 脚本，用于打包和构建 Docker 镜像：\n",
+  "keywords": [
+    "微服务架构", "Docker"
+  ],
+  "articleBody": "服务 Docker 化 修改项目配置 由于镜像运行时 MySQL 数据库所在的主机地址是动态的，所以将项目中的 MySQL 数据库地址和 Zookeeper 注册中心地址配置为动态变量：\nspring: dubbo: registry: zookeeper://${zk.address}:2181 datasource: url: jdbc:mysql://{mysql.address}:3306/cinema?autoReconnect=true\u0026useUnicode=true\u0026characterEncoding=utf8\u0026serverTimezone=GMT%2B8 获取 Java 镜像 docker pull openjdk:8-jre 打包 Maven 项目 在项目根目录下，执行 Maven 的清除和打包命令（跳过测试）：\nmvn clean \u0026\u0026 mvn package -Dmaven.test.skip=true 这样就会在 target 目录下生成 jar 包（Spring Boot 项目）。\n编写 Dockerfile 在 user 子模块的根目录下，创建 Dockerfile 文件，并编辑如下，Dockerfile 文件用于构建 Docker 镜像：\nFROM openjdk:8-jre MAINTAINER zjxjwxk zjxjwxk@gmail.com COPY target/user.jar /user.jar ENTRYPOINT [\"java\", \"-jar\", \"/user.jar\"] 构建项目 Docker 镜像 docker build -t user:latest . 编写 build 脚本 在和 Dockerfile 同一目录下，创建一个 build.sh 脚本，用于打包和构建 Docker 镜像：\nmvn clean \u0026\u0026 mvn package -Dmaven.test.skip=true docker build -t user:latest . 启动镜像容器 docker run -it user:latest --mysql.address=172.20.10.3 --zk.address=172.20.10.3 注意：此处 172.20.10.3 为我的本机地址，可通过 ifconfig 查看（不可为 localhost 或 127.0.0.1，因为容器中的网络和本机是隔离的）。\nDocker 下的服务通讯 Docker 容器之间的通讯有三种方法：\n通过容器的 IP 和端口直接访问（不稳定，容器在每次重启时 IP 可能发生变化） 通过主机和容器的端口映射来访问 使用 Docker 的 link 机制，通过名字来访问 对于微服务之间，我们使用第 3 种方式；对于依赖的基础环境，如 MySQL、Zookeeper，我们使用第 2 种方式。\n建立服务之间的 link 关系 创建 Docker Compose Compose 是用于定义和运行多容器 Docker 应用程序的工具。通过 Compose，您可以使用 YML 文件来配置应用程序需要的所有服务。然后，使用一个命令，就可以从 YML 文件配置中创建并启动所有服务。\n在项目根目录创建一个 docker-compose.yml 文件，编辑如下：\nversion: '1' services: cinema-user: image: cinema-user:latest command: - \"--mysql.address=172.20.10.3 --zk.address=172.20.10.3\" cinema-film: image: cinema-film:latest command: - \"--mysql.address=172.20.10.3 --zk.address=172.20.10.3\" cinema-cinema: image: cinema-cinema:latest command: - \"--mysql.address=172.20.10.3 --zk.address=172.20.10.3\" cinema-order: image: cinema-order:latest command: - \"--mysql.address=172.20.10.3 --zk.address=172.20.10.3\" links: - cinema-cinema cinema-alipay: image: cinema-alipay:latest command: - \"--mysql.address=172.20.10.3 --zk.address=172.20.10.3\" links: - cinema-order cinema-gateway: image: cinema-gateway:latest command: - \"--mysql.address=172.20.10.3 --zk.address=172.20.10.3\" links: - cinema-user - cinema-film - cinema-cinema - cinema-order - cinema-alipay ports: - 8081:8081 其中，services 为所有需要构建的服务，command 为启动时添加的命令，links 为该服务依赖的服务。\n执行 docker-compose 在有 docker-compose.sh 的目录下，\n创建并运行所有容器：\ndocker-compose up -d 关闭并删除所有容器：\ndocker-compose down 镜像仓库 上传镜像 登录 Docker，执行以下命令，并输入 Docker Hub 的账号密码：\ndocker login 将现有的镜像打个 tag：\ndocker tag cinema-user:latest zjxjwxk/cinema-user:latest 将该镜像 push 到 Docker Hub：\ndocker push zjxjwxk/cinema-user:latest 或是将镜像从 Docker Hub pull 下来：\ndocker pull zjxjwxk/cinema-user:latest 使用 harbor 从 https://github.com/goharbor/harbor/releases 下载 harbor-offline-installer，解压之。\n配置 harbor.yml 配置其目录下的 harbor.yml ：\n将其中的 hostname 为 hub.xxx.com（xxx 为你的域名）。将 http 的 port 修改为 8080（由于 MacOS 80 端口不对外开放）。\n如果是 MacOS 系统，还需要将其中本机 host 相关的目录由根目录 / 改为 /Users/xxx/ (xxx 为你当前系统的用户名)，避免挂载权限不足的问题。\n# Configuration file of Harbor # The IP address or hostname to access admin UI and registry service. # DO NOT use localhost or 127.0.0.1, because Harbor needs to be accessed by external clients. hostname: hub.zjxjwxk.com # http related config http: # port for http, default is 80. If https enabled, this port will redirect to https port port: 8080 # https related config #https: # https port for harbor, default is 443 # port: 443 # The path of cert and key files for nginx # certificate: /your/certificate/path # private_key: /your/private/key/path # Uncomment external_url if you want to enable external proxy # And when it enabled the hostname will no longer used # external_url: https://reg.mydomain.com:8433 # The initial password of Harbor admin # It only works in first time to install harbor # Remember Change the admin password from UI after launching Harbor. harbor_admin_password: Harbor12345 # Harbor DB configuration database: # The password for the root user of Harbor DB. Change this before any production use. password: root123 # The maximum number of connections in the idle connection pool. If it \u003c=0, no idle connections are retained. max_idle_conns: 50 # The maximum number of open connections to the database. If it \u003c= 0, then there is no limit on the number of open connections. # Note: the default number of connections is 100 for postgres. max_open_conns: 100 # The default data volume data_volume: /Users/zjxjwxk/data # Harbor Storage settings by default is using /data dir on local filesystem # Uncomment storage_service setting If you want to using external storage # storage_service: # # ca_bundle is the path to the custom root ca certificate, which will be injected into the truststore # # of registry's and chart repository's containers. This is usually needed when the user hosts a internal storage with self signed certificate. # ca_bundle: # # storage backend, default is filesystem, options include filesystem, azure, gcs, s3, swift and oss # # for more info about this configuration please refer https://docs.docker.com/registry/configuration/ # filesystem: # maxthreads: 100 # # set disable to true when you want to disable registry redirect # redirect: # disabled: false # Clair configuration clair: # The interval of clair updaters, the unit is hour, set to 0 to disable the updaters. updaters_interval: 12 jobservice: # Maximum number of job workers in job service max_job_workers: 10 notification: # Maximum retry count for webhook job webhook_job_max_retry: 10 chart: # Change the value of absolute_url to enabled can enable absolute url in chart absolute_url: disabled # Log configurations log: # options are debug, info, warning, error, fatal level: info # configs for logs in local storage local: # Log files are rotated log_rotate_count times before being removed. If count is 0, old versions are removed rather than rotated. rotate_count: 50 # Log files are rotated only if they grow bigger than log_rotate_size bytes. If size is followed by k, the size is assumed to be in kilobytes. # If the M is used, the size is in megabytes, and if G is used, the size is in gigabytes. So size 100, size 100k, size 100M and size 100G # are all valid. rotate_size: 200M # The directory on your host that store log location: /Users/zjxjwxk/var/log/harbor # Uncomment following lines to enable external syslog endpoint. # external_endpoint: # # protocol used to transmit log to external endpoint, options is tcp or udp # protocol: tcp # # The host of external endpoint # host: localhost # # Port of external endpoint # port: 5140 #This attribute is for migrator to detect the version of the .cfg file, DO NOT MODIFY! _version: 1.10.0 # Uncomment external_database if using external database. # external_database: # harbor: # host: harbor_db_host # port: harbor_db_port # db_name: harbor_db_name # username: harbor_db_username # password: harbor_db_password # ssl_mode: disable # max_idle_conns: 2 # max_open_conns: 0 # clair: # host: clair_db_host # port: clair_db_port # db_name: clair_db_name # username: clair_db_username # password: clair_db_password # ssl_mode: disable # notary_signer: # host: notary_signer_db_host # port: notary_signer_db_port # db_name: notary_signer_db_name # username: notary_signer_db_username # password: notary_signer_db_password # ssl_mode: disable # notary_server: # host: notary_server_db_host # port: notary_server_db_port # db_name: notary_server_db_name # username: notary_server_db_username # password: notary_server_db_password # ssl_mode: disable # Uncomment external_redis if using external Redis server # external_redis: # host: redis # port: 6379 # password: # # db_index 0 is for core, it's unchangeable # registry_db_index: 1 # jobservice_db_index: 2 # chartmuseum_db_index: 3 # clair_db_index: 4 # Uncomment uaa for trusting the certificate of uaa instance that is hosted via self-signed cert. # uaa: # ca_file: /path/to/ca # Global proxy # Config http proxy for components, e.g. http://my.proxy.com:3128 # Components doesn't need to connect to each others via http proxy. # Remove component from `components` array if want disable proxy # for it. If you want use proxy for replication, MUST enable proxy # for core and jobservice, and set `http_proxy` and `https_proxy`. # Add domain to the `no_proxy` field, when you want disable proxy # for some special registry. proxy: http_proxy: https_proxy: # no_proxy endpoints will appended to 127.0.0.1,localhost,.local,.internal,log,db,redis,nginx,core,portal,postgresql,jobservice,registry,registryctl,clair,chartmuseum,notary-server no_proxy: components: - core - jobservice - clair 启动 harbar 执行 sh install.sh 运行 harbar。\n出现以下则说明启动成功：\n[Step 5]: starting Harbor ... Creating network \"harbor_harbor\" with the default driver Creating harbor-log ... done Creating redis ... done Creating harbor-portal ... done Creating registryctl ... done Creating harbor-db ... done Creating registry ... done Creating harbor-core ... done Creating nginx ... done Creating harbor-jobservice ... done ✔ ----Harbor has been installed and started successfully.---- 访问 localhost:8080 进入 Harbor UI 界面。默认账号为 admin，默认密码为 harbor.yml 中的 harbor_admin_password : Harbor12345。\n",
+  "wordCount" : "1219",
+  "inLanguage": "en",
+  "datePublished": "2020-06-04T23:15:00Z",
+  "dateModified": "2020-06-04T23:15:00Z",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://zjxjwxk.github.io/posts/docker/docker-+-k8s-%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%AE%B9%E5%99%A8%E5%8C%96/1.-%E6%9C%8D%E5%8A%A1%E7%BC%96%E6%8E%92%E5%89%8D%E5%A5%8F/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Xinkang's Blog",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://zjxjwxk.github.io/favicon.ico"
+    }
+  }
+}
+</script>
 </head>
 
 <body class="" id="top">
@@ -98,7 +191,7 @@ docker build -t user:latest .
 <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="http://localhost:1313/" accesskey="h" title="Xinkang&#39;s Blog (Alt + H)">Xinkang&#39;s Blog</a>
+            <a href="https://zjxjwxk.github.io/" accesskey="h" title="Xinkang&#39;s Blog (Alt + H)">Xinkang&#39;s Blog</a>
             <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
@@ -124,22 +217,22 @@ docker build -t user:latest .
         </div>
         <ul id="menu">
             <li>
-                <a href="http://localhost:1313/archives/" title="Archives">
+                <a href="https://zjxjwxk.github.io/archives/" title="Archives">
                     <span>Archives</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/categories/" title="Categories">
+                <a href="https://zjxjwxk.github.io/categories/" title="Categories">
                     <span>Categories</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/tags/" title="Tags">
+                <a href="https://zjxjwxk.github.io/tags/" title="Tags">
                     <span>Tags</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/search/" title="Search (Alt &#43; /)" accesskey=/>
+                <a href="https://zjxjwxk.github.io/search/" title="Search (Alt &#43; /)" accesskey=/>
                     <span>Search</span>
                 </a>
             </li>
@@ -456,15 +549,15 @@ docker build -t user:latest .
 
   <footer class="post-footer">
     <ul class="post-tags">
-      <li><a href="http://localhost:1313/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/">微服务架构</a></li>
-      <li><a href="http://localhost:1313/tags/docker/">Docker</a></li>
+      <li><a href="https://zjxjwxk.github.io/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/">微服务架构</a></li>
+      <li><a href="https://zjxjwxk.github.io/tags/docker/">Docker</a></li>
     </ul>
   </footer>
 </article>
     </main>
     
 <footer class="footer">
-        <span>&copy; 2024 <a href="http://localhost:1313/">Xinkang&#39;s Blog</a></span> · 
+        <span>&copy; 2024 <a href="https://zjxjwxk.github.io/">Xinkang&#39;s Blog</a></span> · 
 
     <span>
         Powered by

@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" dir="auto">
 
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<head><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="noindex, nofollow">
+<meta name="robots" content="index, follow">
 <title>Spring Boot 中的 JWT 跨域问题 | Xinkang&#39;s Blog</title>
 <meta name="keywords" content="Security, Auth, Spring Boot">
 <meta name="description" content="主要问题
@@ -40,16 +40,16 @@ public class AuthFilter extends OncePerRequestFilter {
 }
 ">
 <meta name="author" content="">
-<link rel="canonical" href="http://localhost:1313/posts/spring-boot/spring-boot-%E4%B8%AD%E7%9A%84-jwt-%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98/">
+<link rel="canonical" href="https://zjxjwxk.github.io/posts/spring-boot/spring-boot-%E4%B8%AD%E7%9A%84-jwt-%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.d6fcd20a4fb86efa4dfac8ec95da60244cc8871042183da1ef28e3a762ad79c8.css" integrity="sha256-1vzSCk&#43;4bvpN&#43;sjsldpgJEzIhxBCGD2h7yjjp2Ktecg=" rel="preload stylesheet" as="style">
-<link rel="icon" href="http://localhost:1313/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
-<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
-<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
+<link rel="icon" href="https://zjxjwxk.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://zjxjwxk.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://zjxjwxk.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://zjxjwxk.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://zjxjwxk.github.io/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" hreflang="en" href="http://localhost:1313/posts/spring-boot/spring-boot-%E4%B8%AD%E7%9A%84-jwt-%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98/">
+<link rel="alternate" hreflang="en" href="https://zjxjwxk.github.io/posts/spring-boot/spring-boot-%E4%B8%AD%E7%9A%84-jwt-%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98/">
 <noscript>
     <style>
         #theme-toggle,
@@ -86,7 +86,108 @@ public class AuthFilter extends OncePerRequestFilter {
         }
 
     </style>
-</noscript>
+</noscript><meta property="og:url" content="https://zjxjwxk.github.io/posts/spring-boot/spring-boot-%E4%B8%AD%E7%9A%84-jwt-%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98/">
+  <meta property="og:site_name" content="Xinkang&#39;s Blog">
+  <meta property="og:title" content="Spring Boot 中的 JWT 跨域问题">
+  <meta property="og:description" content="主要问题 前后端分离后，前端使用 Ajax 进行请求，存在一些跨域的问题。
+基于 Spring Boot 的后端通过给 Controlle类或其中的方法添加 @CrossOrigin 注解来解决跨域问题：
+@CrossOrigin @RequestMapping(&#34;/user/&#34;) public class UserController { ... } 添加该注解之后，可以通过匿名访问的接口都没有跨域问题了，而需要通过 JWT 验证的接口仍然存在跨域问题。
+其中，解决问题的关键在于，浏览器会在发送 Ajax 请求之前发送一个预请求，确认当前的接口是不是有效的接口，此时的请求方式是 OPTIONS 的请求方式。
+因此，JWT 的过滤器需要先判断该请求是否为预请求，如果是则需要给返回的响应头中添加跨域相关的信息；如果不是，则按照一般接口进行 JWT 验证。
+public class AuthFilter extends OncePerRequestFilter { ...... @Override protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException { // 处理浏览器的预请求 if (request.getMethod().equals(&#34;OPTIONS&#34;)) { response.setHeader(&#34;Access-Control-Allow-Origin&#34;, &#34;*&#34;); response.setHeader(&#34;Access-Control-Allow-Methods&#34;, &#34;POST,GET,PUT,OPTIONS,DELETE&#34;); response.setHeader(&#34;Access-Control-Max-Age&#34;, &#34;3600&#34;); response.setHeader(&#34;Access-Control-Allow-Headers&#34;, &#34;Origin,X-Requested-With,Content-Type,Accept,Authorization,token&#34;); return; } // 验证 JWT ...... } } ">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2020-06-05T21:02:00+00:00">
+    <meta property="article:modified_time" content="2020-06-05T21:02:00+00:00">
+    <meta property="article:tag" content="Security">
+    <meta property="article:tag" content="Auth">
+    <meta property="article:tag" content="Spring Boot">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Spring Boot 中的 JWT 跨域问题">
+<meta name="twitter:description" content="主要问题
+前后端分离后，前端使用 Ajax 进行请求，存在一些跨域的问题。
+基于 Spring Boot 的后端通过给 Controlle类或其中的方法添加 @CrossOrigin 注解来解决跨域问题：
+@CrossOrigin
+@RequestMapping(&#34;/user/&#34;)
+public class UserController {
+	...
+}
+添加该注解之后，可以通过匿名访问的接口都没有跨域问题了，而需要通过 JWT 验证的接口仍然存在跨域问题。
+其中，解决问题的关键在于，浏览器会在发送 Ajax 请求之前发送一个预请求，确认当前的接口是不是有效的接口，此时的请求方式是 OPTIONS 的请求方式。
+因此，JWT 的过滤器需要先判断该请求是否为预请求，如果是则需要给返回的响应头中添加跨域相关的信息；如果不是，则按照一般接口进行 JWT 验证。
+public class AuthFilter extends OncePerRequestFilter {
+
+  	......
+
+    @Override
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
+    
+        // 处理浏览器的预请求
+        if (request.getMethod().equals(&#34;OPTIONS&#34;)) {
+            response.setHeader(&#34;Access-Control-Allow-Origin&#34;, &#34;*&#34;);
+            response.setHeader(&#34;Access-Control-Allow-Methods&#34;, &#34;POST,GET,PUT,OPTIONS,DELETE&#34;);
+            response.setHeader(&#34;Access-Control-Max-Age&#34;, &#34;3600&#34;);
+            response.setHeader(&#34;Access-Control-Allow-Headers&#34;, &#34;Origin,X-Requested-With,Content-Type,Accept,Authorization,token&#34;);
+            return;
+        }
+        
+        // 验证 JWT
+        ......
+    }
+}
+">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://zjxjwxk.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Spring Boot 中的 JWT 跨域问题",
+      "item": "https://zjxjwxk.github.io/posts/spring-boot/spring-boot-%E4%B8%AD%E7%9A%84-jwt-%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Spring Boot 中的 JWT 跨域问题",
+  "name": "Spring Boot 中的 JWT 跨域问题",
+  "description": "主要问题 前后端分离后，前端使用 Ajax 进行请求，存在一些跨域的问题。\n基于 Spring Boot 的后端通过给 Controlle类或其中的方法添加 @CrossOrigin 注解来解决跨域问题：\n@CrossOrigin @RequestMapping(\u0026#34;/user/\u0026#34;) public class UserController { ... } 添加该注解之后，可以通过匿名访问的接口都没有跨域问题了，而需要通过 JWT 验证的接口仍然存在跨域问题。\n其中，解决问题的关键在于，浏览器会在发送 Ajax 请求之前发送一个预请求，确认当前的接口是不是有效的接口，此时的请求方式是 OPTIONS 的请求方式。\n因此，JWT 的过滤器需要先判断该请求是否为预请求，如果是则需要给返回的响应头中添加跨域相关的信息；如果不是，则按照一般接口进行 JWT 验证。\npublic class AuthFilter extends OncePerRequestFilter { ...... @Override protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException { // 处理浏览器的预请求 if (request.getMethod().equals(\u0026#34;OPTIONS\u0026#34;)) { response.setHeader(\u0026#34;Access-Control-Allow-Origin\u0026#34;, \u0026#34;*\u0026#34;); response.setHeader(\u0026#34;Access-Control-Allow-Methods\u0026#34;, \u0026#34;POST,GET,PUT,OPTIONS,DELETE\u0026#34;); response.setHeader(\u0026#34;Access-Control-Max-Age\u0026#34;, \u0026#34;3600\u0026#34;); response.setHeader(\u0026#34;Access-Control-Allow-Headers\u0026#34;, \u0026#34;Origin,X-Requested-With,Content-Type,Accept,Authorization,token\u0026#34;); return; } // 验证 JWT ...... } } ",
+  "keywords": [
+    "Security", "Auth", "Spring Boot"
+  ],
+  "articleBody": "主要问题 前后端分离后，前端使用 Ajax 进行请求，存在一些跨域的问题。\n基于 Spring Boot 的后端通过给 Controlle类或其中的方法添加 @CrossOrigin 注解来解决跨域问题：\n@CrossOrigin @RequestMapping(\"/user/\") public class UserController { ... } 添加该注解之后，可以通过匿名访问的接口都没有跨域问题了，而需要通过 JWT 验证的接口仍然存在跨域问题。\n其中，解决问题的关键在于，浏览器会在发送 Ajax 请求之前发送一个预请求，确认当前的接口是不是有效的接口，此时的请求方式是 OPTIONS 的请求方式。\n因此，JWT 的过滤器需要先判断该请求是否为预请求，如果是则需要给返回的响应头中添加跨域相关的信息；如果不是，则按照一般接口进行 JWT 验证。\npublic class AuthFilter extends OncePerRequestFilter { ...... @Override protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException { // 处理浏览器的预请求 if (request.getMethod().equals(\"OPTIONS\")) { response.setHeader(\"Access-Control-Allow-Origin\", \"*\"); response.setHeader(\"Access-Control-Allow-Methods\", \"POST,GET,PUT,OPTIONS,DELETE\"); response.setHeader(\"Access-Control-Max-Age\", \"3600\"); response.setHeader(\"Access-Control-Allow-Headers\", \"Origin,X-Requested-With,Content-Type,Accept,Authorization,token\"); return; } // 验证 JWT ...... } } ",
+  "wordCount" : "72",
+  "inLanguage": "en",
+  "datePublished": "2020-06-05T21:02:00Z",
+  "dateModified": "2020-06-05T21:02:00Z",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://zjxjwxk.github.io/posts/spring-boot/spring-boot-%E4%B8%AD%E7%9A%84-jwt-%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Xinkang's Blog",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://zjxjwxk.github.io/favicon.ico"
+    }
+  }
+}
+</script>
 </head>
 
 <body class="" id="top">
@@ -104,7 +205,7 @@ public class AuthFilter extends OncePerRequestFilter {
 <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="http://localhost:1313/" accesskey="h" title="Xinkang&#39;s Blog (Alt + H)">Xinkang&#39;s Blog</a>
+            <a href="https://zjxjwxk.github.io/" accesskey="h" title="Xinkang&#39;s Blog (Alt + H)">Xinkang&#39;s Blog</a>
             <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
@@ -130,22 +231,22 @@ public class AuthFilter extends OncePerRequestFilter {
         </div>
         <ul id="menu">
             <li>
-                <a href="http://localhost:1313/archives/" title="Archives">
+                <a href="https://zjxjwxk.github.io/archives/" title="Archives">
                     <span>Archives</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/categories/" title="Categories">
+                <a href="https://zjxjwxk.github.io/categories/" title="Categories">
                     <span>Categories</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/tags/" title="Tags">
+                <a href="https://zjxjwxk.github.io/tags/" title="Tags">
                     <span>Tags</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/search/" title="Search (Alt &#43; /)" accesskey=/>
+                <a href="https://zjxjwxk.github.io/search/" title="Search (Alt &#43; /)" accesskey=/>
                     <span>Search</span>
                 </a>
             </li>
@@ -201,16 +302,16 @@ public class AuthFilter extends OncePerRequestFilter {
 
   <footer class="post-footer">
     <ul class="post-tags">
-      <li><a href="http://localhost:1313/tags/security/">Security</a></li>
-      <li><a href="http://localhost:1313/tags/auth/">Auth</a></li>
-      <li><a href="http://localhost:1313/tags/spring-boot/">Spring Boot</a></li>
+      <li><a href="https://zjxjwxk.github.io/tags/security/">Security</a></li>
+      <li><a href="https://zjxjwxk.github.io/tags/auth/">Auth</a></li>
+      <li><a href="https://zjxjwxk.github.io/tags/spring-boot/">Spring Boot</a></li>
     </ul>
   </footer>
 </article>
     </main>
     
 <footer class="footer">
-        <span>&copy; 2024 <a href="http://localhost:1313/">Xinkang&#39;s Blog</a></span> · 
+        <span>&copy; 2024 <a href="https://zjxjwxk.github.io/">Xinkang&#39;s Blog</a></span> · 
 
     <span>
         Powered by
