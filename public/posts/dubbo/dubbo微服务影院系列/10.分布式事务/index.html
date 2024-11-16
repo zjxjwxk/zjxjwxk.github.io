@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" dir="auto">
 
-<head><meta charset="utf-8">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="index, follow">
+<meta name="robots" content="noindex, nofollow">
 <title>Dubbo微服务影院系列（10）：分布式事务 | Xinkang&#39;s Blog</title>
 <meta name="keywords" content="Dubbo, 微服务架构">
 <meta name="description" content="章节概要
@@ -72,16 +72,16 @@ TCC-Transaction 分布式事务框架
 
 Github 仓库：https://github.com/changmingxie/tcc-transaction">
 <meta name="author" content="">
-<link rel="canonical" href="https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/10.%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/">
+<link rel="canonical" href="http://localhost:1313/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/10.%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.d6fcd20a4fb86efa4dfac8ec95da60244cc8871042183da1ef28e3a762ad79c8.css" integrity="sha256-1vzSCk&#43;4bvpN&#43;sjsldpgJEzIhxBCGD2h7yjjp2Ktecg=" rel="preload stylesheet" as="style">
-<link rel="icon" href="https://zjxjwxk.github.io/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="https://zjxjwxk.github.io/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="https://zjxjwxk.github.io/favicon-32x32.png">
-<link rel="apple-touch-icon" href="https://zjxjwxk.github.io/apple-touch-icon.png">
-<link rel="mask-icon" href="https://zjxjwxk.github.io/safari-pinned-tab.svg">
+<link rel="icon" href="http://localhost:1313/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" hreflang="en" href="https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/10.%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/10.%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/">
 <noscript>
     <style>
         #theme-toggle,
@@ -118,134 +118,7 @@ Github 仓库：https://github.com/changmingxie/tcc-transaction">
         }
 
     </style>
-</noscript><meta property="og:url" content="https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/10.%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/">
-  <meta property="og:site_name" content="Xinkang&#39;s Blog">
-  <meta property="og:title" content="Dubbo微服务影院系列（10）：分布式事务">
-  <meta property="og:description" content="章节概要 事务简介 分布式事务的前世今生 分布式事务解决方案 主流分布式事务框架介绍 事务简介 事务是用来保证一组数据操作的完整性和一致性的 事务必须满足 ACID 的四大特性 事务具有四种隔离级别 事务具有七种传播行为 事务属性 原子性（Atomicity） 一致性（Consistency） 隔离型（Isolation） 持久性（Durability） 分布式事务 概念 分布式事务就是将多个节点的事务看成一个整体处理 分布式事务由事务参与者、资源服务器、事务管理器等组成 常见的分布式事务的例子：支付、下订单等 实现思路 两段式事务和三段式事务 基于 XA 的分布式事务 基于消息的最终一致性方案 TCC 编程式补偿性事务 分布式事务类型 两段式和三段式事务 两段式事务 三段式事务 基于 XA 的分布式事务 基于消息的一致性方案 TCC 补偿性事务 基于消息的一致性方案和 TCC 补偿性事务的区别 基于消息的事务是强一致性事务，会存在浪费 TCC 事务是柔性事务，在 try 阶段要对资源做预留 TCC 事务在确认或取消阶段释放资源 与基于消息的事务对比，TCC 的时效性更好 分布式事务框架 全局事务服务（Global Transaction Service，简称 GTS） 蚂蚁金服分布式事务（Distributed Transaction-eXtended，简称 DTX） 开源 TCC 框架（TCC-Transaction）（https://github.com/changmingxie/tcc-transaction） 开源 TCC 框架（ByteTCC）（https://github.com/liuyangming/ByteTCC） TCC-Transaction 分布式事务框架 Github 仓库：https://github.com/changmingxie/tcc-transaction">
-  <meta property="og:locale" content="en">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2020-04-17T20:14:00+00:00">
-    <meta property="article:modified_time" content="2020-04-17T20:14:00+00:00">
-    <meta property="article:tag" content="Dubbo">
-    <meta property="article:tag" content="微服务架构">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Dubbo微服务影院系列（10）：分布式事务">
-<meta name="twitter:description" content="章节概要
-
-事务简介
-分布式事务的前世今生
-分布式事务解决方案
-主流分布式事务框架介绍
-
-事务简介
-
-事务是用来保证一组数据操作的完整性和一致性的
-事务必须满足 ACID 的四大特性
-事务具有四种隔离级别
-事务具有七种传播行为
-
-事务属性
-
-原子性（Atomicity）
-一致性（Consistency）
-隔离型（Isolation）
-持久性（Durability）
-
-分布式事务
-概念
-
-分布式事务就是将多个节点的事务看成一个整体处理
-分布式事务由事务参与者、资源服务器、事务管理器等组成
-常见的分布式事务的例子：支付、下订单等
-
-实现思路
-
-两段式事务和三段式事务
-基于 XA 的分布式事务
-基于消息的最终一致性方案
-TCC 编程式补偿性事务
-
-分布式事务类型
-两段式和三段式事务
-两段式事务
-
-三段式事务
-
-基于 XA 的分布式事务
-
-基于消息的一致性方案
-
-TCC 补偿性事务
-
-基于消息的一致性方案和 TCC 补偿性事务的区别
-
-基于消息的事务是强一致性事务，会存在浪费
-TCC 事务是柔性事务，在 try 阶段要对资源做预留
-TCC 事务在确认或取消阶段释放资源
-与基于消息的事务对比，TCC 的时效性更好
-
-分布式事务框架
-
-全局事务服务（Global Transaction Service，简称 GTS）
-蚂蚁金服分布式事务（Distributed Transaction-eXtended，简称 DTX）
-开源 TCC 框架（TCC-Transaction）（https://github.com/changmingxie/tcc-transaction）
-开源 TCC 框架（ByteTCC）（https://github.com/liuyangming/ByteTCC）
-
-TCC-Transaction 分布式事务框架
-
-Github 仓库：https://github.com/changmingxie/tcc-transaction">
-
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position":  1 ,
-      "name": "Posts",
-      "item": "https://zjxjwxk.github.io/posts/"
-    }, 
-    {
-      "@type": "ListItem",
-      "position":  2 ,
-      "name": "Dubbo微服务影院系列（10）：分布式事务",
-      "item": "https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/10.%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/"
-    }
-  ]
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": "Dubbo微服务影院系列（10）：分布式事务",
-  "name": "Dubbo微服务影院系列（10）：分布式事务",
-  "description": "章节概要 事务简介 分布式事务的前世今生 分布式事务解决方案 主流分布式事务框架介绍 事务简介 事务是用来保证一组数据操作的完整性和一致性的 事务必须满足 ACID 的四大特性 事务具有四种隔离级别 事务具有七种传播行为 事务属性 原子性（Atomicity） 一致性（Consistency） 隔离型（Isolation） 持久性（Durability） 分布式事务 概念 分布式事务就是将多个节点的事务看成一个整体处理 分布式事务由事务参与者、资源服务器、事务管理器等组成 常见的分布式事务的例子：支付、下订单等 实现思路 两段式事务和三段式事务 基于 XA 的分布式事务 基于消息的最终一致性方案 TCC 编程式补偿性事务 分布式事务类型 两段式和三段式事务 两段式事务 三段式事务 基于 XA 的分布式事务 基于消息的一致性方案 TCC 补偿性事务 基于消息的一致性方案和 TCC 补偿性事务的区别 基于消息的事务是强一致性事务，会存在浪费 TCC 事务是柔性事务，在 try 阶段要对资源做预留 TCC 事务在确认或取消阶段释放资源 与基于消息的事务对比，TCC 的时效性更好 分布式事务框架 全局事务服务（Global Transaction Service，简称 GTS） 蚂蚁金服分布式事务（Distributed Transaction-eXtended，简称 DTX） 开源 TCC 框架（TCC-Transaction）（https://github.com/changmingxie/tcc-transaction） 开源 TCC 框架（ByteTCC）（https://github.com/liuyangming/ByteTCC） TCC-Transaction 分布式事务框架 Github 仓库：https://github.com/changmingxie/tcc-transaction\n",
-  "keywords": [
-    "Dubbo", "微服务架构"
-  ],
-  "articleBody": "章节概要 事务简介 分布式事务的前世今生 分布式事务解决方案 主流分布式事务框架介绍 事务简介 事务是用来保证一组数据操作的完整性和一致性的 事务必须满足 ACID 的四大特性 事务具有四种隔离级别 事务具有七种传播行为 事务属性 原子性（Atomicity） 一致性（Consistency） 隔离型（Isolation） 持久性（Durability） 分布式事务 概念 分布式事务就是将多个节点的事务看成一个整体处理 分布式事务由事务参与者、资源服务器、事务管理器等组成 常见的分布式事务的例子：支付、下订单等 实现思路 两段式事务和三段式事务 基于 XA 的分布式事务 基于消息的最终一致性方案 TCC 编程式补偿性事务 分布式事务类型 两段式和三段式事务 两段式事务 三段式事务 基于 XA 的分布式事务 基于消息的一致性方案 TCC 补偿性事务 基于消息的一致性方案和 TCC 补偿性事务的区别 基于消息的事务是强一致性事务，会存在浪费 TCC 事务是柔性事务，在 try 阶段要对资源做预留 TCC 事务在确认或取消阶段释放资源 与基于消息的事务对比，TCC 的时效性更好 分布式事务框架 全局事务服务（Global Transaction Service，简称 GTS） 蚂蚁金服分布式事务（Distributed Transaction-eXtended，简称 DTX） 开源 TCC 框架（TCC-Transaction）（https://github.com/changmingxie/tcc-transaction） 开源 TCC 框架（ByteTCC）（https://github.com/liuyangming/ByteTCC） TCC-Transaction 分布式事务框架 Github 仓库：https://github.com/changmingxie/tcc-transaction\n在需要提供分布式事务支持的接口方法上添加 @Compensable 在对应的接口实现方法上也添加 @Compensable，并添加注解参数 confirmMethod, cancelMethod 和 transactionContextEditor 实现对应的 confirmMethod 和 cancelMethod（必须和 try 方法在同一个类中） 注意：\n在分布式事务框架中，不要轻易在业务层捕获所有异常，只有在抛出异常的情况下，分布式事务框架才知道该业务是执行失败的。 使用 TCC-Transaction 时，confirm 和 cancel 的幂等性问题需要自己解决。 TCC 的数据库应该和业务数据库分开，以保证分布式事务的正常进行。 建立用于分布式事务的数据库 TCC 的数据库应该和业务数据库分开，以保证分布式事务的正常进行。\n其中，TCC 库用于实现分布式事务，其包含的表和表结构如下：\nDubbo Demo 子事务：红包模块 接口\npublic interface RedPacketTradeOrderService { @Compensable public String record(RedPacketTradeOrderDto tradeOrderDto); } 实现类\n@Service(\"redPacketTradeOrderService\") public class RedPacketTradeOrderServiceImpl implements RedPacketTradeOrderService { @Autowired RedPacketAccountRepository redPacketAccountRepository; @Autowired TradeOrderRepository tradeOrderRepository; @Override @Compensable(confirmMethod = \"confirmRecord\", cancelMethod = \"cancelRecord\", transactionContextEditor = DubboTransactionContextEditor.class) @Transactional public String record(RedPacketTradeOrderDto tradeOrderDto) { TradeOrder foundTradeOrder = tradeOrderRepository.findByMerchantOrderNo(tradeOrderDto.getMerchantOrderNo()); // check if trade order has been recorded, if yes, return success directly. if (foundTradeOrder == null) { TradeOrder tradeOrder = new TradeOrder( tradeOrderDto.getSelfUserId(), tradeOrderDto.getOppositeUserId(), tradeOrderDto.getMerchantOrderNo(), tradeOrderDto.getAmount() ); try { tradeOrderRepository.insert(tradeOrder); RedPacketAccount transferFromAccount = redPacketAccountRepository.findByUserId(tradeOrderDto.getSelfUserId()); transferFromAccount.transferFrom(tradeOrderDto.getAmount()); redPacketAccountRepository.save(transferFromAccount); } catch (DataIntegrityViolationException e) { // this exception may happen when insert trade order concurrently, if happened, ignore this insert operation. } } return \"success\"; } @Transactional public void confirmRecord(RedPacketTradeOrderDto tradeOrderDto) { TradeOrder tradeOrder = tradeOrderRepository.findByMerchantOrderNo(tradeOrderDto.getMerchantOrderNo()); // check if the trade order status is DRAFT, if yes, return directly, ensure idempotency. if (tradeOrder != null \u0026\u0026 tradeOrder.getStatus().equals(\"DRAFT\")) { tradeOrder.confirm(); tradeOrderRepository.update(tradeOrder); RedPacketAccount transferToAccount = redPacketAccountRepository.findByUserId(tradeOrderDto.getOppositeUserId()); transferToAccount.transferTo(tradeOrderDto.getAmount()); redPacketAccountRepository.save(transferToAccount); } } @Transactional public void cancelRecord(RedPacketTradeOrderDto tradeOrderDto) { TradeOrder tradeOrder = tradeOrderRepository.findByMerchantOrderNo(tradeOrderDto.getMerchantOrderNo()); // check if the trade order status is DRAFT, if yes, return directly, ensure idempotency. if (null != tradeOrder \u0026\u0026 \"DRAFT\".equals(tradeOrder.getStatus())) { tradeOrder.cancel(); tradeOrderRepository.update(tradeOrder); RedPacketAccount capitalAccount = redPacketAccountRepository.findByUserId(tradeOrderDto.getSelfUserId()); capitalAccount.cancelTransfer(tradeOrderDto.getAmount()); redPacketAccountRepository.save(capitalAccount); } } } 思考：为什么要在 confirm 和 cancel 方法里先检查订单状态是否为 DRAFT（在 try 方法中新增的一个订单），而不直接修改为结束状态？\n答：为了保证服务的幂等性，即使用相同参数对同一资源重复调用某个接口的结果与调用一次的结果相同。\n主事务：订单模块 注意：要在主事务的业务已经实现的差不多的时候才调用子事务。\n@Service public class PaymentServiceImpl { @Autowired CapitalTradeOrderService capitalTradeOrderService; @Autowired RedPacketTradeOrderService redPacketTradeOrderService; @Autowired OrderRepository orderRepository; @Compensable(confirmMethod = \"confirmMakePayment\", cancelMethod = \"cancelMakePayment\", asyncConfirm = false, delayCancelExceptions = {SocketTimeoutException.class, org.apache.dubbo.remoting.TimeoutException.class}) public void makePayment(@UniqueIdentity String orderNo, BigDecimal redPacketPayAmount, BigDecimal capitalPayAmount) { Order order = orderRepository.findByMerchantOrderNo(orderNo); // check if the order status is DRAFT, if no, means that another call makePayment for the same order happened, ignore this call makePayment. if (order.getStatus().equals(\"DRAFT\")) { order.pay(redPacketPayAmount, capitalPayAmount); try { orderRepository.updateOrder(order); } catch (OptimisticLockingFailureException e) { // ignore the concurrently update order exception, ensure idempotency. } } // 调用子事务 String result = capitalTradeOrderService.record(buildCapitalTradeOrderDto(order)); String result2 = redPacketTradeOrderService.record(buildRedPacketTradeOrderDto(order)); } public void confirmMakePayment(String orderNo, BigDecimal redPacketPayAmount, BigDecimal capitalPayAmount) { Order foundOrder = orderRepository.findByMerchantOrderNo(orderNo); // check if the trade order status is PAYING, if no, means another call confirmMakePayment happened, return directly, ensure idempotency. if (foundOrder != null \u0026\u0026 foundOrder.getStatus().equals(\"PAYING\")) { foundOrder.confirm(); orderRepository.updateOrder(foundOrder); } } public void cancelMakePayment(String orderNo, BigDecimal redPacketPayAmount, BigDecimal capitalPayAmount) { Order foundOrder = orderRepository.findByMerchantOrderNo(orderNo); // check if the trade order status is PAYING, if no, means another call cancelMakePayment happened, return directly, ensure idempotency. if (foundOrder != null \u0026\u0026 foundOrder.getStatus().equals(\"PAYING\")) { foundOrder.cancelPayment(); orderRepository.updateOrder(foundOrder); } } } 流程图 隐式参数 根据官方文档可以得知，1.2.x 版本支持 rpc 框架支持隐式传参情况下将事务上下文参数 TransactionContext 以隐式传参方式进行传递。\n那么，在子事务的 Service 实现代码中获取 Dubbo 隐式参数：\nMap\u003cString, String\u003e attachments = RpcContext.getContext().getAttachments(); 打一个断点，可以从隐式参数中得到 key 为 TRANSACTION_CONTEXT，value 为以下信息的键值对：\n{ \"attachments\":{}, \"status\":1, \"xid\":{ \"branchQualifier\":\"hMBMmir6Q56M0hskfmPebw==\", \"formatId\":1, \"globalTransactionId\":\"trSosXg0Soi8Q9xlauTToQ==\" } } 其中，包含了 globalTransactionId 这一全局事务 id，和 branchQualifier 分支事务 id。\n##提出疑问\n什么时候生成的 TRANSACTION_CONTEXT 隐式参数？ 如何判断一个大的事务下，都有哪些小的事务？ 为什么要有 @Compensable 注解？ 两个拦截器都没有处理 confirm 和 cancel，谁来处理？ 源码分析 事务拦截器 重点介绍 tcc-transaction-core 核心包的 interceptor 包，也就是拦截器包。\nCompensableMethodContext\n这是加了 @Compensable 注释的目标方法对象的上下文类。通过构造函数，利用拦截的目标对象上下文，获取被拦截目标对象方法的各种信息。\npublic CompensableMethodContext(ProceedingJoinPoint pjp) { this.pjp = pjp; // 获取待访问对象的方法名称 this.method = getCompensableMethod(); // 获取目标对象的 Compensable 注解 this.compensable = method.getAnnotation(Compensable.class); // 获取目标对象的事务传播属性（默认为 REQUIRED） this.propagation = compensable.propagation(); // 获取事务上下文 this.transactionContext = FactoryBuilder.factoryOf(compensable.transactionContextEditor()).getInstance().get(pjp.getTarget(), method, pjp.getArgs()); } 其中，transactionContext 是一个 TransactionContext 类，定义在 tcc-transaction-api 模块中：\npublic class TransactionContext implements Serializable { private static final long serialVersionUID = -8199390103169700387L; private TransactionXid xid; private int status; /** * 保存当前事务有几个子事务 */ private Map\u003cString, String\u003e attachments = new ConcurrentHashMap\u003cString, String\u003e(); public TransactionContext() { } public TransactionContext(TransactionXid xid, int status) { this.xid = xid; this.status = status; } public void setXid(TransactionXid xid) { this.xid = xid; } public TransactionXid getXid() { return xid.clone(); } public void setAttachments(Map\u003cString, String\u003e attachments) { if (attachments != null \u0026\u0026 !attachments.isEmpty()) { this.attachments.putAll(attachments); } } public Map\u003cString, String\u003e getAttachments() { return attachments; } public void setStatus(int status) { this.status = status; } public int getStatus() { return status; } } CompensableTransactionAspect\n这是一个 AOP 切面类。@Pointcut 将 @Compensable 注解标记为切入点，其签名为 compensableService()。@Around 表示在 compensableService() 之前和之后调用 interceptCompensableMethod()，其中调用了 CompensableTransactionInterceptor 的 interceptCompensableMethod()。\n@Pointcut(\"@annotation(org.mengyun.tcctransaction.api.Compensable)\") public void compensableService() { } @Around(\"compensableService()\") public Object interceptCompensableMethod(ProceedingJoinPoint pjp) throws Throwable { return compensableTransactionInterceptor.interceptCompensableMethod(pjp); } CompensableTransactionInterceptor\n这是事务拦截器，具有以下作用：\n将事务区分为 ROOT 事务和 PROVIDER 分支事务 不断地修改数据库内的状态（初始化事务、修改事务状态） 修改和清除事务管理区中的事务队列 （并没有执行目标对象方法，pjp.proceed() 其实是交给了下一个拦截器 ResourceCoordinatorInterceptor） interceptCompensableMethod\n其中interceptCompensableMethod() 方法中，参数 pjp 表示被代理的目标对象，比如被加了 @Compensable 注解的 makePayment 方法对象，就会作为该参数，通过其获取该方法的各种信息。\npublic Object interceptCompensableMethod(ProceedingJoinPoint pjp) throws Throwable { // 通过上下文对象，获取待访问对象的各种信息，见下方 CompensableMethodContext() 构造函数 CompensableMethodContext compensableMethodContext = new CompensableMethodContext(pjp); // 通过事务管理器，来判断是否有存在的事务队列（从 ThreadLocal 获取 transactions 来判断当前线程是否已经有事务） boolean isTransactionActive = transactionManager.isTransactionActive(); if (!TransactionUtils.isLegalTransactionContext(isTransactionActive, compensableMethodContext)) { throw new SystemException(\"no active compensable transaction while propagation is mandatory for method \" + compensableMethodContext.getMethod().getName()); } // 获取并判断当前事务的角色（ROOT 表示主事务，PROVIDER 表示分支事务或事务参与者），并根据其角色调用不同的方法来处理 switch (compensableMethodContext.getMethodRole(isTransactionActive)) { case ROOT: return rootMethodProceed(compensableMethodContext); case PROVIDER: return providerMethodProceed(compensableMethodContext); default: return pjp.proceed(); } } rootMethodProceed\n处理主事务的 rootMethodProceed() 方法，它会完成：\n开启全局事务 持久化全局事务 注册全局事务 判断应该 confirm 还是 cancel 清除事务队列 private Object rootMethodProceed(CompensableMethodContext compensableMethodContext) throws Throwable { Object returnValue = null; Transaction transaction = null; boolean asyncConfirm = compensableMethodContext.getAnnotation().asyncConfirm(); boolean asyncCancel = compensableMethodContext.getAnnotation().asyncCancel(); Set\u003cClass\u003c? extends Exception\u003e\u003e allDelayCancelExceptions = new HashSet\u003cClass\u003c? extends Exception\u003e\u003e(); allDelayCancelExceptions.addAll(this.delayCancelExceptions); allDelayCancelExceptions.addAll(Arrays.asList(compensableMethodContext.getAnnotation().delayCancelExceptions())); try { // 让事务管理器开启一个全新的事务，持久化事务，并事务管理器注册该事务（加入事务队列） transaction = transactionManager.begin(compensableMethodContext.getUniqueIdentity()); try { // 执行目标方法（实际上会先调用 ResourceCoordinatorIntercepter 拦截器） returnValue = compensableMethodContext.proceed(); // 如果执行异常，就回滚，否则提交 } catch (Throwable tryingException) { if (!isDelayCancelException(tryingException, allDelayCancelExceptions)) { logger.warn(String.format(\"compensable transaction trying failed. transaction content:%s\", JSON.toJSONString(transaction)), tryingException); /* 1. 修改数据库状态 2. 执行 rollback 方法 3. 如果执行成功，则删除事务资源数据 */ transactionManager.rollback(asyncCancel); } throw tryingException; } /* 1. 修改数据库状态 2. 执行 confirm 方法 3. 如果执行成功，则删除事务资源数据 */ transactionManager.commit(asyncConfirm); } finally { // 到这里，分支事务就都执行完了，就清除队列中的事务 transactionManager.cleanAfterCompletion(transaction); } return returnValue; } 其中事务管理器 TransactionManager 的 begin() 方法：\npublic Transaction begin(Object uniqueIdentify) { Transaction transaction = new Transaction(uniqueIdentify,TransactionType.ROOT); // 持久化事务 transactionRepository.create(transaction); // 注册事务，向事务队列中加入该事务 registerTransaction(transaction); return transaction; } providerMethodProceed\n处理分支事务的 providerMethodProceed() 方法：\nprivate Object providerMethodProceed(CompensableMethodContext compensableMethodContext) throws Throwable { Transaction transaction = null; boolean asyncConfirm = compensableMethodContext.getAnnotation().asyncConfirm(); boolean asyncCancel = compensableMethodContext.getAnnotation().asyncCancel(); try { // 根据事务的不同状态，执行不同的动作 switch (TransactionStatus.valueOf(compensableMethodContext.getTransactionContext().getStatus())) { case TRYING: // propagationNewBegin() 持久化事务参与者的数据到当前服务中（默认状态为 TRYING），并向事务管理器注册事务 transaction = transactionManager.propagationNewBegin(compensableMethodContext.getTransactionContext()); return compensableMethodContext.proceed(); case CONFIRMING: try { // propagationExistBegin() 修改事务状态，并注册事务 transaction = transactionManager.propagationExistBegin(compensableMethodContext.getTransactionContext()); // commit() 修改事务状态为 CONFIRMING，并持久化更新，提交事务 transactionManager.commit(asyncConfirm); } catch (NoExistedTransactionException excepton) { //the transaction has been commit,ignore it. } break; case CANCELLING: try { // propagationExistBegin() 修改事务状态，并注册事务 transaction = transactionManager.propagationExistBegin(compensableMethodContext.getTransactionContext()); // rollback() 修改事务状态为 CANCELLING，并持久化更新，回滚事务 transactionManager.rollback(asyncCancel); } catch (NoExistedTransactionException exception) { //the transaction has been rollback,ignore it. } break; } } finally { // 清除事务队列 transactionManager.cleanAfterCompletion(transaction); } Method method = compensableMethodContext.getMethod(); return ReflectionUtils.getNullValue(method.getReturnType()); } ResourceCoordinatorAspect\n资源协调切面类和 CompensableTransactionAspect 类似，几乎一样，不再赘述。\n@Pointcut(\"@annotation(org.mengyun.tcctransaction.api.Compensable)\") public void transactionContextCall() { } @Around(\"transactionContextCall()\") public Object interceptTransactionContextMethod(ProceedingJoinPoint pjp) throws Throwable { return resourceCoordinatorInterceptor.interceptTransactionContextMethod(pjp); } ResourceCoordinatorInterceptor\n主要处理 try 阶段的事情，在 try 阶段，就将所有的“资源”封装完成并交给事务管理器。\n其中“资源”指的是“事务资源”：\n即事务的参与者：\nconfirm 上下文 cancel 上下文 分支事务信息 然后事务管理器修改数据库状态。\ninterceptTransactionContextMethod\npublic Object interceptTransactionContextMethod(ProceedingJoinPoint pjp) throws Throwable { // 使用事务管理器，传递一些事务相关的信息（线程共享） Transaction transaction = transactionManager.getCurrentTransaction(); if (transaction != null) { switch (transaction.getStatus()) { case TRYING: enlistParticipant(pjp); break; case CONFIRMING: break; case CANCELLING: break; } } return pjp.proceed(pjp.getArgs()); } enlistParticipant\nprivate void enlistParticipant(ProceedingJoinPoint pjp) throws IllegalAccessException, InstantiationException { // 获取对象的方法 Method method = CompensableMethodUtils.getCompensableMethod(pjp); if (method == null) { throw new RuntimeException(String.format(\"join point not found method, point is : %s\", pjp.getSignature().getName())); } // 获取对应的 @Compensable 对象 Compensable compensable = method.getAnnotation(Compensable.class); // 获取配置的 confirm 和 cancel 方法 String confirmMethodName = compensable.confirmMethod(); String cancelMethodName = compensable.cancelMethod(); Transaction transaction = transactionManager.getCurrentTransaction(); TransactionXid xid = new TransactionXid(transaction.getXid().getGlobalTransactionId()); if (FactoryBuilder.factoryOf(compensable.transactionContextEditor()).getInstance().get(pjp.getTarget(), method, pjp.getArgs()) == null) { FactoryBuilder.factoryOf(compensable.transactionContextEditor()).getInstance().set(new TransactionContext(xid, TransactionStatus.TRYING.getId()), pjp.getTarget(), ((MethodSignature) pjp.getSignature()).getMethod(), pjp.getArgs()); } Class targetClass = ReflectionUtils.getDeclaringType(pjp.getTarget().getClass(), method.getName(), method.getParameterTypes()); InvocationContext confirmInvocation = new InvocationContext(targetClass, confirmMethodName, method.getParameterTypes(), pjp.getArgs()); InvocationContext cancelInvocation = new InvocationContext(targetClass, cancelMethodName, method.getParameterTypes(), pjp.getArgs()); Participant participant = new Participant( xid, confirmInvocation, cancelInvocation, compensable.transactionContextEditor()); transactionManager.enlistParticipant(participant); } 这样，经过两个拦截器后，才调用目标对象方法。\n幂等性问题 TCC-Transaction 不能保证幂等性，需要自己实现幂等性。如以下 confirm 和 cancel 方法就实现了幂等性：\nconfirm 的幂等性\n@Transactional public void confirmRecord(RedPacketTradeOrderDto tradeOrderDto) { try { Thread.sleep(1000l); } catch (InterruptedException e) { throw new RuntimeException(e); } System.out.println(\"red packet confirm record called. time seq:\" + DateFormatUtils.format(Calendar.getInstance(), \"yyyy-MM-dd HH:mm:ss\")); TradeOrder tradeOrder = tradeOrderRepository.findByMerchantOrderNo(tradeOrderDto.getMerchantOrderNo()); // 保证幂等性 check if the trade order status is DRAFT, if yes, return directly, ensure idempotency. if (tradeOrder != null \u0026\u0026 tradeOrder.getStatus().equals(\"DRAFT\")) { tradeOrder.confirm(); tradeOrderRepository.update(tradeOrder); RedPacketAccount transferToAccount = redPacketAccountRepository.findByUserId(tradeOrderDto.getOppositeUserId()); transferToAccount.transferTo(tradeOrderDto.getAmount()); redPacketAccountRepository.save(transferToAccount); } } cancel 的幂等性\n@Transactional public void cancelRecord(RedPacketTradeOrderDto tradeOrderDto) { try { Thread.sleep(1000l); } catch (InterruptedException e) { throw new RuntimeException(e); } System.out.println(\"red packet cancel record called. time seq:\" + DateFormatUtils.format(Calendar.getInstance(), \"yyyy-MM-dd HH:mm:ss\")); TradeOrder tradeOrder = tradeOrderRepository.findByMerchantOrderNo(tradeOrderDto.getMerchantOrderNo()); // 保证幂等性 check if the trade order status is DRAFT, if yes, return directly, ensure idempotency. if (null != tradeOrder \u0026\u0026 \"DRAFT\".equals(tradeOrder.getStatus())) { tradeOrder.cancel(); tradeOrderRepository.update(tradeOrder); RedPacketAccount capitalAccount = redPacketAccountRepository.findByUserId(tradeOrderDto.getSelfUserId()); capitalAccount.cancelTransfer(tradeOrderDto.getAmount()); redPacketAccountRepository.save(capitalAccount); } } 小结 事务的相关信息（全局事务编号，乐观锁版本等要持久化存储）\n资源 try 核心点：预留资源（业务资源、事务数据资源）\n流程 注册和初始化事务 -\u003e 组织事务参与者 -\u003e 执行目标方法（try） -\u003e 执行 confirm 和 cancel 方法\n总结 熟悉 TCC-Transaction 的分布式事务处理流程 TCC-Transaction 不能保证幂等性 TCC 分布式事务的核心是资源（业务资源和事务资源） ",
-  "wordCount" : "1426",
-  "inLanguage": "en",
-  "datePublished": "2020-04-17T20:14:00Z",
-  "dateModified": "2020-04-17T20:14:00Z",
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/10.%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "Xinkang's Blog",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://zjxjwxk.github.io/favicon.ico"
-    }
-  }
-}
-</script>
+</noscript>
 </head>
 
 <body class="" id="top">
@@ -263,7 +136,7 @@ Github 仓库：https://github.com/changmingxie/tcc-transaction">
 <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="https://zjxjwxk.github.io/" accesskey="h" title="Xinkang&#39;s Blog (Alt + H)">Xinkang&#39;s Blog</a>
+            <a href="http://localhost:1313/" accesskey="h" title="Xinkang&#39;s Blog (Alt + H)">Xinkang&#39;s Blog</a>
             <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
@@ -289,22 +162,22 @@ Github 仓库：https://github.com/changmingxie/tcc-transaction">
         </div>
         <ul id="menu">
             <li>
-                <a href="https://zjxjwxk.github.io/archives/" title="Archives">
+                <a href="http://localhost:1313/archives/" title="Archives">
                     <span>Archives</span>
                 </a>
             </li>
             <li>
-                <a href="https://zjxjwxk.github.io/categories/" title="Categories">
+                <a href="http://localhost:1313/categories/" title="Categories">
                     <span>Categories</span>
                 </a>
             </li>
             <li>
-                <a href="https://zjxjwxk.github.io/tags/" title="Tags">
+                <a href="http://localhost:1313/tags/" title="Tags">
                     <span>Tags</span>
                 </a>
             </li>
             <li>
-                <a href="https://zjxjwxk.github.io/search/" title="Search (Alt &#43; /)" accesskey=/>
+                <a href="http://localhost:1313/search/" title="Search (Alt &#43; /)" accesskey=/>
                     <span>Search</span>
                 </a>
             </li>
@@ -315,11 +188,11 @@ Github 仓库：https://github.com/changmingxie/tcc-transaction">
 
 <article class="post-single">
   <header class="post-header">
-    
+    <div class="breadcrumbs"><a href="http://localhost:1313/">Home</a>&nbsp;»&nbsp;<a href="http://localhost:1313/posts/">Posts</a></div>
     <h1 class="post-title entry-hint-parent">
       Dubbo微服务影院系列（10）：分布式事务
     </h1>
-    <div class="post-meta"><span title='2020-04-17 20:14:00 +0000 UTC'>April 17, 2020</span>
+    <div class="post-meta"><span title='2020-04-17 20:14:00 +0000 UTC'>April 17, 2020</span>&nbsp;·&nbsp;7 min&nbsp;|&nbsp;<a href="https://github.com/zjxjwxk/zjxjwxk.github.io/tree/main/content/posts/Dubbo/Dubbo%e5%be%ae%e6%9c%8d%e5%8a%a1%e5%bd%b1%e9%99%a2%e7%b3%bb%e5%88%97/10.%e5%88%86%e5%b8%83%e5%bc%8f%e4%ba%8b%e5%8a%a1/index.md" rel="noopener noreferrer" target="_blank">Suggest Changes</a>
 
 </div>
   </header> 
@@ -931,15 +804,115 @@ Github 仓库：https://github.com/changmingxie/tcc-transaction">
 
   <footer class="post-footer">
     <ul class="post-tags">
-      <li><a href="https://zjxjwxk.github.io/tags/dubbo/">Dubbo</a></li>
-      <li><a href="https://zjxjwxk.github.io/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/">微服务架构</a></li>
+      <li><a href="http://localhost:1313/tags/dubbo/">Dubbo</a></li>
+      <li><a href="http://localhost:1313/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/">微服务架构</a></li>
     </ul>
-  </footer>
+<nav class="paginav">
+  <a class="prev" href="http://localhost:1313/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/11.%E6%9C%8D%E5%8A%A1%E7%9B%91%E6%8E%A7/">
+    <span class="title">« Prev</span>
+    <br>
+    <span>Dubbo微服务影院系列（11）：服务监控</span>
+  </a>
+  <a class="next" href="http://localhost:1313/posts/pat/advanced_level/a1108/">
+    <span class="title">Next »</span>
+    <br>
+    <span>PAT甲级 1108 Finding Average (20分)</span>
+  </a>
+</nav>
+
+
+<ul class="share-buttons">
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share Dubbo微服务影院系列（10）：分布式事务 on x"
+            href="https://x.com/intent/tweet/?text=Dubbo%e5%be%ae%e6%9c%8d%e5%8a%a1%e5%bd%b1%e9%99%a2%e7%b3%bb%e5%88%97%ef%bc%8810%ef%bc%89%ef%bc%9a%e5%88%86%e5%b8%83%e5%bc%8f%e4%ba%8b%e5%8a%a1&amp;url=http%3a%2f%2flocalhost%3a1313%2fposts%2fdubbo%2fdubbo%25E5%25BE%25AE%25E6%259C%258D%25E5%258A%25A1%25E5%25BD%25B1%25E9%2599%25A2%25E7%25B3%25BB%25E5%2588%2597%2f10.%25E5%2588%2586%25E5%25B8%2583%25E5%25BC%258F%25E4%25BA%258B%25E5%258A%25A1%2f&amp;hashtags=Dubbo%2c%e5%be%ae%e6%9c%8d%e5%8a%a1%e6%9e%b6%e6%9e%84">
+            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M512 62.554 L 512 449.446 C 512 483.97 483.97 512 449.446 512 L 62.554 512 C 28.03 512 0 483.97 0 449.446 L 0 62.554 C 0 28.03 28.029 0 62.554 0 L 449.446 0 C 483.971 0 512 28.03 512 62.554 Z M 269.951 190.75 L 182.567 75.216 L 56 75.216 L 207.216 272.95 L 63.9 436.783 L 125.266 436.783 L 235.9 310.383 L 332.567 436.783 L 456 436.783 L 298.367 228.367 L 432.367 75.216 L 371.033 75.216 Z M 127.633 110 L 164.101 110 L 383.481 400.065 L 349.5 400.065 Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share Dubbo微服务影院系列（10）：分布式事务 on linkedin"
+            href="https://www.linkedin.com/shareArticle?mini=true&amp;url=http%3a%2f%2flocalhost%3a1313%2fposts%2fdubbo%2fdubbo%25E5%25BE%25AE%25E6%259C%258D%25E5%258A%25A1%25E5%25BD%25B1%25E9%2599%25A2%25E7%25B3%25BB%25E5%2588%2597%2f10.%25E5%2588%2586%25E5%25B8%2583%25E5%25BC%258F%25E4%25BA%258B%25E5%258A%25A1%2f&amp;title=Dubbo%e5%be%ae%e6%9c%8d%e5%8a%a1%e5%bd%b1%e9%99%a2%e7%b3%bb%e5%88%97%ef%bc%8810%ef%bc%89%ef%bc%9a%e5%88%86%e5%b8%83%e5%bc%8f%e4%ba%8b%e5%8a%a1&amp;summary=Dubbo%e5%be%ae%e6%9c%8d%e5%8a%a1%e5%bd%b1%e9%99%a2%e7%b3%bb%e5%88%97%ef%bc%8810%ef%bc%89%ef%bc%9a%e5%88%86%e5%b8%83%e5%bc%8f%e4%ba%8b%e5%8a%a1&amp;source=http%3a%2f%2flocalhost%3a1313%2fposts%2fdubbo%2fdubbo%25E5%25BE%25AE%25E6%259C%258D%25E5%258A%25A1%25E5%25BD%25B1%25E9%2599%25A2%25E7%25B3%25BB%25E5%2588%2597%2f10.%25E5%2588%2586%25E5%25B8%2583%25E5%25BC%258F%25E4%25BA%258B%25E5%258A%25A1%2f">
+            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-288.985,423.278l0,-225.717l-75.04,0l0,225.717l75.04,0Zm270.539,0l0,-129.439c0,-69.333 -37.018,-101.586 -86.381,-101.586c-39.804,0 -57.634,21.891 -67.617,37.266l0,-31.958l-75.021,0c0.995,21.181 0,225.717 0,225.717l75.02,0l0,-126.056c0,-6.748 0.486,-13.492 2.474,-18.315c5.414,-13.475 17.767,-27.434 38.494,-27.434c27.135,0 38.007,20.707 38.007,51.037l0,120.768l75.024,0Zm-307.552,-334.556c-25.674,0 -42.448,16.879 -42.448,39.002c0,21.658 16.264,39.002 41.455,39.002l0.484,0c26.165,0 42.452,-17.344 42.452,-39.002c-0.485,-22.092 -16.241,-38.954 -41.943,-39.002Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share Dubbo微服务影院系列（10）：分布式事务 on reddit"
+            href="https://reddit.com/submit?url=http%3a%2f%2flocalhost%3a1313%2fposts%2fdubbo%2fdubbo%25E5%25BE%25AE%25E6%259C%258D%25E5%258A%25A1%25E5%25BD%25B1%25E9%2599%25A2%25E7%25B3%25BB%25E5%2588%2597%2f10.%25E5%2588%2586%25E5%25B8%2583%25E5%25BC%258F%25E4%25BA%258B%25E5%258A%25A1%2f&title=Dubbo%e5%be%ae%e6%9c%8d%e5%8a%a1%e5%bd%b1%e9%99%a2%e7%b3%bb%e5%88%97%ef%bc%8810%ef%bc%89%ef%bc%9a%e5%88%86%e5%b8%83%e5%bc%8f%e4%ba%8b%e5%8a%a1">
+            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-3.446,265.638c0,-22.964 -18.616,-41.58 -41.58,-41.58c-11.211,0 -21.361,4.457 -28.841,11.666c-28.424,-20.508 -67.586,-33.757 -111.204,-35.278l18.941,-89.121l61.884,13.157c0.756,15.734 13.642,28.29 29.56,28.29c16.407,0 29.706,-13.299 29.706,-29.701c0,-16.403 -13.299,-29.702 -29.706,-29.702c-11.666,0 -21.657,6.792 -26.515,16.578l-69.105,-14.69c-1.922,-0.418 -3.939,-0.042 -5.585,1.036c-1.658,1.073 -2.811,2.761 -3.224,4.686l-21.152,99.438c-44.258,1.228 -84.046,14.494 -112.837,35.232c-7.468,-7.164 -17.589,-11.591 -28.757,-11.591c-22.965,0 -41.585,18.616 -41.585,41.58c0,16.896 10.095,31.41 24.568,37.918c-0.639,4.135 -0.99,8.328 -0.99,12.576c0,63.977 74.469,115.836 166.33,115.836c91.861,0 166.334,-51.859 166.334,-115.836c0,-4.218 -0.347,-8.387 -0.977,-12.493c14.564,-6.47 24.735,-21.034 24.735,-38.001Zm-119.474,108.193c-20.27,20.241 -59.115,21.816 -70.534,21.816c-11.428,0 -50.277,-1.575 -70.522,-21.82c-3.007,-3.008 -3.007,-7.882 0,-10.889c3.003,-2.999 7.882,-3.003 10.885,0c12.777,12.781 40.11,17.317 59.637,17.317c19.522,0 46.86,-4.536 59.657,-17.321c3.016,-2.999 7.886,-2.995 10.885,0.008c3.008,3.011 3.003,7.882 -0.008,10.889Zm-5.23,-48.781c-16.373,0 -29.701,-13.324 -29.701,-29.698c0,-16.381 13.328,-29.714 29.701,-29.714c16.378,0 29.706,13.333 29.706,29.714c0,16.374 -13.328,29.698 -29.706,29.698Zm-160.386,-29.702c0,-16.381 13.328,-29.71 29.714,-29.71c16.369,0 29.689,13.329 29.689,29.71c0,16.373 -13.32,29.693 -29.689,29.693c-16.386,0 -29.714,-13.32 -29.714,-29.693Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share Dubbo微服务影院系列（10）：分布式事务 on facebook"
+            href="https://facebook.com/sharer/sharer.php?u=http%3a%2f%2flocalhost%3a1313%2fposts%2fdubbo%2fdubbo%25E5%25BE%25AE%25E6%259C%258D%25E5%258A%25A1%25E5%25BD%25B1%25E9%2599%25A2%25E7%25B3%25BB%25E5%2588%2597%2f10.%25E5%2588%2586%25E5%25B8%2583%25E5%25BC%258F%25E4%25BA%258B%25E5%258A%25A1%2f">
+            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-106.468,0l0,-192.915l66.6,0l12.672,-82.621l-79.272,0l0,-53.617c0,-22.603 11.073,-44.636 46.58,-44.636l36.042,0l0,-70.34c0,0 -32.71,-5.582 -63.982,-5.582c-65.288,0 -107.96,39.569 -107.96,111.204l0,62.971l-72.573,0l0,82.621l72.573,0l0,192.915l-191.104,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share Dubbo微服务影院系列（10）：分布式事务 on whatsapp"
+            href="https://api.whatsapp.com/send?text=Dubbo%e5%be%ae%e6%9c%8d%e5%8a%a1%e5%bd%b1%e9%99%a2%e7%b3%bb%e5%88%97%ef%bc%8810%ef%bc%89%ef%bc%9a%e5%88%86%e5%b8%83%e5%bc%8f%e4%ba%8b%e5%8a%a1%20-%20http%3a%2f%2flocalhost%3a1313%2fposts%2fdubbo%2fdubbo%25E5%25BE%25AE%25E6%259C%258D%25E5%258A%25A1%25E5%25BD%25B1%25E9%2599%25A2%25E7%25B3%25BB%25E5%2588%2597%2f10.%25E5%2588%2586%25E5%25B8%2583%25E5%25BC%258F%25E4%25BA%258B%25E5%258A%25A1%2f">
+            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-58.673,127.703c-33.842,-33.881 -78.847,-52.548 -126.798,-52.568c-98.799,0 -179.21,80.405 -179.249,179.234c-0.013,31.593 8.241,62.428 23.927,89.612l-25.429,92.884l95.021,-24.925c26.181,14.28 55.659,21.807 85.658,21.816l0.074,0c98.789,0 179.206,-80.413 179.247,-179.243c0.018,-47.895 -18.61,-92.93 -52.451,-126.81Zm-126.797,275.782l-0.06,0c-26.734,-0.01 -52.954,-7.193 -75.828,-20.767l-5.441,-3.229l-56.386,14.792l15.05,-54.977l-3.542,-5.637c-14.913,-23.72 -22.791,-51.136 -22.779,-79.287c0.033,-82.142 66.867,-148.971 149.046,-148.971c39.793,0.014 77.199,15.531 105.329,43.692c28.128,28.16 43.609,65.592 43.594,105.4c-0.034,82.149 -66.866,148.983 -148.983,148.984Zm81.721,-111.581c-4.479,-2.242 -26.499,-13.075 -30.604,-14.571c-4.105,-1.495 -7.091,-2.241 -10.077,2.241c-2.986,4.483 -11.569,14.572 -14.182,17.562c-2.612,2.988 -5.225,3.364 -9.703,1.12c-4.479,-2.241 -18.91,-6.97 -36.017,-22.23c-13.314,-11.876 -22.304,-26.542 -24.916,-31.026c-2.612,-4.484 -0.279,-6.908 1.963,-9.14c2.016,-2.007 4.48,-5.232 6.719,-7.847c2.24,-2.615 2.986,-4.484 4.479,-7.472c1.493,-2.99 0.747,-5.604 -0.374,-7.846c-1.119,-2.241 -10.077,-24.288 -13.809,-33.256c-3.635,-8.733 -7.327,-7.55 -10.077,-7.688c-2.609,-0.13 -5.598,-0.158 -8.583,-0.158c-2.986,0 -7.839,1.121 -11.944,5.604c-4.105,4.484 -15.675,15.32 -15.675,37.364c0,22.046 16.048,43.342 18.287,46.332c2.24,2.99 31.582,48.227 76.511,67.627c10.685,4.615 19.028,7.371 25.533,9.434c10.728,3.41 20.492,2.929 28.209,1.775c8.605,-1.285 26.499,-10.833 30.231,-21.295c3.732,-10.464 3.732,-19.431 2.612,-21.298c-1.119,-1.869 -4.105,-2.99 -8.583,-5.232Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share Dubbo微服务影院系列（10）：分布式事务 on telegram"
+            href="https://telegram.me/share/url?text=Dubbo%e5%be%ae%e6%9c%8d%e5%8a%a1%e5%bd%b1%e9%99%a2%e7%b3%bb%e5%88%97%ef%bc%8810%ef%bc%89%ef%bc%9a%e5%88%86%e5%b8%83%e5%bc%8f%e4%ba%8b%e5%8a%a1&amp;url=http%3a%2f%2flocalhost%3a1313%2fposts%2fdubbo%2fdubbo%25E5%25BE%25AE%25E6%259C%258D%25E5%258A%25A1%25E5%25BD%25B1%25E9%2599%25A2%25E7%25B3%25BB%25E5%2588%2597%2f10.%25E5%2588%2586%25E5%25B8%2583%25E5%25BC%258F%25E4%25BA%258B%25E5%258A%25A1%2f">
+            <svg version="1.1" xml:space="preserve" viewBox="2 2 28 28" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M26.49,29.86H5.5a3.37,3.37,0,0,1-2.47-1,3.35,3.35,0,0,1-1-2.47V5.48A3.36,3.36,0,0,1,3,3,3.37,3.37,0,0,1,5.5,2h21A3.38,3.38,0,0,1,29,3a3.36,3.36,0,0,1,1,2.46V26.37a3.35,3.35,0,0,1-1,2.47A3.38,3.38,0,0,1,26.49,29.86Zm-5.38-6.71a.79.79,0,0,0,.85-.66L24.73,9.24a.55.55,0,0,0-.18-.46.62.62,0,0,0-.41-.17q-.08,0-16.53,6.11a.59.59,0,0,0-.41.59.57.57,0,0,0,.43.52l4,1.24,1.61,4.83a.62.62,0,0,0,.63.43.56.56,0,0,0,.4-.17L16.54,20l4.09,3A.9.9,0,0,0,21.11,23.15ZM13.8,20.71l-1.21-4q8.72-5.55,8.78-5.55c.15,0,.23,0,.23.16a.18.18,0,0,1,0,.06s-2.51,2.3-7.52,6.8Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share Dubbo微服务影院系列（10）：分布式事务 on ycombinator"
+            href="https://news.ycombinator.com/submitlink?t=Dubbo%e5%be%ae%e6%9c%8d%e5%8a%a1%e5%bd%b1%e9%99%a2%e7%b3%bb%e5%88%97%ef%bc%8810%ef%bc%89%ef%bc%9a%e5%88%86%e5%b8%83%e5%bc%8f%e4%ba%8b%e5%8a%a1&u=http%3a%2f%2flocalhost%3a1313%2fposts%2fdubbo%2fdubbo%25E5%25BE%25AE%25E6%259C%258D%25E5%258A%25A1%25E5%25BD%25B1%25E9%2599%25A2%25E7%25B3%25BB%25E5%2588%2597%2f10.%25E5%2588%2586%25E5%25B8%2583%25E5%25BC%258F%25E4%25BA%258B%25E5%258A%25A1%2f">
+            <svg version="1.1" xml:space="preserve" width="30px" height="30px" viewBox="0 0 512 512" fill="currentColor"
+                xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape">
+                <path
+                    d="M449.446 0C483.971 0 512 28.03 512 62.554L512 449.446C512 483.97 483.97 512 449.446 512L62.554 512C28.03 512 0 483.97 0 449.446L0 62.554C0 28.03 28.029 0 62.554 0L449.446 0ZM183.8767 87.9921H121.8427L230.6673 292.4508V424.0079H281.3328V292.4508L390.1575 87.9921H328.1233L256 238.2489z" />
+            </svg>
+        </a>
+    </li>
+</ul>
+
+  </footer><div id="disqus_thread"></div>
+<script>
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "xinkangwu" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
 </article>
     </main>
     
 <footer class="footer">
-        <span>&copy; 2024 <a href="https://zjxjwxk.github.io/">Xinkang&#39;s Blog</a></span> · 
+        <span>&copy; 2024 <a href="http://localhost:1313/">Xinkang&#39;s Blog</a></span> · 
 
     <span>
         Powered by
@@ -1006,6 +979,53 @@ Github 仓库：https://github.com/changmingxie/tcc-transaction">
         }
     })
 
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
 </script>
 </body>
 

@@ -2,25 +2,25 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>最短路径 on Xinkang&#39;s Blog</title>
-    <link>https://zjxjwxk.github.io/tags/%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84/</link>
+    <link>http://localhost:1313/tags/%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84/</link>
     <description>Recent content in 最短路径 on Xinkang&#39;s Blog</description>
     <generator>Hugo -- 0.138.0</generator>
     <language>en</language>
     <lastBuildDate>Mon, 13 Apr 2020 00:11:00 +0000</lastBuildDate>
-    <atom:link href="https://zjxjwxk.github.io/tags/%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/tags/%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>PAT甲级 1072 Gas Station (30分)</title>
-      <link>https://zjxjwxk.github.io/posts/pat/advanced_level/a1072/</link>
+      <link>http://localhost:1313/posts/pat/advanced_level/a1072/</link>
       <pubDate>Mon, 13 Apr 2020 00:11:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/posts/pat/advanced_level/a1072/</guid>
+      <guid>http://localhost:1313/posts/pat/advanced_level/a1072/</guid>
       <description>&lt;p&gt;A gas station has to be built at such a location that the minimum distance between the station and any of the residential housing is as far away as possible. However it must guarantee that all the houses are in its service range.&lt;/p&gt;
 &lt;p&gt;Now given the map of the city and several candidate locations for the gas station, you are supposed to give the best recommendation. If there are more than one solution, output the one with the smallest average distance to all the houses. If such a solution is still not unique, output the one with the smallest index number.&lt;/p&gt;</description>
     </item>
     <item>
       <title>PAT甲级 1018 Public Bike Management (30分)</title>
-      <link>https://zjxjwxk.github.io/posts/pat/advanced_level/a1018/</link>
+      <link>http://localhost:1313/posts/pat/advanced_level/a1018/</link>
       <pubDate>Sun, 12 Apr 2020 15:52:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/posts/pat/advanced_level/a1018/</guid>
+      <guid>http://localhost:1313/posts/pat/advanced_level/a1018/</guid>
       <description>&lt;p&gt;There is a public bike service in Hangzhou City which provides great convenience to the tourists from all over the world. One may rent a bike at any station and return it to any other stations in the city.&lt;/p&gt;
 &lt;p&gt;The Public Bike Management Center (PBMC) keeps monitoring the real-time capacity of all the stations. A station is said to be in &lt;strong&gt;perfect&lt;/strong&gt; condition if it is exactly half-full. If a station is full or empty, PBMC will collect or send bikes to adjust the condition of that station to perfect. And more, all the stations on the way will be adjusted as well.&lt;/p&gt;</description>
     </item>

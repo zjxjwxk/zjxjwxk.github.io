@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>微服务架构 on Xinkang&#39;s Blog</title>
-    <link>https://zjxjwxk.github.io/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/</link>
+    <link>http://localhost:1313/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/</link>
     <description>Recent content in 微服务架构 on Xinkang&#39;s Blog</description>
     <generator>Hugo -- 0.138.0</generator>
     <language>en</language>
     <lastBuildDate>Thu, 04 Jun 2020 23:15:00 +0000</lastBuildDate>
-    <atom:link href="https://zjxjwxk.github.io/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>微服务容器化系列（1）：服务编排前奏</title>
-      <link>https://zjxjwxk.github.io/posts/docker/docker-&#43;-k8s-%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%AE%B9%E5%99%A8%E5%8C%96/1.-%E6%9C%8D%E5%8A%A1%E7%BC%96%E6%8E%92%E5%89%8D%E5%A5%8F/</link>
+      <link>http://localhost:1313/posts/docker/docker-&#43;-k8s-%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%AE%B9%E5%99%A8%E5%8C%96/1.-%E6%9C%8D%E5%8A%A1%E7%BC%96%E6%8E%92%E5%89%8D%E5%A5%8F/</link>
       <pubDate>Thu, 04 Jun 2020 23:15:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/posts/docker/docker-&#43;-k8s-%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%AE%B9%E5%99%A8%E5%8C%96/1.-%E6%9C%8D%E5%8A%A1%E7%BC%96%E6%8E%92%E5%89%8D%E5%A5%8F/</guid>
+      <guid>http://localhost:1313/posts/docker/docker-&#43;-k8s-%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%AE%B9%E5%99%A8%E5%8C%96/1.-%E6%9C%8D%E5%8A%A1%E7%BC%96%E6%8E%92%E5%89%8D%E5%A5%8F/</guid>
       <description>&lt;h1 id=&#34;服务-docker-化&#34;&gt;服务 Docker 化&lt;/h1&gt;
 &lt;h2 id=&#34;修改项目配置&#34;&gt;修改项目配置&lt;/h2&gt;
 &lt;p&gt;由于镜像运行时 MySQL 数据库所在的主机地址是动态的，所以将项目中的 MySQL 数据库地址和 Zookeeper 注册中心地址配置为动态变量：&lt;/p&gt;
@@ -42,9 +42,9 @@
     </item>
     <item>
       <title>Dubbo微服务影院系列（12）：系统部署</title>
-      <link>https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/12.%E7%B3%BB%E7%BB%9F%E9%83%A8%E7%BD%B2/</link>
+      <link>http://localhost:1313/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/12.%E7%B3%BB%E7%BB%9F%E9%83%A8%E7%BD%B2/</link>
       <pubDate>Sun, 03 May 2020 22:34:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/12.%E7%B3%BB%E7%BB%9F%E9%83%A8%E7%BD%B2/</guid>
+      <guid>http://localhost:1313/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/12.%E7%B3%BB%E7%BB%9F%E9%83%A8%E7%BD%B2/</guid>
       <description>&lt;h1 id=&#34;运行环境&#34;&gt;运行环境&lt;/h1&gt;
 &lt;ul&gt;
 &lt;li&gt;CentOS 6&lt;/li&gt;
@@ -69,9 +69,9 @@
     </item>
     <item>
       <title>Dubbo微服务影院系列（11）：服务监控</title>
-      <link>https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/11.%E6%9C%8D%E5%8A%A1%E7%9B%91%E6%8E%A7/</link>
+      <link>http://localhost:1313/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/11.%E6%9C%8D%E5%8A%A1%E7%9B%91%E6%8E%A7/</link>
       <pubDate>Fri, 24 Apr 2020 23:11:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/11.%E6%9C%8D%E5%8A%A1%E7%9B%91%E6%8E%A7/</guid>
+      <guid>http://localhost:1313/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/11.%E6%9C%8D%E5%8A%A1%E7%9B%91%E6%8E%A7/</guid>
       <description>&lt;h1 id=&#34;章节概要&#34;&gt;章节概要&lt;/h1&gt;
 &lt;ul&gt;
 &lt;li&gt;了解 Dubbo 监控相关内容&lt;/li&gt;
@@ -80,14 +80,14 @@
 &lt;li&gt;完成业务系统部署&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h1 id=&#34;dubbo-monitor&#34;&gt;Dubbo-monitor&lt;/h1&gt;
-&lt;p&gt;&lt;img alt=&#34;Dubbo架构&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/11.%E6%9C%8D%E5%8A%A1%E7%9B%91%E6%8E%A7/images/image-20200424231550404.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;Dubbo架构&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/11.%E6%9C%8D%E5%8A%A1%E7%9B%91%E6%8E%A7/images/image-20200424231550404.png&#34;&gt;&lt;/p&gt;
 &lt;h2 id=&#34;源码下载和打包&#34;&gt;源码下载和打包&lt;/h2&gt;
 &lt;p&gt;目前，还可以从当当网的项目 Dubbox 中获取（很久没有维护了）：https://github.com/dangdangdotcom/dubbox ，在项目中执行以下命令打包并拷贝到本地仓库（跳过单元测试）：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;mvn package -Dmaven.test.skip&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;true  
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;其中，可能会遇到 Missing artifact com.alibaba:dubbo:jar:2.8.4 的坑，需要在根项目的 pom.xml 文件中添加以下 maven 插件：&lt;/p&gt;
-&lt;p&gt;&lt;img alt=&#34;添加插件依赖&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/11.%E6%9C%8D%E5%8A%A1%E7%9B%91%E6%8E%A7/images/image-20200425004851922.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;添加插件依赖&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/11.%E6%9C%8D%E5%8A%A1%E7%9B%91%E6%8E%A7/images/image-20200425004851922.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;这样在本地仓库就有了 ~/.m2/repository/com/alibaba/dubbo-monitor-simple/2.8.4/dubbo-monitor-simple-2.8.4-assembly.tar.gz 这个 tar.gz 包，解压它可以得到以下文件：&lt;/p&gt;
-&lt;p&gt;&lt;img alt=&#34;Dubbo-Monitor文件目录&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/11.%E6%9C%8D%E5%8A%A1%E7%9B%91%E6%8E%A7/images/image-20200425004950736.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;Dubbo-Monitor文件目录&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/11.%E6%9C%8D%E5%8A%A1%E7%9B%91%E6%8E%A7/images/image-20200425004950736.png&#34;&gt;&lt;/p&gt;
 &lt;h2 id=&#34;启动服务监控&#34;&gt;启动服务监控&lt;/h2&gt;
 &lt;p&gt;在 conf 文件夹下，编辑 dubbo.properties，将相关参数配置如下：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-properties&#34; data-lang=&#34;properties&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;dubbo.container&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;log4j,spring,registry,jetty&lt;/span&gt;
@@ -105,16 +105,16 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;dubbo.log4j.file&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;monitor/dubbo-monitor-simple.log&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;dubbo.log4j.level&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;WARN&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;然后，进入 bin 目录，运行 start.sh 就可以启动 Dubbo-Monitor 了，运行在配置好的 8090 端口（需要先打开 Zookeeper）。&lt;/p&gt;
-&lt;p&gt;&lt;img alt=&#34;Dubbo-Monitor界面&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/11.%E6%9C%8D%E5%8A%A1%E7%9B%91%E6%8E%A7/images/image-20200425005304792.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;Dubbo-Monitor界面&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/11.%E6%9C%8D%E5%8A%A1%E7%9B%91%E6%8E%A7/images/image-20200425005304792.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;启动服务提供者和消费者后，可以在 Applications 中看到如下信息：&lt;/p&gt;
-&lt;p&gt;&lt;img alt=&#34;服务提供者和消费者&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/11.%E6%9C%8D%E5%8A%A1%E7%9B%91%E6%8E%A7/images/image-20200425010612712.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;服务提供者和消费者&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/11.%E6%9C%8D%E5%8A%A1%E7%9B%91%E6%8E%A7/images/image-20200425010612712.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;同时，可以点击 Providers 查看服务某一服务提供者的详细信息，并且可以将其取消注册：&lt;/p&gt;</description>
     </item>
     <item>
       <title>Dubbo微服务影院系列（10）：分布式事务</title>
-      <link>https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/10.%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/</link>
+      <link>http://localhost:1313/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/10.%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/</link>
       <pubDate>Fri, 17 Apr 2020 20:14:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/10.%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/</guid>
+      <guid>http://localhost:1313/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/10.%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/</guid>
       <description>&lt;h1 id=&#34;章节概要&#34;&gt;章节概要&lt;/h1&gt;
 &lt;ul&gt;
 &lt;li&gt;事务简介&lt;/li&gt;
@@ -153,15 +153,15 @@
 &lt;h1 id=&#34;分布式事务类型&#34;&gt;分布式事务类型&lt;/h1&gt;
 &lt;h2 id=&#34;两段式和三段式事务&#34;&gt;两段式和三段式事务&lt;/h2&gt;
 &lt;h3 id=&#34;两段式事务&#34;&gt;两段式事务&lt;/h3&gt;
-&lt;p&gt;&lt;img alt=&#34;两段式事务&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/10.%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/images/63d3220513cf709f84fdcd06457c3b65.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;两段式事务&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/10.%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/images/63d3220513cf709f84fdcd06457c3b65.png&#34;&gt;&lt;/p&gt;
 &lt;h3 id=&#34;三段式事务&#34;&gt;三段式事务&lt;/h3&gt;
-&lt;p&gt;&lt;img alt=&#34;三段式事务&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/10.%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/images/image-20200416213159506.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;三段式事务&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/10.%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/images/image-20200416213159506.png&#34;&gt;&lt;/p&gt;
 &lt;h2 id=&#34;基于-xa-的分布式事务&#34;&gt;基于 XA 的分布式事务&lt;/h2&gt;
-&lt;p&gt;&lt;img alt=&#34;基于XA的分布式事务&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/10.%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/images/image-20200416213551917.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;基于XA的分布式事务&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/10.%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/images/image-20200416213551917.png&#34;&gt;&lt;/p&gt;
 &lt;h2 id=&#34;基于消息的一致性方案&#34;&gt;基于消息的一致性方案&lt;/h2&gt;
-&lt;p&gt;&lt;img alt=&#34;基于消息的一致性方案&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/10.%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/images/image-20200416215409588.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;基于消息的一致性方案&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/10.%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/images/image-20200416215409588.png&#34;&gt;&lt;/p&gt;
 &lt;h2 id=&#34;tcc-补偿性事务&#34;&gt;TCC 补偿性事务&lt;/h2&gt;
-&lt;p&gt;&lt;img alt=&#34;TCC补偿性事务&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/10.%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/images/image-20200416220735799.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;TCC补偿性事务&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/10.%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/images/image-20200416220735799.png&#34;&gt;&lt;/p&gt;
 &lt;h3 id=&#34;基于消息的一致性方案和-tcc-补偿性事务的区别&#34;&gt;基于消息的一致性方案和 TCC 补偿性事务的区别&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;基于消息的事务是强一致性事务，会存在浪费&lt;/li&gt;
@@ -182,9 +182,9 @@
     </item>
     <item>
       <title>Dubbo微服务影院系列（9）：Dubbo服务开发（支付模块开发）</title>
-      <link>https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/9.dubbo%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91%E6%94%AF%E4%BB%98%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/</link>
+      <link>http://localhost:1313/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/9.dubbo%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91%E6%94%AF%E4%BB%98%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/</link>
       <pubDate>Sat, 11 Apr 2020 20:14:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/9.dubbo%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91%E6%94%AF%E4%BB%98%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/</guid>
+      <guid>http://localhost:1313/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/9.dubbo%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91%E6%94%AF%E4%BB%98%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/</guid>
       <description>&lt;h1 id=&#34;章节概要&#34;&gt;章节概要&lt;/h1&gt;
 &lt;ul&gt;
 &lt;li&gt;完成支付模块业务开发&lt;/li&gt;
@@ -200,7 +200,7 @@
 &lt;p&gt;官方文档：https://dubbo.apache.org/zh-cn/docs/user/demos/local-stub.html&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;远程服务后，客户端通常只剩下接口，而实现全在服务器端，但提供方有些时候想在客户端也执行部分逻辑，比如：做 ThreadLocal 缓存，提前验证参数，调用失败后伪造容错数据等等，此时就需要在 API 中带上 Stub，客户端生成 Proxy 实例，会把 Proxy 通过构造函数传给 Stub，然后把 Stub 暴露给用户，Stub 可以决定要不要去调 Proxy。&lt;/p&gt;
-&lt;p&gt;&lt;img alt=&#34;Dubbo本地存根&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/9.dubbo%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91%E6%94%AF%E4%BB%98%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/images/stub.jpg&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;Dubbo本地存根&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/9.dubbo%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91%E6%94%AF%E4%BB%98%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/images/stub.jpg&#34;&gt;&lt;/p&gt;
 &lt;p&gt;在 spring 配置文件中按以下方式配置：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;dubbo:service&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;interface=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;com.foo.BarService&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;stub=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;true&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;/&amp;gt;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;或&lt;/p&gt;
@@ -240,9 +240,9 @@
     </item>
     <item>
       <title>Dubbo微服务影院系列（8）：Dubbo服务开发（订单模块开发）</title>
-      <link>https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/8.dubbo%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91%E8%AE%A2%E5%8D%95%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/</link>
+      <link>http://localhost:1313/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/8.dubbo%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91%E8%AE%A2%E5%8D%95%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/</link>
       <pubDate>Sun, 05 Apr 2020 19:30:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/8.dubbo%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91%E8%AE%A2%E5%8D%95%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/</guid>
+      <guid>http://localhost:1313/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/8.dubbo%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91%E8%AE%A2%E5%8D%95%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/</guid>
       <description>&lt;h1 id=&#34;章节概要&#34;&gt;章节概要&lt;/h1&gt;
 &lt;ul&gt;
 &lt;li&gt;完成订单模块业务开发&lt;/li&gt;
@@ -257,7 +257,7 @@
 &lt;li&gt;如何保证多版本的蓝绿上线？&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h1 id=&#34;横向拆分和纵向拆分&#34;&gt;横向拆分和纵向拆分&lt;/h1&gt;
-&lt;p&gt;&lt;img alt=&#34;横向拆分和纵向拆分&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/8.dubbo%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91%E8%AE%A2%E5%8D%95%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/images/image-20200408000355380.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;横向拆分和纵向拆分&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/8.dubbo%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91%E8%AE%A2%E5%8D%95%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/images/image-20200408000355380.png&#34;&gt;&lt;/p&gt;
 &lt;h1 id=&#34;dubbo-服务分组&#34;&gt;Dubbo 服务分组&lt;/h1&gt;
 &lt;blockquote&gt;
 &lt;p&gt;官方文档：https://dubbo.apache.org/zh-cn/docs/user/demos/service-group.html&lt;/p&gt;
@@ -316,9 +316,9 @@
     </item>
     <item>
       <title>Dubbo微服务影院系列（7）：Dubbo服务开发（影院模块开发）</title>
-      <link>https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/7.dubbo%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91%E5%BD%B1%E9%99%A2%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/</link>
+      <link>http://localhost:1313/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/7.dubbo%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91%E5%BD%B1%E9%99%A2%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/</link>
       <pubDate>Mon, 30 Mar 2020 21:21:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/7.dubbo%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91%E5%BD%B1%E9%99%A2%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/</guid>
+      <guid>http://localhost:1313/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/7.dubbo%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91%E5%BD%B1%E9%99%A2%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/</guid>
       <description>&lt;h1 id=&#34;章节概要&#34;&gt;章节概要&lt;/h1&gt;
 &lt;ul&gt;
 &lt;li&gt;完成影院模块业务开发&lt;/li&gt;
@@ -370,9 +370,9 @@
     </item>
     <item>
       <title>Dubbo微服务影院系列（6）：Dubbo服务开发（影片模块开发）</title>
-      <link>https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/6.dubbo%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91%E5%BD%B1%E7%89%87%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/</link>
+      <link>http://localhost:1313/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/6.dubbo%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91%E5%BD%B1%E7%89%87%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/</link>
       <pubDate>Sun, 22 Mar 2020 19:47:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/6.dubbo%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91%E5%BD%B1%E7%89%87%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/</guid>
+      <guid>http://localhost:1313/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/6.dubbo%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91%E5%BD%B1%E7%89%87%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/</guid>
       <description>&lt;h1 id=&#34;章节概要&#34;&gt;章节概要&lt;/h1&gt;
 &lt;ul&gt;
 &lt;li&gt;掌握 API 网关服务聚合功能的实现&lt;/li&gt;
@@ -431,9 +431,9 @@
     </item>
     <item>
       <title>Dubbo微服务影院系列（5）：Dubbo基本特性（用户模块开发）</title>
-      <link>https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/5.dubbo%E5%9F%BA%E6%9C%AC%E7%89%B9%E6%80%A7%E7%94%A8%E6%88%B7%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/</link>
+      <link>http://localhost:1313/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/5.dubbo%E5%9F%BA%E6%9C%AC%E7%89%B9%E6%80%A7%E7%94%A8%E6%88%B7%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/</link>
       <pubDate>Wed, 11 Mar 2020 23:45:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/5.dubbo%E5%9F%BA%E6%9C%AC%E7%89%B9%E6%80%A7%E7%94%A8%E6%88%B7%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/</guid>
+      <guid>http://localhost:1313/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/5.dubbo%E5%9F%BA%E6%9C%AC%E7%89%B9%E6%80%A7%E7%94%A8%E6%88%B7%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/</guid>
       <description>&lt;h1 id=&#34;章节概要&#34;&gt;章节概要&lt;/h1&gt;
 &lt;ul&gt;
 &lt;li&gt;学会 API 网关权限验证和其他服务交互&lt;/li&gt;
@@ -478,9 +478,9 @@
     </item>
     <item>
       <title>Dubbo微服务影院系列（4）：业务基础环境构建</title>
-      <link>https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/4.%E4%B8%9A%E5%8A%A1%E5%9F%BA%E7%A1%80%E7%8E%AF%E5%A2%83%E6%9E%84%E5%BB%BA/</link>
+      <link>http://localhost:1313/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/4.%E4%B8%9A%E5%8A%A1%E5%9F%BA%E7%A1%80%E7%8E%AF%E5%A2%83%E6%9E%84%E5%BB%BA/</link>
       <pubDate>Mon, 09 Mar 2020 22:25:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/4.%E4%B8%9A%E5%8A%A1%E5%9F%BA%E7%A1%80%E7%8E%AF%E5%A2%83%E6%9E%84%E5%BB%BA/</guid>
+      <guid>http://localhost:1313/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/4.%E4%B8%9A%E5%8A%A1%E5%9F%BA%E7%A1%80%E7%8E%AF%E5%A2%83%E6%9E%84%E5%BB%BA/</guid>
       <description>&lt;h1 id=&#34;章节概要&#34;&gt;章节概要&lt;/h1&gt;
 &lt;ul&gt;
 &lt;li&gt;构建基于 Guns + SpringBoot + Dubbo 的框架&lt;/li&gt;
@@ -493,7 +493,7 @@
 &lt;li&gt;API 网关一般都是微服务系统中的门面&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;API  网关是微服务的重要组成部分&lt;/strong&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;img alt=&#34;API网关示意图&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/4.%E4%B8%9A%E5%8A%A1%E5%9F%BA%E7%A1%80%E7%8E%AF%E5%A2%83%E6%9E%84%E5%BB%BA/images/image-20200309195624129.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;API网关示意图&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/4.%E4%B8%9A%E5%8A%A1%E5%9F%BA%E7%A1%80%E7%8E%AF%E5%A2%83%E6%9E%84%E5%BB%BA/images/image-20200309195624129.png&#34;&gt;&lt;/p&gt;
 &lt;h2 id=&#34;api-网关的常见作用&#34;&gt;API 网关的常见作用&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;身份验证和安全&lt;/li&gt;
@@ -503,12 +503,12 @@
 &lt;li&gt;负载均衡（Dubbo 自带）&lt;/li&gt;
 &lt;li&gt;静态相应处理&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;img alt=&#34;API网关作用&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/4.%E4%B8%9A%E5%8A%A1%E5%9F%BA%E7%A1%80%E7%8E%AF%E5%A2%83%E6%9E%84%E5%BB%BA/images/image-20200309200432132.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;API网关作用&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/4.%E4%B8%9A%E5%8A%A1%E5%9F%BA%E7%A1%80%E7%8E%AF%E5%A2%83%E6%9E%84%E5%BB%BA/images/image-20200309200432132.png&#34;&gt;&lt;/p&gt;
 &lt;h1 id=&#34;guns-环境构建&#34;&gt;Guns 环境构建&lt;/h1&gt;
 &lt;h2 id=&#34;导入-guns-项目&#34;&gt;导入 guns 项目&lt;/h2&gt;
-&lt;p&gt;&lt;img alt=&#34;guns项目结构&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/4.%E4%B8%9A%E5%8A%A1%E5%9F%BA%E7%A1%80%E7%8E%AF%E5%A2%83%E6%9E%84%E5%BB%BA/images/image-20200309203515871.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;guns项目结构&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/4.%E4%B8%9A%E5%8A%A1%E5%9F%BA%E7%A1%80%E7%8E%AF%E5%A2%83%E6%9E%84%E5%BB%BA/images/image-20200309203515871.png&#34;&gt;&lt;/p&gt;
 &lt;h2 id=&#34;创建-guns_rest-数据库&#34;&gt;创建 guns_rest 数据库&lt;/h2&gt;
-&lt;p&gt;&lt;img alt=&#34;guns_rest数据库&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/4.%E4%B8%9A%E5%8A%A1%E5%9F%BA%E7%A1%80%E7%8E%AF%E5%A2%83%E6%9E%84%E5%BB%BA/images/image-20200309203649262.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;guns_rest数据库&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/4.%E4%B8%9A%E5%8A%A1%E5%9F%BA%E7%A1%80%E7%8E%AF%E5%A2%83%E6%9E%84%E5%BB%BA/images/image-20200309203649262.png&#34;&gt;&lt;/p&gt;
 &lt;h2 id=&#34;创建-user-表&#34;&gt;创建 user 表&lt;/h2&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;-- ----------------------------
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;-- Table structure for user
@@ -537,9 +537,9 @@
     </item>
     <item>
       <title>Dubbo微服务影院系列（3）：环境搭建</title>
-      <link>https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/3.%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</link>
+      <link>http://localhost:1313/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/3.%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</link>
       <pubDate>Sun, 08 Mar 2020 23:14:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/3.%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</guid>
+      <guid>http://localhost:1313/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/3.%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</guid>
       <description>&lt;h1 id=&#34;基础环境搭建&#34;&gt;基础环境搭建&lt;/h1&gt;
 &lt;h2 id=&#34;基于guns--springboot--dubbo构建影院平台&#34;&gt;基于Guns + SpringBoot + Dubbo构建影院平台&lt;/h2&gt;
 &lt;ul&gt;
@@ -555,7 +555,7 @@
 &lt;p&gt;以下可以选用 Spring 或 SpringBoot&lt;/p&gt;
 &lt;h2 id=&#34;spring基础环境构建&#34;&gt;Spring基础环境构建&lt;/h2&gt;
 &lt;h3 id=&#34;项目结构&#34;&gt;项目结构&lt;/h3&gt;
-&lt;p&gt;&lt;img alt=&#34;Spring基础环境项目结构&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/3.%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/images/image-20200306232618900.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;Spring基础环境项目结构&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/3.%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/images/image-20200306232618900.png&#34;&gt;&lt;/p&gt;
 &lt;h3 id=&#34;主模块spring-dubbo-demo&#34;&gt;主模块（Spring-Dubbo-Demo）&lt;/h3&gt;
 &lt;p&gt;在 pom.xml 中添加 dependencies&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;dependencies&amp;gt;&lt;/span&gt;
@@ -645,11 +645,11 @@
     </item>
     <item>
       <title>Dubbo微服务影院系列（2）：微服务入门</title>
-      <link>https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/2.%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%85%A5%E9%97%A8/</link>
+      <link>http://localhost:1313/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/2.%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%85%A5%E9%97%A8/</link>
       <pubDate>Fri, 06 Mar 2020 23:14:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/2.%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%85%A5%E9%97%A8/</guid>
+      <guid>http://localhost:1313/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/2.%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%85%A5%E9%97%A8/</guid>
       <description>&lt;h1 id=&#34;传统业务应用&#34;&gt;传统业务应用&lt;/h1&gt;
-&lt;p&gt;&lt;img alt=&#34;传统业务应用&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/2.%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%85%A5%E9%97%A8/images/image-20200306231434458.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;传统业务应用&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/2.%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%85%A5%E9%97%A8/images/image-20200306231434458.png&#34;&gt;&lt;/p&gt;
 &lt;h1 id=&#34;传统应用带来的问题&#34;&gt;传统应用带来的问题&lt;/h1&gt;
 &lt;ul&gt;
 &lt;li&gt;单一业务开发和迭代困难&lt;/li&gt;
@@ -658,7 +658,7 @@
 &lt;/ul&gt;
 &lt;h1 id=&#34;微服务发展历程&#34;&gt;微服务发展历程&lt;/h1&gt;
 &lt;h2 id=&#34;面向服务开发---soa&#34;&gt;面向服务开发 - SOA&lt;/h2&gt;
-&lt;p&gt;&lt;img alt=&#34;SOA&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/2.%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%85%A5%E9%97%A8/images/image-20200306231555431.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;SOA&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/2.%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%85%A5%E9%97%A8/images/image-20200306231555431.png&#34;&gt;&lt;/p&gt;
 &lt;h2 id=&#34;微服务开发&#34;&gt;微服务开发&lt;/h2&gt;
 &lt;h1 id=&#34;微服务概述&#34;&gt;微服务概述&lt;/h1&gt;
 &lt;ul&gt;
@@ -676,12 +676,12 @@
     </item>
     <item>
       <title>Dubbo微服务影院系列（1）：课程导学</title>
-      <link>https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/1.%E8%AF%BE%E7%A8%8B%E5%AF%BC%E5%AD%A6/</link>
+      <link>http://localhost:1313/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/1.%E8%AF%BE%E7%A8%8B%E5%AF%BC%E5%AD%A6/</link>
       <pubDate>Fri, 06 Mar 2020 18:39:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/1.%E8%AF%BE%E7%A8%8B%E5%AF%BC%E5%AD%A6/</guid>
+      <guid>http://localhost:1313/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/1.%E8%AF%BE%E7%A8%8B%E5%AF%BC%E5%AD%A6/</guid>
       <description>&lt;h1 id=&#34;为什么使用dubbo&#34;&gt;为什么使用Dubbo&lt;/h1&gt;
 &lt;h2 id=&#34;dubbo-是基于-rpc-通信协议速度更快&#34;&gt;Dubbo 是基于 RPC 通信协议，速度更快&lt;/h2&gt;
-&lt;p&gt;&lt;img alt=&#34;千万次调用&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/1.%E8%AF%BE%E7%A8%8B%E5%AF%BC%E5%AD%A6/images/image-20200306225758803.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;千万次调用&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/1.%E8%AF%BE%E7%A8%8B%E5%AF%BC%E5%AD%A6/images/image-20200306225758803.png&#34;&gt;&lt;/p&gt;
 &lt;h2 id=&#34;dubbo-的多中心配置更灵活&#34;&gt;Dubbo 的多中心配置更灵活&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;ZooKeeper&lt;/li&gt;
@@ -700,19 +700,19 @@
 &lt;li&gt;掌握基于 Dubbo 的微服务常见面试问题&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h1 id=&#34;业务结构图&#34;&gt;业务结构图&lt;/h1&gt;
-&lt;p&gt;&lt;img alt=&#34;业务结构图&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/1.%E8%AF%BE%E7%A8%8B%E5%AF%BC%E5%AD%A6/images/image-20200306230144862.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;业务结构图&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/1.%E8%AF%BE%E7%A8%8B%E5%AF%BC%E5%AD%A6/images/image-20200306230144862.png&#34;&gt;&lt;/p&gt;
 &lt;h1 id=&#34;核心功能&#34;&gt;核心功能&lt;/h1&gt;
-&lt;p&gt;&lt;img alt=&#34;核心功能&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/1.%E8%AF%BE%E7%A8%8B%E5%AF%BC%E5%AD%A6/images/image-20200306230227966.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;核心功能&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/1.%E8%AF%BE%E7%A8%8B%E5%AF%BC%E5%AD%A6/images/image-20200306230227966.png&#34;&gt;&lt;/p&gt;
 &lt;h1 id=&#34;主要知识点&#34;&gt;主要知识点&lt;/h1&gt;
-&lt;p&gt;&lt;img alt=&#34;主要知识点&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/1.%E8%AF%BE%E7%A8%8B%E5%AF%BC%E5%AD%A6/images/image-20200306230255648.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;主要知识点&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/1.%E8%AF%BE%E7%A8%8B%E5%AF%BC%E5%AD%A6/images/image-20200306230255648.png&#34;&gt;&lt;/p&gt;
 &lt;h1 id=&#34;技术架构图&#34;&gt;技术架构图&lt;/h1&gt;
-&lt;p&gt;&lt;img alt=&#34;技术架构图&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/1.%E8%AF%BE%E7%A8%8B%E5%AF%BC%E5%AD%A6/images/image-20200306230335981.png&#34;&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;img alt=&#34;技术架构图&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/1.%E8%AF%BE%E7%A8%8B%E5%AF%BC%E5%AD%A6/images/image-20200306230335981.png&#34;&gt;&lt;/p&gt;</description>
     </item>
     <item>
       <title>Spring Cloud Eureka</title>
-      <link>https://zjxjwxk.github.io/posts/spring-cloud/%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%8E%E5%8F%91%E7%8E%B0/</link>
+      <link>http://localhost:1313/posts/spring-cloud/%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%8E%E5%8F%91%E7%8E%B0/</link>
       <pubDate>Thu, 31 Jan 2019 20:18:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/posts/spring-cloud/%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%8E%E5%8F%91%E7%8E%B0/</guid>
+      <guid>http://localhost:1313/posts/spring-cloud/%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%8E%E5%8F%91%E7%8E%B0/</guid>
       <description>&lt;h1 id=&#34;spring-cloud-eureka&#34;&gt;Spring Cloud Eureka&lt;/h1&gt;
 &lt;ul&gt;
 &lt;li&gt;基于 Netflix Eureka 做了二次封装&lt;/li&gt;
@@ -733,13 +733,13 @@
 &lt;/ul&gt;
 &lt;h1 id=&#34;启动-eureka-server&#34;&gt;启动 Eureka Server&lt;/h1&gt;
 &lt;h2 id=&#34;1-创建spring项目&#34;&gt;1. 创建Spring项目&lt;/h2&gt;
-&lt;p&gt;&lt;img alt=&#34;创建Spring项目&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/spring-cloud/%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%8E%E5%8F%91%E7%8E%B0/images/image-20190131155138441.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;创建Spring项目&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/spring-cloud/%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%8E%E5%8F%91%E7%8E%B0/images/image-20190131155138441.png&#34;&gt;&lt;/p&gt;
 &lt;h2 id=&#34;2-填充项目信息&#34;&gt;2. 填充项目信息&lt;/h2&gt;
-&lt;p&gt;&lt;img alt=&#34;填充项目信息&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/spring-cloud/%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%8E%E5%8F%91%E7%8E%B0/images/image-20190131155241197.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;填充项目信息&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/spring-cloud/%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%8E%E5%8F%91%E7%8E%B0/images/image-20190131155241197.png&#34;&gt;&lt;/p&gt;
 &lt;h2 id=&#34;3-选择项目类型为-cloud-discovery-中的-eureka-server&#34;&gt;3. 选择项目类型为 Cloud Discovery 中的 Eureka Server&lt;/h2&gt;
-&lt;p&gt;&lt;img alt=&#34;选择Eureka Server&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/spring-cloud/%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%8E%E5%8F%91%E7%8E%B0/images/image-20190131155453826.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;选择Eureka Server&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/spring-cloud/%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%8E%E5%8F%91%E7%8E%B0/images/image-20190131155453826.png&#34;&gt;&lt;/p&gt;
 &lt;h2 id=&#34;4-完成创建&#34;&gt;4. 完成创建&lt;/h2&gt;
-&lt;p&gt;&lt;img alt=&#34;完成创建&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/spring-cloud/%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%8E%E5%8F%91%E7%8E%B0/images/image-20190131160337079.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;完成创建&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/spring-cloud/%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%8E%E5%8F%91%E7%8E%B0/images/image-20190131160337079.png&#34;&gt;&lt;/p&gt;
 &lt;h2 id=&#34;5-添加注解-enableeurekaserver&#34;&gt;5. 添加注解 @EnableEurekaServer&lt;/h2&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;@SpringBootApplication&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;@EnableEurekaServer&lt;/span&gt;
@@ -762,13 +762,13 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;server&lt;/span&gt;:
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;port&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;8761&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;7-启动-eureka-server&#34;&gt;7. 启动 Eureka Server&lt;/h2&gt;
-&lt;p&gt;&lt;img alt=&#34;Eureka Server信息&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/spring-cloud/%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%8E%E5%8F%91%E7%8E%B0/images/image-20190131172458551.png&#34;&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;img alt=&#34;Eureka Server信息&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/spring-cloud/%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%8E%E5%8F%91%E7%8E%B0/images/image-20190131172458551.png&#34;&gt;&lt;/p&gt;</description>
     </item>
     <item>
       <title>微服务简介</title>
-      <link>https://zjxjwxk.github.io/posts/spring-cloud/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/</link>
+      <link>http://localhost:1313/posts/spring-cloud/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/</link>
       <pubDate>Thu, 31 Jan 2019 20:16:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/posts/spring-cloud/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/</guid>
+      <guid>http://localhost:1313/posts/spring-cloud/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/</guid>
       <description>&lt;h1 id=&#34;images&#34;&gt;images&lt;/h1&gt;
 &lt;h2 id=&#34;定义&#34;&gt;定义&lt;/h2&gt;
 &lt;p&gt;The microservice architectural style is an approach to developing a single application running as &lt;strong&gt;a suite of small services&lt;/strong&gt;, each &lt;strong&gt;running its own process&lt;/strong&gt; and communicating with lightweight mechanisms, often an HTTP resource API. These services are &lt;strong&gt;built around business capabilities&lt;/strong&gt; and &lt;strong&gt;independently deployable&lt;/strong&gt; by fully automated deployment machinery. There is &lt;strong&gt;a bare minimum of centralized management of these services&lt;/strong&gt;, which may be written in different programming languages and use different data storage technologies.&lt;/p&gt;</description>

@@ -11,11 +11,26 @@ params:
     Title: Xinkang's Blog
     Content: Software Engineer
   
+  contact:
+    email: zjxjwxk@gmail.com
+
   socialIcons: # optional
     - name: "GitHub"
       url: "https://github.com/zjxjwxk"
     - name: "Linkedin"
       url: "https://www.linkedin.com/in/xinkangwu"
+  
+  ShowShareButtons: true
+  ShowReadingTime: true
+  ShowBreadCrumbs: true
+  ShowPostNavLinks: true
+  ShowCodeCopyButtons: true
+  comments: true
+  
+  editPost:
+    URL: "https://github.com/zjxjwxk/zjxjwxk.github.io/tree/main/content"
+    Text: "Suggest Changes" # edit text
+    appendFilePath: true # to append file path to Edit link
 
 menu:
   main:
@@ -35,7 +50,6 @@ menu:
       name: Search
       url: /search/
       weight: 40
-    
 
 outputs:
   home:
@@ -43,3 +57,6 @@ outputs:
     - RSS
     - JSON # necessary for search
 
+services:
+  disqus:
+    shortname: xinkangwu
