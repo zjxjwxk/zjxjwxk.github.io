@@ -2,33 +2,33 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>PAT on Xinkang&#39;s Blog</title>
-    <link>http://localhost:1313/categories/pat/</link>
+    <link>https://zjxjwxk.github.io/categories/pat/</link>
     <description>Recent content in PAT on Xinkang&#39;s Blog</description>
     <generator>Hugo -- 0.138.0</generator>
     <language>en</language>
     <lastBuildDate>Sat, 11 Apr 2020 16:17:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/categories/pat/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://zjxjwxk.github.io/categories/pat/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>PAT考场 Dev C&#43;&#43; 5.10 配置</title>
-      <link>http://localhost:1313/posts/pat/%E8%80%83%E8%AF%95%E6%94%BB%E7%95%A5/</link>
+      <link>https://zjxjwxk.github.io/posts/pat/%E8%80%83%E8%AF%95%E6%94%BB%E7%95%A5/</link>
       <pubDate>Sat, 11 Apr 2020 16:17:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/pat/%E8%80%83%E8%AF%95%E6%94%BB%E7%95%A5/</guid>
+      <guid>https://zjxjwxk.github.io/posts/pat/%E8%80%83%E8%AF%95%E6%94%BB%E7%95%A5/</guid>
       <description>&lt;p&gt;根据往年 (2019) 年浙大软件学院的考研复试公告，如果今年 (2020) 是线下复试，且考场没有变化的话，机试应该还是在 &lt;code&gt;浙大紫金港校区&lt;/code&gt;（如下图）。&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;浙大软院招生通知：http://www.cst.zju.edu.cn/2019/0307/c36207a1478348/page.htm&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;&lt;img alt=&#34;软件学院2019年统考研究生招生复试安排&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/pat/%E8%80%83%E8%AF%95%E6%94%BB%E7%95%A5/images/image-20200411162644696.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;软件学院2019年统考研究生招生复试安排&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/pat/%E8%80%83%E8%AF%95%E6%94%BB%E7%95%A5/images/image-20200411162644696.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;从 PAT 官网可以找到紫金港的机房配置：&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;PAT 考点联盟：https://www.patest.cn/location&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;&lt;img alt=&#34;PAT紫金港配置.png&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/pat/%E8%80%83%E8%AF%95%E6%94%BB%E7%95%A5/images/PAT%E7%B4%AB%E9%87%91%E6%B8%AF%E9%85%8D%E7%BD%AE.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;PAT紫金港配置.png&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/pat/%E8%80%83%E8%AF%95%E6%94%BB%E7%95%A5/images/PAT%E7%B4%AB%E9%87%91%E6%B8%AF%E9%85%8D%E7%BD%AE.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;我本人选择使用 &lt;code&gt;Dev C++ 5.10&lt;/code&gt; 版本，考试那天在考场需要先对其作以下配置（当然也许已经配置好了）：&lt;/p&gt;
 &lt;h1 id=&#34;打开产生调试信息&#34;&gt;打开产生调试信息&lt;/h1&gt;
 &lt;p&gt;在 &lt;code&gt;“工具(Tools)”&lt;/code&gt; -&amp;gt; &lt;code&gt;“编译选项(Compiler Options)&amp;quot;&lt;/code&gt; 中：&lt;/p&gt;
-&lt;p&gt;&lt;img alt=&#34;编译选项&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/pat/%E8%80%83%E8%AF%95%E6%94%BB%E7%95%A5/images/image-20200411163457056.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;编译选项&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/pat/%E8%80%83%E8%AF%95%E6%94%BB%E7%95%A5/images/image-20200411163457056.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;点击 &lt;code&gt;“代码生成/优化(Settings)”&lt;/code&gt; 选项卡中的 &lt;code&gt;&amp;quot;连接器(Linker)&amp;quot;&lt;/code&gt; 选项卡，将 &lt;code&gt;&amp;quot;产生调试信息(Generate debugging information)&amp;quot;&lt;/code&gt; 选项改为 &lt;code&gt;“Yes”&lt;/code&gt;。&lt;/p&gt;
-&lt;p&gt;&lt;img alt=&#34;产生调试信息&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/pat/%E8%80%83%E8%AF%95%E6%94%BB%E7%95%A5/images/image-20200411163800036.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;产生调试信息&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/pat/%E8%80%83%E8%AF%95%E6%94%BB%E7%95%A5/images/image-20200411163800036.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;这样，就可以愉快的 Debug 了～&lt;/p&gt;
 &lt;h1 id=&#34;添加-c-11-支持&#34;&gt;添加 C++ 11 支持&lt;/h1&gt;
 &lt;p&gt;由于 PAT 的 OJ 是支持 C++ 11 的，故最好打开 C++ 11 支持。&lt;/p&gt;

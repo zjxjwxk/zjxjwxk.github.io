@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" dir="auto">
 
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<head><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="noindex, nofollow">
+<meta name="robots" content="index, follow">
 <title>Hadoop 基础篇 | Xinkang&#39;s Blog</title>
 <meta name="keywords" content="Hadoop, 大数据">
 <meta name="description" content="概要
@@ -59,16 +59,16 @@ ZooKeeper：用于监控 Hadoop 集群的状态，管理一些配置，维护数
 Hadoop 版本
 ver1.x较为稳定且容易上手，本人将选择 ver1.x。">
 <meta name="author" content="">
-<link rel="canonical" href="http://localhost:1313/posts/%E5%A4%A7%E6%95%B0%E6%8D%AE/hadoop/hadoop%E5%9F%BA%E7%A1%80%E7%AF%87/">
+<link rel="canonical" href="https://zjxjwxk.github.io/posts/%E5%A4%A7%E6%95%B0%E6%8D%AE/hadoop/hadoop%E5%9F%BA%E7%A1%80%E7%AF%87/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.d6fcd20a4fb86efa4dfac8ec95da60244cc8871042183da1ef28e3a762ad79c8.css" integrity="sha256-1vzSCk&#43;4bvpN&#43;sjsldpgJEzIhxBCGD2h7yjjp2Ktecg=" rel="preload stylesheet" as="style">
-<link rel="icon" href="http://localhost:1313/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
-<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
-<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
+<link rel="icon" href="https://zjxjwxk.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://zjxjwxk.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://zjxjwxk.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://zjxjwxk.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://zjxjwxk.github.io/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" hreflang="en" href="http://localhost:1313/posts/%E5%A4%A7%E6%95%B0%E6%8D%AE/hadoop/hadoop%E5%9F%BA%E7%A1%80%E7%AF%87/">
+<link rel="alternate" hreflang="en" href="https://zjxjwxk.github.io/posts/%E5%A4%A7%E6%95%B0%E6%8D%AE/hadoop/hadoop%E5%9F%BA%E7%A1%80%E7%AF%87/">
 <noscript>
     <style>
         #theme-toggle,
@@ -106,6 +106,142 @@ ver1.x较为稳定且容易上手，本人将选择 ver1.x。">
 
     </style>
 </noscript>
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-9CMXGMMTKX"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-9CMXGMMTKX');
+        }
+      </script><meta property="og:url" content="https://zjxjwxk.github.io/posts/%E5%A4%A7%E6%95%B0%E6%8D%AE/hadoop/hadoop%E5%9F%BA%E7%A1%80%E7%AF%87/">
+  <meta property="og:site_name" content="Xinkang&#39;s Blog">
+  <meta property="og:title" content="Hadoop 基础篇">
+  <meta property="og:description" content="概要 大数据技术的相关概念 Hadoop 的架构和运行机制 实战：Hadoop 的安装和配置 实战：Hadoop 的开发 目标 掌握大数据存储与处理技术的原理（理论知识） 掌握 Hadoop 的使用和开发能力（实践能力） 结合书本，如《Hadoop 权威指南》 Hadoop 的前世今生 为了解决系统存在的瓶颈：存储容量、读写速率、计算效率… Google 提出了大数据技术：MapReduce、BigTable、GFS，这三样技术取得了革命性的变化：
+成本降低，能用 PC 机，就不用大型机和高端存储 软件容错硬件故障视为常态，通过软件保证可靠性 简化并行分布式计算，无须控制节点同步和数据交换 但是，Google 只发表了相关的技术论文，没有开放源代码。于是，一个模仿 Google 大数据技术的开源实现出现了：Hadoop。
+Hadoop 的功能和优势 Hadoop 是开源的分布式存储和分布式计算框架。
+Hadoop 的组成 包含两个核心组件：
+HDFS：分布式文件系统，存储海量的数据 MapReduce：并行处理框架，实现任务分解和调度 Hadoop 可以用来搭建大型数据仓库，PB 级数据的存储、处理、分析、统计等业务。如：搜索引擎、日志分析、商业智能、数据挖掘。
+Hadoop 的优势 高扩展 低成本 成熟的生态圈（Hive、HBase 等） Hadoop 生态系统及版本 Hadoop 生态系统 Hive：只需要编写 SQL 语句，Hive 就能够将其转化为一个 Hadoop 任务去执行，降低了使用 Hadoop 的门槛。
+HBase：和传统的关系型数据库不同，HBase 放弃事务特性，追求更高的扩展；和 HDFS 不同，HBase 提供数据的随机读写和实时访问，实现对表数据的读写功能。
+ZooKeeper：用于监控 Hadoop 集群的状态，管理一些配置，维护数据间节点的一致性等。
+Hadoop 版本 ver1.x较为稳定且容易上手，本人将选择 ver1.x。">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2020-05-06T20:08:00+00:00">
+    <meta property="article:modified_time" content="2020-05-06T20:08:00+00:00">
+    <meta property="article:tag" content="Hadoop">
+    <meta property="article:tag" content="大数据">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hadoop 基础篇">
+<meta name="twitter:description" content="概要
+
+大数据技术的相关概念
+Hadoop 的架构和运行机制
+实战：Hadoop 的安装和配置
+实战：Hadoop 的开发
+
+目标
+
+掌握大数据存储与处理技术的原理（理论知识）
+掌握 Hadoop 的使用和开发能力（实践能力）
+结合书本，如《Hadoop 权威指南》
+
+Hadoop 的前世今生
+为了解决系统存在的瓶颈：存储容量、读写速率、计算效率&hellip; Google 提出了大数据技术：MapReduce、BigTable、GFS，这三样技术取得了革命性的变化：
+
+成本降低，能用 PC 机，就不用大型机和高端存储
+软件容错硬件故障视为常态，通过软件保证可靠性
+简化并行分布式计算，无须控制节点同步和数据交换
+
+但是，Google 只发表了相关的技术论文，没有开放源代码。于是，一个模仿 Google 大数据技术的开源实现出现了：Hadoop。
+Hadoop 的功能和优势
+Hadoop 是开源的分布式存储和分布式计算框架。
+Hadoop 的组成
+包含两个核心组件：
+
+HDFS：分布式文件系统，存储海量的数据
+MapReduce：并行处理框架，实现任务分解和调度
+
+Hadoop 可以用来搭建大型数据仓库，PB 级数据的存储、处理、分析、统计等业务。如：搜索引擎、日志分析、商业智能、数据挖掘。
+Hadoop 的优势
+
+高扩展
+低成本
+成熟的生态圈（Hive、HBase 等）
+
+Hadoop 生态系统及版本
+Hadoop 生态系统
+
+
+Hive：只需要编写 SQL 语句，Hive 就能够将其转化为一个 Hadoop 任务去执行，降低了使用 Hadoop 的门槛。
+
+
+HBase：和传统的关系型数据库不同，HBase 放弃事务特性，追求更高的扩展；和 HDFS 不同，HBase 提供数据的随机读写和实时访问，实现对表数据的读写功能。
+
+
+ZooKeeper：用于监控 Hadoop 集群的状态，管理一些配置，维护数据间节点的一致性等。
+
+
+Hadoop 版本
+ver1.x较为稳定且容易上手，本人将选择 ver1.x。">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://zjxjwxk.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Hadoop 基础篇",
+      "item": "https://zjxjwxk.github.io/posts/%E5%A4%A7%E6%95%B0%E6%8D%AE/hadoop/hadoop%E5%9F%BA%E7%A1%80%E7%AF%87/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Hadoop 基础篇",
+  "name": "Hadoop 基础篇",
+  "description": "概要 大数据技术的相关概念 Hadoop 的架构和运行机制 实战：Hadoop 的安装和配置 实战：Hadoop 的开发 目标 掌握大数据存储与处理技术的原理（理论知识） 掌握 Hadoop 的使用和开发能力（实践能力） 结合书本，如《Hadoop 权威指南》 Hadoop 的前世今生 为了解决系统存在的瓶颈：存储容量、读写速率、计算效率\u0026hellip; Google 提出了大数据技术：MapReduce、BigTable、GFS，这三样技术取得了革命性的变化：\n成本降低，能用 PC 机，就不用大型机和高端存储 软件容错硬件故障视为常态，通过软件保证可靠性 简化并行分布式计算，无须控制节点同步和数据交换 但是，Google 只发表了相关的技术论文，没有开放源代码。于是，一个模仿 Google 大数据技术的开源实现出现了：Hadoop。\nHadoop 的功能和优势 Hadoop 是开源的分布式存储和分布式计算框架。\nHadoop 的组成 包含两个核心组件：\nHDFS：分布式文件系统，存储海量的数据 MapReduce：并行处理框架，实现任务分解和调度 Hadoop 可以用来搭建大型数据仓库，PB 级数据的存储、处理、分析、统计等业务。如：搜索引擎、日志分析、商业智能、数据挖掘。\nHadoop 的优势 高扩展 低成本 成熟的生态圈（Hive、HBase 等） Hadoop 生态系统及版本 Hadoop 生态系统 Hive：只需要编写 SQL 语句，Hive 就能够将其转化为一个 Hadoop 任务去执行，降低了使用 Hadoop 的门槛。\nHBase：和传统的关系型数据库不同，HBase 放弃事务特性，追求更高的扩展；和 HDFS 不同，HBase 提供数据的随机读写和实时访问，实现对表数据的读写功能。\nZooKeeper：用于监控 Hadoop 集群的状态，管理一些配置，维护数据间节点的一致性等。\nHadoop 版本 ver1.x较为稳定且容易上手，本人将选择 ver1.x。\n",
+  "keywords": [
+    "Hadoop", "大数据"
+  ],
+  "articleBody": "概要 大数据技术的相关概念 Hadoop 的架构和运行机制 实战：Hadoop 的安装和配置 实战：Hadoop 的开发 目标 掌握大数据存储与处理技术的原理（理论知识） 掌握 Hadoop 的使用和开发能力（实践能力） 结合书本，如《Hadoop 权威指南》 Hadoop 的前世今生 为了解决系统存在的瓶颈：存储容量、读写速率、计算效率… Google 提出了大数据技术：MapReduce、BigTable、GFS，这三样技术取得了革命性的变化：\n成本降低，能用 PC 机，就不用大型机和高端存储 软件容错硬件故障视为常态，通过软件保证可靠性 简化并行分布式计算，无须控制节点同步和数据交换 但是，Google 只发表了相关的技术论文，没有开放源代码。于是，一个模仿 Google 大数据技术的开源实现出现了：Hadoop。\nHadoop 的功能和优势 Hadoop 是开源的分布式存储和分布式计算框架。\nHadoop 的组成 包含两个核心组件：\nHDFS：分布式文件系统，存储海量的数据 MapReduce：并行处理框架，实现任务分解和调度 Hadoop 可以用来搭建大型数据仓库，PB 级数据的存储、处理、分析、统计等业务。如：搜索引擎、日志分析、商业智能、数据挖掘。\nHadoop 的优势 高扩展 低成本 成熟的生态圈（Hive、HBase 等） Hadoop 生态系统及版本 Hadoop 生态系统 Hive：只需要编写 SQL 语句，Hive 就能够将其转化为一个 Hadoop 任务去执行，降低了使用 Hadoop 的门槛。\nHBase：和传统的关系型数据库不同，HBase 放弃事务特性，追求更高的扩展；和 HDFS 不同，HBase 提供数据的随机读写和实时访问，实现对表数据的读写功能。\nZooKeeper：用于监控 Hadoop 集群的状态，管理一些配置，维护数据间节点的一致性等。\nHadoop 版本 ver1.x较为稳定且容易上手，本人将选择 ver1.x。\n安装 Hadoop 准备 Linux 环境 安装 JDK 配置 Hadoop 下载 Hadoop wget https://archive.apache.org/dist/hadoop/core/hadoop-1.2.1/hadoop-1.2.1.tar.gz 并解压之。\n配置 Hadoop 在 conf 目录下找到 hadoop-env.sh 脚本，编辑之，将 JAVA_HOME 的注释去掉并配置为 Java 目录：\nexport JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_201.jdk/Contents/Home 配置 core.site.xml 添加如下配置：\nhadoop.tmp.dir /hadoop dfs.name.dir /hadoop/name fs.default.name hdfs://localhost:9000 配置 hdfs-site.xml：\ndfs.data.dir /hadoop/data 配置 mapred-site.xml\nmapred.job.tracker localhost:9001 配置 Hadoop 环境变量，编辑 /etc/profile，添加以下：\nexport HADOOP_HOME=/Library/hadoop-1.2.1 export PATH=$PATH:$HADOOP_HOME/bin 启动 Hadoop 对 NameNode 进行格式化操作：\nhadoop namenode -format 启动 Hadoop，执行 bin/start-all.sh ，使用 jps 命令查看是否有以下进程，若有则表示 Hadoop 已正常运行：\n10690 NameNode 10773 DataNode 10920 JobTracker 10859 SecondaryNameNode 11003 TaskTracker 11101 Jps 可以查看 Hadoop 下有哪些文件：\nhadoop fs -ls / Hadoop 的核心——HDFS简介 HDFS 设计架构 块（Block） NameNode DataNode 块（Block） HDFS 的文件被分成块进行存储，块的默认大小为 64MB，块是文件存储处理的逻辑单元。\n节点（Node） HDFS 中有两类节点 NameNode 和 DataNode：\nNameNode NameNode 是管理节点，存放文件元数据：\n文件与数据块的映射表 数据块与数据节点的映射表 DataNode DateNode 是 HDFS 的工作节点，存放数据块：\n数据管理策略 冗余数据块 每个数据块 3 个副本，分布在两个机架内的三个节点，存储冗余数据是为了预防数据丢失。\n心跳检测 每隔一段时间，DataNode 就像 NameNode 发送自己的状态：\n二级 NameNode 二级 NameNode 定期同步元数据映像文件和修改日志，NameNode 发生故障时，备胎转正，以保证 NameNode 的高可用性。\nHDFS 中文件的读写操作 HDFS 读取文件的流程 客户端（Java 程序或命令行）向 NameNode 发起文件读取请求，把文件名和路径告诉 NameNode NameNode 查询元数据，并返回给客户端，客户端就知道了这个文件包含哪些块，以及这些块分别能在哪些 DataNode 里找到 然后，客户端就能从这些 DataNode 找到这些块，并读取下载，再对它们进行组装 HDFS 写入文件的流程 客户端将需要写的文件拆分成块，并通知 NameNode NameNode 会找到当前可用的磁盘空间中的 DataNodes，并返回给客户端 根据返回的 DataNodes，客户端将这些块写入 DataNodes 客户端在向 DataNode 写入一个块后，DataNode 就要通过管道进行流水线复制 复制完之后，就对 NameNode 更新元数据 HDFS 的特点 特点 数据冗余，硬件容错 流式的数据访问（写一次，读多次） 存储大文件 适用性和局限性 适合数据批量读写，吞度量高（但不适合交互式应用，低延迟很难满足） 适合一次写入多次读取，顺序读写（但不支持多用户并发写相同文件） HDFS 的使用 格式化 NameNode 先对 NameNode 进行格式化操作：\nhadoop namenode -format 创建文件夹 在 HDFS 中创建一个文件夹 input：\nhadoop fs -mkdir input input 文件夹将会在 HDFS 中的 /user/root/ 下\nMacBook-Pro-of-Wxk:~ root# hadoop fs -ls /user/root/input Found 1 items -rw-r--r-- 3 root supergroup 0 2020-05-07 15:26 /user/root/input 上传文件 将本地 test.txt 文件上传到 HDFS 中刚刚创建的 input 中：\nhadoop fs -put test.txt input/ 这样就能在 /user/root/input/ 下找到该文件了\nMacBook-Pro-of-Wxk:~ root# hadoop fs -ls /user/root/input Found 1 items -rw-r--r-- 3 root supergroup 14 2020-05-07 16:00 /user/root/input/test.txt 读取文件 输出 HDFS 中的文件：\nMacBook-Pro-of-Wxk:~ root# hadoop fs -cat input/test.txt Hello Hadoop! 下载文件 从 HDFS 下载指定路径下的文件到本地：\nhadoop fs -get input/test.txt test2.txt 即可在本地找到该文件：\nMacBook-Pro-of-Wxk:~ root# cat test2.txt Hello Hadoop! 查看 NameNode 信息 MacBook-Pro-of-Wxk:~ root# hadoop dfsadmin -report Configured Capacity: 249531727872 (232.39 GB) Present Capacity: 83015577640 (77.31 GB) DFS Remaining: 83015569408 (77.31 GB) DFS Used: 8232 (8.04 KB) DFS Used%: 0% Under replicated blocks: 2 Blocks with corrupt replicas: 0 Missing blocks: 0 ------------------------------------------------- Datanodes available: 1 (1 total, 0 dead) Name: 127.0.0.1:50010 Decommission Status : Normal Configured Capacity: 249531727872 (232.39 GB) DFS Used: 8232 (8.04 KB) Non DFS Used: 166516150232 (155.08 GB) DFS Remaining: 83015569408(77.31 GB) DFS Used%: 0% DFS Remaining%: 33.27% Last contact: Thu May 07 16:09:02 CST 2020 Hadoop 的核心——MapReduce 原理与实现 MapReduce 原理 分而治之，一个大任务分成多个小的子任务（map），并行执行后，合并结果（reduce）。\n假如有 100 副扑克牌混在了一起，其中少了一张，怎么找出缺少的那一张？\nMap：随机分为 100 副扑克牌，各自统计该副牌总每张牌的出现次数。 Reduce：通过交换每副牌各自统计的结果，再次统计总的每张牌出现次数。一个 Reduce 统计一张牌的总出现次数。 最后对每张牌的总出现次数进行排序，筛选出结果。\n再如：100 GB 的网站访问日志文件，找出访问次数最多的 IP 地址；SELECT 表查询操作、JOIN 表连接操作，都可以通过 MapReduce 来实现。\nMapReduce 的运行流程 Job \u0026 Task JobTracker TaskTracker Job \u0026 Task 一个 Job 拆分为多个 Task 来解决，Task 又分为 MapTask 和 ReduceTask。\nJobTracker 作业调度 分配任务、监控任务执行进度 监控 TaskTracker 的状态 TaskTracker 执行任务 汇报任务状态 MapReduce 的容错机制 重复执行 重复执行将会最多重复执行四次任务，若仍然失败则放弃执行。\n推测执行 当 JobTracker 发现其中某个 TaskTracker 执行特别慢的时候，就会另开一个 TaskTracker 执行该任务，这两个 Task 谁先执行完，则终止另一个。\n开发 Hadoop 应用程序 WordCount 单词计数 WordCount 单次计数：计算文件中出现每个单词的频数，输出结果按照字母顺序进行排序。\nMapReduce 过程 源码 package com.zjut; import java.io.IOException; import java.util.StringTokenizer; import org.apache.hadoop.conf.Configuration; import org.apache.hadoop.fs.Path; import org.apache.hadoop.io.IntWritable; import org.apache.hadoop.io.LongWritable; import org.apache.hadoop.io.Text; import org.apache.hadoop.mapreduce.Job; import org.apache.hadoop.mapreduce.Mapper; import org.apache.hadoop.mapreduce.Reducer; import org.apache.hadoop.mapreduce.lib.input.FileInputFormat; import org.apache.hadoop.mapreduce.lib.input.TextInputFormat; import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat; import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat; /** * @author zjxjwxk */ public class WordCount { public static class WordCountMap extends Mapper\u003cLongWritable, Text, Text, IntWritable\u003e { private final IntWritable one = new IntWritable(1); private Text word = new Text(); @Override public void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException { String line = value.toString(); StringTokenizer token = new StringTokenizer(line); while (token.hasMoreTokens()) { word.set(token.nextToken()); context.write(word, one); } } } public static class WordCountReduce extends Reducer\u003cText, IntWritable, Text, IntWritable\u003e { @Override public void reduce(Text key, Iterable\u003cIntWritable\u003e values, Context context) throws IOException, InterruptedException { int sum = 0; for (IntWritable val : values) { sum += val.get(); } context.write(key, new IntWritable(sum)); } } public static void main(String[] args) throws Exception { Configuration conf = new Configuration(); Job job = new Job(conf); job.setJarByClass(WordCount.class); job.setJobName(\"wordcount\"); job.setOutputKeyClass(Text.class); job.setOutputValueClass(IntWritable.class); job.setMapperClass(WordCountMap.class); job.setReducerClass(WordCountReduce.class); job.setInputFormatClass(TextInputFormat.class); job.setOutputFormatClass(TextOutputFormat.class); FileInputFormat.addInputPath(job, new Path(args[0])); FileOutputFormat.setOutputPath(job, new Path(args[1])); job.waitForCompletion(true); } } 编译和打包 编译（添加 classpath 依赖包）：\njavac -classpath /Library/hadoop-1.2.1/hadoop-core-1.2.1.jar:/Library/hadoop-1.2.1/lib/commons-cli-1.2.jar -d WordCountClass/ WordCount.java 打包所有 class 文件为 jar 包：\njar -cvf WordCount.jar *.class 准备文件 创建一个 input 文件夹，在里面添加两个文本文件：\nHello.txt\nHello World Hello Hadoop Hello HDFS Hello Map Hello Reduce Hello2.txt\nHadoop World Hadoop NameNode Hadoop DataNode Hadoop MapReduce Hello BigData 上传文件 在 HDFS 中创建一个 input_wordcount 文件夹：\nhadoop fs -mkdir input_wordcount 将两个文本文件上传到 HDFS：\nhadoop fs -put input/* input_wordcount/ 可以在 HDFS 中找到这两个文件：\nMacBook-Pro-of-Wxk:Project root# hadoop fs -ls input_wordcount Found 2 items -rw-r--r-- 3 root supergroup 59 2020-05-08 13:51 /user/root/input_wordcount/Hello.txt -rw-r--r-- 3 root supergroup 76 2020-05-08 13:51 /user/root/input_wordcount/Hello2.txt 执行 MapReduce hadoop jar Hadoop/WordCount/WordCountClass/WordCount.jar WordCount input_wordcount output_wordcount hadoop 中执行本地 jar 包，最后有两个参数 input_wordcount, output_wordcount，分别为输入路径和输出路径。\n执行过程和结果：\n20/05/08 13:59:11 WARN mapred.JobClient: Use GenericOptionsParser for parsing the arguments. Applications should implement Tool for the same. 20/05/08 13:59:11 INFO input.FileInputFormat: Total input paths to process : 2 20/05/08 13:59:11 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable 20/05/08 13:59:11 WARN snappy.LoadSnappy: Snappy native library not loaded 20/05/08 13:59:11 INFO mapred.JobClient: Running job: job_202005081303_0001 20/05/08 13:59:12 INFO mapred.JobClient: map 0% reduce 0% 20/05/08 13:59:15 INFO mapred.JobClient: map 100% reduce 0% 20/05/08 13:59:22 INFO mapred.JobClient: map 100% reduce 33% 20/05/08 13:59:23 INFO mapred.JobClient: map 100% reduce 100% 20/05/08 13:59:24 INFO mapred.JobClient: Job complete: job_202005081303_0001 20/05/08 13:59:24 INFO mapred.JobClient: Counters: 26 20/05/08 13:59:24 INFO mapred.JobClient: Map-Reduce Framework 20/05/08 13:59:24 INFO mapred.JobClient: Spilled Records=40 20/05/08 13:59:24 INFO mapred.JobClient: Map output materialized bytes=267 20/05/08 13:59:24 INFO mapred.JobClient: Reduce input records=20 20/05/08 13:59:24 INFO mapred.JobClient: Map input records=10 20/05/08 13:59:24 INFO mapred.JobClient: SPLIT_RAW_BYTES=245 20/05/08 13:59:24 INFO mapred.JobClient: Map output bytes=215 20/05/08 13:59:24 INFO mapred.JobClient: Reduce shuffle bytes=267 20/05/08 13:59:24 INFO mapred.JobClient: Reduce input groups=10 20/05/08 13:59:24 INFO mapred.JobClient: Combine output records=0 20/05/08 13:59:24 INFO mapred.JobClient: Reduce output records=10 20/05/08 13:59:24 INFO mapred.JobClient: Map output records=20 20/05/08 13:59:24 INFO mapred.JobClient: Combine input records=0 20/05/08 13:59:24 INFO mapred.JobClient: Total committed heap usage (bytes)=578813952 20/05/08 13:59:24 INFO mapred.JobClient: File Input Format Counters 20/05/08 13:59:24 INFO mapred.JobClient: Bytes Read=135 20/05/08 13:59:24 INFO mapred.JobClient: FileSystemCounters 20/05/08 13:59:24 INFO mapred.JobClient: HDFS_BYTES_READ=380 20/05/08 13:59:24 INFO mapred.JobClient: FILE_BYTES_WRITTEN=156788 20/05/08 13:59:24 INFO mapred.JobClient: FILE_BYTES_READ=261 20/05/08 13:59:24 INFO mapred.JobClient: HDFS_BYTES_WRITTEN=91 20/05/08 13:59:24 INFO mapred.JobClient: Job Counters 20/05/08 13:59:24 INFO mapred.JobClient: Launched map tasks=2 20/05/08 13:59:24 INFO mapred.JobClient: Launched reduce tasks=1 20/05/08 13:59:24 INFO mapred.JobClient: SLOTS_MILLIS_REDUCES=8065 20/05/08 13:59:24 INFO mapred.JobClient: Total time spent by all reduces waiting after reserving slots (ms)=0 20/05/08 13:59:24 INFO mapred.JobClient: SLOTS_MILLIS_MAPS=4142 20/05/08 13:59:24 INFO mapred.JobClient: Total time spent by all maps waiting after reserving slots (ms)=0 20/05/08 13:59:24 INFO mapred.JobClient: Data-local map tasks=2 20/05/08 13:59:24 INFO mapred.JobClient: File Output Format Counters 20/05/08 13:59:24 INFO mapred.JobClient: Bytes Written=91 查看执行结果 MacBook-Pro-of-Wxk:Project root# hadoop fs -ls output_wordcount Found 3 items -rw-r--r-- 3 root supergroup 0 2020-05-08 13:59 /user/root/output_wordcount/_SUCCESS drwxr-xr-x - root supergroup 0 2020-05-08 13:59 /user/root/output_wordcount/_logs -rw-r--r-- 3 root supergroup 91 2020-05-08 13:59 /user/root/output_wordcount/part-r-00000 其中，part-r-00000 就包含执行的结果，即统计了两个文件中，每个单词的总个数，并且按照字典顺序排序：\nMacBook-Pro-of-Wxk:Project root# hadoop fs -cat output_wordcount/part-r-00000 BigData\t1 DataNode\t1 HDFS\t1 Hadoop\t5 Hello\t6 Map\t1 MapReduce\t1 NameNode\t1 Reduce\t1 World\t2 利用 MapReduce 进行排序 将多个文件中的数字排序。\nMapReduce 过程 Map：将数据分片后，将数字按照区间进行标记。 Reduce：将每个分区的数字分别进行排序，最后合并。 源码 import java.io.IOException; import java.util.StringTokenizer; import org.apache.hadoop.conf.Configuration; import org.apache.hadoop.fs.Path; import org.apache.hadoop.io.IntWritable; import org.apache.hadoop.io.Text; import org.apache.hadoop.mapreduce.Job; import org.apache.hadoop.mapreduce.Mapper; import org.apache.hadoop.mapreduce.Reducer; import org.apache.hadoop.mapreduce.Partitioner; import org.apache.hadoop.mapreduce.lib.input.FileInputFormat; import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat; import org.apache.hadoop.util.GenericOptionsParser; public class Sort { public static class Map extends Mapper\u003cObject, Text, IntWritable, IntWritable\u003e { private static IntWritable data = new IntWritable(); public void map(Object key, Text value, Context context) throws IOException, InterruptedException { String line = value.toString(); data.set(Integer.parseInt(line)); context.write(data, new IntWritable(1)); } } public static class Reduce extends Reducer\u003cIntWritable, IntWritable, IntWritable, IntWritable\u003e { private static IntWritable linenum = new IntWritable(1); public void reduce(IntWritable key, Iterable\u003cIntWritable\u003e values, Context context) throws IOException, InterruptedException { for (IntWritable val : values) { context.write(linenum, key); linenum = new IntWritable(linenum.get() + 1); } } } public static class Partition extends Partitioner\u003cIntWritable, IntWritable\u003e { @Override public int getPartition(IntWritable key, IntWritable value, int numPartitions) { int MaxNumber = 65223; int bound = MaxNumber / numPartitions + 1; int keynumber = key.get(); for (int i = 0; i \u003c numPartitions; i++) { if (keynumber \u003c bound * i \u0026\u0026 keynumber \u003e= bound * (i - 1)) return i - 1; } return 0; } } /** * @param args */ public static void main(String[] args) throws Exception { // TODO Auto-generated method stub Configuration conf = new Configuration(); String[] otherArgs = new GenericOptionsParser(conf, args) .getRemainingArgs(); if (otherArgs.length != 2) { System.err.println(\"Usage Sort \"); System.exit(2); } Job job = new Job(conf, \"Sort\"); job.setJarByClass(Sort.class); job.setMapperClass(Map.class); job.setPartitionerClass(Partition.class); job.setReducerClass(Reduce.class); job.setOutputKeyClass(IntWritable.class); job.setOutputValueClass(IntWritable.class); FileInputFormat.addInputPath(job, new Path(otherArgs[0])); FileOutputFormat.setOutputPath(job, new Path(otherArgs[1])); System.exit(job.waitForCompletion(true) ? 0 : 1); } } 编译和打包 编译：\njavac -classpath /Library/hadoop-1.2.1/hadoop-core-1.2.1.jar:/Library/hadoop-1.2.1/lib/commons-cli-1.2.jar -d SortClass/ Sort.java 打包：\njar -cvf Sort.jar *.class 准备文件 Numbers.txt\n199 3 609 456 789 119 Numbers2.txt\n478 971 988 125 9 3 1 上传文件 在 HDFS 中创建 input_sort 文件夹：\nhadoop fs -mkdir input_sort 将两个文本文件上传到 HDFS：\nhadoop fs -put Sort/* input_sort/ 执行 MapReduce hadoop jar Hadoop/WordCount/WordCountClass/WordCount.jar WordCount input_wordcount output_wordcount 执行过程和结果：\nMacBook-Pro-of-Wxk:Project root# hadoop jar Hadoop/Sort/SortClass/Sort.jar Sort input_sort output_sort 20/05/08 14:58:36 INFO input.FileInputFormat: Total input paths to process : 2 20/05/08 14:58:36 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable 20/05/08 14:58:36 WARN snappy.LoadSnappy: Snappy native library not loaded 20/05/08 14:58:36 INFO mapred.JobClient: Running job: job_202005081303_0002 20/05/08 14:58:37 INFO mapred.JobClient: map 0% reduce 0% 20/05/08 14:58:40 INFO mapred.JobClient: map 100% reduce 0% 20/05/08 14:58:48 INFO mapred.JobClient: map 100% reduce 100% 20/05/08 14:58:48 INFO mapred.JobClient: Job complete: job_202005081303_0002 20/05/08 14:58:48 INFO mapred.JobClient: Counters: 26 20/05/08 14:58:48 INFO mapred.JobClient: Map-Reduce Framework 20/05/08 14:58:48 INFO mapred.JobClient: Spilled Records=26 20/05/08 14:58:48 INFO mapred.JobClient: Map output materialized bytes=142 20/05/08 14:58:48 INFO mapred.JobClient: Reduce input records=13 20/05/08 14:58:48 INFO mapred.JobClient: Map input records=13 20/05/08 14:58:48 INFO mapred.JobClient: SPLIT_RAW_BYTES=239 20/05/08 14:58:48 INFO mapred.JobClient: Map output bytes=104 20/05/08 14:58:48 INFO mapred.JobClient: Reduce shuffle bytes=142 20/05/08 14:58:48 INFO mapred.JobClient: Reduce input groups=12 20/05/08 14:58:48 INFO mapred.JobClient: Combine output records=0 20/05/08 14:58:48 INFO mapred.JobClient: Reduce output records=13 20/05/08 14:58:48 INFO mapred.JobClient: Map output records=13 20/05/08 14:58:48 INFO mapred.JobClient: Combine input records=0 20/05/08 14:58:48 INFO mapred.JobClient: Total committed heap usage (bytes)=578813952 20/05/08 14:58:48 INFO mapred.JobClient: File Input Format Counters 20/05/08 14:58:48 INFO mapred.JobClient: Bytes Read=44 20/05/08 14:58:48 INFO mapred.JobClient: FileSystemCounters 20/05/08 14:58:48 INFO mapred.JobClient: HDFS_BYTES_READ=283 20/05/08 14:58:48 INFO mapred.JobClient: FILE_BYTES_WRITTEN=156172 20/05/08 14:58:48 INFO mapred.JobClient: FILE_BYTES_READ=136 20/05/08 14:58:48 INFO mapred.JobClient: HDFS_BYTES_WRITTEN=74 20/05/08 14:58:48 INFO mapred.JobClient: Job Counters 20/05/08 14:58:48 INFO mapred.JobClient: Launched map tasks=2 20/05/08 14:58:48 INFO mapred.JobClient: Launched reduce tasks=1 20/05/08 14:58:48 INFO mapred.JobClient: SLOTS_MILLIS_REDUCES=7980 20/05/08 14:58:48 INFO mapred.JobClient: Total time spent by all reduces waiting after reserving slots (ms)=0 20/05/08 14:58:48 INFO mapred.JobClient: SLOTS_MILLIS_MAPS=3902 20/05/08 14:58:48 INFO mapred.JobClient: Total time spent by all maps waiting after reserving slots (ms)=0 20/05/08 14:58:48 INFO mapred.JobClient: Data-local map tasks=2 20/05/08 14:58:48 INFO mapred.JobClient: File Output Format Counters 20/05/08 14:58:48 INFO mapred.JobClient: Bytes Written=74 查看执行结果 MacBook-Pro-of-Wxk:Project root# hadoop fs -ls output_sort Found 3 items -rw-r--r-- 3 root supergroup 0 2020-05-08 14:58 /user/root/output_sort/_SUCCESS drwxr-xr-x - root supergroup 0 2020-05-08 14:58 /user/root/output_sort/_logs -rw-r--r-- 3 root supergroup 74 2020-05-08 14:58 /user/root/output_sort/part-r-00000 其中，part-r-00000 就包含执行的结果，即两个文件中所有数字从小到大排序后的排名和数字。\nMacBook-Pro-of-Wxk:Project root# hadoop fs -cat output_sort/part-r-00000 1\t1 2\t3 3\t3 4\t9 5\t119 6\t125 7\t199 8\t456 9\t478 10\t609 11\t789 12\t971 13\t988 ",
+  "wordCount" : "1902",
+  "inLanguage": "en",
+  "datePublished": "2020-05-06T20:08:00Z",
+  "dateModified": "2020-05-06T20:08:00Z",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://zjxjwxk.github.io/posts/%E5%A4%A7%E6%95%B0%E6%8D%AE/hadoop/hadoop%E5%9F%BA%E7%A1%80%E7%AF%87/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Xinkang's Blog",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://zjxjwxk.github.io/favicon.ico"
+    }
+  }
+}
+</script>
 </head>
 
 <body class="" id="top">
@@ -123,7 +259,7 @@ ver1.x较为稳定且容易上手，本人将选择 ver1.x。">
 <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="http://localhost:1313/" accesskey="h" title="Xinkang&#39;s Blog (Alt + H)">Xinkang&#39;s Blog</a>
+            <a href="https://zjxjwxk.github.io/" accesskey="h" title="Xinkang&#39;s Blog (Alt + H)">Xinkang&#39;s Blog</a>
             <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
@@ -149,22 +285,22 @@ ver1.x较为稳定且容易上手，本人将选择 ver1.x。">
         </div>
         <ul id="menu">
             <li>
-                <a href="http://localhost:1313/archives/" title="Archives">
+                <a href="https://zjxjwxk.github.io/archives/" title="Archives">
                     <span>Archives</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/categories/" title="Categories">
+                <a href="https://zjxjwxk.github.io/categories/" title="Categories">
                     <span>Categories</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/tags/" title="Tags">
+                <a href="https://zjxjwxk.github.io/tags/" title="Tags">
                     <span>Tags</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/search/" title="Search (Alt &#43; /)" accesskey=/>
+                <a href="https://zjxjwxk.github.io/search/" title="Search (Alt &#43; /)" accesskey=/>
                     <span>Search</span>
                 </a>
             </li>
@@ -175,7 +311,7 @@ ver1.x较为稳定且容易上手，本人将选择 ver1.x。">
 
 <article class="post-single">
   <header class="post-header">
-    <div class="breadcrumbs"><a href="http://localhost:1313/">Home</a>&nbsp;»&nbsp;<a href="http://localhost:1313/posts/">Posts</a></div>
+    <div class="breadcrumbs"><a href="https://zjxjwxk.github.io/">Home</a>&nbsp;»&nbsp;<a href="https://zjxjwxk.github.io/posts/">Posts</a></div>
     <h1 class="post-title entry-hint-parent">
       Hadoop 基础篇
     </h1>
@@ -825,16 +961,16 @@ ver1.x较为稳定且容易上手，本人将选择 ver1.x。">
 
   <footer class="post-footer">
     <ul class="post-tags">
-      <li><a href="http://localhost:1313/tags/hadoop/">Hadoop</a></li>
-      <li><a href="http://localhost:1313/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/">大数据</a></li>
+      <li><a href="https://zjxjwxk.github.io/tags/hadoop/">Hadoop</a></li>
+      <li><a href="https://zjxjwxk.github.io/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/">大数据</a></li>
     </ul>
 <nav class="paginav">
-  <a class="prev" href="http://localhost:1313/posts/%E5%A4%A7%E6%95%B0%E6%8D%AE/hadoop/hadoop%E8%BF%9B%E9%98%B6%E7%AF%87/">
+  <a class="prev" href="https://zjxjwxk.github.io/posts/%E5%A4%A7%E6%95%B0%E6%8D%AE/hadoop/hadoop%E8%BF%9B%E9%98%B6%E7%AF%87/">
     <span class="title">« Prev</span>
     <br>
     <span>Hadoop 进阶篇</span>
   </a>
-  <a class="next" href="http://localhost:1313/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/12.%E7%B3%BB%E7%BB%9F%E9%83%A8%E7%BD%B2/">
+  <a class="next" href="https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/12.%E7%B3%BB%E7%BB%9F%E9%83%A8%E7%BD%B2/">
     <span class="title">Next »</span>
     <br>
     <span>Dubbo微服务影院系列（12）：系统部署</span>
@@ -845,7 +981,7 @@ ver1.x较为稳定且容易上手，本人将选择 ver1.x。">
 <ul class="share-buttons">
     <li>
         <a target="_blank" rel="noopener noreferrer" aria-label="share Hadoop 基础篇 on x"
-            href="https://x.com/intent/tweet/?text=Hadoop%20%e5%9f%ba%e7%a1%80%e7%af%87&amp;url=http%3a%2f%2flocalhost%3a1313%2fposts%2f%25E5%25A4%25A7%25E6%2595%25B0%25E6%258D%25AE%2fhadoop%2fhadoop%25E5%259F%25BA%25E7%25A1%2580%25E7%25AF%2587%2f&amp;hashtags=Hadoop%2c%e5%a4%a7%e6%95%b0%e6%8d%ae">
+            href="https://x.com/intent/tweet/?text=Hadoop%20%e5%9f%ba%e7%a1%80%e7%af%87&amp;url=https%3a%2f%2fzjxjwxk.github.io%2fposts%2f%25E5%25A4%25A7%25E6%2595%25B0%25E6%258D%25AE%2fhadoop%2fhadoop%25E5%259F%25BA%25E7%25A1%2580%25E7%25AF%2587%2f&amp;hashtags=Hadoop%2c%e5%a4%a7%e6%95%b0%e6%8d%ae">
             <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
                 <path
                     d="M512 62.554 L 512 449.446 C 512 483.97 483.97 512 449.446 512 L 62.554 512 C 28.03 512 0 483.97 0 449.446 L 0 62.554 C 0 28.03 28.029 0 62.554 0 L 449.446 0 C 483.971 0 512 28.03 512 62.554 Z M 269.951 190.75 L 182.567 75.216 L 56 75.216 L 207.216 272.95 L 63.9 436.783 L 125.266 436.783 L 235.9 310.383 L 332.567 436.783 L 456 436.783 L 298.367 228.367 L 432.367 75.216 L 371.033 75.216 Z M 127.633 110 L 164.101 110 L 383.481 400.065 L 349.5 400.065 Z" />
@@ -854,7 +990,7 @@ ver1.x较为稳定且容易上手，本人将选择 ver1.x。">
     </li>
     <li>
         <a target="_blank" rel="noopener noreferrer" aria-label="share Hadoop 基础篇 on linkedin"
-            href="https://www.linkedin.com/shareArticle?mini=true&amp;url=http%3a%2f%2flocalhost%3a1313%2fposts%2f%25E5%25A4%25A7%25E6%2595%25B0%25E6%258D%25AE%2fhadoop%2fhadoop%25E5%259F%25BA%25E7%25A1%2580%25E7%25AF%2587%2f&amp;title=Hadoop%20%e5%9f%ba%e7%a1%80%e7%af%87&amp;summary=Hadoop%20%e5%9f%ba%e7%a1%80%e7%af%87&amp;source=http%3a%2f%2flocalhost%3a1313%2fposts%2f%25E5%25A4%25A7%25E6%2595%25B0%25E6%258D%25AE%2fhadoop%2fhadoop%25E5%259F%25BA%25E7%25A1%2580%25E7%25AF%2587%2f">
+            href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fzjxjwxk.github.io%2fposts%2f%25E5%25A4%25A7%25E6%2595%25B0%25E6%258D%25AE%2fhadoop%2fhadoop%25E5%259F%25BA%25E7%25A1%2580%25E7%25AF%2587%2f&amp;title=Hadoop%20%e5%9f%ba%e7%a1%80%e7%af%87&amp;summary=Hadoop%20%e5%9f%ba%e7%a1%80%e7%af%87&amp;source=https%3a%2f%2fzjxjwxk.github.io%2fposts%2f%25E5%25A4%25A7%25E6%2595%25B0%25E6%258D%25AE%2fhadoop%2fhadoop%25E5%259F%25BA%25E7%25A1%2580%25E7%25AF%2587%2f">
             <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
                 <path
                     d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-288.985,423.278l0,-225.717l-75.04,0l0,225.717l75.04,0Zm270.539,0l0,-129.439c0,-69.333 -37.018,-101.586 -86.381,-101.586c-39.804,0 -57.634,21.891 -67.617,37.266l0,-31.958l-75.021,0c0.995,21.181 0,225.717 0,225.717l75.02,0l0,-126.056c0,-6.748 0.486,-13.492 2.474,-18.315c5.414,-13.475 17.767,-27.434 38.494,-27.434c27.135,0 38.007,20.707 38.007,51.037l0,120.768l75.024,0Zm-307.552,-334.556c-25.674,0 -42.448,16.879 -42.448,39.002c0,21.658 16.264,39.002 41.455,39.002l0.484,0c26.165,0 42.452,-17.344 42.452,-39.002c-0.485,-22.092 -16.241,-38.954 -41.943,-39.002Z" />
@@ -863,7 +999,7 @@ ver1.x较为稳定且容易上手，本人将选择 ver1.x。">
     </li>
     <li>
         <a target="_blank" rel="noopener noreferrer" aria-label="share Hadoop 基础篇 on reddit"
-            href="https://reddit.com/submit?url=http%3a%2f%2flocalhost%3a1313%2fposts%2f%25E5%25A4%25A7%25E6%2595%25B0%25E6%258D%25AE%2fhadoop%2fhadoop%25E5%259F%25BA%25E7%25A1%2580%25E7%25AF%2587%2f&title=Hadoop%20%e5%9f%ba%e7%a1%80%e7%af%87">
+            href="https://reddit.com/submit?url=https%3a%2f%2fzjxjwxk.github.io%2fposts%2f%25E5%25A4%25A7%25E6%2595%25B0%25E6%258D%25AE%2fhadoop%2fhadoop%25E5%259F%25BA%25E7%25A1%2580%25E7%25AF%2587%2f&title=Hadoop%20%e5%9f%ba%e7%a1%80%e7%af%87">
             <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
                 <path
                     d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-3.446,265.638c0,-22.964 -18.616,-41.58 -41.58,-41.58c-11.211,0 -21.361,4.457 -28.841,11.666c-28.424,-20.508 -67.586,-33.757 -111.204,-35.278l18.941,-89.121l61.884,13.157c0.756,15.734 13.642,28.29 29.56,28.29c16.407,0 29.706,-13.299 29.706,-29.701c0,-16.403 -13.299,-29.702 -29.706,-29.702c-11.666,0 -21.657,6.792 -26.515,16.578l-69.105,-14.69c-1.922,-0.418 -3.939,-0.042 -5.585,1.036c-1.658,1.073 -2.811,2.761 -3.224,4.686l-21.152,99.438c-44.258,1.228 -84.046,14.494 -112.837,35.232c-7.468,-7.164 -17.589,-11.591 -28.757,-11.591c-22.965,0 -41.585,18.616 -41.585,41.58c0,16.896 10.095,31.41 24.568,37.918c-0.639,4.135 -0.99,8.328 -0.99,12.576c0,63.977 74.469,115.836 166.33,115.836c91.861,0 166.334,-51.859 166.334,-115.836c0,-4.218 -0.347,-8.387 -0.977,-12.493c14.564,-6.47 24.735,-21.034 24.735,-38.001Zm-119.474,108.193c-20.27,20.241 -59.115,21.816 -70.534,21.816c-11.428,0 -50.277,-1.575 -70.522,-21.82c-3.007,-3.008 -3.007,-7.882 0,-10.889c3.003,-2.999 7.882,-3.003 10.885,0c12.777,12.781 40.11,17.317 59.637,17.317c19.522,0 46.86,-4.536 59.657,-17.321c3.016,-2.999 7.886,-2.995 10.885,0.008c3.008,3.011 3.003,7.882 -0.008,10.889Zm-5.23,-48.781c-16.373,0 -29.701,-13.324 -29.701,-29.698c0,-16.381 13.328,-29.714 29.701,-29.714c16.378,0 29.706,13.333 29.706,29.714c0,16.374 -13.328,29.698 -29.706,29.698Zm-160.386,-29.702c0,-16.381 13.328,-29.71 29.714,-29.71c16.369,0 29.689,13.329 29.689,29.71c0,16.373 -13.32,29.693 -29.689,29.693c-16.386,0 -29.714,-13.32 -29.714,-29.693Z" />
@@ -872,7 +1008,7 @@ ver1.x较为稳定且容易上手，本人将选择 ver1.x。">
     </li>
     <li>
         <a target="_blank" rel="noopener noreferrer" aria-label="share Hadoop 基础篇 on facebook"
-            href="https://facebook.com/sharer/sharer.php?u=http%3a%2f%2flocalhost%3a1313%2fposts%2f%25E5%25A4%25A7%25E6%2595%25B0%25E6%258D%25AE%2fhadoop%2fhadoop%25E5%259F%25BA%25E7%25A1%2580%25E7%25AF%2587%2f">
+            href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fzjxjwxk.github.io%2fposts%2f%25E5%25A4%25A7%25E6%2595%25B0%25E6%258D%25AE%2fhadoop%2fhadoop%25E5%259F%25BA%25E7%25A1%2580%25E7%25AF%2587%2f">
             <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
                 <path
                     d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-106.468,0l0,-192.915l66.6,0l12.672,-82.621l-79.272,0l0,-53.617c0,-22.603 11.073,-44.636 46.58,-44.636l36.042,0l0,-70.34c0,0 -32.71,-5.582 -63.982,-5.582c-65.288,0 -107.96,39.569 -107.96,111.204l0,62.971l-72.573,0l0,82.621l72.573,0l0,192.915l-191.104,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Z" />
@@ -881,7 +1017,7 @@ ver1.x较为稳定且容易上手，本人将选择 ver1.x。">
     </li>
     <li>
         <a target="_blank" rel="noopener noreferrer" aria-label="share Hadoop 基础篇 on whatsapp"
-            href="https://api.whatsapp.com/send?text=Hadoop%20%e5%9f%ba%e7%a1%80%e7%af%87%20-%20http%3a%2f%2flocalhost%3a1313%2fposts%2f%25E5%25A4%25A7%25E6%2595%25B0%25E6%258D%25AE%2fhadoop%2fhadoop%25E5%259F%25BA%25E7%25A1%2580%25E7%25AF%2587%2f">
+            href="https://api.whatsapp.com/send?text=Hadoop%20%e5%9f%ba%e7%a1%80%e7%af%87%20-%20https%3a%2f%2fzjxjwxk.github.io%2fposts%2f%25E5%25A4%25A7%25E6%2595%25B0%25E6%258D%25AE%2fhadoop%2fhadoop%25E5%259F%25BA%25E7%25A1%2580%25E7%25AF%2587%2f">
             <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
                 <path
                     d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-58.673,127.703c-33.842,-33.881 -78.847,-52.548 -126.798,-52.568c-98.799,0 -179.21,80.405 -179.249,179.234c-0.013,31.593 8.241,62.428 23.927,89.612l-25.429,92.884l95.021,-24.925c26.181,14.28 55.659,21.807 85.658,21.816l0.074,0c98.789,0 179.206,-80.413 179.247,-179.243c0.018,-47.895 -18.61,-92.93 -52.451,-126.81Zm-126.797,275.782l-0.06,0c-26.734,-0.01 -52.954,-7.193 -75.828,-20.767l-5.441,-3.229l-56.386,14.792l15.05,-54.977l-3.542,-5.637c-14.913,-23.72 -22.791,-51.136 -22.779,-79.287c0.033,-82.142 66.867,-148.971 149.046,-148.971c39.793,0.014 77.199,15.531 105.329,43.692c28.128,28.16 43.609,65.592 43.594,105.4c-0.034,82.149 -66.866,148.983 -148.983,148.984Zm81.721,-111.581c-4.479,-2.242 -26.499,-13.075 -30.604,-14.571c-4.105,-1.495 -7.091,-2.241 -10.077,2.241c-2.986,4.483 -11.569,14.572 -14.182,17.562c-2.612,2.988 -5.225,3.364 -9.703,1.12c-4.479,-2.241 -18.91,-6.97 -36.017,-22.23c-13.314,-11.876 -22.304,-26.542 -24.916,-31.026c-2.612,-4.484 -0.279,-6.908 1.963,-9.14c2.016,-2.007 4.48,-5.232 6.719,-7.847c2.24,-2.615 2.986,-4.484 4.479,-7.472c1.493,-2.99 0.747,-5.604 -0.374,-7.846c-1.119,-2.241 -10.077,-24.288 -13.809,-33.256c-3.635,-8.733 -7.327,-7.55 -10.077,-7.688c-2.609,-0.13 -5.598,-0.158 -8.583,-0.158c-2.986,0 -7.839,1.121 -11.944,5.604c-4.105,4.484 -15.675,15.32 -15.675,37.364c0,22.046 16.048,43.342 18.287,46.332c2.24,2.99 31.582,48.227 76.511,67.627c10.685,4.615 19.028,7.371 25.533,9.434c10.728,3.41 20.492,2.929 28.209,1.775c8.605,-1.285 26.499,-10.833 30.231,-21.295c3.732,-10.464 3.732,-19.431 2.612,-21.298c-1.119,-1.869 -4.105,-2.99 -8.583,-5.232Z" />
@@ -890,7 +1026,7 @@ ver1.x较为稳定且容易上手，本人将选择 ver1.x。">
     </li>
     <li>
         <a target="_blank" rel="noopener noreferrer" aria-label="share Hadoop 基础篇 on telegram"
-            href="https://telegram.me/share/url?text=Hadoop%20%e5%9f%ba%e7%a1%80%e7%af%87&amp;url=http%3a%2f%2flocalhost%3a1313%2fposts%2f%25E5%25A4%25A7%25E6%2595%25B0%25E6%258D%25AE%2fhadoop%2fhadoop%25E5%259F%25BA%25E7%25A1%2580%25E7%25AF%2587%2f">
+            href="https://telegram.me/share/url?text=Hadoop%20%e5%9f%ba%e7%a1%80%e7%af%87&amp;url=https%3a%2f%2fzjxjwxk.github.io%2fposts%2f%25E5%25A4%25A7%25E6%2595%25B0%25E6%258D%25AE%2fhadoop%2fhadoop%25E5%259F%25BA%25E7%25A1%2580%25E7%25AF%2587%2f">
             <svg version="1.1" xml:space="preserve" viewBox="2 2 28 28" height="30px" width="30px" fill="currentColor">
                 <path
                     d="M26.49,29.86H5.5a3.37,3.37,0,0,1-2.47-1,3.35,3.35,0,0,1-1-2.47V5.48A3.36,3.36,0,0,1,3,3,3.37,3.37,0,0,1,5.5,2h21A3.38,3.38,0,0,1,29,3a3.36,3.36,0,0,1,1,2.46V26.37a3.35,3.35,0,0,1-1,2.47A3.38,3.38,0,0,1,26.49,29.86Zm-5.38-6.71a.79.79,0,0,0,.85-.66L24.73,9.24a.55.55,0,0,0-.18-.46.62.62,0,0,0-.41-.17q-.08,0-16.53,6.11a.59.59,0,0,0-.41.59.57.57,0,0,0,.43.52l4,1.24,1.61,4.83a.62.62,0,0,0,.63.43.56.56,0,0,0,.4-.17L16.54,20l4.09,3A.9.9,0,0,0,21.11,23.15ZM13.8,20.71l-1.21-4q8.72-5.55,8.78-5.55c.15,0,.23,0,.23.16a.18.18,0,0,1,0,.06s-2.51,2.3-7.52,6.8Z" />
@@ -899,7 +1035,7 @@ ver1.x较为稳定且容易上手，本人将选择 ver1.x。">
     </li>
     <li>
         <a target="_blank" rel="noopener noreferrer" aria-label="share Hadoop 基础篇 on ycombinator"
-            href="https://news.ycombinator.com/submitlink?t=Hadoop%20%e5%9f%ba%e7%a1%80%e7%af%87&u=http%3a%2f%2flocalhost%3a1313%2fposts%2f%25E5%25A4%25A7%25E6%2595%25B0%25E6%258D%25AE%2fhadoop%2fhadoop%25E5%259F%25BA%25E7%25A1%2580%25E7%25AF%2587%2f">
+            href="https://news.ycombinator.com/submitlink?t=Hadoop%20%e5%9f%ba%e7%a1%80%e7%af%87&u=https%3a%2f%2fzjxjwxk.github.io%2fposts%2f%25E5%25A4%25A7%25E6%2595%25B0%25E6%258D%25AE%2fhadoop%2fhadoop%25E5%259F%25BA%25E7%25A1%2580%25E7%25AF%2587%2f">
             <svg version="1.1" xml:space="preserve" width="30px" height="30px" viewBox="0 0 512 512" fill="currentColor"
                 xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape">
                 <path
@@ -933,7 +1069,7 @@ ver1.x较为稳定且容易上手，本人将选择 ver1.x。">
     </main>
     
 <footer class="footer">
-        <span>&copy; 2024 <a href="http://localhost:1313/">Xinkang&#39;s Blog</a></span> · 
+        <span>&copy; 2024 <a href="https://zjxjwxk.github.io/">Xinkang&#39;s Blog</a></span> · 
 
     <span>
         Powered by

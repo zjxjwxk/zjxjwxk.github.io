@@ -2,32 +2,32 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>排序 on Xinkang&#39;s Blog</title>
-    <link>http://localhost:1313/tags/%E6%8E%92%E5%BA%8F/</link>
+    <link>https://zjxjwxk.github.io/tags/%E6%8E%92%E5%BA%8F/</link>
     <description>Recent content in 排序 on Xinkang&#39;s Blog</description>
     <generator>Hugo -- 0.138.0</generator>
     <language>en</language>
     <lastBuildDate>Sun, 22 Mar 2020 17:24:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/%E6%8E%92%E5%BA%8F/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://zjxjwxk.github.io/tags/%E6%8E%92%E5%BA%8F/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>PAT甲级 1095 Cars on Campus (30分)</title>
-      <link>http://localhost:1313/posts/pat/advanced_level/a1095/</link>
+      <link>https://zjxjwxk.github.io/posts/pat/advanced_level/a1095/</link>
       <pubDate>Sun, 22 Mar 2020 17:24:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/pat/advanced_level/a1095/</guid>
+      <guid>https://zjxjwxk.github.io/posts/pat/advanced_level/a1095/</guid>
       <description>&lt;p&gt;Zhejiang University has 8 campuses and a lot of gates. From each gate we can collect the in/out times and the plate numbers of the cars crossing the gate. Now with all the information available, you are supposed to tell, at any specific time point, the number of cars parking on campus, and at the end of the day find the cars that have parked for the longest time period.&lt;/p&gt;</description>
     </item>
     <item>
       <title>PAT甲级 1016 Phone Bills (25分)</title>
-      <link>http://localhost:1313/posts/pat/advanced_level/a1016/</link>
+      <link>https://zjxjwxk.github.io/posts/pat/advanced_level/a1016/</link>
       <pubDate>Fri, 20 Mar 2020 22:29:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/pat/advanced_level/a1016/</guid>
+      <guid>https://zjxjwxk.github.io/posts/pat/advanced_level/a1016/</guid>
       <description>&lt;p&gt;A long-distance telephone company charges its customers by the following rules:&lt;/p&gt;
 &lt;p&gt;Making a long-distance call costs a certain amount per minute, depending on the time of day when the call is made. When a customer starts connecting a long-distance call, the time will be recorded, and so will be the time when the customer hangs up the phone. Every calendar month, a bill is sent to the customer for each minute called (at a rate determined by the time of day). Your job is to prepare the bills for each month, given a set of phone call records.&lt;/p&gt;</description>
     </item>
     <item>
       <title>PAT甲级 1012 The Best Rank (25分)</title>
-      <link>http://localhost:1313/posts/pat/advanced_level/a1012/</link>
+      <link>https://zjxjwxk.github.io/posts/pat/advanced_level/a1012/</link>
       <pubDate>Fri, 20 Mar 2020 16:05:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/pat/advanced_level/a1012/</guid>
+      <guid>https://zjxjwxk.github.io/posts/pat/advanced_level/a1012/</guid>
       <description>&lt;p&gt;To evaluate the performance of our first year CS majored students, we consider their grades of three courses only: &lt;code&gt;C&lt;/code&gt; - C Programming Language, &lt;code&gt;M&lt;/code&gt; - Mathematics (Calculus or Linear Algrbra), and &lt;code&gt;E&lt;/code&gt; - English. At the mean time, we encourage students by emphasizing on their best ranks &amp;ndash; that is, among the four ranks with respect to the three courses and the average grade, we print the best rank for each student.&lt;/p&gt;</description>
     </item>
   </channel>

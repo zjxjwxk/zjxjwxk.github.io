@@ -26,6 +26,7 @@ params:
   ShowPostNavLinks: true
   ShowCodeCopyButtons: true
   comments: true
+  env: production
   
   editPost:
     URL: "https://github.com/zjxjwxk/zjxjwxk.github.io/tree/main/content"

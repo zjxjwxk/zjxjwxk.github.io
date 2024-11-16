@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" dir="auto">
 
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<head><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="noindex, nofollow">
+<meta name="robots" content="index, follow">
 <title>J2EE基础知识 | Xinkang&#39;s Blog</title>
 <meta name="keywords" content="Java, J2EE">
 <meta name="description" content="Servlet总结
@@ -59,16 +59,16 @@ Form标签里的method的属性为get时调用doGet()，为post时调用doPost()
 
 forward是服务器请求资源,服务器直接访问目标地址的URL,把那个URL的响应内容读取过来,然后把这些内容再发给浏览器.浏览器根本不知道服务器发送的内容从哪里来的,所以它的地址栏还是原来的地址. redirect是服务端根据逻辑,发送一个状态码,告诉浏览器重新去请求那个地址.所以地址栏显示的是新的URL.">
 <meta name="author" content="">
-<link rel="canonical" href="http://localhost:1313/posts/java/j2ee/">
+<link rel="canonical" href="https://zjxjwxk.github.io/posts/java/j2ee/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.d6fcd20a4fb86efa4dfac8ec95da60244cc8871042183da1ef28e3a762ad79c8.css" integrity="sha256-1vzSCk&#43;4bvpN&#43;sjsldpgJEzIhxBCGD2h7yjjp2Ktecg=" rel="preload stylesheet" as="style">
-<link rel="icon" href="http://localhost:1313/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
-<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
-<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
+<link rel="icon" href="https://zjxjwxk.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://zjxjwxk.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://zjxjwxk.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://zjxjwxk.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://zjxjwxk.github.io/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" hreflang="en" href="http://localhost:1313/posts/java/j2ee/">
+<link rel="alternate" hreflang="en" href="https://zjxjwxk.github.io/posts/java/j2ee/">
 <noscript>
     <style>
         #theme-toggle,
@@ -106,6 +106,159 @@ forward是服务器请求资源,服务器直接访问目标地址的URL,把那�
 
     </style>
 </noscript>
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-9CMXGMMTKX"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-9CMXGMMTKX');
+        }
+      </script><meta property="og:url" content="https://zjxjwxk.github.io/posts/java/j2ee/">
+  <meta property="og:site_name" content="Xinkang&#39;s Blog">
+  <meta property="og:title" content="J2EE基础知识">
+  <meta property="og:description" content="Servlet总结 在Java Web程序中，Servlet主要负责接收用户请求HttpServletRequest,在doGet(),doPost()中做相应的处理，并将回应HttpServletResponse反馈给用户。Servlet可以设置初始化参数，供Servlet内部使用。一个Servlet类只会有一个实例，在它初始化时调用init()方法，销毁时调用destroy()方法。Servlet需要在web.xml中配置（MyEclipse中创建Servlet会自动配置），一个Servlet可以设置多个URL访问。Servlet不是线程安全，因此要谨慎使用类变量。
+阐述Servlet和CGI的区别? CGI的不足之处: 1，需要为每个请求启动一个操作CGI程序的系统进程。如果请求频繁，这将会带来很大的开销。
+2，需要为每个请求加载和运行一个CGI程序，这将带来很大的开销
+3，需要重复编写处理网络协议的代码以及编码，这些工作都是非常耗时的。
+Servlet的优点: 1，只需要启动一个操作系统进程以及加载一个JVM，大大降低了系统的开销
+2，如果多个请求需要做同样处理的时候，这时候只需要加载一个类，这也大大降低了开销
+3，所有动态加载的类可以实现对网络协议以及请求解码的共享，大大降低了工作量。
+4，Servlet能直接和Web服务器交互，而普通的CGI程序不能。Servlet还能在各个程序之间共享数据，使数据库连接池之类的功能很容易实现。
+补充：Sun Microsystems公司在1996年发布Servlet技术就是为了和CGI进行竞争，Servlet是一个特殊的Java程序，一个基于Java的Web应用通常包含一个或多个Servlet类。Servlet不能够自行创建并执行，它是在Servlet容器中运行的，容器将用户的请求传递给Servlet程序，并将Servlet的响应回传给用户。通常一个Servlet会关联一个或多个JSP页面。以前CGI经常因为性能开销上的问题被诟病，然而Fast CGI早就已经解决了CGI效率上的问题，所以面试的时候大可不必信口开河的诟病CGI，事实上有很多你熟悉的网站都使用了CGI技术。
+参考：《javaweb整合开发王者归来》P7
+Servlet接口中有哪些方法及Servlet生命周期探秘 Servlet接口定义了5个方法，其中前三个方法与Servlet生命周期相关：
+void init(ServletConfig config) throws ServletException void service(ServletRequest req, ServletResponse resp) throws ServletException, java.io.IOException void destory() java.lang.String getServletInfo() ServletConfig getServletConfig() 生命周期： Web容器加载Servlet并将其实例化后，Servlet生命周期开始，容器运行其init()方法进行Servlet的初始化；请求到达时调用Servlet的service()方法，service()方法会根据需要调用与请求对应的doGet或doPost等方法；当服务器关闭或项目被卸载时服务器会将Servlet实例销毁，此时会调用Servlet的destroy()方法。init方法和destory方法只会执行一次，service方法客户端每次请求Servlet都会执行。Servlet中有时会用到一些需要初始化与销毁的资源，因此可以把初始化资源的代码放入init方法中，销毁资源的代码放入destroy方法中，这样就不需要每次处理客户端的请求都要初始化与销毁资源。
+参考：《javaweb整合开发王者归来》P81
+get和post请求的区别 网上也有文章说：get和post请求实际上是没有区别，大家可以自行查询相关文章！我下面给出的只是一种常见的答案。
+①get请求用来从服务器上获得资源，而post是用来向服务器提交数据；
+②get将表单中数据按照name=value的形式，添加到action 所指向的URL 后面，并且两者使用&#34;?“连接，而各个变量之间使用”&amp;“连接；post是将表单中的数据放在HTTP协议的请求头或消息体中，传递到action所指向URL；
+③get传输的数据要受到URL长度限制（1024字节即256个字符）；而post可以传输大量的数据，上传文件通常要使用post方式；
+④使用get时参数会显示在地址栏上，如果这些数据不是敏感数据，那么可以使用get；对于敏感数据还是应用使用post；
+⑤get使用MIME类型application/x-www-form-urlencoded的URL编码（也叫百分号编码）文本的格式传递参数，保证被传送的参数由遵循规范的文本组成，例如一个空格的编码是”%20&#34;。
+补充：GET方式提交表单的典型应用是搜索引擎。GET方式就是被设计为查询用的。
+还有另外一种回答。推荐大家看一下：
+https://www.zhihu.com/question/28586791 https://mp.weixin.qq.com/s?__biz=MzI3NzIzMzg3Mw==&amp;mid=100000054&amp;idx=1&amp;sn=71f6c214f3833d9ca20b9f7dcd9d33e4#rd 什么情况下调用doGet()和doPost() Form标签里的method的属性为get时调用doGet()，为post时调用doPost()。
+转发(Forward)和重定向(Redirect)的区别 转发是服务器行为，重定向是客户端行为。
+转发（Forword） 通过RequestDispatcher对象的forward（HttpServletRequest request,HttpServletResponse response）方法实现的。RequestDispatcher可以通过HttpServletRequest 的getRequestDispatcher()方法获得。例如下面的代码就是跳转到login_success.jsp页面。
+request.getRequestDispatcher(&#34;login_success.jsp&#34;).forward(request, response); 重定向（Redirect） 是利用服务器返回的状态吗来实现的。客户端浏览器请求服务器的时候，服务器会返回一个状态码。服务器通过HttpServletRequestResponse的setStatus(int status)方法设置状态码。如果服务器返回301或者302，则浏览器会到新的网址重新请求该资源。
+从地址栏显示来说 forward是服务器请求资源,服务器直接访问目标地址的URL,把那个URL的响应内容读取过来,然后把这些内容再发给浏览器.浏览器根本不知道服务器发送的内容从哪里来的,所以它的地址栏还是原来的地址. redirect是服务端根据逻辑,发送一个状态码,告诉浏览器重新去请求那个地址.所以地址栏显示的是新的URL.">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2019-01-04T12:54:00+00:00">
+    <meta property="article:modified_time" content="2019-01-04T12:54:00+00:00">
+    <meta property="article:tag" content="Java">
+    <meta property="article:tag" content="J2EE">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="J2EE基础知识">
+<meta name="twitter:description" content="Servlet总结
+在Java Web程序中，Servlet主要负责接收用户请求HttpServletRequest,在doGet(),doPost()中做相应的处理，并将回应HttpServletResponse反馈给用户。Servlet可以设置初始化参数，供Servlet内部使用。一个Servlet类只会有一个实例，在它初始化时调用init()方法，销毁时调用destroy()方法。Servlet需要在web.xml中配置（MyEclipse中创建Servlet会自动配置），一个Servlet可以设置多个URL访问。Servlet不是线程安全，因此要谨慎使用类变量。
+阐述Servlet和CGI的区别?
+CGI的不足之处:
+1，需要为每个请求启动一个操作CGI程序的系统进程。如果请求频繁，这将会带来很大的开销。
+2，需要为每个请求加载和运行一个CGI程序，这将带来很大的开销
+3，需要重复编写处理网络协议的代码以及编码，这些工作都是非常耗时的。
+Servlet的优点:
+1，只需要启动一个操作系统进程以及加载一个JVM，大大降低了系统的开销
+2，如果多个请求需要做同样处理的时候，这时候只需要加载一个类，这也大大降低了开销
+3，所有动态加载的类可以实现对网络协议以及请求解码的共享，大大降低了工作量。
+4，Servlet能直接和Web服务器交互，而普通的CGI程序不能。Servlet还能在各个程序之间共享数据，使数据库连接池之类的功能很容易实现。
+补充：Sun Microsystems公司在1996年发布Servlet技术就是为了和CGI进行竞争，Servlet是一个特殊的Java程序，一个基于Java的Web应用通常包含一个或多个Servlet类。Servlet不能够自行创建并执行，它是在Servlet容器中运行的，容器将用户的请求传递给Servlet程序，并将Servlet的响应回传给用户。通常一个Servlet会关联一个或多个JSP页面。以前CGI经常因为性能开销上的问题被诟病，然而Fast CGI早就已经解决了CGI效率上的问题，所以面试的时候大可不必信口开河的诟病CGI，事实上有很多你熟悉的网站都使用了CGI技术。
+参考：《javaweb整合开发王者归来》P7
+Servlet接口中有哪些方法及Servlet生命周期探秘
+Servlet接口定义了5个方法，其中前三个方法与Servlet生命周期相关：
+
+void init(ServletConfig config) throws ServletException
+void service(ServletRequest req, ServletResponse resp) throws ServletException, java.io.IOException
+void destory()
+java.lang.String getServletInfo()
+ServletConfig getServletConfig()
+
+生命周期： Web容器加载Servlet并将其实例化后，Servlet生命周期开始，容器运行其init()方法进行Servlet的初始化；请求到达时调用Servlet的service()方法，service()方法会根据需要调用与请求对应的doGet或doPost等方法；当服务器关闭或项目被卸载时服务器会将Servlet实例销毁，此时会调用Servlet的destroy()方法。init方法和destory方法只会执行一次，service方法客户端每次请求Servlet都会执行。Servlet中有时会用到一些需要初始化与销毁的资源，因此可以把初始化资源的代码放入init方法中，销毁资源的代码放入destroy方法中，这样就不需要每次处理客户端的请求都要初始化与销毁资源。
+参考：《javaweb整合开发王者归来》P81
+get和post请求的区别
+
+网上也有文章说：get和post请求实际上是没有区别，大家可以自行查询相关文章！我下面给出的只是一种常见的答案。
+
+①get请求用来从服务器上获得资源，而post是用来向服务器提交数据；
+②get将表单中数据按照name=value的形式，添加到action 所指向的URL 后面，并且两者使用&quot;?&ldquo;连接，而各个变量之间使用&rdquo;&amp;&ldquo;连接；post是将表单中的数据放在HTTP协议的请求头或消息体中，传递到action所指向URL；
+③get传输的数据要受到URL长度限制（1024字节即256个字符）；而post可以传输大量的数据，上传文件通常要使用post方式；
+④使用get时参数会显示在地址栏上，如果这些数据不是敏感数据，那么可以使用get；对于敏感数据还是应用使用post；
+⑤get使用MIME类型application/x-www-form-urlencoded的URL编码（也叫百分号编码）文本的格式传递参数，保证被传送的参数由遵循规范的文本组成，例如一个空格的编码是&rdquo;%20&quot;。
+补充：GET方式提交表单的典型应用是搜索引擎。GET方式就是被设计为查询用的。
+还有另外一种回答。推荐大家看一下：
+
+https://www.zhihu.com/question/28586791
+https://mp.weixin.qq.com/s?__biz=MzI3NzIzMzg3Mw==&amp;mid=100000054&amp;idx=1&amp;sn=71f6c214f3833d9ca20b9f7dcd9d33e4#rd
+
+什么情况下调用doGet()和doPost()
+Form标签里的method的属性为get时调用doGet()，为post时调用doPost()。
+转发(Forward)和重定向(Redirect)的区别
+转发是服务器行为，重定向是客户端行为。
+转发（Forword） 通过RequestDispatcher对象的forward（HttpServletRequest request,HttpServletResponse response）方法实现的。RequestDispatcher可以通过HttpServletRequest 的getRequestDispatcher()方法获得。例如下面的代码就是跳转到login_success.jsp页面。
+     request.getRequestDispatcher(&#34;login_success.jsp&#34;).forward(request, response);
+重定向（Redirect） 是利用服务器返回的状态吗来实现的。客户端浏览器请求服务器的时候，服务器会返回一个状态码。服务器通过HttpServletRequestResponse的setStatus(int status)方法设置状态码。如果服务器返回301或者302，则浏览器会到新的网址重新请求该资源。
+
+从地址栏显示来说
+
+forward是服务器请求资源,服务器直接访问目标地址的URL,把那个URL的响应内容读取过来,然后把这些内容再发给浏览器.浏览器根本不知道服务器发送的内容从哪里来的,所以它的地址栏还是原来的地址. redirect是服务端根据逻辑,发送一个状态码,告诉浏览器重新去请求那个地址.所以地址栏显示的是新的URL.">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://zjxjwxk.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "J2EE基础知识",
+      "item": "https://zjxjwxk.github.io/posts/java/j2ee/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "J2EE基础知识",
+  "name": "J2EE基础知识",
+  "description": "Servlet总结 在Java Web程序中，Servlet主要负责接收用户请求HttpServletRequest,在doGet(),doPost()中做相应的处理，并将回应HttpServletResponse反馈给用户。Servlet可以设置初始化参数，供Servlet内部使用。一个Servlet类只会有一个实例，在它初始化时调用init()方法，销毁时调用destroy()方法。Servlet需要在web.xml中配置（MyEclipse中创建Servlet会自动配置），一个Servlet可以设置多个URL访问。Servlet不是线程安全，因此要谨慎使用类变量。\n阐述Servlet和CGI的区别? CGI的不足之处: 1，需要为每个请求启动一个操作CGI程序的系统进程。如果请求频繁，这将会带来很大的开销。\n2，需要为每个请求加载和运行一个CGI程序，这将带来很大的开销\n3，需要重复编写处理网络协议的代码以及编码，这些工作都是非常耗时的。\nServlet的优点: 1，只需要启动一个操作系统进程以及加载一个JVM，大大降低了系统的开销\n2，如果多个请求需要做同样处理的时候，这时候只需要加载一个类，这也大大降低了开销\n3，所有动态加载的类可以实现对网络协议以及请求解码的共享，大大降低了工作量。\n4，Servlet能直接和Web服务器交互，而普通的CGI程序不能。Servlet还能在各个程序之间共享数据，使数据库连接池之类的功能很容易实现。\n补充：Sun Microsystems公司在1996年发布Servlet技术就是为了和CGI进行竞争，Servlet是一个特殊的Java程序，一个基于Java的Web应用通常包含一个或多个Servlet类。Servlet不能够自行创建并执行，它是在Servlet容器中运行的，容器将用户的请求传递给Servlet程序，并将Servlet的响应回传给用户。通常一个Servlet会关联一个或多个JSP页面。以前CGI经常因为性能开销上的问题被诟病，然而Fast CGI早就已经解决了CGI效率上的问题，所以面试的时候大可不必信口开河的诟病CGI，事实上有很多你熟悉的网站都使用了CGI技术。\n参考：《javaweb整合开发王者归来》P7\nServlet接口中有哪些方法及Servlet生命周期探秘 Servlet接口定义了5个方法，其中前三个方法与Servlet生命周期相关：\nvoid init(ServletConfig config) throws ServletException void service(ServletRequest req, ServletResponse resp) throws ServletException, java.io.IOException void destory() java.lang.String getServletInfo() ServletConfig getServletConfig() 生命周期： Web容器加载Servlet并将其实例化后，Servlet生命周期开始，容器运行其init()方法进行Servlet的初始化；请求到达时调用Servlet的service()方法，service()方法会根据需要调用与请求对应的doGet或doPost等方法；当服务器关闭或项目被卸载时服务器会将Servlet实例销毁，此时会调用Servlet的destroy()方法。init方法和destory方法只会执行一次，service方法客户端每次请求Servlet都会执行。Servlet中有时会用到一些需要初始化与销毁的资源，因此可以把初始化资源的代码放入init方法中，销毁资源的代码放入destroy方法中，这样就不需要每次处理客户端的请求都要初始化与销毁资源。\n参考：《javaweb整合开发王者归来》P81\nget和post请求的区别 网上也有文章说：get和post请求实际上是没有区别，大家可以自行查询相关文章！我下面给出的只是一种常见的答案。\n①get请求用来从服务器上获得资源，而post是用来向服务器提交数据；\n②get将表单中数据按照name=value的形式，添加到action 所指向的URL 后面，并且两者使用\u0026quot;?\u0026ldquo;连接，而各个变量之间使用\u0026rdquo;\u0026amp;\u0026ldquo;连接；post是将表单中的数据放在HTTP协议的请求头或消息体中，传递到action所指向URL；\n③get传输的数据要受到URL长度限制（1024字节即256个字符）；而post可以传输大量的数据，上传文件通常要使用post方式；\n④使用get时参数会显示在地址栏上，如果这些数据不是敏感数据，那么可以使用get；对于敏感数据还是应用使用post；\n⑤get使用MIME类型application/x-www-form-urlencoded的URL编码（也叫百分号编码）文本的格式传递参数，保证被传送的参数由遵循规范的文本组成，例如一个空格的编码是\u0026rdquo;%20\u0026quot;。\n补充：GET方式提交表单的典型应用是搜索引擎。GET方式就是被设计为查询用的。\n还有另外一种回答。推荐大家看一下：\nhttps://www.zhihu.com/question/28586791 https://mp.weixin.qq.com/s?__biz=MzI3NzIzMzg3Mw==\u0026amp;mid=100000054\u0026amp;idx=1\u0026amp;sn=71f6c214f3833d9ca20b9f7dcd9d33e4#rd 什么情况下调用doGet()和doPost() Form标签里的method的属性为get时调用doGet()，为post时调用doPost()。\n转发(Forward)和重定向(Redirect)的区别 转发是服务器行为，重定向是客户端行为。\n转发（Forword） 通过RequestDispatcher对象的forward（HttpServletRequest request,HttpServletResponse response）方法实现的。RequestDispatcher可以通过HttpServletRequest 的getRequestDispatcher()方法获得。例如下面的代码就是跳转到login_success.jsp页面。\nrequest.getRequestDispatcher(\u0026#34;login_success.jsp\u0026#34;).forward(request, response); 重定向（Redirect） 是利用服务器返回的状态吗来实现的。客户端浏览器请求服务器的时候，服务器会返回一个状态码。服务器通过HttpServletRequestResponse的setStatus(int status)方法设置状态码。如果服务器返回301或者302，则浏览器会到新的网址重新请求该资源。\n从地址栏显示来说 forward是服务器请求资源,服务器直接访问目标地址的URL,把那个URL的响应内容读取过来,然后把这些内容再发给浏览器.浏览器根本不知道服务器发送的内容从哪里来的,所以它的地址栏还是原来的地址. redirect是服务端根据逻辑,发送一个状态码,告诉浏览器重新去请求那个地址.所以地址栏显示的是新的URL.\n",
+  "keywords": [
+    "Java", "J2EE"
+  ],
+  "articleBody": "Servlet总结 在Java Web程序中，Servlet主要负责接收用户请求HttpServletRequest,在doGet(),doPost()中做相应的处理，并将回应HttpServletResponse反馈给用户。Servlet可以设置初始化参数，供Servlet内部使用。一个Servlet类只会有一个实例，在它初始化时调用init()方法，销毁时调用destroy()方法。Servlet需要在web.xml中配置（MyEclipse中创建Servlet会自动配置），一个Servlet可以设置多个URL访问。Servlet不是线程安全，因此要谨慎使用类变量。\n阐述Servlet和CGI的区别? CGI的不足之处: 1，需要为每个请求启动一个操作CGI程序的系统进程。如果请求频繁，这将会带来很大的开销。\n2，需要为每个请求加载和运行一个CGI程序，这将带来很大的开销\n3，需要重复编写处理网络协议的代码以及编码，这些工作都是非常耗时的。\nServlet的优点: 1，只需要启动一个操作系统进程以及加载一个JVM，大大降低了系统的开销\n2，如果多个请求需要做同样处理的时候，这时候只需要加载一个类，这也大大降低了开销\n3，所有动态加载的类可以实现对网络协议以及请求解码的共享，大大降低了工作量。\n4，Servlet能直接和Web服务器交互，而普通的CGI程序不能。Servlet还能在各个程序之间共享数据，使数据库连接池之类的功能很容易实现。\n补充：Sun Microsystems公司在1996年发布Servlet技术就是为了和CGI进行竞争，Servlet是一个特殊的Java程序，一个基于Java的Web应用通常包含一个或多个Servlet类。Servlet不能够自行创建并执行，它是在Servlet容器中运行的，容器将用户的请求传递给Servlet程序，并将Servlet的响应回传给用户。通常一个Servlet会关联一个或多个JSP页面。以前CGI经常因为性能开销上的问题被诟病，然而Fast CGI早就已经解决了CGI效率上的问题，所以面试的时候大可不必信口开河的诟病CGI，事实上有很多你熟悉的网站都使用了CGI技术。\n参考：《javaweb整合开发王者归来》P7\nServlet接口中有哪些方法及Servlet生命周期探秘 Servlet接口定义了5个方法，其中前三个方法与Servlet生命周期相关：\nvoid init(ServletConfig config) throws ServletException void service(ServletRequest req, ServletResponse resp) throws ServletException, java.io.IOException void destory() java.lang.String getServletInfo() ServletConfig getServletConfig() 生命周期： Web容器加载Servlet并将其实例化后，Servlet生命周期开始，容器运行其init()方法进行Servlet的初始化；请求到达时调用Servlet的service()方法，service()方法会根据需要调用与请求对应的doGet或doPost等方法；当服务器关闭或项目被卸载时服务器会将Servlet实例销毁，此时会调用Servlet的destroy()方法。init方法和destory方法只会执行一次，service方法客户端每次请求Servlet都会执行。Servlet中有时会用到一些需要初始化与销毁的资源，因此可以把初始化资源的代码放入init方法中，销毁资源的代码放入destroy方法中，这样就不需要每次处理客户端的请求都要初始化与销毁资源。\n参考：《javaweb整合开发王者归来》P81\nget和post请求的区别 网上也有文章说：get和post请求实际上是没有区别，大家可以自行查询相关文章！我下面给出的只是一种常见的答案。\n①get请求用来从服务器上获得资源，而post是用来向服务器提交数据；\n②get将表单中数据按照name=value的形式，添加到action 所指向的URL 后面，并且两者使用\"?“连接，而各个变量之间使用”\u0026“连接；post是将表单中的数据放在HTTP协议的请求头或消息体中，传递到action所指向URL；\n③get传输的数据要受到URL长度限制（1024字节即256个字符）；而post可以传输大量的数据，上传文件通常要使用post方式；\n④使用get时参数会显示在地址栏上，如果这些数据不是敏感数据，那么可以使用get；对于敏感数据还是应用使用post；\n⑤get使用MIME类型application/x-www-form-urlencoded的URL编码（也叫百分号编码）文本的格式传递参数，保证被传送的参数由遵循规范的文本组成，例如一个空格的编码是”%20\"。\n补充：GET方式提交表单的典型应用是搜索引擎。GET方式就是被设计为查询用的。\n还有另外一种回答。推荐大家看一下：\nhttps://www.zhihu.com/question/28586791 https://mp.weixin.qq.com/s?__biz=MzI3NzIzMzg3Mw==\u0026mid=100000054\u0026idx=1\u0026sn=71f6c214f3833d9ca20b9f7dcd9d33e4#rd 什么情况下调用doGet()和doPost() Form标签里的method的属性为get时调用doGet()，为post时调用doPost()。\n转发(Forward)和重定向(Redirect)的区别 转发是服务器行为，重定向是客户端行为。\n转发（Forword） 通过RequestDispatcher对象的forward（HttpServletRequest request,HttpServletResponse response）方法实现的。RequestDispatcher可以通过HttpServletRequest 的getRequestDispatcher()方法获得。例如下面的代码就是跳转到login_success.jsp页面。\nrequest.getRequestDispatcher(\"login_success.jsp\").forward(request, response); 重定向（Redirect） 是利用服务器返回的状态吗来实现的。客户端浏览器请求服务器的时候，服务器会返回一个状态码。服务器通过HttpServletRequestResponse的setStatus(int status)方法设置状态码。如果服务器返回301或者302，则浏览器会到新的网址重新请求该资源。\n从地址栏显示来说 forward是服务器请求资源,服务器直接访问目标地址的URL,把那个URL的响应内容读取过来,然后把这些内容再发给浏览器.浏览器根本不知道服务器发送的内容从哪里来的,所以它的地址栏还是原来的地址. redirect是服务端根据逻辑,发送一个状态码,告诉浏览器重新去请求那个地址.所以地址栏显示的是新的URL.\n从数据共享来说 forward:转发页面和转发到的页面可以共享request里面的数据. redirect:不能共享数据.\n从运用地方来说 forward:一般用于用户登陆的时候,根据角色转发到相应的模块. redirect:一般用于用户注销登陆时返回主页面和跳转到其它的网站等\n从效率来说 forward:高. redirect:低.\n自动刷新(Refresh) 自动刷新不仅可以实现一段时间之后自动跳转到另一个页面，还可以实现一段时间之后自动刷新本页面。Servlet中通过HttpServletResponse对象设置Header属性实现自动刷新例如：\nResponse.setHeader(\"Refresh\",\"5;URL=http://localhost:8080/servlet/example.htm\"); 其中5为时间，单位为秒。URL指定就是要跳转的页面（如果设置自己的路径，就会实现每过一秒自动刷新本页面一次）\nServlet与线程安全 Servlet不是线程安全的，多线程并发的读写会导致数据不同步的问题。 解决的办法是尽量不要定义name属性，而是要把name变量分别定义在doGet()和doPost()方法内。虽然使用synchronized(name){}语句块可以解决问题，但是会造成线程的等待，不是很科学的办法。 注意：多线程的并发的读写Servlet类属性会导致数据不同步。但是如果只是并发地读取属性而不写入，则不存在数据不同步的问题。因此Servlet里的只读属性最好定义为final类型的。\n参考：《javaweb整合开发王者归来》P92\nJSP和Servlet是什么关系 其实这个问题在上面已经阐述过了，Servlet是一个特殊的Java程序，它运行于服务器的JVM中，能够依靠服务器的支持向浏览器提供显示内容。JSP本质上是Servlet的一种简易形式，JSP会被服务器处理成一个类似于Servlet的Java程序，可以简化页面内容的生成。Servlet和JSP最主要的不同点在于，Servlet的应用逻辑是在Java文件中，并且完全从表示层中的HTML分离开来。而JSP的情况是Java和HTML可以组合成一个扩展名为.jsp的文件。有人说，Servlet就是在Java中写HTML，而JSP就是在HTML中写Java代码，当然这个说法是很片面且不够准确的。JSP侧重于视图，Servlet更侧重于控制逻辑，在MVC架构模式中，JSP适合充当视图（view）而Servlet适合充当控制器（controller）。\nJSP工作原理 JSP是一种Servlet，但是与HttpServlet的工作方式不太一样。HttpServlet是先由源代码编译为class文件后部署到服务器下，为先编译后部署。而JSP则是先部署后编译。JSP会在客户端第一次请求JSP文件时被编译为HttpJspPage类（接口Servlet的一个子类）。该类会被服务器临时存放在服务器工作目录里面。下面通过实例给大家介绍。 工程JspLoginDemo下有一个名为login.jsp的Jsp文件，把工程第一次部署到服务器上后访问这个Jsp文件，我们发现这个目录下多了下图这两个东东。 .class文件便是JSP对应的Servlet。编译完毕后再运行class文件来响应客户端请求。以后客户端访问login.jsp的时候，Tomcat将不再重新编译JSP文件，而是直接调用class文件来响应客户端请求。\n由于JSP只会在客户端第一次请求的时候被编译 ，因此第一次请求JSP时会感觉比较慢，之后就会感觉快很多。如果把服务器保存的class文件删除，服务器也会重新编译JSP。\n开发Web程序时经常需要修改JSP。Tomcat能够自动检测到JSP程序的改动。如果检测到JSP源代码发生了改动。Tomcat会在下次客户端请求JSP时重新编译JSP，而不需要重启Tomcat。这种自动检测功能是默认开启的，检测改动会消耗少量的时间，在部署Web应用的时候可以在web.xml中将它关掉。\n参考：《javaweb整合开发王者归来》P97\nJSP有哪些内置对象、作用分别是什么 JSP内置对象 - CSDN博客\nJSP有9个内置对象：\nrequest：封装客户端的请求，其中包含来自GET或POST请求的参数； response：封装服务器对客户端的响应； pageContext：通过该对象可以获取其他对象； session：封装用户会话的对象； application：封装服务器运行环境的对象； out：输出服务器响应的输出流对象； config：Web应用的配置对象； page：JSP页面本身（相当于Java程序中的this）； exception：封装页面抛出异常的对象。 Request对象的主要方法有哪些 setAttribute(String name,Object)：设置名字为name的request 的参数值 getAttribute(String name)：返回由name指定的属性值 getAttributeNames()：返回request 对象所有属性的名字集合，结果是一个枚举的实例 getCookies()：返回客户端的所有 Cookie 对象，结果是一个Cookie 数组 getCharacterEncoding() ：返回请求中的字符编码方式 = getContentLength() ：返回请求的 Body的长度 getHeader(String name) ：获得HTTP协议定义的文件头信息 getHeaders(String name) ：返回指定名字的request Header 的所有值，结果是一个枚举的实例 getHeaderNames() ：返回所以request Header 的名字，结果是一个枚举的实例 getInputStream() ：返回请求的输入流，用于获得请求中的数据 getMethod() ：获得客户端向服务器端传送数据的方法 getParameter(String name) ：获得客户端传送给服务器端的有 name指定的参数值 getParameterNames() ：获得客户端传送给服务器端的所有参数的名字，结果是一个枚举的实例 getParameterValues(String name)：获得有name指定的参数的所有值 getProtocol()：获取客户端向服务器端传送数据所依据的协议名称 getQueryString() ：获得查询字符串 getRequestURI() ：获取发出请求字符串的客户端地址 getRemoteAddr()：获取客户端的 IP 地址 getRemoteHost() ：获取客户端的名字 getSession([Boolean create]) ：返回和请求相关 Session getServerName() ：获取服务器的名字 getServletPath()：获取客户端所请求的脚本文件的路径 getServerPort()：获取服务器的端口号 removeAttribute(String name)：删除请求中的一个属性 request.getAttribute()和 request.getParameter()有何区别 从获取方向来看：\ngetParameter()是获取 POST/GET 传递的参数值；\ngetAttribute()是获取对象容器中的数据值；\n从用途来看：\ngetParameter用于客户端重定向时，即点击了链接或提交按扭时传值用，即用于在用表单或url重定向传值时接收数据用。\ngetAttribute用于服务器端重定向时，即在 sevlet 中使用了 forward 函数,或 struts 中使用了 mapping.findForward。 getAttribute 只能收到程序用 setAttribute 传过来的值。\n另外，可以用 setAttribute,getAttribute 发送接收对象.而 getParameter 显然只能传字符串。 setAttribute 是应用服务器把这个对象放在该页面所对应的一块内存中去，当你的页面服务器重定向到另一个页面时，应用服务器会把这块内存拷贝另一个页面所对应的内存中。这样getAttribute就能取得你所设下的值，当然这种方法可以传对象。session也一样，只是对象在内存中的生命周期不一样而已。getParameter只是应用服务器在分析你送上来的 request页面的文本时，取得你设在表单或 url 重定向时的值。\n总结：\ngetParameter 返回的是String,用于读取提交的表单中的值;（获取之后会根据实际需要转换为自己需要的相应类型，比如整型，日期类型啊等等）\ngetAttribute 返回的是Object，需进行转换,可用setAttribute 设置成任意对象，使用很灵活，可随时用\ninclude指令include的行为的区别 include指令： JSP可以通过include指令来包含其他文件。被包含的文件可以是JSP文件、HTML文件或文本文件。包含的文件就好像是该JSP文件的一部分，会被同时编译执行。 语法格式如下： \u003c%@ include file=“文件相对 url 地址” %\u003e\ninclude动作： jsp:include动作元素用来包含静态和动态的文件。该动作把指定文件插入正在生成的页面。语法格式如下： JSP九大内置对象，七大动作，三大指令 JSP九大内置对象，七大动作，三大指令总结\n讲解JSP中的四种作用域 JSP中的四种作用域包括page、request、session和application，具体来说：\npage代表与一个页面相关的对象和属性。 request代表与Web客户机发出的一个请求相关的对象和属性。一个请求可能跨越多个页面，涉及多个Web组件；需要在页面显示的临时数据可以置于此作用域。 session代表与某个用户与服务器建立的一次会话相关的对象和属性。跟某个用户相关的数据应该放在用户自己的session中。 application代表与整个Web应用程序相关的对象和属性，它实质上是跨越整个Web应用程序，包括多个页面、请求和会话的一个全局作用域。 如何实现JSP或Servlet的单线程模式 对于JSP页面，可以通过page指令进行设置。 \u003c%@page isThreadSafe=”false”%\u003e\n对于Servlet，可以让自定义的Servlet实现SingleThreadModel标识接口。\n说明：如果将JSP或Servlet设置成单线程工作模式，会导致每个请求创建一个Servlet实例，这种实践将导致严重的性能问题（服务器的内存压力很大，还会导致频繁的垃圾回收），所以通常情况下并不会这么做。\n实现会话跟踪的技术有哪些 使用Cookie 向客户端发送Cookie\nCookie c =new Cookie(\"name\",\"value\"); //创建Cookie c.setMaxAge(60*60*24); //设置最大时效，此处设置的最大时效为一天 response.addCookie(c); //把Cookie放入到HTTP响应中 从客户端读取Cookie\nString name =\"name\"; Cookie[]cookies =request.getCookies(); if(cookies !=null){ for(int i= 0;i",
+  "wordCount" : "331",
+  "inLanguage": "en",
+  "datePublished": "2019-01-04T12:54:00Z",
+  "dateModified": "2019-01-04T12:54:00Z",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://zjxjwxk.github.io/posts/java/j2ee/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Xinkang's Blog",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://zjxjwxk.github.io/favicon.ico"
+    }
+  }
+}
+</script>
 </head>
 
 <body class="" id="top">
@@ -123,7 +276,7 @@ forward是服务器请求资源,服务器直接访问目标地址的URL,把那�
 <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="http://localhost:1313/" accesskey="h" title="Xinkang&#39;s Blog (Alt + H)">Xinkang&#39;s Blog</a>
+            <a href="https://zjxjwxk.github.io/" accesskey="h" title="Xinkang&#39;s Blog (Alt + H)">Xinkang&#39;s Blog</a>
             <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
@@ -149,22 +302,22 @@ forward是服务器请求资源,服务器直接访问目标地址的URL,把那�
         </div>
         <ul id="menu">
             <li>
-                <a href="http://localhost:1313/archives/" title="Archives">
+                <a href="https://zjxjwxk.github.io/archives/" title="Archives">
                     <span>Archives</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/categories/" title="Categories">
+                <a href="https://zjxjwxk.github.io/categories/" title="Categories">
                     <span>Categories</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/tags/" title="Tags">
+                <a href="https://zjxjwxk.github.io/tags/" title="Tags">
                     <span>Tags</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/search/" title="Search (Alt &#43; /)" accesskey=/>
+                <a href="https://zjxjwxk.github.io/search/" title="Search (Alt &#43; /)" accesskey=/>
                     <span>Search</span>
                 </a>
             </li>
@@ -175,7 +328,7 @@ forward是服务器请求资源,服务器直接访问目标地址的URL,把那�
 
 <article class="post-single">
   <header class="post-header">
-    <div class="breadcrumbs"><a href="http://localhost:1313/">Home</a>&nbsp;»&nbsp;<a href="http://localhost:1313/posts/">Posts</a></div>
+    <div class="breadcrumbs"><a href="https://zjxjwxk.github.io/">Home</a>&nbsp;»&nbsp;<a href="https://zjxjwxk.github.io/posts/">Posts</a></div>
     <h1 class="post-title entry-hint-parent">
       J2EE基础知识
     </h1>
@@ -382,16 +535,16 @@ if(cookies !=null){
 
   <footer class="post-footer">
     <ul class="post-tags">
-      <li><a href="http://localhost:1313/tags/java/">Java</a></li>
-      <li><a href="http://localhost:1313/tags/j2ee/">J2EE</a></li>
+      <li><a href="https://zjxjwxk.github.io/tags/java/">Java</a></li>
+      <li><a href="https://zjxjwxk.github.io/tags/j2ee/">J2EE</a></li>
     </ul>
 <nav class="paginav">
-  <a class="prev" href="http://localhost:1313/posts/linux/centos/centos-7-tomcat%E7%9A%84%E5%AE%89%E8%A3%85%E5%8F%8A%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF%E5%8A%A8%E9%85%8D%E7%BD%AE/">
+  <a class="prev" href="https://zjxjwxk.github.io/posts/linux/centos/centos-7-tomcat%E7%9A%84%E5%AE%89%E8%A3%85%E5%8F%8A%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF%E5%8A%A8%E9%85%8D%E7%BD%AE/">
     <span class="title">« Prev</span>
     <br>
     <span>CentOS 7 Tomcat开机自启动配置</span>
   </a>
-  <a class="next" href="http://localhost:1313/posts/java/java%E6%A0%B8%E5%BF%83/">
+  <a class="next" href="https://zjxjwxk.github.io/posts/java/java%E6%A0%B8%E5%BF%83/">
     <span class="title">Next »</span>
     <br>
     <span>Java基础知识</span>
@@ -402,7 +555,7 @@ if(cookies !=null){
 <ul class="share-buttons">
     <li>
         <a target="_blank" rel="noopener noreferrer" aria-label="share J2EE基础知识 on x"
-            href="https://x.com/intent/tweet/?text=J2EE%e5%9f%ba%e7%a1%80%e7%9f%a5%e8%af%86&amp;url=http%3a%2f%2flocalhost%3a1313%2fposts%2fjava%2fj2ee%2f&amp;hashtags=Java%2cJ2EE">
+            href="https://x.com/intent/tweet/?text=J2EE%e5%9f%ba%e7%a1%80%e7%9f%a5%e8%af%86&amp;url=https%3a%2f%2fzjxjwxk.github.io%2fposts%2fjava%2fj2ee%2f&amp;hashtags=Java%2cJ2EE">
             <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
                 <path
                     d="M512 62.554 L 512 449.446 C 512 483.97 483.97 512 449.446 512 L 62.554 512 C 28.03 512 0 483.97 0 449.446 L 0 62.554 C 0 28.03 28.029 0 62.554 0 L 449.446 0 C 483.971 0 512 28.03 512 62.554 Z M 269.951 190.75 L 182.567 75.216 L 56 75.216 L 207.216 272.95 L 63.9 436.783 L 125.266 436.783 L 235.9 310.383 L 332.567 436.783 L 456 436.783 L 298.367 228.367 L 432.367 75.216 L 371.033 75.216 Z M 127.633 110 L 164.101 110 L 383.481 400.065 L 349.5 400.065 Z" />
@@ -411,7 +564,7 @@ if(cookies !=null){
     </li>
     <li>
         <a target="_blank" rel="noopener noreferrer" aria-label="share J2EE基础知识 on linkedin"
-            href="https://www.linkedin.com/shareArticle?mini=true&amp;url=http%3a%2f%2flocalhost%3a1313%2fposts%2fjava%2fj2ee%2f&amp;title=J2EE%e5%9f%ba%e7%a1%80%e7%9f%a5%e8%af%86&amp;summary=J2EE%e5%9f%ba%e7%a1%80%e7%9f%a5%e8%af%86&amp;source=http%3a%2f%2flocalhost%3a1313%2fposts%2fjava%2fj2ee%2f">
+            href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fzjxjwxk.github.io%2fposts%2fjava%2fj2ee%2f&amp;title=J2EE%e5%9f%ba%e7%a1%80%e7%9f%a5%e8%af%86&amp;summary=J2EE%e5%9f%ba%e7%a1%80%e7%9f%a5%e8%af%86&amp;source=https%3a%2f%2fzjxjwxk.github.io%2fposts%2fjava%2fj2ee%2f">
             <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
                 <path
                     d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-288.985,423.278l0,-225.717l-75.04,0l0,225.717l75.04,0Zm270.539,0l0,-129.439c0,-69.333 -37.018,-101.586 -86.381,-101.586c-39.804,0 -57.634,21.891 -67.617,37.266l0,-31.958l-75.021,0c0.995,21.181 0,225.717 0,225.717l75.02,0l0,-126.056c0,-6.748 0.486,-13.492 2.474,-18.315c5.414,-13.475 17.767,-27.434 38.494,-27.434c27.135,0 38.007,20.707 38.007,51.037l0,120.768l75.024,0Zm-307.552,-334.556c-25.674,0 -42.448,16.879 -42.448,39.002c0,21.658 16.264,39.002 41.455,39.002l0.484,0c26.165,0 42.452,-17.344 42.452,-39.002c-0.485,-22.092 -16.241,-38.954 -41.943,-39.002Z" />
@@ -420,7 +573,7 @@ if(cookies !=null){
     </li>
     <li>
         <a target="_blank" rel="noopener noreferrer" aria-label="share J2EE基础知识 on reddit"
-            href="https://reddit.com/submit?url=http%3a%2f%2flocalhost%3a1313%2fposts%2fjava%2fj2ee%2f&title=J2EE%e5%9f%ba%e7%a1%80%e7%9f%a5%e8%af%86">
+            href="https://reddit.com/submit?url=https%3a%2f%2fzjxjwxk.github.io%2fposts%2fjava%2fj2ee%2f&title=J2EE%e5%9f%ba%e7%a1%80%e7%9f%a5%e8%af%86">
             <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
                 <path
                     d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-3.446,265.638c0,-22.964 -18.616,-41.58 -41.58,-41.58c-11.211,0 -21.361,4.457 -28.841,11.666c-28.424,-20.508 -67.586,-33.757 -111.204,-35.278l18.941,-89.121l61.884,13.157c0.756,15.734 13.642,28.29 29.56,28.29c16.407,0 29.706,-13.299 29.706,-29.701c0,-16.403 -13.299,-29.702 -29.706,-29.702c-11.666,0 -21.657,6.792 -26.515,16.578l-69.105,-14.69c-1.922,-0.418 -3.939,-0.042 -5.585,1.036c-1.658,1.073 -2.811,2.761 -3.224,4.686l-21.152,99.438c-44.258,1.228 -84.046,14.494 -112.837,35.232c-7.468,-7.164 -17.589,-11.591 -28.757,-11.591c-22.965,0 -41.585,18.616 -41.585,41.58c0,16.896 10.095,31.41 24.568,37.918c-0.639,4.135 -0.99,8.328 -0.99,12.576c0,63.977 74.469,115.836 166.33,115.836c91.861,0 166.334,-51.859 166.334,-115.836c0,-4.218 -0.347,-8.387 -0.977,-12.493c14.564,-6.47 24.735,-21.034 24.735,-38.001Zm-119.474,108.193c-20.27,20.241 -59.115,21.816 -70.534,21.816c-11.428,0 -50.277,-1.575 -70.522,-21.82c-3.007,-3.008 -3.007,-7.882 0,-10.889c3.003,-2.999 7.882,-3.003 10.885,0c12.777,12.781 40.11,17.317 59.637,17.317c19.522,0 46.86,-4.536 59.657,-17.321c3.016,-2.999 7.886,-2.995 10.885,0.008c3.008,3.011 3.003,7.882 -0.008,10.889Zm-5.23,-48.781c-16.373,0 -29.701,-13.324 -29.701,-29.698c0,-16.381 13.328,-29.714 29.701,-29.714c16.378,0 29.706,13.333 29.706,29.714c0,16.374 -13.328,29.698 -29.706,29.698Zm-160.386,-29.702c0,-16.381 13.328,-29.71 29.714,-29.71c16.369,0 29.689,13.329 29.689,29.71c0,16.373 -13.32,29.693 -29.689,29.693c-16.386,0 -29.714,-13.32 -29.714,-29.693Z" />
@@ -429,7 +582,7 @@ if(cookies !=null){
     </li>
     <li>
         <a target="_blank" rel="noopener noreferrer" aria-label="share J2EE基础知识 on facebook"
-            href="https://facebook.com/sharer/sharer.php?u=http%3a%2f%2flocalhost%3a1313%2fposts%2fjava%2fj2ee%2f">
+            href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fzjxjwxk.github.io%2fposts%2fjava%2fj2ee%2f">
             <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
                 <path
                     d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-106.468,0l0,-192.915l66.6,0l12.672,-82.621l-79.272,0l0,-53.617c0,-22.603 11.073,-44.636 46.58,-44.636l36.042,0l0,-70.34c0,0 -32.71,-5.582 -63.982,-5.582c-65.288,0 -107.96,39.569 -107.96,111.204l0,62.971l-72.573,0l0,82.621l72.573,0l0,192.915l-191.104,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Z" />
@@ -438,7 +591,7 @@ if(cookies !=null){
     </li>
     <li>
         <a target="_blank" rel="noopener noreferrer" aria-label="share J2EE基础知识 on whatsapp"
-            href="https://api.whatsapp.com/send?text=J2EE%e5%9f%ba%e7%a1%80%e7%9f%a5%e8%af%86%20-%20http%3a%2f%2flocalhost%3a1313%2fposts%2fjava%2fj2ee%2f">
+            href="https://api.whatsapp.com/send?text=J2EE%e5%9f%ba%e7%a1%80%e7%9f%a5%e8%af%86%20-%20https%3a%2f%2fzjxjwxk.github.io%2fposts%2fjava%2fj2ee%2f">
             <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
                 <path
                     d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-58.673,127.703c-33.842,-33.881 -78.847,-52.548 -126.798,-52.568c-98.799,0 -179.21,80.405 -179.249,179.234c-0.013,31.593 8.241,62.428 23.927,89.612l-25.429,92.884l95.021,-24.925c26.181,14.28 55.659,21.807 85.658,21.816l0.074,0c98.789,0 179.206,-80.413 179.247,-179.243c0.018,-47.895 -18.61,-92.93 -52.451,-126.81Zm-126.797,275.782l-0.06,0c-26.734,-0.01 -52.954,-7.193 -75.828,-20.767l-5.441,-3.229l-56.386,14.792l15.05,-54.977l-3.542,-5.637c-14.913,-23.72 -22.791,-51.136 -22.779,-79.287c0.033,-82.142 66.867,-148.971 149.046,-148.971c39.793,0.014 77.199,15.531 105.329,43.692c28.128,28.16 43.609,65.592 43.594,105.4c-0.034,82.149 -66.866,148.983 -148.983,148.984Zm81.721,-111.581c-4.479,-2.242 -26.499,-13.075 -30.604,-14.571c-4.105,-1.495 -7.091,-2.241 -10.077,2.241c-2.986,4.483 -11.569,14.572 -14.182,17.562c-2.612,2.988 -5.225,3.364 -9.703,1.12c-4.479,-2.241 -18.91,-6.97 -36.017,-22.23c-13.314,-11.876 -22.304,-26.542 -24.916,-31.026c-2.612,-4.484 -0.279,-6.908 1.963,-9.14c2.016,-2.007 4.48,-5.232 6.719,-7.847c2.24,-2.615 2.986,-4.484 4.479,-7.472c1.493,-2.99 0.747,-5.604 -0.374,-7.846c-1.119,-2.241 -10.077,-24.288 -13.809,-33.256c-3.635,-8.733 -7.327,-7.55 -10.077,-7.688c-2.609,-0.13 -5.598,-0.158 -8.583,-0.158c-2.986,0 -7.839,1.121 -11.944,5.604c-4.105,4.484 -15.675,15.32 -15.675,37.364c0,22.046 16.048,43.342 18.287,46.332c2.24,2.99 31.582,48.227 76.511,67.627c10.685,4.615 19.028,7.371 25.533,9.434c10.728,3.41 20.492,2.929 28.209,1.775c8.605,-1.285 26.499,-10.833 30.231,-21.295c3.732,-10.464 3.732,-19.431 2.612,-21.298c-1.119,-1.869 -4.105,-2.99 -8.583,-5.232Z" />
@@ -447,7 +600,7 @@ if(cookies !=null){
     </li>
     <li>
         <a target="_blank" rel="noopener noreferrer" aria-label="share J2EE基础知识 on telegram"
-            href="https://telegram.me/share/url?text=J2EE%e5%9f%ba%e7%a1%80%e7%9f%a5%e8%af%86&amp;url=http%3a%2f%2flocalhost%3a1313%2fposts%2fjava%2fj2ee%2f">
+            href="https://telegram.me/share/url?text=J2EE%e5%9f%ba%e7%a1%80%e7%9f%a5%e8%af%86&amp;url=https%3a%2f%2fzjxjwxk.github.io%2fposts%2fjava%2fj2ee%2f">
             <svg version="1.1" xml:space="preserve" viewBox="2 2 28 28" height="30px" width="30px" fill="currentColor">
                 <path
                     d="M26.49,29.86H5.5a3.37,3.37,0,0,1-2.47-1,3.35,3.35,0,0,1-1-2.47V5.48A3.36,3.36,0,0,1,3,3,3.37,3.37,0,0,1,5.5,2h21A3.38,3.38,0,0,1,29,3a3.36,3.36,0,0,1,1,2.46V26.37a3.35,3.35,0,0,1-1,2.47A3.38,3.38,0,0,1,26.49,29.86Zm-5.38-6.71a.79.79,0,0,0,.85-.66L24.73,9.24a.55.55,0,0,0-.18-.46.62.62,0,0,0-.41-.17q-.08,0-16.53,6.11a.59.59,0,0,0-.41.59.57.57,0,0,0,.43.52l4,1.24,1.61,4.83a.62.62,0,0,0,.63.43.56.56,0,0,0,.4-.17L16.54,20l4.09,3A.9.9,0,0,0,21.11,23.15ZM13.8,20.71l-1.21-4q8.72-5.55,8.78-5.55c.15,0,.23,0,.23.16a.18.18,0,0,1,0,.06s-2.51,2.3-7.52,6.8Z" />
@@ -456,7 +609,7 @@ if(cookies !=null){
     </li>
     <li>
         <a target="_blank" rel="noopener noreferrer" aria-label="share J2EE基础知识 on ycombinator"
-            href="https://news.ycombinator.com/submitlink?t=J2EE%e5%9f%ba%e7%a1%80%e7%9f%a5%e8%af%86&u=http%3a%2f%2flocalhost%3a1313%2fposts%2fjava%2fj2ee%2f">
+            href="https://news.ycombinator.com/submitlink?t=J2EE%e5%9f%ba%e7%a1%80%e7%9f%a5%e8%af%86&u=https%3a%2f%2fzjxjwxk.github.io%2fposts%2fjava%2fj2ee%2f">
             <svg version="1.1" xml:space="preserve" width="30px" height="30px" viewBox="0 0 512 512" fill="currentColor"
                 xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape">
                 <path
@@ -490,7 +643,7 @@ if(cookies !=null){
     </main>
     
 <footer class="footer">
-        <span>&copy; 2024 <a href="http://localhost:1313/">Xinkang&#39;s Blog</a></span> · 
+        <span>&copy; 2024 <a href="https://zjxjwxk.github.io/">Xinkang&#39;s Blog</a></span> · 
 
     <span>
         Powered by
