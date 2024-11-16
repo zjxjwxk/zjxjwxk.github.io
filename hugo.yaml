@@ -60,3 +60,5 @@ outputs:
 services:
   disqus:
     shortname: xinkangwu
+  googleAnalytics:
+    id: G-9CMXGMMTKX
