@@ -2,24 +2,24 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Linux on Xinkang&#39;s Blog</title>
-    <link>https://zjxjwxk.github.io/tags/linux/</link>
+    <link>http://localhost:49689/tags/linux/</link>
     <description>Recent content in Linux on Xinkang&#39;s Blog</description>
     <generator>Hugo -- 0.138.0</generator>
     <language>en</language>
     <lastBuildDate>Mon, 27 Apr 2020 23:11:00 +0000</lastBuildDate>
-    <atom:link href="https://zjxjwxk.github.io/tags/linux/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:49689/tags/linux/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Terminal 终端代理加速</title>
-      <link>https://zjxjwxk.github.io/posts/linux/macos/</link>
+      <link>http://localhost:49689/posts/linux/macos/</link>
       <pubDate>Mon, 27 Apr 2020 23:11:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/posts/linux/macos/</guid>
+      <guid>http://localhost:49689/posts/linux/macos/</guid>
       <description>&lt;h1 id=&#34;方法1暂时&#34;&gt;方法1（暂时）:&lt;/h1&gt;
 &lt;p&gt;在终端中直接运行命令&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;export http_proxy&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;http://proxyAddres.s:port
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这个办法的好处是简单直接，并且影响面很小（只对当前终端有效，退出就不行了）。&lt;/p&gt;
 &lt;p&gt;如果你用的是 s.s 代理，在当前终端运行以下命令，那么&lt;code&gt;wget&lt;/code&gt; &lt;code&gt;curl&lt;/code&gt; 这类网络命令都会经过 s.s 代理，port 端口号可以从 s.s 高级设置中查看，我的是1086。&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;export ALL_PROXY&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;socks5://127.0.0.1:1086
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img alt=&#34;s.s端口&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/linux/macos/images/image-20200426235228770.png&#34;&gt;&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img alt=&#34;s.s端口&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:49689/posts/linux/macos/images/image-20200426235228770.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;安装完软件以后，我们再执行以下命令取消终端代理&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;unset ALL_PROXY
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;方法2永久&#34;&gt;方法2（永久）:&lt;/h1&gt;
@@ -46,9 +46,9 @@
     </item>
     <item>
       <title>CentOS jar包后台运行</title>
-      <link>https://zjxjwxk.github.io/posts/linux/centos/centos-jar%E5%8C%85%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C/</link>
+      <link>http://localhost:49689/posts/linux/centos/centos-jar%E5%8C%85%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C/</link>
       <pubDate>Wed, 30 Jan 2019 00:54:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/posts/linux/centos/centos-jar%E5%8C%85%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C/</guid>
+      <guid>http://localhost:49689/posts/linux/centos/centos-jar%E5%8C%85%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C/</guid>
       <description>&lt;h1 id=&#34;运行jar包命令&#34;&gt;运行jar包命令&lt;/h1&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;java -jar application.jar
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;当前ssh窗口被锁定，可按CTRL + C打断程序运行，或直接关闭窗口让程序退出。&lt;/p&gt;
@@ -77,9 +77,9 @@
     </item>
     <item>
       <title>CentOS 7 Tomcat开机自启动配置</title>
-      <link>https://zjxjwxk.github.io/posts/linux/centos/centos-7-tomcat%E7%9A%84%E5%AE%89%E8%A3%85%E5%8F%8A%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF%E5%8A%A8%E9%85%8D%E7%BD%AE/</link>
+      <link>http://localhost:49689/posts/linux/centos/centos-7-tomcat%E7%9A%84%E5%AE%89%E8%A3%85%E5%8F%8A%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF%E5%8A%A8%E9%85%8D%E7%BD%AE/</link>
       <pubDate>Sun, 13 Jan 2019 00:04:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/posts/linux/centos/centos-7-tomcat%E7%9A%84%E5%AE%89%E8%A3%85%E5%8F%8A%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF%E5%8A%A8%E9%85%8D%E7%BD%AE/</guid>
+      <guid>http://localhost:49689/posts/linux/centos/centos-7-tomcat%E7%9A%84%E5%AE%89%E8%A3%85%E5%8F%8A%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF%E5%8A%A8%E9%85%8D%E7%BD%AE/</guid>
       <description>&lt;h1 id=&#34;centos-7-tomcat开机自启动配置&#34;&gt;CentOS 7 Tomcat开机自启动配置&lt;/h1&gt;
 &lt;h2 id=&#34;配置开机运行&#34;&gt;配置开机运行&lt;/h2&gt;
 &lt;h3 id=&#34;tomcat增加启动参数&#34;&gt;Tomcat增加启动参数&lt;/h3&gt;

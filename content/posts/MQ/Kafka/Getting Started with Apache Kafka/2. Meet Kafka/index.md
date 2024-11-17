@@ -152,7 +152,7 @@ services:
       KAFKA_REST_LISTENERS: "http://0.0.0.0:8082"
 ```
 
-Pull all images and run all composed containers:
+Run composed containers:
 
 ```
 docker compose up -d

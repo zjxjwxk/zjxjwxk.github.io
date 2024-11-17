@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" dir="auto">
 
-<head><meta charset="utf-8">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=49689&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
@@ -9,17 +9,17 @@
 <meta name="keywords" content="">
 <meta name="description" content="Posts - Xinkang&#39;s Blog">
 <meta name="author" content="">
-<link rel="canonical" href="https://zjxjwxk.github.io/posts/">
+<link rel="canonical" href="http://localhost:49689/posts/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.d6fcd20a4fb86efa4dfac8ec95da60244cc8871042183da1ef28e3a762ad79c8.css" integrity="sha256-1vzSCk&#43;4bvpN&#43;sjsldpgJEzIhxBCGD2h7yjjp2Ktecg=" rel="preload stylesheet" as="style">
-<link rel="icon" href="https://zjxjwxk.github.io/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="https://zjxjwxk.github.io/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="https://zjxjwxk.github.io/favicon-32x32.png">
-<link rel="apple-touch-icon" href="https://zjxjwxk.github.io/apple-touch-icon.png">
-<link rel="mask-icon" href="https://zjxjwxk.github.io/safari-pinned-tab.svg">
+<link rel="icon" href="http://localhost:49689/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:49689/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:49689/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:49689/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:49689/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" type="application/rss+xml" href="https://zjxjwxk.github.io/posts/index.xml">
-<link rel="alternate" hreflang="en" href="https://zjxjwxk.github.io/posts/">
+<link rel="alternate" type="application/rss+xml" href="http://localhost:49689/posts/index.xml">
+<link rel="alternate" hreflang="en" href="http://localhost:49689/posts/">
 <noscript>
     <style>
         #theme-toggle,
@@ -70,7 +70,7 @@
           gtag('js', new Date());
           gtag('config', 'G-9CMXGMMTKX');
         }
-      </script><meta property="og:url" content="https://zjxjwxk.github.io/posts/">
+      </script><meta property="og:url" content="http://localhost:49689/posts/">
   <meta property="og:site_name" content="Xinkang&#39;s Blog">
   <meta property="og:title" content="Posts">
   <meta property="og:locale" content="en">
@@ -89,7 +89,7 @@
       "@type": "ListItem",
       "position":  1 ,
       "name": "Posts",
-      "item": "https://zjxjwxk.github.io/posts/"
+      "item": "http://localhost:49689/posts/"
     }
   ]
 }
@@ -111,7 +111,7 @@
 <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="https://zjxjwxk.github.io/" accesskey="h" title="Xinkang&#39;s Blog (Alt + H)">Xinkang&#39;s Blog</a>
+            <a href="http://localhost:49689/" accesskey="h" title="Xinkang&#39;s Blog (Alt + H)">Xinkang&#39;s Blog</a>
             <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
@@ -137,22 +137,22 @@
         </div>
         <ul id="menu">
             <li>
-                <a href="https://zjxjwxk.github.io/archives/" title="Archives">
+                <a href="http://localhost:49689/archives/" title="Archives">
                     <span>Archives</span>
                 </a>
             </li>
             <li>
-                <a href="https://zjxjwxk.github.io/categories/" title="Categories">
+                <a href="http://localhost:49689/categories/" title="Categories">
                     <span>Categories</span>
                 </a>
             </li>
             <li>
-                <a href="https://zjxjwxk.github.io/tags/" title="Tags">
+                <a href="http://localhost:49689/tags/" title="Tags">
                     <span>Tags</span>
                 </a>
             </li>
             <li>
-                <a href="https://zjxjwxk.github.io/search/" title="Search (Alt &#43; /)" accesskey=/>
+                <a href="http://localhost:49689/search/" title="Search (Alt &#43; /)" accesskey=/>
                     <span>Search</span>
                 </a>
             </li>
@@ -160,11 +160,26 @@
     </nav>
 </header>
 <main class="main"> 
-<header class="page-header"><div class="breadcrumbs"><a href="https://zjxjwxk.github.io/">Home</a></div>
+<header class="page-header"><div class="breadcrumbs"><a href="http://localhost:49689/">Home</a></div>
   <h1>
     Posts
   </h1>
 </header>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">Dubbo微服务影院系列（12）：系统部署
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>运行环境 CentOS 6 云服务器 创建用户 创建一个 cinema 用户：
+[root@huawei ~]# useradd cinema [root@huawei ~]# passwd cinema Changing password for user cinema. New password: BAD PASSWORD: it does not contain enough DIFFERENT characters Retype new password: passwd: all authentication tokens updated successfully. 给予其权限，首先需要赋予当前用户对 /etc/sudoers 的写权限，然后在 sudoers 文件中的 root ALL = (ALL) ALL 下增加一行，赋予其在任何地方执行任何命令的权限：
+chmod u&#43;w /etc/sudoers vim sudoers ## Allow root to run any commands anywhere root ALL=(ALL) ALL cinema ALL=(ALL) ALL 最后，取消当前用户的写权限：
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2020-05-03 22:34:00 +0000 UTC'>May 3, 2020</span>&nbsp;·&nbsp;4 min</footer>
+  <a class="entry-link" aria-label="post link to Dubbo微服务影院系列（12）：系统部署" href="http://localhost:49689/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/12.%E7%B3%BB%E7%BB%9F%E9%83%A8%E7%BD%B2/"></a>
+</article>
 
 <article class="post-entry"> 
   <header class="entry-header">
@@ -189,7 +204,7 @@ git config --global http.proxy &#39;socks5://127.0.0.1:1086&#39; git config --gl
 ...</p>
   </div>
   <footer class="entry-footer"><span title='2020-04-27 23:11:00 +0000 UTC'>April 27, 2020</span>&nbsp;·&nbsp;1 min</footer>
-  <a class="entry-link" aria-label="post link to Terminal 终端代理加速" href="https://zjxjwxk.github.io/posts/linux/macos/"></a>
+  <a class="entry-link" aria-label="post link to Terminal 终端代理加速" href="http://localhost:49689/posts/linux/macos/"></a>
 </article>
 
 <article class="post-entry"> 
@@ -208,7 +223,7 @@ dubbo.container=log4j,spring,registry,jetty dubbo.application.name=simple-monito
 ...</p>
   </div>
   <footer class="entry-footer"><span title='2020-04-24 23:11:00 +0000 UTC'>April 24, 2020</span>&nbsp;·&nbsp;3 min</footer>
-  <a class="entry-link" aria-label="post link to Dubbo微服务影院系列（11）：服务监控" href="https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/11.%E6%9C%8D%E5%8A%A1%E7%9B%91%E6%8E%A7/"></a>
+  <a class="entry-link" aria-label="post link to Dubbo微服务影院系列（11）：服务监控" href="http://localhost:49689/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/11.%E6%9C%8D%E5%8A%A1%E7%9B%91%E6%8E%A7/"></a>
 </article>
 
 <article class="post-entry"> 
@@ -221,7 +236,7 @@ dubbo.container=log4j,spring,registry,jetty dubbo.application.name=simple-monito
 ...</p>
   </div>
   <footer class="entry-footer"><span title='2020-04-17 20:14:00 +0000 UTC'>April 17, 2020</span>&nbsp;·&nbsp;7 min</footer>
-  <a class="entry-link" aria-label="post link to Dubbo微服务影院系列（10）：分布式事务" href="https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/10.%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/"></a>
+  <a class="entry-link" aria-label="post link to Dubbo微服务影院系列（10）：分布式事务" href="http://localhost:49689/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/10.%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/"></a>
 </article>
 
 <article class="post-entry"> 
@@ -235,7 +250,7 @@ Input Specification: Each input file contains one test case. For each case, the 
 ...</p>
   </div>
   <footer class="entry-footer"><span title='2020-04-15 21:39:00 +0000 UTC'>April 15, 2020</span>&nbsp;·&nbsp;3 min</footer>
-  <a class="entry-link" aria-label="post link to PAT甲级 1108 Finding Average (20分)" href="https://zjxjwxk.github.io/posts/pat/advanced_level/a1108/"></a>
+  <a class="entry-link" aria-label="post link to PAT甲级 1108 Finding Average (20分)" href="http://localhost:49689/posts/pat/advanced_level/a1108/"></a>
 </article>
 
 <article class="post-entry"> 
@@ -249,7 +264,7 @@ Now given the map of the city and several candidate locations for the gas statio
 ...</p>
   </div>
   <footer class="entry-footer"><span title='2020-04-13 00:11:00 +0000 UTC'>April 13, 2020</span>&nbsp;·&nbsp;4 min</footer>
-  <a class="entry-link" aria-label="post link to PAT甲级 1072 Gas Station (30分)" href="https://zjxjwxk.github.io/posts/pat/advanced_level/a1072/"></a>
+  <a class="entry-link" aria-label="post link to PAT甲级 1072 Gas Station (30分)" href="http://localhost:49689/posts/pat/advanced_level/a1072/"></a>
 </article>
 
 <article class="post-entry"> 
@@ -263,7 +278,7 @@ The Public Bike Management Center (PBMC) keeps monitoring the real-time capacity
 ...</p>
   </div>
   <footer class="entry-footer"><span title='2020-04-12 15:52:00 +0000 UTC'>April 12, 2020</span>&nbsp;·&nbsp;5 min</footer>
-  <a class="entry-link" aria-label="post link to PAT甲级 1018 Public Bike Management (30分)" href="https://zjxjwxk.github.io/posts/pat/advanced_level/a1018/"></a>
+  <a class="entry-link" aria-label="post link to PAT甲级 1018 Public Bike Management (30分)" href="http://localhost:49689/posts/pat/advanced_level/a1018/"></a>
 </article>
 
 <article class="post-entry"> 
@@ -281,7 +296,7 @@ package com.foo; public class BarServiceStub implements BarService { private fin
 ...</p>
   </div>
   <footer class="entry-footer"><span title='2020-04-11 20:14:00 +0000 UTC'>April 11, 2020</span>&nbsp;·&nbsp;2 min</footer>
-  <a class="entry-link" aria-label="post link to Dubbo微服务影院系列（9）：Dubbo服务开发（支付模块开发）" href="https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/9.dubbo%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91%E6%94%AF%E4%BB%98%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/"></a>
+  <a class="entry-link" aria-label="post link to Dubbo微服务影院系列（9）：Dubbo服务开发（支付模块开发）" href="http://localhost:49689/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/9.dubbo%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91%E6%94%AF%E4%BB%98%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/"></a>
 </article>
 
 <article class="post-entry"> 
@@ -303,7 +318,7 @@ PAT 考点联盟：https://www.patest.cn/location
 ...</p>
   </div>
   <footer class="entry-footer"><span title='2020-04-11 16:17:00 +0000 UTC'>April 11, 2020</span>&nbsp;·&nbsp;1 min</footer>
-  <a class="entry-link" aria-label="post link to PAT考场 Dev C&#43;&#43; 5.10 配置" href="https://zjxjwxk.github.io/posts/pat/%E8%80%83%E8%AF%95%E6%94%BB%E7%95%A5/"></a>
+  <a class="entry-link" aria-label="post link to PAT考场 Dev C&#43;&#43; 5.10 配置" href="http://localhost:49689/posts/pat/%E8%80%83%E8%AF%95%E6%94%BB%E7%95%A5/"></a>
 </article>
 
 <article class="post-entry"> 
@@ -317,34 +332,21 @@ Input Specification: Each input file contains one test case. For each case, the 
 ...</p>
   </div>
   <footer class="entry-footer"><span title='2020-04-10 17:55:00 +0000 UTC'>April 10, 2020</span>&nbsp;·&nbsp;2 min</footer>
-  <a class="entry-link" aria-label="post link to PAT甲级 1021 Deepest Root (25分)" href="https://zjxjwxk.github.io/posts/pat/advanced_level/a1021/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">PAT甲级 1013 Battle Over Cities (25分)
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>It is vitally important to have all the cities connected by highways in a war. If a city is occupied by the enemy, all the highways from/toward that city are closed. We must know immediately if we need to repair any other highways to keep the rest of the cities connected. Given the map of cities which have all the remaining highways marked, you are supposed to tell the number of highways need to be repaired, quickly.
-...</p>
-  </div>
-  <footer class="entry-footer"><span title='2020-04-09 19:57:00 +0000 UTC'>April 9, 2020</span>&nbsp;·&nbsp;2 min</footer>
-  <a class="entry-link" aria-label="post link to PAT甲级 1013 Battle Over Cities (25分)" href="https://zjxjwxk.github.io/posts/pat/advanced_level/a1013/"></a>
+  <a class="entry-link" aria-label="post link to PAT甲级 1021 Deepest Root (25分)" href="http://localhost:49689/posts/pat/advanced_level/a1021/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">
-    <a class="prev" href="https://zjxjwxk.github.io/posts/">
+    <a class="prev" href="http://localhost:49689/posts/">
       «&nbsp;Prev&nbsp;
     </a>
-    <a class="next" href="https://zjxjwxk.github.io/posts/page/3/">Next&nbsp;&nbsp;»
+    <a class="next" href="http://localhost:49689/posts/page/3/">Next&nbsp;&nbsp;»
     </a>
   </nav>
 </footer>
     </main>
     
 <footer class="footer">
-        <span>&copy; 2024 <a href="https://zjxjwxk.github.io/">Xinkang&#39;s Blog</a></span> · 
+        <span>&copy; 2024 <a href="http://localhost:49689/">Xinkang&#39;s Blog</a></span> · 
 
     <span>
         Powered by
