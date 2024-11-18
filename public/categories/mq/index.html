@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" dir="auto">
 
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=49689&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<head><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
@@ -9,17 +9,17 @@
 <meta name="keywords" content="">
 <meta name="description" content="">
 <meta name="author" content="">
-<link rel="canonical" href="http://localhost:49689/categories/mq/">
+<link rel="canonical" href="https://zjxjwxk.github.io/categories/mq/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.d6fcd20a4fb86efa4dfac8ec95da60244cc8871042183da1ef28e3a762ad79c8.css" integrity="sha256-1vzSCk&#43;4bvpN&#43;sjsldpgJEzIhxBCGD2h7yjjp2Ktecg=" rel="preload stylesheet" as="style">
-<link rel="icon" href="http://localhost:49689/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:49689/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:49689/favicon-32x32.png">
-<link rel="apple-touch-icon" href="http://localhost:49689/apple-touch-icon.png">
-<link rel="mask-icon" href="http://localhost:49689/safari-pinned-tab.svg">
+<link rel="icon" href="https://zjxjwxk.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://zjxjwxk.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://zjxjwxk.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://zjxjwxk.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://zjxjwxk.github.io/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" type="application/rss+xml" href="http://localhost:49689/categories/mq/index.xml">
-<link rel="alternate" hreflang="en" href="http://localhost:49689/categories/mq/">
+<link rel="alternate" type="application/rss+xml" href="https://zjxjwxk.github.io/categories/mq/index.xml">
+<link rel="alternate" hreflang="en" href="https://zjxjwxk.github.io/categories/mq/">
 <noscript>
     <style>
         #theme-toggle,
@@ -70,7 +70,7 @@
           gtag('js', new Date());
           gtag('config', 'G-9CMXGMMTKX');
         }
-      </script><meta property="og:url" content="http://localhost:49689/categories/mq/">
+      </script><meta property="og:url" content="https://zjxjwxk.github.io/categories/mq/">
   <meta property="og:site_name" content="Xinkang&#39;s Blog">
   <meta property="og:title" content="MQ">
   <meta property="og:locale" content="en">
@@ -96,7 +96,7 @@
 <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="http://localhost:49689/" accesskey="h" title="Xinkang&#39;s Blog (Alt + H)">Xinkang&#39;s Blog</a>
+            <a href="https://zjxjwxk.github.io/" accesskey="h" title="Xinkang&#39;s Blog (Alt + H)">Xinkang&#39;s Blog</a>
             <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
@@ -122,22 +122,22 @@
         </div>
         <ul id="menu">
             <li>
-                <a href="http://localhost:49689/archives/" title="Archives">
+                <a href="https://zjxjwxk.github.io/archives/" title="Archives">
                     <span>Archives</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:49689/categories/" title="Categories">
+                <a href="https://zjxjwxk.github.io/categories/" title="Categories">
                     <span>Categories</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:49689/tags/" title="Tags">
+                <a href="https://zjxjwxk.github.io/tags/" title="Tags">
                     <span>Tags</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:49689/search/" title="Search (Alt &#43; /)" accesskey=/>
+                <a href="https://zjxjwxk.github.io/search/" title="Search (Alt &#43; /)" accesskey=/>
                     <span>Search</span>
                 </a>
             </li>
@@ -145,7 +145,7 @@
     </nav>
 </header>
 <main class="main"> 
-<header class="page-header"><div class="breadcrumbs"><a href="http://localhost:49689/">Home</a>&nbsp;»&nbsp;<a href="http://localhost:49689/categories/">Categories</a></div>
+<header class="page-header"><div class="breadcrumbs"><a href="https://zjxjwxk.github.io/">Home</a>&nbsp;»&nbsp;<a href="https://zjxjwxk.github.io/categories/">Categories</a></div>
   <h1>
     MQ
   </h1>
@@ -153,13 +153,21 @@
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2 class="entry-hint-parent">Kafka Consumer
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Kafka Consumer Group Consumers are typically done as a group. A single consumer will end up inefficient with large amounts of data. A consumer may never catch up. Every consumer should be on it’s own machine, instance, pod. The consumer group ID is the key so Kafka knows that messages should be distributed to both consumers without duplicating.
+If we add one more consumer to this group, the last one will be idle, because one partition can’t be share across consumers. One partition can only be assigned to one consumer. Instead, the partitions are the way of Kafka to scale. More partitions imply you can have more consumers in the same consumer group.
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2024-11-18 18:41:00 +0800 CST'>November 18, 2024</span>&nbsp;·&nbsp;5 min</footer>
+  <a class="entry-link" aria-label="post link to Kafka Consumer" href="https://zjxjwxk.github.io/posts/mq/kafka/getting-started-with-apache-kafka/4-kafka-conumers/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2 class="entry-hint-parent">Kafka Producer
-      <span class="entry-hint" title="Draft">
-        <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" fill="currentColor">
-          <path
-            d="M160-410v-60h300v60H160Zm0-165v-60h470v60H160Zm0-165v-60h470v60H160Zm360 580v-123l221-220q9-9 20-13t22-4q12 0 23 4.5t20 13.5l37 37q9 9 13 20t4 22q0 11-4.5 22.5T862.09-380L643-160H520Zm300-263-37-37 37 37ZM580-220h38l121-122-18-19-19-18-122 121v38Zm141-141-19-18 37 37-18-19Z" />
-        </svg>
-      </span>
     </h2>
   </header>
   <div class="entry-content">
@@ -167,8 +175,8 @@
 --- version: &#39;3&#39; services: zookeeper-1: image: confluentinc/cp-zookeeper:7.4.1 hostname: zookeeper-1 container_name: zookeeper-1 volumes: - ./zookeeper-1_data:/var/lib/zookeeper/data - ./zookeeper-1_log:/var/lib/zookeeper/log environment: ZOOKEEPER_CLIENT_PORT: 2181 ZOOKEEPER_TICK_TIME: 2000 ZOO_MY_ID: 1 ZOO_SERVERS: server.1=zookeeper-1:2888:3888;2181 server.2=zookeeper-2:2888:3888;2181 server.3=zookeeper-3:2888:3888;2181 zookeeper-2: image: confluentinc/cp-zookeeper:7.4.1 hostname: zookeeper-2 container_name: zookeeper-2 volumes: - ./zookeeper-2_data:/var/lib/zookeeper/data - ./zookeeper-2_log:/var/lib/zookeeper/log environment: ZOOKEEPER_CLIENT_PORT: 2181 ZOOKEEPER_TICK_TIME: 2000 ZOO_MY_ID: 2 ZOO_SERVERS: server.1=zookeeper-1:2888:3888;2181 server.2=zookeeper-2:2888:3888;2181 server.3=zookeeper-3:2888:3888;2181 zookeeper-3: image: confluentinc/cp-zookeeper:7.4.1 hostname: zookeeper-3 container_name: zookeeper-3 volumes: - ./zookeeper-3_data:/var/lib/zookeeper/data - ./zookeeper-3_log:/var/lib/zookeeper/log environment: ZOOKEEPER_CLIENT_PORT: 2181 ZOOKEEPER_TICK_TIME: 2000 ZOO_MY_ID: 3 ZOO_SERVERS: server.1=zookeeper-1:2888:3888;2181 server.2=zookeeper-2:2888:3888;2181 server.3=zookeeper-3:2888:3888;2181 broker-1: image: confluentinc/cp-kafka:7.4.1 hostname: broker-1 container_name: broker-1 volumes: - ./broker-1-data:/var/lib/kafka/data depends_on: - zookeeper-1 - zookeeper-2 - zookeeper-3 ports: - 9092:9092 - 29092:29092 environment: KAFKA_BROKER_ID: 1 KAFKA_ZOOKEEPER_CONNECT: zookeeper-1:2181 KAFKA_ADVERTISED_LISTENERS: HOST://localhost:9092,INTERNAL://broker-1:29092 KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: HOST:PLAINTEXT,INTERNAL:PLAINTEXT KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL KAFKA_SNAPSHOT_TRUST_EMPTY: true broker-2: image: confluentinc/cp-kafka:7.4.1 hostname: broker-2 container_name: broker-2 volumes: - ./broker-2-data:/var/lib/kafka/data depends_on: - zookeeper-1 - zookeeper-2 - zookeeper-3 - broker-1 ports: - 9093:9093 - 29093:29093 environment: KAFKA_BROKER_ID: 2 KAFKA_ZOOKEEPER_CONNECT: zookeeper-1:2181 KAFKA_ADVERTISED_LISTENERS: HOST://localhost:9093,INTERNAL://broker-2:29093 KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: HOST:PLAINTEXT,INTERNAL:PLAINTEXT KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL KAFKA_SNAPSHOT_TRUST_EMPTY: true broker-3: image: confluentinc/cp-kafka:7.4.1 hostname: broker-3 container_name: broker-3 volumes: - ./broker-3-data:/var/lib/kafka/data depends_on: - zookeeper-1 - zookeeper-2 - zookeeper-3 - broker-1 - broker-2 ports: - 9094:9094 - 29094:29094 environment: KAFKA_BROKER_ID: 3 KAFKA_ZOOKEEPER_CONNECT: zookeeper-1:2181 KAFKA_ADVERTISED_LISTENERS: HOST://localhost:9094,INTERNAL://broker-3:29094 KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: HOST:PLAINTEXT,INTERNAL:PLAINTEXT KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL KAFKA_SNAPSHOT_TRUST_EMPTY: true rest-proxy: image: confluentinc/cp-kafka-rest:7.4.1 ports: - &#34;8082:8082&#34; depends_on: - zookeeper-1 - zookeeper-2 - zookeeper-3 - broker-1 - broker-2 - broker-3 hostname: rest-proxy container_name: rest-proxy environment: KAFKA_REST_HOST_NAME: rest-proxy KAFKA_REST_BOOTSTRAP_SERVERS: &#39;broker-1:29092,broker-2:29093,broker-3:29094&#39; KAFKA_REST_LISTENERS: &#34;http://0.0.0.0:8082&#34; Run composed containers:
 ...</p>
   </div>
-  <footer class="entry-footer"><span title='2024-11-16 01:47:59 +0800 CST'>November 16, 2024</span>&nbsp;·&nbsp;3 min</footer>
-  <a class="entry-link" aria-label="post link to Kafka Producer" href="http://localhost:49689/posts/mq/kafka/getting-started-with-apache-kafka/3.-kafka-producer/"></a>
+  <footer class="entry-footer"><span title='2024-11-17 01:47:59 +0800 CST'>November 17, 2024</span>&nbsp;·&nbsp;5 min</footer>
+  <a class="entry-link" aria-label="post link to Kafka Producer" href="https://zjxjwxk.github.io/posts/mq/kafka/getting-started-with-apache-kafka/3-kafka-producer/"></a>
 </article>
 
 <article class="post-entry tag-entry"> 
@@ -182,7 +190,7 @@
 ...</p>
   </div>
   <footer class="entry-footer"><span title='2024-11-16 01:47:59 +0800 CST'>November 16, 2024</span>&nbsp;·&nbsp;7 min</footer>
-  <a class="entry-link" aria-label="post link to Meet Kafka" href="http://localhost:49689/posts/mq/kafka/getting-started-with-apache-kafka/2.-meet-kafka/"></a>
+  <a class="entry-link" aria-label="post link to Meet Kafka" href="https://zjxjwxk.github.io/posts/mq/kafka/getting-started-with-apache-kafka/2-meet-kafka/"></a>
 </article>
 
 <article class="post-entry tag-entry"> 
@@ -194,12 +202,12 @@
     <p>We Call The entity/app creates a message, a publisher, or a producer. The entity/app consuming messages from a channel as a consumer. The system where the channels live and handle these requests as an Event Bus or, more recently, a streaming platform. The channel where messages flow as channel or topic. Definitions We say the pub-sub system is reliable when you ensure there is no message loss. Has at most one processing when you ensure there is no message duplication. And has exactly one processing when you only process a message once ensuring it wasn’t lost. Of course, this is the holy grail. We Had a Ton of Other Pub/Sub Systems Before ...</p>
   </div>
   <footer class="entry-footer"><span title='2024-11-16 01:27:59 +0800 CST'>November 16, 2024</span>&nbsp;·&nbsp;2 min</footer>
-  <a class="entry-link" aria-label="post link to Pub-sub System" href="http://localhost:49689/posts/mq/kafka/getting-started-with-apache-kafka/1.-pub-sub-system/"></a>
+  <a class="entry-link" aria-label="post link to Pub-sub System" href="https://zjxjwxk.github.io/posts/mq/kafka/getting-started-with-apache-kafka/1-pub-sub-system/"></a>
 </article>
     </main>
     
 <footer class="footer">
-        <span>&copy; 2024 <a href="http://localhost:49689/">Xinkang&#39;s Blog</a></span> · 
+        <span>&copy; 2024 <a href="https://zjxjwxk.github.io/">Xinkang&#39;s Blog</a></span> · 
 
     <span>
         Powered by

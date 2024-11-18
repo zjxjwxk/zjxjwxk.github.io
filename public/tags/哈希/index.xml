@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>哈希 on Xinkang&#39;s Blog</title>
-    <link>http://localhost:49689/tags/%E5%93%88%E5%B8%8C/</link>
+    <link>https://zjxjwxk.github.io/tags/%E5%93%88%E5%B8%8C/</link>
     <description>Recent content in 哈希 on Xinkang&#39;s Blog</description>
     <generator>Hugo -- 0.138.0</generator>
     <language>en</language>
     <lastBuildDate>Thu, 26 Mar 2020 15:21:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:49689/tags/%E5%93%88%E5%B8%8C/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://zjxjwxk.github.io/tags/%E5%93%88%E5%B8%8C/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>PAT乙级 1033 旧键盘打字 (20分)</title>
-      <link>http://localhost:49689/posts/pat/basic_level/b1033/</link>
+      <link>https://zjxjwxk.github.io/posts/pat/basic_level/b1033/</link>
       <pubDate>Thu, 26 Mar 2020 15:21:00 +0000</pubDate>
-      <guid>http://localhost:49689/posts/pat/basic_level/b1033/</guid>
+      <guid>https://zjxjwxk.github.io/posts/pat/basic_level/b1033/</guid>
       <description>&lt;p&gt;旧键盘上坏了几个键，于是在敲一段文字的时候，对应的字符就不会出现。现在给出应该输入的一段文字、以及坏掉的那些键，打出的结果文字会是怎样？&lt;/p&gt;
 &lt;h1 id=&#34;输入格式&#34;&gt;输入格式：&lt;/h1&gt;
 &lt;p&gt;输入在 2 行中分别给出坏掉的那些键、以及应该输入的文字。其中对应英文字母的坏键以大写给出；每段文字是不超过 10^5 个字符的串。可用的字符包括字母 [&lt;code&gt;a&lt;/code&gt;-&lt;code&gt;z&lt;/code&gt;, &lt;code&gt;A&lt;/code&gt;-&lt;code&gt;Z&lt;/code&gt;]、数字 &lt;code&gt;0&lt;/code&gt;-&lt;code&gt;9&lt;/code&gt;、以及下划线 &lt;code&gt;_&lt;/code&gt;（代表空格）、&lt;code&gt;,&lt;/code&gt;、&lt;code&gt;.&lt;/code&gt;、&lt;code&gt;-&lt;/code&gt;、&lt;code&gt;+&lt;/code&gt;（代表上档键）。题目保证第 2 行输入的文字串非空。&lt;/p&gt;

@@ -1,6 +1,6 @@
 ---
 title: Kafka Producer
-date: 2024-11-16T01:47:59+08:00
+date: 2024-11-17T01:47:59+08:00
 tags:
 - MQ
 - Kafka
@@ -413,15 +413,7 @@ myorders-1@39
 
 And the consumer will receive messages like:
 
-```bash
-kafka-console-consumer.sh \
---bootstrap-server localhost:9092 \
---topic myorders --from-beginning \
---key-deserializer org.apache.kafka.common.serialization.StringDeserializer \
---value-deserializer org.apache.kafka.common.serialization.DoubleDeserializer \
---property print.key=true \
---property key.separator=, \
---group 1
+```
 UT,8272.0
 IL,7659.0
 CO,8457.0

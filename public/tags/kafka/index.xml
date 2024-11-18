@@ -2,19 +2,35 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Kafka on Xinkang&#39;s Blog</title>
-    <link>http://localhost:49689/tags/kafka/</link>
+    <link>https://zjxjwxk.github.io/tags/kafka/</link>
     <description>Recent content in Kafka on Xinkang&#39;s Blog</description>
     <generator>Hugo -- 0.138.0</generator>
     <language>en</language>
-    <lastBuildDate>Sat, 16 Nov 2024 01:47:59 +0800</lastBuildDate>
-    <atom:link href="http://localhost:49689/tags/kafka/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 18 Nov 2024 18:41:00 +0800</lastBuildDate>
+    <atom:link href="https://zjxjwxk.github.io/tags/kafka/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Kafka Consumer</title>
+      <link>https://zjxjwxk.github.io/posts/mq/kafka/getting-started-with-apache-kafka/4-kafka-conumers/</link>
+      <pubDate>Mon, 18 Nov 2024 18:41:00 +0800</pubDate>
+      <guid>https://zjxjwxk.github.io/posts/mq/kafka/getting-started-with-apache-kafka/4-kafka-conumers/</guid>
+      <description>&lt;h2 id=&#34;kafka-consumer-group&#34;&gt;Kafka Consumer Group&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Consumers are typically done as a group.&lt;/li&gt;
+&lt;li&gt;A single consumer will end up inefficient with large amounts of data.&lt;/li&gt;
+&lt;li&gt;A consumer may never catch up.&lt;/li&gt;
+&lt;li&gt;Every consumer should be on it&amp;rsquo;s own machine, instance, pod.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The consumer group ID is the key so Kafka knows that messages should be distributed to both consumers without duplicating.&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;image-20241118185205006&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/mq/kafka/getting-started-with-apache-kafka/4-kafka-conumers/images/image-20241118185205006.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;If we add one more consumer to this group, the last one will be idle, because one partition can&amp;rsquo;t be share across consumers. One partition can only be assigned to one consumer. Instead, the partitions are the way of Kafka to scale. More partitions imply you can have more consumers in the same consumer group.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Kafka Producer</title>
-      <link>http://localhost:49689/posts/mq/kafka/getting-started-with-apache-kafka/3.-kafka-producer/</link>
-      <pubDate>Sat, 16 Nov 2024 01:47:59 +0800</pubDate>
-      <guid>http://localhost:49689/posts/mq/kafka/getting-started-with-apache-kafka/3.-kafka-producer/</guid>
+      <link>https://zjxjwxk.github.io/posts/mq/kafka/getting-started-with-apache-kafka/3-kafka-producer/</link>
+      <pubDate>Sun, 17 Nov 2024 01:47:59 +0800</pubDate>
+      <guid>https://zjxjwxk.github.io/posts/mq/kafka/getting-started-with-apache-kafka/3-kafka-producer/</guid>
       <description>&lt;h2 id=&#34;kafka-producer-overview&#34;&gt;Kafka Producer Overview&lt;/h2&gt;
-&lt;p&gt;&lt;img alt=&#34;image-20241116183122165&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:49689/posts/mq/kafka/getting-started-with-apache-kafka/3.-kafka-producer/images/image-20241116183122165.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;image-20241116183122165&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/mq/kafka/getting-started-with-apache-kafka/3-kafka-producer/images/image-20241116183122165.png&#34;&gt;&lt;/p&gt;
 &lt;h2 id=&#34;producing-messages-with-kafka-cli&#34;&gt;Producing Messages with Kafka CLI&lt;/h2&gt;
 &lt;p&gt;Create a docker-compose file &lt;code&gt;docker-compose.yaml&lt;/code&gt; containing 3 Zookeepers, 3 Kafka Brokers, and 1 Kafka REST Proxy:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;---
@@ -148,13 +164,13 @@
     </item>
     <item>
       <title>Meet Kafka</title>
-      <link>http://localhost:49689/posts/mq/kafka/getting-started-with-apache-kafka/2.-meet-kafka/</link>
+      <link>https://zjxjwxk.github.io/posts/mq/kafka/getting-started-with-apache-kafka/2-meet-kafka/</link>
       <pubDate>Sat, 16 Nov 2024 01:47:59 +0800</pubDate>
-      <guid>http://localhost:49689/posts/mq/kafka/getting-started-with-apache-kafka/2.-meet-kafka/</guid>
+      <guid>https://zjxjwxk.github.io/posts/mq/kafka/getting-started-with-apache-kafka/2-meet-kafka/</guid>
       <description>&lt;h2 id=&#34;kafka-architecture&#34;&gt;Kafka Architecture&lt;/h2&gt;
-&lt;p&gt;&lt;img alt=&#34;image-20241116015015788&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:49689/posts/mq/kafka/getting-started-with-apache-kafka/2.-meet-kafka/images/image-20241116015015788.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;image-20241116015015788&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/mq/kafka/getting-started-with-apache-kafka/2-meet-kafka/images/image-20241116015015788.png&#34;&gt;&lt;/p&gt;
 &lt;h2 id=&#34;kafka-message&#34;&gt;Kafka Message&lt;/h2&gt;
-&lt;p&gt;&lt;img alt=&#34;image-20241116015252987&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:49689/posts/mq/kafka/getting-started-with-apache-kafka/2.-meet-kafka/images/image-20241116015252987.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;image-20241116015252987&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/mq/kafka/getting-started-with-apache-kafka/2-meet-kafka/images/image-20241116015252987.png&#34;&gt;&lt;/p&gt;
 &lt;h2 id=&#34;deploy-kafka&#34;&gt;Deploy Kafka&lt;/h2&gt;
 &lt;p&gt;Create a docker-compose file &lt;code&gt;docker-compose.yaml&lt;/code&gt; containing 3 Zookeepers, 3 Kafka Brokers, and 1 Kafka REST Proxy:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;---
@@ -288,9 +304,9 @@
     </item>
     <item>
       <title>Pub-sub System</title>
-      <link>http://localhost:49689/posts/mq/kafka/getting-started-with-apache-kafka/1.-pub-sub-system/</link>
+      <link>https://zjxjwxk.github.io/posts/mq/kafka/getting-started-with-apache-kafka/1-pub-sub-system/</link>
       <pubDate>Sat, 16 Nov 2024 01:27:59 +0800</pubDate>
-      <guid>http://localhost:49689/posts/mq/kafka/getting-started-with-apache-kafka/1.-pub-sub-system/</guid>
+      <guid>https://zjxjwxk.github.io/posts/mq/kafka/getting-started-with-apache-kafka/1-pub-sub-system/</guid>
       <description>&lt;h2 id=&#34;we-call&#34;&gt;We Call&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;The entity/app creates a message, a publisher, or a producer.&lt;/li&gt;
@@ -305,7 +321,7 @@
 &lt;li&gt;And has exactly one processing when you only process a message once ensuring it wasn&amp;rsquo;t lost. Of course, this is the holy grail.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;we-had-a-ton-of-other-pubsub-systems-before&#34;&gt;We Had a Ton of Other Pub/Sub Systems Before&lt;/h2&gt;
-&lt;p&gt;&lt;img alt=&#34;image-20241116003710435&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:49689/posts/mq/kafka/getting-started-with-apache-kafka/1.-pub-sub-system/images/image-20241116003710435.png&#34;&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;img alt=&#34;image-20241116003710435&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/mq/kafka/getting-started-with-apache-kafka/1-pub-sub-system/images/image-20241116003710435.png&#34;&gt;&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

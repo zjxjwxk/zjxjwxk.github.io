@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Hadoop on Xinkang&#39;s Blog</title>
-    <link>http://localhost:49689/tags/hadoop/</link>
+    <link>https://zjxjwxk.github.io/tags/hadoop/</link>
     <description>Recent content in Hadoop on Xinkang&#39;s Blog</description>
     <generator>Hugo -- 0.138.0</generator>
     <language>en</language>
     <lastBuildDate>Fri, 08 May 2020 16:36:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:49689/tags/hadoop/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://zjxjwxk.github.io/tags/hadoop/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Hadoop 进阶篇</title>
-      <link>http://localhost:49689/posts/%E5%A4%A7%E6%95%B0%E6%8D%AE/hadoop/hadoop%E8%BF%9B%E9%98%B6%E7%AF%87/</link>
+      <link>https://zjxjwxk.github.io/posts/%E5%A4%A7%E6%95%B0%E6%8D%AE/hadoop/hadoop%E8%BF%9B%E9%98%B6%E7%AF%87/</link>
       <pubDate>Fri, 08 May 2020 16:36:00 +0000</pubDate>
-      <guid>http://localhost:49689/posts/%E5%A4%A7%E6%95%B0%E6%8D%AE/hadoop/hadoop%E8%BF%9B%E9%98%B6%E7%AF%87/</guid>
+      <guid>https://zjxjwxk.github.io/posts/%E5%A4%A7%E6%95%B0%E6%8D%AE/hadoop/hadoop%E8%BF%9B%E9%98%B6%E7%AF%87/</guid>
       <description>&lt;h1 id=&#34;概要&#34;&gt;概要&lt;/h1&gt;
 &lt;ul&gt;
 &lt;li&gt;概述&lt;/li&gt;
@@ -22,24 +22,24 @@
 &lt;/ul&gt;
 &lt;h1 id=&#34;hdfs&#34;&gt;HDFS&lt;/h1&gt;
 &lt;p&gt;HDFS 是 Hadoop 分布式文件系统的简称，由若干台计算机组成，用于存放 PB、TB 数量级以上的文件，每份文件可以有多个副本，所以 HDFS 是一个具有高冗余、高容错的文件系统。&lt;/p&gt;
-&lt;p&gt;&lt;img alt=&#34;HDFS架构&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:49689/posts/%E5%A4%A7%E6%95%B0%E6%8D%AE/hadoop/hadoop%E8%BF%9B%E9%98%B6%E7%AF%87/images/image-20200508165016013.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;HDFS架构&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/%E5%A4%A7%E6%95%B0%E6%8D%AE/hadoop/hadoop%E8%BF%9B%E9%98%B6%E7%AF%87/images/image-20200508165016013.png&#34;&gt;&lt;/p&gt;
 &lt;h1 id=&#34;hadoop&#34;&gt;Hadoop&lt;/h1&gt;
 &lt;h2 id=&#34;hadoop-1x&#34;&gt;Hadoop 1.x&lt;/h2&gt;
-&lt;p&gt;&lt;img alt=&#34;Hadoop 1.x&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:49689/posts/%E5%A4%A7%E6%95%B0%E6%8D%AE/hadoop/hadoop%E8%BF%9B%E9%98%B6%E7%AF%87/images/image-20200508165127618.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;Hadoop 1.x&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/%E5%A4%A7%E6%95%B0%E6%8D%AE/hadoop/hadoop%E8%BF%9B%E9%98%B6%E7%AF%87/images/image-20200508165127618.png&#34;&gt;&lt;/p&gt;
 &lt;h2 id=&#34;hadoop-2x&#34;&gt;Hadoop 2.x&lt;/h2&gt;
 &lt;p&gt;Hadoop 1.0 到 2.0 的变化：Hadoop 2.0 以后的版本移除了原有的 JobTracker 和 TaskTracker，改由 Yarn 平台的 ResourceManager 负责集群中所有资源的统一管理和分配，NodeManager 管理 Hadoop 集群中单个计算节点。&lt;/p&gt;
 &lt;p&gt;YARN 的设计减小了 JobTracker 的资源消耗，减少了 Hadoop 1.0 中发生单点故障的风险。我们还可以在 YARN 平台上运行 Spark 和 Storm 作业，充分利用资源。&lt;/p&gt;
-&lt;p&gt;&lt;img alt=&#34;Hadoop 1.0 =&amp;gt; Hadoop 2.0&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:49689/posts/%E5%A4%A7%E6%95%B0%E6%8D%AE/hadoop/hadoop%E8%BF%9B%E9%98%B6%E7%AF%87/images/image-20200508165216140.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;Hadoop 1.0 =&amp;gt; Hadoop 2.0&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/%E5%A4%A7%E6%95%B0%E6%8D%AE/hadoop/hadoop%E8%BF%9B%E9%98%B6%E7%AF%87/images/image-20200508165216140.png&#34;&gt;&lt;/p&gt;
 &lt;h1 id=&#34;深入探索-mapreduce&#34;&gt;深入探索 MapReduce&lt;/h1&gt;
 &lt;h2 id=&#34;wordcount-实例回顾&#34;&gt;WordCount 实例回顾&lt;/h2&gt;
-&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;http://localhost:49689/posts/%E5%A4%A7%E6%95%B0%E6%8D%AE/hadoop/hadoop%E8%BF%9B%E9%98%B6%E7%AF%87/images/image-20200508170750118.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/%E5%A4%A7%E6%95%B0%E6%8D%AE/hadoop/hadoop%E8%BF%9B%E9%98%B6%E7%AF%87/images/image-20200508170750118.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;MapReduce 作业是一种大规模数据集的并行计算的编程模型。我们可以将 HDFS 中存放的海量数据，通过 MapReduce 作业进行计算，得到目标数据。&lt;/p&gt;</description>
     </item>
     <item>
       <title>Hadoop 基础篇</title>
-      <link>http://localhost:49689/posts/%E5%A4%A7%E6%95%B0%E6%8D%AE/hadoop/hadoop%E5%9F%BA%E7%A1%80%E7%AF%87/</link>
+      <link>https://zjxjwxk.github.io/posts/%E5%A4%A7%E6%95%B0%E6%8D%AE/hadoop/hadoop%E5%9F%BA%E7%A1%80%E7%AF%87/</link>
       <pubDate>Wed, 06 May 2020 20:08:00 +0000</pubDate>
-      <guid>http://localhost:49689/posts/%E5%A4%A7%E6%95%B0%E6%8D%AE/hadoop/hadoop%E5%9F%BA%E7%A1%80%E7%AF%87/</guid>
+      <guid>https://zjxjwxk.github.io/posts/%E5%A4%A7%E6%95%B0%E6%8D%AE/hadoop/hadoop%E5%9F%BA%E7%A1%80%E7%AF%87/</guid>
       <description>&lt;h1 id=&#34;概要&#34;&gt;概要&lt;/h1&gt;
 &lt;ol&gt;
 &lt;li&gt;大数据技术的相关概念&lt;/li&gt;

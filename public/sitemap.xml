@@ -2,377 +2,380 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://localhost:49689/categories/</loc>
+    <loc>https://zjxjwxk.github.io/categories/</loc>
+    <lastmod>2024-11-18T18:41:00+08:00</lastmod>
+  </url><url>
+    <loc>https://zjxjwxk.github.io/tags/kafka/</loc>
+    <lastmod>2024-11-18T18:41:00+08:00</lastmod>
+  </url><url>
+    <loc>https://zjxjwxk.github.io/posts/mq/kafka/getting-started-with-apache-kafka/4-kafka-conumers/</loc>
+    <lastmod>2024-11-18T18:41:00+08:00</lastmod>
+  </url><url>
+    <loc>https://zjxjwxk.github.io/tags/mq/</loc>
+    <lastmod>2024-11-18T18:41:00+08:00</lastmod>
+  </url><url>
+    <loc>https://zjxjwxk.github.io/categories/mq/</loc>
+    <lastmod>2024-11-18T18:41:00+08:00</lastmod>
+  </url><url>
+    <loc>https://zjxjwxk.github.io/posts/</loc>
+    <lastmod>2024-11-18T18:41:00+08:00</lastmod>
+  </url><url>
+    <loc>https://zjxjwxk.github.io/tags/</loc>
+    <lastmod>2024-11-18T18:41:00+08:00</lastmod>
+  </url><url>
+    <loc>https://zjxjwxk.github.io/</loc>
+    <lastmod>2024-11-18T18:41:00+08:00</lastmod>
+  </url><url>
+    <loc>https://zjxjwxk.github.io/posts/mq/kafka/getting-started-with-apache-kafka/3-kafka-producer/</loc>
+    <lastmod>2024-11-17T01:47:59+08:00</lastmod>
+  </url><url>
+    <loc>https://zjxjwxk.github.io/posts/mq/kafka/getting-started-with-apache-kafka/2-meet-kafka/</loc>
     <lastmod>2024-11-16T01:47:59+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:49689/tags/kafka/</loc>
-    <lastmod>2024-11-16T01:47:59+08:00</lastmod>
-  </url><url>
-    <loc>http://localhost:49689/posts/mq/kafka/getting-started-with-apache-kafka/3.-kafka-producer/</loc>
-    <lastmod>2024-11-16T01:47:59+08:00</lastmod>
-  </url><url>
-    <loc>http://localhost:49689/posts/mq/kafka/getting-started-with-apache-kafka/2.-meet-kafka/</loc>
-    <lastmod>2024-11-16T01:47:59+08:00</lastmod>
-  </url><url>
-    <loc>http://localhost:49689/tags/mq/</loc>
-    <lastmod>2024-11-16T01:47:59+08:00</lastmod>
-  </url><url>
-    <loc>http://localhost:49689/categories/mq/</loc>
-    <lastmod>2024-11-16T01:47:59+08:00</lastmod>
-  </url><url>
-    <loc>http://localhost:49689/posts/</loc>
-    <lastmod>2024-11-16T01:47:59+08:00</lastmod>
-  </url><url>
-    <loc>http://localhost:49689/tags/</loc>
-    <lastmod>2024-11-16T01:47:59+08:00</lastmod>
-  </url><url>
-    <loc>http://localhost:49689/</loc>
-    <lastmod>2024-11-16T01:47:59+08:00</lastmod>
-  </url><url>
-    <loc>http://localhost:49689/posts/mq/kafka/getting-started-with-apache-kafka/1.-pub-sub-system/</loc>
+    <loc>https://zjxjwxk.github.io/posts/mq/kafka/getting-started-with-apache-kafka/1-pub-sub-system/</loc>
     <lastmod>2024-11-16T01:27:59+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:49689/tags/auth/</loc>
+    <loc>https://zjxjwxk.github.io/tags/auth/</loc>
     <lastmod>2021-03-19T21:15:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:49689/tags/security/</loc>
+    <loc>https://zjxjwxk.github.io/tags/security/</loc>
     <lastmod>2021-03-19T21:15:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:49689/tags/shiro/</loc>
+    <loc>https://zjxjwxk.github.io/tags/shiro/</loc>
     <lastmod>2021-03-19T21:15:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:49689/categories/shiro/</loc>
+    <loc>https://zjxjwxk.github.io/categories/shiro/</loc>
     <lastmod>2021-03-19T21:15:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:49689/posts/shiro/</loc>
+    <loc>https://zjxjwxk.github.io/posts/shiro/</loc>
     <lastmod>2021-03-19T21:15:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:49689/tags/blockchain/</loc>
+    <loc>https://zjxjwxk.github.io/tags/blockchain/</loc>
     <lastmod>2020-11-03T12:40:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:49689/categories/blockchain/</loc>
+    <loc>https://zjxjwxk.github.io/categories/blockchain/</loc>
     <lastmod>2020-11-03T12:40:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:49689/tags/ethereum/</loc>
+    <loc>https://zjxjwxk.github.io/tags/ethereum/</loc>
     <lastmod>2020-11-03T12:40:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:49689/posts/blockchain/%E4%BB%A5%E5%A4%AA%E5%9D%8A%E7%A7%81%E6%9C%89%E9%93%BE%E6%90%AD%E5%BB%BA/</loc>
+    <loc>https://zjxjwxk.github.io/posts/blockchain/%E4%BB%A5%E5%A4%AA%E5%9D%8A%E7%A7%81%E6%9C%89%E9%93%BE%E6%90%AD%E5%BB%BA/</loc>
     <lastmod>2020-11-03T12:40:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:49689/tags/java/</loc>
+    <loc>https://zjxjwxk.github.io/tags/java/</loc>
     <lastmod>2020-07-16T11:01:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:49689/categories/java/</loc>
+    <loc>https://zjxjwxk.github.io/categories/java/</loc>
     <lastmod>2020-07-16T11:01:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:49689/tags/jvm/</loc>
+    <loc>https://zjxjwxk.github.io/tags/jvm/</loc>
     <lastmod>2020-07-16T11:01:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:49689/posts/java/jvm/%E8%87%AA%E5%B7%B1%E7%BC%96%E8%AF%91openjdk-8/</loc>
+    <loc>https://zjxjwxk.github.io/posts/java/jvm/%E8%87%AA%E5%B7%B1%E7%BC%96%E8%AF%91openjdk-8/</loc>
     <lastmod>2020-07-16T11:01:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:49689/tags/spring-boot/</loc>
+    <loc>https://zjxjwxk.github.io/tags/spring-boot/</loc>
     <lastmod>2020-06-05T21:02:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:49689/categories/spring-boot/</loc>
+    <loc>https://zjxjwxk.github.io/categories/spring-boot/</loc>
     <lastmod>2020-06-05T21:02:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:49689/posts/spring-boot/spring-boot-%E4%B8%AD%E7%9A%84-jwt-%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98/</loc>
+    <loc>https://zjxjwxk.github.io/posts/spring-boot/spring-boot-%E4%B8%AD%E7%9A%84-jwt-%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98/</loc>
     <lastmod>2020-06-05T21:02:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:49689/tags/docker/</loc>
+    <loc>https://zjxjwxk.github.io/tags/docker/</loc>
     <lastmod>2020-06-04T23:15:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:49689/categories/docker/</loc>
+    <loc>https://zjxjwxk.github.io/categories/docker/</loc>
     <lastmod>2020-06-04T23:15:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:49689/posts/docker/docker-&#43;-k8s-%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%AE%B9%E5%99%A8%E5%8C%96/1.-%E6%9C%8D%E5%8A%A1%E7%BC%96%E6%8E%92%E5%89%8D%E5%A5%8F/</loc>
+    <loc>https://zjxjwxk.github.io/posts/docker/docker-&#43;-k8s-%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%AE%B9%E5%99%A8%E5%8C%96/1.-%E6%9C%8D%E5%8A%A1%E7%BC%96%E6%8E%92%E5%89%8D%E5%A5%8F/</loc>
     <lastmod>2020-06-04T23:15:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:49689/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/</loc>
+    <loc>https://zjxjwxk.github.io/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/</loc>
     <lastmod>2020-06-04T23:15:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:49689/tags/hadoop/</loc>
+    <loc>https://zjxjwxk.github.io/tags/hadoop/</loc>
     <lastmod>2020-05-08T16:36:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:49689/posts/%E5%A4%A7%E6%95%B0%E6%8D%AE/hadoop/hadoop%E8%BF%9B%E9%98%B6%E7%AF%87/</loc>
+    <loc>https://zjxjwxk.github.io/posts/%E5%A4%A7%E6%95%B0%E6%8D%AE/hadoop/hadoop%E8%BF%9B%E9%98%B6%E7%AF%87/</loc>
     <lastmod>2020-05-08T16:36:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:49689/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/</loc>
+    <loc>https://zjxjwxk.github.io/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/</loc>
     <lastmod>2020-05-08T16:36:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:49689/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/</loc>
+    <loc>https://zjxjwxk.github.io/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/</loc>
     <lastmod>2020-05-08T16:36:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:49689/posts/%E5%A4%A7%E6%95%B0%E6%8D%AE/hadoop/hadoop%E5%9F%BA%E7%A1%80%E7%AF%87/</loc>
+    <loc>https://zjxjwxk.github.io/posts/%E5%A4%A7%E6%95%B0%E6%8D%AE/hadoop/hadoop%E5%9F%BA%E7%A1%80%E7%AF%87/</loc>
     <lastmod>2020-05-06T20:08:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:49689/tags/dubbo/</loc>
+    <loc>https://zjxjwxk.github.io/tags/dubbo/</loc>
     <lastmod>2020-05-03T22:34:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:49689/categories/dubbo/</loc>
+    <loc>https://zjxjwxk.github.io/categories/dubbo/</loc>
     <lastmod>2020-05-03T22:34:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:49689/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/12.%E7%B3%BB%E7%BB%9F%E9%83%A8%E7%BD%B2/</loc>
+    <loc>https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/12.%E7%B3%BB%E7%BB%9F%E9%83%A8%E7%BD%B2/</loc>
     <lastmod>2020-05-03T22:34:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:49689/tags/linux/</loc>
+    <loc>https://zjxjwxk.github.io/tags/linux/</loc>
     <lastmod>2020-04-27T23:11:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:49689/categories/linux/</loc>
+    <loc>https://zjxjwxk.github.io/categories/linux/</loc>
     <lastmod>2020-04-27T23:11:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:49689/tags/macos/</loc>
+    <loc>https://zjxjwxk.github.io/tags/macos/</loc>
     <lastmod>2020-04-27T23:11:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:49689/posts/linux/macos/</loc>
+    <loc>https://zjxjwxk.github.io/posts/linux/macos/</loc>
     <lastmod>2020-04-27T23:11:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:49689/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/11.%E6%9C%8D%E5%8A%A1%E7%9B%91%E6%8E%A7/</loc>
+    <loc>https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/11.%E6%9C%8D%E5%8A%A1%E7%9B%91%E6%8E%A7/</loc>
     <lastmod>2020-04-24T23:11:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:49689/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/10.%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/</loc>
+    <loc>https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/10.%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/</loc>
     <lastmod>2020-04-17T20:14:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:49689/tags/pat/</loc>
+    <loc>https://zjxjwxk.github.io/tags/pat/</loc>
     <lastmod>2020-04-15T21:39:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:49689/posts/pat/advanced_level/a1108/</loc>
+    <loc>https://zjxjwxk.github.io/posts/pat/advanced_level/a1108/</loc>
     <lastmod>2020-04-15T21:39:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:49689/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/</loc>
+    <loc>https://zjxjwxk.github.io/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/</loc>
     <lastmod>2020-04-15T21:39:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:49689/categories/%E7%AE%97%E6%B3%95/</loc>
+    <loc>https://zjxjwxk.github.io/categories/%E7%AE%97%E6%B3%95/</loc>
     <lastmod>2020-04-15T21:39:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:49689/posts/pat/advanced_level/a1072/</loc>
+    <loc>https://zjxjwxk.github.io/posts/pat/advanced_level/a1072/</loc>
     <lastmod>2020-04-13T00:11:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:49689/tags/%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84/</loc>
+    <loc>https://zjxjwxk.github.io/tags/%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84/</loc>
     <lastmod>2020-04-13T00:11:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:49689/posts/pat/advanced_level/a1018/</loc>
+    <loc>https://zjxjwxk.github.io/posts/pat/advanced_level/a1018/</loc>
     <lastmod>2020-04-12T15:52:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:49689/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/9.dubbo%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91%E6%94%AF%E4%BB%98%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/</loc>
+    <loc>https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/9.dubbo%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91%E6%94%AF%E4%BB%98%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/</loc>
     <lastmod>2020-04-11T20:14:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:49689/categories/pat/</loc>
+    <loc>https://zjxjwxk.github.io/categories/pat/</loc>
     <lastmod>2020-04-11T16:17:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:49689/posts/pat/%E8%80%83%E8%AF%95%E6%94%BB%E7%95%A5/</loc>
+    <loc>https://zjxjwxk.github.io/posts/pat/%E8%80%83%E8%AF%95%E6%94%BB%E7%95%A5/</loc>
     <lastmod>2020-04-11T16:17:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:49689/categories/%E8%80%83%E8%AF%95%E7%9B%B8%E5%85%B3/</loc>
+    <loc>https://zjxjwxk.github.io/categories/%E8%80%83%E8%AF%95%E7%9B%B8%E5%85%B3/</loc>
     <lastmod>2020-04-11T16:17:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:49689/posts/pat/advanced_level/a1021/</loc>
+    <loc>https://zjxjwxk.github.io/posts/pat/advanced_level/a1021/</loc>
     <lastmod>2020-04-10T17:55:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:49689/tags/%E5%9B%BE/</loc>
+    <loc>https://zjxjwxk.github.io/tags/%E5%9B%BE/</loc>
     <lastmod>2020-04-10T17:55:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:49689/posts/pat/advanced_level/a1013/</loc>
+    <loc>https://zjxjwxk.github.io/posts/pat/advanced_level/a1013/</loc>
     <lastmod>2020-04-09T19:57:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:49689/posts/pat/advanced_level/a1032/</loc>
+    <loc>https://zjxjwxk.github.io/posts/pat/advanced_level/a1032/</loc>
     <lastmod>2020-04-07T16:34:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:49689/tags/%E9%93%BE%E8%A1%A8/</loc>
+    <loc>https://zjxjwxk.github.io/tags/%E9%93%BE%E8%A1%A8/</loc>
     <lastmod>2020-04-07T16:34:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:49689/posts/pat/advanced_level/a1056/</loc>
+    <loc>https://zjxjwxk.github.io/posts/pat/advanced_level/a1056/</loc>
     <lastmod>2020-04-06T19:04:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:49689/tags/%E9%98%9F%E5%88%97/</loc>
+    <loc>https://zjxjwxk.github.io/tags/%E9%98%9F%E5%88%97/</loc>
     <lastmod>2020-04-06T19:04:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:49689/posts/pat/advanced_level/a1100/</loc>
+    <loc>https://zjxjwxk.github.io/posts/pat/advanced_level/a1100/</loc>
     <lastmod>2020-04-06T15:17:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:49689/tags/stl/</loc>
+    <loc>https://zjxjwxk.github.io/tags/stl/</loc>
     <lastmod>2020-04-06T15:17:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:49689/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/8.dubbo%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91%E8%AE%A2%E5%8D%95%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/</loc>
+    <loc>https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/8.dubbo%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91%E8%AE%A2%E5%8D%95%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/</loc>
     <lastmod>2020-04-05T19:30:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:49689/posts/pat/advanced_level/a1060/</loc>
+    <loc>https://zjxjwxk.github.io/posts/pat/advanced_level/a1060/</loc>
     <lastmod>2020-04-04T22:28:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:49689/posts/pat/advanced_level/a1039/</loc>
+    <loc>https://zjxjwxk.github.io/posts/pat/advanced_level/a1039/</loc>
     <lastmod>2020-04-03T15:33:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:49689/posts/pat/advanced_level/a1096/</loc>
+    <loc>https://zjxjwxk.github.io/posts/pat/advanced_level/a1096/</loc>
     <lastmod>2020-04-02T20:53:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:49689/tags/%E6%95%B0%E5%AD%A6%E9%97%AE%E9%A2%98/</loc>
+    <loc>https://zjxjwxk.github.io/tags/%E6%95%B0%E5%AD%A6%E9%97%AE%E9%A2%98/</loc>
     <lastmod>2020-04-02T20:53:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:49689/posts/pat/advanced_level/a1078/</loc>
+    <loc>https://zjxjwxk.github.io/posts/pat/advanced_level/a1078/</loc>
     <lastmod>2020-04-02T17:04:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:49689/posts/pat/advanced_level/a1081/</loc>
+    <loc>https://zjxjwxk.github.io/posts/pat/advanced_level/a1081/</loc>
     <lastmod>2020-04-01T16:29:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:49689/posts/pat/basic_level/b1008/</loc>
+    <loc>https://zjxjwxk.github.io/posts/pat/basic_level/b1008/</loc>
     <lastmod>2020-03-31T16:04:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:49689/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/7.dubbo%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91%E5%BD%B1%E9%99%A2%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/</loc>
+    <loc>https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/7.dubbo%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91%E5%BD%B1%E9%99%A2%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/</loc>
     <lastmod>2020-03-30T21:21:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:49689/posts/pat/advanced_level/a1049/</loc>
+    <loc>https://zjxjwxk.github.io/posts/pat/advanced_level/a1049/</loc>
     <lastmod>2020-03-30T21:12:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:49689/posts/pat/basic_level/b1003/</loc>
+    <loc>https://zjxjwxk.github.io/posts/pat/basic_level/b1003/</loc>
     <lastmod>2020-03-30T16:26:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:49689/posts/pat/advanced_level/a1104/</loc>
+    <loc>https://zjxjwxk.github.io/posts/pat/advanced_level/a1104/</loc>
     <lastmod>2020-03-30T16:26:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:49689/posts/pat/advanced_level/a1101/</loc>
+    <loc>https://zjxjwxk.github.io/posts/pat/advanced_level/a1101/</loc>
     <lastmod>2020-03-29T17:27:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:49689/posts/pat/advanced_level/a1010/</loc>
+    <loc>https://zjxjwxk.github.io/posts/pat/advanced_level/a1010/</loc>
     <lastmod>2020-03-29T14:48:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:49689/tags/%E4%BA%8C%E5%88%86/</loc>
+    <loc>https://zjxjwxk.github.io/tags/%E4%BA%8C%E5%88%86/</loc>
     <lastmod>2020-03-29T14:48:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:49689/posts/pat/advanced_level/a1085/</loc>
+    <loc>https://zjxjwxk.github.io/posts/pat/advanced_level/a1085/</loc>
     <lastmod>2020-03-28T16:38:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:49689/posts/pat/advanced_level/a1038/</loc>
+    <loc>https://zjxjwxk.github.io/posts/pat/advanced_level/a1038/</loc>
     <lastmod>2020-03-28T16:34:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:49689/tags/%E8%B4%AA%E5%BF%83/</loc>
+    <loc>https://zjxjwxk.github.io/tags/%E8%B4%AA%E5%BF%83/</loc>
     <lastmod>2020-03-28T16:34:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:49689/posts/pat/advanced_level/a1067/</loc>
+    <loc>https://zjxjwxk.github.io/posts/pat/advanced_level/a1067/</loc>
     <lastmod>2020-03-27T20:06:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:49689/posts/pat/basic_level/b1033/</loc>
+    <loc>https://zjxjwxk.github.io/posts/pat/basic_level/b1033/</loc>
     <lastmod>2020-03-26T15:21:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:49689/tags/%E5%93%88%E5%B8%8C/</loc>
+    <loc>https://zjxjwxk.github.io/tags/%E5%93%88%E5%B8%8C/</loc>
     <lastmod>2020-03-26T15:21:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:49689/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/6.dubbo%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91%E5%BD%B1%E7%89%87%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/</loc>
+    <loc>https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/6.dubbo%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91%E5%BD%B1%E7%89%87%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/</loc>
     <lastmod>2020-03-22T19:47:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:49689/posts/pat/advanced_level/a1033/</loc>
+    <loc>https://zjxjwxk.github.io/posts/pat/advanced_level/a1033/</loc>
     <lastmod>2020-03-22T17:24:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:49689/posts/pat/advanced_level/a1095/</loc>
+    <loc>https://zjxjwxk.github.io/posts/pat/advanced_level/a1095/</loc>
     <lastmod>2020-03-22T17:24:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:49689/tags/%E6%8E%92%E5%BA%8F/</loc>
+    <loc>https://zjxjwxk.github.io/tags/%E6%8E%92%E5%BA%8F/</loc>
     <lastmod>2020-03-22T17:24:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:49689/posts/pat/advanced_level/a1016/</loc>
+    <loc>https://zjxjwxk.github.io/posts/pat/advanced_level/a1016/</loc>
     <lastmod>2020-03-20T22:29:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:49689/posts/pat/advanced_level/a1012/</loc>
+    <loc>https://zjxjwxk.github.io/posts/pat/advanced_level/a1012/</loc>
     <lastmod>2020-03-20T16:05:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:49689/posts/pat/advanced_level/a1082/</loc>
+    <loc>https://zjxjwxk.github.io/posts/pat/advanced_level/a1082/</loc>
     <lastmod>2020-03-19T17:34:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:49689/posts/pat/advanced_level/a1061/</loc>
+    <loc>https://zjxjwxk.github.io/posts/pat/advanced_level/a1061/</loc>
     <lastmod>2020-03-18T21:25:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:49689/posts/pat/basic_level/b1010/</loc>
+    <loc>https://zjxjwxk.github.io/posts/pat/basic_level/b1010/</loc>
     <lastmod>2020-03-17T15:11:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:49689/tags/%E6%A8%A1%E6%8B%9F/</loc>
+    <loc>https://zjxjwxk.github.io/tags/%E6%A8%A1%E6%8B%9F/</loc>
     <lastmod>2020-03-17T15:11:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:49689/posts/pat/advanced_level/a1065/</loc>
+    <loc>https://zjxjwxk.github.io/posts/pat/advanced_level/a1065/</loc>
     <lastmod>2020-03-15T18:04:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:49689/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/5.dubbo%E5%9F%BA%E6%9C%AC%E7%89%B9%E6%80%A7%E7%94%A8%E6%88%B7%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/</loc>
+    <loc>https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/5.dubbo%E5%9F%BA%E6%9C%AC%E7%89%B9%E6%80%A7%E7%94%A8%E6%88%B7%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/</loc>
     <lastmod>2020-03-11T23:45:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:49689/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/4.%E4%B8%9A%E5%8A%A1%E5%9F%BA%E7%A1%80%E7%8E%AF%E5%A2%83%E6%9E%84%E5%BB%BA/</loc>
+    <loc>https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/4.%E4%B8%9A%E5%8A%A1%E5%9F%BA%E7%A1%80%E7%8E%AF%E5%A2%83%E6%9E%84%E5%BB%BA/</loc>
     <lastmod>2020-03-09T22:25:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:49689/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/3.%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</loc>
+    <loc>https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/3.%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</loc>
     <lastmod>2020-03-08T23:14:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:49689/posts/pat/advanced_level/a1014/</loc>
+    <loc>https://zjxjwxk.github.io/posts/pat/advanced_level/a1014/</loc>
     <lastmod>2020-03-08T17:18:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:49689/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/2.%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%85%A5%E9%97%A8/</loc>
+    <loc>https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/2.%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%85%A5%E9%97%A8/</loc>
     <lastmod>2020-03-06T23:14:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:49689/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/1.%E8%AF%BE%E7%A8%8B%E5%AF%BC%E5%AD%A6/</loc>
+    <loc>https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/1.%E8%AF%BE%E7%A8%8B%E5%AF%BC%E5%AD%A6/</loc>
     <lastmod>2020-03-06T18:39:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:49689/tags/bth/</loc>
+    <loc>https://zjxjwxk.github.io/tags/bth/</loc>
     <lastmod>2019-06-21T16:22:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:49689/posts/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/outsourcing/</loc>
+    <loc>https://zjxjwxk.github.io/posts/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/outsourcing/</loc>
     <lastmod>2019-06-21T16:22:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:49689/tags/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/</loc>
+    <loc>https://zjxjwxk.github.io/tags/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/</loc>
     <lastmod>2019-06-21T16:22:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:49689/categories/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/</loc>
+    <loc>https://zjxjwxk.github.io/categories/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/</loc>
     <lastmod>2019-06-21T16:22:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:49689/posts/spring-boot/spring-boot-%E7%AE%80%E5%8C%96%E5%88%86%E9%A1%B5%E6%9F%A5%E8%AF%A2page%E6%8E%A5%E5%8F%A3%E7%9A%84json%E5%93%8D%E5%BA%94/</loc>
+    <loc>https://zjxjwxk.github.io/posts/spring-boot/spring-boot-%E7%AE%80%E5%8C%96%E5%88%86%E9%A1%B5%E6%9F%A5%E8%AF%A2page%E6%8E%A5%E5%8F%A3%E7%9A%84json%E5%93%8D%E5%BA%94/</loc>
     <lastmod>2019-02-02T17:15:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:49689/tags/spring-cloud/</loc>
+    <loc>https://zjxjwxk.github.io/tags/spring-cloud/</loc>
     <lastmod>2019-01-31T20:18:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:49689/posts/spring-cloud/%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%8E%E5%8F%91%E7%8E%B0/</loc>
+    <loc>https://zjxjwxk.github.io/posts/spring-cloud/%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%8E%E5%8F%91%E7%8E%B0/</loc>
     <lastmod>2019-01-31T20:18:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:49689/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/</loc>
+    <loc>https://zjxjwxk.github.io/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/</loc>
     <lastmod>2019-01-31T20:18:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:49689/posts/spring-cloud/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/</loc>
+    <loc>https://zjxjwxk.github.io/posts/spring-cloud/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/</loc>
     <lastmod>2019-01-31T20:16:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:49689/tags/centos/</loc>
+    <loc>https://zjxjwxk.github.io/tags/centos/</loc>
     <lastmod>2019-01-30T00:54:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:49689/posts/linux/centos/centos-jar%E5%8C%85%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C/</loc>
+    <loc>https://zjxjwxk.github.io/posts/linux/centos/centos-jar%E5%8C%85%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C/</loc>
     <lastmod>2019-01-30T00:54:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:49689/posts/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/applied-software-project-management/</loc>
+    <loc>https://zjxjwxk.github.io/posts/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/applied-software-project-management/</loc>
     <lastmod>2019-01-20T23:05:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:49689/posts/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/software-architecture-and-quality/</loc>
+    <loc>https://zjxjwxk.github.io/posts/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/software-architecture-and-quality/</loc>
     <lastmod>2019-01-19T22:01:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:49689/posts/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/team-collaboration-and-career-development/</loc>
+    <loc>https://zjxjwxk.github.io/posts/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/team-collaboration-and-career-development/</loc>
     <lastmod>2019-01-19T22:01:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:49689/posts/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/team-collaboration-and-career-development-for-exam/</loc>
+    <loc>https://zjxjwxk.github.io/posts/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/team-collaboration-and-career-development-for-exam/</loc>
     <lastmod>2019-01-19T22:01:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:49689/posts/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/the-design-and-analysis-of-algorithms/</loc>
+    <loc>https://zjxjwxk.github.io/posts/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/the-design-and-analysis-of-algorithms/</loc>
     <lastmod>2019-01-19T22:01:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:49689/posts/linux/centos/centos-7-tomcat%E7%9A%84%E5%AE%89%E8%A3%85%E5%8F%8A%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF%E5%8A%A8%E9%85%8D%E7%BD%AE/</loc>
+    <loc>https://zjxjwxk.github.io/posts/linux/centos/centos-7-tomcat%E7%9A%84%E5%AE%89%E8%A3%85%E5%8F%8A%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF%E5%8A%A8%E9%85%8D%E7%BD%AE/</loc>
     <lastmod>2019-01-13T00:04:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:49689/tags/tomcat/</loc>
+    <loc>https://zjxjwxk.github.io/tags/tomcat/</loc>
     <lastmod>2019-01-13T00:04:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:49689/tags/j2ee/</loc>
+    <loc>https://zjxjwxk.github.io/tags/j2ee/</loc>
     <lastmod>2019-01-04T12:54:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:49689/posts/java/j2ee/</loc>
+    <loc>https://zjxjwxk.github.io/posts/java/j2ee/</loc>
     <lastmod>2019-01-04T12:54:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:49689/posts/java/java%E6%A0%B8%E5%BF%83/</loc>
+    <loc>https://zjxjwxk.github.io/posts/java/java%E6%A0%B8%E5%BF%83/</loc>
     <lastmod>2019-01-03T22:44:22+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:49689/archives/</loc>
+    <loc>https://zjxjwxk.github.io/archives/</loc>
   </url><url>
-    <loc>http://localhost:49689/search/</loc>
+    <loc>https://zjxjwxk.github.io/search/</loc>
   </url>
 </urlset>

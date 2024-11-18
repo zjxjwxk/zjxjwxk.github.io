@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" dir="auto">
 
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=49689&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<head><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
@@ -9,17 +9,17 @@
 <meta name="keywords" content="">
 <meta name="description" content="Posts - Xinkang&#39;s Blog">
 <meta name="author" content="">
-<link rel="canonical" href="http://localhost:49689/posts/">
+<link rel="canonical" href="https://zjxjwxk.github.io/posts/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.d6fcd20a4fb86efa4dfac8ec95da60244cc8871042183da1ef28e3a762ad79c8.css" integrity="sha256-1vzSCk&#43;4bvpN&#43;sjsldpgJEzIhxBCGD2h7yjjp2Ktecg=" rel="preload stylesheet" as="style">
-<link rel="icon" href="http://localhost:49689/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:49689/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:49689/favicon-32x32.png">
-<link rel="apple-touch-icon" href="http://localhost:49689/apple-touch-icon.png">
-<link rel="mask-icon" href="http://localhost:49689/safari-pinned-tab.svg">
+<link rel="icon" href="https://zjxjwxk.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://zjxjwxk.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://zjxjwxk.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://zjxjwxk.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://zjxjwxk.github.io/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" type="application/rss+xml" href="http://localhost:49689/posts/index.xml">
-<link rel="alternate" hreflang="en" href="http://localhost:49689/posts/">
+<link rel="alternate" type="application/rss+xml" href="https://zjxjwxk.github.io/posts/index.xml">
+<link rel="alternate" hreflang="en" href="https://zjxjwxk.github.io/posts/">
 <noscript>
     <style>
         #theme-toggle,
@@ -70,7 +70,7 @@
           gtag('js', new Date());
           gtag('config', 'G-9CMXGMMTKX');
         }
-      </script><meta property="og:url" content="http://localhost:49689/posts/">
+      </script><meta property="og:url" content="https://zjxjwxk.github.io/posts/">
   <meta property="og:site_name" content="Xinkang&#39;s Blog">
   <meta property="og:title" content="Posts">
   <meta property="og:locale" content="en">
@@ -89,7 +89,7 @@
       "@type": "ListItem",
       "position":  1 ,
       "name": "Posts",
-      "item": "http://localhost:49689/posts/"
+      "item": "https://zjxjwxk.github.io/posts/"
     }
   ]
 }
@@ -111,7 +111,7 @@
 <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="http://localhost:49689/" accesskey="h" title="Xinkang&#39;s Blog (Alt + H)">Xinkang&#39;s Blog</a>
+            <a href="https://zjxjwxk.github.io/" accesskey="h" title="Xinkang&#39;s Blog (Alt + H)">Xinkang&#39;s Blog</a>
             <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
@@ -137,22 +137,22 @@
         </div>
         <ul id="menu">
             <li>
-                <a href="http://localhost:49689/archives/" title="Archives">
+                <a href="https://zjxjwxk.github.io/archives/" title="Archives">
                     <span>Archives</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:49689/categories/" title="Categories">
+                <a href="https://zjxjwxk.github.io/categories/" title="Categories">
                     <span>Categories</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:49689/tags/" title="Tags">
+                <a href="https://zjxjwxk.github.io/tags/" title="Tags">
                     <span>Tags</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:49689/search/" title="Search (Alt &#43; /)" accesskey=/>
+                <a href="https://zjxjwxk.github.io/search/" title="Search (Alt &#43; /)" accesskey=/>
                     <span>Search</span>
                 </a>
             </li>
@@ -160,7 +160,7 @@
     </nav>
 </header>
 <main class="main"> 
-<header class="page-header"><div class="breadcrumbs"><a href="http://localhost:49689/">Home</a></div>
+<header class="page-header"><div class="breadcrumbs"><a href="https://zjxjwxk.github.io/">Home</a></div>
   <h1>
     Posts
   </h1>
@@ -168,13 +168,21 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2 class="entry-hint-parent">Kafka Consumer
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Kafka Consumer Group Consumers are typically done as a group. A single consumer will end up inefficient with large amounts of data. A consumer may never catch up. Every consumer should be on it’s own machine, instance, pod. The consumer group ID is the key so Kafka knows that messages should be distributed to both consumers without duplicating.
+If we add one more consumer to this group, the last one will be idle, because one partition can’t be share across consumers. One partition can only be assigned to one consumer. Instead, the partitions are the way of Kafka to scale. More partitions imply you can have more consumers in the same consumer group.
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2024-11-18 18:41:00 +0800 CST'>November 18, 2024</span>&nbsp;·&nbsp;5 min</footer>
+  <a class="entry-link" aria-label="post link to Kafka Consumer" href="https://zjxjwxk.github.io/posts/mq/kafka/getting-started-with-apache-kafka/4-kafka-conumers/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2 class="entry-hint-parent">Kafka Producer
-      <span class="entry-hint" title="Draft">
-        <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" fill="currentColor">
-          <path
-            d="M160-410v-60h300v60H160Zm0-165v-60h470v60H160Zm0-165v-60h470v60H160Zm360 580v-123l221-220q9-9 20-13t22-4q12 0 23 4.5t20 13.5l37 37q9 9 13 20t4 22q0 11-4.5 22.5T862.09-380L643-160H520Zm300-263-37-37 37 37ZM580-220h38l121-122-18-19-19-18-122 121v38Zm141-141-19-18 37 37-18-19Z" />
-        </svg>
-      </span>
     </h2>
   </header>
   <div class="entry-content">
@@ -182,8 +190,8 @@
 --- version: &#39;3&#39; services: zookeeper-1: image: confluentinc/cp-zookeeper:7.4.1 hostname: zookeeper-1 container_name: zookeeper-1 volumes: - ./zookeeper-1_data:/var/lib/zookeeper/data - ./zookeeper-1_log:/var/lib/zookeeper/log environment: ZOOKEEPER_CLIENT_PORT: 2181 ZOOKEEPER_TICK_TIME: 2000 ZOO_MY_ID: 1 ZOO_SERVERS: server.1=zookeeper-1:2888:3888;2181 server.2=zookeeper-2:2888:3888;2181 server.3=zookeeper-3:2888:3888;2181 zookeeper-2: image: confluentinc/cp-zookeeper:7.4.1 hostname: zookeeper-2 container_name: zookeeper-2 volumes: - ./zookeeper-2_data:/var/lib/zookeeper/data - ./zookeeper-2_log:/var/lib/zookeeper/log environment: ZOOKEEPER_CLIENT_PORT: 2181 ZOOKEEPER_TICK_TIME: 2000 ZOO_MY_ID: 2 ZOO_SERVERS: server.1=zookeeper-1:2888:3888;2181 server.2=zookeeper-2:2888:3888;2181 server.3=zookeeper-3:2888:3888;2181 zookeeper-3: image: confluentinc/cp-zookeeper:7.4.1 hostname: zookeeper-3 container_name: zookeeper-3 volumes: - ./zookeeper-3_data:/var/lib/zookeeper/data - ./zookeeper-3_log:/var/lib/zookeeper/log environment: ZOOKEEPER_CLIENT_PORT: 2181 ZOOKEEPER_TICK_TIME: 2000 ZOO_MY_ID: 3 ZOO_SERVERS: server.1=zookeeper-1:2888:3888;2181 server.2=zookeeper-2:2888:3888;2181 server.3=zookeeper-3:2888:3888;2181 broker-1: image: confluentinc/cp-kafka:7.4.1 hostname: broker-1 container_name: broker-1 volumes: - ./broker-1-data:/var/lib/kafka/data depends_on: - zookeeper-1 - zookeeper-2 - zookeeper-3 ports: - 9092:9092 - 29092:29092 environment: KAFKA_BROKER_ID: 1 KAFKA_ZOOKEEPER_CONNECT: zookeeper-1:2181 KAFKA_ADVERTISED_LISTENERS: HOST://localhost:9092,INTERNAL://broker-1:29092 KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: HOST:PLAINTEXT,INTERNAL:PLAINTEXT KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL KAFKA_SNAPSHOT_TRUST_EMPTY: true broker-2: image: confluentinc/cp-kafka:7.4.1 hostname: broker-2 container_name: broker-2 volumes: - ./broker-2-data:/var/lib/kafka/data depends_on: - zookeeper-1 - zookeeper-2 - zookeeper-3 - broker-1 ports: - 9093:9093 - 29093:29093 environment: KAFKA_BROKER_ID: 2 KAFKA_ZOOKEEPER_CONNECT: zookeeper-1:2181 KAFKA_ADVERTISED_LISTENERS: HOST://localhost:9093,INTERNAL://broker-2:29093 KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: HOST:PLAINTEXT,INTERNAL:PLAINTEXT KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL KAFKA_SNAPSHOT_TRUST_EMPTY: true broker-3: image: confluentinc/cp-kafka:7.4.1 hostname: broker-3 container_name: broker-3 volumes: - ./broker-3-data:/var/lib/kafka/data depends_on: - zookeeper-1 - zookeeper-2 - zookeeper-3 - broker-1 - broker-2 ports: - 9094:9094 - 29094:29094 environment: KAFKA_BROKER_ID: 3 KAFKA_ZOOKEEPER_CONNECT: zookeeper-1:2181 KAFKA_ADVERTISED_LISTENERS: HOST://localhost:9094,INTERNAL://broker-3:29094 KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: HOST:PLAINTEXT,INTERNAL:PLAINTEXT KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL KAFKA_SNAPSHOT_TRUST_EMPTY: true rest-proxy: image: confluentinc/cp-kafka-rest:7.4.1 ports: - &#34;8082:8082&#34; depends_on: - zookeeper-1 - zookeeper-2 - zookeeper-3 - broker-1 - broker-2 - broker-3 hostname: rest-proxy container_name: rest-proxy environment: KAFKA_REST_HOST_NAME: rest-proxy KAFKA_REST_BOOTSTRAP_SERVERS: &#39;broker-1:29092,broker-2:29093,broker-3:29094&#39; KAFKA_REST_LISTENERS: &#34;http://0.0.0.0:8082&#34; Run composed containers:
 ...</p>
   </div>
-  <footer class="entry-footer"><span title='2024-11-16 01:47:59 +0800 CST'>November 16, 2024</span>&nbsp;·&nbsp;3 min</footer>
-  <a class="entry-link" aria-label="post link to Kafka Producer" href="http://localhost:49689/posts/mq/kafka/getting-started-with-apache-kafka/3.-kafka-producer/"></a>
+  <footer class="entry-footer"><span title='2024-11-17 01:47:59 +0800 CST'>November 17, 2024</span>&nbsp;·&nbsp;5 min</footer>
+  <a class="entry-link" aria-label="post link to Kafka Producer" href="https://zjxjwxk.github.io/posts/mq/kafka/getting-started-with-apache-kafka/3-kafka-producer/"></a>
 </article>
 
 <article class="post-entry"> 
@@ -197,7 +205,7 @@
 ...</p>
   </div>
   <footer class="entry-footer"><span title='2024-11-16 01:47:59 +0800 CST'>November 16, 2024</span>&nbsp;·&nbsp;7 min</footer>
-  <a class="entry-link" aria-label="post link to Meet Kafka" href="http://localhost:49689/posts/mq/kafka/getting-started-with-apache-kafka/2.-meet-kafka/"></a>
+  <a class="entry-link" aria-label="post link to Meet Kafka" href="https://zjxjwxk.github.io/posts/mq/kafka/getting-started-with-apache-kafka/2-meet-kafka/"></a>
 </article>
 
 <article class="post-entry"> 
@@ -209,7 +217,7 @@
     <p>We Call The entity/app creates a message, a publisher, or a producer. The entity/app consuming messages from a channel as a consumer. The system where the channels live and handle these requests as an Event Bus or, more recently, a streaming platform. The channel where messages flow as channel or topic. Definitions We say the pub-sub system is reliable when you ensure there is no message loss. Has at most one processing when you ensure there is no message duplication. And has exactly one processing when you only process a message once ensuring it wasn’t lost. Of course, this is the holy grail. We Had a Ton of Other Pub/Sub Systems Before ...</p>
   </div>
   <footer class="entry-footer"><span title='2024-11-16 01:27:59 +0800 CST'>November 16, 2024</span>&nbsp;·&nbsp;2 min</footer>
-  <a class="entry-link" aria-label="post link to Pub-sub System" href="http://localhost:49689/posts/mq/kafka/getting-started-with-apache-kafka/1.-pub-sub-system/"></a>
+  <a class="entry-link" aria-label="post link to Pub-sub System" href="https://zjxjwxk.github.io/posts/mq/kafka/getting-started-with-apache-kafka/1-pub-sub-system/"></a>
 </article>
 
 <article class="post-entry"> 
@@ -222,7 +230,7 @@
 ...</p>
   </div>
   <footer class="entry-footer"><span title='2021-03-19 21:15:00 +0000 UTC'>March 19, 2021</span>&nbsp;·&nbsp;8 min</footer>
-  <a class="entry-link" aria-label="post link to Shiro入门" href="http://localhost:49689/posts/shiro/"></a>
+  <a class="entry-link" aria-label="post link to Shiro入门" href="https://zjxjwxk.github.io/posts/shiro/"></a>
 </article>
 
 <article class="post-entry"> 
@@ -239,7 +247,7 @@
 ...</p>
   </div>
   <footer class="entry-footer"><span title='2020-11-03 12:40:00 +0000 UTC'>November 3, 2020</span>&nbsp;·&nbsp;2 min</footer>
-  <a class="entry-link" aria-label="post link to 以太坊私有链搭建" href="http://localhost:49689/posts/blockchain/%E4%BB%A5%E5%A4%AA%E5%9D%8A%E7%A7%81%E6%9C%89%E9%93%BE%E6%90%AD%E5%BB%BA/"></a>
+  <a class="entry-link" aria-label="post link to 以太坊私有链搭建" href="https://zjxjwxk.github.io/posts/blockchain/%E4%BB%A5%E5%A4%AA%E5%9D%8A%E7%A7%81%E6%9C%89%E9%93%BE%E6%90%AD%E5%BB%BA/"></a>
 </article>
 
 <article class="post-entry"> 
@@ -254,7 +262,7 @@ llvm-gcc -m64 -m64 -L`pwd` -framework CoreFoundation -o gamma launcher/java_md.o
 ...</p>
   </div>
   <footer class="entry-footer"><span title='2020-07-16 11:01:00 +0000 UTC'>July 16, 2020</span>&nbsp;·&nbsp;4 min</footer>
-  <a class="entry-link" aria-label="post link to 自己编译OpenJDK 8" href="http://localhost:49689/posts/java/jvm/%E8%87%AA%E5%B7%B1%E7%BC%96%E8%AF%91openjdk-8/"></a>
+  <a class="entry-link" aria-label="post link to 自己编译OpenJDK 8" href="https://zjxjwxk.github.io/posts/java/jvm/%E8%87%AA%E5%B7%B1%E7%BC%96%E8%AF%91openjdk-8/"></a>
 </article>
 
 <article class="post-entry"> 
@@ -271,7 +279,7 @@ llvm-gcc -m64 -m64 -L`pwd` -framework CoreFoundation -o gamma launcher/java_md.o
 public class AuthFilter extends OncePerRequestFilter { ...... @Override protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException { // 处理浏览器的预请求 if (request.getMethod().equals(&#34;OPTIONS&#34;)) { response.setHeader(&#34;Access-Control-Allow-Origin&#34;, &#34;*&#34;); response.setHeader(&#34;Access-Control-Allow-Methods&#34;, &#34;POST,GET,PUT,OPTIONS,DELETE&#34;); response.setHeader(&#34;Access-Control-Max-Age&#34;, &#34;3600&#34;); response.setHeader(&#34;Access-Control-Allow-Headers&#34;, &#34;Origin,X-Requested-With,Content-Type,Accept,Authorization,token&#34;); return; } // 验证 JWT ...... } } </p>
   </div>
   <footer class="entry-footer"><span title='2020-06-05 21:02:00 +0000 UTC'>June 5, 2020</span>&nbsp;·&nbsp;1 min</footer>
-  <a class="entry-link" aria-label="post link to Spring Boot 中的 JWT 跨域问题" href="http://localhost:49689/posts/spring-boot/spring-boot-%E4%B8%AD%E7%9A%84-jwt-%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98/"></a>
+  <a class="entry-link" aria-label="post link to Spring Boot 中的 JWT 跨域问题" href="https://zjxjwxk.github.io/posts/spring-boot/spring-boot-%E4%B8%AD%E7%9A%84-jwt-%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98/"></a>
 </article>
 
 <article class="post-entry"> 
@@ -288,7 +296,7 @@ FROM openjdk:8-jre MAINTAINER zjxjwxk zjxjwxk@gmail.com COPY target/user.jar /us
 ...</p>
   </div>
   <footer class="entry-footer"><span title='2020-06-04 23:15:00 +0000 UTC'>June 4, 2020</span>&nbsp;·&nbsp;6 min</footer>
-  <a class="entry-link" aria-label="post link to 微服务容器化系列（1）：服务编排前奏" href="http://localhost:49689/posts/docker/docker-&#43;-k8s-%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%AE%B9%E5%99%A8%E5%8C%96/1.-%E6%9C%8D%E5%8A%A1%E7%BC%96%E6%8E%92%E5%89%8D%E5%A5%8F/"></a>
+  <a class="entry-link" aria-label="post link to 微服务容器化系列（1）：服务编排前奏" href="https://zjxjwxk.github.io/posts/docker/docker-&#43;-k8s-%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%AE%B9%E5%99%A8%E5%8C%96/1.-%E6%9C%8D%E5%8A%A1%E7%BC%96%E6%8E%92%E5%89%8D%E5%A5%8F/"></a>
 </article>
 
 <article class="post-entry"> 
@@ -304,39 +312,18 @@ YARN 的设计减小了 JobTracker 的资源消耗，减少了 Hadoop 1.0 中发
 ...</p>
   </div>
   <footer class="entry-footer"><span title='2020-05-08 16:36:00 +0000 UTC'>May 8, 2020</span>&nbsp;·&nbsp;1 min</footer>
-  <a class="entry-link" aria-label="post link to Hadoop 进阶篇" href="http://localhost:49689/posts/%E5%A4%A7%E6%95%B0%E6%8D%AE/hadoop/hadoop%E8%BF%9B%E9%98%B6%E7%AF%87/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">Hadoop 基础篇
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>概要 大数据技术的相关概念 Hadoop 的架构和运行机制 实战：Hadoop 的安装和配置 实战：Hadoop 的开发 目标 掌握大数据存储与处理技术的原理（理论知识） 掌握 Hadoop 的使用和开发能力（实践能力） 结合书本，如《Hadoop 权威指南》 Hadoop 的前世今生 为了解决系统存在的瓶颈：存储容量、读写速率、计算效率… Google 提出了大数据技术：MapReduce、BigTable、GFS，这三样技术取得了革命性的变化：
-成本降低，能用 PC 机，就不用大型机和高端存储 软件容错硬件故障视为常态，通过软件保证可靠性 简化并行分布式计算，无须控制节点同步和数据交换 但是，Google 只发表了相关的技术论文，没有开放源代码。于是，一个模仿 Google 大数据技术的开源实现出现了：Hadoop。
-Hadoop 的功能和优势 Hadoop 是开源的分布式存储和分布式计算框架。
-Hadoop 的组成 包含两个核心组件：
-HDFS：分布式文件系统，存储海量的数据 MapReduce：并行处理框架，实现任务分解和调度 Hadoop 可以用来搭建大型数据仓库，PB 级数据的存储、处理、分析、统计等业务。如：搜索引擎、日志分析、商业智能、数据挖掘。
-Hadoop 的优势 高扩展 低成本 成熟的生态圈（Hive、HBase 等） Hadoop 生态系统及版本 Hadoop 生态系统 Hive：只需要编写 SQL 语句，Hive 就能够将其转化为一个 Hadoop 任务去执行，降低了使用 Hadoop 的门槛。
-HBase：和传统的关系型数据库不同，HBase 放弃事务特性，追求更高的扩展；和 HDFS 不同，HBase 提供数据的随机读写和实时访问，实现对表数据的读写功能。
-ZooKeeper：用于监控 Hadoop 集群的状态，管理一些配置，维护数据间节点的一致性等。
-Hadoop 版本 ver1.x较为稳定且容易上手，本人将选择 ver1.x。
-...</p>
-  </div>
-  <footer class="entry-footer"><span title='2020-05-06 20:08:00 +0000 UTC'>May 6, 2020</span>&nbsp;·&nbsp;9 min</footer>
-  <a class="entry-link" aria-label="post link to Hadoop 基础篇" href="http://localhost:49689/posts/%E5%A4%A7%E6%95%B0%E6%8D%AE/hadoop/hadoop%E5%9F%BA%E7%A1%80%E7%AF%87/"></a>
+  <a class="entry-link" aria-label="post link to Hadoop 进阶篇" href="https://zjxjwxk.github.io/posts/%E5%A4%A7%E6%95%B0%E6%8D%AE/hadoop/hadoop%E8%BF%9B%E9%98%B6%E7%AF%87/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">
-    <a class="next" href="http://localhost:49689/posts/page/2/">Next&nbsp;&nbsp;»
+    <a class="next" href="https://zjxjwxk.github.io/posts/page/2/">Next&nbsp;&nbsp;»
     </a>
   </nav>
 </footer>
     </main>
     
 <footer class="footer">
-        <span>&copy; 2024 <a href="http://localhost:49689/">Xinkang&#39;s Blog</a></span> · 
+        <span>&copy; 2024 <a href="https://zjxjwxk.github.io/">Xinkang&#39;s Blog</a></span> · 
 
     <span>
         Powered by
