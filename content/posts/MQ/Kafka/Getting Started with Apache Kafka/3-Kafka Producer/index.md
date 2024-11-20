@@ -263,11 +263,11 @@ GROUP           TOPIC           PARTITION  CURRENT-OFFSET  LOG-END-OFFSET  LAG  
 
 These three consumers belong to the same group so that they share the load. The partitions 0 and 1 are assigned to a same consumer, and partition 2 is assigned to the other.
 
-## Serializers and Producer Configuration
+## Producing Messages with Java
 
-### Java API
+### Serializers and Producer Configuration
 
-Provide a Serilizer for the key:
+Provide a Serializer for the key:
 
 ```java
 Properties properties = new Properties();
@@ -381,7 +381,9 @@ public class Main {
 }
 ```
 
-Run a Kafka Consumer lisitening to the topic `myorders` and deserialize the messages by string key and double value seperated by `,`.
+### Demo
+
+Run a Kafka Consumer listening to the topic `myorders` and deserialize the messages by string key and double value separated by `,`.
 
 ```bash
 kafka-console-consumer.sh \
@@ -419,9 +421,9 @@ IL,7659.0
 CO,8457.0
 ```
 
-## Tips
+## Takeaways
 
-- The producer protocal implies the existence of a Partitioner that redirects messages to the correct partition.
-- The partitions information is caught on the initial instantiation of the Producer Object.
+- The producer protocol implies the existence of a Partitioner that redirects messages to the correct partition.
+- The partition information is caught on the initial instantiation of the Producer Object.
 - The response from the producer.send() method is a Future, but you can capture it in a Callback or Lambda.
-- There are Retryable and non-retryable Exceptions and based on that the Protocal will automatically retry.
+- There are retryable and not retryable Exceptions and based on that the Protocol will automatically retry.
