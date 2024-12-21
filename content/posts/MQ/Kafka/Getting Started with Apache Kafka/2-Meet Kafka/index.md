@@ -230,7 +230,7 @@ DBs:
 - Debezium also offers a connector that includes no-SQL Dos.
 - Presto connector that allows us to query Kafka using Presto queries.
 
-## Interaction with Kafka via the CLI
+## Demo: Interaction with Kafka via the CLI
 
 ### Run Kafka Containers
 
@@ -345,7 +345,7 @@ Each topic has a number called the replication factor, which replicates each par
 
 Each partition is on a different broker. Therefore, a single topic is scaled.
 
-## Interaction with Kafka via the REST Proxy
+## Demo: Interaction with Kafka via the REST Proxy
 
 ### Run Kafka Containers
 

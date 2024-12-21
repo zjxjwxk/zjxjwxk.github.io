@@ -168,6 +168,21 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2 class="entry-hint-parent">Kafka Connect
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>ETL with Apache Kafka One important statement is that Kafka Connect is not an ETL(Extract, Load, Transform) solution itself, it only connects.
+But with the help of the correct plugins it can have some ETL capabilities.
+Connectors Source Connectors: Transfer data from a Source to Kafka. Sink Connectors: Transfer data from Kafka to a Sink. You can search through all of the connectors at thre registry: https://www.confluent.io/product/connectors.
+Standalone vs. Distributed ...</p>
+  </div>
+  <footer class="entry-footer"><span title='2024-11-23 16:44:00 +0800 CST'>November 23, 2024</span>&nbsp;·&nbsp;11 min</footer>
+  <a class="entry-link" aria-label="post link to Kafka Connect" href="https://zjxjwxk.github.io/posts/mq/kafka/getting-started-with-apache-kafka/5-kafka-connect/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2 class="entry-hint-parent">Kafka Consumer
     </h2>
   </header>
@@ -186,7 +201,7 @@ If we add one more consumer to this group, the last one will be idle, because on
     </h2>
   </header>
   <div class="entry-content">
-    <p>Kafka Producer Overview Producing Messages with Kafka CLI Create a docker-compose file docker-compose.yaml containing 3 Zookeepers, 3 Kafka Brokers, and 1 Kafka REST Proxy:
+    <p>Kafka Producer Overview Demo: Producing Messages with Kafka CLI Run Kafka Containers Create a docker-compose file docker-compose.yaml containing 3 Zookeepers, 3 Kafka Brokers, and 1 Kafka REST Proxy:
 --- version: &#39;3&#39; services: zookeeper-1: image: confluentinc/cp-zookeeper:7.4.1 hostname: zookeeper-1 container_name: zookeeper-1 volumes: - ./zookeeper-1_data:/var/lib/zookeeper/data - ./zookeeper-1_log:/var/lib/zookeeper/log environment: ZOOKEEPER_CLIENT_PORT: 2181 ZOOKEEPER_TICK_TIME: 2000 ZOO_MY_ID: 1 ZOO_SERVERS: server.1=zookeeper-1:2888:3888;2181 server.2=zookeeper-2:2888:3888;2181 server.3=zookeeper-3:2888:3888;2181 zookeeper-2: image: confluentinc/cp-zookeeper:7.4.1 hostname: zookeeper-2 container_name: zookeeper-2 volumes: - ./zookeeper-2_data:/var/lib/zookeeper/data - ./zookeeper-2_log:/var/lib/zookeeper/log environment: ZOOKEEPER_CLIENT_PORT: 2181 ZOOKEEPER_TICK_TIME: 2000 ZOO_MY_ID: 2 ZOO_SERVERS: server.1=zookeeper-1:2888:3888;2181 server.2=zookeeper-2:2888:3888;2181 server.3=zookeeper-3:2888:3888;2181 zookeeper-3: image: confluentinc/cp-zookeeper:7.4.1 hostname: zookeeper-3 container_name: zookeeper-3 volumes: - ./zookeeper-3_data:/var/lib/zookeeper/data - ./zookeeper-3_log:/var/lib/zookeeper/log environment: ZOOKEEPER_CLIENT_PORT: 2181 ZOOKEEPER_TICK_TIME: 2000 ZOO_MY_ID: 3 ZOO_SERVERS: server.1=zookeeper-1:2888:3888;2181 server.2=zookeeper-2:2888:3888;2181 server.3=zookeeper-3:2888:3888;2181 broker-1: image: confluentinc/cp-kafka:7.4.1 hostname: broker-1 container_name: broker-1 volumes: - ./broker-1-data:/var/lib/kafka/data depends_on: - zookeeper-1 - zookeeper-2 - zookeeper-3 ports: - 9092:9092 - 29092:29092 environment: KAFKA_BROKER_ID: 1 KAFKA_ZOOKEEPER_CONNECT: zookeeper-1:2181 KAFKA_ADVERTISED_LISTENERS: HOST://localhost:9092,INTERNAL://broker-1:29092 KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: HOST:PLAINTEXT,INTERNAL:PLAINTEXT KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL KAFKA_SNAPSHOT_TRUST_EMPTY: true broker-2: image: confluentinc/cp-kafka:7.4.1 hostname: broker-2 container_name: broker-2 volumes: - ./broker-2-data:/var/lib/kafka/data depends_on: - zookeeper-1 - zookeeper-2 - zookeeper-3 - broker-1 ports: - 9093:9093 - 29093:29093 environment: KAFKA_BROKER_ID: 2 KAFKA_ZOOKEEPER_CONNECT: zookeeper-1:2181 KAFKA_ADVERTISED_LISTENERS: HOST://localhost:9093,INTERNAL://broker-2:29093 KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: HOST:PLAINTEXT,INTERNAL:PLAINTEXT KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL KAFKA_SNAPSHOT_TRUST_EMPTY: true broker-3: image: confluentinc/cp-kafka:7.4.1 hostname: broker-3 container_name: broker-3 volumes: - ./broker-3-data:/var/lib/kafka/data depends_on: - zookeeper-1 - zookeeper-2 - zookeeper-3 - broker-1 - broker-2 ports: - 9094:9094 - 29094:29094 environment: KAFKA_BROKER_ID: 3 KAFKA_ZOOKEEPER_CONNECT: zookeeper-1:2181 KAFKA_ADVERTISED_LISTENERS: HOST://localhost:9094,INTERNAL://broker-3:29094 KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: HOST:PLAINTEXT,INTERNAL:PLAINTEXT KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL KAFKA_SNAPSHOT_TRUST_EMPTY: true rest-proxy: image: confluentinc/cp-kafka-rest:7.4.1 ports: - &#34;8082:8082&#34; depends_on: - zookeeper-1 - zookeeper-2 - zookeeper-3 - broker-1 - broker-2 - broker-3 hostname: rest-proxy container_name: rest-proxy environment: KAFKA_REST_HOST_NAME: rest-proxy KAFKA_REST_BOOTSTRAP_SERVERS: &#39;broker-1:29092,broker-2:29093,broker-3:29094&#39; KAFKA_REST_LISTENERS: &#34;http://0.0.0.0:8082&#34; Run composed containers:
 ...</p>
   </div>
@@ -297,22 +312,6 @@ FROM openjdk:8-jre MAINTAINER zjxjwxk zjxjwxk@gmail.com COPY target/user.jar /us
   </div>
   <footer class="entry-footer"><span title='2020-06-04 23:15:00 +0000 UTC'>June 4, 2020</span>&nbsp;·&nbsp;6 min</footer>
   <a class="entry-link" aria-label="post link to 微服务容器化系列（1）：服务编排前奏" href="https://zjxjwxk.github.io/posts/docker/docker-&#43;-k8s-%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%AE%B9%E5%99%A8%E5%8C%96/1.-%E6%9C%8D%E5%8A%A1%E7%BC%96%E6%8E%92%E5%89%8D%E5%A5%8F/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">Hadoop 进阶篇
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>概要 概述 深入探索 MapReduce 过程 Hadoop 的分布式缓存 Hadoop 应用——推荐算法 HDFS HDFS 是 Hadoop 分布式文件系统的简称，由若干台计算机组成，用于存放 PB、TB 数量级以上的文件，每份文件可以有多个副本，所以 HDFS 是一个具有高冗余、高容错的文件系统。
-Hadoop Hadoop 1.x Hadoop 2.x Hadoop 1.0 到 2.0 的变化：Hadoop 2.0 以后的版本移除了原有的 JobTracker 和 TaskTracker，改由 Yarn 平台的 ResourceManager 负责集群中所有资源的统一管理和分配，NodeManager 管理 Hadoop 集群中单个计算节点。
-YARN 的设计减小了 JobTracker 的资源消耗，减少了 Hadoop 1.0 中发生单点故障的风险。我们还可以在 YARN 平台上运行 Spark 和 Storm 作业，充分利用资源。
-深入探索 MapReduce WordCount 实例回顾 MapReduce 作业是一种大规模数据集的并行计算的编程模型。我们可以将 HDFS 中存放的海量数据，通过 MapReduce 作业进行计算，得到目标数据。
-...</p>
-  </div>
-  <footer class="entry-footer"><span title='2020-05-08 16:36:00 +0000 UTC'>May 8, 2020</span>&nbsp;·&nbsp;1 min</footer>
-  <a class="entry-link" aria-label="post link to Hadoop 进阶篇" href="https://zjxjwxk.github.io/posts/%E5%A4%A7%E6%95%B0%E6%8D%AE/hadoop/hadoop%E8%BF%9B%E9%98%B6%E7%AF%87/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

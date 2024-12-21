@@ -168,6 +168,28 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2 class="entry-hint-parent">PAT考场 Dev C&#43;&#43; 5.10 配置
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>根据往年 (2019) 年浙大软件学院的考研复试公告，如果今年 (2020) 是线下复试，且考场没有变化的话，机试应该还是在 浙大紫金港校区（如下图）。
+浙大软院招生通知：http://www.cst.zju.edu.cn/2019/0307/c36207a1478348/page.htm
+从 PAT 官网可以找到紫金港的机房配置：
+PAT 考点联盟：https://www.patest.cn/location
+我本人选择使用 Dev C&#43;&#43; 5.10 版本，考试那天在考场需要先对其作以下配置（当然也许已经配置好了）：
+打开产生调试信息 在 “工具(Tools)” -&gt; “编译选项(Compiler Options)&#34; 中：
+点击 “代码生成/优化(Settings)” 选项卡中的 &#34;连接器(Linker)&#34; 选项卡，将 &#34;产生调试信息(Generate debugging information)&#34; 选项改为 “Yes”。
+这样，就可以愉快的 Debug 了～
+添加 C&#43;&#43; 11 支持 由于 PAT 的 OJ 是支持 C&#43;&#43; 11 的，故最好打开 C&#43;&#43; 11 支持。
+方法一（推荐） 在 “工具(Tools)” -&gt; “编译选项(Compiler Options)&#34; 中，“代码生成/优化(Settings)” 选项卡下的 “代码生成(Code Generation)” 选项卡中，将 “语言标准(Language Standard)(-std)” 设置为 ISO C&#43;&#43;11 即可。
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2020-04-11 16:17:00 +0000 UTC'>April 11, 2020</span>&nbsp;·&nbsp;1 min</footer>
+  <a class="entry-link" aria-label="post link to PAT考场 Dev C&#43;&#43; 5.10 配置" href="https://zjxjwxk.github.io/posts/pat/%E8%80%83%E8%AF%95%E6%94%BB%E7%95%A5/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2 class="entry-hint-parent">PAT甲级 1021 Deepest Root (25分)
     </h2>
   </header>
@@ -304,20 +326,6 @@ Input Specification: Each input file contains one test case, which gives the int
   </div>
   <footer class="entry-footer"><span title='2020-04-02 20:53:00 +0000 UTC'>April 2, 2020</span>&nbsp;·&nbsp;2 min</footer>
   <a class="entry-link" aria-label="post link to PAT甲级 1096 Consecutive Factors (20分)" href="https://zjxjwxk.github.io/posts/pat/advanced_level/a1096/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">PAT甲级 1078 Hashing (25分)
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>The task of this problem is simple: insert a sequence of distinct positive integers into a hash table, and output the positions of the input numbers. The hash function is defined to be H(key)=key%TSize where TSize is the maximum size of the hash table. Quadratic probing (with positive increments only) is used to solve the collisions.
-Note that the table size is better to be prime. If the maximum size given by the user is not prime, you must re-define the table size to be the smallest prime number which is larger than the size given by the user.
-...</p>
-  </div>
-  <footer class="entry-footer"><span title='2020-04-02 17:04:00 +0000 UTC'>April 2, 2020</span>&nbsp;·&nbsp;2 min</footer>
-  <a class="entry-link" aria-label="post link to PAT甲级 1078 Hashing (25分)" href="https://zjxjwxk.github.io/posts/pat/advanced_level/a1078/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

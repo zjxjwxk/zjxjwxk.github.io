@@ -6,8 +6,26 @@
     <description>Recent content on Xinkang&#39;s Blog</description>
     <generator>Hugo -- 0.138.0</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 18 Nov 2024 18:41:00 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 23 Nov 2024 16:44:00 +0800</lastBuildDate>
     <atom:link href="https://zjxjwxk.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Kafka Connect</title>
+      <link>https://zjxjwxk.github.io/posts/mq/kafka/getting-started-with-apache-kafka/5-kafka-connect/</link>
+      <pubDate>Sat, 23 Nov 2024 16:44:00 +0800</pubDate>
+      <guid>https://zjxjwxk.github.io/posts/mq/kafka/getting-started-with-apache-kafka/5-kafka-connect/</guid>
+      <description>&lt;h2 id=&#34;etl-with-apache-kafka&#34;&gt;ETL with Apache Kafka&lt;/h2&gt;
+&lt;p&gt;&lt;img alt=&#34;image-20241123173425604&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/mq/kafka/getting-started-with-apache-kafka/5-kafka-connect/images/image-20241123173425604.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;One important statement is that Kafka Connect is not an ETL(Extract, Load, Transform) solution itself, it only connects.&lt;/p&gt;
+&lt;p&gt;But with the help of the correct plugins it can have some ETL capabilities.&lt;/p&gt;
+&lt;h2 id=&#34;connectors&#34;&gt;Connectors&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Source Connectors&lt;/strong&gt;: Transfer data from a Source to Kafka.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Sink Connectors&lt;/strong&gt;: Transfer data from Kafka to a Sink.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;You can search through all of the connectors at thre registry: &lt;a href=&#34;https://www.confluent.io/product/connectors&#34;&gt;https://www.confluent.io/product/connectors&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;standalone-vs-distributed&#34;&gt;Standalone vs. Distributed&lt;/h2&gt;
+&lt;p&gt;&lt;img alt=&#34;image-20241123182435451&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/mq/kafka/getting-started-with-apache-kafka/5-kafka-connect/images/image-20241123182435451.png&#34;&gt;&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Kafka Consumer</title>
       <link>https://zjxjwxk.github.io/posts/mq/kafka/getting-started-with-apache-kafka/4-kafka-conumers/</link>
@@ -31,7 +49,8 @@
       <guid>https://zjxjwxk.github.io/posts/mq/kafka/getting-started-with-apache-kafka/3-kafka-producer/</guid>
       <description>&lt;h2 id=&#34;kafka-producer-overview&#34;&gt;Kafka Producer Overview&lt;/h2&gt;
 &lt;p&gt;&lt;img alt=&#34;image-20241116183122165&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/mq/kafka/getting-started-with-apache-kafka/3-kafka-producer/images/image-20241116183122165.png&#34;&gt;&lt;/p&gt;
-&lt;h2 id=&#34;producing-messages-with-kafka-cli&#34;&gt;Producing Messages with Kafka CLI&lt;/h2&gt;
+&lt;h2 id=&#34;demo-producing-messages-with-kafka-cli&#34;&gt;Demo: Producing Messages with Kafka CLI&lt;/h2&gt;
+&lt;h3 id=&#34;run-kafka-containers&#34;&gt;Run Kafka Containers&lt;/h3&gt;
 &lt;p&gt;Create a docker-compose file &lt;code&gt;docker-compose.yaml&lt;/code&gt; containing 3 Zookeepers, 3 Kafka Brokers, and 1 Kafka REST Proxy:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;---
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;version&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;3&amp;#39;&lt;/span&gt;

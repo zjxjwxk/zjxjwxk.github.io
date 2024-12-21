@@ -25,7 +25,9 @@ If we add one more consumer to this group, the last one will be idle, because on
 
 ![image-20241118185601440](images/image-20241118185601440.png)
 
-## Consuming from Kafka
+## Demo: Consuming from Kafka
+
+### Run Kafka Containers
 
 Create a docker-compose file `docker-compose.yaml` containing 3 Zookeepers, 3 Kafka Brokers, and 1 Kafka REST Proxy:
 
@@ -305,7 +307,7 @@ GROUP           TOPIC           PARTITION  CURRENT-OFFSET  LOG-END-OFFSET  LAG  
 
 We can see that in the group 1, these two partitions are assigned to two different consumers. But in the group2, these two partitions are assigned to the same consumer.
 
-## Consuming Messages with Java
+## Demo: Consuming Messages with Java
 
 ### Deserializers and Consumer Configuration
 

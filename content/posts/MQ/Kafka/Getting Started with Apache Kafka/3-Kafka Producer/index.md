@@ -14,7 +14,9 @@ preview: 200
 
 ![image-20241116183122165](images/image-20241116183122165.png)
 
-## Producing Messages with Kafka CLI
+## Demo: Producing Messages with Kafka CLI
+
+### Run Kafka Containers
 
 Create a docker-compose file `docker-compose.yaml` containing 3 Zookeepers, 3 Kafka Brokers, and 1 Kafka REST Proxy:
 
@@ -263,7 +265,7 @@ GROUP           TOPIC           PARTITION  CURRENT-OFFSET  LOG-END-OFFSET  LAG  
 
 These three consumers belong to the same group so that they share the load. The partitions 0 and 1 are assigned to a same consumer, and partition 2 is assigned to the other.
 
-## Producing Messages with Java
+## Demo: Producing Messages with Java
 
 ### Serializers and Producer Configuration
 
