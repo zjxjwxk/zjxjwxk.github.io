@@ -168,6 +168,24 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2 class="entry-hint-parent">Dubbo微服务影院系列（9）：Dubbo服务开发（支付模块开发）
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>章节概要 完成支付模块业务开发 Dubbo 特性学习：隐式参数、参数验证等 Dubbo 本地存根 本地存根类似于 Dubbo 的静态代理 Dubbo 会在客户端生成一个代理，处理部分业务 Stub 必须有可传入 Proxy 的构造函数 官方文档：https://dubbo.apache.org/zh-cn/docs/user/demos/local-stub.html
+远程服务后，客户端通常只剩下接口，而实现全在服务器端，但提供方有些时候想在客户端也执行部分逻辑，比如：做 ThreadLocal 缓存，提前验证参数，调用失败后伪造容错数据等等，此时就需要在 API 中带上 Stub，客户端生成 Proxy 实例，会把 Proxy 通过构造函数传给 Stub，然后把 Stub 暴露给用户，Stub 可以决定要不要去调 Proxy。
+在 spring 配置文件中按以下方式配置：
+&lt;dubbo:service interface=&#34;com.foo.BarService&#34; stub=&#34;true&#34; /&gt; 或
+&lt;dubbo:service interface=&#34;com.foo.BarService&#34; stub=&#34;com.foo.BarServiceStub&#34; /&gt; 提供 Stub 的实现：
+package com.foo; public class BarServiceStub implements BarService { private final BarService barService; // 构造函数传入真正的远程代理对象 public BarServiceStub(BarService barService){ this.barService = barService; } public String sayHello(String name) { // 此代码在客户端执行, 你可以在客户端做ThreadLocal本地缓存，或预先验证参数是否合法，等等 try { return barService.sayHello(name); } catch (Exception e) { // 你可以容错，可以做任何AOP拦截事项 return &#34;容错数据&#34;; } } } Stub 必须有可传入 Proxy 的构造函数。 在 interface 旁边放一个 Stub 实现，它实现 BarService 接口，并有一个传入远程 BarService 实例的构造函数 Dubbo 本地伪装 本地伪装是本地存根的一个子集 通常会使用本地伪装处理服务降级 建议本地伪装在客户端实现 官方文档：https://dubbo.apache.org/zh-cn/docs/user/demos/local-mock.html
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2020-04-11 20:14:00 +0000 UTC'>April 11, 2020</span>&nbsp;·&nbsp;2 min</footer>
+  <a class="entry-link" aria-label="post link to Dubbo微服务影院系列（9）：Dubbo服务开发（支付模块开发）" href="https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/9.dubbo%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91%E6%94%AF%E4%BB%98%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2 class="entry-hint-parent">PAT考场 Dev C&#43;&#43; 5.10 配置
     </h2>
   </header>
@@ -313,20 +331,6 @@ Input Specification: Each input file contains one test case. For each case, the 
   <footer class="entry-footer"><span title='2020-04-03 15:33:00 +0000 UTC'>April 3, 2020</span>&nbsp;·&nbsp;3 min</footer>
   <a class="entry-link" aria-label="post link to PAT甲级 1039 Course List for Student (25分)" href="https://zjxjwxk.github.io/posts/pat/advanced_level/a1039/"></a>
 </article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">PAT甲级 1096 Consecutive Factors (20分)
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>Among all the factors of a positive integer N, there may exist several consecutive numbers. For example, 630 can be factored as 3×5×6×7, where 5, 6, and 7 are the three consecutive numbers. Now given any positive N, you are supposed to find the maximum number of consecutive factors, and list the smallest sequence of the consecutive factors.
-Input Specification: Each input file contains one test case, which gives the integer N (1&lt;N&lt;2^{31}).
-...</p>
-  </div>
-  <footer class="entry-footer"><span title='2020-04-02 20:53:00 +0000 UTC'>April 2, 2020</span>&nbsp;·&nbsp;2 min</footer>
-  <a class="entry-link" aria-label="post link to PAT甲级 1096 Consecutive Factors (20分)" href="https://zjxjwxk.github.io/posts/pat/advanced_level/a1096/"></a>
-</article>
 <footer class="page-footer">
   <nav class="pagination">
     <a class="prev" href="https://zjxjwxk.github.io/posts/page/2/">
@@ -339,7 +343,7 @@ Input Specification: Each input file contains one test case, which gives the int
     </main>
     
 <footer class="footer">
-        <span>&copy; 2024 <a href="https://zjxjwxk.github.io/">Xinkang&#39;s Blog</a></span> · 
+        <span>&copy; 2025 <a href="https://zjxjwxk.github.io/">Xinkang&#39;s Blog</a></span> · 
 
     <span>
         Powered by

@@ -6,8 +6,18 @@
     <description>Recent content in Kafka on Xinkang&#39;s Blog</description>
     <generator>Hugo -- 0.138.0</generator>
     <language>en</language>
-    <lastBuildDate>Sat, 23 Nov 2024 16:44:00 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 22 Dec 2024 20:06:00 +0800</lastBuildDate>
     <atom:link href="https://zjxjwxk.github.io/tags/kafka/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Kafka Stream</title>
+      <link>https://zjxjwxk.github.io/posts/mq/kafka/getting-started-with-apache-kafka/6-kafka-stream/</link>
+      <pubDate>Sun, 22 Dec 2024 20:06:00 +0800</pubDate>
+      <guid>https://zjxjwxk.github.io/posts/mq/kafka/getting-started-with-apache-kafka/6-kafka-stream/</guid>
+      <description>&lt;h2 id=&#34;microservices-with-kafka&#34;&gt;Microservices with Kafka&lt;/h2&gt;
+&lt;p&gt;To understand the logic behind doing microservices with Kafka, I believe it is important to take a smaller tour of how databases work. The engine uses a file called the write‑ahead log, or WAL. First, it writes the operation to the WAL. Then, it executes operations on the tables and indexes to reflect what the WAL said they should look like.&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;image-20250113214711151&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/mq/kafka/getting-started-with-apache-kafka/6-kafka-stream/images/image-20250113214711151.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;We have normally two types of microservices:&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Kafka Connect</title>
       <link>https://zjxjwxk.github.io/posts/mq/kafka/getting-started-with-apache-kafka/5-kafka-connect/</link>

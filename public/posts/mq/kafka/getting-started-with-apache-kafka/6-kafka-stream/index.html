@@ -1,0 +1,1145 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Kafka Stream | Xinkang&#39;s Blog</title>
+<meta name="keywords" content="MQ, Kafka">
+<meta name="description" content="Microservices with Kafka
+To understand the logic behind doing microservices with Kafka, I believe it is important to take a smaller tour of how databases work. The engine uses a file called the write‑ahead log, or WAL. First, it writes the operation to the WAL. Then, it executes operations on the tables and indexes to reflect what the WAL said they should look like.
+
+We have normally two types of microservices:">
+<meta name="author" content="">
+<link rel="canonical" href="https://zjxjwxk.github.io/posts/mq/kafka/getting-started-with-apache-kafka/6-kafka-stream/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.d6fcd20a4fb86efa4dfac8ec95da60244cc8871042183da1ef28e3a762ad79c8.css" integrity="sha256-1vzSCk&#43;4bvpN&#43;sjsldpgJEzIhxBCGD2h7yjjp2Ktecg=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://zjxjwxk.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://zjxjwxk.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://zjxjwxk.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://zjxjwxk.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://zjxjwxk.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://zjxjwxk.github.io/posts/mq/kafka/getting-started-with-apache-kafka/6-kafka-stream/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-9CMXGMMTKX"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-9CMXGMMTKX');
+        }
+      </script><meta property="og:url" content="https://zjxjwxk.github.io/posts/mq/kafka/getting-started-with-apache-kafka/6-kafka-stream/">
+  <meta property="og:site_name" content="Xinkang&#39;s Blog">
+  <meta property="og:title" content="Kafka Stream">
+  <meta property="og:description" content="Microservices with Kafka To understand the logic behind doing microservices with Kafka, I believe it is important to take a smaller tour of how databases work. The engine uses a file called the write‑ahead log, or WAL. First, it writes the operation to the WAL. Then, it executes operations on the tables and indexes to reflect what the WAL said they should look like.
+We have normally two types of microservices:">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-12-22T20:06:00+08:00">
+    <meta property="article:modified_time" content="2024-12-22T20:06:00+08:00">
+    <meta property="article:tag" content="MQ">
+    <meta property="article:tag" content="Kafka">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Kafka Stream">
+<meta name="twitter:description" content="Microservices with Kafka
+To understand the logic behind doing microservices with Kafka, I believe it is important to take a smaller tour of how databases work. The engine uses a file called the write‑ahead log, or WAL. First, it writes the operation to the WAL. Then, it executes operations on the tables and indexes to reflect what the WAL said they should look like.
+
+We have normally two types of microservices:">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://zjxjwxk.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Kafka Stream",
+      "item": "https://zjxjwxk.github.io/posts/mq/kafka/getting-started-with-apache-kafka/6-kafka-stream/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Kafka Stream",
+  "name": "Kafka Stream",
+  "description": "Microservices with Kafka To understand the logic behind doing microservices with Kafka, I believe it is important to take a smaller tour of how databases work. The engine uses a file called the write‑ahead log, or WAL. First, it writes the operation to the WAL. Then, it executes operations on the tables and indexes to reflect what the WAL said they should look like.\nWe have normally two types of microservices:\n",
+  "keywords": [
+    "MQ", "Kafka"
+  ],
+  "articleBody": "Microservices with Kafka To understand the logic behind doing microservices with Kafka, I believe it is important to take a smaller tour of how databases work. The engine uses a file called the write‑ahead log, or WAL. First, it writes the operation to the WAL. Then, it executes operations on the tables and indexes to reflect what the WAL said they should look like.\nWe have normally two types of microservices:\nThe first one is the synchronous microservices. These are the normal ones, normally RESTful services that wait on other dependent services to respond. The asynchronous microservices have an event bus based on these futures or callbacks. Here is where we tie the knot because if we let Kafka become the center of the application, we can build an entire async application based on it. And to make it simpler, this is what Kafka Streams chimes in to create each of these services. Let’s see an example that an e-commerce application may clarify.\nUI Service -\u003e send message -\u003e Checkout Topic -\u003e receive message -\u003e Order Service Order Service -\u003e send message -\u003e OrderPlaced Topic -\u003e receive message -\u003e Payment Service Payment Service -\u003e send message -\u003e OrderPaid Topic -\u003e receive message -\u003e Fulfilment Service Fulfillment Service -\u003e send message -\u003e OrderFinalized Topic -\u003e receive message -\u003e UI Service Kafka will be the center. There are some reasons:\nEvery event happening in your application can be traced back to a Kafka topic, and that is stored. This also means that if each of these microservices is a Kafka Stream app, everything in your app goes through Kafka. Kafka topics have an abstraction called the log that allows messages to be replayed. This means Kafka becomes the WAL of the application and allows for things like multi-phase transactions. Kafka Streams and Stateless Stream Processing This is what Kafka Stream apps look like. They read from an input topic, which is the source. They perform some operations defined in a graph or topology. Finally, they write normally to an output topic. Optionally, they can write to another topic that can act as a log.\nThe map operation maps this green message to sendToLog, as well as to the Filter. As this one is green, it passes the Filter. Then the app produces the message to both the Output Topic, as well as the Log Topic.\nOn the other hand, the red message is mapped to the Filter and sendToLog, but it cannot pass the filter. So, it’s only sent to the Log Topic.\nThere are more benefits. Thanks to Kafka Connect and Kafka Streams, querying Kafka will be easier. If we set up a Kafka Streams app that takes the orders topic and writes it to a DB topic in the correct schema defined by the schema registry with Avro, then Kafka Connect can use the database connector to write it to a database like PostgreSQL or MongoDB. From there, we can expose a query API that only translates certain RESTful requests into DB queries.\nCreating a Kafka Streams Application Establishing Properties Create an application.id that represents your application group or “team” Serde is combination of Serializer/Deserializer Every stream application and KSQL app (later) is a consumer-producer Properties props = new Properties(); props.put(StreamsConfig.APPLICATION_ID_CONFIG, \"my_stream_app\"); props.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, \"localhost:9092\"); props.put(StreamsConfig.DEFAULT_KEY_SERDE_CLASS_CONFIG, Serdes.String().getClass()); props.put(StreamsConfig.DEFAULT_VALUE_SERDE_CLASS_CONFIG, Serdes.String().getClass()); props.put(\"schema.registry.url\", \"http://localhost:8081\"); Create a Stream Builder Always start with a StreamBuilder object. This is the GoF builder pattern, where we will create a Topology object that represents our data pipeline. StreamsBuilder builder = new StreamsBuilder(); KStream\u003cString, DisasterValue\u003e rawReadings = builder.stream(\"DisasterReadings\", Consumed.with(Serdes.String(), Serdes.Integer())); Standard Functional Programming map, filter, flatMap, groupBy, reduce, window, join, leftJoin, outerJoin\nMapping Before: (1, “Hello”), (2, “Zoom”), (3, “Fold”)\nstream.map((key, value) -\u003e new KeyValue\u003c\u003e(key + 1, value + \"!\")); After: (2, “Hello!”), (3, “Zoom!”), (4, “Fold!”)\nFilter Before: (1, “Hello”), (2, “Zoom”), (3, “Fold”), (4, “Past”)\nstream.filter((key, value) -\u003e key % 2 == 0); (2, “Zoom”), (4, “Past”)\nDump Results to a Topic Dump the results to a topic using through to post to the topic and continue.\nKStream stream = builder.stream(\"my_topic\"); stream.filter(...).through(\"new_topic\").flatMap(...).to(\"other_topic\"); Run Topology topology = builder.build(); KafkaStreams streams = new KafkaStreams(topology, props); streams.start(); Adding a Shutdown Hook Runtime.getRuntime().addShutdownHook(new Thread(streams::close)); Demo: Creating a Kafka Streams Application Run Docker Containers Create a docker-compose file, including 3 zookeepers, 3 Kafka brokers, 1 Rest Proxy, and 1 Schema Registry.\n--- version: '3' services: zookeeper-1: image: confluentinc/cp-zookeeper:7.4.1 hostname: zookeeper-1 container_name: zookeeper-1 volumes: - ./zookeeper-1_data:/var/lib/zookeeper/data - ./zookeeper-1_log:/var/lib/zookeeper/log environment: ZOOKEEPER_CLIENT_PORT: 2181 ZOOKEEPER_TICK_TIME: 2000 ZOO_MY_ID: 1 ZOO_SERVERS: server.1=zookeeper-1:2888:3888;2181 server.2=zookeeper-2:2888:3888;2181 server.3=zookeeper-3:2888:3888;2181 zookeeper-2: image: confluentinc/cp-zookeeper:7.4.1 hostname: zookeeper-2 container_name: zookeeper-2 volumes: - ./zookeeper-2_data:/var/lib/zookeeper/data - ./zookeeper-2_log:/var/lib/zookeeper/log environment: ZOOKEEPER_CLIENT_PORT: 2181 ZOOKEEPER_TICK_TIME: 2000 ZOO_MY_ID: 2 ZOO_SERVERS: server.1=zookeeper-1:2888:3888;2181 server.2=zookeeper-2:2888:3888;2181 server.3=zookeeper-3:2888:3888;2181 zookeeper-3: image: confluentinc/cp-zookeeper:7.4.1 hostname: zookeeper-3 container_name: zookeeper-3 volumes: - ./zookeeper-3_data:/var/lib/zookeeper/data - ./zookeeper-3_log:/var/lib/zookeeper/log environment: ZOOKEEPER_CLIENT_PORT: 2181 ZOOKEEPER_TICK_TIME: 2000 ZOO_MY_ID: 3 ZOO_SERVERS: server.1=zookeeper-1:2888:3888;2181 server.2=zookeeper-2:2888:3888;2181 server.3=zookeeper-3:2888:3888;2181 broker-1: image: confluentinc/cp-kafka:7.4.1 hostname: broker-1 container_name: broker-1 volumes: - ./broker-1-data:/var/lib/kafka/data depends_on: - zookeeper-1 - zookeeper-2 - zookeeper-3 ports: - 9092:9092 - 29092:29092 environment: KAFKA_BROKER_ID: 1 KAFKA_ZOOKEEPER_CONNECT: zookeeper-1:2181 KAFKA_ADVERTISED_LISTENERS: HOST://localhost:9092,INTERNAL://broker-1:29092 KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: HOST:PLAINTEXT,INTERNAL:PLAINTEXT KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL KAFKA_SNAPSHOT_TRUST_EMPTY: true broker-2: image: confluentinc/cp-kafka:7.4.1 hostname: broker-2 container_name: broker-2 volumes: - ./broker-2-data:/var/lib/kafka/data depends_on: - zookeeper-1 - zookeeper-2 - zookeeper-3 - broker-1 ports: - 9093:9093 - 29093:29093 environment: KAFKA_BROKER_ID: 2 KAFKA_ZOOKEEPER_CONNECT: zookeeper-1:2181 KAFKA_ADVERTISED_LISTENERS: HOST://localhost:9093,INTERNAL://broker-2:29093 KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: HOST:PLAINTEXT,INTERNAL:PLAINTEXT KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL KAFKA_SNAPSHOT_TRUST_EMPTY: true broker-3: image: confluentinc/cp-kafka:7.4.1 hostname: broker-3 container_name: broker-3 volumes: - ./broker-3-data:/var/lib/kafka/data depends_on: - zookeeper-1 - zookeeper-2 - zookeeper-3 - broker-1 - broker-2 ports: - 9094:9094 - 29094:29094 environment: KAFKA_BROKER_ID: 3 KAFKA_ZOOKEEPER_CONNECT: zookeeper-1:2181 KAFKA_ADVERTISED_LISTENERS: HOST://localhost:9094,INTERNAL://broker-3:29094 KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: HOST:PLAINTEXT,INTERNAL:PLAINTEXT KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL KAFKA_SNAPSHOT_TRUST_EMPTY: true rest-proxy: image: confluentinc/cp-kafka-rest:7.4.1 ports: - \"8082:8082\" depends_on: - zookeeper-1 - zookeeper-2 - zookeeper-3 - broker-1 - broker-2 - broker-3 hostname: rest-proxy container_name: rest-proxy environment: KAFKA_REST_HOST_NAME: rest-proxy KAFKA_REST_BOOTSTRAP_SERVERS: 'broker-1:29092,broker-2:29093,broker-3:29094' KAFKA_REST_LISTENERS: \"http://0.0.0.0:8082\" schema-registry: image: confluentinc/cp-schema-registry:7.4.1 hostname: schema-registry container_name: schema-registry depends_on: - rest-proxy ports: - \"8081:8081\" environment: SCHEMA_REGISTRY_HOST_NAME: schema-registry SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS: 'broker-1:29092,broker-2:29093,broker-3:29094' Run composed containers:\ndocker compose up -d Create two Topics Create a RawTeampReadings topic that has 4 partitions.\nkafka-topics.sh --create --bootstrap-server localhost:9092 --partitions 4 --topic RawTempReadings Then create a ValidatedTempReadings topic that has 4 partitions.\nkafka-topics.sh --create --bootstrap-server localhost:9092 --partitions 4 --topic ValidatedTempReadings Create a Consumer kafka-console-consumer.sh \\ --bootstrap-server localhost:9092 \\ --topic ValidatedTempReadings --from-beginning \\ --key-deserializer org.apache.kafka.common.serialization.StringDeserializer \\ --value-deserializer org.apache.kafka.common.serialization.IntegerDeserializer \\ --property print.key=true \\ --property key.separator=, \\ --group 1 Run a Stream Run a Kafka Stream from topic RawTempReadings to topic ValidatedTempReadings, only filtering the messages whose values are between -50 and 130.\npackage com.globomantics; import org.apache.kafka.common.serialization.Serdes; import org.apache.kafka.streams.KafkaStreams; import org.apache.kafka.streams.StreamsBuilder; import org.apache.kafka.streams.StreamsConfig; import org.apache.kafka.streams.Topology; import org.apache.kafka.streams.kstream.KStream; import java.util.Properties; public class SimpleETL { public static void main(String[] args) { Properties props = new Properties(); props.put(StreamsConfig.APPLICATION_ID_CONFIG, \"weather.filter\"); props.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, \"http://localhost:9092,http://localhost:9093,http://localhost:9094\"); props.put(StreamsConfig.DEFAULT_KEY_SERDE_CLASS_CONFIG, Serdes.String().getClass()); props.put(StreamsConfig.DEFAULT_VALUE_SERDE_CLASS_CONFIG, Serdes.Integer().getClass()); StreamsBuilder builder = new StreamsBuilder(); KStream\u003cString, Integer\u003e rawReadings = builder.stream(\"RawTempReadings\"); KStream\u003cString, Integer\u003e validatedReadings = rawReadings .filter((key, value) -\u003e value \u003e -50 \u0026\u0026 value \u003c 130); validatedReadings.to(\"ValidatedTempReadings\"); Topology topo = builder.build(); System.out.println(topo.describe()); KafkaStreams streams = new KafkaStreams(topo, props); Runtime.getRuntime().addShutdownHook(new Thread(streams::close)); streams.cleanUp(); streams.start(); System.out.println(\"Starting simple ETL\"); } } Run a Producer Run a Kafka Producer that sends messages to the topic RawTempReadings, which sends messages whose values are between -20 and 180.\npackage com.globomantics; import org.apache.kafka.clients.producer.KafkaProducer; import org.apache.kafka.clients.producer.ProducerConfig; import org.apache.kafka.clients.producer.ProducerRecord; import org.apache.kafka.common.serialization.IntegerSerializer; import org.apache.kafka.common.serialization.StringSerializer; import org.slf4j.Logger; import org.slf4j.LoggerFactory; import java.util.Properties; import java.util.Random; import java.util.concurrent.ThreadLocalRandom; public class Producer { private static final Logger log = LoggerFactory.getLogger(Producer.class); private static final Properties props = new Properties(); public static void main(String[] args) throws InterruptedException { props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, \"http://localhost:9092,http://localhost:9093,http://localhost:9094\"); props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName()); props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, IntegerSerializer.class.getName()); KafkaProducer\u003cString, Integer\u003e producer = new KafkaProducer\u003c\u003e(props); String[] sensors = new String[]{\"sensor_1\", \"sensor_2\", \"sensor_3\"}; Runtime.getRuntime().addShutdownHook(new Thread(producer::close)); while (true) { int idx = new Random().nextInt(sensors.length); String key = (sensors[idx]); int value = ThreadLocalRandom.current().nextInt(-20, 180 + 1); ProducerRecord\u003cString, Integer\u003e producerRecord = new ProducerRecord\u003c\u003e(\"RawTempReadings\", key, value); producer.send(producerRecord); producer.flush(); log.info(\"Successfully produced message from sensor \" + key); Thread.sleep(200); } } } We can see the received messages from the consumer, whose values are only between -50 and 130, which have been filtered by the Kafka Stream successfully.\n❯ kafka-console-consumer.sh \\ --bootstrap-server localhost:9092 \\ --topic ValidatedTempReadings --from-beginning \\ --key-deserializer org.apache.kafka.common.serialization.StringDeserializer \\ --value-deserializer org.apache.kafka.common.serialization.IntegerDeserializer \\ --property print.key=true \\ --property key.separator=, \\ --group 1 sensor_2,89 sensor_2,86 sensor_1,75 sensor_1,0 sensor_2,39 sensor_3,-11 sensor_3,106 sensor_1,84 sensor_1,52 sensor_1,122 sensor_1,53 sensor_2,117 sensor_3,-10 sensor_1,16 sensor_2,113 sensor_3,-11 Querying a Stream with KSQL Run Docker Containers Create a docker-compose file, including 3 zookeepers, 3 Kafka brokers, 1 Rest Proxy, 1 Schema Registry, 1 KSQL DB Server, and 1 KSQL DB Client.\n--- version: '3' services: zookeeper-1: image: confluentinc/cp-zookeeper:7.4.1 hostname: zookeeper-1 container_name: zookeeper-1 volumes: - ./zookeeper-1_data:/var/lib/zookeeper/data - ./zookeeper-1_log:/var/lib/zookeeper/log environment: ZOOKEEPER_CLIENT_PORT: 2181 ZOOKEEPER_TICK_TIME: 2000 ZOO_MY_ID: 1 ZOO_SERVERS: server.1=zookeeper-1:2888:3888;2181 server.2=zookeeper-2:2888:3888;2181 server.3=zookeeper-3:2888:3888;2181 zookeeper-2: image: confluentinc/cp-zookeeper:7.4.1 hostname: zookeeper-2 container_name: zookeeper-2 volumes: - ./zookeeper-2_data:/var/lib/zookeeper/data - ./zookeeper-2_log:/var/lib/zookeeper/log environment: ZOOKEEPER_CLIENT_PORT: 2181 ZOOKEEPER_TICK_TIME: 2000 ZOO_MY_ID: 2 ZOO_SERVERS: server.1=zookeeper-1:2888:3888;2181 server.2=zookeeper-2:2888:3888;2181 server.3=zookeeper-3:2888:3888;2181 zookeeper-3: image: confluentinc/cp-zookeeper:7.4.1 hostname: zookeeper-3 container_name: zookeeper-3 volumes: - ./zookeeper-3_data:/var/lib/zookeeper/data - ./zookeeper-3_log:/var/lib/zookeeper/log environment: ZOOKEEPER_CLIENT_PORT: 2181 ZOOKEEPER_TICK_TIME: 2000 ZOO_MY_ID: 3 ZOO_SERVERS: server.1=zookeeper-1:2888:3888;2181 server.2=zookeeper-2:2888:3888;2181 server.3=zookeeper-3:2888:3888;2181 broker-1: image: confluentinc/cp-kafka:7.4.1 hostname: broker-1 container_name: broker-1 volumes: - ./broker-1-data:/var/lib/kafka/data depends_on: - zookeeper-1 - zookeeper-2 - zookeeper-3 ports: - 9092:9092 - 29092:29092 environment: KAFKA_BROKER_ID: 1 KAFKA_ZOOKEEPER_CONNECT: zookeeper-1:2181 KAFKA_ADVERTISED_LISTENERS: HOST://localhost:9092,INTERNAL://broker-1:29092 KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: HOST:PLAINTEXT,INTERNAL:PLAINTEXT KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL KAFKA_SNAPSHOT_TRUST_EMPTY: true broker-2: image: confluentinc/cp-kafka:7.4.1 hostname: broker-2 container_name: broker-2 volumes: - ./broker-2-data:/var/lib/kafka/data depends_on: - zookeeper-1 - zookeeper-2 - zookeeper-3 - broker-1 ports: - 9093:9093 - 29093:29093 environment: KAFKA_BROKER_ID: 2 KAFKA_ZOOKEEPER_CONNECT: zookeeper-1:2181 KAFKA_ADVERTISED_LISTENERS: HOST://localhost:9093,INTERNAL://broker-2:29093 KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: HOST:PLAINTEXT,INTERNAL:PLAINTEXT KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL KAFKA_SNAPSHOT_TRUST_EMPTY: true broker-3: image: confluentinc/cp-kafka:7.4.1 hostname: broker-3 container_name: broker-3 volumes: - ./broker-3-data:/var/lib/kafka/data depends_on: - zookeeper-1 - zookeeper-2 - zookeeper-3 - broker-1 - broker-2 ports: - 9094:9094 - 29094:29094 environment: KAFKA_BROKER_ID: 3 KAFKA_ZOOKEEPER_CONNECT: zookeeper-1:2181 KAFKA_ADVERTISED_LISTENERS: HOST://localhost:9094,INTERNAL://broker-3:29094 KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: HOST:PLAINTEXT,INTERNAL:PLAINTEXT KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL KAFKA_SNAPSHOT_TRUST_EMPTY: true rest-proxy: image: confluentinc/cp-kafka-rest:7.4.1 ports: - \"8082:8082\" depends_on: - zookeeper-1 - zookeeper-2 - zookeeper-3 - broker-1 - broker-2 - broker-3 hostname: rest-proxy container_name: rest-proxy environment: KAFKA_REST_HOST_NAME: rest-proxy KAFKA_REST_BOOTSTRAP_SERVERS: 'broker-1:29092,broker-2:29093,broker-3:29094' KAFKA_REST_LISTENERS: \"http://0.0.0.0:8082\" schema-registry: image: confluentinc/cp-schema-registry:7.4.1 hostname: schema-registry container_name: schema-registry depends_on: - rest-proxy ports: - \"8081:8081\" environment: SCHEMA_REGISTRY_HOST_NAME: schema-registry SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS: 'broker-1:29092,broker-2:29093,broker-3:29094' ksqldb-server: image: confluentinc/cp-ksqldb-server:7.4.1 hostname: ksqldb-server container_name: ksqldb-server depends_on: - schema-registry ports: - \"8088:8088\" environment: KSQL_LISTENERS: http://0.0.0.0:8088 KSQL_BOOTSTRAP_SERVERS: broker-1:29092,broker-2:29093,broker-3:29094 KSQL_KSQL_LOGGING_PROCESSING_STREAM_AUTO_CREATE: \"true\" KSQL_KSQL_LOGGING_PROCESSING_TOPIC_AUTO_CREATE: \"true\" ksqldb-cli: image: confluentinc/cp-ksqldb-cli:7.4.1 container_name: ksqldb-cli hostname: ksqldb-cli depends_on: - ksqldb-server entrypoint: /bin/sh tty: true Run composed containers:\ndocker compose up -d Run KSQL CLient docker exec -it ksqldb-cli ksql http://ksqldb-server:8088 We can show all the topics:\nksql\u003e show all topics; Kafka Topic | Partitions | Partition Replicas -------------------------------------------------------------------------- _confluent-ksql-default__command_topic | 1 | 1 _schemas | 1 | 3 default_ksql_processing_log | 1 | 1 -------------------------------------------------------------------------- Then, set the topic offset to the earliest, so that we can see all topics from the beginning:\nksql\u003e SET 'auto.offset.reset'='earliest'; Successfully changed local property 'auto.offset.reset' to 'earliest'. Use the UNSET command to revert your change. Create a Stream Create a Kafka Stream tempReadings with columns zipcode, sensortime, and temp, which is associated with topic readings. Its timestamp will come from the sensortime.\nksql\u003e CREATE STREAM tempReadings (zipcode VARCHAR, sensortime BIGINT, temp DOUBLE) \\ \u003e WITH (kafka_topic='readings', timestamp='sensortime', value_format='json', partitions=1); Message ---------------- Stream created ---------------- We can see the topics:\nksql\u003e show topics extended; Kafka Topic | Partitions | Partition Replicas | Consumers | ConsumerGroups -------------------------------------------------------------------------------------------- default_ksql_processing_log | 1 | 1 | 0 | 0 readings | 1 | 1 | 0 | 0 -------------------------------------------------------------------------------------------- We can see the streams:\nksql\u003e show streams extended; Name : TEMPREADINGS Type : STREAM Timestamp field : SENSORTIME Key format : KAFKA Value format : JSON Kafka topic : readings (partitions: 1, replication: 1) Statement : CREATE STREAM TEMPREADINGS (ZIPCODE STRING, SENSORTIME BIGINT, TEMP DOUBLE) WITH (CLEANUP_POLICY='delete', KAFKA_TOPIC='readings', KEY_FORMAT='KAFKA', PARTITIONS=1, TIMESTAMP='sensortime', VALUE_FORMAT='JSON'); Field | Type ------------------------------ ZIPCODE | VARCHAR(STRING) SENSORTIME | BIGINT TEMP | DOUBLE ------------------------------ ... Insert Stream We can insert records to the stream tempReadings like inserting into a DB, which will send messages to the topic readings at the same time:\nksql\u003e INSERT INTO tempReadings (zipcode, sensortime, temp) VALUES ('1865', UNIX_TIMESTAMP(), 20); ksql\u003e INSERT INTO tempReadings (zipcode, sensortime, temp) VALUES ('1806', UNIX_TIMESTAMP(), 25); ksql\u003e INSERT INTO tempReadings (zipcode, sensortime, temp) VALUES ('1806', UNIX_TIMESTAMP() + 60 * 60 * 1000, 32); ksql\u003e INSERT INTO tempReadings (zipcode, sensortime, temp) VALUES ('1865', UNIX_TIMESTAMP() + 60 * 60 * 1000, 27); Query Stream We can query the rowcount and average temperature of each zipcode and each window time from the stream:\nksql\u003e SELECT zipcode, TIMESTAMPTOSTRING(WINDOWSTART, 'HH:mm:ss') as windowtime, \u003e COUNT(*) as rowcount, AVG(temp) as temp \u003eFROM tempReadings \u003eWINDOW TUMBLING (SIZE 1 HOURS) \u003eGROUP BY zipcode EMIT CHANGES; +-----------------------+-----------------------+-----------------------+-----------------------+ |ZIPCODE |WINDOWTIME |ROWCOUNT |TEMP | +-----------------------+-----------------------+-----------------------+-----------------------+ |1865 |07:00:00 |1 |20.0 | |1806 |07:00:00 |1 |25.0 | |1806 |08:00:00 |1 |32.0 | |1865 |08:00:00 |1 |27.0 | Press CTRL-C to interrupt We can also run consumer to consume messages from the topic:\n❯ kafka-console-consumer.sh \\ \u003e --bootstrap-server localhost:9092 \\ \u003e --topic readings --from-beginning {\"ZIPCODE\":\"1865\",\"SENSORTIME\":1742023920742,\"TEMP\":20.0} {\"ZIPCODE\":\"1806\",\"SENSORTIME\":1742023939063,\"TEMP\":25.0} {\"ZIPCODE\":\"1806\",\"SENSORTIME\":1742027558360,\"TEMP\":32.0} {\"ZIPCODE\":\"1865\",\"SENSORTIME\":1742027593367,\"TEMP\":27.0} Create Table We can create a table highsandlows that selects data including the minimum and maximum temperature of each zipcode from the stream:\nksql\u003e CREATE TABLE highsandlows WITH (kafka_topic='readings') AS \u003e SELECT MIN(temp) as min_temp, MAX(temp) as max_temp, zipcode \u003e FROM tempReadings GROUP BY zipcode; Message ------------------------------------------- Created query with ID CTAS_HIGHSANDLOWS_3 ------------------------------------------- Query Table Then, we can query data directly from the table, which is the latest data from the stream:\nksql\u003e SELECT min_temp, max_temp, zipcode \u003e FROM highsandlows \u003e WHERE zipcode = '1865'; +--------------------------------+--------------------------------+--------------------------------+ |MIN_TEMP |MAX_TEMP |ZIPCODE | +--------------------------------+--------------------------------+--------------------------------+ Query terminated Takeaways Kafka can effectively act as the WAL for your app when using Kafka Streams. A stream app is just a topology of functional applications to a stream of incoming messages. One can deploy as many streams as you want and they act as microservices. KSQL is the CLI to query KSQLDB which is a thin layer over Kafka Streams and permits to do simple stuff without creating an streams app with code. Keys Try to create a table instead of a stream and query it. Try to investigate how to use groupBy and perform JOINs. Try to deploy the architecture we mentioned above to query a topic. ",
+  "wordCount" : "2260",
+  "inLanguage": "en",
+  "datePublished": "2024-12-22T20:06:00+08:00",
+  "dateModified": "2024-12-22T20:06:00+08:00",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://zjxjwxk.github.io/posts/mq/kafka/getting-started-with-apache-kafka/6-kafka-stream/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Xinkang's Blog",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://zjxjwxk.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://zjxjwxk.github.io/" accesskey="h" title="Xinkang&#39;s Blog (Alt + H)">Xinkang&#39;s Blog</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://zjxjwxk.github.io/archives/" title="Archives">
+                    <span>Archives</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://zjxjwxk.github.io/categories/" title="Categories">
+                    <span>Categories</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://zjxjwxk.github.io/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://zjxjwxk.github.io/search/" title="Search (Alt &#43; /)" accesskey=/>
+                    <span>Search</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://zjxjwxk.github.io/">Home</a>&nbsp;»&nbsp;<a href="https://zjxjwxk.github.io/posts/">Posts</a></div>
+    <h1 class="post-title entry-hint-parent">
+      Kafka Stream
+    </h1>
+    <div class="post-meta"><span title='2024-12-22 20:06:00 +0800 CST'>December 22, 2024</span>&nbsp;·&nbsp;11 min&nbsp;|&nbsp;<a href="https://github.com/zjxjwxk/zjxjwxk.github.io/tree/main/content/posts/MQ/Kafka/Getting%20Started%20with%20Apache%20Kafka/6-Kafka%20Stream/index.md" rel="noopener noreferrer" target="_blank">Suggest Changes</a>
+
+</div>
+  </header> <div class="toc">
+    <details >
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#microservices-with-kafka" aria-label="Microservices with Kafka">Microservices with Kafka</a></li>
+                <li>
+                    <a href="#kafka-streams-and-stateless-stream-processing" aria-label="Kafka Streams and Stateless Stream Processing">Kafka Streams and Stateless Stream Processing</a></li>
+                <li>
+                    <a href="#creating-a-kafka-streams-application" aria-label="Creating a Kafka Streams Application">Creating a Kafka Streams Application</a><ul>
+                        
+                <li>
+                    <a href="#establishing-properties" aria-label="Establishing Properties">Establishing Properties</a></li>
+                <li>
+                    <a href="#create-a-stream-builder" aria-label="Create a Stream Builder">Create a Stream Builder</a></li>
+                <li>
+                    <a href="#standard-functional-programming" aria-label="Standard Functional Programming">Standard Functional Programming</a><ul>
+                        
+                <li>
+                    <a href="#mapping" aria-label="Mapping">Mapping</a></li>
+                <li>
+                    <a href="#filter" aria-label="Filter">Filter</a></li></ul>
+                </li>
+                <li>
+                    <a href="#dump-results-to-a-topic" aria-label="Dump Results to a Topic">Dump Results to a Topic</a></li>
+                <li>
+                    <a href="#run" aria-label="Run">Run</a></li>
+                <li>
+                    <a href="#adding-a-shutdown-hook" aria-label="Adding a Shutdown Hook">Adding a Shutdown Hook</a></li></ul>
+                </li>
+                <li>
+                    <a href="#demo-creating-a-kafka-streams-application" aria-label="Demo: Creating a Kafka Streams Application">Demo: Creating a Kafka Streams Application</a><ul>
+                        
+                <li>
+                    <a href="#run-docker-containers" aria-label="Run Docker Containers">Run Docker Containers</a></li>
+                <li>
+                    <a href="#create-two-topics" aria-label="Create two Topics">Create two Topics</a></li>
+                <li>
+                    <a href="#create-a-consumer" aria-label="Create a Consumer">Create a Consumer</a></li>
+                <li>
+                    <a href="#run-a-stream" aria-label="Run a Stream">Run a Stream</a></li>
+                <li>
+                    <a href="#run-a-producer" aria-label="Run a Producer">Run a Producer</a></li></ul>
+                </li>
+                <li>
+                    <a href="#querying-a-stream-with-ksql" aria-label="Querying a Stream with KSQL">Querying a Stream with KSQL</a><ul>
+                        
+                <li>
+                    <a href="#run-docker-containers-1" aria-label="Run Docker Containers">Run Docker Containers</a></li>
+                <li>
+                    <a href="#run-ksql-client" aria-label="Run KSQL CLient">Run KSQL CLient</a></li>
+                <li>
+                    <a href="#create-a-stream" aria-label="Create a Stream">Create a Stream</a></li>
+                <li>
+                    <a href="#insert-stream" aria-label="Insert Stream">Insert Stream</a></li>
+                <li>
+                    <a href="#query-stream" aria-label="Query Stream">Query Stream</a></li>
+                <li>
+                    <a href="#create-table" aria-label="Create Table">Create Table</a></li>
+                <li>
+                    <a href="#query-table" aria-label="Query Table">Query Table</a></li></ul>
+                </li>
+                <li>
+                    <a href="#takeaways" aria-label="Takeaways">Takeaways</a></li>
+                <li>
+                    <a href="#keys" aria-label="Keys">Keys</a>
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><h2 id="microservices-with-kafka">Microservices with Kafka<a hidden class="anchor" aria-hidden="true" href="#microservices-with-kafka">#</a></h2>
+<p>To understand the logic behind doing microservices with Kafka, I believe it is important to take a smaller tour of how databases work. The engine uses a file called the write‑ahead log, or WAL. First, it writes the operation to the WAL. Then, it executes operations on the tables and indexes to reflect what the WAL said they should look like.</p>
+<p><img alt="image-20250113214711151" loading="lazy" src="/posts/mq/kafka/getting-started-with-apache-kafka/6-kafka-stream/images/image-20250113214711151.png"></p>
+<p>We have normally two types of microservices:</p>
+<ul>
+<li>The first one is the synchronous microservices. These are the normal ones, normally RESTful services that wait on other dependent services to respond.</li>
+<li>The asynchronous microservices have an event bus based on these futures or callbacks. Here is where we tie the knot because if we let Kafka become the center of the application, we can build an entire async application based on it. And to make it simpler, this is what Kafka Streams chimes in to create each of these services.</li>
+</ul>
+<p><img alt="image-20250113215256634" loading="lazy" src="/posts/mq/kafka/getting-started-with-apache-kafka/6-kafka-stream/images/image-20250113215256634.png"></p>
+<p>Let&rsquo;s see an example that an e-commerce application may clarify.</p>
+<ul>
+<li>UI Service -&gt; send message -&gt; Checkout Topic -&gt; receive message -&gt; Order Service</li>
+<li>Order Service -&gt; send message -&gt; OrderPlaced Topic -&gt; receive message -&gt; Payment Service</li>
+<li>Payment Service -&gt; send message -&gt; OrderPaid Topic -&gt; receive message -&gt; Fulfilment Service</li>
+<li>Fulfillment Service -&gt; send message -&gt; OrderFinalized Topic -&gt; receive message -&gt; UI Service</li>
+</ul>
+<p><img alt="image-20250113215857870" loading="lazy" src="/posts/mq/kafka/getting-started-with-apache-kafka/6-kafka-stream/images/image-20250113215857870.png"></p>
+<p>Kafka will be the center. There are some reasons:</p>
+<ol>
+<li>Every event happening in your application can be traced back to a Kafka topic, and that is stored.</li>
+<li>This also means that if each of these microservices is a Kafka Stream app, everything in your app goes through Kafka. Kafka topics have an abstraction called the log that allows messages to be replayed.</li>
+<li>This means Kafka becomes the WAL of the application and allows for things like multi-phase transactions.</li>
+</ol>
+<h2 id="kafka-streams-and-stateless-stream-processing">Kafka Streams and Stateless Stream Processing<a hidden class="anchor" aria-hidden="true" href="#kafka-streams-and-stateless-stream-processing">#</a></h2>
+<p>This is what Kafka Stream apps look like. They read from an input topic, which is the source. They perform some operations defined in a graph or topology. Finally, they write normally to an output topic. Optionally, they can write to another topic that can act as a log.</p>
+<ul>
+<li>
+<p>The map operation maps this green message to sendToLog, as well as to the Filter. As this one is green, it passes the Filter. Then the app produces the message to both the Output Topic, as well as the Log Topic.</p>
+</li>
+<li>
+<p>On the other hand, the red message is mapped to the Filter and sendToLog, but it cannot pass the filter. So, it&rsquo;s only sent to the Log Topic.</p>
+</li>
+</ul>
+<p><img alt="image-20250113222323248" loading="lazy" src="/posts/mq/kafka/getting-started-with-apache-kafka/6-kafka-stream/images/image-20250113222323248.png"></p>
+<p>There are more benefits. Thanks to Kafka Connect and Kafka Streams, querying Kafka will be easier. If we set up a Kafka Streams app that takes the orders topic and writes it to a DB topic in the correct schema defined by the schema registry with Avro, then Kafka Connect can use the database connector to write it to a database like PostgreSQL or MongoDB. From there, we can expose a query API that only translates certain RESTful requests into DB queries.</p>
+<p><img alt="image-20250113223029315" loading="lazy" src="/posts/mq/kafka/getting-started-with-apache-kafka/6-kafka-stream/images/image-20250113223029315.png"></p>
+<h2 id="creating-a-kafka-streams-application">Creating a Kafka Streams Application<a hidden class="anchor" aria-hidden="true" href="#creating-a-kafka-streams-application">#</a></h2>
+<h3 id="establishing-properties">Establishing Properties<a hidden class="anchor" aria-hidden="true" href="#establishing-properties">#</a></h3>
+<ul>
+<li>Create an application.id that represents your application group or &ldquo;team&rdquo;</li>
+<li>Serde is combination of Serializer/Deserializer</li>
+<li>Every stream application and KSQL app (later) is a consumer-producer</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>Properties props <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Properties();
+</span></span><span style="display:flex;"><span>props.<span style="color:#a6e22e">put</span>(StreamsConfig.<span style="color:#a6e22e">APPLICATION_ID_CONFIG</span>, <span style="color:#e6db74">&#34;my_stream_app&#34;</span>);
+</span></span><span style="display:flex;"><span>props.<span style="color:#a6e22e">put</span>(StreamsConfig.<span style="color:#a6e22e">BOOTSTRAP_SERVERS_CONFIG</span>, <span style="color:#e6db74">&#34;localhost:9092&#34;</span>);
+</span></span><span style="display:flex;"><span>props.<span style="color:#a6e22e">put</span>(StreamsConfig.<span style="color:#a6e22e">DEFAULT_KEY_SERDE_CLASS_CONFIG</span>, Serdes.<span style="color:#a6e22e">String</span>().<span style="color:#a6e22e">getClass</span>());
+</span></span><span style="display:flex;"><span>props.<span style="color:#a6e22e">put</span>(StreamsConfig.<span style="color:#a6e22e">DEFAULT_VALUE_SERDE_CLASS_CONFIG</span>, Serdes.<span style="color:#a6e22e">String</span>().<span style="color:#a6e22e">getClass</span>());
+</span></span><span style="display:flex;"><span>props.<span style="color:#a6e22e">put</span>(<span style="color:#e6db74">&#34;schema.registry.url&#34;</span>, <span style="color:#e6db74">&#34;http://localhost:8081&#34;</span>);
+</span></span></code></pre></div><h3 id="create-a-stream-builder">Create a Stream Builder<a hidden class="anchor" aria-hidden="true" href="#create-a-stream-builder">#</a></h3>
+<ul>
+<li>Always start with a StreamBuilder object.</li>
+<li>This is the GoF builder pattern, where we will create a Topology object that represents our data pipeline.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>StreamsBuilder builder <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> StreamsBuilder();
+</span></span><span style="display:flex;"><span>KStream<span style="color:#f92672">&lt;</span>String, DisasterValue<span style="color:#f92672">&gt;</span> rawReadings <span style="color:#f92672">=</span> builder.<span style="color:#a6e22e">stream</span>(<span style="color:#e6db74">&#34;DisasterReadings&#34;</span>, Consumed.<span style="color:#a6e22e">with</span>(Serdes.<span style="color:#a6e22e">String</span>(), Serdes.<span style="color:#a6e22e">Integer</span>()));
+</span></span></code></pre></div><h3 id="standard-functional-programming">Standard Functional Programming<a hidden class="anchor" aria-hidden="true" href="#standard-functional-programming">#</a></h3>
+<p>map, filter, flatMap, groupBy, reduce, window, join, leftJoin, outerJoin</p>
+<h4 id="mapping">Mapping<a hidden class="anchor" aria-hidden="true" href="#mapping">#</a></h4>
+<p>Before: (1, &ldquo;Hello&rdquo;), (2, &ldquo;Zoom&rdquo;), (3, &ldquo;Fold&rdquo;)</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>stream.<span style="color:#a6e22e">map</span>((key, value) <span style="color:#f92672">-&gt;</span> <span style="color:#66d9ef">new</span> KeyValue<span style="color:#f92672">&lt;&gt;</span>(key <span style="color:#f92672">+</span> 1, value <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;!&#34;</span>));
+</span></span></code></pre></div><p>After: (2, &ldquo;Hello!&rdquo;), (3, &ldquo;Zoom!&rdquo;), (4, &ldquo;Fold!&rdquo;)</p>
+<h4 id="filter">Filter<a hidden class="anchor" aria-hidden="true" href="#filter">#</a></h4>
+<p>Before: (1, &ldquo;Hello&rdquo;), (2, &ldquo;Zoom&rdquo;), (3, &ldquo;Fold&rdquo;), (4, &ldquo;Past&rdquo;)</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>stream.<span style="color:#a6e22e">filter</span>((key, value) <span style="color:#f92672">-&gt;</span> key <span style="color:#f92672">%</span> 2 <span style="color:#f92672">==</span> 0);
+</span></span></code></pre></div><p>(2, &ldquo;Zoom&rdquo;), (4, &ldquo;Past&rdquo;)</p>
+<h3 id="dump-results-to-a-topic">Dump Results to a Topic<a hidden class="anchor" aria-hidden="true" href="#dump-results-to-a-topic">#</a></h3>
+<p>Dump the results to a topic using through to post to the topic and continue.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>KStream stream <span style="color:#f92672">=</span> builder.<span style="color:#a6e22e">stream</span>(<span style="color:#e6db74">&#34;my_topic&#34;</span>);
+</span></span><span style="display:flex;"><span>stream.<span style="color:#a6e22e">filter</span>(...).<span style="color:#a6e22e">through</span>(<span style="color:#e6db74">&#34;new_topic&#34;</span>).<span style="color:#a6e22e">flatMap</span>(...).<span style="color:#a6e22e">to</span>(<span style="color:#e6db74">&#34;other_topic&#34;</span>);
+</span></span></code></pre></div><h3 id="run">Run<a hidden class="anchor" aria-hidden="true" href="#run">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>Topology topology <span style="color:#f92672">=</span> builder.<span style="color:#a6e22e">build</span>();
+</span></span><span style="display:flex;"><span>KafkaStreams streams <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> KafkaStreams(topology, props);
+</span></span><span style="display:flex;"><span>streams.<span style="color:#a6e22e">start</span>();
+</span></span></code></pre></div><h3 id="adding-a-shutdown-hook">Adding a Shutdown Hook<a hidden class="anchor" aria-hidden="true" href="#adding-a-shutdown-hook">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>Runtime.<span style="color:#a6e22e">getRuntime</span>().<span style="color:#a6e22e">addShutdownHook</span>(<span style="color:#66d9ef">new</span> Thread(streams::close));
+</span></span></code></pre></div><h2 id="demo-creating-a-kafka-streams-application">Demo: Creating a Kafka Streams Application<a hidden class="anchor" aria-hidden="true" href="#demo-creating-a-kafka-streams-application">#</a></h2>
+<h3 id="run-docker-containers">Run Docker Containers<a hidden class="anchor" aria-hidden="true" href="#run-docker-containers">#</a></h3>
+<p>Create a docker-compose file, including 3 zookeepers, 3 Kafka brokers, 1 Rest Proxy, and 1 Schema Registry.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span>---
+</span></span><span style="display:flex;"><span><span style="color:#f92672">version</span>: <span style="color:#e6db74">&#39;3&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">services</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">zookeeper-1</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">image</span>: <span style="color:#ae81ff">confluentinc/cp-zookeeper:7.4.1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">hostname</span>: <span style="color:#ae81ff">zookeeper-1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">container_name</span>: <span style="color:#ae81ff">zookeeper-1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">volumes</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">./zookeeper-1_data:/var/lib/zookeeper/data</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">./zookeeper-1_log:/var/lib/zookeeper/log</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">environment</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">ZOOKEEPER_CLIENT_PORT</span>: <span style="color:#ae81ff">2181</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">ZOOKEEPER_TICK_TIME</span>: <span style="color:#ae81ff">2000</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">ZOO_MY_ID</span>: <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">ZOO_SERVERS</span>: <span style="color:#ae81ff">server.1=zookeeper-1:2888:3888;2181 server.2=zookeeper-2:2888:3888;2181 server.3=zookeeper-3:2888:3888;2181</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">zookeeper-2</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">image</span>: <span style="color:#ae81ff">confluentinc/cp-zookeeper:7.4.1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">hostname</span>: <span style="color:#ae81ff">zookeeper-2</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">container_name</span>: <span style="color:#ae81ff">zookeeper-2</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">volumes</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">./zookeeper-2_data:/var/lib/zookeeper/data</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">./zookeeper-2_log:/var/lib/zookeeper/log</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">environment</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">ZOOKEEPER_CLIENT_PORT</span>: <span style="color:#ae81ff">2181</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">ZOOKEEPER_TICK_TIME</span>: <span style="color:#ae81ff">2000</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">ZOO_MY_ID</span>: <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">ZOO_SERVERS</span>: <span style="color:#ae81ff">server.1=zookeeper-1:2888:3888;2181 server.2=zookeeper-2:2888:3888;2181 server.3=zookeeper-3:2888:3888;2181</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">zookeeper-3</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">image</span>: <span style="color:#ae81ff">confluentinc/cp-zookeeper:7.4.1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">hostname</span>: <span style="color:#ae81ff">zookeeper-3</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">container_name</span>: <span style="color:#ae81ff">zookeeper-3</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">volumes</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">./zookeeper-3_data:/var/lib/zookeeper/data</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">./zookeeper-3_log:/var/lib/zookeeper/log</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">environment</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">ZOOKEEPER_CLIENT_PORT</span>: <span style="color:#ae81ff">2181</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">ZOOKEEPER_TICK_TIME</span>: <span style="color:#ae81ff">2000</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">ZOO_MY_ID</span>: <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">ZOO_SERVERS</span>: <span style="color:#ae81ff">server.1=zookeeper-1:2888:3888;2181 server.2=zookeeper-2:2888:3888;2181 server.3=zookeeper-3:2888:3888;2181</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">broker-1</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">image</span>: <span style="color:#ae81ff">confluentinc/cp-kafka:7.4.1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">hostname</span>: <span style="color:#ae81ff">broker-1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">container_name</span>: <span style="color:#ae81ff">broker-1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">volumes</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">./broker-1-data:/var/lib/kafka/data</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">depends_on</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">zookeeper-1</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">zookeeper-2</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">zookeeper-3</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">ports</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">9092</span>:<span style="color:#ae81ff">9092</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">29092</span>:<span style="color:#ae81ff">29092</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">environment</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">KAFKA_BROKER_ID</span>: <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">KAFKA_ZOOKEEPER_CONNECT</span>: <span style="color:#ae81ff">zookeeper-1:2181</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">KAFKA_ADVERTISED_LISTENERS</span>: <span style="color:#ae81ff">HOST://localhost:9092,INTERNAL://broker-1:29092</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">KAFKA_LISTENER_SECURITY_PROTOCOL_MAP</span>: <span style="color:#ae81ff">HOST:PLAINTEXT,INTERNAL:PLAINTEXT</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">KAFKA_INTER_BROKER_LISTENER_NAME</span>: <span style="color:#ae81ff">INTERNAL</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">KAFKA_SNAPSHOT_TRUST_EMPTY</span>: <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">broker-2</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">image</span>: <span style="color:#ae81ff">confluentinc/cp-kafka:7.4.1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">hostname</span>: <span style="color:#ae81ff">broker-2</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">container_name</span>: <span style="color:#ae81ff">broker-2</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">volumes</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">./broker-2-data:/var/lib/kafka/data</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">depends_on</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">zookeeper-1</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">zookeeper-2</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">zookeeper-3</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">broker-1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">ports</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">9093</span>:<span style="color:#ae81ff">9093</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">29093</span>:<span style="color:#ae81ff">29093</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">environment</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">KAFKA_BROKER_ID</span>: <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">KAFKA_ZOOKEEPER_CONNECT</span>: <span style="color:#ae81ff">zookeeper-1:2181</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">KAFKA_ADVERTISED_LISTENERS</span>: <span style="color:#ae81ff">HOST://localhost:9093,INTERNAL://broker-2:29093</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">KAFKA_LISTENER_SECURITY_PROTOCOL_MAP</span>: <span style="color:#ae81ff">HOST:PLAINTEXT,INTERNAL:PLAINTEXT</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">KAFKA_INTER_BROKER_LISTENER_NAME</span>: <span style="color:#ae81ff">INTERNAL</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">KAFKA_SNAPSHOT_TRUST_EMPTY</span>: <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">broker-3</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">image</span>: <span style="color:#ae81ff">confluentinc/cp-kafka:7.4.1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">hostname</span>: <span style="color:#ae81ff">broker-3</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">container_name</span>: <span style="color:#ae81ff">broker-3</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">volumes</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">./broker-3-data:/var/lib/kafka/data</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">depends_on</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">zookeeper-1</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">zookeeper-2</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">zookeeper-3</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">broker-1</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">broker-2</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">ports</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">9094</span>:<span style="color:#ae81ff">9094</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">29094</span>:<span style="color:#ae81ff">29094</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">environment</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">KAFKA_BROKER_ID</span>: <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">KAFKA_ZOOKEEPER_CONNECT</span>: <span style="color:#ae81ff">zookeeper-1:2181</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">KAFKA_ADVERTISED_LISTENERS</span>: <span style="color:#ae81ff">HOST://localhost:9094,INTERNAL://broker-3:29094</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">KAFKA_LISTENER_SECURITY_PROTOCOL_MAP</span>: <span style="color:#ae81ff">HOST:PLAINTEXT,INTERNAL:PLAINTEXT</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">KAFKA_INTER_BROKER_LISTENER_NAME</span>: <span style="color:#ae81ff">INTERNAL</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">KAFKA_SNAPSHOT_TRUST_EMPTY</span>: <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">rest-proxy</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">image</span>: <span style="color:#ae81ff">confluentinc/cp-kafka-rest:7.4.1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">ports</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#e6db74">&#34;8082:8082&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">depends_on</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">zookeeper-1</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">zookeeper-2</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">zookeeper-3</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">broker-1</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">broker-2</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">broker-3</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">hostname</span>: <span style="color:#ae81ff">rest-proxy</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">container_name</span>: <span style="color:#ae81ff">rest-proxy</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">environment</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">KAFKA_REST_HOST_NAME</span>: <span style="color:#ae81ff">rest-proxy</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">KAFKA_REST_BOOTSTRAP_SERVERS</span>: <span style="color:#e6db74">&#39;broker-1:29092,broker-2:29093,broker-3:29094&#39;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">KAFKA_REST_LISTENERS</span>: <span style="color:#e6db74">&#34;http://0.0.0.0:8082&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">schema-registry</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">image</span>: <span style="color:#ae81ff">confluentinc/cp-schema-registry:7.4.1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">hostname</span>: <span style="color:#ae81ff">schema-registry</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">container_name</span>: <span style="color:#ae81ff">schema-registry</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">depends_on</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">rest-proxy</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">ports</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#e6db74">&#34;8081:8081&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">environment</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">SCHEMA_REGISTRY_HOST_NAME</span>: <span style="color:#ae81ff">schema-registry</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS</span>: <span style="color:#e6db74">&#39;broker-1:29092,broker-2:29093,broker-3:29094&#39;</span>
+</span></span></code></pre></div><p>Run composed containers:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker compose up -d
+</span></span></code></pre></div><h3 id="create-two-topics">Create two Topics<a hidden class="anchor" aria-hidden="true" href="#create-two-topics">#</a></h3>
+<p>Create a <code>RawTeampReadings</code> topic that has 4 partitions.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kafka-topics.sh --create --bootstrap-server localhost:9092 --partitions <span style="color:#ae81ff">4</span> --topic RawTempReadings
+</span></span></code></pre></div><p>Then create a <code>ValidatedTempReadings</code> topic that has 4 partitions.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kafka-topics.sh --create --bootstrap-server localhost:9092 --partitions <span style="color:#ae81ff">4</span> --topic ValidatedTempReadings
+</span></span></code></pre></div><h3 id="create-a-consumer">Create a Consumer<a hidden class="anchor" aria-hidden="true" href="#create-a-consumer">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kafka-console-consumer.sh <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>--bootstrap-server localhost:9092 <span style="color:#ae81ff">\ </span>                                              
+</span></span><span style="display:flex;"><span>--topic ValidatedTempReadings --from-beginning <span style="color:#ae81ff">\ </span>                                 
+</span></span><span style="display:flex;"><span>--key-deserializer org.apache.kafka.common.serialization.StringDeserializer <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>--value-deserializer org.apache.kafka.common.serialization.IntegerDeserializer <span style="color:#ae81ff">\ </span> 
+</span></span><span style="display:flex;"><span>--property print.key<span style="color:#f92672">=</span>true <span style="color:#ae81ff">\ </span>                                                      
+</span></span><span style="display:flex;"><span>--property key.separator<span style="color:#f92672">=</span>, <span style="color:#ae81ff">\ </span>                                                     
+</span></span><span style="display:flex;"><span>--group <span style="color:#ae81ff">1</span>
+</span></span></code></pre></div><h3 id="run-a-stream">Run a Stream<a hidden class="anchor" aria-hidden="true" href="#run-a-stream">#</a></h3>
+<p>Run a Kafka Stream from topic <code>RawTempReadings</code> to topic <code>ValidatedTempReadings</code>, only filtering the messages whose values are between -50 and 130.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">package</span> com.globomantics;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.apache.kafka.common.serialization.Serdes;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.apache.kafka.streams.KafkaStreams;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.apache.kafka.streams.StreamsBuilder;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.apache.kafka.streams.StreamsConfig;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.apache.kafka.streams.Topology;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.apache.kafka.streams.kstream.KStream;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.util.Properties;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">SimpleETL</span> {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>(String<span style="color:#f92672">[]</span> args) {
+</span></span><span style="display:flex;"><span>		Properties props <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Properties();
+</span></span><span style="display:flex;"><span>    props.<span style="color:#a6e22e">put</span>(StreamsConfig.<span style="color:#a6e22e">APPLICATION_ID_CONFIG</span>, <span style="color:#e6db74">&#34;weather.filter&#34;</span>);
+</span></span><span style="display:flex;"><span>    props.<span style="color:#a6e22e">put</span>(StreamsConfig.<span style="color:#a6e22e">BOOTSTRAP_SERVERS_CONFIG</span>, <span style="color:#e6db74">&#34;http://localhost:9092,http://localhost:9093,http://localhost:9094&#34;</span>);
+</span></span><span style="display:flex;"><span>    props.<span style="color:#a6e22e">put</span>(StreamsConfig.<span style="color:#a6e22e">DEFAULT_KEY_SERDE_CLASS_CONFIG</span>, 
+</span></span><span style="display:flex;"><span>              Serdes.<span style="color:#a6e22e">String</span>().<span style="color:#a6e22e">getClass</span>());
+</span></span><span style="display:flex;"><span>    props.<span style="color:#a6e22e">put</span>(StreamsConfig.<span style="color:#a6e22e">DEFAULT_VALUE_SERDE_CLASS_CONFIG</span>, 
+</span></span><span style="display:flex;"><span>              Serdes.<span style="color:#a6e22e">Integer</span>().<span style="color:#a6e22e">getClass</span>());
+</span></span><span style="display:flex;"><span>		
+</span></span><span style="display:flex;"><span>		StreamsBuilder builder <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> StreamsBuilder();
+</span></span><span style="display:flex;"><span>		KStream<span style="color:#f92672">&lt;</span>String, Integer<span style="color:#f92672">&gt;</span> rawReadings <span style="color:#f92672">=</span> builder.<span style="color:#a6e22e">stream</span>(<span style="color:#e6db74">&#34;RawTempReadings&#34;</span>);
+</span></span><span style="display:flex;"><span>		KStream<span style="color:#f92672">&lt;</span>String, Integer<span style="color:#f92672">&gt;</span> validatedReadings <span style="color:#f92672">=</span> rawReadings
+</span></span><span style="display:flex;"><span>				.<span style="color:#a6e22e">filter</span>((key, value) <span style="color:#f92672">-&gt;</span> value <span style="color:#f92672">&gt;</span> <span style="color:#f92672">-</span>50 <span style="color:#f92672">&amp;&amp;</span> value <span style="color:#f92672">&lt;</span> 130);
+</span></span><span style="display:flex;"><span>		validatedReadings.<span style="color:#a6e22e">to</span>(<span style="color:#e6db74">&#34;ValidatedTempReadings&#34;</span>);
+</span></span><span style="display:flex;"><span>		
+</span></span><span style="display:flex;"><span>		Topology topo <span style="color:#f92672">=</span> builder.<span style="color:#a6e22e">build</span>();
+</span></span><span style="display:flex;"><span>		System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(topo.<span style="color:#a6e22e">describe</span>());
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		KafkaStreams streams <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> KafkaStreams(topo, props);
+</span></span><span style="display:flex;"><span>		Runtime.<span style="color:#a6e22e">getRuntime</span>().<span style="color:#a6e22e">addShutdownHook</span>(<span style="color:#66d9ef">new</span> Thread(streams::close));
+</span></span><span style="display:flex;"><span>		streams.<span style="color:#a6e22e">cleanUp</span>();
+</span></span><span style="display:flex;"><span>		streams.<span style="color:#a6e22e">start</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Starting simple ETL&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="run-a-producer">Run a Producer<a hidden class="anchor" aria-hidden="true" href="#run-a-producer">#</a></h3>
+<p>Run a Kafka Producer that sends messages to the topic <code>RawTempReadings</code>, which sends messages whose values are between -20 and 180.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">package</span> com.globomantics;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.apache.kafka.clients.producer.KafkaProducer;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.apache.kafka.clients.producer.ProducerConfig;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.apache.kafka.clients.producer.ProducerRecord;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.apache.kafka.common.serialization.IntegerSerializer;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.apache.kafka.common.serialization.StringSerializer;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.slf4j.Logger;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.slf4j.LoggerFactory;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.util.Properties;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.util.Random;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.util.concurrent.ThreadLocalRandom;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Producer</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">final</span> Logger log <span style="color:#f92672">=</span> LoggerFactory.<span style="color:#a6e22e">getLogger</span>(Producer.<span style="color:#a6e22e">class</span>);
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">final</span> Properties props <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Properties();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>(String<span style="color:#f92672">[]</span> args) <span style="color:#66d9ef">throws</span> InterruptedException {
+</span></span><span style="display:flex;"><span>		props.<span style="color:#a6e22e">put</span>(ProducerConfig.<span style="color:#a6e22e">BOOTSTRAP_SERVERS_CONFIG</span>, <span style="color:#e6db74">&#34;http://localhost:9092,http://localhost:9093,http://localhost:9094&#34;</span>);
+</span></span><span style="display:flex;"><span>		props.<span style="color:#a6e22e">put</span>(ProducerConfig.<span style="color:#a6e22e">KEY_SERIALIZER_CLASS_CONFIG</span>, StringSerializer.<span style="color:#a6e22e">class</span>.<span style="color:#a6e22e">getName</span>());
+</span></span><span style="display:flex;"><span>		props.<span style="color:#a6e22e">put</span>(ProducerConfig.<span style="color:#a6e22e">VALUE_SERIALIZER_CLASS_CONFIG</span>, IntegerSerializer.<span style="color:#a6e22e">class</span>.<span style="color:#a6e22e">getName</span>());
+</span></span><span style="display:flex;"><span>		KafkaProducer<span style="color:#f92672">&lt;</span>String, Integer<span style="color:#f92672">&gt;</span> producer <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> KafkaProducer<span style="color:#f92672">&lt;&gt;</span>(props);
+</span></span><span style="display:flex;"><span>		String<span style="color:#f92672">[]</span> sensors <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> String<span style="color:#f92672">[]</span>{<span style="color:#e6db74">&#34;sensor_1&#34;</span>, <span style="color:#e6db74">&#34;sensor_2&#34;</span>, <span style="color:#e6db74">&#34;sensor_3&#34;</span>};
+</span></span><span style="display:flex;"><span>		Runtime.<span style="color:#a6e22e">getRuntime</span>().<span style="color:#a6e22e">addShutdownHook</span>(<span style="color:#66d9ef">new</span> Thread(producer::close));
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">while</span> (<span style="color:#66d9ef">true</span>) {
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">int</span> idx <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Random().<span style="color:#a6e22e">nextInt</span>(sensors.<span style="color:#a6e22e">length</span>);
+</span></span><span style="display:flex;"><span>			String key <span style="color:#f92672">=</span> (sensors<span style="color:#f92672">[</span>idx<span style="color:#f92672">]</span>);
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">int</span> value <span style="color:#f92672">=</span> ThreadLocalRandom.<span style="color:#a6e22e">current</span>().<span style="color:#a6e22e">nextInt</span>(<span style="color:#f92672">-</span>20, 180 <span style="color:#f92672">+</span> 1);
+</span></span><span style="display:flex;"><span>			ProducerRecord<span style="color:#f92672">&lt;</span>String, Integer<span style="color:#f92672">&gt;</span> producerRecord <span style="color:#f92672">=</span>
+</span></span><span style="display:flex;"><span>					<span style="color:#66d9ef">new</span> ProducerRecord<span style="color:#f92672">&lt;&gt;</span>(<span style="color:#e6db74">&#34;RawTempReadings&#34;</span>, key, value);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>			producer.<span style="color:#a6e22e">send</span>(producerRecord);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>			producer.<span style="color:#a6e22e">flush</span>();
+</span></span><span style="display:flex;"><span>			log.<span style="color:#a6e22e">info</span>(<span style="color:#e6db74">&#34;Successfully produced message from sensor &#34;</span> <span style="color:#f92672">+</span> key);
+</span></span><span style="display:flex;"><span>			Thread.<span style="color:#a6e22e">sleep</span>(200);
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>We can see the received messages from the consumer, whose values are only between -50 and 130, which have been filtered by the Kafka Stream successfully.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>❯ kafka-console-consumer.sh <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>--bootstrap-server localhost:9092 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>--topic ValidatedTempReadings --from-beginning <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>--key-deserializer org.apache.kafka.common.serialization.StringDeserializer <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>--value-deserializer org.apache.kafka.common.serialization.IntegerDeserializer <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>--property print.key<span style="color:#f92672">=</span>true <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>--property key.separator<span style="color:#f92672">=</span>, <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>--group <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>sensor_2,89
+</span></span><span style="display:flex;"><span>sensor_2,86
+</span></span><span style="display:flex;"><span>sensor_1,75
+</span></span><span style="display:flex;"><span>sensor_1,0
+</span></span><span style="display:flex;"><span>sensor_2,39
+</span></span><span style="display:flex;"><span>sensor_3,-11
+</span></span><span style="display:flex;"><span>sensor_3,106
+</span></span><span style="display:flex;"><span>sensor_1,84
+</span></span><span style="display:flex;"><span>sensor_1,52
+</span></span><span style="display:flex;"><span>sensor_1,122
+</span></span><span style="display:flex;"><span>sensor_1,53
+</span></span><span style="display:flex;"><span>sensor_2,117
+</span></span><span style="display:flex;"><span>sensor_3,-10
+</span></span><span style="display:flex;"><span>sensor_1,16
+</span></span><span style="display:flex;"><span>sensor_2,113
+</span></span><span style="display:flex;"><span>sensor_3,-11
+</span></span></code></pre></div><h2 id="querying-a-stream-with-ksql">Querying a Stream with KSQL<a hidden class="anchor" aria-hidden="true" href="#querying-a-stream-with-ksql">#</a></h2>
+<h3 id="run-docker-containers-1">Run Docker Containers<a hidden class="anchor" aria-hidden="true" href="#run-docker-containers-1">#</a></h3>
+<p>Create a docker-compose file, including 3 zookeepers, 3 Kafka brokers, 1 Rest Proxy, 1 Schema Registry, 1 KSQL DB Server, and 1 KSQL DB Client.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span>---
+</span></span><span style="display:flex;"><span><span style="color:#f92672">version</span>: <span style="color:#e6db74">&#39;3&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">services</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">zookeeper-1</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">image</span>: <span style="color:#ae81ff">confluentinc/cp-zookeeper:7.4.1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">hostname</span>: <span style="color:#ae81ff">zookeeper-1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">container_name</span>: <span style="color:#ae81ff">zookeeper-1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">volumes</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">./zookeeper-1_data:/var/lib/zookeeper/data</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">./zookeeper-1_log:/var/lib/zookeeper/log</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">environment</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">ZOOKEEPER_CLIENT_PORT</span>: <span style="color:#ae81ff">2181</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">ZOOKEEPER_TICK_TIME</span>: <span style="color:#ae81ff">2000</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">ZOO_MY_ID</span>: <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">ZOO_SERVERS</span>: <span style="color:#ae81ff">server.1=zookeeper-1:2888:3888;2181 server.2=zookeeper-2:2888:3888;2181 server.3=zookeeper-3:2888:3888;2181</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">zookeeper-2</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">image</span>: <span style="color:#ae81ff">confluentinc/cp-zookeeper:7.4.1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">hostname</span>: <span style="color:#ae81ff">zookeeper-2</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">container_name</span>: <span style="color:#ae81ff">zookeeper-2</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">volumes</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">./zookeeper-2_data:/var/lib/zookeeper/data</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">./zookeeper-2_log:/var/lib/zookeeper/log</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">environment</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">ZOOKEEPER_CLIENT_PORT</span>: <span style="color:#ae81ff">2181</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">ZOOKEEPER_TICK_TIME</span>: <span style="color:#ae81ff">2000</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">ZOO_MY_ID</span>: <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">ZOO_SERVERS</span>: <span style="color:#ae81ff">server.1=zookeeper-1:2888:3888;2181 server.2=zookeeper-2:2888:3888;2181 server.3=zookeeper-3:2888:3888;2181</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">zookeeper-3</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">image</span>: <span style="color:#ae81ff">confluentinc/cp-zookeeper:7.4.1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">hostname</span>: <span style="color:#ae81ff">zookeeper-3</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">container_name</span>: <span style="color:#ae81ff">zookeeper-3</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">volumes</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">./zookeeper-3_data:/var/lib/zookeeper/data</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">./zookeeper-3_log:/var/lib/zookeeper/log</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">environment</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">ZOOKEEPER_CLIENT_PORT</span>: <span style="color:#ae81ff">2181</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">ZOOKEEPER_TICK_TIME</span>: <span style="color:#ae81ff">2000</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">ZOO_MY_ID</span>: <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">ZOO_SERVERS</span>: <span style="color:#ae81ff">server.1=zookeeper-1:2888:3888;2181 server.2=zookeeper-2:2888:3888;2181 server.3=zookeeper-3:2888:3888;2181</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">broker-1</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">image</span>: <span style="color:#ae81ff">confluentinc/cp-kafka:7.4.1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">hostname</span>: <span style="color:#ae81ff">broker-1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">container_name</span>: <span style="color:#ae81ff">broker-1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">volumes</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">./broker-1-data:/var/lib/kafka/data</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">depends_on</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">zookeeper-1</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">zookeeper-2</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">zookeeper-3</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">ports</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">9092</span>:<span style="color:#ae81ff">9092</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">29092</span>:<span style="color:#ae81ff">29092</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">environment</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">KAFKA_BROKER_ID</span>: <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">KAFKA_ZOOKEEPER_CONNECT</span>: <span style="color:#ae81ff">zookeeper-1:2181</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">KAFKA_ADVERTISED_LISTENERS</span>: <span style="color:#ae81ff">HOST://localhost:9092,INTERNAL://broker-1:29092</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">KAFKA_LISTENER_SECURITY_PROTOCOL_MAP</span>: <span style="color:#ae81ff">HOST:PLAINTEXT,INTERNAL:PLAINTEXT</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">KAFKA_INTER_BROKER_LISTENER_NAME</span>: <span style="color:#ae81ff">INTERNAL</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">KAFKA_SNAPSHOT_TRUST_EMPTY</span>: <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">broker-2</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">image</span>: <span style="color:#ae81ff">confluentinc/cp-kafka:7.4.1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">hostname</span>: <span style="color:#ae81ff">broker-2</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">container_name</span>: <span style="color:#ae81ff">broker-2</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">volumes</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">./broker-2-data:/var/lib/kafka/data</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">depends_on</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">zookeeper-1</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">zookeeper-2</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">zookeeper-3</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">broker-1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">ports</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">9093</span>:<span style="color:#ae81ff">9093</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">29093</span>:<span style="color:#ae81ff">29093</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">environment</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">KAFKA_BROKER_ID</span>: <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">KAFKA_ZOOKEEPER_CONNECT</span>: <span style="color:#ae81ff">zookeeper-1:2181</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">KAFKA_ADVERTISED_LISTENERS</span>: <span style="color:#ae81ff">HOST://localhost:9093,INTERNAL://broker-2:29093</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">KAFKA_LISTENER_SECURITY_PROTOCOL_MAP</span>: <span style="color:#ae81ff">HOST:PLAINTEXT,INTERNAL:PLAINTEXT</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">KAFKA_INTER_BROKER_LISTENER_NAME</span>: <span style="color:#ae81ff">INTERNAL</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">KAFKA_SNAPSHOT_TRUST_EMPTY</span>: <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">broker-3</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">image</span>: <span style="color:#ae81ff">confluentinc/cp-kafka:7.4.1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">hostname</span>: <span style="color:#ae81ff">broker-3</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">container_name</span>: <span style="color:#ae81ff">broker-3</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">volumes</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">./broker-3-data:/var/lib/kafka/data</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">depends_on</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">zookeeper-1</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">zookeeper-2</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">zookeeper-3</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">broker-1</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">broker-2</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">ports</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">9094</span>:<span style="color:#ae81ff">9094</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">29094</span>:<span style="color:#ae81ff">29094</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">environment</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">KAFKA_BROKER_ID</span>: <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">KAFKA_ZOOKEEPER_CONNECT</span>: <span style="color:#ae81ff">zookeeper-1:2181</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">KAFKA_ADVERTISED_LISTENERS</span>: <span style="color:#ae81ff">HOST://localhost:9094,INTERNAL://broker-3:29094</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">KAFKA_LISTENER_SECURITY_PROTOCOL_MAP</span>: <span style="color:#ae81ff">HOST:PLAINTEXT,INTERNAL:PLAINTEXT</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">KAFKA_INTER_BROKER_LISTENER_NAME</span>: <span style="color:#ae81ff">INTERNAL</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">KAFKA_SNAPSHOT_TRUST_EMPTY</span>: <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">rest-proxy</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">image</span>: <span style="color:#ae81ff">confluentinc/cp-kafka-rest:7.4.1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">ports</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#e6db74">&#34;8082:8082&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">depends_on</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">zookeeper-1</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">zookeeper-2</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">zookeeper-3</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">broker-1</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">broker-2</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">broker-3</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">hostname</span>: <span style="color:#ae81ff">rest-proxy</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">container_name</span>: <span style="color:#ae81ff">rest-proxy</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">environment</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">KAFKA_REST_HOST_NAME</span>: <span style="color:#ae81ff">rest-proxy</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">KAFKA_REST_BOOTSTRAP_SERVERS</span>: <span style="color:#e6db74">&#39;broker-1:29092,broker-2:29093,broker-3:29094&#39;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">KAFKA_REST_LISTENERS</span>: <span style="color:#e6db74">&#34;http://0.0.0.0:8082&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">schema-registry</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">image</span>: <span style="color:#ae81ff">confluentinc/cp-schema-registry:7.4.1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">hostname</span>: <span style="color:#ae81ff">schema-registry</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">container_name</span>: <span style="color:#ae81ff">schema-registry</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">depends_on</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">rest-proxy</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">ports</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#e6db74">&#34;8081:8081&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">environment</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">SCHEMA_REGISTRY_HOST_NAME</span>: <span style="color:#ae81ff">schema-registry</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS</span>: <span style="color:#e6db74">&#39;broker-1:29092,broker-2:29093,broker-3:29094&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">ksqldb-server</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">image</span>: <span style="color:#ae81ff">confluentinc/cp-ksqldb-server:7.4.1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">hostname</span>: <span style="color:#ae81ff">ksqldb-server</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">container_name</span>: <span style="color:#ae81ff">ksqldb-server</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">depends_on</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">schema-registry</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">ports</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#e6db74">&#34;8088:8088&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">environment</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">KSQL_LISTENERS</span>: <span style="color:#ae81ff">http://0.0.0.0:8088</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">KSQL_BOOTSTRAP_SERVERS</span>: <span style="color:#ae81ff">broker-1:29092,broker-2:29093,broker-3:29094</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">KSQL_KSQL_LOGGING_PROCESSING_STREAM_AUTO_CREATE</span>: <span style="color:#e6db74">&#34;true&#34;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">KSQL_KSQL_LOGGING_PROCESSING_TOPIC_AUTO_CREATE</span>: <span style="color:#e6db74">&#34;true&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">ksqldb-cli</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">image</span>: <span style="color:#ae81ff">confluentinc/cp-ksqldb-cli:7.4.1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">container_name</span>: <span style="color:#ae81ff">ksqldb-cli</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">hostname</span>: <span style="color:#ae81ff">ksqldb-cli</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">depends_on</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">ksqldb-server</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">entrypoint</span>: <span style="color:#ae81ff">/bin/sh</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">tty</span>: <span style="color:#66d9ef">true</span>
+</span></span></code></pre></div><p>Run composed containers:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker compose up -d
+</span></span></code></pre></div><h3 id="run-ksql-client">Run KSQL CLient<a hidden class="anchor" aria-hidden="true" href="#run-ksql-client">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker exec -it ksqldb-cli ksql http://ksqldb-server:8088
+</span></span></code></pre></div><p>We can show all the topics:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ksql&gt; show all topics;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span> Kafka Topic                            | Partitions | Partition Replicas 
+</span></span><span style="display:flex;"><span>--------------------------------------------------------------------------
+</span></span><span style="display:flex;"><span> _confluent-ksql-default__command_topic | <span style="color:#ae81ff">1</span>          | <span style="color:#ae81ff">1</span>                  
+</span></span><span style="display:flex;"><span> _schemas                               | <span style="color:#ae81ff">1</span>          | <span style="color:#ae81ff">3</span>                  
+</span></span><span style="display:flex;"><span> default_ksql_processing_log            | <span style="color:#ae81ff">1</span>          | <span style="color:#ae81ff">1</span>                  
+</span></span><span style="display:flex;"><span>--------------------------------------------------------------------------
+</span></span></code></pre></div><p>Then, set the topic offset to the <code>earliest</code>, so that we can see all topics from the beginning:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ksql&gt; SET <span style="color:#e6db74">&#39;auto.offset.reset&#39;</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#39;earliest&#39;</span>;
+</span></span><span style="display:flex;"><span>Successfully changed local property <span style="color:#e6db74">&#39;auto.offset.reset&#39;</span> to <span style="color:#e6db74">&#39;earliest&#39;</span>. Use the UNSET command to revert your change.
+</span></span></code></pre></div><h3 id="create-a-stream">Create a Stream<a hidden class="anchor" aria-hidden="true" href="#create-a-stream">#</a></h3>
+<p>Create a Kafka Stream <code>tempReadings</code> with columns zipcode, sensortime, and temp, which is associated with topic <code>readings</code>. Its timestamp will come from the <code>sensortime</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ksql&gt; CREATE STREAM tempReadings <span style="color:#f92672">(</span>zipcode VARCHAR, sensortime BIGINT, temp DOUBLE<span style="color:#f92672">)</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>&gt; WITH <span style="color:#f92672">(</span>kafka_topic<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;readings&#39;</span>, timestamp<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;sensortime&#39;</span>, value_format<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;json&#39;</span>, partitions<span style="color:#f92672">=</span>1<span style="color:#f92672">)</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span> Message        
+</span></span><span style="display:flex;"><span>----------------
+</span></span><span style="display:flex;"><span> Stream created 
+</span></span><span style="display:flex;"><span>----------------
+</span></span></code></pre></div><p>We can see the topics:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ksql&gt; show topics extended;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span> Kafka Topic                 | Partitions | Partition Replicas | Consumers | ConsumerGroups 
+</span></span><span style="display:flex;"><span>--------------------------------------------------------------------------------------------
+</span></span><span style="display:flex;"><span> default_ksql_processing_log | <span style="color:#ae81ff">1</span>          | <span style="color:#ae81ff">1</span>                  | <span style="color:#ae81ff">0</span>         | <span style="color:#ae81ff">0</span>              
+</span></span><span style="display:flex;"><span> readings                    | <span style="color:#ae81ff">1</span>          | <span style="color:#ae81ff">1</span>                  | <span style="color:#ae81ff">0</span>         | <span style="color:#ae81ff">0</span>              
+</span></span><span style="display:flex;"><span>--------------------------------------------------------------------------------------------
+</span></span></code></pre></div><p>We can see the streams:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ksql&gt; show streams extended;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Name                 : TEMPREADINGS
+</span></span><span style="display:flex;"><span>Type                 : STREAM
+</span></span><span style="display:flex;"><span>Timestamp field      : SENSORTIME
+</span></span><span style="display:flex;"><span>Key format           : KAFKA
+</span></span><span style="display:flex;"><span>Value format         : JSON
+</span></span><span style="display:flex;"><span>Kafka topic          : readings <span style="color:#f92672">(</span>partitions: 1, replication: 1<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>Statement            : CREATE STREAM TEMPREADINGS <span style="color:#f92672">(</span>ZIPCODE STRING, SENSORTIME BIGINT, TEMP DOUBLE<span style="color:#f92672">)</span> WITH <span style="color:#f92672">(</span>CLEANUP_POLICY<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;delete&#39;</span>, KAFKA_TOPIC<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;readings&#39;</span>, KEY_FORMAT<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;KAFKA&#39;</span>, PARTITIONS<span style="color:#f92672">=</span>1, TIMESTAMP<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;sensortime&#39;</span>, VALUE_FORMAT<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;JSON&#39;</span><span style="color:#f92672">)</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span> Field      | Type            
+</span></span><span style="display:flex;"><span>------------------------------
+</span></span><span style="display:flex;"><span> ZIPCODE    | VARCHAR<span style="color:#f92672">(</span>STRING<span style="color:#f92672">)</span> 
+</span></span><span style="display:flex;"><span> SENSORTIME | BIGINT          
+</span></span><span style="display:flex;"><span> TEMP       | DOUBLE          
+</span></span><span style="display:flex;"><span>------------------------------
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>...
+</span></span></code></pre></div><h3 id="insert-stream">Insert Stream<a hidden class="anchor" aria-hidden="true" href="#insert-stream">#</a></h3>
+<p>We can insert records to the stream <code>tempReadings</code> like inserting into a DB, which will send messages to the topic <code>readings</code> at the same time:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ksql&gt; INSERT INTO tempReadings <span style="color:#f92672">(</span>zipcode, sensortime, temp<span style="color:#f92672">)</span> VALUES <span style="color:#f92672">(</span><span style="color:#e6db74">&#39;1865&#39;</span>, UNIX_TIMESTAMP<span style="color:#f92672">()</span>, 20<span style="color:#f92672">)</span>;
+</span></span><span style="display:flex;"><span>ksql&gt; INSERT INTO tempReadings <span style="color:#f92672">(</span>zipcode, sensortime, temp<span style="color:#f92672">)</span> VALUES <span style="color:#f92672">(</span><span style="color:#e6db74">&#39;1806&#39;</span>, UNIX_TIMESTAMP<span style="color:#f92672">()</span>, 25<span style="color:#f92672">)</span>;
+</span></span><span style="display:flex;"><span>ksql&gt; INSERT INTO tempReadings <span style="color:#f92672">(</span>zipcode, sensortime, temp<span style="color:#f92672">)</span> VALUES <span style="color:#f92672">(</span><span style="color:#e6db74">&#39;1806&#39;</span>, UNIX_TIMESTAMP<span style="color:#f92672">()</span> + <span style="color:#ae81ff">60</span> * <span style="color:#ae81ff">60</span> * 1000, 32<span style="color:#f92672">)</span>;
+</span></span><span style="display:flex;"><span>ksql&gt; INSERT INTO tempReadings <span style="color:#f92672">(</span>zipcode, sensortime, temp<span style="color:#f92672">)</span> VALUES <span style="color:#f92672">(</span><span style="color:#e6db74">&#39;1865&#39;</span>, UNIX_TIMESTAMP<span style="color:#f92672">()</span> + <span style="color:#ae81ff">60</span> * <span style="color:#ae81ff">60</span> * 1000, 27<span style="color:#f92672">)</span>;
+</span></span></code></pre></div><h3 id="query-stream">Query Stream<a hidden class="anchor" aria-hidden="true" href="#query-stream">#</a></h3>
+<p>We can query the rowcount and average temperature of each zipcode and each window time from the stream:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ksql&gt; SELECT zipcode, TIMESTAMPTOSTRING<span style="color:#f92672">(</span>WINDOWSTART, <span style="color:#e6db74">&#39;HH:mm:ss&#39;</span><span style="color:#f92672">)</span> as windowtime,
+</span></span><span style="display:flex;"><span>&gt; COUNT<span style="color:#f92672">(</span>*<span style="color:#f92672">)</span> as rowcount, AVG<span style="color:#f92672">(</span>temp<span style="color:#f92672">)</span> as temp
+</span></span><span style="display:flex;"><span>&gt;FROM tempReadings
+</span></span><span style="display:flex;"><span>&gt;WINDOW TUMBLING <span style="color:#f92672">(</span>SIZE <span style="color:#ae81ff">1</span> HOURS<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>&gt;GROUP BY zipcode EMIT CHANGES;
+</span></span><span style="display:flex;"><span>+-----------------------+-----------------------+-----------------------+-----------------------+
+</span></span><span style="display:flex;"><span>|ZIPCODE                |WINDOWTIME             |ROWCOUNT               |TEMP                   |
+</span></span><span style="display:flex;"><span>+-----------------------+-----------------------+-----------------------+-----------------------+
+</span></span><span style="display:flex;"><span>|<span style="color:#ae81ff">1865</span>                   |07:00:00               |<span style="color:#ae81ff">1</span>                      |20.0                   |
+</span></span><span style="display:flex;"><span>|<span style="color:#ae81ff">1806</span>                   |07:00:00               |<span style="color:#ae81ff">1</span>                      |25.0                   |
+</span></span><span style="display:flex;"><span>|<span style="color:#ae81ff">1806</span>                   |08:00:00               |<span style="color:#ae81ff">1</span>                      |32.0                   |
+</span></span><span style="display:flex;"><span>|<span style="color:#ae81ff">1865</span>                   |08:00:00               |<span style="color:#ae81ff">1</span>                      |27.0                   |
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Press CTRL-C to interrupt
+</span></span></code></pre></div><p>We can also run consumer to consume messages from the topic:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>❯ kafka-console-consumer.sh <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>&gt; --bootstrap-server localhost:9092 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>&gt; --topic readings --from-beginning
+</span></span><span style="display:flex;"><span><span style="color:#f92672">{</span><span style="color:#e6db74">&#34;ZIPCODE&#34;</span>:<span style="color:#e6db74">&#34;1865&#34;</span>,<span style="color:#e6db74">&#34;SENSORTIME&#34;</span>:1742023920742,<span style="color:#e6db74">&#34;TEMP&#34;</span>:20.0<span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">{</span><span style="color:#e6db74">&#34;ZIPCODE&#34;</span>:<span style="color:#e6db74">&#34;1806&#34;</span>,<span style="color:#e6db74">&#34;SENSORTIME&#34;</span>:1742023939063,<span style="color:#e6db74">&#34;TEMP&#34;</span>:25.0<span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">{</span><span style="color:#e6db74">&#34;ZIPCODE&#34;</span>:<span style="color:#e6db74">&#34;1806&#34;</span>,<span style="color:#e6db74">&#34;SENSORTIME&#34;</span>:1742027558360,<span style="color:#e6db74">&#34;TEMP&#34;</span>:32.0<span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">{</span><span style="color:#e6db74">&#34;ZIPCODE&#34;</span>:<span style="color:#e6db74">&#34;1865&#34;</span>,<span style="color:#e6db74">&#34;SENSORTIME&#34;</span>:1742027593367,<span style="color:#e6db74">&#34;TEMP&#34;</span>:27.0<span style="color:#f92672">}</span>
+</span></span></code></pre></div><h3 id="create-table">Create Table<a hidden class="anchor" aria-hidden="true" href="#create-table">#</a></h3>
+<p>We can create a table <code>highsandlows</code> that selects data including the minimum and maximum temperature of each zipcode from the stream:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ksql&gt; CREATE TABLE highsandlows WITH <span style="color:#f92672">(</span>kafka_topic<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;readings&#39;</span><span style="color:#f92672">)</span> AS
+</span></span><span style="display:flex;"><span>&gt; SELECT MIN<span style="color:#f92672">(</span>temp<span style="color:#f92672">)</span> as min_temp, MAX<span style="color:#f92672">(</span>temp<span style="color:#f92672">)</span> as max_temp, zipcode
+</span></span><span style="display:flex;"><span>&gt;  FROM tempReadings GROUP BY zipcode;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span> Message                                   
+</span></span><span style="display:flex;"><span>-------------------------------------------
+</span></span><span style="display:flex;"><span> Created query with ID CTAS_HIGHSANDLOWS_3 
+</span></span><span style="display:flex;"><span>-------------------------------------------
+</span></span></code></pre></div><h3 id="query-table">Query Table<a hidden class="anchor" aria-hidden="true" href="#query-table">#</a></h3>
+<p>Then, we can query data directly from the table, which is the latest data from the stream:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ksql&gt; SELECT min_temp, max_temp, zipcode
+</span></span><span style="display:flex;"><span>&gt; FROM highsandlows
+</span></span><span style="display:flex;"><span>&gt; WHERE zipcode <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;1865&#39;</span>;
+</span></span><span style="display:flex;"><span>+--------------------------------+--------------------------------+--------------------------------+
+</span></span><span style="display:flex;"><span>|MIN_TEMP                        |MAX_TEMP                        |ZIPCODE                         |
+</span></span><span style="display:flex;"><span>+--------------------------------+--------------------------------+--------------------------------+
+</span></span><span style="display:flex;"><span>Query terminated
+</span></span></code></pre></div><h2 id="takeaways">Takeaways<a hidden class="anchor" aria-hidden="true" href="#takeaways">#</a></h2>
+<ul>
+<li>Kafka can effectively act as the WAL for your app when using Kafka Streams.</li>
+<li>A stream app is just a topology of functional applications to a stream of incoming messages.</li>
+<li>One can deploy as many streams as you want and they act as microservices.</li>
+<li>KSQL is the CLI to query KSQLDB which is a thin layer over Kafka Streams and permits to do simple stuff without creating an streams app with code.</li>
+</ul>
+<h2 id="keys">Keys<a hidden class="anchor" aria-hidden="true" href="#keys">#</a></h2>
+<ul>
+<li>Try to create a table instead of a stream and query it.</li>
+<li>Try to investigate how to use groupBy and perform JOINs.</li>
+<li>Try to deploy the architecture we mentioned above to query a topic.</li>
+</ul>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://zjxjwxk.github.io/tags/mq/">MQ</a></li>
+      <li><a href="https://zjxjwxk.github.io/tags/kafka/">Kafka</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="next" href="https://zjxjwxk.github.io/posts/mq/kafka/getting-started-with-apache-kafka/5-kafka-connect/">
+    <span class="title">Next »</span>
+    <br>
+    <span>Kafka Connect</span>
+  </a>
+</nav>
+
+
+<ul class="share-buttons">
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share Kafka Stream on x"
+            href="https://x.com/intent/tweet/?text=Kafka%20Stream&amp;url=https%3a%2f%2fzjxjwxk.github.io%2fposts%2fmq%2fkafka%2fgetting-started-with-apache-kafka%2f6-kafka-stream%2f&amp;hashtags=MQ%2cKafka">
+            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M512 62.554 L 512 449.446 C 512 483.97 483.97 512 449.446 512 L 62.554 512 C 28.03 512 0 483.97 0 449.446 L 0 62.554 C 0 28.03 28.029 0 62.554 0 L 449.446 0 C 483.971 0 512 28.03 512 62.554 Z M 269.951 190.75 L 182.567 75.216 L 56 75.216 L 207.216 272.95 L 63.9 436.783 L 125.266 436.783 L 235.9 310.383 L 332.567 436.783 L 456 436.783 L 298.367 228.367 L 432.367 75.216 L 371.033 75.216 Z M 127.633 110 L 164.101 110 L 383.481 400.065 L 349.5 400.065 Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share Kafka Stream on linkedin"
+            href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fzjxjwxk.github.io%2fposts%2fmq%2fkafka%2fgetting-started-with-apache-kafka%2f6-kafka-stream%2f&amp;title=Kafka%20Stream&amp;summary=Kafka%20Stream&amp;source=https%3a%2f%2fzjxjwxk.github.io%2fposts%2fmq%2fkafka%2fgetting-started-with-apache-kafka%2f6-kafka-stream%2f">
+            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-288.985,423.278l0,-225.717l-75.04,0l0,225.717l75.04,0Zm270.539,0l0,-129.439c0,-69.333 -37.018,-101.586 -86.381,-101.586c-39.804,0 -57.634,21.891 -67.617,37.266l0,-31.958l-75.021,0c0.995,21.181 0,225.717 0,225.717l75.02,0l0,-126.056c0,-6.748 0.486,-13.492 2.474,-18.315c5.414,-13.475 17.767,-27.434 38.494,-27.434c27.135,0 38.007,20.707 38.007,51.037l0,120.768l75.024,0Zm-307.552,-334.556c-25.674,0 -42.448,16.879 -42.448,39.002c0,21.658 16.264,39.002 41.455,39.002l0.484,0c26.165,0 42.452,-17.344 42.452,-39.002c-0.485,-22.092 -16.241,-38.954 -41.943,-39.002Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share Kafka Stream on reddit"
+            href="https://reddit.com/submit?url=https%3a%2f%2fzjxjwxk.github.io%2fposts%2fmq%2fkafka%2fgetting-started-with-apache-kafka%2f6-kafka-stream%2f&title=Kafka%20Stream">
+            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-3.446,265.638c0,-22.964 -18.616,-41.58 -41.58,-41.58c-11.211,0 -21.361,4.457 -28.841,11.666c-28.424,-20.508 -67.586,-33.757 -111.204,-35.278l18.941,-89.121l61.884,13.157c0.756,15.734 13.642,28.29 29.56,28.29c16.407,0 29.706,-13.299 29.706,-29.701c0,-16.403 -13.299,-29.702 -29.706,-29.702c-11.666,0 -21.657,6.792 -26.515,16.578l-69.105,-14.69c-1.922,-0.418 -3.939,-0.042 -5.585,1.036c-1.658,1.073 -2.811,2.761 -3.224,4.686l-21.152,99.438c-44.258,1.228 -84.046,14.494 -112.837,35.232c-7.468,-7.164 -17.589,-11.591 -28.757,-11.591c-22.965,0 -41.585,18.616 -41.585,41.58c0,16.896 10.095,31.41 24.568,37.918c-0.639,4.135 -0.99,8.328 -0.99,12.576c0,63.977 74.469,115.836 166.33,115.836c91.861,0 166.334,-51.859 166.334,-115.836c0,-4.218 -0.347,-8.387 -0.977,-12.493c14.564,-6.47 24.735,-21.034 24.735,-38.001Zm-119.474,108.193c-20.27,20.241 -59.115,21.816 -70.534,21.816c-11.428,0 -50.277,-1.575 -70.522,-21.82c-3.007,-3.008 -3.007,-7.882 0,-10.889c3.003,-2.999 7.882,-3.003 10.885,0c12.777,12.781 40.11,17.317 59.637,17.317c19.522,0 46.86,-4.536 59.657,-17.321c3.016,-2.999 7.886,-2.995 10.885,0.008c3.008,3.011 3.003,7.882 -0.008,10.889Zm-5.23,-48.781c-16.373,0 -29.701,-13.324 -29.701,-29.698c0,-16.381 13.328,-29.714 29.701,-29.714c16.378,0 29.706,13.333 29.706,29.714c0,16.374 -13.328,29.698 -29.706,29.698Zm-160.386,-29.702c0,-16.381 13.328,-29.71 29.714,-29.71c16.369,0 29.689,13.329 29.689,29.71c0,16.373 -13.32,29.693 -29.689,29.693c-16.386,0 -29.714,-13.32 -29.714,-29.693Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share Kafka Stream on facebook"
+            href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fzjxjwxk.github.io%2fposts%2fmq%2fkafka%2fgetting-started-with-apache-kafka%2f6-kafka-stream%2f">
+            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-106.468,0l0,-192.915l66.6,0l12.672,-82.621l-79.272,0l0,-53.617c0,-22.603 11.073,-44.636 46.58,-44.636l36.042,0l0,-70.34c0,0 -32.71,-5.582 -63.982,-5.582c-65.288,0 -107.96,39.569 -107.96,111.204l0,62.971l-72.573,0l0,82.621l72.573,0l0,192.915l-191.104,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share Kafka Stream on whatsapp"
+            href="https://api.whatsapp.com/send?text=Kafka%20Stream%20-%20https%3a%2f%2fzjxjwxk.github.io%2fposts%2fmq%2fkafka%2fgetting-started-with-apache-kafka%2f6-kafka-stream%2f">
+            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-58.673,127.703c-33.842,-33.881 -78.847,-52.548 -126.798,-52.568c-98.799,0 -179.21,80.405 -179.249,179.234c-0.013,31.593 8.241,62.428 23.927,89.612l-25.429,92.884l95.021,-24.925c26.181,14.28 55.659,21.807 85.658,21.816l0.074,0c98.789,0 179.206,-80.413 179.247,-179.243c0.018,-47.895 -18.61,-92.93 -52.451,-126.81Zm-126.797,275.782l-0.06,0c-26.734,-0.01 -52.954,-7.193 -75.828,-20.767l-5.441,-3.229l-56.386,14.792l15.05,-54.977l-3.542,-5.637c-14.913,-23.72 -22.791,-51.136 -22.779,-79.287c0.033,-82.142 66.867,-148.971 149.046,-148.971c39.793,0.014 77.199,15.531 105.329,43.692c28.128,28.16 43.609,65.592 43.594,105.4c-0.034,82.149 -66.866,148.983 -148.983,148.984Zm81.721,-111.581c-4.479,-2.242 -26.499,-13.075 -30.604,-14.571c-4.105,-1.495 -7.091,-2.241 -10.077,2.241c-2.986,4.483 -11.569,14.572 -14.182,17.562c-2.612,2.988 -5.225,3.364 -9.703,1.12c-4.479,-2.241 -18.91,-6.97 -36.017,-22.23c-13.314,-11.876 -22.304,-26.542 -24.916,-31.026c-2.612,-4.484 -0.279,-6.908 1.963,-9.14c2.016,-2.007 4.48,-5.232 6.719,-7.847c2.24,-2.615 2.986,-4.484 4.479,-7.472c1.493,-2.99 0.747,-5.604 -0.374,-7.846c-1.119,-2.241 -10.077,-24.288 -13.809,-33.256c-3.635,-8.733 -7.327,-7.55 -10.077,-7.688c-2.609,-0.13 -5.598,-0.158 -8.583,-0.158c-2.986,0 -7.839,1.121 -11.944,5.604c-4.105,4.484 -15.675,15.32 -15.675,37.364c0,22.046 16.048,43.342 18.287,46.332c2.24,2.99 31.582,48.227 76.511,67.627c10.685,4.615 19.028,7.371 25.533,9.434c10.728,3.41 20.492,2.929 28.209,1.775c8.605,-1.285 26.499,-10.833 30.231,-21.295c3.732,-10.464 3.732,-19.431 2.612,-21.298c-1.119,-1.869 -4.105,-2.99 -8.583,-5.232Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share Kafka Stream on telegram"
+            href="https://telegram.me/share/url?text=Kafka%20Stream&amp;url=https%3a%2f%2fzjxjwxk.github.io%2fposts%2fmq%2fkafka%2fgetting-started-with-apache-kafka%2f6-kafka-stream%2f">
+            <svg version="1.1" xml:space="preserve" viewBox="2 2 28 28" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M26.49,29.86H5.5a3.37,3.37,0,0,1-2.47-1,3.35,3.35,0,0,1-1-2.47V5.48A3.36,3.36,0,0,1,3,3,3.37,3.37,0,0,1,5.5,2h21A3.38,3.38,0,0,1,29,3a3.36,3.36,0,0,1,1,2.46V26.37a3.35,3.35,0,0,1-1,2.47A3.38,3.38,0,0,1,26.49,29.86Zm-5.38-6.71a.79.79,0,0,0,.85-.66L24.73,9.24a.55.55,0,0,0-.18-.46.62.62,0,0,0-.41-.17q-.08,0-16.53,6.11a.59.59,0,0,0-.41.59.57.57,0,0,0,.43.52l4,1.24,1.61,4.83a.62.62,0,0,0,.63.43.56.56,0,0,0,.4-.17L16.54,20l4.09,3A.9.9,0,0,0,21.11,23.15ZM13.8,20.71l-1.21-4q8.72-5.55,8.78-5.55c.15,0,.23,0,.23.16a.18.18,0,0,1,0,.06s-2.51,2.3-7.52,6.8Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share Kafka Stream on ycombinator"
+            href="https://news.ycombinator.com/submitlink?t=Kafka%20Stream&u=https%3a%2f%2fzjxjwxk.github.io%2fposts%2fmq%2fkafka%2fgetting-started-with-apache-kafka%2f6-kafka-stream%2f">
+            <svg version="1.1" xml:space="preserve" width="30px" height="30px" viewBox="0 0 512 512" fill="currentColor"
+                xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape">
+                <path
+                    d="M449.446 0C483.971 0 512 28.03 512 62.554L512 449.446C512 483.97 483.97 512 449.446 512L62.554 512C28.03 512 0 483.97 0 449.446L0 62.554C0 28.03 28.029 0 62.554 0L449.446 0ZM183.8767 87.9921H121.8427L230.6673 292.4508V424.0079H281.3328V292.4508L390.1575 87.9921H328.1233L256 238.2489z" />
+            </svg>
+        </a>
+    </li>
+</ul>
+
+  </footer><div id="disqus_thread"></div>
+<script>
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "xinkangwu" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2025 <a href="https://zjxjwxk.github.io/">Xinkang&#39;s Blog</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

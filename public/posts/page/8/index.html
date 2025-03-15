@@ -168,6 +168,44 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2 class="entry-hint-parent">J2EE基础知识
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Servlet总结 在Java Web程序中，Servlet主要负责接收用户请求HttpServletRequest,在doGet(),doPost()中做相应的处理，并将回应HttpServletResponse反馈给用户。Servlet可以设置初始化参数，供Servlet内部使用。一个Servlet类只会有一个实例，在它初始化时调用init()方法，销毁时调用destroy()方法。Servlet需要在web.xml中配置（MyEclipse中创建Servlet会自动配置），一个Servlet可以设置多个URL访问。Servlet不是线程安全，因此要谨慎使用类变量。
+阐述Servlet和CGI的区别? CGI的不足之处: 1，需要为每个请求启动一个操作CGI程序的系统进程。如果请求频繁，这将会带来很大的开销。
+2，需要为每个请求加载和运行一个CGI程序，这将带来很大的开销
+3，需要重复编写处理网络协议的代码以及编码，这些工作都是非常耗时的。
+Servlet的优点: 1，只需要启动一个操作系统进程以及加载一个JVM，大大降低了系统的开销
+2，如果多个请求需要做同样处理的时候，这时候只需要加载一个类，这也大大降低了开销
+3，所有动态加载的类可以实现对网络协议以及请求解码的共享，大大降低了工作量。
+4，Servlet能直接和Web服务器交互，而普通的CGI程序不能。Servlet还能在各个程序之间共享数据，使数据库连接池之类的功能很容易实现。
+补充：Sun Microsystems公司在1996年发布Servlet技术就是为了和CGI进行竞争，Servlet是一个特殊的Java程序，一个基于Java的Web应用通常包含一个或多个Servlet类。Servlet不能够自行创建并执行，它是在Servlet容器中运行的，容器将用户的请求传递给Servlet程序，并将Servlet的响应回传给用户。通常一个Servlet会关联一个或多个JSP页面。以前CGI经常因为性能开销上的问题被诟病，然而Fast CGI早就已经解决了CGI效率上的问题，所以面试的时候大可不必信口开河的诟病CGI，事实上有很多你熟悉的网站都使用了CGI技术。
+参考：《javaweb整合开发王者归来》P7
+Servlet接口中有哪些方法及Servlet生命周期探秘 Servlet接口定义了5个方法，其中前三个方法与Servlet生命周期相关：
+void init(ServletConfig config) throws ServletException void service(ServletRequest req, ServletResponse resp) throws ServletException, java.io.IOException void destory() java.lang.String getServletInfo() ServletConfig getServletConfig() 生命周期： Web容器加载Servlet并将其实例化后，Servlet生命周期开始，容器运行其init()方法进行Servlet的初始化；请求到达时调用Servlet的service()方法，service()方法会根据需要调用与请求对应的doGet或doPost等方法；当服务器关闭或项目被卸载时服务器会将Servlet实例销毁，此时会调用Servlet的destroy()方法。init方法和destory方法只会执行一次，service方法客户端每次请求Servlet都会执行。Servlet中有时会用到一些需要初始化与销毁的资源，因此可以把初始化资源的代码放入init方法中，销毁资源的代码放入destroy方法中，这样就不需要每次处理客户端的请求都要初始化与销毁资源。
+参考：《javaweb整合开发王者归来》P81
+get和post请求的区别 网上也有文章说：get和post请求实际上是没有区别，大家可以自行查询相关文章！我下面给出的只是一种常见的答案。
+①get请求用来从服务器上获得资源，而post是用来向服务器提交数据；
+②get将表单中数据按照name=value的形式，添加到action 所指向的URL 后面，并且两者使用&#34;?“连接，而各个变量之间使用”&amp;“连接；post是将表单中的数据放在HTTP协议的请求头或消息体中，传递到action所指向URL；
+③get传输的数据要受到URL长度限制（1024字节即256个字符）；而post可以传输大量的数据，上传文件通常要使用post方式；
+④使用get时参数会显示在地址栏上，如果这些数据不是敏感数据，那么可以使用get；对于敏感数据还是应用使用post；
+⑤get使用MIME类型application/x-www-form-urlencoded的URL编码（也叫百分号编码）文本的格式传递参数，保证被传送的参数由遵循规范的文本组成，例如一个空格的编码是”%20&#34;。
+补充：GET方式提交表单的典型应用是搜索引擎。GET方式就是被设计为查询用的。
+还有另外一种回答。推荐大家看一下：
+https://www.zhihu.com/question/28586791 https://mp.weixin.qq.com/s?__biz=MzI3NzIzMzg3Mw==&amp;mid=100000054&amp;idx=1&amp;sn=71f6c214f3833d9ca20b9f7dcd9d33e4#rd 什么情况下调用doGet()和doPost() Form标签里的method的属性为get时调用doGet()，为post时调用doPost()。
+转发(Forward)和重定向(Redirect)的区别 转发是服务器行为，重定向是客户端行为。
+转发（Forword） 通过RequestDispatcher对象的forward（HttpServletRequest request,HttpServletResponse response）方法实现的。RequestDispatcher可以通过HttpServletRequest 的getRequestDispatcher()方法获得。例如下面的代码就是跳转到login_success.jsp页面。
+request.getRequestDispatcher(&#34;login_success.jsp&#34;).forward(request, response); 重定向（Redirect） 是利用服务器返回的状态吗来实现的。客户端浏览器请求服务器的时候，服务器会返回一个状态码。服务器通过HttpServletRequestResponse的setStatus(int status)方法设置状态码。如果服务器返回301或者302，则浏览器会到新的网址重新请求该资源。
+从地址栏显示来说 forward是服务器请求资源,服务器直接访问目标地址的URL,把那个URL的响应内容读取过来,然后把这些内容再发给浏览器.浏览器根本不知道服务器发送的内容从哪里来的,所以它的地址栏还是原来的地址. redirect是服务端根据逻辑,发送一个状态码,告诉浏览器重新去请求那个地址.所以地址栏显示的是新的URL.
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2019-01-04 12:54:00 +0000 UTC'>January 4, 2019</span>&nbsp;·&nbsp;2 min</footer>
+  <a class="entry-link" aria-label="post link to J2EE基础知识" href="https://zjxjwxk.github.io/posts/java/j2ee/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2 class="entry-hint-parent">Java基础知识
     </h2>
   </header>
@@ -197,7 +235,7 @@ JDK 用于开发，JRE 用于运行java程序 ； JDK 和 JRE 中都包含 JVM �
     </main>
     
 <footer class="footer">
-        <span>&copy; 2024 <a href="https://zjxjwxk.github.io/">Xinkang&#39;s Blog</a></span> · 
+        <span>&copy; 2025 <a href="https://zjxjwxk.github.io/">Xinkang&#39;s Blog</a></span> · 
 
     <span>
         Powered by
