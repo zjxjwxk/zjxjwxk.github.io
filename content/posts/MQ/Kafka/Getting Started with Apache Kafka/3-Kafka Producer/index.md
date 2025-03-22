@@ -18,7 +18,7 @@ preview: 200
 
 ### Run Kafka Containers
 
-Create a docker-compose file `docker-compose.yaml` containing 3 Zookeepers, 3 Kafka Brokers, and 1 Kafka REST Proxy:
+Create a docker-compose file `docker-compose.yaml` containing three Zookeepers, three Kafka Brokers, and a Kafka REST Proxy:
 
 ```yaml
 ---

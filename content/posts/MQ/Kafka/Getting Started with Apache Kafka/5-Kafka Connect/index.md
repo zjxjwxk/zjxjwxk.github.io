@@ -55,7 +55,7 @@ When worker 3 is alive again, the tasks rebalance again to the original worker.
 
 ## Demo: Using the File Connector in a Standalone Mode
 
-Create a docker-compose file `docker-compose.yaml` containing 3 Zookeepers, 3 Kafka Brokers, 1 Kafka REST Proxy, and 1 Schema Registry:
+Create a docker-compose file `docker-compose.yaml` containing three Zookeepers, three Kafka Brokers, a Kafka REST Proxy, and a Schema Registry:
 
 ```yaml
 ---
@@ -491,7 +491,7 @@ cp guava-32.1.2-jre.jar ~/Library/kafka_2.13-3.9.0/libs
 
 ### Run Docker Containers
 
-Create a `docker-compose.yaml` file containing 3 Zookeepers, 3 Kafka Brokers, 1 Rest Proxy, 1 Schema Registry, and 1 MongoDB.
+Create a `docker-compose.yaml` file containing three Zookeepers, three Kafka Brokers, a Rest Proxy, a Schema Registry, and a MongoDB.
 
 ```yaml
 ---

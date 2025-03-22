@@ -130,7 +130,7 @@ Runtime.getRuntime().addShutdownHook(new Thread(streams::close));
 
 ### Run Docker Containers
 
-Create a docker-compose file, including 3 zookeepers, 3 Kafka brokers, 1 Rest Proxy, and 1 Schema Registry.
+Create a docker-compose file, including three zookeepers, three Kafka brokers, a Rest Proxy, and a Schema Registry.
 
 ```yaml
 ---
@@ -436,7 +436,7 @@ sensor_3,-11
 
 ### Run Docker Containers
 
-Create a docker-compose file, including 3 zookeepers, 3 Kafka brokers, 1 Rest Proxy, 1 Schema Registry, 1 KSQL DB Server, and 1 KSQL DB Client.
+Create a docker-compose file, including three zookeepers, three Kafka brokers, a Rest Proxy, a Schema Registry, a KSQL DB Server, and a KSQL DB Client.
 
 ```yaml
 ---
