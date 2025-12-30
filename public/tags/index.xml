@@ -6,8 +6,29 @@
     <description>Recent content in Tags on Xinkang&#39;s Blog</description>
     <generator>Hugo -- 0.138.0</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 16 Mar 2025 13:29:00 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 30 Dec 2025 22:19:00 +0800</lastBuildDate>
     <atom:link href="https://zjxjwxk.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Database</title>
+      <link>https://zjxjwxk.github.io/tags/database/</link>
+      <pubDate>Tue, 30 Dec 2025 22:19:00 +0800</pubDate>
+      <guid>https://zjxjwxk.github.io/tags/database/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Docker</title>
+      <link>https://zjxjwxk.github.io/tags/docker/</link>
+      <pubDate>Tue, 30 Dec 2025 22:19:00 +0800</pubDate>
+      <guid>https://zjxjwxk.github.io/tags/docker/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>MySQL</title>
+      <link>https://zjxjwxk.github.io/tags/mysql/</link>
+      <pubDate>Tue, 30 Dec 2025 22:19:00 +0800</pubDate>
+      <guid>https://zjxjwxk.github.io/tags/mysql/</guid>
+      <description></description>
+    </item>
     <item>
       <title>Kafka</title>
       <link>https://zjxjwxk.github.io/tags/kafka/</link>
@@ -76,13 +97,6 @@
       <link>https://zjxjwxk.github.io/tags/spring-boot/</link>
       <pubDate>Fri, 05 Jun 2020 21:02:00 +0000</pubDate>
       <guid>https://zjxjwxk.github.io/tags/spring-boot/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Docker</title>
-      <link>https://zjxjwxk.github.io/tags/docker/</link>
-      <pubDate>Thu, 04 Jun 2020 23:15:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/tags/docker/</guid>
       <description></description>
     </item>
     <item>

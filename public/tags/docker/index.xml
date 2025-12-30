@@ -6,8 +6,41 @@
     <description>Recent content in Docker on Xinkang&#39;s Blog</description>
     <generator>Hugo -- 0.138.0</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 04 Jun 2020 23:15:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 30 Dec 2025 22:19:00 +0800</lastBuildDate>
     <atom:link href="https://zjxjwxk.github.io/tags/docker/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Docker 容器下的 MySQL 主从同步</title>
+      <link>https://zjxjwxk.github.io/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql/</link>
+      <pubDate>Tue, 30 Dec 2025 22:19:00 +0800</pubDate>
+      <guid>https://zjxjwxk.github.io/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql/</guid>
+      <description>&lt;h2 id=&#34;创建宿主机-docker-容器挂载目录&#34;&gt;创建宿主机 Docker 容器挂载目录&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;mkdir -p /var/lib/mysql/master1/conf
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;mkdir -p /var/lib/mysql/master1/data
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;mkdir -p /var/lib/mysql/slave1/conf
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;mkdir -p /var/lib/mysql/slave1/data
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;创建-mysql-主从配置文件&#34;&gt;创建 MySQL 主从配置文件&lt;/h2&gt;
+&lt;p&gt;创建主库配置文件（宿主机路径为 /var/lib/mysql/master1/conf/my.cnf）：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;[mysqld]
+character-set-server = utf8
+lower-case-table-names = 1
+# 主从复制,主机配置,主服务器唯一ID
+server-id = 1
+# 启用二进制日志
+log-bin=mysql-bin
+# 设置logbin格式
+binlog_format = STATEMENT
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;创建从库配置文件（宿主机路径：/var/lib/mysql/slave1/conf/my.cnf）：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;[mysqld]
+character-set-server = utf8
+lower-case-table-names = 1
+# 主从复制,从机配置,从服务器唯一ID
+server-id = 2
+# 启用中继日志
+relay-log = mysql-relay
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;授权文件夹：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;chmod -R &lt;span style=&#34;color:#ae81ff&#34;&gt;777&lt;/span&gt; /var/lib/mysql
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;需要注意的是，主从的 my.cnf 文件权限不能为 777，否则 my.cnf 文件无法在容器内生效，在登陆 Docker 容器内的 MySQL 时会提示：&lt;code&gt;mysql: [Warning] World-writable config file &#39;/etc/mysql/my.cnf&#39; is ignored&lt;/code&gt;。解决办法是修改宿主机上主从的 my.cnf 权限为更低的 644：&lt;/p&gt;</description>
+    </item>
     <item>
       <title>微服务容器化系列（1）：服务编排前奏</title>
       <link>https://zjxjwxk.github.io/posts/docker/docker-&#43;-k8s-%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%AE%B9%E5%99%A8%E5%8C%96/1.-%E6%9C%8D%E5%8A%A1%E7%BC%96%E6%8E%92%E5%89%8D%E5%A5%8F/</link>

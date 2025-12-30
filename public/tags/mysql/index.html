@@ -5,11 +5,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
-<title>Docker | Xinkang&#39;s Blog</title>
+<title>MySQL | Xinkang&#39;s Blog</title>
 <meta name="keywords" content="">
 <meta name="description" content="">
 <meta name="author" content="">
-<link rel="canonical" href="https://zjxjwxk.github.io/tags/docker/">
+<link rel="canonical" href="https://zjxjwxk.github.io/tags/mysql/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.d6fcd20a4fb86efa4dfac8ec95da60244cc8871042183da1ef28e3a762ad79c8.css" integrity="sha256-1vzSCk&#43;4bvpN&#43;sjsldpgJEzIhxBCGD2h7yjjp2Ktecg=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://zjxjwxk.github.io/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://zjxjwxk.github.io/favicon-16x16.png">
@@ -18,8 +18,8 @@
 <link rel="mask-icon" href="https://zjxjwxk.github.io/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" type="application/rss+xml" href="https://zjxjwxk.github.io/tags/docker/index.xml">
-<link rel="alternate" hreflang="en" href="https://zjxjwxk.github.io/tags/docker/">
+<link rel="alternate" type="application/rss+xml" href="https://zjxjwxk.github.io/tags/mysql/index.xml">
+<link rel="alternate" hreflang="en" href="https://zjxjwxk.github.io/tags/mysql/">
 <noscript>
     <style>
         #theme-toggle,
@@ -70,13 +70,13 @@
           gtag('js', new Date());
           gtag('config', 'G-9CMXGMMTKX');
         }
-      </script><meta property="og:url" content="https://zjxjwxk.github.io/tags/docker/">
+      </script><meta property="og:url" content="https://zjxjwxk.github.io/tags/mysql/">
   <meta property="og:site_name" content="Xinkang&#39;s Blog">
-  <meta property="og:title" content="Docker">
+  <meta property="og:title" content="MySQL">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Docker">
+<meta name="twitter:title" content="MySQL">
 <meta name="twitter:description" content="">
 
 </head>
@@ -147,7 +147,7 @@
 <main class="main"> 
 <header class="page-header"><div class="breadcrumbs"><a href="https://zjxjwxk.github.io/">Home</a>&nbsp;»&nbsp;<a href="https://zjxjwxk.github.io/tags/">Tags</a></div>
   <h1>
-    Docker
+    MySQL
   </h1>
 </header>
 
@@ -165,23 +165,6 @@ chmod -R 777 /var/lib/mysql 需要注意的是，主从的 my.cnf 文件权限�
   </div>
   <footer class="entry-footer"><span title='2025-12-30 22:19:00 +0800 CST'>December 30, 2025</span>&nbsp;·&nbsp;2 min</footer>
   <a class="entry-link" aria-label="post link to Docker 容器下的 MySQL 主从同步" href="https://zjxjwxk.github.io/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">微服务容器化系列（1）：服务编排前奏
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>服务 Docker 化 修改项目配置 由于镜像运行时 MySQL 数据库所在的主机地址是动态的，所以将项目中的 MySQL 数据库地址和 Zookeeper 注册中心地址配置为动态变量：
-spring: dubbo: registry: zookeeper://${zk.address}:2181 datasource: url: jdbc:mysql://{mysql.address}:3306/cinema?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=utf8&amp;serverTimezone=GMT%2B8 获取 Java 镜像 docker pull openjdk:8-jre 打包 Maven 项目 在项目根目录下，执行 Maven 的清除和打包命令（跳过测试）：
-mvn clean &amp;&amp; mvn package -Dmaven.test.skip=true 这样就会在 target 目录下生成 jar 包（Spring Boot 项目）。
-编写 Dockerfile 在 user 子模块的根目录下，创建 Dockerfile 文件，并编辑如下，Dockerfile 文件用于构建 Docker 镜像：
-FROM openjdk:8-jre MAINTAINER zjxjwxk zjxjwxk@gmail.com COPY target/user.jar /user.jar ENTRYPOINT [&#34;java&#34;, &#34;-jar&#34;, &#34;/user.jar&#34;] 构建项目 Docker 镜像 docker build -t user:latest . 编写 build 脚本 在和 Dockerfile 同一目录下，创建一个 build.sh 脚本，用于打包和构建 Docker 镜像：
-...</p>
-  </div>
-  <footer class="entry-footer"><span title='2020-06-04 23:15:00 +0000 UTC'>June 4, 2020</span>&nbsp;·&nbsp;6 min</footer>
-  <a class="entry-link" aria-label="post link to 微服务容器化系列（1）：服务编排前奏" href="https://zjxjwxk.github.io/posts/docker/docker-&#43;-k8s-%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%AE%B9%E5%99%A8%E5%8C%96/1.-%E6%9C%8D%E5%8A%A1%E7%BC%96%E6%8E%92%E5%89%8D%E5%A5%8F/"></a>
 </article>
     </main>
     
