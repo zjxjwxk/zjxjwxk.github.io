@@ -163,6 +163,20 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2 class="entry-hint-parent">PAT甲级 1108 Finding Average (20分)
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>The basic task is simple: given N real numbers, you are supposed to calculate their average. But what makes it complicated is that some of the input numbers might not be legal. A legal input is a real number in [−1000,1000] and is accurate up to no more than 2 decimal places. When you calculate the average, those illegal numbers must not be counted in.
+Input Specification: Each input file contains one test case. For each case, the first line gives a positive integer N (≤100). Then N numbers are given in the next line, separated by one space.
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2020-04-15 21:39:00 +0000 UTC'>April 15, 2020</span>&nbsp;·&nbsp;3 min</footer>
+  <a class="entry-link" aria-label="post link to PAT甲级 1108 Finding Average (20分)" href="https://zjxjwxk.github.io/posts/pat/advanced_level/a1108/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2 class="entry-hint-parent">PAT甲级 1072 Gas Station (30分)
     </h2>
   </header>
@@ -297,35 +311,6 @@ Zero on Earth is called “tret” on Mars. The numbers 1 to 12 on Earth is call
   <footer class="entry-footer"><span title='2020-04-06 15:17:00 +0000 UTC'>April 6, 2020</span>&nbsp;·&nbsp;2 min</footer>
   <a class="entry-link" aria-label="post link to PAT甲级 1100 Mars Numbers (20分)" href="https://zjxjwxk.github.io/posts/pat/advanced_level/a1100/"></a>
 </article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">Dubbo微服务影院系列（8）：Dubbo服务开发（订单模块开发）
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>章节概要 完成订单模块业务开发 完成限流和熔断、降级相关内容 Dubbo 特性之分组、聚合和版本控制 订单模块问题 订单模块的横向和纵向分表如何解决？ 服务限流如何处理？ 服务熔断和降级？ 如何保证多版本的蓝绿上线？ 横向拆分和纵向拆分 Dubbo 服务分组 官方文档：https://dubbo.apache.org/zh-cn/docs/user/demos/service-group.html
-当一个接口有多种实现时，可以用 group 区分。
-服务 &lt;dubbo:service group=&#34;feedback&#34; interface=&#34;com.xxx.IndexService&#34; /&gt; &lt;dubbo:service group=&#34;member&#34; interface=&#34;com.xxx.IndexService&#34; /&gt; 引用 &lt;dubbo:reference id=&#34;feedbackIndexService&#34; group=&#34;feedback&#34; interface=&#34;com.xxx.IndexService&#34; /&gt; &lt;dubbo:reference id=&#34;memberIndexService&#34; group=&#34;member&#34; interface=&#34;com.xxx.IndexService&#34; /&gt; 任意组：
-&lt;dubbo:reference id=&#34;barService&#34; interface=&#34;com.foo.BarService&#34; group=&#34;*&#34; /&gt; Dubbo 分组聚合 https://dubbo.apache.org/zh-cn/docs/user/demos/group-merger.html
-按组合并返回结果，比如菜单服务，接口一样，但有多种实现，用 group 区分，现在消费方需从每种 group 中调用一次返回结果，合并结果返回，这样就可以实现聚合菜单项。
-配置 搜索所有分组
-&lt;dubbo:reference interface=&#34;com.xxx.MenuService&#34; group=&#34;*&#34; merger=&#34;true&#34; /&gt; 合并指定分组
-&lt;dubbo:reference interface=&#34;com.xxx.MenuService&#34; group=&#34;aaa,bbb&#34; merger=&#34;true&#34; /&gt; 指定方法合并结果，其它未指定的方法，将只调用一个 Group
-&lt;dubbo:reference interface=&#34;com.xxx.MenuService&#34; group=&#34;*&#34;&gt; &lt;dubbo:method name=&#34;getMenuItems&#34; merger=&#34;true&#34; /&gt; &lt;/dubbo:reference&gt; 某个方法不合并结果，其它都合并结果
-&lt;dubbo:reference interface=&#34;com.xxx.MenuService&#34; group=&#34;*&#34; merger=&#34;true&#34;&gt; &lt;dubbo:method name=&#34;getMenuItems&#34; merger=&#34;false&#34; /&gt; &lt;/dubbo:reference&gt; 指定合并策略，缺省根据返回值类型自动匹配，如果同一类型有两个合并器时，需指定合并器的名称
-&lt;dubbo:reference interface=&#34;com.xxx.MenuService&#34; group=&#34;*&#34;&gt; &lt;dubbo:method name=&#34;getMenuItems&#34; merger=&#34;mymerge&#34; /&gt; &lt;/dubbo:reference&gt; 指定合并方法，将调用返回结果的指定方法进行合并，合并方法的参数类型必须是返回结果类型本身
-&lt;dubbo:reference interface=&#34;com.xxx.MenuService&#34; group=&#34;*&#34;&gt; &lt;dubbo:method name=&#34;getMenuItems&#34; merger=&#34;.addAll&#34; /&gt; &lt;/dubbo:reference&gt; Dubbo 多版本 当一个接口实现，出现不兼容升级时，可以用版本号过渡，版本号不同的服务相互间不引用。
-可以按照以下的步骤进行版本迁移：
-在低压力时间段，先升级一半提供者为新版本 再将所有消费者升级为新版本 然后将剩下的一半提供者升级为新版本 配置 老版本服务提供者配置：
-&lt;dubbo:service interface=&#34;com.foo.BarService&#34; version=&#34;1.0.0&#34; /&gt; 新版本服务提供者配置：
-&lt;dubbo:service interface=&#34;com.foo.BarService&#34; version=&#34;2.0.0&#34; /&gt; 老版本服务消费者配置：
-&lt;dubbo:reference id=&#34;barService&#34; interface=&#34;com.foo.BarService&#34; version=&#34;1.0.0&#34; /&gt; 新版本服务消费者配置：
-...</p>
-  </div>
-  <footer class="entry-footer"><span title='2020-04-05 19:30:00 +0000 UTC'>April 5, 2020</span>&nbsp;·&nbsp;2 min</footer>
-  <a class="entry-link" aria-label="post link to Dubbo微服务影院系列（8）：Dubbo服务开发（订单模块开发）" href="https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/8.dubbo%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91%E8%AE%A2%E5%8D%95%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/"></a>
-</article>
 <footer class="page-footer">
   <nav class="pagination">
     <a class="prev" href="https://zjxjwxk.github.io/page/2/">
@@ -338,7 +323,7 @@ Zero on Earth is called “tret” on Mars. The numbers 1 to 12 on Earth is call
     </main>
     
 <footer class="footer">
-        <span>&copy; 2025 <a href="https://zjxjwxk.github.io/">Xinkang&#39;s Blog</a></span> · 
+        <span>&copy; 2026 <a href="https://zjxjwxk.github.io/">Xinkang&#39;s Blog</a></span> · 
 
     <span>
         Powered by

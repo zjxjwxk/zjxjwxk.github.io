@@ -11,7 +11,7 @@
     <loc>https://zjxjwxk.github.io/tags/docker/</loc>
     <lastmod>2025-12-30T22:19:00+08:00</lastmod>
   </url><url>
-    <loc>https://zjxjwxk.github.io/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql/</loc>
+    <loc>https://zjxjwxk.github.io/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql/docker-%E5%AE%B9%E5%99%A8%E4%B8%8B%E7%9A%84-mysql-%E4%B8%BB%E4%BB%8E%E5%90%8C%E6%AD%A5/</loc>
     <lastmod>2025-12-30T22:19:00+08:00</lastmod>
   </url><url>
     <loc>https://zjxjwxk.github.io/tags/mysql/</loc>
@@ -40,6 +40,15 @@
   </url><url>
     <loc>https://zjxjwxk.github.io/categories/mq/</loc>
     <lastmod>2025-03-16T13:29:00+08:00</lastmod>
+  </url><url>
+    <loc>https://zjxjwxk.github.io/categories/docker/</loc>
+    <lastmod>2025-01-03T22:30:00+08:00</lastmod>
+  </url><url>
+    <loc>https://zjxjwxk.github.io/posts/nacos/docker-%E9%83%A8%E7%BD%B2-dubbo-%E5%BE%AE%E6%9C%8D%E5%8A%A1/</loc>
+    <lastmod>2025-01-03T22:30:00+08:00</lastmod>
+  </url><url>
+    <loc>https://zjxjwxk.github.io/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/</loc>
+    <lastmod>2025-01-03T22:30:00+08:00</lastmod>
   </url><url>
     <loc>https://zjxjwxk.github.io/posts/mq/kafka/getting-started-with-apache-kafka/6-kafka-stream/</loc>
     <lastmod>2024-12-22T20:06:00+08:00</lastmod>
@@ -106,9 +115,6 @@
   </url><url>
     <loc>https://zjxjwxk.github.io/posts/spring-boot/spring-boot-%E4%B8%AD%E7%9A%84-jwt-%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98/</loc>
     <lastmod>2020-06-05T21:02:00+00:00</lastmod>
-  </url><url>
-    <loc>https://zjxjwxk.github.io/categories/docker/</loc>
-    <lastmod>2020-06-04T23:15:00+00:00</lastmod>
   </url><url>
     <loc>https://zjxjwxk.github.io/posts/docker/docker-&#43;-k8s-%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%AE%B9%E5%99%A8%E5%8C%96/1.-%E6%9C%8D%E5%8A%A1%E7%BC%96%E6%8E%92%E5%89%8D%E5%A5%8F/</loc>
     <lastmod>2020-06-04T23:15:00+00:00</lastmod>

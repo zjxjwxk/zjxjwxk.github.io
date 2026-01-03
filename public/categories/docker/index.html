@@ -153,6 +153,23 @@
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2 class="entry-hint-parent">Docker 部署 Dubbo 微服务
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Docker 部署 Nacos 注册中心 首先需要部署 Nacos 注册中心，在开发环境中运行 Nacos 单机模式，执行以下 Docker 命令拉取镜像并运行容器：
+docker run -d \ --name nacos-server \ -p 8848:8848 \ -p 9848:9848 \ -e MODE=standalone \ nacos/nacos-server:2.0.2 需要注意的是，若在开发环境中使用模拟域名（配置在 /etc/hosts 中）访问 Docker 容器中的 Nacos 服务，当开启了 socks 等代理服务时，可能导致访问失败。若使用了如 clash 等代理服务，可以在配置文件中关闭其 dns 功能，并配置该模拟域名为直连：
+dns: enable: false ... rules: - DOMAIN-SUFFIX,live.zjxjwxk.com,🎯 全球直连 若部署成功，可以通过 localhost:8848/nacos/index.html 访问 Nacos 控制台页面。
+Maven 插件配置 在需要部署的微服务的 pom.xml 文件中配置如下插件，用于在 Maven 打包的同时构建 Docker 镜像：
+&lt;build&gt; &lt;finalName&gt;${artifactId}-docker&lt;/finalName&gt; &lt;plugins&gt; &lt;plugin&gt; &lt;groupId&gt;com.spotify&lt;/groupId&gt; &lt;artifactId&gt;docker-maven-plugin&lt;/artifactId&gt; &lt;version&gt;1.2.0&lt;/version&gt; &lt;executions&gt; &lt;!--当mvn执行install操作的时候，执行docker的build--&gt; &lt;execution&gt; &lt;id&gt;build&lt;/id&gt; &lt;phase&gt;install&lt;/phase&gt; &lt;goals&gt; &lt;goal&gt;build&lt;/goal&gt; &lt;/goals&gt; &lt;/execution&gt; &lt;/executions&gt; &lt;configuration&gt; &lt;imageTags&gt; &lt;imageTag&gt;${project.version}&lt;/imageTag&gt; &lt;/imageTags&gt; &lt;imageName&gt;${project.build.finalName}&lt;/imageName&gt; &lt;!--指定Dockerfile文件的位置--&gt; &lt;dockerDirectory&gt;${project.basedir}/docker&lt;/dockerDirectory&gt; &lt;!--指定jar包路径，这里对应Dockerfile中复制jar包 到docker容器指定目录配置，也可以写到Dockerfile中--&gt; &lt;resources&gt; &lt;resource&gt; &lt;targetPath&gt;/&lt;/targetPath&gt; &lt;!--将下边目录的内容，拷贝到docker镜像中--&gt; &lt;directory&gt;${project.build.directory}&lt;/directory&gt; &lt;include&gt;${project.build.finalName}.jar&lt;/include&gt; &lt;/resource&gt; &lt;/resources&gt; &lt;/configuration&gt; &lt;/plugin&gt; &lt;plugin&gt; &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt; &lt;artifactId&gt;spring-boot-maven-plugin&lt;/artifactId&gt; &lt;/plugin&gt; &lt;/plugins&gt; &lt;/build&gt; 编写 Dockerfile 文件 在需要部署的微服务目录下创建 docker 文件夹，并在此文件夹下创建如下 Dockerfile 文件（路径与 pom.xml 中的 ${project.basedir}/docker 一致）：
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2025-01-03 22:30:00 +0800 CST'>January 3, 2025</span>&nbsp;·&nbsp;2 min</footer>
+  <a class="entry-link" aria-label="post link to Docker 部署 Dubbo 微服务" href="https://zjxjwxk.github.io/posts/nacos/docker-%E9%83%A8%E7%BD%B2-dubbo-%E5%BE%AE%E6%9C%8D%E5%8A%A1/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2 class="entry-hint-parent">微服务容器化系列（1）：服务编排前奏
     </h2>
   </header>
@@ -170,7 +187,7 @@ FROM openjdk:8-jre MAINTAINER zjxjwxk zjxjwxk@gmail.com COPY target/user.jar /us
     </main>
     
 <footer class="footer">
-        <span>&copy; 2025 <a href="https://zjxjwxk.github.io/">Xinkang&#39;s Blog</a></span> · 
+        <span>&copy; 2026 <a href="https://zjxjwxk.github.io/">Xinkang&#39;s Blog</a></span> · 
 
     <span>
         Powered by
