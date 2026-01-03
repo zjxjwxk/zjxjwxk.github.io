@@ -2,7 +2,7 @@
 <html lang="en" dir="auto">
 
 <head>
-	<meta name="generator" content="Hugo 0.138.0"><meta charset="utf-8">
+	<meta name="generator" content="Hugo 0.138.0"><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
@@ -10,18 +10,18 @@
 
 <meta name="description" content="">
 <meta name="author" content="">
-<link rel="canonical" href="https://zjxjwxk.github.io/">
+<link rel="canonical" href="http://localhost:1313/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.d6fcd20a4fb86efa4dfac8ec95da60244cc8871042183da1ef28e3a762ad79c8.css" integrity="sha256-1vzSCk&#43;4bvpN&#43;sjsldpgJEzIhxBCGD2h7yjjp2Ktecg=" rel="preload stylesheet" as="style">
-<link rel="icon" href="https://zjxjwxk.github.io/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="https://zjxjwxk.github.io/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="https://zjxjwxk.github.io/favicon-32x32.png">
-<link rel="apple-touch-icon" href="https://zjxjwxk.github.io/apple-touch-icon.png">
-<link rel="mask-icon" href="https://zjxjwxk.github.io/safari-pinned-tab.svg">
+<link rel="icon" href="http://localhost:1313/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" type="application/rss+xml" href="https://zjxjwxk.github.io/index.xml">
-<link rel="alternate" type="application/json" href="https://zjxjwxk.github.io/index.json">
-<link rel="alternate" hreflang="en" href="https://zjxjwxk.github.io/">
+<link rel="alternate" type="application/rss+xml" href="http://localhost:1313/index.xml">
+<link rel="alternate" type="application/json" href="http://localhost:1313/index.json">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/">
 <noscript>
     <style>
         #theme-toggle,
@@ -72,7 +72,7 @@
           gtag('js', new Date());
           gtag('config', 'G-9CMXGMMTKX');
         }
-      </script><meta property="og:url" content="https://zjxjwxk.github.io/">
+      </script><meta property="og:url" content="http://localhost:1313/">
   <meta property="og:site_name" content="Xinkang&#39;s Blog">
   <meta property="og:title" content="Xinkang&#39;s Blog">
   <meta property="og:locale" content="en">
@@ -86,9 +86,9 @@
   "@context": "https://schema.org",
   "@type": "Organization",
   "name": "Xinkang's Blog",
-  "url": "https://zjxjwxk.github.io/",
+  "url": "http://localhost:1313/",
   "description": "",
-  "logo": "https://zjxjwxk.github.io/favicon.ico",
+  "logo": "http://localhost:1313/favicon.ico",
   "sameAs": [
       "https://github.com/zjxjwxk", "https://www.linkedin.com/in/xinkangwu"
   ]
@@ -111,7 +111,7 @@
 <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="https://zjxjwxk.github.io/" accesskey="h" title="Xinkang&#39;s Blog (Alt + H)">Xinkang&#39;s Blog</a>
+            <a href="http://localhost:1313/" accesskey="h" title="Xinkang&#39;s Blog (Alt + H)">Xinkang&#39;s Blog</a>
             <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
@@ -137,22 +137,22 @@
         </div>
         <ul id="menu">
             <li>
-                <a href="https://zjxjwxk.github.io/archives/" title="Archives">
+                <a href="http://localhost:1313/archives/" title="Archives">
                     <span>Archives</span>
                 </a>
             </li>
             <li>
-                <a href="https://zjxjwxk.github.io/categories/" title="Categories">
+                <a href="http://localhost:1313/categories/" title="Categories">
                     <span>Categories</span>
                 </a>
             </li>
             <li>
-                <a href="https://zjxjwxk.github.io/tags/" title="Tags">
+                <a href="http://localhost:1313/tags/" title="Tags">
                     <span>Tags</span>
                 </a>
             </li>
             <li>
-                <a href="https://zjxjwxk.github.io/search/" title="Search (Alt &#43; /)" accesskey=/>
+                <a href="http://localhost:1313/search/" title="Search (Alt &#43; /)" accesskey=/>
                     <span>Search</span>
                 </a>
             </li>
@@ -194,6 +194,23 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2 class="entry-hint-parent">Docker 部署 Dubbo 微服务
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Docker 部署 Nacos 注册中心 首先需要部署 Nacos 注册中心，在开发环境中运行 Nacos 单机模式，执行以下 Docker 命令拉取镜像并运行容器：
+docker run -d \ --name nacos-server \ -p 8848:8848 \ -p 9848:9848 \ -e MODE=standalone \ nacos/nacos-server:2.0.2 需要注意的是，若在开发环境中使用模拟域名（配置在 /etc/hosts 中）访问 Docker 容器中的 Nacos 服务，当开启了 socks 等代理服务时，可能导致访问失败。若使用了如 clash 等代理服务，可以在配置文件中关闭其 dns 功能，并配置该模拟域名为直连：
+dns: enable: false ... rules: - DOMAIN-SUFFIX,live.zjxjwxk.com,🎯 全球直连 若部署成功，可以通过 localhost:8848/nacos/index.html 访问 Nacos 控制台页面。
+Maven 插件配置 在需要部署的微服务的 pom.xml 文件中配置如下插件，用于在 Maven 打包的同时构建 Docker 镜像：
+&lt;build&gt; &lt;finalName&gt;${artifactId}-docker&lt;/finalName&gt; &lt;plugins&gt; &lt;plugin&gt; &lt;groupId&gt;com.spotify&lt;/groupId&gt; &lt;artifactId&gt;docker-maven-plugin&lt;/artifactId&gt; &lt;version&gt;1.2.0&lt;/version&gt; &lt;executions&gt; &lt;!--当mvn执行install操作的时候，执行docker的build--&gt; &lt;execution&gt; &lt;id&gt;build&lt;/id&gt; &lt;phase&gt;install&lt;/phase&gt; &lt;goals&gt; &lt;goal&gt;build&lt;/goal&gt; &lt;/goals&gt; &lt;/execution&gt; &lt;/executions&gt; &lt;configuration&gt; &lt;imageTags&gt; &lt;imageTag&gt;${project.version}&lt;/imageTag&gt; &lt;/imageTags&gt; &lt;imageName&gt;${project.build.finalName}&lt;/imageName&gt; &lt;!--指定Dockerfile文件的位置--&gt; &lt;dockerDirectory&gt;${project.basedir}/docker&lt;/dockerDirectory&gt; &lt;!--指定jar包路径，这里对应Dockerfile中复制jar包 到docker容器指定目录配置，也可以写到Dockerfile中--&gt; &lt;resources&gt; &lt;resource&gt; &lt;targetPath&gt;/&lt;/targetPath&gt; &lt;!--将下边目录的内容，拷贝到docker镜像中--&gt; &lt;directory&gt;${project.build.directory}&lt;/directory&gt; &lt;include&gt;${project.build.finalName}.jar&lt;/include&gt; &lt;/resource&gt; &lt;/resources&gt; &lt;/configuration&gt; &lt;/plugin&gt; &lt;plugin&gt; &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt; &lt;artifactId&gt;spring-boot-maven-plugin&lt;/artifactId&gt; &lt;/plugin&gt; &lt;/plugins&gt; &lt;/build&gt; 编写 Dockerfile 文件 在需要部署的微服务目录下创建 docker 文件夹，并在此文件夹下创建如下 Dockerfile 文件（路径与 pom.xml 中的 ${project.basedir}/docker 一致）：
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2026-01-03 22:30:00 +0800 CST'>January 3, 2026</span>&nbsp;·&nbsp;2 min</footer>
+  <a class="entry-link" aria-label="post link to Docker 部署 Dubbo 微服务" href="http://localhost:1313/posts/nacos/docker-%E9%83%A8%E7%BD%B2-dubbo-%E5%BE%AE%E6%9C%8D%E5%8A%A1/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2 class="entry-hint-parent">Docker 容器下的 MySQL 主从同步
     </h2>
   </header>
@@ -205,7 +222,7 @@ chmod -R 777 /var/lib/mysql 需要注意的是，主从的 my.cnf 文件权限�
 ...</p>
   </div>
   <footer class="entry-footer"><span title='2025-12-30 22:19:00 +0800 CST'>December 30, 2025</span>&nbsp;·&nbsp;2 min</footer>
-  <a class="entry-link" aria-label="post link to Docker 容器下的 MySQL 主从同步" href="https://zjxjwxk.github.io/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql/docker-%E5%AE%B9%E5%99%A8%E4%B8%8B%E7%9A%84-mysql-%E4%B8%BB%E4%BB%8E%E5%90%8C%E6%AD%A5/"></a>
+  <a class="entry-link" aria-label="post link to Docker 容器下的 MySQL 主从同步" href="http://localhost:1313/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql/docker-%E5%AE%B9%E5%99%A8%E4%B8%8B%E7%9A%84-mysql-%E4%B8%BB%E4%BB%8E%E5%90%8C%E6%AD%A5/"></a>
 </article>
 
 <article class="post-entry"> 
@@ -219,24 +236,7 @@ Nowadays, the TLS is mostly used to secure a connection via a CA (Certificate Au
 CA (Certificate Authority): The CA can sign other entities certificates. Client: The client put certificates in the Trust Store and doesn’t hold keys. Server: The server puts certificates, public keys, and private keys in the Key Store. ...</p>
   </div>
   <footer class="entry-footer"><span title='2025-03-16 13:29:00 +0800 CST'>March 16, 2025</span>&nbsp;·&nbsp;10 min</footer>
-  <a class="entry-link" aria-label="post link to Kafka Administration" href="https://zjxjwxk.github.io/posts/mq/kafka/getting-started-with-apache-kafka/7-kafka-administration/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">Docker 部署 Dubbo 微服务
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>Docker 部署 Nacos 注册中心 首先需要部署 Nacos 注册中心，在开发环境中运行 Nacos 单机模式，执行以下 Docker 命令拉取镜像并运行容器：
-docker run -d \ --name nacos-server \ -p 8848:8848 \ -p 9848:9848 \ -e MODE=standalone \ nacos/nacos-server:2.0.2 需要注意的是，若在开发环境中使用模拟域名（配置在 /etc/hosts 中）访问 Docker 容器中的 Nacos 服务，当开启了 socks 等代理服务时，可能导致访问失败。若使用了如 clash 等代理服务，可以在配置文件中关闭其 dns 功能，并配置该模拟域名为直连：
-dns: enable: false ... rules: - DOMAIN-SUFFIX,live.zjxjwxk.com,🎯 全球直连 若部署成功，可以通过 localhost:8848/nacos/index.html 访问 Nacos 控制台页面。
-Maven 插件配置 在需要部署的微服务的 pom.xml 文件中配置如下插件，用于在 Maven 打包的同时构建 Docker 镜像：
-&lt;build&gt; &lt;finalName&gt;${artifactId}-docker&lt;/finalName&gt; &lt;plugins&gt; &lt;plugin&gt; &lt;groupId&gt;com.spotify&lt;/groupId&gt; &lt;artifactId&gt;docker-maven-plugin&lt;/artifactId&gt; &lt;version&gt;1.2.0&lt;/version&gt; &lt;executions&gt; &lt;!--当mvn执行install操作的时候，执行docker的build--&gt; &lt;execution&gt; &lt;id&gt;build&lt;/id&gt; &lt;phase&gt;install&lt;/phase&gt; &lt;goals&gt; &lt;goal&gt;build&lt;/goal&gt; &lt;/goals&gt; &lt;/execution&gt; &lt;/executions&gt; &lt;configuration&gt; &lt;imageTags&gt; &lt;imageTag&gt;${project.version}&lt;/imageTag&gt; &lt;/imageTags&gt; &lt;imageName&gt;${project.build.finalName}&lt;/imageName&gt; &lt;!--指定Dockerfile文件的位置--&gt; &lt;dockerDirectory&gt;${project.basedir}/docker&lt;/dockerDirectory&gt; &lt;!--指定jar包路径，这里对应Dockerfile中复制jar包 到docker容器指定目录配置，也可以写到Dockerfile中--&gt; &lt;resources&gt; &lt;resource&gt; &lt;targetPath&gt;/&lt;/targetPath&gt; &lt;!--将下边目录的内容，拷贝到docker镜像中--&gt; &lt;directory&gt;${project.build.directory}&lt;/directory&gt; &lt;include&gt;${project.build.finalName}.jar&lt;/include&gt; &lt;/resource&gt; &lt;/resources&gt; &lt;/configuration&gt; &lt;/plugin&gt; &lt;plugin&gt; &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt; &lt;artifactId&gt;spring-boot-maven-plugin&lt;/artifactId&gt; &lt;/plugin&gt; &lt;/plugins&gt; &lt;/build&gt; 编写 Dockerfile 文件 在需要部署的微服务目录下创建 docker 文件夹，并在此文件夹下创建如下 Dockerfile 文件（路径与 pom.xml 中的 ${project.basedir}/docker 一致）：
-...</p>
-  </div>
-  <footer class="entry-footer"><span title='2025-01-03 22:30:00 +0800 CST'>January 3, 2025</span>&nbsp;·&nbsp;2 min</footer>
-  <a class="entry-link" aria-label="post link to Docker 部署 Dubbo 微服务" href="https://zjxjwxk.github.io/posts/nacos/docker-%E9%83%A8%E7%BD%B2-dubbo-%E5%BE%AE%E6%9C%8D%E5%8A%A1/"></a>
+  <a class="entry-link" aria-label="post link to Kafka Administration" href="http://localhost:1313/posts/mq/kafka/getting-started-with-apache-kafka/7-kafka-administration/"></a>
 </article>
 
 <article class="post-entry"> 
@@ -250,7 +250,7 @@ We have normally two types of microservices:
 ...</p>
   </div>
   <footer class="entry-footer"><span title='2024-12-22 20:06:00 +0800 CST'>December 22, 2024</span>&nbsp;·&nbsp;11 min</footer>
-  <a class="entry-link" aria-label="post link to Kafka Stream" href="https://zjxjwxk.github.io/posts/mq/kafka/getting-started-with-apache-kafka/6-kafka-stream/"></a>
+  <a class="entry-link" aria-label="post link to Kafka Stream" href="http://localhost:1313/posts/mq/kafka/getting-started-with-apache-kafka/6-kafka-stream/"></a>
 </article>
 
 <article class="post-entry"> 
@@ -265,7 +265,7 @@ Connectors Source Connectors: Transfer data from a Source to Kafka. Sink Connect
 Standalone vs. Distributed ...</p>
   </div>
   <footer class="entry-footer"><span title='2024-11-23 16:44:00 +0800 CST'>November 23, 2024</span>&nbsp;·&nbsp;11 min</footer>
-  <a class="entry-link" aria-label="post link to Kafka Connect" href="https://zjxjwxk.github.io/posts/mq/kafka/getting-started-with-apache-kafka/5-kafka-connect/"></a>
+  <a class="entry-link" aria-label="post link to Kafka Connect" href="http://localhost:1313/posts/mq/kafka/getting-started-with-apache-kafka/5-kafka-connect/"></a>
 </article>
 
 <article class="post-entry"> 
@@ -279,7 +279,7 @@ If we add one more consumer to this group, the last one will be idle, because on
 ...</p>
   </div>
   <footer class="entry-footer"><span title='2024-11-18 18:41:00 +0800 CST'>November 18, 2024</span>&nbsp;·&nbsp;10 min</footer>
-  <a class="entry-link" aria-label="post link to Kafka Consumer" href="https://zjxjwxk.github.io/posts/mq/kafka/getting-started-with-apache-kafka/4-kafka-conumers/"></a>
+  <a class="entry-link" aria-label="post link to Kafka Consumer" href="http://localhost:1313/posts/mq/kafka/getting-started-with-apache-kafka/4-kafka-conumers/"></a>
 </article>
 
 <article class="post-entry"> 
@@ -293,7 +293,7 @@ If we add one more consumer to this group, the last one will be idle, because on
 ...</p>
   </div>
   <footer class="entry-footer"><span title='2024-11-17 01:47:59 +0800 CST'>November 17, 2024</span>&nbsp;·&nbsp;5 min</footer>
-  <a class="entry-link" aria-label="post link to Kafka Producer" href="https://zjxjwxk.github.io/posts/mq/kafka/getting-started-with-apache-kafka/3-kafka-producer/"></a>
+  <a class="entry-link" aria-label="post link to Kafka Producer" href="http://localhost:1313/posts/mq/kafka/getting-started-with-apache-kafka/3-kafka-producer/"></a>
 </article>
 
 <article class="post-entry"> 
@@ -307,7 +307,7 @@ If we add one more consumer to this group, the last one will be idle, because on
 ...</p>
   </div>
   <footer class="entry-footer"><span title='2024-11-16 01:47:59 +0800 CST'>November 16, 2024</span>&nbsp;·&nbsp;7 min</footer>
-  <a class="entry-link" aria-label="post link to Meet Kafka" href="https://zjxjwxk.github.io/posts/mq/kafka/getting-started-with-apache-kafka/2-meet-kafka/"></a>
+  <a class="entry-link" aria-label="post link to Meet Kafka" href="http://localhost:1313/posts/mq/kafka/getting-started-with-apache-kafka/2-meet-kafka/"></a>
 </article>
 
 <article class="post-entry"> 
@@ -319,7 +319,7 @@ If we add one more consumer to this group, the last one will be idle, because on
     <p>We Call The entity/app creates a message, a publisher, or a producer. The entity/app consuming messages from a channel as a consumer. The system where the channels live and handle these requests as an Event Bus or, more recently, a streaming platform. The channel where messages flow as channel or topic. Definitions We say the pub-sub system is reliable when you ensure there is no message loss. Has at most one processing when you ensure there is no message duplication. And has exactly one processing when you only process a message once ensuring it wasn’t lost. Of course, this is the holy grail. We Had a Ton of Other Pub/Sub Systems Before ...</p>
   </div>
   <footer class="entry-footer"><span title='2024-11-16 01:27:59 +0800 CST'>November 16, 2024</span>&nbsp;·&nbsp;2 min</footer>
-  <a class="entry-link" aria-label="post link to Pub-sub System" href="https://zjxjwxk.github.io/posts/mq/kafka/getting-started-with-apache-kafka/1-pub-sub-system/"></a>
+  <a class="entry-link" aria-label="post link to Pub-sub System" href="http://localhost:1313/posts/mq/kafka/getting-started-with-apache-kafka/1-pub-sub-system/"></a>
 </article>
 
 <article class="post-entry"> 
@@ -332,18 +332,18 @@ If we add one more consumer to this group, the last one will be idle, because on
 ...</p>
   </div>
   <footer class="entry-footer"><span title='2021-03-19 21:15:00 +0000 UTC'>March 19, 2021</span>&nbsp;·&nbsp;8 min</footer>
-  <a class="entry-link" aria-label="post link to Shiro入门" href="https://zjxjwxk.github.io/posts/shiro/"></a>
+  <a class="entry-link" aria-label="post link to Shiro入门" href="http://localhost:1313/posts/shiro/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">
-    <a class="next" href="https://zjxjwxk.github.io/page/2/">Next&nbsp;&nbsp;»
+    <a class="next" href="http://localhost:1313/page/2/">Next&nbsp;&nbsp;»
     </a>
   </nav>
 </footer>
     </main>
     
 <footer class="footer">
-        <span>&copy; 2026 <a href="https://zjxjwxk.github.io/">Xinkang&#39;s Blog</a></span> · 
+        <span>&copy; 2026 <a href="http://localhost:1313/">Xinkang&#39;s Blog</a></span> · 
 
     <span>
         Powered by

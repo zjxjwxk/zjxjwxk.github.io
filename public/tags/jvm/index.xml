@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>JVM on Xinkang&#39;s Blog</title>
-    <link>https://zjxjwxk.github.io/tags/jvm/</link>
+    <link>http://localhost:1313/tags/jvm/</link>
     <description>Recent content in JVM on Xinkang&#39;s Blog</description>
     <generator>Hugo -- 0.138.0</generator>
     <language>en</language>
     <lastBuildDate>Thu, 16 Jul 2020 11:01:00 +0000</lastBuildDate>
-    <atom:link href="https://zjxjwxk.github.io/tags/jvm/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/tags/jvm/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>自己编译OpenJDK 8</title>
-      <link>https://zjxjwxk.github.io/posts/java/jvm/%E8%87%AA%E5%B7%B1%E7%BC%96%E8%AF%91openjdk-8/</link>
+      <link>http://localhost:1313/posts/java/jvm/%E8%87%AA%E5%B7%B1%E7%BC%96%E8%AF%91openjdk-8/</link>
       <pubDate>Thu, 16 Jul 2020 11:01:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/posts/java/jvm/%E8%87%AA%E5%B7%B1%E7%BC%96%E8%AF%91openjdk-8/</guid>
+      <guid>http://localhost:1313/posts/java/jvm/%E8%87%AA%E5%B7%B1%E7%BC%96%E8%AF%91openjdk-8/</guid>
       <description>&lt;p&gt;想要一探 JDK 内部的实现机制，最便捷的捷径之一就是自己编译一套 JDK，通过阅读和跟踪调试 JDK 源码去了解 Java 技术体系的原理。本人选择了 OpenJDK 进行编译。&lt;/p&gt;
 &lt;p&gt;由于在编译 OpenJDK 7 时出现了如下不知如何解决的问题：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;llvm-gcc -m64   -m64  -L&lt;span style=&#34;color:#e6db74&#34;&gt;`&lt;/span&gt;pwd&lt;span style=&#34;color:#e6db74&#34;&gt;`&lt;/span&gt;  -framework CoreFoundation  -o gamma launcher/java_md.o launcher/java.o launcher/jli_util.o launcher/wildcard.o -ljvm -lm -pthread

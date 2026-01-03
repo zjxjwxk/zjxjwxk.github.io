@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>微服务 on Xinkang&#39;s Blog</title>
-    <link>https://zjxjwxk.github.io/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/</link>
+    <link>http://localhost:1313/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/</link>
     <description>Recent content in 微服务 on Xinkang&#39;s Blog</description>
     <generator>Hugo -- 0.138.0</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 03 Jan 2025 22:30:00 +0800</lastBuildDate>
-    <atom:link href="https://zjxjwxk.github.io/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 03 Jan 2026 22:30:00 +0800</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Docker 部署 Dubbo 微服务</title>
-      <link>https://zjxjwxk.github.io/posts/nacos/docker-%E9%83%A8%E7%BD%B2-dubbo-%E5%BE%AE%E6%9C%8D%E5%8A%A1/</link>
-      <pubDate>Fri, 03 Jan 2025 22:30:00 +0800</pubDate>
-      <guid>https://zjxjwxk.github.io/posts/nacos/docker-%E9%83%A8%E7%BD%B2-dubbo-%E5%BE%AE%E6%9C%8D%E5%8A%A1/</guid>
+      <link>http://localhost:1313/posts/nacos/docker-%E9%83%A8%E7%BD%B2-dubbo-%E5%BE%AE%E6%9C%8D%E5%8A%A1/</link>
+      <pubDate>Sat, 03 Jan 2026 22:30:00 +0800</pubDate>
+      <guid>http://localhost:1313/posts/nacos/docker-%E9%83%A8%E7%BD%B2-dubbo-%E5%BE%AE%E6%9C%8D%E5%8A%A1/</guid>
       <description>&lt;h2 id=&#34;docker-部署-nacos-注册中心&#34;&gt;Docker 部署 Nacos 注册中心&lt;/h2&gt;
 &lt;p&gt;首先需要部署 Nacos 注册中心，在开发环境中运行 Nacos 单机模式，执行以下 Docker 命令拉取镜像并运行容器：&lt;/p&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;docker run -d \

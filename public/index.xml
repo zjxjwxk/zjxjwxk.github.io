@@ -2,66 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Xinkang&#39;s Blog</title>
-    <link>https://zjxjwxk.github.io/</link>
+    <link>http://localhost:1313/</link>
     <description>Recent content on Xinkang&#39;s Blog</description>
     <generator>Hugo -- 0.138.0</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 30 Dec 2025 22:19:00 +0800</lastBuildDate>
-    <atom:link href="https://zjxjwxk.github.io/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Docker 容器下的 MySQL 主从同步</title>
-      <link>https://zjxjwxk.github.io/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql/docker-%E5%AE%B9%E5%99%A8%E4%B8%8B%E7%9A%84-mysql-%E4%B8%BB%E4%BB%8E%E5%90%8C%E6%AD%A5/</link>
-      <pubDate>Tue, 30 Dec 2025 22:19:00 +0800</pubDate>
-      <guid>https://zjxjwxk.github.io/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql/docker-%E5%AE%B9%E5%99%A8%E4%B8%8B%E7%9A%84-mysql-%E4%B8%BB%E4%BB%8E%E5%90%8C%E6%AD%A5/</guid>
-      <description>&lt;h2 id=&#34;创建宿主机-docker-容器挂载目录&#34;&gt;创建宿主机 Docker 容器挂载目录&lt;/h2&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;mkdir -p /var/lib/mysql/master1/conf
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;mkdir -p /var/lib/mysql/master1/data
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;mkdir -p /var/lib/mysql/slave1/conf
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;mkdir -p /var/lib/mysql/slave1/data
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;创建-mysql-主从配置文件&#34;&gt;创建 MySQL 主从配置文件&lt;/h2&gt;
-&lt;p&gt;创建主库配置文件（宿主机路径为 /var/lib/mysql/master1/conf/my.cnf）：&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;[mysqld]
-character-set-server = utf8
-lower-case-table-names = 1
-# 主从复制,主机配置,主服务器唯一ID
-server-id = 1
-# 启用二进制日志
-log-bin=mysql-bin
-# 设置logbin格式
-binlog_format = STATEMENT
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;创建从库配置文件（宿主机路径：/var/lib/mysql/slave1/conf/my.cnf）：&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;[mysqld]
-character-set-server = utf8
-lower-case-table-names = 1
-# 主从复制,从机配置,从服务器唯一ID
-server-id = 2
-# 启用中继日志
-relay-log = mysql-relay
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;授权文件夹：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;chmod -R &lt;span style=&#34;color:#ae81ff&#34;&gt;777&lt;/span&gt; /var/lib/mysql
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;需要注意的是，主从的 my.cnf 文件权限不能为 777，否则 my.cnf 文件无法在容器内生效，在登陆 Docker 容器内的 MySQL 时会提示：&lt;code&gt;mysql: [Warning] World-writable config file &#39;/etc/mysql/my.cnf&#39; is ignored&lt;/code&gt;。解决办法是修改宿主机上主从的 my.cnf 权限为更低的 644：&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Kafka Administration</title>
-      <link>https://zjxjwxk.github.io/posts/mq/kafka/getting-started-with-apache-kafka/7-kafka-administration/</link>
-      <pubDate>Sun, 16 Mar 2025 13:29:00 +0800</pubDate>
-      <guid>https://zjxjwxk.github.io/posts/mq/kafka/getting-started-with-apache-kafka/7-kafka-administration/</guid>
-      <description>&lt;h2 id=&#34;truststore-and-keystore-in-kafka&#34;&gt;TrustStore and KeyStore in Kafka&lt;/h2&gt;
-&lt;p&gt;We need to have a secure deployment and encrypted communication on each of these four types of arrows.&lt;/p&gt;
-&lt;p&gt;&lt;img alt=&#34;image-20250316135513552&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/mq/kafka/getting-started-with-apache-kafka/7-kafka-administration/images/image-20250316135513552.png&#34;&gt;&lt;/p&gt;
-&lt;p&gt;Nowadays, the TLS is mostly used to secure a connection via a CA (Certificate Authority):&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;CA (Certificate Authority): The CA can sign other entities certificates.&lt;/li&gt;
-&lt;li&gt;Client: The client put certificates in the Trust Store and doesn&amp;rsquo;t hold keys.&lt;/li&gt;
-&lt;li&gt;Server: The server puts certificates, public keys, and private keys in the Key Store.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;img alt=&#34;image-20250316140335677&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/mq/kafka/getting-started-with-apache-kafka/7-kafka-administration/images/image-20250316140335677.png&#34;&gt;&lt;/p&gt;</description>
-    </item>
+    <lastBuildDate>Sat, 03 Jan 2026 22:30:00 +0800</lastBuildDate>
+    <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Docker 部署 Dubbo 微服务</title>
-      <link>https://zjxjwxk.github.io/posts/nacos/docker-%E9%83%A8%E7%BD%B2-dubbo-%E5%BE%AE%E6%9C%8D%E5%8A%A1/</link>
-      <pubDate>Fri, 03 Jan 2025 22:30:00 +0800</pubDate>
-      <guid>https://zjxjwxk.github.io/posts/nacos/docker-%E9%83%A8%E7%BD%B2-dubbo-%E5%BE%AE%E6%9C%8D%E5%8A%A1/</guid>
+      <link>http://localhost:1313/posts/nacos/docker-%E9%83%A8%E7%BD%B2-dubbo-%E5%BE%AE%E6%9C%8D%E5%8A%A1/</link>
+      <pubDate>Sat, 03 Jan 2026 22:30:00 +0800</pubDate>
+      <guid>http://localhost:1313/posts/nacos/docker-%E9%83%A8%E7%BD%B2-dubbo-%E5%BE%AE%E6%9C%8D%E5%8A%A1/</guid>
       <description>&lt;h2 id=&#34;docker-部署-nacos-注册中心&#34;&gt;Docker 部署 Nacos 注册中心&lt;/h2&gt;
 &lt;p&gt;首先需要部署 Nacos 注册中心，在开发环境中运行 Nacos 单机模式，执行以下 Docker 命令拉取镜像并运行容器：&lt;/p&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;docker run -d \
@@ -126,22 +77,71 @@ rules:
 &lt;p&gt;在需要部署的微服务目录下创建 docker 文件夹，并在此文件夹下创建如下 Dockerfile 文件（路径与 pom.xml 中的 &lt;code&gt;${project.basedir}/docker&lt;/code&gt; 一致）：&lt;/p&gt;</description>
     </item>
     <item>
+      <title>Docker 容器下的 MySQL 主从同步</title>
+      <link>http://localhost:1313/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql/docker-%E5%AE%B9%E5%99%A8%E4%B8%8B%E7%9A%84-mysql-%E4%B8%BB%E4%BB%8E%E5%90%8C%E6%AD%A5/</link>
+      <pubDate>Tue, 30 Dec 2025 22:19:00 +0800</pubDate>
+      <guid>http://localhost:1313/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql/docker-%E5%AE%B9%E5%99%A8%E4%B8%8B%E7%9A%84-mysql-%E4%B8%BB%E4%BB%8E%E5%90%8C%E6%AD%A5/</guid>
+      <description>&lt;h2 id=&#34;创建宿主机-docker-容器挂载目录&#34;&gt;创建宿主机 Docker 容器挂载目录&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;mkdir -p /var/lib/mysql/master1/conf
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;mkdir -p /var/lib/mysql/master1/data
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;mkdir -p /var/lib/mysql/slave1/conf
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;mkdir -p /var/lib/mysql/slave1/data
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;创建-mysql-主从配置文件&#34;&gt;创建 MySQL 主从配置文件&lt;/h2&gt;
+&lt;p&gt;创建主库配置文件（宿主机路径为 /var/lib/mysql/master1/conf/my.cnf）：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;[mysqld]
+character-set-server = utf8
+lower-case-table-names = 1
+# 主从复制,主机配置,主服务器唯一ID
+server-id = 1
+# 启用二进制日志
+log-bin=mysql-bin
+# 设置logbin格式
+binlog_format = STATEMENT
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;创建从库配置文件（宿主机路径：/var/lib/mysql/slave1/conf/my.cnf）：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;[mysqld]
+character-set-server = utf8
+lower-case-table-names = 1
+# 主从复制,从机配置,从服务器唯一ID
+server-id = 2
+# 启用中继日志
+relay-log = mysql-relay
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;授权文件夹：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;chmod -R &lt;span style=&#34;color:#ae81ff&#34;&gt;777&lt;/span&gt; /var/lib/mysql
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;需要注意的是，主从的 my.cnf 文件权限不能为 777，否则 my.cnf 文件无法在容器内生效，在登陆 Docker 容器内的 MySQL 时会提示：&lt;code&gt;mysql: [Warning] World-writable config file &#39;/etc/mysql/my.cnf&#39; is ignored&lt;/code&gt;。解决办法是修改宿主机上主从的 my.cnf 权限为更低的 644：&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Kafka Administration</title>
+      <link>http://localhost:1313/posts/mq/kafka/getting-started-with-apache-kafka/7-kafka-administration/</link>
+      <pubDate>Sun, 16 Mar 2025 13:29:00 +0800</pubDate>
+      <guid>http://localhost:1313/posts/mq/kafka/getting-started-with-apache-kafka/7-kafka-administration/</guid>
+      <description>&lt;h2 id=&#34;truststore-and-keystore-in-kafka&#34;&gt;TrustStore and KeyStore in Kafka&lt;/h2&gt;
+&lt;p&gt;We need to have a secure deployment and encrypted communication on each of these four types of arrows.&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;image-20250316135513552&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/mq/kafka/getting-started-with-apache-kafka/7-kafka-administration/images/image-20250316135513552.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Nowadays, the TLS is mostly used to secure a connection via a CA (Certificate Authority):&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;CA (Certificate Authority): The CA can sign other entities certificates.&lt;/li&gt;
+&lt;li&gt;Client: The client put certificates in the Trust Store and doesn&amp;rsquo;t hold keys.&lt;/li&gt;
+&lt;li&gt;Server: The server puts certificates, public keys, and private keys in the Key Store.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img alt=&#34;image-20250316140335677&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/mq/kafka/getting-started-with-apache-kafka/7-kafka-administration/images/image-20250316140335677.png&#34;&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
       <title>Kafka Stream</title>
-      <link>https://zjxjwxk.github.io/posts/mq/kafka/getting-started-with-apache-kafka/6-kafka-stream/</link>
+      <link>http://localhost:1313/posts/mq/kafka/getting-started-with-apache-kafka/6-kafka-stream/</link>
       <pubDate>Sun, 22 Dec 2024 20:06:00 +0800</pubDate>
-      <guid>https://zjxjwxk.github.io/posts/mq/kafka/getting-started-with-apache-kafka/6-kafka-stream/</guid>
+      <guid>http://localhost:1313/posts/mq/kafka/getting-started-with-apache-kafka/6-kafka-stream/</guid>
       <description>&lt;h2 id=&#34;microservices-with-kafka&#34;&gt;Microservices with Kafka&lt;/h2&gt;
 &lt;p&gt;To understand the logic behind doing microservices with Kafka, I believe it is important to take a smaller tour of how databases work. The engine uses a file called the write‑ahead log, or WAL. First, it writes the operation to the WAL. Then, it executes operations on the tables and indexes to reflect what the WAL said they should look like.&lt;/p&gt;
-&lt;p&gt;&lt;img alt=&#34;image-20250113214711151&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/mq/kafka/getting-started-with-apache-kafka/6-kafka-stream/images/image-20250113214711151.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;image-20250113214711151&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/mq/kafka/getting-started-with-apache-kafka/6-kafka-stream/images/image-20250113214711151.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;We have normally two types of microservices:&lt;/p&gt;</description>
     </item>
     <item>
       <title>Kafka Connect</title>
-      <link>https://zjxjwxk.github.io/posts/mq/kafka/getting-started-with-apache-kafka/5-kafka-connect/</link>
+      <link>http://localhost:1313/posts/mq/kafka/getting-started-with-apache-kafka/5-kafka-connect/</link>
       <pubDate>Sat, 23 Nov 2024 16:44:00 +0800</pubDate>
-      <guid>https://zjxjwxk.github.io/posts/mq/kafka/getting-started-with-apache-kafka/5-kafka-connect/</guid>
+      <guid>http://localhost:1313/posts/mq/kafka/getting-started-with-apache-kafka/5-kafka-connect/</guid>
       <description>&lt;h2 id=&#34;etl-with-apache-kafka&#34;&gt;ETL with Apache Kafka&lt;/h2&gt;
-&lt;p&gt;&lt;img alt=&#34;image-20241123173425604&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/mq/kafka/getting-started-with-apache-kafka/5-kafka-connect/images/image-20241123173425604.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;image-20241123173425604&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/mq/kafka/getting-started-with-apache-kafka/5-kafka-connect/images/image-20241123173425604.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;One important statement is that Kafka Connect is not an ETL(Extract, Load, Transform) solution itself, it only connects.&lt;/p&gt;
 &lt;p&gt;But with the help of the correct plugins it can have some ETL capabilities.&lt;/p&gt;
 &lt;h2 id=&#34;connectors&#34;&gt;Connectors&lt;/h2&gt;
@@ -151,13 +151,13 @@ rules:
 &lt;/ul&gt;
 &lt;p&gt;You can search through all of the connectors at thre registry: &lt;a href=&#34;https://www.confluent.io/product/connectors&#34;&gt;https://www.confluent.io/product/connectors&lt;/a&gt;.&lt;/p&gt;
 &lt;h2 id=&#34;standalone-vs-distributed&#34;&gt;Standalone vs. Distributed&lt;/h2&gt;
-&lt;p&gt;&lt;img alt=&#34;image-20241123182435451&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/mq/kafka/getting-started-with-apache-kafka/5-kafka-connect/images/image-20241123182435451.png&#34;&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;img alt=&#34;image-20241123182435451&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/mq/kafka/getting-started-with-apache-kafka/5-kafka-connect/images/image-20241123182435451.png&#34;&gt;&lt;/p&gt;</description>
     </item>
     <item>
       <title>Kafka Consumer</title>
-      <link>https://zjxjwxk.github.io/posts/mq/kafka/getting-started-with-apache-kafka/4-kafka-conumers/</link>
+      <link>http://localhost:1313/posts/mq/kafka/getting-started-with-apache-kafka/4-kafka-conumers/</link>
       <pubDate>Mon, 18 Nov 2024 18:41:00 +0800</pubDate>
-      <guid>https://zjxjwxk.github.io/posts/mq/kafka/getting-started-with-apache-kafka/4-kafka-conumers/</guid>
+      <guid>http://localhost:1313/posts/mq/kafka/getting-started-with-apache-kafka/4-kafka-conumers/</guid>
       <description>&lt;h2 id=&#34;kafka-consumer-group&#34;&gt;Kafka Consumer Group&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;Consumers are typically done as a group.&lt;/li&gt;
@@ -166,16 +166,16 @@ rules:
 &lt;li&gt;Every consumer should be on it&amp;rsquo;s own machine, instance, pod.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;The consumer group ID is the key so Kafka knows that messages should be distributed to both consumers without duplicating.&lt;/p&gt;
-&lt;p&gt;&lt;img alt=&#34;image-20241118185205006&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/mq/kafka/getting-started-with-apache-kafka/4-kafka-conumers/images/image-20241118185205006.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;image-20241118185205006&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/mq/kafka/getting-started-with-apache-kafka/4-kafka-conumers/images/image-20241118185205006.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;If we add one more consumer to this group, the last one will be idle, because one partition can&amp;rsquo;t be share across consumers. One partition can only be assigned to one consumer. Instead, the partitions are the way of Kafka to scale. More partitions imply you can have more consumers in the same consumer group.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Kafka Producer</title>
-      <link>https://zjxjwxk.github.io/posts/mq/kafka/getting-started-with-apache-kafka/3-kafka-producer/</link>
+      <link>http://localhost:1313/posts/mq/kafka/getting-started-with-apache-kafka/3-kafka-producer/</link>
       <pubDate>Sun, 17 Nov 2024 01:47:59 +0800</pubDate>
-      <guid>https://zjxjwxk.github.io/posts/mq/kafka/getting-started-with-apache-kafka/3-kafka-producer/</guid>
+      <guid>http://localhost:1313/posts/mq/kafka/getting-started-with-apache-kafka/3-kafka-producer/</guid>
       <description>&lt;h2 id=&#34;kafka-producer-overview&#34;&gt;Kafka Producer Overview&lt;/h2&gt;
-&lt;p&gt;&lt;img alt=&#34;image-20241116183122165&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/mq/kafka/getting-started-with-apache-kafka/3-kafka-producer/images/image-20241116183122165.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;image-20241116183122165&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/mq/kafka/getting-started-with-apache-kafka/3-kafka-producer/images/image-20241116183122165.png&#34;&gt;&lt;/p&gt;
 &lt;h2 id=&#34;demo-producing-messages-with-kafka-cli&#34;&gt;Demo: Producing Messages with Kafka CLI&lt;/h2&gt;
 &lt;h3 id=&#34;run-kafka-containers&#34;&gt;Run Kafka Containers&lt;/h3&gt;
 &lt;p&gt;Create a docker-compose file &lt;code&gt;docker-compose.yaml&lt;/code&gt; containing three Zookeepers, three Kafka Brokers, and a Kafka REST Proxy:&lt;/p&gt;
@@ -310,13 +310,13 @@ rules:
     </item>
     <item>
       <title>Meet Kafka</title>
-      <link>https://zjxjwxk.github.io/posts/mq/kafka/getting-started-with-apache-kafka/2-meet-kafka/</link>
+      <link>http://localhost:1313/posts/mq/kafka/getting-started-with-apache-kafka/2-meet-kafka/</link>
       <pubDate>Sat, 16 Nov 2024 01:47:59 +0800</pubDate>
-      <guid>https://zjxjwxk.github.io/posts/mq/kafka/getting-started-with-apache-kafka/2-meet-kafka/</guid>
+      <guid>http://localhost:1313/posts/mq/kafka/getting-started-with-apache-kafka/2-meet-kafka/</guid>
       <description>&lt;h2 id=&#34;kafka-architecture&#34;&gt;Kafka Architecture&lt;/h2&gt;
-&lt;p&gt;&lt;img alt=&#34;image-20241116015015788&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/mq/kafka/getting-started-with-apache-kafka/2-meet-kafka/images/image-20241116015015788.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;image-20241116015015788&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/mq/kafka/getting-started-with-apache-kafka/2-meet-kafka/images/image-20241116015015788.png&#34;&gt;&lt;/p&gt;
 &lt;h2 id=&#34;kafka-message&#34;&gt;Kafka Message&lt;/h2&gt;
-&lt;p&gt;&lt;img alt=&#34;image-20241116015252987&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/mq/kafka/getting-started-with-apache-kafka/2-meet-kafka/images/image-20241116015252987.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;image-20241116015252987&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/mq/kafka/getting-started-with-apache-kafka/2-meet-kafka/images/image-20241116015252987.png&#34;&gt;&lt;/p&gt;
 &lt;h2 id=&#34;deploy-kafka&#34;&gt;Deploy Kafka&lt;/h2&gt;
 &lt;p&gt;Create a docker-compose file &lt;code&gt;docker-compose.yaml&lt;/code&gt; containing three Zookeepers, three Kafka Brokers, and a Kafka REST Proxy:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;---
@@ -450,9 +450,9 @@ rules:
     </item>
     <item>
       <title>Pub-sub System</title>
-      <link>https://zjxjwxk.github.io/posts/mq/kafka/getting-started-with-apache-kafka/1-pub-sub-system/</link>
+      <link>http://localhost:1313/posts/mq/kafka/getting-started-with-apache-kafka/1-pub-sub-system/</link>
       <pubDate>Sat, 16 Nov 2024 01:27:59 +0800</pubDate>
-      <guid>https://zjxjwxk.github.io/posts/mq/kafka/getting-started-with-apache-kafka/1-pub-sub-system/</guid>
+      <guid>http://localhost:1313/posts/mq/kafka/getting-started-with-apache-kafka/1-pub-sub-system/</guid>
       <description>&lt;h2 id=&#34;we-call&#34;&gt;We Call&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;The entity/app creates a message, a publisher, or a producer.&lt;/li&gt;
@@ -467,13 +467,13 @@ rules:
 &lt;li&gt;And has exactly one processing when you only process a message once ensuring it wasn&amp;rsquo;t lost. Of course, this is the holy grail.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;we-had-a-ton-of-other-pubsub-systems-before&#34;&gt;We Had a Ton of Other Pub/Sub Systems Before&lt;/h2&gt;
-&lt;p&gt;&lt;img alt=&#34;image-20241116003710435&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/mq/kafka/getting-started-with-apache-kafka/1-pub-sub-system/images/image-20241116003710435.png&#34;&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;img alt=&#34;image-20241116003710435&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/mq/kafka/getting-started-with-apache-kafka/1-pub-sub-system/images/image-20241116003710435.png&#34;&gt;&lt;/p&gt;</description>
     </item>
     <item>
       <title>Shiro入门</title>
-      <link>https://zjxjwxk.github.io/posts/shiro/</link>
+      <link>http://localhost:1313/posts/shiro/</link>
       <pubDate>Fri, 19 Mar 2021 21:15:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/posts/shiro/</guid>
+      <guid>http://localhost:1313/posts/shiro/</guid>
       <description>&lt;h1 id=&#34;学习目标&#34;&gt;学习目标&lt;/h1&gt;
 &lt;ul&gt;
 &lt;li&gt;认识 Shiro 的整体架构，各组件的概念&lt;/li&gt;
@@ -502,7 +502,7 @@ rules:
 &lt;li&gt;粒度更细&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h1 id=&#34;shiro-整体架构&#34;&gt;Shiro 整体架构&lt;/h1&gt;
-&lt;p&gt;&lt;img alt=&#34;Shiro 整体架构&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/shiro/images/ShiroArchitecture-20210319212652355.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;Shiro 整体架构&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/shiro/images/ShiroArchitecture-20210319212652355.png&#34;&gt;&lt;/p&gt;
 &lt;h1 id=&#34;shiro-认证和授权&#34;&gt;Shiro 认证和授权&lt;/h1&gt;
 &lt;h2 id=&#34;认证过程&#34;&gt;认证过程&lt;/h2&gt;
 &lt;ul&gt;
@@ -516,30 +516,30 @@ rules:
     </item>
     <item>
       <title>以太坊私有链搭建</title>
-      <link>https://zjxjwxk.github.io/posts/blockchain/%E4%BB%A5%E5%A4%AA%E5%9D%8A%E7%A7%81%E6%9C%89%E9%93%BE%E6%90%AD%E5%BB%BA/</link>
+      <link>http://localhost:1313/posts/blockchain/%E4%BB%A5%E5%A4%AA%E5%9D%8A%E7%A7%81%E6%9C%89%E9%93%BE%E6%90%AD%E5%BB%BA/</link>
       <pubDate>Tue, 03 Nov 2020 12:40:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/posts/blockchain/%E4%BB%A5%E5%A4%AA%E5%9D%8A%E7%A7%81%E6%9C%89%E9%93%BE%E6%90%AD%E5%BB%BA/</guid>
+      <guid>http://localhost:1313/posts/blockchain/%E4%BB%A5%E5%A4%AA%E5%9D%8A%E7%A7%81%E6%9C%89%E9%93%BE%E6%90%AD%E5%BB%BA/</guid>
       <description>&lt;h1 id=&#34;1-以太坊开发环境搭建&#34;&gt;1. 以太坊开发环境搭建&lt;/h1&gt;
 &lt;h2 id=&#34;11-配置以太坊环境&#34;&gt;1.1 配置以太坊环境&lt;/h2&gt;
 &lt;h3 id=&#34;111-安装-go-环境&#34;&gt;1.1.1 安装 Go 环境&lt;/h3&gt;
 &lt;p&gt;可在 Go 官网 &lt;a href=&#34;https://golang.org/dl/&#34;&gt;https://golang.org/dl/&lt;/a&gt; 直接下载相应操作系统的安装包，本人使用 MacOS 系统，故点击如下按钮下载：&lt;/p&gt;
-&lt;p&gt;&lt;img alt=&#34;Go安装包下载&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/blockchain/%E4%BB%A5%E5%A4%AA%E5%9D%8A%E7%A7%81%E6%9C%89%E9%93%BE%E6%90%AD%E5%BB%BA/images/image-20201103124547934.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;Go安装包下载&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/blockchain/%E4%BB%A5%E5%A4%AA%E5%9D%8A%E7%A7%81%E6%9C%89%E9%93%BE%E6%90%AD%E5%BB%BA/images/image-20201103124547934.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;根据其提示信息进行安装，无需配置环境变量，在终端中输入 &lt;code&gt;go version&lt;/code&gt; ，若出现如下版本信息则 Go 环境安装成功。&lt;/p&gt;
-&lt;p&gt;&lt;img alt=&#34;Go 版本信息&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/blockchain/%E4%BB%A5%E5%A4%AA%E5%9D%8A%E7%A7%81%E6%9C%89%E9%93%BE%E6%90%AD%E5%BB%BA/images/image-20201103132116806.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;Go 版本信息&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/blockchain/%E4%BB%A5%E5%A4%AA%E5%9D%8A%E7%A7%81%E6%9C%89%E9%93%BE%E6%90%AD%E5%BB%BA/images/image-20201103132116806.png&#34;&gt;&lt;/p&gt;
 &lt;h3 id=&#34;112-安装-nodejsnpm&#34;&gt;1.1.2 安装 Node.js、NPM&lt;/h3&gt;
 &lt;p&gt;由于 Node.js 的安装包已经包含了 NPM，故只需下载最新稳定版本的 Node.js 安装包即可。&lt;/p&gt;
-&lt;p&gt;&lt;img alt=&#34;Node.js 和 NPM 安装&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/blockchain/%E4%BB%A5%E5%A4%AA%E5%9D%8A%E7%A7%81%E6%9C%89%E9%93%BE%E6%90%AD%E5%BB%BA/images/image-20201103125435679.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;Node.js 和 NPM 安装&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/blockchain/%E4%BB%A5%E5%A4%AA%E5%9D%8A%E7%A7%81%E6%9C%89%E9%93%BE%E6%90%AD%E5%BB%BA/images/image-20201103125435679.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;同样根据提示安装，无需配置环境变量，在终端中输入 &lt;code&gt;node -v&lt;/code&gt; 和 &lt;code&gt;npm -v&lt;/code&gt; ，若分别出现如下 Node.js 和 NPM 的版本信息，则安装成功。&lt;/p&gt;
-&lt;p&gt;&lt;img alt=&#34;Node.js 和 NPM 版本信息&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/blockchain/%E4%BB%A5%E5%A4%AA%E5%9D%8A%E7%A7%81%E6%9C%89%E9%93%BE%E6%90%AD%E5%BB%BA/images/image-20201103132211802.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;Node.js 和 NPM 版本信息&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/blockchain/%E4%BB%A5%E5%A4%AA%E5%9D%8A%E7%A7%81%E6%9C%89%E9%93%BE%E6%90%AD%E5%BB%BA/images/image-20201103132211802.png&#34;&gt;&lt;/p&gt;
 &lt;h3 id=&#34;113-安装以太坊-ethereum&#34;&gt;1.1.3 安装以太坊 Ethereum&lt;/h3&gt;
 &lt;p&gt;由于本人使用 MacOS 系统，故使用 brew 安装，在终端中输入 &lt;code&gt;brew install ethereum&lt;/code&gt; 即可安装。安装完成后，若输入 &lt;code&gt;geth version&lt;/code&gt; 出现如下版本信息，则 Ethereum 安装成功。&lt;/p&gt;
-&lt;p&gt;&lt;img alt=&#34;geth 版本信息&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/blockchain/%E4%BB%A5%E5%A4%AA%E5%9D%8A%E7%A7%81%E6%9C%89%E9%93%BE%E6%90%AD%E5%BB%BA/images/image-20201103132306255.png&#34;&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;img alt=&#34;geth 版本信息&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/blockchain/%E4%BB%A5%E5%A4%AA%E5%9D%8A%E7%A7%81%E6%9C%89%E9%93%BE%E6%90%AD%E5%BB%BA/images/image-20201103132306255.png&#34;&gt;&lt;/p&gt;</description>
     </item>
     <item>
       <title>自己编译OpenJDK 8</title>
-      <link>https://zjxjwxk.github.io/posts/java/jvm/%E8%87%AA%E5%B7%B1%E7%BC%96%E8%AF%91openjdk-8/</link>
+      <link>http://localhost:1313/posts/java/jvm/%E8%87%AA%E5%B7%B1%E7%BC%96%E8%AF%91openjdk-8/</link>
       <pubDate>Thu, 16 Jul 2020 11:01:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/posts/java/jvm/%E8%87%AA%E5%B7%B1%E7%BC%96%E8%AF%91openjdk-8/</guid>
+      <guid>http://localhost:1313/posts/java/jvm/%E8%87%AA%E5%B7%B1%E7%BC%96%E8%AF%91openjdk-8/</guid>
       <description>&lt;p&gt;想要一探 JDK 内部的实现机制，最便捷的捷径之一就是自己编译一套 JDK，通过阅读和跟踪调试 JDK 源码去了解 Java 技术体系的原理。本人选择了 OpenJDK 进行编译。&lt;/p&gt;
 &lt;p&gt;由于在编译 OpenJDK 7 时出现了如下不知如何解决的问题：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;llvm-gcc -m64   -m64  -L&lt;span style=&#34;color:#e6db74&#34;&gt;`&lt;/span&gt;pwd&lt;span style=&#34;color:#e6db74&#34;&gt;`&lt;/span&gt;  -framework CoreFoundation  -o gamma launcher/java_md.o launcher/java.o launcher/jli_util.o launcher/wildcard.o -ljvm -lm -pthread
@@ -563,9 +563,9 @@ rules:
     </item>
     <item>
       <title>Spring Boot 中的 JWT 跨域问题</title>
-      <link>https://zjxjwxk.github.io/posts/spring-boot/spring-boot-%E4%B8%AD%E7%9A%84-jwt-%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98/</link>
+      <link>http://localhost:1313/posts/spring-boot/spring-boot-%E4%B8%AD%E7%9A%84-jwt-%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98/</link>
       <pubDate>Fri, 05 Jun 2020 21:02:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/posts/spring-boot/spring-boot-%E4%B8%AD%E7%9A%84-jwt-%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98/</guid>
+      <guid>http://localhost:1313/posts/spring-boot/spring-boot-%E4%B8%AD%E7%9A%84-jwt-%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98/</guid>
       <description>&lt;h1 id=&#34;主要问题&#34;&gt;主要问题&lt;/h1&gt;
 &lt;p&gt;前后端分离后，前端使用 Ajax 进行请求，存在一些跨域的问题。&lt;/p&gt;
 &lt;p&gt;基于 Spring Boot 的后端通过给 Controlle类或其中的方法添加 &lt;code&gt;@CrossOrigin&lt;/code&gt; 注解来解决跨域问题：&lt;/p&gt;
@@ -601,9 +601,9 @@ rules:
     </item>
     <item>
       <title>微服务容器化系列（1）：服务编排前奏</title>
-      <link>https://zjxjwxk.github.io/posts/docker/docker-&#43;-k8s-%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%AE%B9%E5%99%A8%E5%8C%96/1.-%E6%9C%8D%E5%8A%A1%E7%BC%96%E6%8E%92%E5%89%8D%E5%A5%8F/</link>
+      <link>http://localhost:1313/posts/docker/docker-&#43;-k8s-%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%AE%B9%E5%99%A8%E5%8C%96/1.-%E6%9C%8D%E5%8A%A1%E7%BC%96%E6%8E%92%E5%89%8D%E5%A5%8F/</link>
       <pubDate>Thu, 04 Jun 2020 23:15:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/posts/docker/docker-&#43;-k8s-%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%AE%B9%E5%99%A8%E5%8C%96/1.-%E6%9C%8D%E5%8A%A1%E7%BC%96%E6%8E%92%E5%89%8D%E5%A5%8F/</guid>
+      <guid>http://localhost:1313/posts/docker/docker-&#43;-k8s-%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%AE%B9%E5%99%A8%E5%8C%96/1.-%E6%9C%8D%E5%8A%A1%E7%BC%96%E6%8E%92%E5%89%8D%E5%A5%8F/</guid>
       <description>&lt;h1 id=&#34;服务-docker-化&#34;&gt;服务 Docker 化&lt;/h1&gt;
 &lt;h2 id=&#34;修改项目配置&#34;&gt;修改项目配置&lt;/h2&gt;
 &lt;p&gt;由于镜像运行时 MySQL 数据库所在的主机地址是动态的，所以将项目中的 MySQL 数据库地址和 Zookeeper 注册中心地址配置为动态变量：&lt;/p&gt;
@@ -633,9 +633,9 @@ rules:
     </item>
     <item>
       <title>Hadoop 进阶篇</title>
-      <link>https://zjxjwxk.github.io/posts/%E5%A4%A7%E6%95%B0%E6%8D%AE/hadoop/hadoop%E8%BF%9B%E9%98%B6%E7%AF%87/</link>
+      <link>http://localhost:1313/posts/%E5%A4%A7%E6%95%B0%E6%8D%AE/hadoop/hadoop%E8%BF%9B%E9%98%B6%E7%AF%87/</link>
       <pubDate>Fri, 08 May 2020 16:36:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/posts/%E5%A4%A7%E6%95%B0%E6%8D%AE/hadoop/hadoop%E8%BF%9B%E9%98%B6%E7%AF%87/</guid>
+      <guid>http://localhost:1313/posts/%E5%A4%A7%E6%95%B0%E6%8D%AE/hadoop/hadoop%E8%BF%9B%E9%98%B6%E7%AF%87/</guid>
       <description>&lt;h1 id=&#34;概要&#34;&gt;概要&lt;/h1&gt;
 &lt;ul&gt;
 &lt;li&gt;概述&lt;/li&gt;
@@ -645,24 +645,24 @@ rules:
 &lt;/ul&gt;
 &lt;h1 id=&#34;hdfs&#34;&gt;HDFS&lt;/h1&gt;
 &lt;p&gt;HDFS 是 Hadoop 分布式文件系统的简称，由若干台计算机组成，用于存放 PB、TB 数量级以上的文件，每份文件可以有多个副本，所以 HDFS 是一个具有高冗余、高容错的文件系统。&lt;/p&gt;
-&lt;p&gt;&lt;img alt=&#34;HDFS架构&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/%E5%A4%A7%E6%95%B0%E6%8D%AE/hadoop/hadoop%E8%BF%9B%E9%98%B6%E7%AF%87/images/image-20200508165016013.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;HDFS架构&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/%E5%A4%A7%E6%95%B0%E6%8D%AE/hadoop/hadoop%E8%BF%9B%E9%98%B6%E7%AF%87/images/image-20200508165016013.png&#34;&gt;&lt;/p&gt;
 &lt;h1 id=&#34;hadoop&#34;&gt;Hadoop&lt;/h1&gt;
 &lt;h2 id=&#34;hadoop-1x&#34;&gt;Hadoop 1.x&lt;/h2&gt;
-&lt;p&gt;&lt;img alt=&#34;Hadoop 1.x&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/%E5%A4%A7%E6%95%B0%E6%8D%AE/hadoop/hadoop%E8%BF%9B%E9%98%B6%E7%AF%87/images/image-20200508165127618.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;Hadoop 1.x&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/%E5%A4%A7%E6%95%B0%E6%8D%AE/hadoop/hadoop%E8%BF%9B%E9%98%B6%E7%AF%87/images/image-20200508165127618.png&#34;&gt;&lt;/p&gt;
 &lt;h2 id=&#34;hadoop-2x&#34;&gt;Hadoop 2.x&lt;/h2&gt;
 &lt;p&gt;Hadoop 1.0 到 2.0 的变化：Hadoop 2.0 以后的版本移除了原有的 JobTracker 和 TaskTracker，改由 Yarn 平台的 ResourceManager 负责集群中所有资源的统一管理和分配，NodeManager 管理 Hadoop 集群中单个计算节点。&lt;/p&gt;
 &lt;p&gt;YARN 的设计减小了 JobTracker 的资源消耗，减少了 Hadoop 1.0 中发生单点故障的风险。我们还可以在 YARN 平台上运行 Spark 和 Storm 作业，充分利用资源。&lt;/p&gt;
-&lt;p&gt;&lt;img alt=&#34;Hadoop 1.0 =&amp;gt; Hadoop 2.0&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/%E5%A4%A7%E6%95%B0%E6%8D%AE/hadoop/hadoop%E8%BF%9B%E9%98%B6%E7%AF%87/images/image-20200508165216140.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;Hadoop 1.0 =&amp;gt; Hadoop 2.0&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/%E5%A4%A7%E6%95%B0%E6%8D%AE/hadoop/hadoop%E8%BF%9B%E9%98%B6%E7%AF%87/images/image-20200508165216140.png&#34;&gt;&lt;/p&gt;
 &lt;h1 id=&#34;深入探索-mapreduce&#34;&gt;深入探索 MapReduce&lt;/h1&gt;
 &lt;h2 id=&#34;wordcount-实例回顾&#34;&gt;WordCount 实例回顾&lt;/h2&gt;
-&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/%E5%A4%A7%E6%95%B0%E6%8D%AE/hadoop/hadoop%E8%BF%9B%E9%98%B6%E7%AF%87/images/image-20200508170750118.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/%E5%A4%A7%E6%95%B0%E6%8D%AE/hadoop/hadoop%E8%BF%9B%E9%98%B6%E7%AF%87/images/image-20200508170750118.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;MapReduce 作业是一种大规模数据集的并行计算的编程模型。我们可以将 HDFS 中存放的海量数据，通过 MapReduce 作业进行计算，得到目标数据。&lt;/p&gt;</description>
     </item>
     <item>
       <title>Hadoop 基础篇</title>
-      <link>https://zjxjwxk.github.io/posts/%E5%A4%A7%E6%95%B0%E6%8D%AE/hadoop/hadoop%E5%9F%BA%E7%A1%80%E7%AF%87/</link>
+      <link>http://localhost:1313/posts/%E5%A4%A7%E6%95%B0%E6%8D%AE/hadoop/hadoop%E5%9F%BA%E7%A1%80%E7%AF%87/</link>
       <pubDate>Wed, 06 May 2020 20:08:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/posts/%E5%A4%A7%E6%95%B0%E6%8D%AE/hadoop/hadoop%E5%9F%BA%E7%A1%80%E7%AF%87/</guid>
+      <guid>http://localhost:1313/posts/%E5%A4%A7%E6%95%B0%E6%8D%AE/hadoop/hadoop%E5%9F%BA%E7%A1%80%E7%AF%87/</guid>
       <description>&lt;h1 id=&#34;概要&#34;&gt;概要&lt;/h1&gt;
 &lt;ol&gt;
 &lt;li&gt;大数据技术的相关概念&lt;/li&gt;
@@ -717,9 +717,9 @@ rules:
     </item>
     <item>
       <title>Dubbo微服务影院系列（12）：系统部署</title>
-      <link>https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/12.%E7%B3%BB%E7%BB%9F%E9%83%A8%E7%BD%B2/</link>
+      <link>http://localhost:1313/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/12.%E7%B3%BB%E7%BB%9F%E9%83%A8%E7%BD%B2/</link>
       <pubDate>Sun, 03 May 2020 22:34:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/12.%E7%B3%BB%E7%BB%9F%E9%83%A8%E7%BD%B2/</guid>
+      <guid>http://localhost:1313/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/12.%E7%B3%BB%E7%BB%9F%E9%83%A8%E7%BD%B2/</guid>
       <description>&lt;h1 id=&#34;运行环境&#34;&gt;运行环境&lt;/h1&gt;
 &lt;ul&gt;
 &lt;li&gt;CentOS 6&lt;/li&gt;
@@ -744,16 +744,16 @@ rules:
     </item>
     <item>
       <title>Terminal 终端代理加速</title>
-      <link>https://zjxjwxk.github.io/posts/linux/macos/</link>
+      <link>http://localhost:1313/posts/linux/macos/</link>
       <pubDate>Mon, 27 Apr 2020 23:11:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/posts/linux/macos/</guid>
+      <guid>http://localhost:1313/posts/linux/macos/</guid>
       <description>&lt;h1 id=&#34;方法1暂时&#34;&gt;方法1（暂时）:&lt;/h1&gt;
 &lt;p&gt;在终端中直接运行命令&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;export http_proxy&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;http://proxyAddres.s:port
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这个办法的好处是简单直接，并且影响面很小（只对当前终端有效，退出就不行了）。&lt;/p&gt;
 &lt;p&gt;如果你用的是 s.s 代理，在当前终端运行以下命令，那么&lt;code&gt;wget&lt;/code&gt; &lt;code&gt;curl&lt;/code&gt; 这类网络命令都会经过 s.s 代理，port 端口号可以从 s.s 高级设置中查看，我的是1086。&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;export ALL_PROXY&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;socks5://127.0.0.1:1086
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img alt=&#34;s.s端口&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/linux/macos/images/image-20200426235228770.png&#34;&gt;&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img alt=&#34;s.s端口&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/linux/macos/images/image-20200426235228770.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;安装完软件以后，我们再执行以下命令取消终端代理&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;unset ALL_PROXY
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;方法2永久&#34;&gt;方法2（永久）:&lt;/h1&gt;
@@ -780,9 +780,9 @@ rules:
     </item>
     <item>
       <title>Dubbo微服务影院系列（11）：服务监控</title>
-      <link>https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/11.%E6%9C%8D%E5%8A%A1%E7%9B%91%E6%8E%A7/</link>
+      <link>http://localhost:1313/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/11.%E6%9C%8D%E5%8A%A1%E7%9B%91%E6%8E%A7/</link>
       <pubDate>Fri, 24 Apr 2020 23:11:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/11.%E6%9C%8D%E5%8A%A1%E7%9B%91%E6%8E%A7/</guid>
+      <guid>http://localhost:1313/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/11.%E6%9C%8D%E5%8A%A1%E7%9B%91%E6%8E%A7/</guid>
       <description>&lt;h1 id=&#34;章节概要&#34;&gt;章节概要&lt;/h1&gt;
 &lt;ul&gt;
 &lt;li&gt;了解 Dubbo 监控相关内容&lt;/li&gt;
@@ -791,14 +791,14 @@ rules:
 &lt;li&gt;完成业务系统部署&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h1 id=&#34;dubbo-monitor&#34;&gt;Dubbo-monitor&lt;/h1&gt;
-&lt;p&gt;&lt;img alt=&#34;Dubbo架构&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/11.%E6%9C%8D%E5%8A%A1%E7%9B%91%E6%8E%A7/images/image-20200424231550404.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;Dubbo架构&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/11.%E6%9C%8D%E5%8A%A1%E7%9B%91%E6%8E%A7/images/image-20200424231550404.png&#34;&gt;&lt;/p&gt;
 &lt;h2 id=&#34;源码下载和打包&#34;&gt;源码下载和打包&lt;/h2&gt;
 &lt;p&gt;目前，还可以从当当网的项目 Dubbox 中获取（很久没有维护了）：https://github.com/dangdangdotcom/dubbox ，在项目中执行以下命令打包并拷贝到本地仓库（跳过单元测试）：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;mvn package -Dmaven.test.skip&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;true  
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;其中，可能会遇到 Missing artifact com.alibaba:dubbo:jar:2.8.4 的坑，需要在根项目的 pom.xml 文件中添加以下 maven 插件：&lt;/p&gt;
-&lt;p&gt;&lt;img alt=&#34;添加插件依赖&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/11.%E6%9C%8D%E5%8A%A1%E7%9B%91%E6%8E%A7/images/image-20200425004851922.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;添加插件依赖&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/11.%E6%9C%8D%E5%8A%A1%E7%9B%91%E6%8E%A7/images/image-20200425004851922.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;这样在本地仓库就有了 ~/.m2/repository/com/alibaba/dubbo-monitor-simple/2.8.4/dubbo-monitor-simple-2.8.4-assembly.tar.gz 这个 tar.gz 包，解压它可以得到以下文件：&lt;/p&gt;
-&lt;p&gt;&lt;img alt=&#34;Dubbo-Monitor文件目录&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/11.%E6%9C%8D%E5%8A%A1%E7%9B%91%E6%8E%A7/images/image-20200425004950736.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;Dubbo-Monitor文件目录&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/11.%E6%9C%8D%E5%8A%A1%E7%9B%91%E6%8E%A7/images/image-20200425004950736.png&#34;&gt;&lt;/p&gt;
 &lt;h2 id=&#34;启动服务监控&#34;&gt;启动服务监控&lt;/h2&gt;
 &lt;p&gt;在 conf 文件夹下，编辑 dubbo.properties，将相关参数配置如下：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-properties&#34; data-lang=&#34;properties&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;dubbo.container&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;log4j,spring,registry,jetty&lt;/span&gt;
@@ -816,16 +816,16 @@ rules:
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;dubbo.log4j.file&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;monitor/dubbo-monitor-simple.log&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;dubbo.log4j.level&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;WARN&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;然后，进入 bin 目录，运行 start.sh 就可以启动 Dubbo-Monitor 了，运行在配置好的 8090 端口（需要先打开 Zookeeper）。&lt;/p&gt;
-&lt;p&gt;&lt;img alt=&#34;Dubbo-Monitor界面&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/11.%E6%9C%8D%E5%8A%A1%E7%9B%91%E6%8E%A7/images/image-20200425005304792.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;Dubbo-Monitor界面&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/11.%E6%9C%8D%E5%8A%A1%E7%9B%91%E6%8E%A7/images/image-20200425005304792.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;启动服务提供者和消费者后，可以在 Applications 中看到如下信息：&lt;/p&gt;
-&lt;p&gt;&lt;img alt=&#34;服务提供者和消费者&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/11.%E6%9C%8D%E5%8A%A1%E7%9B%91%E6%8E%A7/images/image-20200425010612712.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;服务提供者和消费者&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/11.%E6%9C%8D%E5%8A%A1%E7%9B%91%E6%8E%A7/images/image-20200425010612712.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;同时，可以点击 Providers 查看服务某一服务提供者的详细信息，并且可以将其取消注册：&lt;/p&gt;</description>
     </item>
     <item>
       <title>Dubbo微服务影院系列（10）：分布式事务</title>
-      <link>https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/10.%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/</link>
+      <link>http://localhost:1313/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/10.%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/</link>
       <pubDate>Fri, 17 Apr 2020 20:14:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/10.%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/</guid>
+      <guid>http://localhost:1313/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/10.%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/</guid>
       <description>&lt;h1 id=&#34;章节概要&#34;&gt;章节概要&lt;/h1&gt;
 &lt;ul&gt;
 &lt;li&gt;事务简介&lt;/li&gt;
@@ -864,15 +864,15 @@ rules:
 &lt;h1 id=&#34;分布式事务类型&#34;&gt;分布式事务类型&lt;/h1&gt;
 &lt;h2 id=&#34;两段式和三段式事务&#34;&gt;两段式和三段式事务&lt;/h2&gt;
 &lt;h3 id=&#34;两段式事务&#34;&gt;两段式事务&lt;/h3&gt;
-&lt;p&gt;&lt;img alt=&#34;两段式事务&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/10.%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/images/63d3220513cf709f84fdcd06457c3b65.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;两段式事务&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/10.%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/images/63d3220513cf709f84fdcd06457c3b65.png&#34;&gt;&lt;/p&gt;
 &lt;h3 id=&#34;三段式事务&#34;&gt;三段式事务&lt;/h3&gt;
-&lt;p&gt;&lt;img alt=&#34;三段式事务&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/10.%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/images/image-20200416213159506.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;三段式事务&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/10.%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/images/image-20200416213159506.png&#34;&gt;&lt;/p&gt;
 &lt;h2 id=&#34;基于-xa-的分布式事务&#34;&gt;基于 XA 的分布式事务&lt;/h2&gt;
-&lt;p&gt;&lt;img alt=&#34;基于XA的分布式事务&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/10.%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/images/image-20200416213551917.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;基于XA的分布式事务&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/10.%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/images/image-20200416213551917.png&#34;&gt;&lt;/p&gt;
 &lt;h2 id=&#34;基于消息的一致性方案&#34;&gt;基于消息的一致性方案&lt;/h2&gt;
-&lt;p&gt;&lt;img alt=&#34;基于消息的一致性方案&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/10.%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/images/image-20200416215409588.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;基于消息的一致性方案&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/10.%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/images/image-20200416215409588.png&#34;&gt;&lt;/p&gt;
 &lt;h2 id=&#34;tcc-补偿性事务&#34;&gt;TCC 补偿性事务&lt;/h2&gt;
-&lt;p&gt;&lt;img alt=&#34;TCC补偿性事务&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/10.%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/images/image-20200416220735799.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;TCC补偿性事务&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/10.%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/images/image-20200416220735799.png&#34;&gt;&lt;/p&gt;
 &lt;h3 id=&#34;基于消息的一致性方案和-tcc-补偿性事务的区别&#34;&gt;基于消息的一致性方案和 TCC 补偿性事务的区别&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;基于消息的事务是强一致性事务，会存在浪费&lt;/li&gt;
@@ -893,34 +893,34 @@ rules:
     </item>
     <item>
       <title>PAT甲级 1108 Finding Average (20分)</title>
-      <link>https://zjxjwxk.github.io/posts/pat/advanced_level/a1108/</link>
+      <link>http://localhost:1313/posts/pat/advanced_level/a1108/</link>
       <pubDate>Wed, 15 Apr 2020 21:39:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/posts/pat/advanced_level/a1108/</guid>
+      <guid>http://localhost:1313/posts/pat/advanced_level/a1108/</guid>
       <description>&lt;p&gt;The basic task is simple: given &lt;em&gt;N&lt;/em&gt; real numbers, you are supposed to calculate their average. But what makes it complicated is that some of the input numbers might not be legal. A &lt;strong&gt;legal&lt;/strong&gt; input is a real number in [−1000,1000] and is accurate up to no more than 2 decimal places. When you calculate the average, those illegal numbers must not be counted in.&lt;/p&gt;
 &lt;h1 id=&#34;input-specification&#34;&gt;Input Specification:&lt;/h1&gt;
 &lt;p&gt;Each input file contains one test case. For each case, the first line gives a positive integer &lt;em&gt;N&lt;/em&gt; (≤100). Then &lt;em&gt;N&lt;/em&gt; numbers are given in the next line, separated by one space.&lt;/p&gt;</description>
     </item>
     <item>
       <title>PAT甲级 1072 Gas Station (30分)</title>
-      <link>https://zjxjwxk.github.io/posts/pat/advanced_level/a1072/</link>
+      <link>http://localhost:1313/posts/pat/advanced_level/a1072/</link>
       <pubDate>Mon, 13 Apr 2020 00:11:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/posts/pat/advanced_level/a1072/</guid>
+      <guid>http://localhost:1313/posts/pat/advanced_level/a1072/</guid>
       <description>&lt;p&gt;A gas station has to be built at such a location that the minimum distance between the station and any of the residential housing is as far away as possible. However it must guarantee that all the houses are in its service range.&lt;/p&gt;
 &lt;p&gt;Now given the map of the city and several candidate locations for the gas station, you are supposed to give the best recommendation. If there are more than one solution, output the one with the smallest average distance to all the houses. If such a solution is still not unique, output the one with the smallest index number.&lt;/p&gt;</description>
     </item>
     <item>
       <title>PAT甲级 1018 Public Bike Management (30分)</title>
-      <link>https://zjxjwxk.github.io/posts/pat/advanced_level/a1018/</link>
+      <link>http://localhost:1313/posts/pat/advanced_level/a1018/</link>
       <pubDate>Sun, 12 Apr 2020 15:52:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/posts/pat/advanced_level/a1018/</guid>
+      <guid>http://localhost:1313/posts/pat/advanced_level/a1018/</guid>
       <description>&lt;p&gt;There is a public bike service in Hangzhou City which provides great convenience to the tourists from all over the world. One may rent a bike at any station and return it to any other stations in the city.&lt;/p&gt;
 &lt;p&gt;The Public Bike Management Center (PBMC) keeps monitoring the real-time capacity of all the stations. A station is said to be in &lt;strong&gt;perfect&lt;/strong&gt; condition if it is exactly half-full. If a station is full or empty, PBMC will collect or send bikes to adjust the condition of that station to perfect. And more, all the stations on the way will be adjusted as well.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Dubbo微服务影院系列（9）：Dubbo服务开发（支付模块开发）</title>
-      <link>https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/9.dubbo%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91%E6%94%AF%E4%BB%98%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/</link>
+      <link>http://localhost:1313/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/9.dubbo%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91%E6%94%AF%E4%BB%98%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/</link>
       <pubDate>Sat, 11 Apr 2020 20:14:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/9.dubbo%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91%E6%94%AF%E4%BB%98%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/</guid>
+      <guid>http://localhost:1313/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/9.dubbo%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91%E6%94%AF%E4%BB%98%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/</guid>
       <description>&lt;h1 id=&#34;章节概要&#34;&gt;章节概要&lt;/h1&gt;
 &lt;ul&gt;
 &lt;li&gt;完成支付模块业务开发&lt;/li&gt;
@@ -936,7 +936,7 @@ rules:
 &lt;p&gt;官方文档：https://dubbo.apache.org/zh-cn/docs/user/demos/local-stub.html&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;远程服务后，客户端通常只剩下接口，而实现全在服务器端，但提供方有些时候想在客户端也执行部分逻辑，比如：做 ThreadLocal 缓存，提前验证参数，调用失败后伪造容错数据等等，此时就需要在 API 中带上 Stub，客户端生成 Proxy 实例，会把 Proxy 通过构造函数传给 Stub，然后把 Stub 暴露给用户，Stub 可以决定要不要去调 Proxy。&lt;/p&gt;
-&lt;p&gt;&lt;img alt=&#34;Dubbo本地存根&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/9.dubbo%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91%E6%94%AF%E4%BB%98%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/images/stub.jpg&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;Dubbo本地存根&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/9.dubbo%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91%E6%94%AF%E4%BB%98%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/images/stub.jpg&#34;&gt;&lt;/p&gt;
 &lt;p&gt;在 spring 配置文件中按以下方式配置：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;dubbo:service&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;interface=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;com.foo.BarService&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;stub=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;true&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;/&amp;gt;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;或&lt;/p&gt;
@@ -976,25 +976,25 @@ rules:
     </item>
     <item>
       <title>PAT考场 Dev C&#43;&#43; 5.10 配置</title>
-      <link>https://zjxjwxk.github.io/posts/pat/%E8%80%83%E8%AF%95%E6%94%BB%E7%95%A5/</link>
+      <link>http://localhost:1313/posts/pat/%E8%80%83%E8%AF%95%E6%94%BB%E7%95%A5/</link>
       <pubDate>Sat, 11 Apr 2020 16:17:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/posts/pat/%E8%80%83%E8%AF%95%E6%94%BB%E7%95%A5/</guid>
+      <guid>http://localhost:1313/posts/pat/%E8%80%83%E8%AF%95%E6%94%BB%E7%95%A5/</guid>
       <description>&lt;p&gt;根据往年 (2019) 年浙大软件学院的考研复试公告，如果今年 (2020) 是线下复试，且考场没有变化的话，机试应该还是在 &lt;code&gt;浙大紫金港校区&lt;/code&gt;（如下图）。&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;浙大软院招生通知：http://www.cst.zju.edu.cn/2019/0307/c36207a1478348/page.htm&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;&lt;img alt=&#34;软件学院2019年统考研究生招生复试安排&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/pat/%E8%80%83%E8%AF%95%E6%94%BB%E7%95%A5/images/image-20200411162644696.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;软件学院2019年统考研究生招生复试安排&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/pat/%E8%80%83%E8%AF%95%E6%94%BB%E7%95%A5/images/image-20200411162644696.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;从 PAT 官网可以找到紫金港的机房配置：&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;PAT 考点联盟：https://www.patest.cn/location&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;&lt;img alt=&#34;PAT紫金港配置.png&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/pat/%E8%80%83%E8%AF%95%E6%94%BB%E7%95%A5/images/PAT%E7%B4%AB%E9%87%91%E6%B8%AF%E9%85%8D%E7%BD%AE.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;PAT紫金港配置.png&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/pat/%E8%80%83%E8%AF%95%E6%94%BB%E7%95%A5/images/PAT%E7%B4%AB%E9%87%91%E6%B8%AF%E9%85%8D%E7%BD%AE.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;我本人选择使用 &lt;code&gt;Dev C++ 5.10&lt;/code&gt; 版本，考试那天在考场需要先对其作以下配置（当然也许已经配置好了）：&lt;/p&gt;
 &lt;h1 id=&#34;打开产生调试信息&#34;&gt;打开产生调试信息&lt;/h1&gt;
 &lt;p&gt;在 &lt;code&gt;“工具(Tools)”&lt;/code&gt; -&amp;gt; &lt;code&gt;“编译选项(Compiler Options)&amp;quot;&lt;/code&gt; 中：&lt;/p&gt;
-&lt;p&gt;&lt;img alt=&#34;编译选项&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/pat/%E8%80%83%E8%AF%95%E6%94%BB%E7%95%A5/images/image-20200411163457056.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;编译选项&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/pat/%E8%80%83%E8%AF%95%E6%94%BB%E7%95%A5/images/image-20200411163457056.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;点击 &lt;code&gt;“代码生成/优化(Settings)”&lt;/code&gt; 选项卡中的 &lt;code&gt;&amp;quot;连接器(Linker)&amp;quot;&lt;/code&gt; 选项卡，将 &lt;code&gt;&amp;quot;产生调试信息(Generate debugging information)&amp;quot;&lt;/code&gt; 选项改为 &lt;code&gt;“Yes”&lt;/code&gt;。&lt;/p&gt;
-&lt;p&gt;&lt;img alt=&#34;产生调试信息&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/pat/%E8%80%83%E8%AF%95%E6%94%BB%E7%95%A5/images/image-20200411163800036.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;产生调试信息&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/pat/%E8%80%83%E8%AF%95%E6%94%BB%E7%95%A5/images/image-20200411163800036.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;这样，就可以愉快的 Debug 了～&lt;/p&gt;
 &lt;h1 id=&#34;添加-c-11-支持&#34;&gt;添加 C++ 11 支持&lt;/h1&gt;
 &lt;p&gt;由于 PAT 的 OJ 是支持 C++ 11 的，故最好打开 C++ 11 支持。&lt;/p&gt;
@@ -1003,42 +1003,42 @@ rules:
     </item>
     <item>
       <title>PAT甲级 1021 Deepest Root (25分)</title>
-      <link>https://zjxjwxk.github.io/posts/pat/advanced_level/a1021/</link>
+      <link>http://localhost:1313/posts/pat/advanced_level/a1021/</link>
       <pubDate>Fri, 10 Apr 2020 17:55:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/posts/pat/advanced_level/a1021/</guid>
+      <guid>http://localhost:1313/posts/pat/advanced_level/a1021/</guid>
       <description>&lt;p&gt;A graph which is connected and acyclic can be considered a tree. The height of the tree depends on the selected root. Now you are supposed to find the root that results in a highest tree. Such a root is called &lt;strong&gt;the deepest root&lt;/strong&gt;.&lt;/p&gt;
 &lt;h1 id=&#34;input-specification&#34;&gt;Input Specification:&lt;/h1&gt;
 &lt;p&gt;Each input file contains one test case. For each case, the first line contains a positive integer &lt;em&gt;N&lt;/em&gt; (≤10^4) which is the number of nodes, and hence the nodes are numbered from 1 to &lt;em&gt;N&lt;/em&gt;. Then &lt;em&gt;N&lt;/em&gt;−1 lines follow, each describes an edge by given the two adjacent nodes&amp;rsquo; numbers.&lt;/p&gt;</description>
     </item>
     <item>
       <title>PAT甲级 1013 Battle Over Cities (25分)</title>
-      <link>https://zjxjwxk.github.io/posts/pat/advanced_level/a1013/</link>
+      <link>http://localhost:1313/posts/pat/advanced_level/a1013/</link>
       <pubDate>Thu, 09 Apr 2020 19:57:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/posts/pat/advanced_level/a1013/</guid>
+      <guid>http://localhost:1313/posts/pat/advanced_level/a1013/</guid>
       <description>&lt;p&gt;It is vitally important to have all the cities connected by highways in a war. If a city is occupied by the enemy, all the highways from/toward that city are closed. We must know immediately if we need to repair any other highways to keep the rest of the cities connected. Given the map of cities which have all the remaining highways marked, you are supposed to tell the number of highways need to be repaired, quickly.&lt;/p&gt;</description>
     </item>
     <item>
       <title>PAT甲级 1032 Sharing (25分)</title>
-      <link>https://zjxjwxk.github.io/posts/pat/advanced_level/a1032/</link>
+      <link>http://localhost:1313/posts/pat/advanced_level/a1032/</link>
       <pubDate>Tue, 07 Apr 2020 16:34:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/posts/pat/advanced_level/a1032/</guid>
+      <guid>http://localhost:1313/posts/pat/advanced_level/a1032/</guid>
       <description>&lt;p&gt;To store English words, one method is to use linked lists and store a word letter by letter. To save some space, we may let the words share the same sublist if they share the same suffix. For example, &lt;code&gt;loading&lt;/code&gt; and &lt;code&gt;being&lt;/code&gt; are stored as showed in Figure 1.&lt;/p&gt;
 &lt;p&gt;&lt;img alt=&#34;Figure 1&#34; loading=&#34;lazy&#34; src=&#34;../images/image-A1032.jpg&#34;&gt;&lt;/p&gt;
 &lt;p&gt;You are supposed to find the starting position of the common suffix (e.g. the position of &lt;code&gt;i&lt;/code&gt; in Figure 1).&lt;/p&gt;</description>
     </item>
     <item>
       <title>PAT甲级 1056 Mice and Rice (25分)</title>
-      <link>https://zjxjwxk.github.io/posts/pat/advanced_level/a1056/</link>
+      <link>http://localhost:1313/posts/pat/advanced_level/a1056/</link>
       <pubDate>Mon, 06 Apr 2020 19:04:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/posts/pat/advanced_level/a1056/</guid>
+      <guid>http://localhost:1313/posts/pat/advanced_level/a1056/</guid>
       <description>&lt;p&gt;&lt;strong&gt;Mice and Rice&lt;/strong&gt; is the name of a programming contest in which each programmer must write a piece of code to control the movements of a mouse in a given map. The goal of each mouse is to eat as much rice as possible in order to become a FatMouse.&lt;/p&gt;
 &lt;p&gt;First the playing order is randomly decided for N &lt;!-- raw HTML omitted --&gt;P&lt;!-- raw HTML omitted --&gt; programmers. Then every N &lt;!-- raw HTML omitted --&gt;G&lt;!-- raw HTML omitted --&gt; programmers are grouped in a match. The fattest mouse in a group wins and enters the next turn. All the losers in this turn are ranked the same. Every N &lt;!-- raw HTML omitted --&gt;G&lt;!-- raw HTML omitted --&gt; winners are then grouped in the next match until a final winner is determined.&lt;/p&gt;</description>
     </item>
     <item>
       <title>PAT甲级 1100 Mars Numbers (20分)</title>
-      <link>https://zjxjwxk.github.io/posts/pat/advanced_level/a1100/</link>
+      <link>http://localhost:1313/posts/pat/advanced_level/a1100/</link>
       <pubDate>Mon, 06 Apr 2020 15:17:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/posts/pat/advanced_level/a1100/</guid>
+      <guid>http://localhost:1313/posts/pat/advanced_level/a1100/</guid>
       <description>&lt;p&gt;People on Mars count their numbers with base 13:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Zero on Earth is called &amp;ldquo;tret&amp;rdquo; on Mars.&lt;/li&gt;
@@ -1049,9 +1049,9 @@ rules:
     </item>
     <item>
       <title>Dubbo微服务影院系列（8）：Dubbo服务开发（订单模块开发）</title>
-      <link>https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/8.dubbo%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91%E8%AE%A2%E5%8D%95%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/</link>
+      <link>http://localhost:1313/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/8.dubbo%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91%E8%AE%A2%E5%8D%95%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/</link>
       <pubDate>Sun, 05 Apr 2020 19:30:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/8.dubbo%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91%E8%AE%A2%E5%8D%95%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/</guid>
+      <guid>http://localhost:1313/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/8.dubbo%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91%E8%AE%A2%E5%8D%95%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/</guid>
       <description>&lt;h1 id=&#34;章节概要&#34;&gt;章节概要&lt;/h1&gt;
 &lt;ul&gt;
 &lt;li&gt;完成订单模块业务开发&lt;/li&gt;
@@ -1066,7 +1066,7 @@ rules:
 &lt;li&gt;如何保证多版本的蓝绿上线？&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h1 id=&#34;横向拆分和纵向拆分&#34;&gt;横向拆分和纵向拆分&lt;/h1&gt;
-&lt;p&gt;&lt;img alt=&#34;横向拆分和纵向拆分&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/8.dubbo%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91%E8%AE%A2%E5%8D%95%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/images/image-20200408000355380.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;横向拆分和纵向拆分&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/8.dubbo%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91%E8%AE%A2%E5%8D%95%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/images/image-20200408000355380.png&#34;&gt;&lt;/p&gt;
 &lt;h1 id=&#34;dubbo-服务分组&#34;&gt;Dubbo 服务分组&lt;/h1&gt;
 &lt;blockquote&gt;
 &lt;p&gt;官方文档：https://dubbo.apache.org/zh-cn/docs/user/demos/service-group.html&lt;/p&gt;
@@ -1125,60 +1125,60 @@ rules:
     </item>
     <item>
       <title>PAT甲级 1060 Are They Equal (25分)</title>
-      <link>https://zjxjwxk.github.io/posts/pat/advanced_level/a1060/</link>
+      <link>http://localhost:1313/posts/pat/advanced_level/a1060/</link>
       <pubDate>Sat, 04 Apr 2020 22:28:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/posts/pat/advanced_level/a1060/</guid>
+      <guid>http://localhost:1313/posts/pat/advanced_level/a1060/</guid>
       <description>&lt;p&gt;If a machine can save only 3 significant digits, the float numbers 12300 and 12358.9 are considered equal since they are both saved as 0.123×105 with simple chopping. Now given the number of significant digits on a machine and two float numbers, you are supposed to tell if they are treated equal in that machine.&lt;/p&gt;
 &lt;h1 id=&#34;input-specification&#34;&gt;Input Specification:&lt;/h1&gt;
 &lt;p&gt;Each input file contains one test case which gives three numbers &lt;em&gt;N&lt;/em&gt;, &lt;em&gt;A&lt;/em&gt; and &lt;em&gt;B&lt;/em&gt;, where &lt;em&gt;N&lt;/em&gt; (&amp;lt;100) is the number of significant digits, and &lt;em&gt;A&lt;/em&gt; and &lt;em&gt;B&lt;/em&gt; are the two float numbers to be compared. Each float number is non-negative, no greater than 10100, and that its total digit number is less than 100.&lt;/p&gt;</description>
     </item>
     <item>
       <title>PAT甲级 1039 Course List for Student (25分)</title>
-      <link>https://zjxjwxk.github.io/posts/pat/advanced_level/a1039/</link>
+      <link>http://localhost:1313/posts/pat/advanced_level/a1039/</link>
       <pubDate>Fri, 03 Apr 2020 15:33:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/posts/pat/advanced_level/a1039/</guid>
+      <guid>http://localhost:1313/posts/pat/advanced_level/a1039/</guid>
       <description>&lt;p&gt;Zhejiang University has 40000 students and provides 2500 courses. Now given the student name lists of all the courses, you are supposed to output the registered course list for each student who comes for a query.&lt;/p&gt;
 &lt;h1 id=&#34;input-specification&#34;&gt;Input Specification:&lt;/h1&gt;
 &lt;p&gt;Each input file contains one test case. For each case, the first line contains 2 positive integers: &lt;em&gt;N&lt;/em&gt; (≤40,000), the number of students who look for their course lists, and &lt;em&gt;K&lt;/em&gt; (≤2,500), the total number of courses. Then the student name lists are given for the courses (numbered from 1 to &lt;em&gt;K&lt;/em&gt;) in the following format: for each course &lt;em&gt;i&lt;/em&gt;, first the course index &lt;em&gt;i&lt;/em&gt; and the number of registered students N &lt;!-- raw HTML omitted --&gt;i&lt;!-- raw HTML omitted --&gt; (≤200) are given in a line. Then in the next line, N &lt;!-- raw HTML omitted --&gt;i&lt;!-- raw HTML omitted --&gt; student names are given. A student name consists of 3 capital English letters plus a one-digit number. Finally the last line contains the &lt;em&gt;N&lt;/em&gt; names of students who come for a query. All the names and numbers in a line are separated by a space.&lt;/p&gt;</description>
     </item>
     <item>
       <title>PAT甲级 1096 Consecutive Factors (20分)</title>
-      <link>https://zjxjwxk.github.io/posts/pat/advanced_level/a1096/</link>
+      <link>http://localhost:1313/posts/pat/advanced_level/a1096/</link>
       <pubDate>Thu, 02 Apr 2020 20:53:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/posts/pat/advanced_level/a1096/</guid>
+      <guid>http://localhost:1313/posts/pat/advanced_level/a1096/</guid>
       <description>&lt;p&gt;Among all the factors of a positive integer N, there may exist several consecutive numbers. For example, 630 can be factored as 3×5×6×7, where 5, 6, and 7 are the three consecutive numbers. Now given any positive N, you are supposed to find the maximum number of consecutive factors, and list the smallest sequence of the consecutive factors.&lt;/p&gt;
 &lt;h1 id=&#34;input-specification&#34;&gt;Input Specification:&lt;/h1&gt;
 &lt;p&gt;Each input file contains one test case, which gives the integer N (1&amp;lt;N&amp;lt;2^{31}).&lt;/p&gt;</description>
     </item>
     <item>
       <title>PAT甲级 1078 Hashing (25分)</title>
-      <link>https://zjxjwxk.github.io/posts/pat/advanced_level/a1078/</link>
+      <link>http://localhost:1313/posts/pat/advanced_level/a1078/</link>
       <pubDate>Thu, 02 Apr 2020 17:04:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/posts/pat/advanced_level/a1078/</guid>
+      <guid>http://localhost:1313/posts/pat/advanced_level/a1078/</guid>
       <description>&lt;p&gt;The task of this problem is simple: insert a sequence of distinct positive integers into a hash table, and output the positions of the input numbers. The hash function is defined to be H(key)=key%TSize where TSize is the maximum size of the hash table. Quadratic probing (with positive increments only) is used to solve the collisions.&lt;/p&gt;
 &lt;p&gt;Note that the table size is better to be prime. If the maximum size given by the user is not prime, you must re-define the table size to be the smallest prime number which is larger than the size given by the user.&lt;/p&gt;</description>
     </item>
     <item>
       <title>PAT甲级 1081 Rational Sum (20分)</title>
-      <link>https://zjxjwxk.github.io/posts/pat/advanced_level/a1081/</link>
+      <link>http://localhost:1313/posts/pat/advanced_level/a1081/</link>
       <pubDate>Wed, 01 Apr 2020 16:29:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/posts/pat/advanced_level/a1081/</guid>
+      <guid>http://localhost:1313/posts/pat/advanced_level/a1081/</guid>
       <description>&lt;p&gt;Given &lt;em&gt;N&lt;/em&gt; rational numbers in the form &lt;code&gt;numerator/denominator&lt;/code&gt;, you are supposed to calculate their sum.&lt;/p&gt;
 &lt;h1 id=&#34;input-specification&#34;&gt;Input Specification:&lt;/h1&gt;
 &lt;p&gt;Each input file contains one test case. Each case starts with a positive integer &lt;em&gt;N&lt;/em&gt; (≤100), followed in the next line &lt;em&gt;N&lt;/em&gt; rational numbers &lt;code&gt;a1/b1 a2/b2 ...&lt;/code&gt; where all the numerators and denominators are in the range of &lt;strong&gt;long int&lt;/strong&gt;. If there is a negative number, then the sign must appear in front of the numerator.&lt;/p&gt;</description>
     </item>
     <item>
       <title>PAT乙级 1008 数组元素循环右移问题 (20分)</title>
-      <link>https://zjxjwxk.github.io/posts/pat/basic_level/b1008/</link>
+      <link>http://localhost:1313/posts/pat/basic_level/b1008/</link>
       <pubDate>Tue, 31 Mar 2020 16:04:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/posts/pat/basic_level/b1008/</guid>
+      <guid>http://localhost:1313/posts/pat/basic_level/b1008/</guid>
       <description>&lt;p&gt;一个数组&lt;em&gt;A&lt;/em&gt;中存有&lt;em&gt;N&lt;/em&gt;（&amp;gt;0）个整数，在不允许使用另外数组的前提下，将每个整数循环向右移&lt;em&gt;M&lt;/em&gt;（≥0）个位置，即将&lt;em&gt;A&lt;/em&gt;中的数据由（A&lt;!-- raw HTML omitted --&gt;0&lt;!-- raw HTML omitted --&gt; A&lt;!-- raw HTML omitted --&gt;1&lt;!-- raw HTML omitted --&gt; ⋯A &lt;!-- raw HTML omitted --&gt;N−1&lt;!-- raw HTML omitted --&gt; ）变换为（A &lt;!-- raw HTML omitted --&gt;N−M&lt;!-- raw HTML omitted --&gt; ⋯A &lt;!-- raw HTML omitted --&gt;N−1&lt;!-- raw HTML omitted --&gt; A &lt;!-- raw HTML omitted --&gt;0&lt;!-- raw HTML omitted --&gt; A &lt;!-- raw HTML omitted --&gt;1&lt;!-- raw HTML omitted --&gt;⋯A  &lt;!-- raw HTML omitted --&gt;N−M−1&lt;!-- raw HTML omitted --&gt; ）（最后&lt;em&gt;M&lt;/em&gt;个数循环移至最前面的&lt;em&gt;M&lt;/em&gt;个位置）。如果需要考虑程序移动数据的次数尽量少，要如何设计移动的方法？&lt;/p&gt;</description>
     </item>
     <item>
       <title>Dubbo微服务影院系列（7）：Dubbo服务开发（影院模块开发）</title>
-      <link>https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/7.dubbo%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91%E5%BD%B1%E9%99%A2%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/</link>
+      <link>http://localhost:1313/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/7.dubbo%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91%E5%BD%B1%E9%99%A2%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/</link>
       <pubDate>Mon, 30 Mar 2020 21:21:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/7.dubbo%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91%E5%BD%B1%E9%99%A2%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/</guid>
+      <guid>http://localhost:1313/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/7.dubbo%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91%E5%BD%B1%E9%99%A2%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/</guid>
       <description>&lt;h1 id=&#34;章节概要&#34;&gt;章节概要&lt;/h1&gt;
 &lt;ul&gt;
 &lt;li&gt;完成影院模块业务开发&lt;/li&gt;
@@ -1230,9 +1230,9 @@ rules:
     </item>
     <item>
       <title>PAT甲级 1049 Counting Ones (30分)</title>
-      <link>https://zjxjwxk.github.io/posts/pat/advanced_level/a1049/</link>
+      <link>http://localhost:1313/posts/pat/advanced_level/a1049/</link>
       <pubDate>Mon, 30 Mar 2020 21:12:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/posts/pat/advanced_level/a1049/</guid>
+      <guid>http://localhost:1313/posts/pat/advanced_level/a1049/</guid>
       <description>&lt;p&gt;The task is simple: given any positive integer &lt;em&gt;N&lt;/em&gt;, you are supposed to count the total number of 1&amp;rsquo;s in the decimal form of the integers from 1 to &lt;em&gt;N&lt;/em&gt;. For example, given &lt;em&gt;N&lt;/em&gt; being 12, there are five 1&amp;rsquo;s in 1, 10, 11, and 12.&lt;/p&gt;
 &lt;h1 id=&#34;input-specification&#34;&gt;Input Specification:&lt;/h1&gt;
 &lt;p&gt;Each input file contains one test case which gives the positive &lt;em&gt;N&lt;/em&gt; (≤230).&lt;/p&gt;
@@ -1241,9 +1241,9 @@ rules:
     </item>
     <item>
       <title>PAT乙级 1003 我要通过！ (20分)</title>
-      <link>https://zjxjwxk.github.io/posts/pat/basic_level/b1003/</link>
+      <link>http://localhost:1313/posts/pat/basic_level/b1003/</link>
       <pubDate>Mon, 30 Mar 2020 16:26:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/posts/pat/basic_level/b1003/</guid>
+      <guid>http://localhost:1313/posts/pat/basic_level/b1003/</guid>
       <description>&lt;p&gt;“&lt;strong&gt;答案正确&lt;/strong&gt;”是自动判题系统给出的最令人欢喜的回复。本题属于 PAT 的“&lt;strong&gt;答案正确&lt;/strong&gt;”大派送 —— 只要读入的字符串满足下列条件，系统就输出“&lt;strong&gt;答案正确&lt;/strong&gt;”，否则输出“&lt;strong&gt;答案错误&lt;/strong&gt;”。&lt;/p&gt;
 &lt;p&gt;得到“&lt;strong&gt;答案正确&lt;/strong&gt;”的条件是：&lt;/p&gt;
 &lt;ol&gt;
@@ -1320,25 +1320,25 @@ NO
     </item>
     <item>
       <title>PAT甲级 1104 Sum of Number Segments (20分)</title>
-      <link>https://zjxjwxk.github.io/posts/pat/advanced_level/a1104/</link>
+      <link>http://localhost:1313/posts/pat/advanced_level/a1104/</link>
       <pubDate>Mon, 30 Mar 2020 16:26:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/posts/pat/advanced_level/a1104/</guid>
+      <guid>http://localhost:1313/posts/pat/advanced_level/a1104/</guid>
       <description>&lt;p&gt;Given a sequence of positive numbers, a segment is defined to be a consecutive subsequence. For example, given the sequence { 0.1, 0.2, 0.3, 0.4 }, we have 10 segments: (0.1) (0.1, 0.2) (0.1, 0.2, 0.3) (0.1, 0.2, 0.3, 0.4) (0.2) (0.2, 0.3) (0.2, 0.3, 0.4) (0.3) (0.3, 0.4) and (0.4).&lt;/p&gt;
 &lt;p&gt;Now given a sequence, you are supposed to find the sum of all the numbers in all the segments. For the previous example, the sum of all the 10 segments is 0.1 + 0.3 + 0.6 + 1.0 + 0.2 + 0.5 + 0.9 + 0.3 + 0.7 + 0.4 = 5.0.&lt;/p&gt;</description>
     </item>
     <item>
       <title>PAT甲级 1101 Quick Sort (25分)</title>
-      <link>https://zjxjwxk.github.io/posts/pat/advanced_level/a1101/</link>
+      <link>http://localhost:1313/posts/pat/advanced_level/a1101/</link>
       <pubDate>Sun, 29 Mar 2020 17:27:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/posts/pat/advanced_level/a1101/</guid>
+      <guid>http://localhost:1313/posts/pat/advanced_level/a1101/</guid>
       <description>&lt;p&gt;There is a classical process named &lt;strong&gt;partition&lt;/strong&gt; in the famous quick sort algorithm. In this process we typically choose one element as the pivot. Then the elements less than the pivot are moved to its left and those larger than the pivot to its right. Given &lt;em&gt;N&lt;/em&gt; distinct positive integers after a run of partition, could you tell how many elements could be the selected pivot for this partition?&lt;/p&gt;
 &lt;p&gt;For example, given &lt;em&gt;N&lt;/em&gt;=5 and the numbers 1, 3, 2, 4, and 5. We have:&lt;/p&gt;</description>
     </item>
     <item>
       <title>PAT甲级 1010 Radix (25分)</title>
-      <link>https://zjxjwxk.github.io/posts/pat/advanced_level/a1010/</link>
+      <link>http://localhost:1313/posts/pat/advanced_level/a1010/</link>
       <pubDate>Sun, 29 Mar 2020 14:48:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/posts/pat/advanced_level/a1010/</guid>
+      <guid>http://localhost:1313/posts/pat/advanced_level/a1010/</guid>
       <description>&lt;p&gt;Given a pair of positive integers, for example, 6 and 110, can this equation 6 = 110 be true? The answer is &lt;code&gt;yes&lt;/code&gt;, if 6 is a decimal number and 110 is a binary number.&lt;/p&gt;
 &lt;p&gt;Now for any pair of positive integers &lt;em&gt;N&lt;/em&gt;1 and &lt;em&gt;N&lt;/em&gt;2, your task is to find the radix of one number while that of the other is given.&lt;/p&gt;
 &lt;h1 id=&#34;input-specification&#34;&gt;Input Specification:&lt;/h1&gt;
@@ -1346,9 +1346,9 @@ NO
     </item>
     <item>
       <title>PAT甲级 1085 Perfect Sequence (25分)</title>
-      <link>https://zjxjwxk.github.io/posts/pat/advanced_level/a1085/</link>
+      <link>http://localhost:1313/posts/pat/advanced_level/a1085/</link>
       <pubDate>Sat, 28 Mar 2020 16:38:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/posts/pat/advanced_level/a1085/</guid>
+      <guid>http://localhost:1313/posts/pat/advanced_level/a1085/</guid>
       <description>&lt;p&gt;Given a sequence of positive integers and another positive integer &lt;em&gt;p&lt;/em&gt;. The sequence is said to be a &lt;strong&gt;perfect sequence&lt;/strong&gt; if &lt;em&gt;M&lt;/em&gt;≤&lt;em&gt;m&lt;/em&gt;×&lt;em&gt;p&lt;/em&gt; where &lt;em&gt;M&lt;/em&gt; and &lt;em&gt;m&lt;/em&gt; are the maximum and minimum numbers in the sequence, respectively.&lt;/p&gt;
 &lt;p&gt;Now given a sequence and a parameter &lt;em&gt;p&lt;/em&gt;, you are supposed to find from the sequence as many numbers as possible to form a perfect subsequence.&lt;/p&gt;
 &lt;h1 id=&#34;input-specification&#34;&gt;Input Specification:&lt;/h1&gt;
@@ -1356,18 +1356,18 @@ NO
     </item>
     <item>
       <title>PAT甲级 1038 Recover the Smallest Number (30分)</title>
-      <link>https://zjxjwxk.github.io/posts/pat/advanced_level/a1038/</link>
+      <link>http://localhost:1313/posts/pat/advanced_level/a1038/</link>
       <pubDate>Sat, 28 Mar 2020 16:34:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/posts/pat/advanced_level/a1038/</guid>
+      <guid>http://localhost:1313/posts/pat/advanced_level/a1038/</guid>
       <description>&lt;p&gt;Given a collection of number segments, you are supposed to recover the smallest number from them. For example, given { 32, 321, 3214, 0229, 87 }, we can recover many numbers such like 32-321-3214-0229-87 or 0229-32-87-321-3214 with respect to different orders of combinations of these segments, and the smallest number is 0229-321-3214-32-87.&lt;/p&gt;
 &lt;h1 id=&#34;input-specification&#34;&gt;Input Specification:&lt;/h1&gt;
 &lt;p&gt;Each input file contains one test case. Each case gives a positive integer &lt;em&gt;N&lt;/em&gt; (≤10^4) followed by &lt;em&gt;N&lt;/em&gt; number segments. Each segment contains a non-negative integer of no more than 8 digits. All the numbers in a line are separated by a space.&lt;/p&gt;</description>
     </item>
     <item>
       <title>PAT甲级 1067 Sort with Swap(0, i) (25分)</title>
-      <link>https://zjxjwxk.github.io/posts/pat/advanced_level/a1067/</link>
+      <link>http://localhost:1313/posts/pat/advanced_level/a1067/</link>
       <pubDate>Fri, 27 Mar 2020 20:06:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/posts/pat/advanced_level/a1067/</guid>
+      <guid>http://localhost:1313/posts/pat/advanced_level/a1067/</guid>
       <description>&lt;p&gt;Given any permutation of the numbers {0, 1, 2,&amp;hellip;, &lt;em&gt;N&lt;/em&gt;−1}, it is easy to sort them in increasing order. But what if &lt;code&gt;Swap(0, *)&lt;/code&gt; is the ONLY operation that is allowed to use? For example, to sort {4, 0, 2, 1, 3} we may apply the swap operations in the following way:&lt;/p&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;Swap(0, 1) =&amp;gt; {4, 1, 2, 0, 3}
 Swap(0, 3) =&amp;gt; {4, 1, 2, 3, 0}
@@ -1376,9 +1376,9 @@ Swap(0, 4) =&amp;gt; {0, 1, 2, 3, 4}
     </item>
     <item>
       <title>PAT乙级 1033 旧键盘打字 (20分)</title>
-      <link>https://zjxjwxk.github.io/posts/pat/basic_level/b1033/</link>
+      <link>http://localhost:1313/posts/pat/basic_level/b1033/</link>
       <pubDate>Thu, 26 Mar 2020 15:21:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/posts/pat/basic_level/b1033/</guid>
+      <guid>http://localhost:1313/posts/pat/basic_level/b1033/</guid>
       <description>&lt;p&gt;旧键盘上坏了几个键，于是在敲一段文字的时候，对应的字符就不会出现。现在给出应该输入的一段文字、以及坏掉的那些键，打出的结果文字会是怎样？&lt;/p&gt;
 &lt;h1 id=&#34;输入格式&#34;&gt;输入格式：&lt;/h1&gt;
 &lt;p&gt;输入在 2 行中分别给出坏掉的那些键、以及应该输入的文字。其中对应英文字母的坏键以大写给出；每段文字是不超过 10^5 个字符的串。可用的字符包括字母 [&lt;code&gt;a&lt;/code&gt;-&lt;code&gt;z&lt;/code&gt;, &lt;code&gt;A&lt;/code&gt;-&lt;code&gt;Z&lt;/code&gt;]、数字 &lt;code&gt;0&lt;/code&gt;-&lt;code&gt;9&lt;/code&gt;、以及下划线 &lt;code&gt;_&lt;/code&gt;（代表空格）、&lt;code&gt;,&lt;/code&gt;、&lt;code&gt;.&lt;/code&gt;、&lt;code&gt;-&lt;/code&gt;、&lt;code&gt;+&lt;/code&gt;（代表上档键）。题目保证第 2 行输入的文字串非空。&lt;/p&gt;
@@ -1430,9 +1430,9 @@ Swap(0, 4) =&amp;gt; {0, 1, 2, 3, 4}
     </item>
     <item>
       <title>Dubbo微服务影院系列（6）：Dubbo服务开发（影片模块开发）</title>
-      <link>https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/6.dubbo%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91%E5%BD%B1%E7%89%87%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/</link>
+      <link>http://localhost:1313/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/6.dubbo%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91%E5%BD%B1%E7%89%87%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/</link>
       <pubDate>Sun, 22 Mar 2020 19:47:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/6.dubbo%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91%E5%BD%B1%E7%89%87%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/</guid>
+      <guid>http://localhost:1313/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/6.dubbo%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91%E5%BD%B1%E7%89%87%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/</guid>
       <description>&lt;h1 id=&#34;章节概要&#34;&gt;章节概要&lt;/h1&gt;
 &lt;ul&gt;
 &lt;li&gt;掌握 API 网关服务聚合功能的实现&lt;/li&gt;
@@ -1491,54 +1491,54 @@ Swap(0, 4) =&amp;gt; {0, 1, 2, 3, 4}
     </item>
     <item>
       <title>PAT甲级 1033 To Fill or Not to Fill (25分)</title>
-      <link>https://zjxjwxk.github.io/posts/pat/advanced_level/a1033/</link>
+      <link>http://localhost:1313/posts/pat/advanced_level/a1033/</link>
       <pubDate>Sun, 22 Mar 2020 17:24:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/posts/pat/advanced_level/a1033/</guid>
+      <guid>http://localhost:1313/posts/pat/advanced_level/a1033/</guid>
       <description>&lt;p&gt;With highways available, driving a car from Hangzhou to any other city is easy. But since the tank capacity of a car is limited, we have to find gas stations on the way from time to time. Different gas station may give different price. You are asked to carefully design the cheapest route to go.&lt;/p&gt;
 &lt;h1 id=&#34;input-specification&#34;&gt;Input Specification:&lt;/h1&gt;
 &lt;p&gt;Each input file contains one test case. For each case, the first line contains 4 positive numbers: &lt;em&gt;Cmax&lt;/em&gt; (≤ 100), the maximum capacity of the tank; &lt;em&gt;D&lt;/em&gt; (≤30000), the distance between Hangzhou and the destination city; &lt;em&gt;Davg&lt;/em&gt; (≤20), the average distance per unit gas that the car can run; and &lt;em&gt;N&lt;/em&gt; (≤ 500), the total number of gas stations. Then &lt;em&gt;N&lt;/em&gt; lines follow, each contains a pair of non-negative numbers: &lt;em&gt;Pi&lt;/em&gt;, the unit gas price, and &lt;em&gt;Di&lt;/em&gt; (≤&lt;em&gt;D&lt;/em&gt;), the distance between this station and Hangzhou, for &lt;em&gt;i&lt;/em&gt;=1,⋯,&lt;em&gt;N&lt;/em&gt;. All the numbers in a line are separated by a space.&lt;/p&gt;</description>
     </item>
     <item>
       <title>PAT甲级 1095 Cars on Campus (30分)</title>
-      <link>https://zjxjwxk.github.io/posts/pat/advanced_level/a1095/</link>
+      <link>http://localhost:1313/posts/pat/advanced_level/a1095/</link>
       <pubDate>Sun, 22 Mar 2020 17:24:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/posts/pat/advanced_level/a1095/</guid>
+      <guid>http://localhost:1313/posts/pat/advanced_level/a1095/</guid>
       <description>&lt;p&gt;Zhejiang University has 8 campuses and a lot of gates. From each gate we can collect the in/out times and the plate numbers of the cars crossing the gate. Now with all the information available, you are supposed to tell, at any specific time point, the number of cars parking on campus, and at the end of the day find the cars that have parked for the longest time period.&lt;/p&gt;</description>
     </item>
     <item>
       <title>PAT甲级 1016 Phone Bills (25分)</title>
-      <link>https://zjxjwxk.github.io/posts/pat/advanced_level/a1016/</link>
+      <link>http://localhost:1313/posts/pat/advanced_level/a1016/</link>
       <pubDate>Fri, 20 Mar 2020 22:29:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/posts/pat/advanced_level/a1016/</guid>
+      <guid>http://localhost:1313/posts/pat/advanced_level/a1016/</guid>
       <description>&lt;p&gt;A long-distance telephone company charges its customers by the following rules:&lt;/p&gt;
 &lt;p&gt;Making a long-distance call costs a certain amount per minute, depending on the time of day when the call is made. When a customer starts connecting a long-distance call, the time will be recorded, and so will be the time when the customer hangs up the phone. Every calendar month, a bill is sent to the customer for each minute called (at a rate determined by the time of day). Your job is to prepare the bills for each month, given a set of phone call records.&lt;/p&gt;</description>
     </item>
     <item>
       <title>PAT甲级 1012 The Best Rank (25分)</title>
-      <link>https://zjxjwxk.github.io/posts/pat/advanced_level/a1012/</link>
+      <link>http://localhost:1313/posts/pat/advanced_level/a1012/</link>
       <pubDate>Fri, 20 Mar 2020 16:05:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/posts/pat/advanced_level/a1012/</guid>
+      <guid>http://localhost:1313/posts/pat/advanced_level/a1012/</guid>
       <description>&lt;p&gt;To evaluate the performance of our first year CS majored students, we consider their grades of three courses only: &lt;code&gt;C&lt;/code&gt; - C Programming Language, &lt;code&gt;M&lt;/code&gt; - Mathematics (Calculus or Linear Algrbra), and &lt;code&gt;E&lt;/code&gt; - English. At the mean time, we encourage students by emphasizing on their best ranks &amp;ndash; that is, among the four ranks with respect to the three courses and the average grade, we print the best rank for each student.&lt;/p&gt;</description>
     </item>
     <item>
       <title>PAT甲级 1082 Read Number in Chinese (25分)</title>
-      <link>https://zjxjwxk.github.io/posts/pat/advanced_level/a1082/</link>
+      <link>http://localhost:1313/posts/pat/advanced_level/a1082/</link>
       <pubDate>Thu, 19 Mar 2020 17:34:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/posts/pat/advanced_level/a1082/</guid>
+      <guid>http://localhost:1313/posts/pat/advanced_level/a1082/</guid>
       <description>&lt;p&gt;Given an integer with no more than 9 digits, you are supposed to read it in the traditional Chinese way. Output &lt;code&gt;Fu&lt;/code&gt; first if it is negative. For example, -123456789 is read as &lt;code&gt;Fu yi Yi er Qian san Bai si Shi wu Wan liu Qian qi Bai ba Shi jiu&lt;/code&gt;. Note: zero (&lt;code&gt;ling&lt;/code&gt;) must be handled correctly according to the Chinese tradition. For example, 100800 is &lt;code&gt;yi Shi Wan ling ba Bai&lt;/code&gt;.&lt;/p&gt;</description>
     </item>
     <item>
       <title>PAT甲级 1061 Dating (20分)</title>
-      <link>https://zjxjwxk.github.io/posts/pat/advanced_level/a1061/</link>
+      <link>http://localhost:1313/posts/pat/advanced_level/a1061/</link>
       <pubDate>Wed, 18 Mar 2020 21:25:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/posts/pat/advanced_level/a1061/</guid>
+      <guid>http://localhost:1313/posts/pat/advanced_level/a1061/</guid>
       <description>&lt;p&gt;Sherlock Holmes received a note with some strange strings: &lt;code&gt;Let&#39;s date! 3485djDkxh4hhGE 2984akDfkkkkggEdsb s&amp;amp;hgsfdk d&amp;amp;Hyscvnm&lt;/code&gt;. It took him only a minute to figure out that those strange strings are actually referring to the coded time &lt;code&gt;Thursday 14:04&lt;/code&gt; &amp;ndash; since the first common capital English letter (case sensitive) shared by the first two strings is the 4th capital letter &lt;code&gt;D&lt;/code&gt;, representing the 4th day in a week; the second common character is the 5th capital letter &lt;code&gt;E&lt;/code&gt;, representing the 14th hour (hence the hours from 0 to 23 in a day are represented by the numbers from 0 to 9 and the capital letters from &lt;code&gt;A&lt;/code&gt; to &lt;code&gt;N&lt;/code&gt;, respectively); and the English letter shared by the last two strings is &lt;code&gt;s&lt;/code&gt; at the 4th position, representing the 4th minute. Now given two pairs of strings, you are supposed to help Sherlock decode the dating time.&lt;/p&gt;</description>
     </item>
     <item>
       <title>PAT乙级 1010 一元多项式求导 (25分)</title>
-      <link>https://zjxjwxk.github.io/posts/pat/basic_level/b1010/</link>
+      <link>http://localhost:1313/posts/pat/basic_level/b1010/</link>
       <pubDate>Tue, 17 Mar 2020 15:11:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/posts/pat/basic_level/b1010/</guid>
+      <guid>http://localhost:1313/posts/pat/basic_level/b1010/</guid>
       <description>&lt;p&gt;设计函数求一元多项式的导数。（注：x^n（&lt;em&gt;n&lt;/em&gt;为整数）的一阶导数为nx^{n−1}。）&lt;/p&gt;
 &lt;h1 id=&#34;输入格式&#34;&gt;输入格式:&lt;/h1&gt;
 &lt;p&gt;以指数递降方式输入多项式非零项系数和指数（绝对值均为不超过 1000 的整数）。数字间以空格分隔。&lt;/p&gt;
@@ -1594,9 +1594,9 @@ Swap(0, 4) =&amp;gt; {0, 1, 2, 3, 4}
     </item>
     <item>
       <title>PAT甲级 1065 A&#43;B and C (64bit) (20分)</title>
-      <link>https://zjxjwxk.github.io/posts/pat/advanced_level/a1065/</link>
+      <link>http://localhost:1313/posts/pat/advanced_level/a1065/</link>
       <pubDate>Sun, 15 Mar 2020 18:04:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/posts/pat/advanced_level/a1065/</guid>
+      <guid>http://localhost:1313/posts/pat/advanced_level/a1065/</guid>
       <description>&lt;p&gt;Given three integers &lt;em&gt;A&lt;/em&gt;, &lt;em&gt;B&lt;/em&gt; and &lt;em&gt;C&lt;/em&gt; in [−2^63,2^63], you are supposed to tell whether &lt;em&gt;A&lt;/em&gt;+&lt;em&gt;B&lt;/em&gt;&amp;gt;&lt;em&gt;C&lt;/em&gt;.&lt;/p&gt;
 &lt;h1 id=&#34;input-specification&#34;&gt;Input Specification:&lt;/h1&gt;
 &lt;p&gt;The first line of the input gives the positive number of test cases, &lt;em&gt;T&lt;/em&gt; (≤10). Then &lt;em&gt;T&lt;/em&gt; test cases follow, each consists of a single line containing three integers &lt;em&gt;A&lt;/em&gt;, &lt;em&gt;B&lt;/em&gt; and &lt;em&gt;C&lt;/em&gt;, separated by single spaces.&lt;/p&gt;
@@ -1605,9 +1605,9 @@ Swap(0, 4) =&amp;gt; {0, 1, 2, 3, 4}
     </item>
     <item>
       <title>Dubbo微服务影院系列（5）：Dubbo基本特性（用户模块开发）</title>
-      <link>https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/5.dubbo%E5%9F%BA%E6%9C%AC%E7%89%B9%E6%80%A7%E7%94%A8%E6%88%B7%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/</link>
+      <link>http://localhost:1313/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/5.dubbo%E5%9F%BA%E6%9C%AC%E7%89%B9%E6%80%A7%E7%94%A8%E6%88%B7%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/</link>
       <pubDate>Wed, 11 Mar 2020 23:45:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/5.dubbo%E5%9F%BA%E6%9C%AC%E7%89%B9%E6%80%A7%E7%94%A8%E6%88%B7%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/</guid>
+      <guid>http://localhost:1313/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/5.dubbo%E5%9F%BA%E6%9C%AC%E7%89%B9%E6%80%A7%E7%94%A8%E6%88%B7%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91/</guid>
       <description>&lt;h1 id=&#34;章节概要&#34;&gt;章节概要&lt;/h1&gt;
 &lt;ul&gt;
 &lt;li&gt;学会 API 网关权限验证和其他服务交互&lt;/li&gt;
@@ -1652,9 +1652,9 @@ Swap(0, 4) =&amp;gt; {0, 1, 2, 3, 4}
     </item>
     <item>
       <title>Dubbo微服务影院系列（4）：业务基础环境构建</title>
-      <link>https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/4.%E4%B8%9A%E5%8A%A1%E5%9F%BA%E7%A1%80%E7%8E%AF%E5%A2%83%E6%9E%84%E5%BB%BA/</link>
+      <link>http://localhost:1313/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/4.%E4%B8%9A%E5%8A%A1%E5%9F%BA%E7%A1%80%E7%8E%AF%E5%A2%83%E6%9E%84%E5%BB%BA/</link>
       <pubDate>Mon, 09 Mar 2020 22:25:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/4.%E4%B8%9A%E5%8A%A1%E5%9F%BA%E7%A1%80%E7%8E%AF%E5%A2%83%E6%9E%84%E5%BB%BA/</guid>
+      <guid>http://localhost:1313/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/4.%E4%B8%9A%E5%8A%A1%E5%9F%BA%E7%A1%80%E7%8E%AF%E5%A2%83%E6%9E%84%E5%BB%BA/</guid>
       <description>&lt;h1 id=&#34;章节概要&#34;&gt;章节概要&lt;/h1&gt;
 &lt;ul&gt;
 &lt;li&gt;构建基于 Guns + SpringBoot + Dubbo 的框架&lt;/li&gt;
@@ -1667,7 +1667,7 @@ Swap(0, 4) =&amp;gt; {0, 1, 2, 3, 4}
 &lt;li&gt;API 网关一般都是微服务系统中的门面&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;API  网关是微服务的重要组成部分&lt;/strong&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;img alt=&#34;API网关示意图&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/4.%E4%B8%9A%E5%8A%A1%E5%9F%BA%E7%A1%80%E7%8E%AF%E5%A2%83%E6%9E%84%E5%BB%BA/images/image-20200309195624129.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;API网关示意图&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/4.%E4%B8%9A%E5%8A%A1%E5%9F%BA%E7%A1%80%E7%8E%AF%E5%A2%83%E6%9E%84%E5%BB%BA/images/image-20200309195624129.png&#34;&gt;&lt;/p&gt;
 &lt;h2 id=&#34;api-网关的常见作用&#34;&gt;API 网关的常见作用&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;身份验证和安全&lt;/li&gt;
@@ -1677,12 +1677,12 @@ Swap(0, 4) =&amp;gt; {0, 1, 2, 3, 4}
 &lt;li&gt;负载均衡（Dubbo 自带）&lt;/li&gt;
 &lt;li&gt;静态相应处理&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;img alt=&#34;API网关作用&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/4.%E4%B8%9A%E5%8A%A1%E5%9F%BA%E7%A1%80%E7%8E%AF%E5%A2%83%E6%9E%84%E5%BB%BA/images/image-20200309200432132.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;API网关作用&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/4.%E4%B8%9A%E5%8A%A1%E5%9F%BA%E7%A1%80%E7%8E%AF%E5%A2%83%E6%9E%84%E5%BB%BA/images/image-20200309200432132.png&#34;&gt;&lt;/p&gt;
 &lt;h1 id=&#34;guns-环境构建&#34;&gt;Guns 环境构建&lt;/h1&gt;
 &lt;h2 id=&#34;导入-guns-项目&#34;&gt;导入 guns 项目&lt;/h2&gt;
-&lt;p&gt;&lt;img alt=&#34;guns项目结构&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/4.%E4%B8%9A%E5%8A%A1%E5%9F%BA%E7%A1%80%E7%8E%AF%E5%A2%83%E6%9E%84%E5%BB%BA/images/image-20200309203515871.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;guns项目结构&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/4.%E4%B8%9A%E5%8A%A1%E5%9F%BA%E7%A1%80%E7%8E%AF%E5%A2%83%E6%9E%84%E5%BB%BA/images/image-20200309203515871.png&#34;&gt;&lt;/p&gt;
 &lt;h2 id=&#34;创建-guns_rest-数据库&#34;&gt;创建 guns_rest 数据库&lt;/h2&gt;
-&lt;p&gt;&lt;img alt=&#34;guns_rest数据库&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/4.%E4%B8%9A%E5%8A%A1%E5%9F%BA%E7%A1%80%E7%8E%AF%E5%A2%83%E6%9E%84%E5%BB%BA/images/image-20200309203649262.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;guns_rest数据库&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/4.%E4%B8%9A%E5%8A%A1%E5%9F%BA%E7%A1%80%E7%8E%AF%E5%A2%83%E6%9E%84%E5%BB%BA/images/image-20200309203649262.png&#34;&gt;&lt;/p&gt;
 &lt;h2 id=&#34;创建-user-表&#34;&gt;创建 user 表&lt;/h2&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;-- ----------------------------
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;-- Table structure for user
@@ -1711,9 +1711,9 @@ Swap(0, 4) =&amp;gt; {0, 1, 2, 3, 4}
     </item>
     <item>
       <title>Dubbo微服务影院系列（3）：环境搭建</title>
-      <link>https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/3.%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</link>
+      <link>http://localhost:1313/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/3.%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</link>
       <pubDate>Sun, 08 Mar 2020 23:14:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/3.%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</guid>
+      <guid>http://localhost:1313/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/3.%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</guid>
       <description>&lt;h1 id=&#34;基础环境搭建&#34;&gt;基础环境搭建&lt;/h1&gt;
 &lt;h2 id=&#34;基于guns--springboot--dubbo构建影院平台&#34;&gt;基于Guns + SpringBoot + Dubbo构建影院平台&lt;/h2&gt;
 &lt;ul&gt;
@@ -1729,7 +1729,7 @@ Swap(0, 4) =&amp;gt; {0, 1, 2, 3, 4}
 &lt;p&gt;以下可以选用 Spring 或 SpringBoot&lt;/p&gt;
 &lt;h2 id=&#34;spring基础环境构建&#34;&gt;Spring基础环境构建&lt;/h2&gt;
 &lt;h3 id=&#34;项目结构&#34;&gt;项目结构&lt;/h3&gt;
-&lt;p&gt;&lt;img alt=&#34;Spring基础环境项目结构&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/3.%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/images/image-20200306232618900.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;Spring基础环境项目结构&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/3.%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/images/image-20200306232618900.png&#34;&gt;&lt;/p&gt;
 &lt;h3 id=&#34;主模块spring-dubbo-demo&#34;&gt;主模块（Spring-Dubbo-Demo）&lt;/h3&gt;
 &lt;p&gt;在 pom.xml 中添加 dependencies&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;dependencies&amp;gt;&lt;/span&gt;
@@ -1819,9 +1819,9 @@ Swap(0, 4) =&amp;gt; {0, 1, 2, 3, 4}
     </item>
     <item>
       <title>PAT甲级 1014 Waiting in Line (30分)</title>
-      <link>https://zjxjwxk.github.io/posts/pat/advanced_level/a1014/</link>
+      <link>http://localhost:1313/posts/pat/advanced_level/a1014/</link>
       <pubDate>Sun, 08 Mar 2020 17:18:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/posts/pat/advanced_level/a1014/</guid>
+      <guid>http://localhost:1313/posts/pat/advanced_level/a1014/</guid>
       <description>&lt;p&gt;Suppose a bank has N windows open for service. There is a yellow line in front of the windows which devides the waiting area into two parts. The rules for the customers to wait in line are:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;The space inside the yellow line in front of each window is enough to contain a line with M customers. Hence when all the N lines are full, all the customers after (and including) the (NM+1)st one will have to wait in a line behind the yellow line.&lt;/li&gt;
@@ -1833,11 +1833,11 @@ Swap(0, 4) =&amp;gt; {0, 1, 2, 3, 4}
     </item>
     <item>
       <title>Dubbo微服务影院系列（2）：微服务入门</title>
-      <link>https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/2.%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%85%A5%E9%97%A8/</link>
+      <link>http://localhost:1313/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/2.%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%85%A5%E9%97%A8/</link>
       <pubDate>Fri, 06 Mar 2020 23:14:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/2.%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%85%A5%E9%97%A8/</guid>
+      <guid>http://localhost:1313/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/2.%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%85%A5%E9%97%A8/</guid>
       <description>&lt;h1 id=&#34;传统业务应用&#34;&gt;传统业务应用&lt;/h1&gt;
-&lt;p&gt;&lt;img alt=&#34;传统业务应用&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/2.%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%85%A5%E9%97%A8/images/image-20200306231434458.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;传统业务应用&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/2.%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%85%A5%E9%97%A8/images/image-20200306231434458.png&#34;&gt;&lt;/p&gt;
 &lt;h1 id=&#34;传统应用带来的问题&#34;&gt;传统应用带来的问题&lt;/h1&gt;
 &lt;ul&gt;
 &lt;li&gt;单一业务开发和迭代困难&lt;/li&gt;
@@ -1846,7 +1846,7 @@ Swap(0, 4) =&amp;gt; {0, 1, 2, 3, 4}
 &lt;/ul&gt;
 &lt;h1 id=&#34;微服务发展历程&#34;&gt;微服务发展历程&lt;/h1&gt;
 &lt;h2 id=&#34;面向服务开发---soa&#34;&gt;面向服务开发 - SOA&lt;/h2&gt;
-&lt;p&gt;&lt;img alt=&#34;SOA&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/2.%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%85%A5%E9%97%A8/images/image-20200306231555431.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;SOA&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/2.%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%85%A5%E9%97%A8/images/image-20200306231555431.png&#34;&gt;&lt;/p&gt;
 &lt;h2 id=&#34;微服务开发&#34;&gt;微服务开发&lt;/h2&gt;
 &lt;h1 id=&#34;微服务概述&#34;&gt;微服务概述&lt;/h1&gt;
 &lt;ul&gt;
@@ -1864,12 +1864,12 @@ Swap(0, 4) =&amp;gt; {0, 1, 2, 3, 4}
     </item>
     <item>
       <title>Dubbo微服务影院系列（1）：课程导学</title>
-      <link>https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/1.%E8%AF%BE%E7%A8%8B%E5%AF%BC%E5%AD%A6/</link>
+      <link>http://localhost:1313/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/1.%E8%AF%BE%E7%A8%8B%E5%AF%BC%E5%AD%A6/</link>
       <pubDate>Fri, 06 Mar 2020 18:39:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/1.%E8%AF%BE%E7%A8%8B%E5%AF%BC%E5%AD%A6/</guid>
+      <guid>http://localhost:1313/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/1.%E8%AF%BE%E7%A8%8B%E5%AF%BC%E5%AD%A6/</guid>
       <description>&lt;h1 id=&#34;为什么使用dubbo&#34;&gt;为什么使用Dubbo&lt;/h1&gt;
 &lt;h2 id=&#34;dubbo-是基于-rpc-通信协议速度更快&#34;&gt;Dubbo 是基于 RPC 通信协议，速度更快&lt;/h2&gt;
-&lt;p&gt;&lt;img alt=&#34;千万次调用&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/1.%E8%AF%BE%E7%A8%8B%E5%AF%BC%E5%AD%A6/images/image-20200306225758803.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;千万次调用&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/1.%E8%AF%BE%E7%A8%8B%E5%AF%BC%E5%AD%A6/images/image-20200306225758803.png&#34;&gt;&lt;/p&gt;
 &lt;h2 id=&#34;dubbo-的多中心配置更灵活&#34;&gt;Dubbo 的多中心配置更灵活&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;ZooKeeper&lt;/li&gt;
@@ -1888,19 +1888,19 @@ Swap(0, 4) =&amp;gt; {0, 1, 2, 3, 4}
 &lt;li&gt;掌握基于 Dubbo 的微服务常见面试问题&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h1 id=&#34;业务结构图&#34;&gt;业务结构图&lt;/h1&gt;
-&lt;p&gt;&lt;img alt=&#34;业务结构图&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/1.%E8%AF%BE%E7%A8%8B%E5%AF%BC%E5%AD%A6/images/image-20200306230144862.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;业务结构图&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/1.%E8%AF%BE%E7%A8%8B%E5%AF%BC%E5%AD%A6/images/image-20200306230144862.png&#34;&gt;&lt;/p&gt;
 &lt;h1 id=&#34;核心功能&#34;&gt;核心功能&lt;/h1&gt;
-&lt;p&gt;&lt;img alt=&#34;核心功能&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/1.%E8%AF%BE%E7%A8%8B%E5%AF%BC%E5%AD%A6/images/image-20200306230227966.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;核心功能&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/1.%E8%AF%BE%E7%A8%8B%E5%AF%BC%E5%AD%A6/images/image-20200306230227966.png&#34;&gt;&lt;/p&gt;
 &lt;h1 id=&#34;主要知识点&#34;&gt;主要知识点&lt;/h1&gt;
-&lt;p&gt;&lt;img alt=&#34;主要知识点&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/1.%E8%AF%BE%E7%A8%8B%E5%AF%BC%E5%AD%A6/images/image-20200306230255648.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;主要知识点&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/1.%E8%AF%BE%E7%A8%8B%E5%AF%BC%E5%AD%A6/images/image-20200306230255648.png&#34;&gt;&lt;/p&gt;
 &lt;h1 id=&#34;技术架构图&#34;&gt;技术架构图&lt;/h1&gt;
-&lt;p&gt;&lt;img alt=&#34;技术架构图&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/1.%E8%AF%BE%E7%A8%8B%E5%AF%BC%E5%AD%A6/images/image-20200306230335981.png&#34;&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;img alt=&#34;技术架构图&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/dubbo/dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BD%B1%E9%99%A2%E7%B3%BB%E5%88%97/1.%E8%AF%BE%E7%A8%8B%E5%AF%BC%E5%AD%A6/images/image-20200306230335981.png&#34;&gt;&lt;/p&gt;</description>
     </item>
     <item>
       <title>Outsourcing</title>
-      <link>https://zjxjwxk.github.io/posts/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/outsourcing/</link>
+      <link>http://localhost:1313/posts/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/outsourcing/</link>
       <pubDate>Fri, 21 Jun 2019 16:22:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/posts/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/outsourcing/</guid>
+      <guid>http://localhost:1313/posts/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/outsourcing/</guid>
       <description>&lt;h1 id=&#34;what-is-gse&#34;&gt;What is GSE?&lt;/h1&gt;
 &lt;p&gt;GSE is a complex phenomenon that unites many different collaboration models and project organization models.&lt;/p&gt;
 &lt;h1 id=&#34;reason-for-gse&#34;&gt;Reason for GSE?&lt;/h1&gt;
@@ -1912,15 +1912,15 @@ Swap(0, 4) =&amp;gt; {0, 1, 2, 3, 4}
 &lt;li&gt;Get access to a specific market&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h1 id=&#34;differences-between-co-located-team-and-global-team&#34;&gt;Differences between co-located team and global team&lt;/h1&gt;
-&lt;p&gt;&lt;img alt=&#34;Differences between co-located team and global team&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/outsourcing/images/image-20190623152437638.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;Differences between co-located team and global team&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/outsourcing/images/image-20190623152437638.png&#34;&gt;&lt;/p&gt;
 &lt;h1 id=&#34;according-to-what-when-where-to-determine-whether-the-supplier-is-suitable&#34;&gt;According to What, When, Where to determine whether the supplier is suitable&lt;/h1&gt;
-&lt;p&gt;&lt;img alt=&#34;Each combination is unique&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/outsourcing/images/image-20190622103720847.png&#34;&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;img alt=&#34;Each combination is unique&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/outsourcing/images/image-20190622103720847.png&#34;&gt;&lt;/p&gt;</description>
     </item>
     <item>
       <title>Spring Boot 简化分页查询Page接口的JSON响应</title>
-      <link>https://zjxjwxk.github.io/posts/spring-boot/spring-boot-%E7%AE%80%E5%8C%96%E5%88%86%E9%A1%B5%E6%9F%A5%E8%AF%A2page%E6%8E%A5%E5%8F%A3%E7%9A%84json%E5%93%8D%E5%BA%94/</link>
+      <link>http://localhost:1313/posts/spring-boot/spring-boot-%E7%AE%80%E5%8C%96%E5%88%86%E9%A1%B5%E6%9F%A5%E8%AF%A2page%E6%8E%A5%E5%8F%A3%E7%9A%84json%E5%93%8D%E5%BA%94/</link>
       <pubDate>Sat, 02 Feb 2019 17:15:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/posts/spring-boot/spring-boot-%E7%AE%80%E5%8C%96%E5%88%86%E9%A1%B5%E6%9F%A5%E8%AF%A2page%E6%8E%A5%E5%8F%A3%E7%9A%84json%E5%93%8D%E5%BA%94/</guid>
+      <guid>http://localhost:1313/posts/spring-boot/spring-boot-%E7%AE%80%E5%8C%96%E5%88%86%E9%A1%B5%E6%9F%A5%E8%AF%A2page%E6%8E%A5%E5%8F%A3%E7%9A%84json%E5%93%8D%E5%BA%94/</guid>
       <description>&lt;h3 id=&#34;多余的分页信息&#34;&gt;多余的分页信息&lt;/h3&gt;
 &lt;p&gt;Spring Data 的 Page 接口进行数据分页返回了很多很多垃圾信息：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
@@ -1982,9 +1982,9 @@ Swap(0, 4) =&amp;gt; {0, 1, 2, 3, 4}
     </item>
     <item>
       <title>Spring Cloud Eureka</title>
-      <link>https://zjxjwxk.github.io/posts/spring-cloud/%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%8E%E5%8F%91%E7%8E%B0/</link>
+      <link>http://localhost:1313/posts/spring-cloud/%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%8E%E5%8F%91%E7%8E%B0/</link>
       <pubDate>Thu, 31 Jan 2019 20:18:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/posts/spring-cloud/%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%8E%E5%8F%91%E7%8E%B0/</guid>
+      <guid>http://localhost:1313/posts/spring-cloud/%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%8E%E5%8F%91%E7%8E%B0/</guid>
       <description>&lt;h1 id=&#34;spring-cloud-eureka&#34;&gt;Spring Cloud Eureka&lt;/h1&gt;
 &lt;ul&gt;
 &lt;li&gt;基于 Netflix Eureka 做了二次封装&lt;/li&gt;
@@ -2005,13 +2005,13 @@ Swap(0, 4) =&amp;gt; {0, 1, 2, 3, 4}
 &lt;/ul&gt;
 &lt;h1 id=&#34;启动-eureka-server&#34;&gt;启动 Eureka Server&lt;/h1&gt;
 &lt;h2 id=&#34;1-创建spring项目&#34;&gt;1. 创建Spring项目&lt;/h2&gt;
-&lt;p&gt;&lt;img alt=&#34;创建Spring项目&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/spring-cloud/%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%8E%E5%8F%91%E7%8E%B0/images/image-20190131155138441.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;创建Spring项目&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/spring-cloud/%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%8E%E5%8F%91%E7%8E%B0/images/image-20190131155138441.png&#34;&gt;&lt;/p&gt;
 &lt;h2 id=&#34;2-填充项目信息&#34;&gt;2. 填充项目信息&lt;/h2&gt;
-&lt;p&gt;&lt;img alt=&#34;填充项目信息&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/spring-cloud/%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%8E%E5%8F%91%E7%8E%B0/images/image-20190131155241197.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;填充项目信息&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/spring-cloud/%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%8E%E5%8F%91%E7%8E%B0/images/image-20190131155241197.png&#34;&gt;&lt;/p&gt;
 &lt;h2 id=&#34;3-选择项目类型为-cloud-discovery-中的-eureka-server&#34;&gt;3. 选择项目类型为 Cloud Discovery 中的 Eureka Server&lt;/h2&gt;
-&lt;p&gt;&lt;img alt=&#34;选择Eureka Server&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/spring-cloud/%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%8E%E5%8F%91%E7%8E%B0/images/image-20190131155453826.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;选择Eureka Server&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/spring-cloud/%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%8E%E5%8F%91%E7%8E%B0/images/image-20190131155453826.png&#34;&gt;&lt;/p&gt;
 &lt;h2 id=&#34;4-完成创建&#34;&gt;4. 完成创建&lt;/h2&gt;
-&lt;p&gt;&lt;img alt=&#34;完成创建&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/spring-cloud/%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%8E%E5%8F%91%E7%8E%B0/images/image-20190131160337079.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;完成创建&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/spring-cloud/%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%8E%E5%8F%91%E7%8E%B0/images/image-20190131160337079.png&#34;&gt;&lt;/p&gt;
 &lt;h2 id=&#34;5-添加注解-enableeurekaserver&#34;&gt;5. 添加注解 @EnableEurekaServer&lt;/h2&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;@SpringBootApplication&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;@EnableEurekaServer&lt;/span&gt;
@@ -2034,22 +2034,22 @@ Swap(0, 4) =&amp;gt; {0, 1, 2, 3, 4}
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;server&lt;/span&gt;:
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;port&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;8761&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;7-启动-eureka-server&#34;&gt;7. 启动 Eureka Server&lt;/h2&gt;
-&lt;p&gt;&lt;img alt=&#34;Eureka Server信息&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/spring-cloud/%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%8E%E5%8F%91%E7%8E%B0/images/image-20190131172458551.png&#34;&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;img alt=&#34;Eureka Server信息&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/spring-cloud/%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%8E%E5%8F%91%E7%8E%B0/images/image-20190131172458551.png&#34;&gt;&lt;/p&gt;</description>
     </item>
     <item>
       <title>微服务简介</title>
-      <link>https://zjxjwxk.github.io/posts/spring-cloud/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/</link>
+      <link>http://localhost:1313/posts/spring-cloud/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/</link>
       <pubDate>Thu, 31 Jan 2019 20:16:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/posts/spring-cloud/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/</guid>
+      <guid>http://localhost:1313/posts/spring-cloud/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/</guid>
       <description>&lt;h1 id=&#34;images&#34;&gt;images&lt;/h1&gt;
 &lt;h2 id=&#34;定义&#34;&gt;定义&lt;/h2&gt;
 &lt;p&gt;The microservice architectural style is an approach to developing a single application running as &lt;strong&gt;a suite of small services&lt;/strong&gt;, each &lt;strong&gt;running its own process&lt;/strong&gt; and communicating with lightweight mechanisms, often an HTTP resource API. These services are &lt;strong&gt;built around business capabilities&lt;/strong&gt; and &lt;strong&gt;independently deployable&lt;/strong&gt; by fully automated deployment machinery. There is &lt;strong&gt;a bare minimum of centralized management of these services&lt;/strong&gt;, which may be written in different programming languages and use different data storage technologies.&lt;/p&gt;</description>
     </item>
     <item>
       <title>CentOS jar包后台运行</title>
-      <link>https://zjxjwxk.github.io/posts/linux/centos/centos-jar%E5%8C%85%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C/</link>
+      <link>http://localhost:1313/posts/linux/centos/centos-jar%E5%8C%85%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C/</link>
       <pubDate>Wed, 30 Jan 2019 00:54:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/posts/linux/centos/centos-jar%E5%8C%85%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C/</guid>
+      <guid>http://localhost:1313/posts/linux/centos/centos-jar%E5%8C%85%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C/</guid>
       <description>&lt;h1 id=&#34;运行jar包命令&#34;&gt;运行jar包命令&lt;/h1&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;java -jar application.jar
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;当前ssh窗口被锁定，可按CTRL + C打断程序运行，或直接关闭窗口让程序退出。&lt;/p&gt;
@@ -2078,9 +2078,9 @@ Swap(0, 4) =&amp;gt; {0, 1, 2, 3, 4}
     </item>
     <item>
       <title>Applied Software Project Management</title>
-      <link>https://zjxjwxk.github.io/posts/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/applied-software-project-management/</link>
+      <link>http://localhost:1313/posts/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/applied-software-project-management/</link>
       <pubDate>Sun, 20 Jan 2019 23:05:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/posts/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/applied-software-project-management/</guid>
+      <guid>http://localhost:1313/posts/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/applied-software-project-management/</guid>
       <description>&lt;h1 id=&#34;general-characteristics-of-a-project&#34;&gt;General characteristics of a project&lt;/h1&gt;
 &lt;p&gt;A project is a temporary endeavour undertaken to create a unique product or service. It is specific, timely, usually multidisciplinary, and always conflict ridden. Projects are parts of overall programs and may be broken down into tasks, subtasks, and further if desired.&lt;/p&gt;
 &lt;ul&gt;
@@ -2153,13 +2153,13 @@ Swap(0, 4) =&amp;gt; {0, 1, 2, 3, 4}
 &lt;li&gt;Risk planning; how to address risks – eliminate, reduce, ignore&lt;/li&gt;
 &lt;li&gt;Risk monitoring; controlling and updating the risks&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;img alt=&#34;Risk reporting Matrix&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/applied-software-project-management/images/1548175505399.png&#34;&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;img alt=&#34;Risk reporting Matrix&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/applied-software-project-management/images/1548175505399.png&#34;&gt;&lt;/p&gt;</description>
     </item>
     <item>
       <title>Software Architecture and Quality</title>
-      <link>https://zjxjwxk.github.io/posts/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/software-architecture-and-quality/</link>
+      <link>http://localhost:1313/posts/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/software-architecture-and-quality/</link>
       <pubDate>Sat, 19 Jan 2019 22:01:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/posts/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/software-architecture-and-quality/</guid>
+      <guid>http://localhost:1313/posts/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/software-architecture-and-quality/</guid>
       <description>&lt;h1 id=&#34;ch-1-what-is-software-architecture&#34;&gt;CH 1. What is software architecture?&lt;/h1&gt;
 &lt;h2 id=&#34;what-is-software-architecture&#34;&gt;What is software architecture&lt;/h2&gt;
 &lt;p&gt;The software architecture of a system is the set of structures needed to reason about the system, which comprise software elements, relations among them, and properties of both.&lt;/p&gt;
@@ -2183,11 +2183,11 @@ Swap(0, 4) =&amp;gt; {0, 1, 2, 3, 4}
     </item>
     <item>
       <title>Team Collaboration and Career Development</title>
-      <link>https://zjxjwxk.github.io/posts/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/team-collaboration-and-career-development/</link>
+      <link>http://localhost:1313/posts/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/team-collaboration-and-career-development/</link>
       <pubDate>Sat, 19 Jan 2019 22:01:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/posts/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/team-collaboration-and-career-development/</guid>
+      <guid>http://localhost:1313/posts/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/team-collaboration-and-career-development/</guid>
       <description>&lt;h1 id=&#34;career-decision-making-cycle&#34;&gt;Career decision making cycle&lt;/h1&gt;
-&lt;p&gt;&lt;img alt=&#34;Career decision making cycle&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/team-collaboration-and-career-development/images/1547727641728.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;Career decision making cycle&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/team-collaboration-and-career-development/images/1547727641728.png&#34;&gt;&lt;/p&gt;
 &lt;h2 id=&#34;know-the-elements&#34;&gt;Know the elements&lt;/h2&gt;
 &lt;p&gt;Communication, Analysis, Synthesis, Valuing, Execution&lt;/p&gt;
 &lt;h2 id=&#34;know-the-definition&#34;&gt;Know the definition&lt;/h2&gt;
@@ -2230,9 +2230,9 @@ Swap(0, 4) =&amp;gt; {0, 1, 2, 3, 4}
     </item>
     <item>
       <title>Team Collaboration and Career Development for Exam</title>
-      <link>https://zjxjwxk.github.io/posts/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/team-collaboration-and-career-development-for-exam/</link>
+      <link>http://localhost:1313/posts/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/team-collaboration-and-career-development-for-exam/</link>
       <pubDate>Sat, 19 Jan 2019 22:01:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/posts/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/team-collaboration-and-career-development-for-exam/</guid>
+      <guid>http://localhost:1313/posts/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/team-collaboration-and-career-development-for-exam/</guid>
       <description>&lt;h3 id=&#34;during-the-lectures-we-defined-three-different-areas-important-for-every-individual-values-interests-and-skills-these-should-be-described-regarding-your-internal-focus-in-a-resume&#34;&gt;During the lectures we defined three different areas important for every individual: Values, Interests and Skills. These should be described regarding your internal focus in a resume.&lt;/h3&gt;
 &lt;p&gt;&lt;strong&gt;a. Describe, explain, these three areas, including at least two examples from each area. (15)&lt;/strong&gt;&lt;/p&gt;
 &lt;ul&gt;
@@ -2246,7 +2246,7 @@ Swap(0, 4) =&amp;gt; {0, 1, 2, 3, 4}
 &lt;h3 id=&#34;2-name-the-5-elements-of-the-career-development-cycle-draw-the-model-of-the-cycle-describe-shortly-1-2-sentences-every-action-in-the-cycle-12&#34;&gt;2. Name the 5 elements of the Career Development Cycle. Draw the model of the cycle. Describe shortly, 1-2 sentences, every action in the cycle. (12)&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;Communication, Analysis, Synthesis, Valuing, Execution
-&lt;img loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/team-collaboration-and-career-development-for-exam/images/1547730517318.png&#34;&gt;&lt;/li&gt;
+&lt;img loading=&#34;lazy&#34; src=&#34;http://localhost:1313/posts/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/team-collaboration-and-career-development-for-exam/images/1547730517318.png&#34;&gt;&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;Communication&lt;/strong&gt;: Become aware of the gap and feel discomfort about the gap. Seek assistance if needed.&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;Analysis&lt;/strong&gt;: Clarify your knowledge, what do you want, what are your values, interests and skills and so on.&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;Synthesis&lt;/strong&gt;: Solve the gap, avoid missing alternatives and reduce to a manageable amount of options.&lt;/li&gt;
@@ -2275,9 +2275,9 @@ Swap(0, 4) =&amp;gt; {0, 1, 2, 3, 4}
     </item>
     <item>
       <title>The Design and Analysis of Algorithms for Exam</title>
-      <link>https://zjxjwxk.github.io/posts/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/the-design-and-analysis-of-algorithms/</link>
+      <link>http://localhost:1313/posts/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/the-design-and-analysis-of-algorithms/</link>
       <pubDate>Sat, 19 Jan 2019 22:01:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/posts/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/the-design-and-analysis-of-algorithms/</guid>
+      <guid>http://localhost:1313/posts/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/the-design-and-analysis-of-algorithms/</guid>
       <description>&lt;h1 id=&#34;this-question-tests-your-knowledge-on-algorithms-and-algorithm-construction&#34;&gt;This question tests your knowledge on algorithms and algorithm construction:&lt;/h1&gt;
 &lt;p&gt;&lt;strong&gt;(a) A function that is defined in terms of itself is called a recursive function. Describe the purpose of a base case in a recursive function.(3p)&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;A base case is an (input) value for which the function can be calculated without recursion.&lt;/p&gt;
@@ -2286,9 +2286,9 @@ Swap(0, 4) =&amp;gt; {0, 1, 2, 3, 4}
     </item>
     <item>
       <title>CentOS 7 Tomcat开机自启动配置</title>
-      <link>https://zjxjwxk.github.io/posts/linux/centos/centos-7-tomcat%E7%9A%84%E5%AE%89%E8%A3%85%E5%8F%8A%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF%E5%8A%A8%E9%85%8D%E7%BD%AE/</link>
+      <link>http://localhost:1313/posts/linux/centos/centos-7-tomcat%E7%9A%84%E5%AE%89%E8%A3%85%E5%8F%8A%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF%E5%8A%A8%E9%85%8D%E7%BD%AE/</link>
       <pubDate>Sun, 13 Jan 2019 00:04:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/posts/linux/centos/centos-7-tomcat%E7%9A%84%E5%AE%89%E8%A3%85%E5%8F%8A%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF%E5%8A%A8%E9%85%8D%E7%BD%AE/</guid>
+      <guid>http://localhost:1313/posts/linux/centos/centos-7-tomcat%E7%9A%84%E5%AE%89%E8%A3%85%E5%8F%8A%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF%E5%8A%A8%E9%85%8D%E7%BD%AE/</guid>
       <description>&lt;h1 id=&#34;centos-7-tomcat开机自启动配置&#34;&gt;CentOS 7 Tomcat开机自启动配置&lt;/h1&gt;
 &lt;h2 id=&#34;配置开机运行&#34;&gt;配置开机运行&lt;/h2&gt;
 &lt;h3 id=&#34;tomcat增加启动参数&#34;&gt;Tomcat增加启动参数&lt;/h3&gt;
@@ -2332,9 +2332,9 @@ Swap(0, 4) =&amp;gt; {0, 1, 2, 3, 4}
     </item>
     <item>
       <title>J2EE基础知识</title>
-      <link>https://zjxjwxk.github.io/posts/java/j2ee/</link>
+      <link>http://localhost:1313/posts/java/j2ee/</link>
       <pubDate>Fri, 04 Jan 2019 12:54:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/posts/java/j2ee/</guid>
+      <guid>http://localhost:1313/posts/java/j2ee/</guid>
       <description>&lt;h2 id=&#34;servlet总结&#34;&gt;Servlet总结&lt;/h2&gt;
 &lt;p&gt;在Java Web程序中，&lt;strong&gt;Servlet&lt;/strong&gt;主要负责接收用户请求&lt;strong&gt;HttpServletRequest&lt;/strong&gt;,在&lt;strong&gt;doGet()&lt;/strong&gt;,&lt;strong&gt;doPost()中做相应的处理，并将回应HttpServletResponse&lt;/strong&gt;反馈给用户。Servlet可以设置初始化参数，供Servlet内部使用。一个Servlet类只会有一个实例，在它初始化时调用&lt;strong&gt;init()方法&lt;/strong&gt;，销毁时调用&lt;strong&gt;destroy()方法&lt;/strong&gt;。&lt;strong&gt;Servlet需要在web.xml中配置&lt;/strong&gt;（MyEclipse中创建Servlet会自动配置），&lt;strong&gt;一个Servlet可以设置多个URL访问&lt;/strong&gt;。&lt;strong&gt;Servlet不是线程安全&lt;/strong&gt;，因此要谨慎使用类变量。&lt;/p&gt;
 &lt;h2 id=&#34;阐述servlet和cgi的区别&#34;&gt;阐述Servlet和CGI的区别?&lt;/h2&gt;
@@ -2389,9 +2389,9 @@ Swap(0, 4) =&amp;gt; {0, 1, 2, 3, 4}
     </item>
     <item>
       <title>Java基础知识</title>
-      <link>https://zjxjwxk.github.io/posts/java/java%E6%A0%B8%E5%BF%83/</link>
+      <link>http://localhost:1313/posts/java/java%E6%A0%B8%E5%BF%83/</link>
       <pubDate>Thu, 03 Jan 2019 22:44:22 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/posts/java/java%E6%A0%B8%E5%BF%83/</guid>
+      <guid>http://localhost:1313/posts/java/java%E6%A0%B8%E5%BF%83/</guid>
       <description>&lt;h2 id=&#34;1-面向对象和面向过程的区别&#34;&gt;1. 面向对象和面向过程的区别&lt;/h2&gt;
 &lt;h3 id=&#34;面向过程&#34;&gt;面向过程&lt;/h3&gt;
 &lt;p&gt;&lt;strong&gt;优点：&lt;/strong&gt; 性能比面向对象高，因为类调用时需要实例化，开销比较大，比较消耗资源;比如单片机、嵌入式开发、Linux/Unix等一般采用面向过程开发，性能是最重要的因素。&lt;/p&gt;

@@ -2,50 +2,50 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>数学问题 on Xinkang&#39;s Blog</title>
-    <link>https://zjxjwxk.github.io/tags/%E6%95%B0%E5%AD%A6%E9%97%AE%E9%A2%98/</link>
+    <link>http://localhost:1313/tags/%E6%95%B0%E5%AD%A6%E9%97%AE%E9%A2%98/</link>
     <description>Recent content in 数学问题 on Xinkang&#39;s Blog</description>
     <generator>Hugo -- 0.138.0</generator>
     <language>en</language>
     <lastBuildDate>Thu, 02 Apr 2020 20:53:00 +0000</lastBuildDate>
-    <atom:link href="https://zjxjwxk.github.io/tags/%E6%95%B0%E5%AD%A6%E9%97%AE%E9%A2%98/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/tags/%E6%95%B0%E5%AD%A6%E9%97%AE%E9%A2%98/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>PAT甲级 1096 Consecutive Factors (20分)</title>
-      <link>https://zjxjwxk.github.io/posts/pat/advanced_level/a1096/</link>
+      <link>http://localhost:1313/posts/pat/advanced_level/a1096/</link>
       <pubDate>Thu, 02 Apr 2020 20:53:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/posts/pat/advanced_level/a1096/</guid>
+      <guid>http://localhost:1313/posts/pat/advanced_level/a1096/</guid>
       <description>&lt;p&gt;Among all the factors of a positive integer N, there may exist several consecutive numbers. For example, 630 can be factored as 3×5×6×7, where 5, 6, and 7 are the three consecutive numbers. Now given any positive N, you are supposed to find the maximum number of consecutive factors, and list the smallest sequence of the consecutive factors.&lt;/p&gt;
 &lt;h1 id=&#34;input-specification&#34;&gt;Input Specification:&lt;/h1&gt;
 &lt;p&gt;Each input file contains one test case, which gives the integer N (1&amp;lt;N&amp;lt;2^{31}).&lt;/p&gt;</description>
     </item>
     <item>
       <title>PAT甲级 1078 Hashing (25分)</title>
-      <link>https://zjxjwxk.github.io/posts/pat/advanced_level/a1078/</link>
+      <link>http://localhost:1313/posts/pat/advanced_level/a1078/</link>
       <pubDate>Thu, 02 Apr 2020 17:04:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/posts/pat/advanced_level/a1078/</guid>
+      <guid>http://localhost:1313/posts/pat/advanced_level/a1078/</guid>
       <description>&lt;p&gt;The task of this problem is simple: insert a sequence of distinct positive integers into a hash table, and output the positions of the input numbers. The hash function is defined to be H(key)=key%TSize where TSize is the maximum size of the hash table. Quadratic probing (with positive increments only) is used to solve the collisions.&lt;/p&gt;
 &lt;p&gt;Note that the table size is better to be prime. If the maximum size given by the user is not prime, you must re-define the table size to be the smallest prime number which is larger than the size given by the user.&lt;/p&gt;</description>
     </item>
     <item>
       <title>PAT甲级 1081 Rational Sum (20分)</title>
-      <link>https://zjxjwxk.github.io/posts/pat/advanced_level/a1081/</link>
+      <link>http://localhost:1313/posts/pat/advanced_level/a1081/</link>
       <pubDate>Wed, 01 Apr 2020 16:29:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/posts/pat/advanced_level/a1081/</guid>
+      <guid>http://localhost:1313/posts/pat/advanced_level/a1081/</guid>
       <description>&lt;p&gt;Given &lt;em&gt;N&lt;/em&gt; rational numbers in the form &lt;code&gt;numerator/denominator&lt;/code&gt;, you are supposed to calculate their sum.&lt;/p&gt;
 &lt;h1 id=&#34;input-specification&#34;&gt;Input Specification:&lt;/h1&gt;
 &lt;p&gt;Each input file contains one test case. Each case starts with a positive integer &lt;em&gt;N&lt;/em&gt; (≤100), followed in the next line &lt;em&gt;N&lt;/em&gt; rational numbers &lt;code&gt;a1/b1 a2/b2 ...&lt;/code&gt; where all the numerators and denominators are in the range of &lt;strong&gt;long int&lt;/strong&gt;. If there is a negative number, then the sign must appear in front of the numerator.&lt;/p&gt;</description>
     </item>
     <item>
       <title>PAT乙级 1008 数组元素循环右移问题 (20分)</title>
-      <link>https://zjxjwxk.github.io/posts/pat/basic_level/b1008/</link>
+      <link>http://localhost:1313/posts/pat/basic_level/b1008/</link>
       <pubDate>Tue, 31 Mar 2020 16:04:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/posts/pat/basic_level/b1008/</guid>
+      <guid>http://localhost:1313/posts/pat/basic_level/b1008/</guid>
       <description>&lt;p&gt;一个数组&lt;em&gt;A&lt;/em&gt;中存有&lt;em&gt;N&lt;/em&gt;（&amp;gt;0）个整数，在不允许使用另外数组的前提下，将每个整数循环向右移&lt;em&gt;M&lt;/em&gt;（≥0）个位置，即将&lt;em&gt;A&lt;/em&gt;中的数据由（A&lt;!-- raw HTML omitted --&gt;0&lt;!-- raw HTML omitted --&gt; A&lt;!-- raw HTML omitted --&gt;1&lt;!-- raw HTML omitted --&gt; ⋯A &lt;!-- raw HTML omitted --&gt;N−1&lt;!-- raw HTML omitted --&gt; ）变换为（A &lt;!-- raw HTML omitted --&gt;N−M&lt;!-- raw HTML omitted --&gt; ⋯A &lt;!-- raw HTML omitted --&gt;N−1&lt;!-- raw HTML omitted --&gt; A &lt;!-- raw HTML omitted --&gt;0&lt;!-- raw HTML omitted --&gt; A &lt;!-- raw HTML omitted --&gt;1&lt;!-- raw HTML omitted --&gt;⋯A  &lt;!-- raw HTML omitted --&gt;N−M−1&lt;!-- raw HTML omitted --&gt; ）（最后&lt;em&gt;M&lt;/em&gt;个数循环移至最前面的&lt;em&gt;M&lt;/em&gt;个位置）。如果需要考虑程序移动数据的次数尽量少，要如何设计移动的方法？&lt;/p&gt;</description>
     </item>
     <item>
       <title>PAT甲级 1049 Counting Ones (30分)</title>
-      <link>https://zjxjwxk.github.io/posts/pat/advanced_level/a1049/</link>
+      <link>http://localhost:1313/posts/pat/advanced_level/a1049/</link>
       <pubDate>Mon, 30 Mar 2020 21:12:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/posts/pat/advanced_level/a1049/</guid>
+      <guid>http://localhost:1313/posts/pat/advanced_level/a1049/</guid>
       <description>&lt;p&gt;The task is simple: given any positive integer &lt;em&gt;N&lt;/em&gt;, you are supposed to count the total number of 1&amp;rsquo;s in the decimal form of the integers from 1 to &lt;em&gt;N&lt;/em&gt;. For example, given &lt;em&gt;N&lt;/em&gt; being 12, there are five 1&amp;rsquo;s in 1, 10, 11, and 12.&lt;/p&gt;
 &lt;h1 id=&#34;input-specification&#34;&gt;Input Specification:&lt;/h1&gt;
 &lt;p&gt;Each input file contains one test case which gives the positive &lt;em&gt;N&lt;/em&gt; (≤230).&lt;/p&gt;
@@ -54,9 +54,9 @@
     </item>
     <item>
       <title>PAT乙级 1003 我要通过！ (20分)</title>
-      <link>https://zjxjwxk.github.io/posts/pat/basic_level/b1003/</link>
+      <link>http://localhost:1313/posts/pat/basic_level/b1003/</link>
       <pubDate>Mon, 30 Mar 2020 16:26:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/posts/pat/basic_level/b1003/</guid>
+      <guid>http://localhost:1313/posts/pat/basic_level/b1003/</guid>
       <description>&lt;p&gt;“&lt;strong&gt;答案正确&lt;/strong&gt;”是自动判题系统给出的最令人欢喜的回复。本题属于 PAT 的“&lt;strong&gt;答案正确&lt;/strong&gt;”大派送 —— 只要读入的字符串满足下列条件，系统就输出“&lt;strong&gt;答案正确&lt;/strong&gt;”，否则输出“&lt;strong&gt;答案错误&lt;/strong&gt;”。&lt;/p&gt;
 &lt;p&gt;得到“&lt;strong&gt;答案正确&lt;/strong&gt;”的条件是：&lt;/p&gt;
 &lt;ol&gt;
@@ -133,9 +133,9 @@ NO
     </item>
     <item>
       <title>PAT甲级 1104 Sum of Number Segments (20分)</title>
-      <link>https://zjxjwxk.github.io/posts/pat/advanced_level/a1104/</link>
+      <link>http://localhost:1313/posts/pat/advanced_level/a1104/</link>
       <pubDate>Mon, 30 Mar 2020 16:26:00 +0000</pubDate>
-      <guid>https://zjxjwxk.github.io/posts/pat/advanced_level/a1104/</guid>
+      <guid>http://localhost:1313/posts/pat/advanced_level/a1104/</guid>
       <description>&lt;p&gt;Given a sequence of positive numbers, a segment is defined to be a consecutive subsequence. For example, given the sequence { 0.1, 0.2, 0.3, 0.4 }, we have 10 segments: (0.1) (0.1, 0.2) (0.1, 0.2, 0.3) (0.1, 0.2, 0.3, 0.4) (0.2) (0.2, 0.3) (0.2, 0.3, 0.4) (0.3) (0.3, 0.4) and (0.4).&lt;/p&gt;
 &lt;p&gt;Now given a sequence, you are supposed to find the sum of all the numbers in all the segments. For the previous example, the sum of all the 10 segments is 0.1 + 0.3 + 0.6 + 1.0 + 0.2 + 0.5 + 0.9 + 0.3 + 0.7 + 0.4 = 5.0.&lt;/p&gt;</description>
     </item>

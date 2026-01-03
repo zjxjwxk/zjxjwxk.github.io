@@ -1,6 +1,6 @@
 ---
 title: Docker 部署 Dubbo 微服务
-date: 2025-01-03T22:30:00+08:00
+date: 2026-01-03T22:30:00+08:00
 tags:
 - Docker
 - 微服务
@@ -121,9 +121,9 @@ live-user-provider-docker           1.0.0           45a95bb45bd6   2 hours ago  
 
 -   开发环境中，为了避免本机 IP 变化造成的麻烦，可以在环境变量中（如 `~/.zshrc` 中）定义本机 IP 为 $HOST_IP。如 MacOS 可以定义如下变量，自动获取当前 IP：
 
-    ```
-    export HOST_IP=$(ipconfig getifaddr en0)
-    ```
+```
+export HOST_IP=$(ipconfig getifaddr en0)
+```
 
 -   由于该服务依赖的所有外部地址均使用模拟域名，并在开发环境中配置了 /etc/hosts 文件用于模拟真实域名，因此在运行 Docker 容器时，需要将域名和宿主机 IP 的映射通过 `--add-host`作为 host 传入容器内的 `/etc/hosts` 文件。
 
