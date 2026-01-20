@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" dir="auto">
 
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<head><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
@@ -9,17 +9,17 @@
 <meta name="keywords" content="">
 <meta name="description" content="Posts - Xinkang&#39;s Blog">
 <meta name="author" content="">
-<link rel="canonical" href="http://localhost:1313/posts/">
+<link rel="canonical" href="https://zjxjwxk.github.io/posts/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.d6fcd20a4fb86efa4dfac8ec95da60244cc8871042183da1ef28e3a762ad79c8.css" integrity="sha256-1vzSCk&#43;4bvpN&#43;sjsldpgJEzIhxBCGD2h7yjjp2Ktecg=" rel="preload stylesheet" as="style">
-<link rel="icon" href="http://localhost:1313/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
-<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
-<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
+<link rel="icon" href="https://zjxjwxk.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://zjxjwxk.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://zjxjwxk.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://zjxjwxk.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://zjxjwxk.github.io/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" type="application/rss+xml" href="http://localhost:1313/posts/index.xml">
-<link rel="alternate" hreflang="en" href="http://localhost:1313/posts/">
+<link rel="alternate" type="application/rss+xml" href="https://zjxjwxk.github.io/posts/index.xml">
+<link rel="alternate" hreflang="en" href="https://zjxjwxk.github.io/posts/">
 <noscript>
     <style>
         #theme-toggle,
@@ -70,7 +70,7 @@
           gtag('js', new Date());
           gtag('config', 'G-9CMXGMMTKX');
         }
-      </script><meta property="og:url" content="http://localhost:1313/posts/">
+      </script><meta property="og:url" content="https://zjxjwxk.github.io/posts/">
   <meta property="og:site_name" content="Xinkang&#39;s Blog">
   <meta property="og:title" content="Posts">
   <meta property="og:locale" content="en">
@@ -89,7 +89,7 @@
       "@type": "ListItem",
       "position":  1 ,
       "name": "Posts",
-      "item": "http://localhost:1313/posts/"
+      "item": "https://zjxjwxk.github.io/posts/"
     }
   ]
 }
@@ -111,7 +111,7 @@
 <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="http://localhost:1313/" accesskey="h" title="Xinkang&#39;s Blog (Alt + H)">Xinkang&#39;s Blog</a>
+            <a href="https://zjxjwxk.github.io/" accesskey="h" title="Xinkang&#39;s Blog (Alt + H)">Xinkang&#39;s Blog</a>
             <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
@@ -137,22 +137,22 @@
         </div>
         <ul id="menu">
             <li>
-                <a href="http://localhost:1313/archives/" title="Archives">
+                <a href="https://zjxjwxk.github.io/archives/" title="Archives">
                     <span>Archives</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/categories/" title="Categories">
+                <a href="https://zjxjwxk.github.io/categories/" title="Categories">
                     <span>Categories</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/tags/" title="Tags">
+                <a href="https://zjxjwxk.github.io/tags/" title="Tags">
                     <span>Tags</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/search/" title="Search (Alt &#43; /)" accesskey=/>
+                <a href="https://zjxjwxk.github.io/search/" title="Search (Alt &#43; /)" accesskey=/>
                     <span>Search</span>
                 </a>
             </li>
@@ -160,11 +160,27 @@
     </nav>
 </header>
 <main class="main"> 
-<header class="page-header"><div class="breadcrumbs"><a href="http://localhost:1313/">Home</a></div>
+<header class="page-header"><div class="breadcrumbs"><a href="https://zjxjwxk.github.io/">Home</a></div>
   <h1>
     Posts
   </h1>
 </header>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">基于 SPI 机制实现 ShardingJDBC 的 Nacos 数据源配置
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>ShardingJDBC 的配置源路径 SPI 机制 由于最新版本 ShardingJDBC 不再支持基于 Nacos 作为配置数据源的功能，可以从 ShardingSphere JDBC 的依赖包中观察到，其数据源配置的获取接口 org.apache.shardingsphere.driver.jdbc.core.driver.ShardingSphereDriverURLProvider 采用了 SPI 机制，但其默认仅实现了以下几种配置获取方式： AbsolutePathDriverURLProvider（绝对路径）、ClasspathDriverURLProvider （Class Path 路径） 和 ApolloDriverURLProvider （Apollo 路径）。
+因此需要自行基于 ShardingJDBC 的 SPI 机制对 ShardingJDBC 进行二次开发，以实现从 Nacos 获取数据源配置文件。
+ShardingJDBC 配置获取的源码分析 根据该接口的包路径 org.apache.shardingsphere.driver.jdbc.core.driver ，可以找到其接口及其实现类，该接口包含两个方法：
+boolean accept(String url)：校验当前 url 是否应该使用当前类获取配置 byte[] getContent(String url)：从该 url 获取配置文件，并返回字节数组 如果将配置文件 db-sharding.yaml 放在 src/main/resources 目录下，并使用 classpath 作为配置文件的路径（如 spring.datasource.url=jdbc:shardingsphere:classpath:db-sharding.yaml），并在 ClasspathDriverURLProvider 类的 accept 方法中打断点并启动服务，可以发现在上层使用了 ShardingSphereDriverURLManager 类来对每个实现类进行遍历，分别调用 accept 校验当前 url 是否适用于当前类，若适用则调用其 getContent 方法从该 url 获取相应的配置文件。
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2026-01-20 23:39:00 +0800 CST'>January 20, 2026</span>&nbsp;·&nbsp;3 min</footer>
+  <a class="entry-link" aria-label="post link to 基于 SPI 机制实现 ShardingJDBC 的 Nacos 数据源配置" href="https://zjxjwxk.github.io/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/shardingjdbc/%E5%9F%BA%E4%BA%8E-spi-%E6%9C%BA%E5%88%B6%E5%AE%9E%E7%8E%B0-shardingjdbc-%E7%9A%84-nacos-%E6%95%B0%E6%8D%AE%E6%BA%90%E9%85%8D%E7%BD%AE/"></a>
+</article>
 
 <article class="post-entry"> 
   <header class="entry-header">
@@ -180,7 +196,7 @@ Maven 插件配置 在需要部署的微服务的 pom.xml 文件中配置如下�
 ...</p>
   </div>
   <footer class="entry-footer"><span title='2026-01-03 22:30:00 +0800 CST'>January 3, 2026</span>&nbsp;·&nbsp;2 min</footer>
-  <a class="entry-link" aria-label="post link to Docker 部署 Dubbo 微服务" href="http://localhost:1313/posts/nacos/docker-%E9%83%A8%E7%BD%B2-dubbo-%E5%BE%AE%E6%9C%8D%E5%8A%A1/"></a>
+  <a class="entry-link" aria-label="post link to Docker 部署 Dubbo 微服务" href="https://zjxjwxk.github.io/posts/nacos/docker-%E9%83%A8%E7%BD%B2-dubbo-%E5%BE%AE%E6%9C%8D%E5%8A%A1/"></a>
 </article>
 
 <article class="post-entry"> 
@@ -196,7 +212,7 @@ chmod -R 777 /var/lib/mysql 需要注意的是，主从的 my.cnf 文件权限�
 ...</p>
   </div>
   <footer class="entry-footer"><span title='2025-12-30 22:19:00 +0800 CST'>December 30, 2025</span>&nbsp;·&nbsp;2 min</footer>
-  <a class="entry-link" aria-label="post link to Docker 容器下的 MySQL 主从同步" href="http://localhost:1313/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql/docker-%E5%AE%B9%E5%99%A8%E4%B8%8B%E7%9A%84-mysql-%E4%B8%BB%E4%BB%8E%E5%90%8C%E6%AD%A5/"></a>
+  <a class="entry-link" aria-label="post link to Docker 容器下的 MySQL 主从同步" href="https://zjxjwxk.github.io/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql/docker-%E5%AE%B9%E5%99%A8%E4%B8%8B%E7%9A%84-mysql-%E4%B8%BB%E4%BB%8E%E5%90%8C%E6%AD%A5/"></a>
 </article>
 
 <article class="post-entry"> 
@@ -210,7 +226,7 @@ Nowadays, the TLS is mostly used to secure a connection via a CA (Certificate Au
 CA (Certificate Authority): The CA can sign other entities certificates. Client: The client put certificates in the Trust Store and doesn’t hold keys. Server: The server puts certificates, public keys, and private keys in the Key Store. ...</p>
   </div>
   <footer class="entry-footer"><span title='2025-03-16 13:29:00 +0800 CST'>March 16, 2025</span>&nbsp;·&nbsp;10 min</footer>
-  <a class="entry-link" aria-label="post link to Kafka Administration" href="http://localhost:1313/posts/mq/kafka/getting-started-with-apache-kafka/7-kafka-administration/"></a>
+  <a class="entry-link" aria-label="post link to Kafka Administration" href="https://zjxjwxk.github.io/posts/mq/kafka/getting-started-with-apache-kafka/7-kafka-administration/"></a>
 </article>
 
 <article class="post-entry"> 
@@ -224,7 +240,7 @@ We have normally two types of microservices:
 ...</p>
   </div>
   <footer class="entry-footer"><span title='2024-12-22 20:06:00 +0800 CST'>December 22, 2024</span>&nbsp;·&nbsp;11 min</footer>
-  <a class="entry-link" aria-label="post link to Kafka Stream" href="http://localhost:1313/posts/mq/kafka/getting-started-with-apache-kafka/6-kafka-stream/"></a>
+  <a class="entry-link" aria-label="post link to Kafka Stream" href="https://zjxjwxk.github.io/posts/mq/kafka/getting-started-with-apache-kafka/6-kafka-stream/"></a>
 </article>
 
 <article class="post-entry"> 
@@ -239,7 +255,7 @@ Connectors Source Connectors: Transfer data from a Source to Kafka. Sink Connect
 Standalone vs. Distributed ...</p>
   </div>
   <footer class="entry-footer"><span title='2024-11-23 16:44:00 +0800 CST'>November 23, 2024</span>&nbsp;·&nbsp;11 min</footer>
-  <a class="entry-link" aria-label="post link to Kafka Connect" href="http://localhost:1313/posts/mq/kafka/getting-started-with-apache-kafka/5-kafka-connect/"></a>
+  <a class="entry-link" aria-label="post link to Kafka Connect" href="https://zjxjwxk.github.io/posts/mq/kafka/getting-started-with-apache-kafka/5-kafka-connect/"></a>
 </article>
 
 <article class="post-entry"> 
@@ -253,7 +269,7 @@ If we add one more consumer to this group, the last one will be idle, because on
 ...</p>
   </div>
   <footer class="entry-footer"><span title='2024-11-18 18:41:00 +0800 CST'>November 18, 2024</span>&nbsp;·&nbsp;10 min</footer>
-  <a class="entry-link" aria-label="post link to Kafka Consumer" href="http://localhost:1313/posts/mq/kafka/getting-started-with-apache-kafka/4-kafka-conumers/"></a>
+  <a class="entry-link" aria-label="post link to Kafka Consumer" href="https://zjxjwxk.github.io/posts/mq/kafka/getting-started-with-apache-kafka/4-kafka-conumers/"></a>
 </article>
 
 <article class="post-entry"> 
@@ -267,7 +283,7 @@ If we add one more consumer to this group, the last one will be idle, because on
 ...</p>
   </div>
   <footer class="entry-footer"><span title='2024-11-17 01:47:59 +0800 CST'>November 17, 2024</span>&nbsp;·&nbsp;5 min</footer>
-  <a class="entry-link" aria-label="post link to Kafka Producer" href="http://localhost:1313/posts/mq/kafka/getting-started-with-apache-kafka/3-kafka-producer/"></a>
+  <a class="entry-link" aria-label="post link to Kafka Producer" href="https://zjxjwxk.github.io/posts/mq/kafka/getting-started-with-apache-kafka/3-kafka-producer/"></a>
 </article>
 
 <article class="post-entry"> 
@@ -281,7 +297,7 @@ If we add one more consumer to this group, the last one will be idle, because on
 ...</p>
   </div>
   <footer class="entry-footer"><span title='2024-11-16 01:47:59 +0800 CST'>November 16, 2024</span>&nbsp;·&nbsp;7 min</footer>
-  <a class="entry-link" aria-label="post link to Meet Kafka" href="http://localhost:1313/posts/mq/kafka/getting-started-with-apache-kafka/2-meet-kafka/"></a>
+  <a class="entry-link" aria-label="post link to Meet Kafka" href="https://zjxjwxk.github.io/posts/mq/kafka/getting-started-with-apache-kafka/2-meet-kafka/"></a>
 </article>
 
 <article class="post-entry"> 
@@ -293,31 +309,18 @@ If we add one more consumer to this group, the last one will be idle, because on
     <p>We Call The entity/app creates a message, a publisher, or a producer. The entity/app consuming messages from a channel as a consumer. The system where the channels live and handle these requests as an Event Bus or, more recently, a streaming platform. The channel where messages flow as channel or topic. Definitions We say the pub-sub system is reliable when you ensure there is no message loss. Has at most one processing when you ensure there is no message duplication. And has exactly one processing when you only process a message once ensuring it wasn’t lost. Of course, this is the holy grail. We Had a Ton of Other Pub/Sub Systems Before ...</p>
   </div>
   <footer class="entry-footer"><span title='2024-11-16 01:27:59 +0800 CST'>November 16, 2024</span>&nbsp;·&nbsp;2 min</footer>
-  <a class="entry-link" aria-label="post link to Pub-sub System" href="http://localhost:1313/posts/mq/kafka/getting-started-with-apache-kafka/1-pub-sub-system/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">Shiro入门
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>学习目标 认识 Shiro 的整体架构，各组件的概念 Shiro 认证，授权的过程 Shiro 自定义的 Realm，Filter Shiro Session 管理 Shiro 缓存管理 Shiro 集成 Spring Shiro 简介 Apache 的强大灵活的开源安全框架 认证、授权、企业会话管理、安全加密 Shiro 与 Spring Security 比较 Shiro 简单、灵活 可脱离 Spring 粒度较粗 Spring Security 复杂、笨重 不可脱离 Spring 粒度更细 Shiro 整体架构 Shiro 认证和授权 认证过程 创建 SecurityManager -&gt; 主体提交认证 -&gt; SecurityManager 认证 -&gt; Authenticator 认证 -&gt; Realm 验证 授权过程 创建 SecurityManager -&gt; 主体提交授权 -&gt; SecurityManager 授权 -&gt; Authorizer 授权 -&gt; Realm 获取角色权限数据 测试代码如下（这里先使用 SimpleAccountRealm 作为 Realm）：
-...</p>
-  </div>
-  <footer class="entry-footer"><span title='2021-03-19 21:15:00 +0000 UTC'>March 19, 2021</span>&nbsp;·&nbsp;8 min</footer>
-  <a class="entry-link" aria-label="post link to Shiro入门" href="http://localhost:1313/posts/shiro/"></a>
+  <a class="entry-link" aria-label="post link to Pub-sub System" href="https://zjxjwxk.github.io/posts/mq/kafka/getting-started-with-apache-kafka/1-pub-sub-system/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">
-    <a class="next" href="http://localhost:1313/posts/page/2/">Next&nbsp;&nbsp;»
+    <a class="next" href="https://zjxjwxk.github.io/posts/page/2/">Next&nbsp;&nbsp;»
     </a>
   </nav>
 </footer>
     </main>
     
 <footer class="footer">
-        <span>&copy; 2026 <a href="http://localhost:1313/">Xinkang&#39;s Blog</a></span> · 
+        <span>&copy; 2026 <a href="https://zjxjwxk.github.io/">Xinkang&#39;s Blog</a></span> · 
 
     <span>
         Powered by

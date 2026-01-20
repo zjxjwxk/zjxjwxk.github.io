@@ -1,6 +1,6 @@
 ---
 title: 基于 SPI 机制实现 ShardingJDBC 的 Nacos 数据源配置
-date: 2025-12-30T22:19:00+08:00
+date: 2026-01-20T23:39:00+08:00
 tags:
 - 数据库
 - ShardingJDBC

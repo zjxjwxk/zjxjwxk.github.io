@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>J2EE on Xinkang&#39;s Blog</title>
-    <link>http://localhost:1313/tags/j2ee/</link>
+    <link>https://zjxjwxk.github.io/tags/j2ee/</link>
     <description>Recent content in J2EE on Xinkang&#39;s Blog</description>
     <generator>Hugo -- 0.138.0</generator>
     <language>en</language>
     <lastBuildDate>Fri, 04 Jan 2019 12:54:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/j2ee/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://zjxjwxk.github.io/tags/j2ee/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>J2EE基础知识</title>
-      <link>http://localhost:1313/posts/java/j2ee/</link>
+      <link>https://zjxjwxk.github.io/posts/java/j2ee/</link>
       <pubDate>Fri, 04 Jan 2019 12:54:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/java/j2ee/</guid>
+      <guid>https://zjxjwxk.github.io/posts/java/j2ee/</guid>
       <description>&lt;h2 id=&#34;servlet总结&#34;&gt;Servlet总结&lt;/h2&gt;
 &lt;p&gt;在Java Web程序中，&lt;strong&gt;Servlet&lt;/strong&gt;主要负责接收用户请求&lt;strong&gt;HttpServletRequest&lt;/strong&gt;,在&lt;strong&gt;doGet()&lt;/strong&gt;,&lt;strong&gt;doPost()中做相应的处理，并将回应HttpServletResponse&lt;/strong&gt;反馈给用户。Servlet可以设置初始化参数，供Servlet内部使用。一个Servlet类只会有一个实例，在它初始化时调用&lt;strong&gt;init()方法&lt;/strong&gt;，销毁时调用&lt;strong&gt;destroy()方法&lt;/strong&gt;。&lt;strong&gt;Servlet需要在web.xml中配置&lt;/strong&gt;（MyEclipse中创建Servlet会自动配置），&lt;strong&gt;一个Servlet可以设置多个URL访问&lt;/strong&gt;。&lt;strong&gt;Servlet不是线程安全&lt;/strong&gt;，因此要谨慎使用类变量。&lt;/p&gt;
 &lt;h2 id=&#34;阐述servlet和cgi的区别&#34;&gt;阐述Servlet和CGI的区别?&lt;/h2&gt;

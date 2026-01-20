@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>ShardingJDBC on Xinkang&#39;s Blog</title>
+    <link>https://zjxjwxk.github.io/tags/shardingjdbc/</link>
+    <description>Recent content in ShardingJDBC on Xinkang&#39;s Blog</description>
+    <generator>Hugo -- 0.138.0</generator>
+    <language>en</language>
+    <lastBuildDate>Tue, 20 Jan 2026 23:39:00 +0800</lastBuildDate>
+    <atom:link href="https://zjxjwxk.github.io/tags/shardingjdbc/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>基于 SPI 机制实现 ShardingJDBC 的 Nacos 数据源配置</title>
+      <link>https://zjxjwxk.github.io/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/shardingjdbc/%E5%9F%BA%E4%BA%8E-spi-%E6%9C%BA%E5%88%B6%E5%AE%9E%E7%8E%B0-shardingjdbc-%E7%9A%84-nacos-%E6%95%B0%E6%8D%AE%E6%BA%90%E9%85%8D%E7%BD%AE/</link>
+      <pubDate>Tue, 20 Jan 2026 23:39:00 +0800</pubDate>
+      <guid>https://zjxjwxk.github.io/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/shardingjdbc/%E5%9F%BA%E4%BA%8E-spi-%E6%9C%BA%E5%88%B6%E5%AE%9E%E7%8E%B0-shardingjdbc-%E7%9A%84-nacos-%E6%95%B0%E6%8D%AE%E6%BA%90%E9%85%8D%E7%BD%AE/</guid>
+      <description>&lt;h2 id=&#34;shardingjdbc-的配置源路径-spi-机制&#34;&gt;ShardingJDBC 的配置源路径 SPI 机制&lt;/h2&gt;
+&lt;p&gt;由于最新版本 ShardingJDBC 不再支持基于 Nacos 作为配置数据源的功能，可以从 ShardingSphere JDBC 的依赖包中观察到，其数据源配置的获取接口 &lt;code&gt;org.apache.shardingsphere.driver.jdbc.core.driver.ShardingSphereDriverURLProvider&lt;/code&gt; 采用了 SPI 机制，但其默认仅实现了以下几种配置获取方式： AbsolutePathDriverURLProvider（绝对路径）、ClasspathDriverURLProvider （Class Path 路径） 和 ApolloDriverURLProvider （Apollo 路径）。&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;image-20260120223851785&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/shardingjdbc/%E5%9F%BA%E4%BA%8E-spi-%E6%9C%BA%E5%88%B6%E5%AE%9E%E7%8E%B0-shardingjdbc-%E7%9A%84-nacos-%E6%95%B0%E6%8D%AE%E6%BA%90%E9%85%8D%E7%BD%AE/images/image-20260120223851785.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;因此需要自行基于 ShardingJDBC 的 SPI 机制对 ShardingJDBC 进行二次开发，以实现从 Nacos 获取数据源配置文件。&lt;/p&gt;
+&lt;h2 id=&#34;shardingjdbc-配置获取的源码分析&#34;&gt;ShardingJDBC 配置获取的源码分析&lt;/h2&gt;
+&lt;p&gt;根据该接口的包路径  &lt;code&gt;org.apache.shardingsphere.driver.jdbc.core.driver&lt;/code&gt; ，可以找到其接口及其实现类，该接口包含两个方法：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;boolean accept(String url)：校验当前 url 是否应该使用当前类获取配置&lt;/li&gt;
+&lt;li&gt;byte[] getContent(String url)：从该 url 获取配置文件，并返回字节数组&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img alt=&#34;image-20260120224837077&#34; loading=&#34;lazy&#34; src=&#34;https://zjxjwxk.github.io/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/shardingjdbc/%E5%9F%BA%E4%BA%8E-spi-%E6%9C%BA%E5%88%B6%E5%AE%9E%E7%8E%B0-shardingjdbc-%E7%9A%84-nacos-%E6%95%B0%E6%8D%AE%E6%BA%90%E9%85%8D%E7%BD%AE/images/image-20260120224837077.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;如果将配置文件 &lt;code&gt;db-sharding.yaml&lt;/code&gt; 放在 &lt;code&gt;src/main/resources&lt;/code&gt; 目录下，并使用 classpath 作为配置文件的路径（如 &lt;code&gt;spring.datasource.url=jdbc:shardingsphere:classpath:db-sharding.yaml&lt;/code&gt;），并在 &lt;code&gt;ClasspathDriverURLProvider&lt;/code&gt; 类的 accept 方法中打断点并启动服务，可以发现在上层使用了 &lt;code&gt;ShardingSphereDriverURLManager&lt;/code&gt; 类来对每个实现类进行遍历，分别调用 accept 校验当前 url 是否适用于当前类，若适用则调用其 getContent 方法从该 url 获取相应的配置文件。&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
