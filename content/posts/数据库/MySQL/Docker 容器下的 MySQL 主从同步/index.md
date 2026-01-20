@@ -2,7 +2,7 @@
 title: Docker 容器下的 MySQL 主从同步
 date: 2025-12-30T22:19:00+08:00
 tags:
-- Database
+- 数据库
 - MySQL
 - Docker
 categories:
