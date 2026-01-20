@@ -167,10 +167,15 @@ public class NacosDriverURLProvider implements ShardingSphereDriverURLProvider {
 -   boolean accept(String url)：校验当前 url 是否包含 "nacos:"
 -   byte[] getContent(String url)：从该 url 获取 Nacos 配置文件，其中需要分别从 url 中提取以下字段用于从 Nacos 获取配置文件：
     -   dataId（即 Nacos 上该配置文件的 Data ID）
+    -   group：默认为 "DEFAULT_GROUP"
     -   Properties 中需要包含的字段（相关字段常量可以从 `com.alibaba.nacos.api.PropertyKeyConst` 获取）：
         -   username：Nacos 用户名
         -   password：Nacos 密码
         -   serverAddr：Nacos 服务地址
+
+对应 Nacos 配置中心上传的配置文件：
+
+![image-20260120235130821](images/image-20260120235130821.png)
 
 ### 创建 SPI 配置文件
 
